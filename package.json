@@ -1,0 +1,39 @@
+{
+  "name": "@kuib-ai/kuib",
+  "version": "0.0.1",
+  "description": "kuib ai bitch",
+  "scripts": {},
+  "keywords": [],
+  "author": {
+    "url": "https://github.com/roysupriyo10",
+    "name": "Supriyo Roy",
+    "email": "supriyo@kuib.ai"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuib-ai/kuib"
+  },
+  "packageManager": "pnpm@10.28.1",
+  "engineStrict": true,
+  "engines": {
+    "node": "25.4.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "concurrently": "catalog:",
+    "esbuild": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "eslint-plugin-prettier": "catalog:",
+    "globals": "catalog:",
+    "jiti": "catalog:",
+    "nx": "catalog:",
+    "prettier": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:"
+  },
+  "nx": {}
+}
