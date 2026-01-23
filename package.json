@@ -2,7 +2,9 @@
   "name": "@kuib-ai/kuib",
   "version": "0.0.1",
   "description": "kuib ai bitch",
-  "scripts": {},
+  "scripts": {
+    "format:modified": "prettier --write $(git ls-files --others --exclude-standard --modified)"
+  },
   "keywords": [],
   "author": {
     "url": "https://github.com/roysupriyo10",
