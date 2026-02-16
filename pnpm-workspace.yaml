@@ -6,7 +6,7 @@ catalogMode: strict
 
 catalogs:
   default:
-    '@eslint/js': ^9.39.2
+    "@eslint/js": ^9.39.2
     concurrently: ^9.2.1
     esbuild: ^0.27.2
     eslint: ^9.39.2
