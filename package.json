@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "kuib ai bitch",
   "scripts": {
-    "format:modified": "prettier --write $(git ls-files --others --exclude-standard --modified)"
+    "format:modified": "prettier --write $(git ls-files --others --exclude-standard --modified)",
+    "format:all": "prettier --write $(git ls-files)"
   },
   "keywords": [],
   "author": {
