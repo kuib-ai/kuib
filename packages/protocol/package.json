@@ -1,0 +1,23 @@
+{
+  "name": "@kuib/protocol",
+  "version": "0.0.1",
+  "description": "kuib protocol — schemas, events, and interfaces",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsgo -b",
+    "typecheck": "tsgo --noEmit"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "nx": {}
+}

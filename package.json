@@ -17,7 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/kuib-ai/kuib"
   },
-  "packageManager": "pnpm@10.28.1",
+  "packageManager": "pnpm@10.33.1+sha512.05ba3c1d5d1c18f68df06470d74055e62d41fc110a0c660db1b2dfb2785327f04cf0f68345d4609bc52089e7fa0343c31593b2f9594e2c5d5da426230acc9820",
   "engineStrict": true,
   "engines": {
     "node": "25.4.0"
@@ -25,6 +25,7 @@
   "type": "module",
   "devDependencies": {
     "@eslint/js": "catalog:",
+    "@typescript/native-preview": "catalog:",
     "concurrently": "catalog:",
     "esbuild": "catalog:",
     "eslint": "catalog:",
@@ -35,7 +36,6 @@
     "nx": "catalog:",
     "prettier": "catalog:",
     "tsx": "catalog:",
-    "typescript": "catalog:",
     "typescript-eslint": "catalog:"
   },
   "nx": {}
