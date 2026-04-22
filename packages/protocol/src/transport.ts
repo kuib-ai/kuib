@@ -10,29 +10,29 @@
  * The Submission and Event schemas handle validation at the boundary.
  */
 
-import type { SessionID } from "./id.js"
-import type { Submission } from "./submission.js"
-import type { Event } from "./event.js"
+import type { SessionID } from "./id.js";
+import type { Submission } from "./submission.js";
+import type { Event } from "./event.js";
 
-export type Unsubscribe = () => void
+export type Unsubscribe = () => void;
 
 export interface Transport {
-  submit(submission: Submission): void
-  emit(event: Event): void
-  onEvent(handler: (event: Event) => void): Unsubscribe
-  onSubmission(handler: (submission: Submission) => void): Unsubscribe
-  dispose(): void
+  submit(submission: Submission): void;
+  emit(event: Event): void;
+  onEvent(handler: (event: Event) => void): Unsubscribe;
+  onSubmission(handler: (submission: Submission) => void): Unsubscribe;
+  dispose(): void;
 }
 
 export interface TransportFactory {
-  inProcess(): { consumer: Transport; engine: Transport }
-  webSocket(url: string): Promise<Transport>
-  mesh(deviceID: string): Promise<Transport>
+  inProcess(): { consumer: Transport; engine: Transport };
+  webSocket(url: string): Promise<Transport>;
+  mesh(deviceID: string): Promise<Transport>;
 }
 
 export interface SessionTransport {
-  readonly sessionID: SessionID
-  submit(submission: Submission): void
-  onEvent(handler: (event: Event) => void): Unsubscribe
-  dispose(): void
+  readonly sessionID: SessionID;
+  submit(submission: Submission): void;
+  onEvent(handler: (event: Event) => void): Unsubscribe;
+  dispose(): void;
 }

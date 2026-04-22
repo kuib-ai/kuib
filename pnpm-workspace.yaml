@@ -7,7 +7,7 @@ catalogMode: strict
 catalogs:
   default:
     "@eslint/js": ^10.0.1
-    '@typescript/native-preview': 7.0.0-dev.20260422.1
+    "@typescript/native-preview": 7.0.0-dev.20260422.1
     concurrently: ^9.2.1
     esbuild: ^0.28.0
     eslint: ^10.2.1
