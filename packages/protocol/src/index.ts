@@ -32,15 +32,12 @@ export {
   FilePart,
   ToolCallPart,
   StepBoundary,
-  CompactionPart,
   Part,
-  MessageErrorKind,
   MessageError,
   ModelRef,
   UserMessage,
   AssistantMessage,
   Message,
-  MessageWithParts,
 } from "./message.js";
 
 // Session — schemas + types
