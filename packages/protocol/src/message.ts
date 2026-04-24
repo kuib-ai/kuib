@@ -8,6 +8,10 @@ import {
   ModelID,
 } from "./id.js";
 
+// ---------------------------------------------------------------------------
+// RuntimeMetadata
+// model provider, token usage primitives
+// ---------------------------------------------------------------------------
 export const TokenUsage = z.object({
   input: z.number().int(),
   output: z.number().int(),
@@ -20,42 +24,42 @@ export const TokenUsage = z.object({
     .optional(),
 });
 export type TokenUsage = z.infer<typeof TokenUsage>;
-
 export const ModelRef = z.object({
   providerID: ProviderID,
   modelID: ModelID,
 });
 export type ModelRef = z.infer<typeof ModelRef>;
 
+// ---------------------------------------------------------------------------
+// ToolCallPart primitives
+// ---------------------------------------------------------------------------
 export enum ToolCallStatusEnum {
   PENDING = "pending",
-  RUNNING = "running",
   COMPLETED = "completed",
   ERROR = "error",
 }
 export const ToolCallPending = z.object({
   status: z.literal(ToolCallStatusEnum.PENDING),
   input: z.record(z.string(), z.unknown()),
+  title: z.string(),
+  startedAt: z.number(),
 });
 export type ToolCallPending = z.infer<typeof ToolCallPending>;
-
-enum ToolCallCompletedKindEnum {
+export enum ToolCallKindEnum {
   NORMAL = "normal",
   SUBAGENT = "subagent",
 }
 export const ToolCallCompletedBase = z.object({
   status: z.literal(ToolCallStatusEnum.COMPLETED),
-  input: z.record(z.string(), z.unknown()),
-  title: z.string(),
+  kind: z.enum(ToolCallKindEnum),
   output: z.string(),
-  metadata: z.record(z.string(), z.unknown()),
   completedAt: z.number(),
 });
 export const ToolCallCompletedNormal = ToolCallCompletedBase.extend({
-  kind: z.literal(ToolCallCompletedKindEnum.NORMAL),
+  kind: z.literal(ToolCallKindEnum.NORMAL),
 });
 export const ToolCallCompletedSubagent = ToolCallCompletedBase.extend({
-  kind: z.literal(ToolCallCompletedKindEnum.SUBAGENT),
+  kind: z.literal(ToolCallKindEnum.SUBAGENT),
   model: ModelRef,
   tokens: TokenUsage,
 });
@@ -65,14 +69,31 @@ export const ToolCallCompleted = z.discriminatedUnion("kind", [
 ]);
 export type ToolCallCompleted = z.infer<typeof ToolCallCompleted>;
 
-export const ToolCallError = z.object({
+export enum ToolCallErrorReasonEnum {
+  FAILED = "failed",
+  INTERRUPTED = "interrupted",
+  CANCELLED = "cancelled",
+  REJECTED = "rejected",
+}
+export const ToolCallErrorBase = z.object({
   status: z.literal(ToolCallStatusEnum.ERROR),
-  input: z.record(z.string(), z.unknown()),
+  reason: z.enum(ToolCallErrorReasonEnum),
+  kind: z.enum(ToolCallKindEnum),
   error: z.string(),
-  startedAt: z.number(),
-  failedAt: z.number(),
-  metadata: z.record(z.string(), z.unknown()).optional(),
+  completedAt: z.number(),
 });
+export const ToolCallErrorNormal = ToolCallErrorBase.extend({
+  kind: z.literal(ToolCallKindEnum.NORMAL),
+});
+export const ToolCallErrorSubagent = ToolCallErrorBase.extend({
+  kind: z.literal(ToolCallKindEnum.SUBAGENT),
+  model: ModelRef,
+  tokens: TokenUsage,
+});
+export const ToolCallError = z.discriminatedUnion("kind", [
+  ToolCallErrorNormal,
+  ToolCallErrorSubagent,
+]);
 export type ToolCallError = z.infer<typeof ToolCallError>;
 
 export const ToolCallState = z.discriminatedUnion("status", [
@@ -82,6 +103,9 @@ export const ToolCallState = z.discriminatedUnion("status", [
 ]);
 export type ToolCallState = z.infer<typeof ToolCallState>;
 
+// ---------------------------------------------------------------------------
+// Part primitives for message formation
+// ---------------------------------------------------------------------------
 export enum PartTypeEnum {
   STEP_BOUNDARY = "step-boundary",
   TEXT = "text",
@@ -93,15 +117,12 @@ export enum PartTypeEnum {
 export const TextPart = z.object({
   type: z.literal(PartTypeEnum.TEXT),
   text: z.string(),
-  synthetic: z.boolean().optional(),
-  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 export type TextPart = z.infer<typeof TextPart>;
 
 export const ReasoningPart = z.object({
   type: z.literal(PartTypeEnum.REASONING),
   text: z.string(),
-  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 export type ReasoningPart = z.infer<typeof ReasoningPart>;
 
@@ -117,9 +138,7 @@ export const ToolCallPart = z.object({
   type: z.literal(PartTypeEnum.TOOL_CALL),
   callID: ToolCallID,
   tool: z.string(),
-  input: z.record(z.string(), z.unknown()),
   state: ToolCallState,
-  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 export type ToolCallPart = z.infer<typeof ToolCallPart>;
 
@@ -158,28 +177,11 @@ export const Part = z.discriminatedUnion("type", [
 ]);
 export type Part = z.infer<typeof Part>;
 
-export enum MessageErrorKindEnum {
-  AUTH = "auth",
-  API = "api",
-  OUTPUT_LENGTH = "output_length",
-  CONTEXT_OVERFLOW = "context_overflow",
-  ABORTED = "aborted",
-  UNKNOWN = "unknown",
-}
-export const MessageError = z.object({
-  kind: z.enum(MessageErrorKindEnum),
-  message: z.string(),
-  statusCode: z.number().int().optional(),
-  retryable: z.boolean().optional(),
-  metadata: z.record(z.string(), z.unknown()).optional(),
-});
-export type MessageError = z.infer<typeof MessageError>;
-
 export enum MessageRoleEnum {
   USER = "user",
   ASSISTANT = "assistant",
 }
-export const UserMessage = z.object({
+export const MessageUser = z.object({
   role: z.literal(MessageRoleEnum.USER),
   id: MessageID,
   sessionID: SessionID,
@@ -187,13 +189,13 @@ export const UserMessage = z.object({
   parts: z.array(Part),
   createdAt: z.number(),
 });
-export type UserMessage = z.infer<typeof UserMessage>;
+export type MessageUser = z.infer<typeof MessageUser>;
 
-export enum AssistantMessageStatusEnum {
+export enum MessageAssistantStatusEnum {
   SUCCESS = "success",
   ERROR = "error",
 }
-export const AssistantMessageBase = z.object({
+export const MessageAssistantBase = z.object({
   role: z.literal(MessageRoleEnum.ASSISTANT),
   id: MessageID,
   sessionID: SessionID,
@@ -201,22 +203,55 @@ export const AssistantMessageBase = z.object({
   parts: z.array(Part),
   createdAt: z.number(),
 });
-export const AssistantMessageSuccess = AssistantMessageBase.extend({
-  status: z.literal(AssistantMessageStatusEnum.SUCCESS),
+export const MessageAssistantSuccess = MessageAssistantBase.extend({
+  status: z.literal(MessageAssistantStatusEnum.SUCCESS),
   completedAt: z.number(),
 });
-export const AssistantMessageError = AssistantMessageBase.extend({
-  status: z.literal(AssistantMessageStatusEnum.ERROR),
-  error: MessageError,
+
+export enum MessageAssistantErrorKindEnum {
+  API = "api",
+  CONTEXT_OVERFLOW = "context_overflow",
+  UNKNOWN = "unknown",
+}
+export const MessageAssistantErrorBase = MessageAssistantBase.extend({
+  status: z.literal(MessageAssistantStatusEnum.ERROR),
 });
-export const AssistantMessage = z.discriminatedUnion("status", [
-  AssistantMessageSuccess,
-  AssistantMessageError,
+export const MessageAssistantErrorApi = MessageAssistantErrorBase.extend({
+  kind: z.literal(MessageAssistantErrorKindEnum.API),
+  statusCode: z.number(),
+});
+export const MessageAssistantErrorUnknown = MessageAssistantErrorBase.extend({
+  kind: z.literal(MessageAssistantErrorKindEnum.UNKNOWN),
+});
+export const MessageAssistantErrorContextOverflow =
+  MessageAssistantErrorBase.extend({
+    kind: z.literal(MessageAssistantErrorKindEnum.CONTEXT_OVERFLOW),
+  });
+
+export const MessageAssistantError = z.discriminatedUnion("kind", [
+  MessageAssistantErrorApi,
+  MessageAssistantErrorUnknown,
+  MessageAssistantErrorContextOverflow,
 ]);
-export type AssistantMessage = z.infer<typeof AssistantMessage>;
+export type MessageAssistantErrorApi = z.infer<typeof MessageAssistantErrorApi>;
+export type MessageAssistantErrorUnknown = z.infer<
+  typeof MessageAssistantErrorUnknown
+>;
+export type MessageAssistantErrorContextOverflow = z.infer<
+  typeof MessageAssistantErrorContextOverflow
+>;
+
+export const MessageAssistant = z.discriminatedUnion("status", [
+  MessageAssistantSuccess,
+  MessageAssistantError,
+]);
+export type MessageAssistantSuccess = z.infer<typeof MessageAssistantSuccess>;
+export type MessageAssistantError = z.infer<typeof MessageAssistantError>;
 
 export const Message = z.discriminatedUnion("role", [
-  UserMessage,
-  AssistantMessage,
+  MessageUser,
+  MessageAssistant,
 ]);
+export type MessageAssistant = z.infer<typeof MessageAssistant>;
+
 export type Message = z.infer<typeof Message>;
