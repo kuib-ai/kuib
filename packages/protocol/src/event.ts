@@ -15,7 +15,7 @@ import {
   ProviderID,
   ModelID,
 } from "./id.js";
-import { Message, Part, TokenUsage, MessageError } from "./message.js";
+import { Message, Part, TokenUsage, MessageAssistantError } from "./message.js";
 import { SessionStatus, Discussion } from "./session.js";
 import { SecurityVerdict } from "./security.js";
 
@@ -52,7 +52,7 @@ export const TurnError = z.object({
   type: z.literal("turn-error"),
   sessionID: SessionID,
   messageID: MessageID,
-  error: MessageError,
+  error: MessageAssistantError,
 });
 export type TurnError = z.infer<typeof TurnError>;
 
