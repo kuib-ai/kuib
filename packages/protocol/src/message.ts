@@ -7,6 +7,7 @@ import {
   ProviderID,
   ModelID,
   PartID,
+  DeviceID,
 } from "./id.js";
 
 // ---------------------------------------------------------------------------
@@ -218,6 +219,7 @@ const MessageBase = z.object({
 export const MessageUser = MessageBase.extend({
   role: z.literal(MessageRoleEnum.USER),
   parts: z.array(PartUser),
+  originDeviceID: DeviceID,
 });
 export type MessageUser = z.infer<typeof MessageUser>;
 
