@@ -33,7 +33,7 @@ export const ModelRef = z.object({
 export type ModelRef = z.infer<typeof ModelRef>;
 
 // ---------------------------------------------------------------------------
-// ToolCallPart primitives
+// ToolCall state primitives
 // ---------------------------------------------------------------------------
 export enum ToolCallStatusEnum {
   PENDING = "pending",
@@ -201,6 +201,9 @@ export type PartAssistant = z.infer<typeof PartAssistant>;
 export const Part = z.union([PartAssistant, PartUser]);
 export type Part = z.infer<typeof Part>;
 
+// ---------------------------------------------------------------------------
+// Message primitives
+// ---------------------------------------------------------------------------
 export enum MessageRoleEnum {
   USER = "user",
   ASSISTANT = "assistant",
