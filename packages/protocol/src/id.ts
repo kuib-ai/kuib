@@ -1,11 +1,3 @@
-/**
- * Branded ID types — Zod schemas with branded strings.
- *
- * Each entity gets its own branded type so you can't accidentally
- * pass a SessionID where a MessageID is expected.
- * Runtime validation ensures IDs are non-empty strings.
- */
-
 import { z } from "zod";
 
 export const SessionID = z.string().min(1).brand("SessionID");
