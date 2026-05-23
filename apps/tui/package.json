@@ -1,0 +1,10 @@
+{
+  "name": "@kuib-ai/tui",
+  "version": "0.0.1",
+  "description": "tui for kuib bitches",
+  "engineStrict": true,
+  "engines": {
+    "runtime": "",
+    "node": ""
+  }
+}

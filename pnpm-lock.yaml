@@ -93,6 +93,8 @@ importers:
         specifier: 'catalog:'
         version: 8.59.2(eslint@10.3.0(jiti@2.7.0))(typescript@5.9.3)
 
+  apps/tui: {}
+
   packages/protocol:
     dependencies:
       zod:

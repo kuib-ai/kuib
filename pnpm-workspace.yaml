@@ -2,6 +2,10 @@ packages:
   - apps/*
   - packages/*
 
+allowBuilds:
+  esbuild: set this to true or false
+  nx: set this to true or false
+
 catalogMode: strict
 
 catalogs:
