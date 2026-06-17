@@ -2,5 +2,11 @@
   "name": "@kuib-ai/tui",
   "version": "0.0.1",
   "description": "tui for kuib bitches",
-  "engineStrict": true
+  "engineStrict": true,
+  "dependencies": {
+    "ai": "catalog:"
+  },
+  "scripts": {
+    "build": "tsgo -b"
+  }
 }
