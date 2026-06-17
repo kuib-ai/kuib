@@ -4,6 +4,7 @@
   "description": "tui for kuib bitches",
   "engineStrict": true,
   "dependencies": {
+    "@ai-sdk/openai": "catalog:",
     "ai": "catalog:",
     "dotenv": "catalog:"
   },

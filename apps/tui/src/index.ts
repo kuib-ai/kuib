@@ -1,13 +1,8 @@
-import {
-  createProviderRegistry,
-  gateway,
-  ModelMessage,
-  streamText,
-  wrapLanguageModel,
-} from "ai";
+import { ModelMessage, streamText } from "ai";
 import { createInterface } from "node:readline/promises";
 
 import { configDotenv } from "dotenv";
+import { createOpenAI } from "@ai-sdk/openai";
 
 const nodeEnvironment = process.env.NODE_ENV;
 
@@ -47,6 +42,13 @@ const terminal = createInterface({
 
 const messages: ModelMessage[] = [];
 
+const xiaomiProvider = createOpenAI({
+  apiKey: process.env.XIAOMI_API_KEY,
+  baseURL: "https://api.xiaomimimo.com/v1",
+});
+
+const mimoModel = xiaomiProvider.chat("mimo-v2.5-pro");
+
 async function main() {
   while (true) {
     const userInput = await terminal.question("User: ");
@@ -58,7 +60,7 @@ async function main() {
 
     const result = streamText({
       messages,
-      model: "xiaomi/mimo-v2.5-pro",
+      model: mimoModel,
     });
 
     let fullResponse = "";
