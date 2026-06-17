@@ -4,6 +4,7 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "lib": ["ESNext"],
+    "types": ["node"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -14,7 +15,6 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "isolatedModules": true,
-    "verbatimModuleSyntax": true,
     "composite": true,
     "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo"
   },

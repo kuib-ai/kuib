@@ -4,9 +4,13 @@
   "description": "tui for kuib bitches",
   "engineStrict": true,
   "dependencies": {
-    "ai": "catalog:"
+    "ai": "catalog:",
+    "dotenv": "catalog:"
   },
   "scripts": {
     "build": "tsgo -b"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:"
   }
 }

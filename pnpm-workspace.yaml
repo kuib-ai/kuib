@@ -11,9 +11,11 @@ catalogMode: strict
 catalogs:
   default:
     "@eslint/js": ^10.0.1
+    "@types/node": ^25.9.3
     "@typescript/native-preview": 7.0.0-dev.20260616.1
     ai: ^6.0.206
     concurrently: ^10.0.3
+    dotenv: ^17.4.2
     esbuild: ^0.28.1
     eslint: ^10.5.0
     eslint-config-prettier: ^10.1.8
