@@ -10,6 +10,7 @@ You have filesystem tools scoped to the current workspace directory:
 - read_file: read a text file
 - list_dir: list a directory
 - write_file: create or overwrite a text file
+- edit_file: edit a file with multiple operations (replace, insert, delete, append, prepend)
 
 Use the tools instead of guessing about files. Be concise.`;
 
