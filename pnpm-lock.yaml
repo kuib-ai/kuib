@@ -146,6 +146,9 @@ importers:
 
   apps/host-tui:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.12.1
       '@connectrpc/connect':
         specifier: 'catalog:'
         version: 2.1.2(@bufbuild/protobuf@2.12.1)

@@ -6,6 +6,9 @@
     "strict": true,
     "target": "ESNext",
     "module": "ESNext",
-    "types": ["node"]
+    "types": ["node"],
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }

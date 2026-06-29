@@ -13,6 +13,7 @@
     "solid-js": "catalog:",
     "@connectrpc/connect": "catalog:",
     "@connectrpc/connect-node": "catalog:",
+    "@bufbuild/protobuf": "catalog:",
     "@kuib/protocol": "workspace:*"
   },
   "devDependencies": {
