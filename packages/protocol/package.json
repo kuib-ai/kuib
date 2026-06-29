@@ -7,7 +7,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./src/gen/*": "./src/gen/*"
   },
   "files": [
     "dist"
@@ -17,7 +18,13 @@
     "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
+    "@bufbuild/protobuf": "catalog:",
+    "@connectrpc/connect": "catalog:",
     "zod": "catalog:"
   },
-  "nx": {}
+  "nx": {},
+  "devDependencies": {
+    "@bufbuild/buf": "catalog:",
+    "@bufbuild/protoc-gen-es": "catalog:"
+  }
 }

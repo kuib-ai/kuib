@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package kuib.v1;
+
+service DaemonService {
+  // Execute a shell command
+  rpc ExecuteCommand (ExecuteCommandRequest) returns (ExecuteCommandResponse);
+  
+  // Read a file from the daemon's filesystem
+  rpc ReadFile (ReadFileRequest) returns (ReadFileResponse);
+  
+  // Write a file to the daemon's filesystem
+  rpc WriteFile (WriteFileRequest) returns (WriteFileResponse);
+}
+
+message ExecuteCommandRequest {
+  string command = 1;
+  string cwd = 2;
+  map<string, string> env = 3;
+}
+
+message ExecuteCommandResponse {
+  int32 exit_code = 1;
+  string stdout = 2;
+  string stderr = 3;
+}
+
+message ReadFileRequest {
+  string path = 1;
+}
+
+message ReadFileResponse {
+  bytes content = 1;
+}
+
+message WriteFileRequest {
+  string path = 1;
+  bytes content = 2;
+}
+
+message WriteFileResponse {
+  bool success = 1;
+}
