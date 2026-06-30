@@ -1,5 +1,5 @@
 {
-  "name": "@kuib/eslint-plugin-house-style",
+  "name": "@kuib-ai/eslint-plugin-house-style",
   "version": "1.0.0",
   "private": true,
   "type": "module",

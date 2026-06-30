@@ -20,9 +20,10 @@ const fileStem = function (filename: string): string {
   return path.basename(filename).replace(/\.(ts|tsx)$/, "");
 };
 
-const segmentsUnderSrc = function (
-  filename: string,
-): { dirs: string[]; file: string } {
+const segmentsUnderSrc = function (filename: string): {
+  dirs: string[];
+  file: string;
+} {
   const marker = `${path.sep}src${path.sep}`;
   const index = filename.lastIndexOf(marker);
   const file = fileStem(filename);

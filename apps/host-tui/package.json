@@ -1,5 +1,5 @@
 {
-  "name": "@kuib/host-tui",
+  "name": "@kuib-ai/host-tui",
   "version": "0.0.1",
   "description": "Terminal UI Host for Kuib AI using Solid",
   "type": "module",
@@ -8,15 +8,16 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@opentui/core": "catalog:",
-    "@opentui/solid": "catalog:",
-    "solid-js": "catalog:",
+    "@bufbuild/protobuf": "catalog:",
     "@connectrpc/connect": "catalog:",
     "@connectrpc/connect-node": "catalog:",
-    "@bufbuild/protobuf": "catalog:",
-    "@kuib/protocol": "workspace:*"
+    "@kuib-ai/protocol": "workspace:*",
+    "@opentui/core": "catalog:",
+    "@opentui/solid": "catalog:",
+    "solid-js": "catalog:"
   },
   "devDependencies": {
+    "@kuib-ai/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"

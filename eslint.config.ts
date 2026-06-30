@@ -25,6 +25,19 @@ export default defineConfig(
       "func-style": ["warn", "expression"],
       eqeqeq: ["warn", "always"],
       "no-labels": "off",
+      "no-restricted-imports": [
+        "warn",
+        {
+          patterns: [
+            {
+              group: ["@kuib-ai/protocol/*"],
+              allowTypeImports: true,
+              message:
+                "Import values from the @kuib-ai/protocol namespace (e.g. Protocol.ID.SessionID); only types may come from subpaths.",
+            },
+          ],
+        },
+      ],
       "no-restricted-syntax": [
         "warn",
         {
@@ -33,6 +46,14 @@ export default defineConfig(
             "Do not use try/catch. Handle errors explicitly via the async tuple helper. Override with eslint-disable if unavoidable.",
         },
       ],
+    },
+  },
+  {
+    files: ["**/*.test.ts", "**/*.test.tsx"],
+    rules: {
+      "house/require-context-link": "off",
+      "house/named-exports-are-types": "off",
+      "house/dot-case-filename": "off",
     },
   },
 );

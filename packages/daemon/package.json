@@ -1,21 +1,24 @@
 {
-  "name": "daemon",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "@kuib-ai/daemon",
+  "version": "0.0.1",
+  "description": "kuib node-local fs/shell executor (tRPC)",
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": {
+      "types": "./src/*/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
-    "@connectrpc/connect": "catalog:",
-    "@connectrpc/connect-node": "catalog:",
-    "@kuib/protocol": "workspace:*"
+    "@trpc/server": "catalog:",
+    "@kuib-ai/std": "workspace:*",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "tsx": "catalog:"
+    "@kuib-ai/tsconfig": "workspace:*",
+    "@types/node": "catalog:"
   }
 }

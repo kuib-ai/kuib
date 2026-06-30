@@ -27,7 +27,11 @@ const noTopLevelArrow = createRule<[], MessageIds>({
         const parent = node.parent;
 
         if (parent.type === "ExportDefaultDeclaration") {
-          context.report({ node, messageId: "noArrow", data: { name: "unit" } });
+          context.report({
+            node,
+            messageId: "noArrow",
+            data: { name: "unit" },
+          });
           return;
         }
 

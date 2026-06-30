@@ -39,7 +39,11 @@
     "prettier": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
-    "typescript-eslint": "catalog:"
+    "typescript-eslint": "catalog:",
+    "vitest": "catalog:"
   },
-  "nx": {}
+  "nx": {},
+  "dependencies": {
+    "@trpc/server": "catalog:"
+  }
 }

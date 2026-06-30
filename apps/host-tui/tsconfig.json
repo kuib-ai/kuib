@@ -1,14 +1,9 @@
 {
+  "extends": "@kuib-ai/tsconfig/base.json",
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "@opentui/solid",
-    "moduleResolution": "bundler",
-    "strict": true,
-    "target": "ESNext",
-    "module": "ESNext",
-    "types": ["node"],
-    "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true
-  }
+    "types": ["node"]
+  },
+  "include": ["src"]
 }

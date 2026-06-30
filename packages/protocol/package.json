@@ -1,30 +1,22 @@
 {
-  "name": "@kuib/protocol",
+  "name": "@kuib-ai/protocol",
   "version": "0.0.1",
   "description": "kuib protocol — schemas, events, and interfaces",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./src/gen/*": "./src/gen/*"
+    ".": "./src/index.ts",
+    "./*": {
+      "types": "./src/*/index.ts"
+    }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "build": "tsgo -b",
-    "typecheck": "tsgo --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "catalog:",
-    "@connectrpc/connect": "catalog:",
     "zod": "catalog:"
   },
   "nx": {},
   "devDependencies": {
-    "@bufbuild/buf": "catalog:",
-    "@bufbuild/protoc-gen-es": "catalog:"
+    "@kuib-ai/tsconfig": "workspace:*"
   }
 }
