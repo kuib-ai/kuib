@@ -28,6 +28,19 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
   };
 
   await emit({
+    type: Protocol.Event.EventTypeEnum.USER_MESSAGE_SUBMITTED,
+    messageID: newID(Protocol.ID.MessageID),
+    parts: [
+      {
+        type: Protocol.Part.PartTypeEnum.TEXT,
+        partID: newID(Protocol.ID.PartID),
+        excluded: false,
+        text: prompt,
+      },
+    ],
+  });
+
+  await emit({
     type: Protocol.Event.EventTypeEnum.MESSAGE_STARTED,
     messageID,
   });
@@ -112,15 +125,48 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
     stopWhen: stepCountIs(5),
   });
 
-  const textPartID = newID(Protocol.ID.PartID);
-  for await (const delta of result.textStream) {
+  const errorPartID = newID(Protocol.ID.PartID);
+  const consume = async function (): Promise<void> {
+    for await (const part of result.fullStream) {
+      if (part.type === "text-delta") {
+        await emit({
+          type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
+          messageID,
+          partID: Protocol.ID.PartID.parse(part.id),
+          delta: part.text,
+        });
+      } else if (part.type === "reasoning-delta") {
+        await emit({
+          type: Protocol.Event.EventTypeEnum.REASONING_DELTA,
+          messageID,
+          partID: Protocol.ID.PartID.parse(part.id),
+          delta: part.text,
+        });
+      }
+    }
+  };
+
+  const [streamError] = await Std.asyncWithError(consume());
+  if (streamError) {
     await emit({
       type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
       messageID,
-      partID: textPartID,
-      delta,
+      partID: errorPartID,
+      delta: `⚠️ ${streamError.message}`,
     });
+    await emit({
+      type: Protocol.Event.EventTypeEnum.MESSAGE_FAILED,
+      messageID,
+      error: streamError.message,
+      completedAt: Date.now(),
+    });
+    return;
   }
+  await emit({
+    type: Protocol.Event.EventTypeEnum.MESSAGE_COMPLETED,
+    messageID,
+    completedAt: Date.now(),
+  });
 };
 
 export default runAgent;

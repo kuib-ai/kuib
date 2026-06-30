@@ -1,0 +1,28 @@
+{
+  "name": "@kuib-ai/engine-service",
+  "version": "0.0.1",
+  "description": "kuib engine-service — process host for the agent loop (Bun-quarantined)",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": {
+      "types": "./src/*/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@kuib-ai/engine": "workspace:*",
+    "@kuib-ai/event-log-sqlite": "workspace:*",
+    "@kuib-ai/protocol": "workspace:*",
+    "@kuib-ai/std": "workspace:*"
+  },
+  "nx": {},
+  "devDependencies": {
+    "@kuib-ai/tsconfig": "workspace:*",
+    "ai": "catalog:",
+    "bun-types": "catalog:"
+  }
+}

@@ -11,4 +11,6 @@ export enum EventTypeEnum {
   TOOL_CALL_OUTPUT_DELTA = "tool-call-output-delta",
   TOOL_CALL_COMPLETED = "tool-call-completed",
   TOOL_CALL_FAILED = "tool-call-failed",
+  MESSAGE_COMPLETED = "message-completed",
+  MESSAGE_FAILED = "message-failed",
 }

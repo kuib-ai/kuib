@@ -1,0 +1,23 @@
+{
+  "name": "@kuib-ai/event-log-sqlite",
+  "version": "0.0.1",
+  "description": "kuib event log — bun:sqlite adapter (Bun-quarantined)",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": {
+      "types": "./src/*/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@kuib-ai/protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "@kuib-ai/tsconfig": "workspace:*",
+    "bun-types": "catalog:"
+  }
+}

@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "bun run src/index.tsx",
-    "build": "tsc"
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "catalog:",
-    "@connectrpc/connect": "catalog:",
-    "@connectrpc/connect-node": "catalog:",
+    "@kuib-ai/engine": "workspace:*",
+    "@kuib-ai/engine-service": "workspace:*",
+    "@kuib-ai/env": "workspace:*",
+    "@kuib-ai/event-log-sqlite": "workspace:*",
     "@kuib-ai/protocol": "workspace:*",
     "@opentui/core": "catalog:",
     "@opentui/solid": "catalog:",
@@ -19,6 +21,7 @@
   "devDependencies": {
     "@kuib-ai/tsconfig": "workspace:*",
     "@types/node": "catalog:",
+    "bun-types": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
   }

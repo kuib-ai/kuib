@@ -23,6 +23,14 @@ export default defineConfig(
       "house/no-prose-comments": "warn",
       "house/no-destructure-props": "warn",
       "func-style": ["warn", "expression"],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
       eqeqeq: ["warn", "always"],
       "no-labels": "off",
       "no-restricted-imports": [

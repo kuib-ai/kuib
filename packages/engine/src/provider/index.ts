@@ -1,8 +1,8 @@
 // @context @journal/provider-architecture
-import minerva from "./minerva";
+import createModel from "./model";
 
 const Provider = {
-  minerva,
+  createModel,
 };
 
 export default Provider;

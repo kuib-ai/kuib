@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": ["Read(**)", "Glob(**)", "Grep(**)"],
+    "deny": ["Bash(rm -rf *)", "Bash(git push --force *)"]
+  },
+  "env": {
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "80"
+  },
+  "hooks": {
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/rs10/developer/kuib-ai && npx tsx scripts/compile-journal-index.ts 2>&1"
+          },
+          {
+            "type": "command",
+            "command": "echo 'Context was compacted. Journal index rebuilt. Run /remember <feature-name> to reload your active journal context before continuing work.'"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/rs10/developer/kuib-ai && npx tsx scripts/compile-journal-index.ts --check 2>&1 || echo 'Journal index is stale. Run /journal-validate to rebuild.'"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -11,6 +11,8 @@ import ToolCallStarted from "../tool.call.started";
 import ToolCallOutputDelta from "../tool.call.output.delta";
 import ToolCallCompleted from "../tool.call.completed";
 import ToolCallFailed from "../tool.call.failed";
+import MessageCompleted from "../message.completed";
+import MessageFailed from "../message.failed";
 
 const AnyEvent = z.discriminatedUnion("type", [
   UserMessageSubmitted,
@@ -24,6 +26,8 @@ const AnyEvent = z.discriminatedUnion("type", [
   ToolCallOutputDelta,
   ToolCallCompleted,
   ToolCallFailed,
+  MessageCompleted,
+  MessageFailed,
 ]);
 type AnyEvent = z.infer<typeof AnyEvent>;
 

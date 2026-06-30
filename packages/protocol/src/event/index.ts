@@ -11,6 +11,8 @@ import ToolCallStarted from "./tool.call.started";
 import ToolCallOutputDelta from "./tool.call.output.delta";
 import ToolCallCompleted from "./tool.call.completed";
 import ToolCallFailed from "./tool.call.failed";
+import MessageCompleted from "./message.completed";
+import MessageFailed from "./message.failed";
 import AnyEvent from "./event.any";
 import EventEnvelope from "./event.envelope";
 
@@ -27,6 +29,8 @@ const Event = {
   ToolCallOutputDelta,
   ToolCallCompleted,
   ToolCallFailed,
+  MessageCompleted,
+  MessageFailed,
   AnyEvent,
   EventEnvelope,
 };
