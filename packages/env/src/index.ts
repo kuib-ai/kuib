@@ -4,6 +4,7 @@ import EnvSchema from "./env.schema";
 import resolveDbPath from "./db.path";
 import resolveMeshConfigPath from "./mesh.config.path";
 import resolveNodeLabel from "./node.label";
+import findWorkspaceRoot from "./workspace.root";
 
 const Env = {
   bootstrapEnv,
@@ -11,6 +12,7 @@ const Env = {
   resolveDbPath,
   resolveMeshConfigPath,
   resolveNodeLabel,
+  findWorkspaceRoot,
 };
 
 export default Env;

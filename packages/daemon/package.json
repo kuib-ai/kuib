@@ -10,9 +10,11 @@
     }
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "start": "bun run src/start.daemon/index.ts"
   },
   "dependencies": {
+    "@kuib-ai/env": "workspace:*",
     "@kuib-ai/protocol": "workspace:*",
     "@kuib-ai/std": "workspace:*",
     "@trpc/server": "catalog:",

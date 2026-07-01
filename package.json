@@ -8,7 +8,8 @@
     "lint:all": "eslint",
     "check:circular": "madge --circular --extensions ts,tsx packages apps",
     "typecheck": "pnpm -r exec tsc --noEmit",
-    "test": "bun test packages apps"
+    "test": "bun test packages apps",
+    "reload": "bun scripts/reload.ts"
   },
   "keywords": [],
   "author": {
