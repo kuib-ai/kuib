@@ -34,14 +34,14 @@ The author's cleanest hand-written code. Conventions:
 
 ## Rules (final set)
 
-Custom (in the plugin), all `warn`:
+Custom (in the plugin), all `error` (severity flipped from `warn` 2026-07-01):
 
 - `require-context-link` — each file must carry one `@context @journal/<entry>` → resolves to `journal/<entry>/decisions.md` (flat layout; the resolver walks up past the `kuib/` monorepo root to find the `journal/` dir, since the journal sits one level above). Flags missing / dead / stale (stale = the target ADR still contains the unfilled scaffolding placeholder token, i.e. `FEATURE_NAME` wrapped in double braces). Per-file granularity (synergy with S1).
-- `dot-case-filename` (S3) · `no-top-level-arrow` (C2, arrows) · `named-exports-are-types` (C1/S1) · `no-prose-comments` (C6) · `no-destructure-props` (Solid: destructuring props breaks reactivity — `.tsx` only, on JSX-returning functions).
+- `dot-case-filename` (S3) · `no-top-level-arrow` (C2, arrows) · `named-exports-are-types` (C1/S1) · `no-prose-comments` (C6) · `no-destructure-props` (Solid: destructuring props breaks reactivity — `.tsx` only, on JSX-returning functions) · `no-cross-package-relative` (bans relative imports that escape the `packages/*`/`apps/*` boundary — pure path math, no resolver; see RESOLVED section below).
 
-Reused built-ins (per "reuse existing plugins"):
+Reused built-ins (per "reuse existing plugins"), all `error`:
 
-- `func-style: ["warn","expression"]` (C2, declarations) · `no-restricted-syntax` on `TryStatement` (C4) · `eqeqeq: ["warn","always"]` (C3) · `no-labels: off` (C5).
+- `func-style: ["error","expression"]` (C2, declarations) · `no-restricted-syntax` on `TryStatement` (C4) · `eqeqeq: ["error","always"]` (C3) · `no-labels: off` (C5) · `no-restricted-imports` (protocol subpath value-imports). Severities + rule set live in the plugin's `configs.recommended`, consumed by `eslint.config.ts`.
 
 ## Decisions
 
@@ -57,14 +57,31 @@ Studied the author's type-structuring across `figr/identity` + kuib protocol. Lo
 - **Generic machinery in identity** (the "complicated generics"): generic utility wrappers (`DeepPartial<T>`, `HydratedDocument<T>`, `PartialBy<T,K>`, conditional `T extends object ? …`), **tagged discriminated unions** (`TokenBooleanValueByMode | TokenStringValueByMode | …`, each `{ type: SomeEnum.X; value }`), `Exclude`-derived enum subsets, and **enum-keyed `Record`** (`Record<ColorInfoEnum, …>`).
 - **Apply only where warranted (don't cargo-cult):** the enum-keyed `Record` _does_ fit (`roleColor: Record<TranscriptRoleEnum, string>`). A **tagged discriminated union does NOT yet** — identity only splits a union when variant _shapes diverge_ (boolean vs color value); the transcript entries are uniform `{id, role, text}`, so a union would be N identical members. Use a **single structured type + the enum** now; switch to the tagged union the moment a role's shape diverges (e.g. `tool` gaining `callID`/status). Generic wrappers don't fit a concrete view-model. In-memory view-models stay plain `type` (not Zod) — Zod is only for wire/disk/process boundaries.
 
-## OPEN: relative imports — scope undecided (2026-07-01)
+## RESOLVED: relative imports — cross-package-only ban (2026-07-01)
 
-Author wants "no relative imports + a lint rule." **Conflicts with the deliberate type-only-subpaths decision** (within a package, _value_ imports must be relative unless `exports` expose runtime subpaths — currently `"./*": { types }` only, on purpose, to stop consumers importing internal defaults; enforced by the `no-restricted-imports` rule on `@kuib-ai/protocol/*`). Audit: **232 relative imports** (protocol 39, daemon 7, host-tui 7, engine 6, …) — almost all _within-package value imports_. Two scopes:
+Decided **(ii) cross-package only**: within-package `../unit` relatives stay; only relatives that _escape_ a package are banned. Enforced by a **custom `house/no-cross-package-relative` rule** (pure `node:path` math against the `packages/*` / `apps/*` layout — no resolver, no dependency, deterministic; verified it fires cross-package and allows within-package). Cross-package relatives were already ≈0, so the rule is preventive; no codemod was needed.
 
-- **(i) Total ban** — expose runtime subpaths in every `exports` map, drop the protocol restriction, self-reference, codemod all 232 → `@kuib-ai/…`, add no-relative rule. Reverses 2 decisions; loses internal-default encapsulation.
-- **(ii) Cross-package only** — ban relative imports that _escape_ a package (`import/no-relative-packages`); keep within-package relative (the universal norm, preserves encapsulation). Cross-package relatives already ≈0.
+**Why NOT total-ban / absolute-everywhere `@/` (investigated and rejected, with evidence):**
 
-**Recommended (ii); awaiting the author's call before adding the rule.**
+- **`@/` self-alias does not survive `tsc` declaration emit.** A spike on `std` showed the emitted `.d.ts` contains `import("@/async.with.error")` **unresolved** — TypeScript never rewrites `paths` aliases in output (by design; the TS team declined this). A consumer then either errors `TS2307` or, under `skipLibCheck: true`, silently degrades the type to `any` (a **false green**). Verified with a type probe.
+- **Project references + Nx sync do NOT fix it** — they make consumers read the dependency's `.d.ts` instead of source, but the `@/` still leaks into that `.d.ts`. Nx sync only auto-maintains the `references` arrays; it doesn't change what `tsc` emits. References relocate the problem, they don't resolve it.
+- **Runtime is fine either way** — Bun resolves `@/` per-file (nearest tsconfig); the break is TypeScript-only.
+
+**Deferred routes to literal `@/` (long-running; not adopted now):**
+
+- **(A) literal `@/`** = project references + Nx sync + declaration emit + a `.d.ts` path-rewriter (`tsc-alias` / `ts-patch` `typescript-transform-paths`). Delivers the `@/` token but bolts a real build pipeline onto a zero-build, run-source-on-Bun repo.
+- **(B) globally-unique `@pkg/*` aliases** in the root base tsconfig (`@std/* → packages/std/src/*`, …) — resolves locally via tsconfig `paths`, bypasses the export map, exposes nothing externally, needs no rewriter/build. Works in tsc + Bun; not the literal `@/` token.
+
+Author is fine with the current config (within-package relative + `@kuib-ai/<pkg>` cross-package); (A)/(B) can be revisited later.
+
+**Rejected `eslint-plugin-import-x` for the rule:** it needs a native `unrs-resolver` + build-approval + resolver settings, and `no-relative-packages` still **silently didn't fire** without full resolver config. The custom rule is dependency-free and actually enforces — a case where custom beats prebuilt.
+
+## Lint infra changes (2026-07-01)
+
+- **All house rules are now `error`** (was `warn`). Flipping surfaced **zero** violations beyond relative-imports — the codebase was already clean on every other rule.
+- **Rule config lives in the plugin**, not `eslint.config.ts`: the plugin exports `configs.recommended` (custom `house/*` rules + reused built-ins `func-style`/`eqeqeq`/`no-restricted-imports`/`no-restricted-syntax`/`no-unused-vars`, all `error`); `eslint.config.ts` just does `rules: houseStylePlugin.configs.recommended.rules`.
+- **The plugin dogfoods itself** — removed from the ignore list; `@context` added to every rule file; plugin typecheck + `eslint .` green. It uses `@typescript-eslint/utils` + `node:path` (the right tools); it correctly does **not** depend on `@kuib-ai/std` (rules are synchronous, so `asyncWithError` doesn't apply).
+- **Circular-dependency detection via `madge`** — `pnpm check:circular` (`madge --circular --extensions ts,tsx packages apps`); currently **0 cycles** across 143 files. This is the real guard against barrel cycles, independent of import path style.
 
 ## Open Questions — Solid-JSX linting bucket (deferred)
 

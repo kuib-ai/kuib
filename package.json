@@ -6,6 +6,7 @@
     "format:modified": "prettier --write $(git ls-files --others --exclude-standard --modified)",
     "format:all": "prettier --write .",
     "lint:all": "eslint",
+    "check:circular": "madge --circular --extensions ts,tsx packages apps",
     "typecheck": "pnpm -r exec tsc --noEmit"
   },
   "keywords": [],
@@ -35,6 +36,7 @@
     "globals": "catalog:",
     "jiti": "catalog:",
     "lint-staged": "catalog:",
+    "madge": "catalog:",
     "nx": "catalog:",
     "prettier": "catalog:",
     "tsx": "catalog:",

@@ -6,7 +6,7 @@ layer: architecture
 created: 2026-04-13
 tags: [architecture, providers, plugins, llm]
 depends-on: ["[[architecture-overview]]", "[[security-model]]"]
-informs: ["[[protocol-design]]"]
+informs: ["[[protocol-design]]", "[[tool-system]]"]
 ---
 
 # Provider Architecture

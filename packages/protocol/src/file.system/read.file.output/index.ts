@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/tool-system
 import { z } from "zod";
 
 const ReadFileOutput = z.object({

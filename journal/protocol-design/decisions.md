@@ -683,6 +683,17 @@ Discussion { id: DiscussionID, partIDs: PartID[], ... }
 
 **Step boundaries** are not included in discussions — they're internal tracking, never sent to the LLM. Same for transient event-only states (running tool calls, approval flow).
 
+## Tool-call backends — where the pieces live (2026-07-01)
+
+The tool system is split across layers so the definition, the interface, and the executor stay separated (see [[tool-system]]). Current locations:
+
+- **`@kuib-ai/protocol`** — the **contract**: `FileSystem` namespace (`ReadFileInput` / `ReadFileOutput` Zod schemas, in `src/file.system/`) + the **`FileSystemPort`** interface (`src/file.system.port/`, type-only, mirrors `EventLogPort`). Source of truth for tool I/O + the port a tool calls.
+- **`@kuib-ai/tools`** — the **definitions**: `defineTool` (existential `ToolSpec`) + `read.file` (calls `ctx.fs.readFile`, never the daemon directly) + `tool.registry`. Backed by the protocol interface.
+- **`@kuib-ai/daemon`** — the **backend/executor**: `procedure/read.file` (real `node:fs`, `~` expanded via `expand.home.path`), exposed over tRPC on the unix socket. The only place that touches the filesystem.
+- **`@kuib-ai/engine`** — the **wiring**: `provider/build.tools` (registry → AI SDK tool map) + `daemon.file.system` (a `FileSystemPort` impl backed by the daemon tRPC client). The engine injects the daemon-backed `fs` into the tool `ctx`.
+
+Dependency flow holds: `protocol ← tools ← engine`, daemon implements the interface, engine wires them. v1 exposes only `readFile`; `executeCommand`/`writeFile` remain daemon primitives, not agent tools.
+
 ## Open Questions
 
 - Host boundary vs engine: see [[host-layer]]

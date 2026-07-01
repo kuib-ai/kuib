@@ -9,11 +9,13 @@
     "test": "bun test"
   },
   "dependencies": {
+    "@kuib-ai/daemon": "workspace:*",
     "@kuib-ai/engine": "workspace:*",
     "@kuib-ai/engine-service": "workspace:*",
     "@kuib-ai/env": "workspace:*",
     "@kuib-ai/event-log-sqlite": "workspace:*",
     "@kuib-ai/protocol": "workspace:*",
+    "@kuib-ai/transcript": "workspace:*",
     "@opentui/core": "catalog:",
     "@opentui/solid": "catalog:",
     "solid-js": "catalog:"

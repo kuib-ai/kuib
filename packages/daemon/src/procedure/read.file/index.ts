@@ -1,17 +1,17 @@
-// @context @journal/architecture-overview
+// @context @journal/tool-system
 import { readFile } from "node:fs/promises";
 import { TRPCError } from "@trpc/server";
 import Std from "@kuib-ai/std";
+import Protocol from "@kuib-ai/protocol";
 import Trpc from "../../trpc";
-import ReadFileInput from "../../io/read.file.input";
-import ReadFileOutput from "../../io/read.file.output";
+import expandHomePath from "../../expand.home.path";
 
 const readFileProcedure = Trpc.procedure
-  .input(ReadFileInput)
-  .output(ReadFileOutput)
+  .input(Protocol.FileSystem.ReadFileInput)
+  .output(Protocol.FileSystem.ReadFileOutput)
   .query(async ({ input }) => {
     const [error, content] = await Std.asyncWithError(
-      readFile(input.path, "utf8"),
+      readFile(expandHomePath(input.path), "utf8"),
     );
     if (error) {
       throw new TRPCError({

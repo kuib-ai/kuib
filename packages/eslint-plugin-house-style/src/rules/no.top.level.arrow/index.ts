@@ -1,3 +1,4 @@
+// @context @journal/house-style-linting
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(

@@ -3,16 +3,16 @@ import { dirname, join } from "node:path";
 import { render } from "@opentui/solid";
 import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
+import Daemon from "@kuib-ai/daemon";
 import EventLogSqlite from "@kuib-ai/event-log-sqlite";
 import EngineService from "@kuib-ai/engine-service";
 import Env from "@kuib-ai/env";
 import App from "./app";
-import resolveDbPath from "./db.path";
 
 const main = async function (): Promise<void> {
   const env = Env.bootstrapEnv();
   const argv = process.argv.slice(2);
-  const dbPath = resolveDbPath(env.KUIB_DB_PATH);
+  const dbPath = Env.resolveDbPath(env.KUIB_DB_PATH);
   const socketPath = join(dirname(dbPath), "engine.sock");
   const sessionID = Protocol.ID.SessionID.parse(env.KUIB_SESSION_ID);
   const deviceID = Protocol.ID.DeviceID.parse(crypto.randomUUID());
@@ -23,9 +23,9 @@ const main = async function (): Promise<void> {
       apiKey: env.KUIB_MODEL_API_KEY,
       modelID: env.KUIB_MODEL_ID,
     });
-    const daemonClient = Engine.DaemonClient.createDaemonClient(
-      env.KUIB_DAEMON_URL,
-    );
+    const daemonSocket = Daemon.resolveDaemonSocketPath(env.KUIB_DAEMON_SOCKET);
+    await Daemon.ensureDaemon(daemonSocket);
+    const daemonClient = Engine.DaemonClient.createDaemonClient(daemonSocket);
     const eventLog = EventLogSqlite.createSqliteEventLog(dbPath);
     await EngineService.startEngineService({
       socketPath,

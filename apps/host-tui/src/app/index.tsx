@@ -3,8 +3,8 @@ import { createSignal, onMount, onCleanup, For } from "solid-js";
 import type { EventLogPort } from "@kuib-ai/protocol/event.log.port";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 import type { SessionID } from "@kuib-ai/protocol/id/session.id";
-import Transcript from "../transcript";
-import type { TranscriptEntry } from "../transcript/transcript.entry";
+import Transcript from "@kuib-ai/transcript";
+import type { TranscriptEntry } from "@kuib-ai/transcript/transcript.entry";
 
 type AppProps = {
   eventLog: EventLogPort;

@@ -11,50 +11,10 @@ export default defineConfig(
   ...tseslint.configs.recommended,
   {
     files: ["apps/**/*.{ts,tsx}", "packages/**/*.{ts,tsx}"],
-    ignores: ["packages/eslint-plugin-house-style/**"],
     plugins: {
       house: houseStylePlugin,
     },
-    rules: {
-      "house/require-context-link": "warn",
-      "house/dot-case-filename": "warn",
-      "house/no-top-level-arrow": "warn",
-      "house/named-exports-are-types": "warn",
-      "house/no-prose-comments": "warn",
-      "house/no-destructure-props": "warn",
-      "func-style": ["warn", "expression"],
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_",
-        },
-      ],
-      eqeqeq: ["warn", "always"],
-      "no-labels": "off",
-      "no-restricted-imports": [
-        "warn",
-        {
-          patterns: [
-            {
-              group: ["@kuib-ai/protocol/*"],
-              allowTypeImports: true,
-              message:
-                "Import values from the @kuib-ai/protocol namespace (e.g. Protocol.ID.SessionID); only types may come from subpaths.",
-            },
-          ],
-        },
-      ],
-      "no-restricted-syntax": [
-        "warn",
-        {
-          selector: "TryStatement",
-          message:
-            "Do not use try/catch. Handle errors explicitly via the async tuple helper. Override with eslint-disable if unavoidable.",
-        },
-      ],
-    },
+    rules: houseStylePlugin.configs.recommended.rules,
   },
   {
     files: ["**/*.test.ts", "**/*.test.tsx"],

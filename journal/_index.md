@@ -56,6 +56,12 @@ Providers are plugins, not core. The protocol defines the provider interface. An
 
 Three user actions on any command that requires approval:
 
+### [[tool-system]] | status:in-progress | tags:tools,single-source,file-system,interface,daemon,ai-sdk,dedup
+
+Builds the `packages/tools` layer the `[[architecture-overview]]` always prescribed but that was never created. Resolves...
+
+- [[tool-system/progress]]
+
 ## Protocol
 
 ### [[protocol-design]] | status:in-progress | tags:protocol,types,zod,events,state-management,tsgo

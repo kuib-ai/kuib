@@ -1,0 +1,23 @@
+{
+  "name": "@kuib-ai/tools",
+  "version": "0.0.1",
+  "description": "kuib tool definitions — single source of truth, backed by protocol interfaces",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": {
+      "types": "./src/*/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kuib-ai/protocol": "workspace:*",
+    "zod": "catalog:"
+  },
+  "nx": {},
+  "devDependencies": {
+    "@kuib-ai/tsconfig": "workspace:*"
+  }
+}

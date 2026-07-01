@@ -14,6 +14,7 @@ informs:
     "[[security-model]]",
     "[[infrastructure-strategy]]",
     "[[house-style-linting]]",
+    "[[tool-system]]",
   ]
 ---
 
