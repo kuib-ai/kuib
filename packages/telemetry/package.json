@@ -1,0 +1,31 @@
+{
+  "name": "@kuib-ai/telemetry",
+  "version": "0.0.1",
+  "description": "kuib telemetry — OpenTelemetry span export for the AI SDK to Phoenix",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": {
+      "types": "./src/*/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-sdk/otel": "catalog:",
+    "@arizeai/openinference-semantic-conventions": "catalog:",
+    "@arizeai/openinference-vercel": "catalog:",
+    "@opentelemetry/api": "catalog:",
+    "@opentelemetry/exporter-trace-otlp-proto": "catalog:",
+    "@opentelemetry/resources": "catalog:",
+    "@opentelemetry/sdk-trace-node": "catalog:",
+    "@opentelemetry/semantic-conventions": "catalog:",
+    "ai": "catalog:"
+  },
+  "devDependencies": {
+    "@kuib-ai/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "bun-types": "catalog:"
+  }
+}

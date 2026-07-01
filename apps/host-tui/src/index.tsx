@@ -6,6 +6,7 @@ import Engine from "@kuib-ai/engine";
 import EventLogSqlite from "@kuib-ai/event-log-sqlite";
 import EngineService from "@kuib-ai/engine-service";
 import Env from "@kuib-ai/env";
+import Telemetry from "@kuib-ai/telemetry";
 import App from "./app";
 import resolveDaemonClient from "./resolve.daemon.client";
 
@@ -20,6 +21,10 @@ const main = async function (): Promise<void> {
   const deviceLabel = env.KUIB_TARGET_NODE ?? localLabel;
 
   if (argv.includes("serve")) {
+    Telemetry.startTelemetry({
+      endpoint: env.KUIB_TRACE_ENDPOINT,
+      serviceName: env.KUIB_TRACE_SERVICE,
+    });
     const model = Engine.Provider.createModel({
       baseURL: env.KUIB_MODEL_BASE_URL,
       apiKey: env.KUIB_MODEL_API_KEY,
@@ -72,4 +77,7 @@ const main = async function (): Promise<void> {
   );
 };
 
-void main();
+void main().catch((error: Error) => {
+  process.stderr.write(`kuib failed to start: ${error.message}\n`);
+  process.exit(1);
+});

@@ -1,0 +1,55 @@
+import { describe, it, expect } from "bun:test";
+import { z } from "zod";
+import Tools from "@kuib-ai/tools";
+import type { ToolContext } from "@kuib-ai/tools";
+import buildTools from "./index";
+
+const ctx: ToolContext = {
+  fs: {
+    readFile: async () => ({ content: "" }),
+  },
+};
+
+describe("buildTools", () => {
+  it("builds a record keyed by spec.name", () => {
+    const alpha = Tools.defineTool({
+      name: "alpha",
+      description: "a",
+      input: z.object({ x: z.number() }),
+      execute: async () => "ok",
+    });
+    const beta = Tools.defineTool({
+      name: "beta",
+      description: "b",
+      input: z.object({}),
+      execute: async () => "ok",
+    });
+    const tools = buildTools([alpha, beta], ctx);
+    expect(Object.keys(tools)).toEqual(["alpha", "beta"]);
+  });
+
+  it("parses input before calling definition.execute with ctx", async () => {
+    const receivedInputs: unknown[] = [];
+    const receivedCtxs: ToolContext[] = [];
+    const spec = Tools.defineTool({
+      name: "coerce",
+      description: "c",
+      input: z.object({ n: z.coerce.number() }),
+      execute: async (input, execCtx) => {
+        receivedInputs.push(input);
+        receivedCtxs.push(execCtx);
+        return "done";
+      },
+    });
+    const tools = buildTools([spec], ctx);
+    const coerce = tools["coerce"];
+    expect(coerce).toBeDefined();
+    const result = await coerce?.execute?.(
+      { n: "42" },
+      { toolCallId: "t1", messages: [], context: undefined },
+    );
+    expect(receivedInputs[0]).toEqual({ n: 42 });
+    expect(receivedCtxs[0]).toBe(ctx);
+    expect(result).toBe("done");
+  });
+});

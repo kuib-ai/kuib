@@ -10,7 +10,7 @@
     "noEmit": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
+    "types": ["node", "bun-types"]
   },
   "include": ["src"]
 }

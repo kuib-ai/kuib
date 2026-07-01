@@ -15,6 +15,7 @@ informs:
     "[[infrastructure-strategy]]",
     "[[house-style-linting]]",
     "[[tool-system]]",
+    "[[testing-strategy]]",
   ]
 ---
 

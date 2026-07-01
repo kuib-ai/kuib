@@ -16,6 +16,7 @@
     "@kuib-ai/env": "workspace:*",
     "@kuib-ai/event-log-sqlite": "workspace:*",
     "@kuib-ai/protocol": "workspace:*",
+    "@kuib-ai/telemetry": "workspace:*",
     "@kuib-ai/transcript": "workspace:*",
     "solid-js": "catalog:"
   },

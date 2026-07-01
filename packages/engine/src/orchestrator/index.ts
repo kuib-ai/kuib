@@ -58,6 +58,7 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
     messages,
     tools,
     stopWhen: stepCountIs(5),
+    telemetry: { isEnabled: true, functionId: "runAgent" },
   });
 
   const errorPartID = newID(Protocol.ID.PartID);
@@ -89,6 +90,20 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
           partID: newID(Protocol.ID.PartID),
           callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
           output: JSON.stringify(part.output),
+          completedAt: Date.now(),
+          kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
+        });
+      } else if (part.type === "tool-error") {
+        await emit({
+          type: Protocol.Event.EventTypeEnum.TOOL_CALL_FAILED,
+          messageID,
+          partID: newID(Protocol.ID.PartID),
+          callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
+          reason: Protocol.ToolCall.ToolCallErrorReasonEnum.FAILED,
+          error:
+            part.error instanceof Error
+              ? part.error.message
+              : String(part.error),
           completedAt: Date.now(),
           kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
         });

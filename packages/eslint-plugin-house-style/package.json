@@ -9,7 +9,10 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
+    "@typescript-eslint/parser": "catalog:",
+    "@typescript-eslint/rule-tester": "catalog:",
     "@typescript-eslint/utils": "catalog:",
+    "bun-types": "catalog:",
     "typescript": "catalog:"
   }
 }

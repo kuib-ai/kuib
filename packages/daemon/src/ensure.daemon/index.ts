@@ -45,6 +45,7 @@ const ensureDaemon = async function (socketPath: string): Promise<void> {
     }
     await sleep(PROBE_INTERVAL_MS);
   }
+  throw new Error(`daemon did not become reachable at ${socketPath}`);
 };
 
 export default ensureDaemon;
