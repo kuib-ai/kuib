@@ -1,0 +1,31 @@
+{
+  "name": "@kuib-ai/host-web",
+  "version": "0.0.1",
+  "description": "Web Host for Kuib AI — serves the engine + daemon in-process over HTTP/SSE",
+  "type": "module",
+  "scripts": {
+    "build:client": "vite build",
+    "web": "vite build && bun run src/server/index.ts",
+    "serve": "bun run src/server/index.ts",
+    "dev": "KUIB_WEB_DEV=1 concurrently -k \"bun run src/server/index.ts\" \"vite\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kuib-ai/daemon": "workspace:*",
+    "@kuib-ai/engine": "workspace:*",
+    "@kuib-ai/env": "workspace:*",
+    "@kuib-ai/event-log-sqlite": "workspace:*",
+    "@kuib-ai/protocol": "workspace:*",
+    "@kuib-ai/transcript": "workspace:*",
+    "solid-js": "catalog:"
+  },
+  "devDependencies": {
+    "@kuib-ai/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "bun-types": "catalog:",
+    "concurrently": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-solid": "catalog:"
+  }
+}

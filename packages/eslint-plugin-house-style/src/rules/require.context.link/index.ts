@@ -1,3 +1,4 @@
+// @context @journal/house-style-linting
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 import * as fs from "node:fs";
 import * as path from "node:path";

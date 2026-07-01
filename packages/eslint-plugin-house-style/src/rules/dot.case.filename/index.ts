@@ -1,3 +1,4 @@
+// @context @journal/house-style-linting
 import { ESLintUtils } from "@typescript-eslint/utils";
 import * as path from "node:path";
 

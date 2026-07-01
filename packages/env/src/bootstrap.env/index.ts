@@ -1,23 +1,10 @@
 // @context @journal/provider-architecture
 import { existsSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 import { config as loadDotenv } from "dotenv";
 import EnvSchema from "../env.schema";
 import type { Env } from "../env.schema";
-
-const findWorkspaceRoot = function (start: string): string {
-  let current = start;
-  while (true) {
-    if (existsSync(resolve(current, "pnpm-workspace.yaml"))) {
-      return current;
-    }
-    const parent = dirname(current);
-    if (parent === current) {
-      return start;
-    }
-    current = parent;
-  }
-};
+import findWorkspaceRoot from "../workspace.root";
 
 const bootstrapEnv = function (
   mode: string = process.env["NODE_ENV"] ?? "development",

@@ -7,6 +7,7 @@ import Event from "./event";
 import ServiceMessage from "./service.message";
 import TokenUsage from "./token.usage";
 import ModelRef from "./model.ref";
+import FileSystem from "./file.system";
 
 const Protocol = {
   ID,
@@ -17,6 +18,7 @@ const Protocol = {
   ServiceMessage,
   TokenUsage,
   ModelRef,
+  FileSystem,
 };
 
 export default Protocol;

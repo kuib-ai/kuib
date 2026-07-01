@@ -1,9 +1,12 @@
 // @context @journal/architecture-overview
-import { streamText, stepCountIs, tool, type LanguageModel } from "ai";
-import { z } from "zod";
+import { streamText, stepCountIs, type LanguageModel } from "ai";
 import Protocol from "@kuib-ai/protocol";
 import Std from "@kuib-ai/std";
+import Tools from "@kuib-ai/tools";
 import newID from "../new.id";
+import buildMessages from "../build.messages";
+import Provider from "../provider";
+import createDaemonFileSystem from "../daemon.file.system";
 import type { DaemonClient } from "../daemon.client/transport.factory";
 import type { EventLogPort } from "../event.log/event.log.port";
 import type { SessionID } from "@kuib-ai/protocol/id/session.id";
@@ -45,82 +48,14 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
     messageID,
   });
 
-  const tools = {
-    executeCommand: tool({
-      description: "Execute a bash shell command on the target daemon machine.",
-      inputSchema: z.object({
-        command: z.string().min(1),
-        cwd: z.string().optional(),
-      }),
-      execute: async ({ command, cwd }) => {
-        const callID = newID(Protocol.ID.ToolCallID);
-        await emit({
-          type: Protocol.Event.EventTypeEnum.TOOL_CALL_STARTED,
-          callID,
-        });
-        const [error, result] = await Std.asyncWithError(
-          daemonClient.executeCommand.mutate({ command, cwd: cwd ?? "." }),
-        );
-        const partID = newID(Protocol.ID.PartID);
-        if (error) {
-          await emit({
-            type: Protocol.Event.EventTypeEnum.TOOL_CALL_FAILED,
-            messageID,
-            partID,
-            callID,
-            reason: Protocol.ToolCall.ToolCallErrorReasonEnum.FAILED,
-            error: error.message,
-            completedAt: Date.now(),
-            kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
-          });
-          return { error: error.message };
-        }
-        await emit({
-          type: Protocol.Event.EventTypeEnum.TOOL_CALL_COMPLETED,
-          messageID,
-          partID,
-          callID,
-          output: JSON.stringify(result),
-          completedAt: Date.now(),
-          kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
-        });
-        return result;
-      },
-    }),
-    readFile: tool({
-      description: "Read a file from the target daemon machine.",
-      inputSchema: z.object({ path: z.string().min(1) }),
-      execute: async ({ path }) => {
-        const [error, result] = await Std.asyncWithError(
-          daemonClient.readFile.query({ path }),
-        );
-        if (error) {
-          return { error: error.message };
-        }
-        return result;
-      },
-    }),
-    writeFile: tool({
-      description: "Write a file on the target daemon machine.",
-      inputSchema: z.object({
-        path: z.string().min(1),
-        content: z.string(),
-      }),
-      execute: async ({ path, content }) => {
-        const [error, result] = await Std.asyncWithError(
-          daemonClient.writeFile.mutate({ path, content }),
-        );
-        if (error) {
-          return { error: error.message };
-        }
-        return result;
-      },
-    }),
-  };
+  const fileSystem = createDaemonFileSystem(daemonClient);
+  const tools = Provider.buildTools(Tools.registry, { fs: fileSystem });
+
+  const messages = buildMessages(eventLog, sessionID);
 
   const result = streamText({
     model,
-    prompt,
+    messages,
     tools,
     stopWhen: stepCountIs(5),
   });
@@ -141,6 +76,21 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
           messageID,
           partID: Protocol.ID.PartID.parse(part.id),
           delta: part.text,
+        });
+      } else if (part.type === "tool-call") {
+        await emit({
+          type: Protocol.Event.EventTypeEnum.TOOL_CALL_STARTED,
+          callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
+        });
+      } else if (part.type === "tool-result") {
+        await emit({
+          type: Protocol.Event.EventTypeEnum.TOOL_CALL_COMPLETED,
+          messageID,
+          partID: newID(Protocol.ID.PartID),
+          callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
+          output: JSON.stringify(part.output),
+          completedAt: Date.now(),
+          kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
         });
       }
     }

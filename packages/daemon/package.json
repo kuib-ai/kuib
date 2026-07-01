@@ -13,8 +13,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@trpc/server": "catalog:",
+    "@kuib-ai/protocol": "workspace:*",
     "@kuib-ai/std": "workspace:*",
+    "@trpc/server": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {

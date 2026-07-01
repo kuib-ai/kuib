@@ -199,3 +199,29 @@ WAL gives concurrent readers + one writer; `sqlite3_update_hook` is in-process-o
 - Project Map vs Ledger: same pane with mode switch, or always split?
 - Engine idle-reap timeout `T` (how long to keep a hostless engine alive before draining).
 - Package-manager service scope: system unit with `User=` vs user-level unit.
+
+## Web host (`kuib web`) + SSE catch-up protocol (2026-07-01)
+
+A browser cannot open a `bun:sqlite` file or a unix socket — the two things the TUI relies on. So the web host is not standalone: **a local `kuib` process is compulsory**, the browser is a pure _viewer_ (`viewing ≠ leading`). This is the predicted `LocalEventLog → MeshEventLog` transport-swap, with "remote = localhost": the browser gets a **`RemoteEventLog`** whose `subscribe()` rides HTTP/SSE instead of reading SQLite. Host code shape is unchanged; only the transport impl differs. Later, the same client can point at a mesh node (homelab via coordinator) with the same contract.
+
+**`kuib web` = one long-lived process** serving engine + daemon **in-process** + the web bridge. Endpoints: `POST /api/submit` (runs `runAgent`), `GET /api/events` (SSE live tail), `GET /api/events/since` (pull reconcile), `GET /api/status` (liveness). It binds **loopback + this node's tailscale IP** (never `0.0.0.0`) so phone / other mesh nodes can reach it. Auth + threat model live in [[security-model]] "Web host auth".
+
+### The catch-up / no-staleness protocol (the load-bearing part)
+
+Total order is `(epoch, seq)`, PK-enforced, and `seq` is strictly contiguous per session/epoch (`MAX(seq)+1`). That contiguity makes gap _detection_ trivial. Three layers, each covering what the others miss:
+
+1. **Live push — SSE with `id: epoch:seq`.** On any drop, `EventSource` auto-reconnects with `Last-Event-Id`; the server resumes `replay(afterSeq)` from the durable log then rides the tail. Since the settled log is append-only (never truncated in v1), replay always closes the drop window.
+2. **Pull reconcile — `/api/events/since?afterSeq`.** Fired on load, `visibilitychange→visible`, `online`, and on detected gap. Backstop for the cases `Last-Event-Id` silently misses — backgrounded tabs (browsers suspend EventSource without `onerror`), proxy buffering, laptop sleep. The DB is truth, so a pull always reconciles to latest.
+3. **Contiguity gap-heal.** Any incoming `seq ≠ lastSeq+1` is a provable hole → auto-reconcile from `lastSeq`. Silent loss becomes self-healing.
+
+**Idempotency:** client applies only `key > cursor`, deduped by `(epoch,seq)`; the three layers can overlap freely and always converge.
+
+**Latency refinement:** because the engine runs **in-process**, the server holds the _writer_ `eventLog`, whose `subscribe()` does synchronous in-process fan-out on `append` → **zero-latency, zero-staleness tail** (strictly better than the TUI's 150ms poll reader). The polling `createSqliteReader` is only needed when reader and writer are _different processes_ (detached `serve`, or the mesh) — that path wants the socket **doorbell** to avoid the 150ms floor.
+
+### Run-liveness detection (co-viewing a TUI-started stream)
+
+Single engine + single log per device (socket mutex) ⇒ TUI and web are **co-viewers of the same log**, not separate streams. "Is a run live?" is answered two ways: **(1)** derive from the log tail — a submit with no terminal `MessageCompleted`/`Failed`, or a trailing `TextDelta`, means in-flight; **(2)** authoritative `activeRuns` (already tracked by the engine-service) via `/api/status`, which covers the submit→first-token spin-up window the log alone is ambiguous about.
+
+### Client stack
+
+Solid-for-DOM via **Vite** (`vite-plugin-solid` — Bun's transpiler can't do Solid's reactivity transform). Dev = Vite server + API proxy to the Bun engine; prod = `vite build` → Bun serves `dist/` with the token injected into an `index.html` meta tag. The transcript **fold** is reused from the TUI shape; extracting it to `packages/transcript` (so both hosts share one impl) is a tracked follow-up. Lives in `apps/host-web`; folds into the unified `kuib` binary later.

@@ -18,6 +18,7 @@
     "@kuib-ai/daemon": "workspace:*",
     "@kuib-ai/protocol": "workspace:*",
     "@kuib-ai/std": "workspace:*",
+    "@kuib-ai/tools": "workspace:*",
     "@trpc/client": "catalog:",
     "ai": "catalog:",
     "zod": "catalog:"

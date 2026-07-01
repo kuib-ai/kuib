@@ -213,9 +213,22 @@ SQLite replication isn't one thing — `ReplicationPort` keeps it swappable like
 - **SQLite-as-durable-event-backbone is the proven pattern for local AI-agent orchestration** (goqite/sqliteq; "the queue is the backbone, everything else optional"). Polling cost is ~μs; the LLM call is the bottleneck.
 - **rqlite/dqlite vs LiteFS vs Litestream** map the consensus↔async spectrum above.
 
+## RESOLVED: coordinator-as-lease-authority (2026-07-01, author-agreed)
+
+Leadership is arbitrated by the **always-present coordinator**, NOT by peer-majority Raft.
+
+**Load-bearing architectural invariant:** the architecture _guarantees_ a Headscale coordinator for any mesh — it is **mandatory, not optional** (it's what registers nodes and allocates the per-user mesh IPs; see [[infrastructure-strategy]] "per-user-daemon = its own mesh node with its own IP"). Ensuring a coordinator always exists is the architecture's responsibility (self-hosted / you-host / BYO tiers all provide one). So the lease authority is **always provisioned and structurally present** — there is never a bare 2-party tie. **Existence ≠ reachability:** a guaranteed coordinator can still be _transiently unreachable_ under partition; that degraded case is the human-confirm fallback below, not a missing coordinator.
+
+- **Mechanism:** per-session leadership = a **lease record on the coordinator** `{ sessionID, epoch, leaderID, expiry }`, acquired by **compare-and-swap**. The coordinator serializes → exactly one leader per epoch, no peer quorum round-trips. This is the WSFC Cloud-Witness / Spanner vote-only-witness pattern generalized to all N.
+- **Dissolves the N=2 problem** and collapses the two-regime model: **1 device** = single-device, no consensus (coordinator irrelevant, `epoch=0`); **≥2 devices** = coordinator + devices, coordinator arbitrates. There is **no separate "witness" concept** — the coordinator _is_ the witness, by construction. (Supersedes the "1–2 voters / witness / weighted-quorum" framing above.)
+- **Fencing** = the existing `(epoch, seq)` token; storage rejects stale-epoch appends. **Self-fencing watchdog:** a leader whose lease lapses (or that loses coordinator contact) **stops dispatching before** the new leader's takeover window — software STONITH on consumer hardware with no IPMI.
+- **Human-confirm fallback** now applies only to the **coordinator-itself-unreachable** double fault (not to N=2): block auto-failover, prompt the user (who has out-of-band truth). Coordinator holds only a leadership _pointer_ (epoch/leaderID/expiry) — no session data or keys, so the dataless/no-honeypot invariant holds ([[security-model]]).
+- **Substrate question resolved for small meshes:** no embedded peer-Raft is needed — leadership is CAS-on-coordinator, durability is point-to-point ordered log-shipping (COPY-not-merge, above). Peer-Raft (rqlite/dqlite/LiteFS) stays an _optional_ substrate behind `ReplicationPort` only for users with **3+ always-on voters**.
+- **Tradeoff (accepted):** leadership _changes_ depend on coordinator reachability (a soft SPOF for _failover_, not steady-state — a healthy leader rides its unexpired lease through blips); coordinator-absent degrades to human-confirm. We already run the dataless coordinator, so this adds no new trust boundary.
+- **v1 uses none of this** (single device, `epoch=0`); coordinator-lease + self-fence land in **v1.x**, behind the unchanged `TransportFactory`/`Discovery`/`ReplicationPort` seams.
+
 ## Open Questions
 
-- **Consensus substrate** — which embeddable library/approach? This is the gating unknown (research pass pending).
 - Replicated **log storage** mechanism (hand-rolled epoch-fenced append log over tRPC vs embedded replicated store; NATS JetStream/Kafka rejected — quorum/datacenter misfit).
-- 2-node resolution default: pause-until-return vs witness vs human-confirm.
+- **Coordinator lease store** — where the `{epoch, leaderID, expiry}` record lives (extend the wrapped Headscale service vs a small sidecar) and the CAS API surface.
 - Failback policy details (explicit/idle-triggered only).
