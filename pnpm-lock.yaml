@@ -254,6 +254,9 @@ importers:
 
   packages/daemon:
     dependencies:
+      '@kuib-ai/env':
+        specifier: workspace:*
+        version: link:../env
       '@kuib-ai/protocol':
         specifier: workspace:*
         version: link:../protocol
