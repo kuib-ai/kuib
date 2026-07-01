@@ -75,11 +75,82 @@ describe("foldTranscript", () => {
 
     expect(entries).toEqual([
       {
-        id: "m2:reasoning",
+        id: "m2:reasoning:0",
         role: TranscriptRoleEnum.REASONING,
         text: "thinking",
       },
-      { id: "m2", role: TranscriptRoleEnum.ASSISTANT, text: "Hello" },
+      { id: "m2:0", role: TranscriptRoleEnum.ASSISTANT, text: "Hello" },
+    ]);
+  });
+
+  it("segments assistant text around tool results preserving chronology", () => {
+    const text = function (delta: string): AnyEvent {
+      return Protocol.Event.TextDelta.parse({
+        type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
+        messageID: "m4",
+        partID: "t1",
+        delta,
+      });
+    };
+    const completed = Protocol.Event.ToolCallCompleted.parse({
+      type: Protocol.Event.EventTypeEnum.TOOL_CALL_COMPLETED,
+      messageID: "m4",
+      partID: "p1",
+      callID: "c1",
+      output: "file contents",
+      completedAt: 1,
+      kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
+    });
+
+    const entries = foldTranscript([
+      envelope(text("reading it"), 0),
+      envelope(completed, 1),
+      envelope(text("here is the answer"), 2),
+    ]);
+
+    expect(entries).toEqual([
+      { id: "m4:0", role: TranscriptRoleEnum.ASSISTANT, text: "reading it" },
+      { id: "c1", role: TranscriptRoleEnum.TOOL, text: "✓ file contents" },
+      {
+        id: "m4:1",
+        role: TranscriptRoleEnum.ASSISTANT,
+        text: "here is the answer",
+      },
+    ]);
+  });
+
+  it("segments assistant text around an injected mid-turn user message", () => {
+    const text = function (delta: string): AnyEvent {
+      return Protocol.Event.TextDelta.parse({
+        type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
+        messageID: "m5",
+        partID: "t1",
+        delta,
+      });
+    };
+    const injected = Protocol.Event.UserMessageSubmitted.parse({
+      type: Protocol.Event.EventTypeEnum.USER_MESSAGE_SUBMITTED,
+      messageID: "u2",
+      parts: [
+        {
+          type: Protocol.Part.PartTypeEnum.TEXT,
+          partID: "p1",
+          excluded: false,
+          text: "also check the tests",
+        },
+      ],
+    });
+
+    const entries = foldTranscript([
+      envelope(text("working"), 0),
+      envelope(injected, 1),
+      envelope(text("on it"), 2),
+    ]);
+
+    expect(entries).toEqual([
+      { id: "m5:0", role: TranscriptRoleEnum.ASSISTANT, text: "working" },
+      { id: "u2", role: TranscriptRoleEnum.USER, text: "also check the tests" },
+      { id: "m5:1", role: TranscriptRoleEnum.ASSISTANT, text: "on it" },
     ]);
   });
 

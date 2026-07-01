@@ -25,18 +25,21 @@ const main = async function (): Promise<void> {
       endpoint: env.KUIB_TRACE_ENDPOINT,
       serviceName: env.KUIB_TRACE_SERVICE,
     });
-    const model = Engine.Provider.createModel({
+    const modelConfig = Engine.Provider.resolveModelConfig({
+      model: env.KUIB_MODEL,
       baseURL: env.KUIB_MODEL_BASE_URL,
       apiKey: env.KUIB_MODEL_API_KEY,
       modelID: env.KUIB_MODEL_ID,
+      anthropicApiKey: env.KUIB_ANTHROPIC_API_KEY,
     });
+    const model = Engine.Provider.createModel(modelConfig);
     const daemonClient = await resolveDaemonClient(env, localLabel);
     const eventLog = EventLogSqlite.createSqliteEventLog(dbPath);
     await EngineService.startEngineService({
       socketPath,
       eventLog,
       reapIdleMs: 5000,
-      runTurn: ({ sessionID: sid, prompt }) =>
+      runTurn: ({ sessionID: sid, prompt, takePending }) =>
         Engine.runAgent({
           prompt,
           sessionID: sid,
@@ -44,6 +47,7 @@ const main = async function (): Promise<void> {
           model,
           daemonClient,
           eventLog,
+          takePending,
         }),
     });
     return;

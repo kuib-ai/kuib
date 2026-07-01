@@ -99,6 +99,8 @@ DERP/relay never leaks into these contracts (direct-vs-relayed is handled below 
 
 ### Build progress + revised seams (2026-07-01)
 
+> Historical note: the "vitest N, bun N" test counts below record the split-runner era; vitest was removed 2026-07-02 — everything is `bun test` now ([[testing-strategy]]).
+
 **Done & verified (typecheck + lint clean; vitest 13, bun 7):**
 
 - `@kuib-ai/protocol/event.log.port` — `EventLogPort` contract (moved here from engine).

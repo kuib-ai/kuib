@@ -183,6 +183,8 @@ The transcript DB is **SQLite**, zero native dependency. Earlier plan was a runt
 
 **Decision:** use **`bun:sqlite`** in a **separate, Bun-quarantined package `@kuib-ai/event-log-sqlite`** — NOT inside `engine`, because importing `bun:sqlite` anywhere `engine`'s barrel pulls would crash every vitest-on-Node test and force `bun-types` into engine. `engine` stays runtime-agnostic with `memory.event.log` (vitest); the sqlite adapter is tested under `bun test` (like the OpenTUI host is Bun-quarantined). **Convergence:** when bun#32498 ships, the adapter swaps `bun:sqlite`→`node:sqlite` (one import) and stops being Bun-quarantined — zero `EventLogPort` change.
 
+> **Rationale update (2026-07-02):** the vitest-on-Node motivation is superseded — testing is now **bun-only** ([[testing-strategy]]), so `bun:sqlite` can no longer crash a Node test runner. The package split **stands** on layering grounds (engine stays runtime-agnostic behind `EventLogPort`; the adapter is an impl detail), and the bun#32498 convergence path is unchanged.
+
 **`EventLogPort` lives in `@kuib-ai/protocol/event.log.port`** (the contract — protocol = "Zod schemas + behavioral interfaces"). Both the host (reader impl) and the engine-service (writer impl) depend on this one contract. (`memory.event.log` in engine + `@kuib-ai/event-log-sqlite` are the two impls; a redundant engine re-export shim should be deleted.)
 
 Tables: `events(sessionID, epoch, seq, envelope TEXT, createdAt INT, PK(sessionID,epoch,seq))` canonical; `messages(messageID, sessionID, message JSON, PK)` materialized snapshot; `sessions`, `checkpoints`. `append` computes next `seq = MAX(seq)+1` in an `immediate` transaction (the **authoring** path, leader-only); replication will later add an `applyReplicated(envelope)` path that inserts the leader's already-assigned `(epoch,seq)` (see [[consensus-model]] author-vs-replicate).
@@ -701,6 +703,7 @@ Dependency flow holds: `protocol ← tools ← engine`, daemon implements the in
 - Should `ToolSpec.inputSchema` use Zod's `z.toJSONSchema()` output type instead of `Record<string, unknown>`?
 - Discussion schema details — `session.ts` redesign; cross-session snapshot semantics
 - User/org/team model and its impact on discussions and permissions
+- **`Protocol.Message` namespace is currently unreferenced** (2026-07-02 audit: `MessageUser`/`MessageAssistant`/`AnyMessage` + status/role enums have no consumer in packages/apps/tests) — the event-sourced model superseded the message-snapshot model in practice. Candidate for deletion OR the schema for the planned `messages` materialized-snapshot table (see sqlite section) — decide when the materializer lands; do not delete blindly.
 
 ## Resolved Questions
 

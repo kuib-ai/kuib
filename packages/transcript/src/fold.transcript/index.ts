@@ -15,11 +15,22 @@ const foldTranscript = function (
   const entries: TranscriptEntry[] = [];
   const assistantByMessage = new Map<string, TranscriptEntry>();
   const reasoningByMessage = new Map<string, TranscriptEntry>();
+  let segment = 0;
+
+  const breakSegment = function (): void {
+    if (assistantByMessage.size === 0 && reasoningByMessage.size === 0) {
+      return;
+    }
+    assistantByMessage.clear();
+    reasoningByMessage.clear();
+    segment++;
+  };
 
   for (const envelope of envelopes) {
     const event = envelope.event;
     switch (event.type) {
       case Protocol.Event.EventTypeEnum.USER_MESSAGE_SUBMITTED: {
+        breakSegment();
         const text = event.parts
           .filter(isTextPart)
           .map((part) => part.text)
@@ -35,7 +46,7 @@ const foldTranscript = function (
         let entry = reasoningByMessage.get(event.messageID);
         if (entry === undefined) {
           entry = {
-            id: `${event.messageID}:reasoning`,
+            id: `${event.messageID}:reasoning:${segment}`,
             role: TranscriptRoleEnum.REASONING,
             text: "",
           };
@@ -49,7 +60,7 @@ const foldTranscript = function (
         let entry = assistantByMessage.get(event.messageID);
         if (entry === undefined) {
           entry = {
-            id: event.messageID,
+            id: `${event.messageID}:${segment}`,
             role: TranscriptRoleEnum.ASSISTANT,
             text: "",
           };
@@ -60,6 +71,7 @@ const foldTranscript = function (
         break;
       }
       case Protocol.Event.EventTypeEnum.TOOL_CALL_COMPLETED: {
+        breakSegment();
         entries.push({
           id: event.callID,
           role: TranscriptRoleEnum.TOOL,
@@ -68,6 +80,7 @@ const foldTranscript = function (
         break;
       }
       case Protocol.Event.EventTypeEnum.TOOL_CALL_FAILED: {
+        breakSegment();
         entries.push({
           id: event.callID,
           role: TranscriptRoleEnum.TOOL,

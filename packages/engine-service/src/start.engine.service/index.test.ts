@@ -105,6 +105,76 @@ describe("startEngineService", () => {
     rmSync(socketPath, { force: true });
   });
 
+  it("queues submits arriving mid-turn and runs them in order without overlap", async () => {
+    const socketPath = uniqueSocketPath();
+    const trace: string[] = [];
+    const handle = await startEngineService({
+      socketPath,
+      eventLog: Engine.EventLog.createMemoryEventLog(),
+      runTurn: async function (input): Promise<void> {
+        trace.push(`start:${input.prompt}`);
+        await delay(60);
+        trace.push(`end:${input.prompt}`);
+      },
+      reapIdleMs: 5000,
+    });
+
+    const client = await connectClient(socketPath);
+    const frame = function (prompt: string): string {
+      return `${JSON.stringify({ type: "submit", sessionID: "s1", prompt })}\n`;
+    };
+    client.write(frame("a") + frame("b") + frame("c"));
+
+    const done = await waitUntil(() => trace.length === 6, 3000);
+    expect(done).toBe(true);
+    expect(trace).toEqual([
+      "start:a",
+      "end:a",
+      "start:b",
+      "end:b",
+      "start:c",
+      "end:c",
+    ]);
+
+    client.end();
+    await handle.close();
+    rmSync(socketPath, { force: true });
+  });
+
+  it("hands queued prompts to the running turn via takePending", async () => {
+    const socketPath = uniqueSocketPath();
+    const drained: string[][] = [];
+    let turns = 0;
+    const handle = await startEngineService({
+      socketPath,
+      eventLog: Engine.EventLog.createMemoryEventLog(),
+      runTurn: async function (input): Promise<void> {
+        turns++;
+        await delay(60);
+        drained.push(input.takePending());
+      },
+      reapIdleMs: 5000,
+    });
+
+    const client = await connectClient(socketPath);
+    const frame = function (prompt: string): string {
+      return `${JSON.stringify({ type: "submit", sessionID: "s1", prompt })}\n`;
+    };
+    client.write(frame("first"));
+    await delay(20);
+    client.write(frame("second") + frame("third"));
+
+    const done = await waitUntil(() => drained.length === 1, 3000);
+    expect(done).toBe(true);
+    expect(drained[0]).toEqual(["second", "third"]);
+    await delay(100);
+    expect(turns).toBe(1);
+
+    client.end();
+    await handle.close();
+    rmSync(socketPath, { force: true });
+  });
+
   it("rejects with EADDRINUSE while a live server owns the socket", async () => {
     const socketPath = uniqueSocketPath();
     const first = await startEngineService({

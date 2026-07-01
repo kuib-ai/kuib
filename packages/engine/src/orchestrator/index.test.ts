@@ -142,6 +142,69 @@ describe("orchestrator runAgent", () => {
     ).toBe(Protocol.ID.ToolCallID.parse("call-1"));
   });
 
+  it("drains pending user messages into the log and the step messages", async () => {
+    const seenPrompts: unknown[] = [];
+    const model = new MockLanguageModelV3({
+      doStream: async (options) => {
+        seenPrompts.push(options.prompt);
+        return {
+          stream: simulateReadableStream({
+            chunks: [
+              { type: "text-start", id: "t1" },
+              { type: "text-delta", id: "t1", delta: "ok" },
+              { type: "text-end", id: "t1" },
+              {
+                type: "finish",
+                finishReason: { unified: "stop", raw: "stop" },
+                usage: {
+                  inputTokens: {
+                    total: 1,
+                    noCache: 1,
+                    cacheRead: 0,
+                    cacheWrite: 0,
+                  },
+                  outputTokens: { total: 1, text: 1, reasoning: 0 },
+                },
+              },
+            ],
+          }),
+        };
+      },
+    });
+
+    let drained = false;
+    const takePending = function (): string[] {
+      if (drained) {
+        return [];
+      }
+      drained = true;
+      return ["injected follow-up"];
+    };
+
+    const eventLog = Engine.EventLog.createMemoryEventLog();
+    await Engine.runAgent({
+      prompt: "go",
+      sessionID,
+      deviceID,
+      model,
+      daemonClient,
+      eventLog,
+      takePending,
+    });
+
+    const userTexts = collect(eventLog)
+      .filter(
+        (e) => e.type === Protocol.Event.EventTypeEnum.USER_MESSAGE_SUBMITTED,
+      )
+      .map((e) =>
+        e.type === Protocol.Event.EventTypeEnum.USER_MESSAGE_SUBMITTED
+          ? e.parts.map((part) => ("text" in part ? part.text : "")).join("")
+          : "",
+      );
+    expect(userTexts).toEqual(["go", "injected follow-up"]);
+    expect(JSON.stringify(seenPrompts[0])).toContain("injected follow-up");
+  });
+
   it("emits TOOL_CALL_FAILED when a tool execution fails", async () => {
     const model = new MockLanguageModelV3({
       doStream: async () => ({

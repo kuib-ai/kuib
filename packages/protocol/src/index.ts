@@ -10,6 +10,7 @@ import ModelRef from "./model.ref";
 import FileSystem from "./file.system";
 import Endpoint from "./endpoint";
 import Node from "./node";
+import Provider from "./provider";
 
 const Protocol = {
   ID,
@@ -23,6 +24,7 @@ const Protocol = {
   FileSystem,
   Endpoint,
   Node,
+  Provider,
 };
 
 export default Protocol;

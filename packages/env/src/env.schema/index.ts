@@ -2,9 +2,11 @@
 import { z } from "zod";
 
 const EnvSchema = z.object({
+  KUIB_MODEL: z.string().optional(),
   KUIB_MODEL_BASE_URL: z.string().url().default("http://localhost:11434/v1"),
   KUIB_MODEL_API_KEY: z.string().default("ollama"),
   KUIB_MODEL_ID: z.string().default("gemma3:12b"),
+  KUIB_ANTHROPIC_API_KEY: z.string().optional(),
   KUIB_DAEMON_SOCKET: z.string().optional(),
   KUIB_DAEMON_PORT: z.coerce.number().int().positive().optional(),
   KUIB_DAEMON_URL: z.string().url().optional(),

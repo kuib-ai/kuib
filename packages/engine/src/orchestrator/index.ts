@@ -20,6 +20,7 @@ type RunAgentParams = {
   model: LanguageModel;
   daemonClient: DaemonClient;
   eventLog: EventLogPort;
+  takePending?: () => string[];
 };
 
 const runAgent = async function (params: RunAgentParams): Promise<void> {
@@ -30,18 +31,22 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
     return eventLog.append(sessionID, deviceID, event);
   };
 
-  await emit({
-    type: Protocol.Event.EventTypeEnum.USER_MESSAGE_SUBMITTED,
-    messageID: newID(Protocol.ID.MessageID),
-    parts: [
-      {
-        type: Protocol.Part.PartTypeEnum.TEXT,
-        partID: newID(Protocol.ID.PartID),
-        excluded: false,
-        text: prompt,
-      },
-    ],
-  });
+  const emitUserMessage = function (text: string) {
+    return emit({
+      type: Protocol.Event.EventTypeEnum.USER_MESSAGE_SUBMITTED,
+      messageID: newID(Protocol.ID.MessageID),
+      parts: [
+        {
+          type: Protocol.Part.PartTypeEnum.TEXT,
+          partID: newID(Protocol.ID.PartID),
+          excluded: false,
+          text,
+        },
+      ],
+    });
+  };
+
+  await emitUserMessage(prompt);
 
   await emit({
     type: Protocol.Event.EventTypeEnum.MESSAGE_STARTED,
@@ -59,6 +64,18 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
     tools,
     stopWhen: stepCountIs(5),
     telemetry: { isEnabled: true, functionId: "runAgent" },
+    prepareStep: async function (step) {
+      const pending = params.takePending?.() ?? [];
+      if (pending.length === 0) {
+        return {};
+      }
+      const injected = [...step.messages];
+      for (const text of pending) {
+        await emitUserMessage(text);
+        injected.push({ role: "user", content: text });
+      }
+      return { messages: injected };
+    },
   });
 
   const errorPartID = newID(Protocol.ID.PartID);
