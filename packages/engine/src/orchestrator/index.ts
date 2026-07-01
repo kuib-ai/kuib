@@ -92,6 +92,9 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
           completedAt: Date.now(),
           kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
         });
+      } else if (part.type === "error") {
+        const cause = part.error;
+        throw cause instanceof Error ? cause : new Error(String(cause));
       }
     }
   };
