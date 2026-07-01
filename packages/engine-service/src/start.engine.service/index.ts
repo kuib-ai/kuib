@@ -9,7 +9,13 @@ import type { SessionID } from "@kuib-ai/protocol/id/session.id";
 type RunTurn = (input: {
   sessionID: SessionID;
   prompt: string;
+  takePending: () => string[];
 }) => Promise<void>;
+
+type SessionTurnState = {
+  running: boolean;
+  pending: string[];
+};
 
 type StartEngineServiceParams = {
   socketPath: string;
@@ -31,6 +37,7 @@ const startEngineService = function (
   const server = net.createServer();
 
   const sockets = new Set<net.Socket>();
+  const sessions = new Map<string, SessionTurnState>();
   let attachedConnections = 0;
   let activeRuns = 0;
   let reapTimer: ReturnType<typeof setTimeout> | null = null;
@@ -98,12 +105,31 @@ const startEngineService = function (
     }
     const msg = decoded.data;
     if (msg.type === Protocol.ServiceMessage.ServiceMessageTypeEnum.SUBMIT) {
+      const state = sessions.get(msg.sessionID) ?? {
+        running: false,
+        pending: [],
+      };
+      sessions.set(msg.sessionID, state);
+      if (state.running) {
+        state.pending.push(msg.prompt);
+        return;
+      }
+      state.running = true;
       activeRuns++;
       clearReapTimer();
-      const [runErr] = await Std.asyncWithError(
-        params.runTurn({ sessionID: msg.sessionID, prompt: msg.prompt }),
-      );
-      void runErr;
+      let prompt: string | undefined = msg.prompt;
+      while (prompt !== undefined) {
+        const [runErr] = await Std.asyncWithError(
+          params.runTurn({
+            sessionID: msg.sessionID,
+            prompt,
+            takePending: () => state.pending.splice(0),
+          }),
+        );
+        void runErr;
+        prompt = state.pending.shift();
+      }
+      state.running = false;
       activeRuns--;
       maybeReap();
     }

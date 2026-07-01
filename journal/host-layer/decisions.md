@@ -165,7 +165,7 @@ Surfaced by a real bug: the TUI ran the agent loop **in-process** (`apps/host-tu
 | Owns    | nothing process-y                                                                          | the SQLite **writer**, the **unix socket**, **lifecycle** (spawn/self-reap), live **fan-out** |
 | Runtime | **agnostic** (runs under Node tests)                                                       | **Bun-quarantined** (sockets, `bun:sqlite`, spawn)                                            |
 
-`engine-service` **imports and runs** `engine`. Split so the brain stays runtime-agnostic/testable while all OS/IO/process code lives in the body — same rule that makes `@kuib-ai/event-log-sqlite` its own Bun package. The service must import `event-log-sqlite` (Bun) + bind sockets + spawn, none of which may live in runtime-agnostic `engine`.
+`engine-service` **imports and runs** `engine`. Split so the brain stays a pure library (no sockets, no spawn, no SQLite writer) while all OS/IO/process code lives in the body. **Framing update (2026-07-02):** the original "runtime-agnostic / Node tests" motivation is superseded — everything runs and tests on Bun now ([[testing-strategy]], [[architecture-overview]] Runtime), and `engine` itself may use `Bun.*` (e.g. `Bun.TOML`). The split **stands** on IO-separation grounds: library vs process, not runtime vs runtime.
 
 ### Control plane vs data plane
 
@@ -191,6 +191,19 @@ The host **only reads** (and, in the mesh, locally-replicates received entries �
 ### Data-plane research (see [[consensus-model]] for full grounding)
 
 WAL gives concurrent readers + one writer; `sqlite3_update_hook` is in-process-only (hence poll + socket doorbell, not a DB push); SQLite-as-durable-event-backbone is the proven local-AI-agent pattern. Host-reads-local-DB is **correct**, not a compromise — and it's replication-invariant (mesh fills the local DB via replication; host read path never changes).
+
+## Turn scheduling — per-session queue + step-boundary steering (2026-07-02)
+
+Previously submits were fire-and-forget: a SUBMIT arriving mid-run started a **second concurrent `runAgent`** on the same session (interleaved transcript; worse, run B's context snapshot contained run A's half-streamed assistant text folded as a complete turn). Writes were safe (`BEGIN IMMEDIATE`) — the problem was semantic.
+
+**Decision: single active turn per session; pending messages steer the running turn at step boundaries.** A message enters the event log **when it enters the conversation**, not at submit time — the log stays the source of truth for what the model actually saw.
+
+- **engine-service** keeps `Map<sessionID, { running, pending[] }>`. SUBMIT while running → `pending.push` (no log write). Otherwise a turn loop: run the turn; any pending left when it ends becomes the next turn's prompt, until drained. Sessions serialize independently; `activeRuns`/reap accounting spans the loop.
+- **`RunTurn` contract** gains `takePending: () => string[]` (drain-all splice). Hosts thread it into `runAgent`.
+- **orchestrator** passes `prepareStep` to `streamText` (AI SDK v7 — runs before _every_ step; a returned `messages` override carries forward): drain `takePending`, emit `USER_MESSAGE_SUBMITTED` for each, append `{role:"user"}` to the step messages. So a message typed mid-run is picked up at the next tool/step boundary — inside the same turn — or, if the turn is past its last boundary, becomes the immediate next turn.
+- **`fold.transcript` segmentation** (fixes "tool call renders last"): assistant/reasoning accumulation now **breaks** on `USER_MESSAGE_SUBMITTED` / `TOOL_CALL_COMPLETED` / `TOOL_CALL_FAILED` — post-boundary deltas open a new entry (`id: <messageID>:<segment>`), so chronology renders truthfully (`text → tool ✓ → text`, injected user messages in place).
+- **Known gap:** host-web bypasses the engine-service (`void runAgent` per POST) so it still allows concurrent turns — resolves with the shared-host-bootstrap follow-up (see the host-duplication smell in [[testing-strategy]]'s sweep).
+- TUI mouse-selection note: opentui enables mouse tracking, so terminal text selection needs Shift+drag; in-app copy-on-select is part of the deferred `@opentui/keymap` pass.
 
 ## Open Questions
 
@@ -224,4 +237,15 @@ Single engine + single log per device (socket mutex) ⇒ TUI and web are **co-vi
 
 ### Client stack
 
-Solid-for-DOM via **Vite** (`vite-plugin-solid` — Bun's transpiler can't do Solid's reactivity transform). Dev = Vite server + API proxy to the Bun engine; prod = `vite build` → Bun serves `dist/` with the token injected into an `index.html` meta tag. The transcript **fold** is reused from the TUI shape; extracting it to `packages/transcript` (so both hosts share one impl) is a tracked follow-up. Lives in `apps/host-web`; folds into the unified `kuib` binary later.
+Solid-for-DOM via **Vite** (`vite-plugin-solid` — Bun's transpiler can't do Solid's reactivity transform). Dev = Vite server + API proxy to the Bun engine; prod = `vite build` → Bun serves `dist/` with the token injected into an `index.html` meta tag. The transcript **fold is shared** — both hosts import `Transcript.foldTranscript` from `@kuib-ai/transcript` (the extraction follow-up is DONE), so the segmentation fix applies to both. Lives in `apps/host-web`; folds into the unified `kuib` binary later.
+
+### host-web parity gaps vs host-tui (audited 2026-07-02)
+
+The web host lags the TUI on the newer seams — all traceable to it assembling its own engine graph instead of sharing a bootstrap:
+
+- **No mesh target routing** — uses `Daemon.resolveDaemonEndpoint(KUIB_DAEMON_URL, KUIB_DAEMON_SOCKET)` directly; ignores `KUIB_TARGET_NODE`/`mesh.config.toml` (the TUI's `resolve.daemon.client` seam lives in `apps/host-tui`, not shared).
+- **No turn queue/steering** — bypasses the engine-service; `void runAgent` per `POST /api/submit` → concurrent turns still possible (see Turn scheduling section above).
+- **No device badge** — the web UI doesn't show the selected node.
+- Shares: provider v2 config resolution ✓, telemetry ✓, SQLite db + fold ✓.
+
+**Resolution path:** extract a shared host bootstrap (model + daemon client + event log + telemetry + submit path) consumed by both hosts — also kills the duplication smell flagged in the coverage sweep.

@@ -74,11 +74,14 @@ const main = async function (): Promise<void> {
     "i",
   );
 
-  const model = Engine.Provider.createModel({
+  const modelConfig = Engine.Provider.resolveModelConfig({
+    model: env.KUIB_MODEL,
     baseURL: env.KUIB_MODEL_BASE_URL,
     apiKey: env.KUIB_MODEL_API_KEY,
     modelID: env.KUIB_MODEL_ID,
+    anthropicApiKey: env.KUIB_ANTHROPIC_API_KEY,
   });
+  const model = Engine.Provider.createModel(modelConfig);
   const daemonEndpoint = await Daemon.resolveDaemonEndpoint(
     env.KUIB_DAEMON_URL,
     env.KUIB_DAEMON_SOCKET,
@@ -348,7 +351,7 @@ const main = async function (): Promise<void> {
       tsLine +
       `  open a URL above in a browser (local, no pairing needed)\n` +
       `  or open ${HOSTED_ORIGIN} and paste pairing code:  ${pairing.code}  (5 min, single-use)\n` +
-      `  model: ${env.KUIB_MODEL_ID} @ ${env.KUIB_MODEL_BASE_URL}\n\n`,
+      `  model: ${modelConfig.modelID} via ${modelConfig.npm}\n\n`,
   );
 };
 

@@ -101,8 +101,9 @@ packages/
 ### Runtime & Distribution
 
 - **Bun is the runtime for the TUI host app.** The OpenTUI native Zig renderer requires FFI, available stably only on Bun — the Node 26.3.0 `--experimental-ffi` path is more fragile and a worse install story. Bun is now the chosen runtime _and_ distribution path. See [[host-layer]], [[host-layer/research/tui-framework]].
-- **Bun is quarantined to the host adapter.** Engine + core packages (`protocol`, `tools`, `engine`, fs/shell impls) stay **runtime-agnostic** — pure Node-compatible TS, no `Bun.*` APIs, no FFI. A future DesktopHost/WebHost can swap runtimes; lock-in lives only at the replaceable presentation adapter (matches "engine never imports host").
+- ~~**Bun is quarantined to the host adapter.**~~ **Superseded (2026-07-02): Bun is the single runtime everywhere.** The quarantine was dropped deliberately — the product runs on Bun, so tests, engine, and packages exercise the same runtime ([[testing-strategy]]). Engine now uses `Bun.*` where it's the best tool (`Bun.TOML.parse` for `mesh.config.toml`), `bun-types` is a devDep across packages, and vitest was removed. Runtime-swappability is no longer a goal; `bun build --compile` distribution makes the runtime an implementation detail.
 - **Distribution: per-platform self-contained binaries via `bun build --compile`** — bundles the Bun runtime + JS + the native OpenTUI `.so/.dylib` into one executable; users install nothing.
+- **Toolchain provisioning (2026-07-02): pnpm stays the package manager; bun is provisioned BY pnpm.** `bun` (stable, catalog-pinned `^1.3.14`) is a root devDependency with `allowBuilds: bun: true`, so `git clone && pnpm install` fetches the platform binary into `node_modules/.bin` on any device (proven on minerva/darwin) — no system bun install, no version drift across the mesh. `pnpm run` scripts resolve that pinned bun via PATH. Trade-off accepted: npm ships stable only (no canary).
 
 ### Config & Env Resolution (`@kuib-ai/env`, 2026-07-01)
 

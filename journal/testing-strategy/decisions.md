@@ -24,6 +24,7 @@ Every source unit with **runtime behavior** gets a colocated `<unitDir>/index.te
 - **No `bun:test` `mock.module`.** It patches the module registry **process-globally and leaks across test files** — a mocked `ensure.local.daemon` made the real module's own test receive the mock (order-dependent suite failure). Instead: inject fakes through the unit's params/ports, or stand up a real tiny fixture (a `net.createServer` on a temp socket makes daemon-probe paths testable without spawning).
 - **Never assert env-derived values that `.env` can override** — test pure defaults via `EnvSchema.parse({})` and entrypoints structurally; isolate with a temp workspace (`mkdtempSync` + own `pnpm-workspace.yaml` + `chdir`) so `findWorkspaceRoot` never resolves to the real repo.
 - **Unique temp resources per test** (`${process.pid}-${Date.now()}` socket/file names); clean up in the test body.
+- **Kill spawned processes in teardown** — KNOWN VIOLATION: `ensure.daemon`'s spawn-path tests launch real detached `start.daemon` children that outlive the run (~20 accumulated before being noticed; `pnpm reload` clears them). Open fix tracked in [[tool-system]].
 - House style applies to tests: no try/catch (use `expect(...).rejects`), no `as any`/`as unknown`, no prose comments, `const x = function () {}` at top level. Lint overrides for tests disable only `require-context-link`, `named-exports-are-types`, `dot-case-filename`.
 
 ## Package-specific idioms
