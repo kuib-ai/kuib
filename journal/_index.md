@@ -48,6 +48,10 @@ How the local-first P2P mesh stays correct. This is the load-bearing, highest-ri
 
 We need a secure, distributed way to store user configuration, AI model preferences, and API keys across multiple device...
 
+### [[observability]] | status:decided | tags:observability,telemetry,tracing,opentelemetry,openinference,phoenix
+
+The engine ran the model with **no visibility**: a failed model/daemon call was silently swallowed (the stream `error` p...
+
 ### [[provider-architecture]] | status:decided | tags:architecture,providers,plugins,llm
 
 Providers are plugins, not core. The protocol defines the provider interface. Anyone can implement it.
@@ -83,6 +87,10 @@ Validate Kuib by **simulating building Kuib as a user journey** — not narrow d
 ### [[house-style-linting]] | status:in-progress | tags:linting,eslint,house-style,context-graph,conventions,tooling
 
 A custom ESLint plugin that encodes the user's hand-coding conventions (so agent-written code matches the user's idiom a...
+
+### [[testing-strategy]] | status:decided | tags:testing,bun-test,coverage,hermeticity,conventions
+
+One runtime, one runner. vitest was removed (config, catalog entry, root devDep); every suite imports from `"bun:test"`....
 
 ### [[ux-classification]] | status:stable | tags:classification,ux,context,model,process
 

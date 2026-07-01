@@ -17,6 +17,8 @@
   },
   "nx": {},
   "devDependencies": {
-    "@kuib-ai/tsconfig": "workspace:*"
+    "@kuib-ai/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "bun-types": "catalog:"
   }
 }

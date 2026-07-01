@@ -40,4 +40,26 @@ describe("memory event log", () => {
     log.replay(sessionID, 0, (envelope) => seen.push(envelope.seq));
     expect(seen).toEqual([1]);
   });
+
+  it("subscribe with afterSeq replays past events then delivers live ones", async () => {
+    const log = Engine.EventLog.createMemoryEventLog();
+    await log.append(sessionID, deviceID, event);
+    await log.append(sessionID, deviceID, event);
+    const seen: number[] = [];
+    log.subscribe(sessionID, (envelope) => seen.push(envelope.seq), 0);
+    await log.append(sessionID, deviceID, event);
+    expect(seen).toEqual([1, 2]);
+  });
+
+  it("stops delivering after unsubscribe", async () => {
+    const log = Engine.EventLog.createMemoryEventLog();
+    const seen: number[] = [];
+    const unsubscribe = log.subscribe(sessionID, (envelope) =>
+      seen.push(envelope.seq),
+    );
+    await log.append(sessionID, deviceID, event);
+    unsubscribe();
+    await log.append(sessionID, deviceID, event);
+    expect(seen).toEqual([0]);
+  });
 });

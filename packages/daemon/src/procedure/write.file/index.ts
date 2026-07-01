@@ -3,6 +3,7 @@ import { writeFile } from "node:fs/promises";
 import { TRPCError } from "@trpc/server";
 import Std from "@kuib-ai/std";
 import Trpc from "../../trpc";
+import expandHomePath from "../../expand.home.path";
 import WriteFileInput from "../../io/write.file.input";
 import WriteFileOutput from "../../io/write.file.output";
 
@@ -11,7 +12,7 @@ const writeFileProcedure = Trpc.procedure
   .output(WriteFileOutput)
   .mutation(async ({ input }) => {
     const [error] = await Std.asyncWithError(
-      writeFile(input.path, input.content),
+      writeFile(expandHomePath(input.path), input.content),
     );
     if (error) {
       throw new TRPCError({

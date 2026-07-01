@@ -6,7 +6,13 @@ layer: infrastructure
 created: 2026-04-13
 tags: [infrastructure, cluster, deployment, mesh, remote, trpc]
 depends-on: ["[[vision]]", "[[architecture-overview]]"]
-informs: ["[[security-model]]", "[[protocol-design]]", "[[consensus-model]]"]
+informs:
+  [
+    "[[security-model]]",
+    "[[protocol-design]]",
+    "[[consensus-model]]",
+    "[[observability]]",
+  ]
 ---
 
 # Infrastructure Strategy

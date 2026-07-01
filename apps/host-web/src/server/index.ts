@@ -6,9 +6,9 @@ import Engine from "@kuib-ai/engine";
 import Daemon from "@kuib-ai/daemon";
 import EventLogSqlite from "@kuib-ai/event-log-sqlite";
 import Env from "@kuib-ai/env";
+import Telemetry from "@kuib-ai/telemetry";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 
-const DEFAULT_PORT = 4321;
 const HOSTED_ORIGIN = "https://code.kuib.ai";
 
 type Pairing = {
@@ -36,8 +36,9 @@ const mintPairingCode = function (): string {
   return out;
 };
 
-const detectTailscaleIp = function (): string | null {
-  const override = process.env["KUIB_WEB_TAILSCALE_IP"];
+const detectTailscaleIp = function (
+  override: string | undefined,
+): string | null {
   if (override) {
     return override;
   }
@@ -55,10 +56,14 @@ const detectTailscaleIp = function (): string | null {
 
 const main = async function (): Promise<void> {
   const env = Env.bootstrapEnv();
-  const port = Number(process.env["KUIB_WEB_PORT"] ?? DEFAULT_PORT);
+  Telemetry.startTelemetry({
+    endpoint: env.KUIB_TRACE_ENDPOINT,
+    serviceName: env.KUIB_TRACE_SERVICE,
+  });
+  const port = env.KUIB_WEB_PORT;
   const dbPath = Env.resolveDbPath(env.KUIB_DB_PATH);
   const deviceID = Protocol.ID.DeviceID.parse(crypto.randomUUID());
-  const tsIp = detectTailscaleIp();
+  const tsIp = detectTailscaleIp(env.KUIB_WEB_TAILSCALE_IP);
 
   const tsIpEsc = tsIp?.replace(/\./g, "\\.");
   const loopFrag = `localhost|127\\.0\\.0\\.1${tsIpEsc ? "|" + tsIpEsc : ""}`;
@@ -182,7 +187,7 @@ const main = async function (): Promise<void> {
     }
 
     if (url.pathname === "/api/token" && req.method === "GET") {
-      if (!process.env["KUIB_WEB_DEV"] || origin === HOSTED_ORIGIN) {
+      if (!env.KUIB_WEB_DEV || origin === HOSTED_ORIGIN) {
         return json({ error: "not available" }, 404, ch);
       }
       return json({ token }, 200, ch);
@@ -347,4 +352,7 @@ const main = async function (): Promise<void> {
   );
 };
 
-void main();
+void main().catch((error: Error) => {
+  process.stderr.write(`kuib web failed to start: ${error.message}\n`);
+  process.exit(1);
+});

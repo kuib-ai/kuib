@@ -6,7 +6,7 @@ layer: process
 created: 2026-06-30
 tags: [linting, eslint, house-style, context-graph, conventions, tooling]
 depends-on: ["[[architecture-overview]]", "[[protocol-design]]"]
-informs: ["[[journal-system]]"]
+informs: ["[[journal-system]]", "[[testing-strategy]]"]
 ---
 
 # House-Style Linting
