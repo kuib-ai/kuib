@@ -29,6 +29,7 @@
   "type": "module",
   "devDependencies": {
     "@eslint/js": "catalog:",
+    "bun": "catalog:",
     "concurrently": "catalog:",
     "esbuild": "catalog:",
     "eslint": "catalog:",
