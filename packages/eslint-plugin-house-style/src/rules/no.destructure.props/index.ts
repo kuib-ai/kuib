@@ -50,6 +50,7 @@ const returnsJsx = function (fn: FunctionNode): boolean {
       if (key === "parent") {
         continue;
       }
+      // eslint-disable-next-line no-restricted-syntax
       const value = (current as unknown as Record<string, unknown>)[key];
       if (Array.isArray(value)) {
         for (const item of value) {

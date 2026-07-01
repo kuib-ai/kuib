@@ -11,6 +11,11 @@ import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 const DEFAULT_PORT = 4321;
 const HOSTED_ORIGIN = "https://code.kuib.ai";
 
+type Pairing = {
+  code: string;
+  expiresAt: number;
+};
+
 const mintToken = function (): string {
   return (
     crypto.randomUUID().replace(/-/g, "") +
@@ -69,9 +74,11 @@ const main = async function (): Promise<void> {
     apiKey: env.KUIB_MODEL_API_KEY,
     modelID: env.KUIB_MODEL_ID,
   });
-  const daemonSocket = Daemon.resolveDaemonSocketPath(env.KUIB_DAEMON_SOCKET);
-  await Daemon.ensureDaemon(daemonSocket);
-  const daemonClient = Engine.DaemonClient.createDaemonClient(daemonSocket);
+  const daemonEndpoint = await Daemon.resolveDaemonEndpoint(
+    env.KUIB_DAEMON_URL,
+    env.KUIB_DAEMON_SOCKET,
+  );
+  const daemonClient = Engine.DaemonClient.createDaemonClient(daemonEndpoint);
   const eventLog = EventLogSqlite.createSqliteEventLog(dbPath);
   const reader = EventLogSqlite.createSqliteReader(dbPath);
 
@@ -81,7 +88,7 @@ const main = async function (): Promise<void> {
   };
 
   const token = mintToken();
-  let pairing: { code: string; expiresAt: number } | null = null;
+  let pairing: Pairing | null = null;
   let pairAttempts = 0;
 
   const allowedOrigin = function (origin: string | null): string | null {

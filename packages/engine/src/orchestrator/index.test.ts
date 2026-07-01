@@ -35,8 +35,12 @@ const streamingModel = new MockLanguageModelV3({
 describe("orchestrator runAgent", () => {
   it("emits the user message then streams assistant deltas into the event log", async () => {
     const eventLog = Engine.EventLog.createMemoryEventLog();
-    const daemonClient =
-      Engine.DaemonClient.createDaemonClient("http://localhost:1");
+    const daemonClient = Engine.DaemonClient.createDaemonClient(
+      Protocol.Endpoint.AnyEndpoint.parse({
+        kind: "tcp",
+        url: "http://localhost:1",
+      }),
+    );
 
     await Engine.runAgent({
       prompt: "hi there",

@@ -9,6 +9,7 @@ import type { TranscriptEntry } from "@kuib-ai/transcript/transcript.entry";
 type AppProps = {
   eventLog: EventLogPort;
   sessionID: SessionID;
+  deviceLabel: string;
   onSubmit: (text: string) => void;
 };
 
@@ -49,6 +50,12 @@ const App = function (props: AppProps) {
 
   return (
     <box flexDirection="column" padding={1}>
+      <box flexDirection="row" justifyContent="flex-end">
+        <text fg="#1a1b26" bg="#7aa2f7">
+          {" "}
+          {props.deviceLabel}{" "}
+        </text>
+      </box>
       <scrollbox flexGrow={1} stickyScroll stickyStart="bottom">
         <For each={entries()}>
           {(entry) => (
