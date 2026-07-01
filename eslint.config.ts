@@ -5,7 +5,12 @@ import houseStylePlugin from "./packages/eslint-plugin-house-style/src/index.ts"
 
 export default defineConfig(
   {
-    ignores: ["**/dist/**", "**/node_modules/**", "**/.nx/**"],
+    ignores: [
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/.nx/**",
+      ".references/**",
+    ],
   },
   jseslint.configs.recommended,
   ...tseslint.configs.recommended,

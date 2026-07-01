@@ -6,9 +6,12 @@ import type { DaemonClient } from "../../daemon.client/transport.factory";
 
 const createTransportFactory = function (discovery: DiscoveryPort) {
   return function transportFactory(nodeID: NodeID): Promise<DaemonClient> {
-    return discovery
-      .resolve(nodeID)
-      .then((descriptor) => createDaemonClient(descriptor.endpoint));
+    return discovery.resolve(nodeID).then((descriptor) => {
+      if (descriptor.endpoint === undefined) {
+        throw new Error(`node has no endpoint: ${nodeID}`);
+      }
+      return createDaemonClient(descriptor.endpoint);
+    });
   };
 };
 type TransportFactory = ReturnType<typeof createTransportFactory>;

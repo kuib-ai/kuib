@@ -9,6 +9,9 @@ const EnvSchema = z.object({
   KUIB_DAEMON_URL: z.string().url().optional(),
   KUIB_DB_PATH: z.string().optional(),
   KUIB_SESSION_ID: z.string().default("default"),
+  KUIB_NODE_LABEL: z.string().optional(),
+  KUIB_MESH_CONFIG: z.string().optional(),
+  KUIB_TARGET_NODE: z.string().optional(),
 });
 type Env = z.infer<typeof EnvSchema>;
 

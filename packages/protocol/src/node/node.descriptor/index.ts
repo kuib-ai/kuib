@@ -5,7 +5,10 @@ import AnyEndpoint from "../../endpoint/endpoint.any";
 
 const NodeDescriptor = z.object({
   nodeID: NodeID,
-  endpoint: AnyEndpoint,
+  osUser: z.string(),
+  machineID: z.string(),
+  capabilities: z.array(z.string()).default([]),
+  endpoint: AnyEndpoint.optional(),
 });
 type NodeDescriptor = z.infer<typeof NodeDescriptor>;
 

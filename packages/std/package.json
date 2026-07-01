@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@kuib-ai/tsconfig": "workspace:*"
+    "@kuib-ai/tsconfig": "workspace:*",
+    "bun-types": "catalog:"
   }
 }

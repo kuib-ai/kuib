@@ -97,7 +97,7 @@ Discovery is a swappable seam so the network substrate (Headscale, raw WG…) is
 
 - **`NodeID`** — address by this, never by IP/coordinator specifics.
 - **`NodeDescriptor`** — `{ nodeID, osUser, machineID, capabilities, endpoint? }` (endpoint substrate-opaque).
-- **`Discovery`** — `listNodes()`, `resolve(nodeID): Endpoint`. v1 impl `LocalOnly` (self + local socket); v1.x impl `Headscale` (the coordinator IS the registry).
+- **`DiscoveryPort`** — `listNodes(): NodeDescriptor[]`, `resolve(nodeID): NodeDescriptor` (returns the descriptor, whose `endpoint` the caller dials — richer than a bare `Endpoint`). Impls: `Static` (v1 — from `mesh.config.toml`), `LocalOnly` (self + local socket), `Headscale` (v1.x — the coordinator IS the registry). Named `DiscoveryPort` for parity with `EventLogPort`/`FileSystemPort`. Implemented — see [[distributed-mesh-state]].
 - **`TransportFactory(nodeID)`** — resolves via `Discovery`, connects.
 
 **v1 has no discovery problem** — one local unix socket. The model exists now only to shape the schema (`DeviceID`=nodeID, `+osUser`, `+machineID`) correctly.

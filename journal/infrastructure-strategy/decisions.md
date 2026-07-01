@@ -86,7 +86,7 @@ The network substrate is a **swappable seam**, like `EventLogPort` and `ConfigSt
 
 1. **`NodeID`** — abstract node identity (= the per-user-daemon `DeviceID`); address by NodeID, never by IP/coordinator specifics.
 2. **`NodeDescriptor`** — `{ nodeID, osUser, machineID, capabilities, endpoint? }` (endpoint substrate-opaque).
-3. **`Discovery`** — `listNodes(): NodeDescriptor[]`, `resolve(nodeID): Endpoint`. Impls: `LocalOnly` (v1 — self + local socket), `Headscale` (v1.x).
+3. **`DiscoveryPort`** — `listNodes(): NodeDescriptor[]`, `resolve(nodeID): NodeDescriptor` (returns the descriptor; caller dials its `endpoint`). Impls: `Static` (v1 — `mesh.config.toml`, implemented), `LocalOnly` (self + local socket), `Headscale` (v1.x). See [[distributed-mesh-state]].
 4. **`TransportFactory(nodeID)`** — resolves via `Discovery`, connects (unix socket local-same-user, mesh IP remote).
 
 DERP/relay never leaks into these contracts (direct-vs-relayed is handled below the transport) — the proof the abstraction holds. Headscale is the _intended first_ `Discovery`+network impl, not a v1 commitment; if it's wrong, zero contracts change. See [[multi-device-ux]].

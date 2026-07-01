@@ -7,7 +7,8 @@
     "format:all": "prettier --write .",
     "lint:all": "eslint",
     "check:circular": "madge --circular --extensions ts,tsx packages apps",
-    "typecheck": "pnpm -r exec tsc --noEmit"
+    "typecheck": "pnpm -r exec tsc --noEmit",
+    "test": "bun test packages apps"
   },
   "keywords": [],
   "author": {
@@ -41,8 +42,7 @@
     "prettier": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
-    "typescript-eslint": "catalog:",
-    "vitest": "catalog:"
+    "typescript-eslint": "catalog:"
   },
   "nx": {},
   "dependencies": {
