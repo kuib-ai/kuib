@@ -8,6 +8,8 @@ import ServiceMessage from "./service.message";
 import TokenUsage from "./token.usage";
 import ModelRef from "./model.ref";
 import FileSystem from "./file.system";
+import Endpoint from "./endpoint";
+import Node from "./node";
 
 const Protocol = {
   ID,
@@ -19,6 +21,8 @@ const Protocol = {
   TokenUsage,
   ModelRef,
   FileSystem,
+  Endpoint,
+  Node,
 };
 
 export default Protocol;

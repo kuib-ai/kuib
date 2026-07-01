@@ -6,6 +6,8 @@ import namedExportsAreTypes from "./rules/named.exports.are.types/index.js";
 import noProseComments from "./rules/no.prose.comments/index.js";
 import noDestructureProps from "./rules/no.destructure.props/index.js";
 import noCrossPackageRelative from "./rules/no.cross.package.relative/index.js";
+import namedUnionMembers from "./rules/named.union.members/index.js";
+import namedSchemaUnion from "./rules/named.schema.union/index.js";
 
 const rules = {
   "require-context-link": requireContextLink,
@@ -15,6 +17,8 @@ const rules = {
   "no-prose-comments": noProseComments,
   "no-destructure-props": noDestructureProps,
   "no-cross-package-relative": noCrossPackageRelative,
+  "named-union-members": namedUnionMembers,
+  "named-schema-union": namedSchemaUnion,
 };
 
 const recommendedRules = {
@@ -25,6 +29,8 @@ const recommendedRules = {
   "house/no-prose-comments": "error",
   "house/no-destructure-props": "error",
   "house/no-cross-package-relative": "error",
+  "house/named-union-members": "error",
+  "house/named-schema-union": "error",
   "func-style": ["error", "expression"],
   eqeqeq: ["error", "always"],
   "no-labels": "off",
@@ -49,12 +55,23 @@ const recommendedRules = {
       ],
     },
   ],
+  "@typescript-eslint/no-explicit-any": "error",
   "no-restricted-syntax": [
     "error",
     {
       selector: "TryStatement",
       message:
         "Do not use try/catch. Handle errors explicitly via the async tuple helper. Override with eslint-disable if unavoidable.",
+    },
+    {
+      selector: "TSAsExpression[typeAnnotation.type='TSUnknownKeyword']",
+      message:
+        "Never cast through `as unknown` — it defeats type safety. Narrow genuinely-unknown values with a concrete `as Type`, or add an eslint-disable comment if truly unavoidable.",
+    },
+    {
+      selector: "TSAsExpression[typeAnnotation.type='TSAnyKeyword']",
+      message:
+        "Do not cast to `as any`. Use a concrete `as Type`, or add an eslint-disable comment if unavoidable.",
     },
   ],
 };

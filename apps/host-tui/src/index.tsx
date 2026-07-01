@@ -23,9 +23,11 @@ const main = async function (): Promise<void> {
       apiKey: env.KUIB_MODEL_API_KEY,
       modelID: env.KUIB_MODEL_ID,
     });
-    const daemonSocket = Daemon.resolveDaemonSocketPath(env.KUIB_DAEMON_SOCKET);
-    await Daemon.ensureDaemon(daemonSocket);
-    const daemonClient = Engine.DaemonClient.createDaemonClient(daemonSocket);
+    const daemonEndpoint = await Daemon.resolveDaemonEndpoint(
+      env.KUIB_DAEMON_URL,
+      env.KUIB_DAEMON_SOCKET,
+    );
+    const daemonClient = Engine.DaemonClient.createDaemonClient(daemonEndpoint);
     const eventLog = EventLogSqlite.createSqliteEventLog(dbPath);
     await EngineService.startEngineService({
       socketPath,
@@ -49,6 +51,7 @@ const main = async function (): Promise<void> {
     spawnArgv: [process.argv[1] ?? "", "serve"],
   });
   const eventLog = EventLogSqlite.createSqliteReader(dbPath);
+  const deviceLabel = Env.resolveNodeLabel(env.KUIB_NODE_LABEL);
   const onSubmit = function (prompt: string): void {
     void client
       .submit({

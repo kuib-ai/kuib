@@ -9,6 +9,7 @@ import ProviderID from "./provider.id";
 import ModelID from "./model.id";
 import DeviceID from "./device.id";
 import CheckpointID from "./checkpoint.id";
+import NodeID from "./node.id";
 
 const ID = {
   SessionID,
@@ -21,6 +22,7 @@ const ID = {
   ModelID,
   DeviceID,
   CheckpointID,
+  NodeID,
 };
 
 export default ID;

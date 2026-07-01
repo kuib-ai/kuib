@@ -8,12 +8,17 @@ const isTextPart = function (part: { type: string }): part is PartText {
   return part.type === "text";
 };
 
+type AssistantAccumulator = {
+  messageID: string;
+  text: string;
+};
+
 const buildMessages = function (
   eventLog: EventLogPort,
   sessionID: SessionID,
 ): ModelMessage[] {
   const messages: ModelMessage[] = [];
-  let assistant: { messageID: string; text: string } | null = null;
+  let assistant: AssistantAccumulator | null = null;
 
   const flushAssistant = function (): void {
     if (assistant !== null && assistant.text.length > 0) {
