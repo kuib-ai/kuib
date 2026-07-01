@@ -12,7 +12,14 @@ test("renders assistant text streamed into the wired event log", async () => {
   const eventLog = Engine.EventLog.createMemoryEventLog();
 
   const { renderer, captureCharFrame, waitForFrame } = await testRender(
-    () => <App eventLog={eventLog} sessionID={sessionID} onSubmit={() => {}} />,
+    () => (
+      <App
+        eventLog={eventLog}
+        sessionID={sessionID}
+        deviceLabel="rs10@septimus"
+        onSubmit={() => {}}
+      />
+    ),
     { width: 50, height: 12 },
   );
 

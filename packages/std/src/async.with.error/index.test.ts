@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 import Std from "@kuib-ai/std";
 
 describe("asyncWithError", () => {

@@ -80,8 +80,12 @@ const makeSlowModel = function (): MockLanguageModelV3 {
 
 const makeRunTurn = function (eventLog: EventLogPort) {
   const model = makeSlowModel();
-  const daemonClient =
-    Engine.DaemonClient.createDaemonClient("http://localhost:1");
+  const daemonClient = Engine.DaemonClient.createDaemonClient(
+    Protocol.Endpoint.AnyEndpoint.parse({
+      kind: "tcp",
+      url: "http://localhost:1",
+    }),
+  );
   return function (input: {
     sessionID: SessionID;
     prompt: string;

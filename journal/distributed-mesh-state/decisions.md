@@ -30,3 +30,20 @@ This entry covers **config / model preferences / API-key** state only — mergea
 
 - **Positive**: Zero central trust boundary. API keys never leave the user's trusted Tailnet. The system scales horizontally with the user's own hardware without managing infrastructure.
 - **Negative**: Requires robust CRDT integration, ensuring eventual consistency when nodes reconnect after periods of offline usage. Network edge cases must be handled gracefully in the sync loop.
+
+## Implementation status — Layer 1 (node resolution seam) — DONE
+
+Built the composable seam so an engine addresses a daemon by **node identity**, not a raw URL. Headscale/CRDT deliberately deferred; nothing above the `DiscoveryPort` changes when they arrive.
+
+**Layer 0 — transport (prior):** `Protocol.Endpoint` (unix|tcp discriminated union), dual-bind daemon (`createDaemonServer(socketPath, port?)` — TCP `listen(port)` binds all interfaces, reachable on the tailscale IP), and `Engine.DaemonClient.createDaemonClient(endpoint)`.
+
+**Layer 1 — node resolution (this change):**
+
+- `protocol`: `ID.NodeID` (branded), `Node.NodeDescriptor` (Zod-first, the full contract shape `{ nodeID, osUser, machineID, capabilities (default []), endpoint?: AnyEndpoint }` — matches [[multi-device-ux]] / [[infrastructure-strategy]]; `endpoint` optional because a discovered node may be known before its transport is), `DiscoveryPort` (behavioral TS interface — `listNodes(): Promise<NodeDescriptor[]>` + `resolve(nodeID): Promise<NodeDescriptor>`; named `DiscoveryPort` for consistency with `EventLogPort`/`FileSystemPort`; `resolve` returns the descriptor, not a bare `Endpoint`; subpath-imported like the other `*.port` contracts).
+- `engine/mesh`: `MeshConfig` (Zod), `loadMeshConfig(path)` (reads TOML via `Bun.TOML.parse`, validates, returns descriptors — empty if file absent), `createStaticDiscovery(descriptors)`, `createLocalOnlyDiscovery(self: NodeDescriptor)`, `createTransportFactory(discovery) → (nodeID) → Promise<DaemonClient>` (throws if the resolved descriptor has no `endpoint`).
+- `env`: `resolveMeshConfigPath` (`$XDG_CONFIG_HOME/kuib/mesh.config.toml`, override `KUIB_MESH_CONFIG`), `resolveNodeLabel` (`user@hostname`), new env keys `KUIB_NODE_LABEL`, `KUIB_MESH_CONFIG`, `KUIB_TARGET_NODE`.
+- `host-tui`: `resolve.daemon.client` selects transport — if `KUIB_TARGET_NODE` is set and ≠ local label, resolve it through `StaticDiscovery` → TCP client; otherwise fall back to the local unix daemon (auto-spawn, unchanged). A top-right **device badge** shows the target (or local) label.
+
+**Switching (current, env-routed):** `mesh.config.toml` (identical on every device) maps each `nodeID` → its tailscale-IP TCP endpoint. On a device, `KUIB_TARGET_NODE=rs10@minerva` points the local engine's file tools at minerva's daemon over the tailnet — the remote-execution "money shot." The interactive `<leader>rd` picker is deferred (will use `@opentui/keymap` + a `DialogSelect`-style overlay, per the opencode study).
+
+**Deferred → next:** Headscale-backed `DiscoveryPort` (dynamic registry replacing the static TOML), CRDT config/key `SyncState`, and the `@opentui/keymap` device switcher.

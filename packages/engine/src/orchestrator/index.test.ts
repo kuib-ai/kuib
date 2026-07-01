@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 import { MockLanguageModelV3, simulateReadableStream } from "ai/test";
 import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";

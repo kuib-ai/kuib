@@ -11,6 +11,9 @@ const createStaticDiscovery = function (
     byID.set(descriptor.nodeID, descriptor);
   }
   return {
+    listNodes(): Promise<NodeDescriptor[]> {
+      return Promise.resolve([...byID.values()]);
+    },
     resolve(nodeID: NodeID): Promise<NodeDescriptor> {
       const descriptor = byID.get(nodeID);
       if (descriptor === undefined) {

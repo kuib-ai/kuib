@@ -3,11 +3,11 @@ import { dirname, join } from "node:path";
 import { render } from "@opentui/solid";
 import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
-import Daemon from "@kuib-ai/daemon";
 import EventLogSqlite from "@kuib-ai/event-log-sqlite";
 import EngineService from "@kuib-ai/engine-service";
 import Env from "@kuib-ai/env";
 import App from "./app";
+import resolveDaemonClient from "./resolve.daemon.client";
 
 const main = async function (): Promise<void> {
   const env = Env.bootstrapEnv();
@@ -16,6 +16,8 @@ const main = async function (): Promise<void> {
   const socketPath = join(dirname(dbPath), "engine.sock");
   const sessionID = Protocol.ID.SessionID.parse(env.KUIB_SESSION_ID);
   const deviceID = Protocol.ID.DeviceID.parse(crypto.randomUUID());
+  const localLabel = Env.resolveNodeLabel(env.KUIB_NODE_LABEL);
+  const deviceLabel = env.KUIB_TARGET_NODE ?? localLabel;
 
   if (argv.includes("serve")) {
     const model = Engine.Provider.createModel({
@@ -23,11 +25,7 @@ const main = async function (): Promise<void> {
       apiKey: env.KUIB_MODEL_API_KEY,
       modelID: env.KUIB_MODEL_ID,
     });
-    const daemonEndpoint = await Daemon.resolveDaemonEndpoint(
-      env.KUIB_DAEMON_URL,
-      env.KUIB_DAEMON_SOCKET,
-    );
-    const daemonClient = Engine.DaemonClient.createDaemonClient(daemonEndpoint);
+    const daemonClient = await resolveDaemonClient(env, localLabel);
     const eventLog = EventLogSqlite.createSqliteEventLog(dbPath);
     await EngineService.startEngineService({
       socketPath,
@@ -51,7 +49,6 @@ const main = async function (): Promise<void> {
     spawnArgv: [process.argv[1] ?? "", "serve"],
   });
   const eventLog = EventLogSqlite.createSqliteReader(dbPath);
-  const deviceLabel = Env.resolveNodeLabel(env.KUIB_NODE_LABEL);
   const onSubmit = function (prompt: string): void {
     void client
       .submit({
@@ -63,7 +60,14 @@ const main = async function (): Promise<void> {
   };
 
   render(
-    () => <App eventLog={eventLog} sessionID={sessionID} onSubmit={onSubmit} />,
+    () => (
+      <App
+        eventLog={eventLog}
+        sessionID={sessionID}
+        deviceLabel={deviceLabel}
+        onSubmit={onSubmit}
+      />
+    ),
     { exitOnCtrlC: true, onDestroy: () => process.exit(0) },
   );
 };
