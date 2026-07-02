@@ -81,52 +81,66 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
   const errorPartID = newID(Protocol.ID.PartID);
   const consume = async function (): Promise<void> {
     for await (const part of result.fullStream) {
-      if (part.type === "text-delta") {
-        await emit({
-          type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
-          messageID,
-          partID: Protocol.ID.PartID.parse(part.id),
-          delta: part.text,
-        });
-      } else if (part.type === "reasoning-delta") {
-        await emit({
-          type: Protocol.Event.EventTypeEnum.REASONING_DELTA,
-          messageID,
-          partID: Protocol.ID.PartID.parse(part.id),
-          delta: part.text,
-        });
-      } else if (part.type === "tool-call") {
-        await emit({
-          type: Protocol.Event.EventTypeEnum.TOOL_CALL_STARTED,
-          callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
-        });
-      } else if (part.type === "tool-result") {
-        await emit({
-          type: Protocol.Event.EventTypeEnum.TOOL_CALL_COMPLETED,
-          messageID,
-          partID: newID(Protocol.ID.PartID),
-          callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
-          output: JSON.stringify(part.output),
-          completedAt: Date.now(),
-          kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
-        });
-      } else if (part.type === "tool-error") {
-        await emit({
-          type: Protocol.Event.EventTypeEnum.TOOL_CALL_FAILED,
-          messageID,
-          partID: newID(Protocol.ID.PartID),
-          callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
-          reason: Protocol.ToolCall.ToolCallErrorReasonEnum.FAILED,
-          error:
-            part.error instanceof Error
-              ? part.error.message
-              : String(part.error),
-          completedAt: Date.now(),
-          kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
-        });
-      } else if (part.type === "error") {
-        const cause = part.error;
-        throw cause instanceof Error ? cause : new Error(String(cause));
+      switch (part.type) {
+        case "text-delta": {
+          await emit({
+            type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
+            messageID,
+            partID: Protocol.ID.PartID.parse(part.id),
+            delta: part.text,
+          });
+          break;
+        }
+        case "reasoning-delta": {
+          await emit({
+            type: Protocol.Event.EventTypeEnum.REASONING_DELTA,
+            messageID,
+            partID: Protocol.ID.PartID.parse(part.id),
+            delta: part.text,
+          });
+          break;
+        }
+        case "tool-call": {
+          await emit({
+            type: Protocol.Event.EventTypeEnum.TOOL_CALL_STARTED,
+            callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
+          });
+          break;
+        }
+        case "tool-result": {
+          await emit({
+            type: Protocol.Event.EventTypeEnum.TOOL_CALL_COMPLETED,
+            messageID,
+            partID: newID(Protocol.ID.PartID),
+            callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
+            output: JSON.stringify(part.output),
+            completedAt: Date.now(),
+            kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
+          });
+          break;
+        }
+        case "tool-error": {
+          await emit({
+            type: Protocol.Event.EventTypeEnum.TOOL_CALL_FAILED,
+            messageID,
+            partID: newID(Protocol.ID.PartID),
+            callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
+            reason: Protocol.ToolCall.ToolCallErrorReasonEnum.FAILED,
+            error:
+              part.error instanceof Error
+                ? part.error.message
+                : String(part.error),
+            completedAt: Date.now(),
+            kind: Protocol.ToolCall.ToolCallKindEnum.NORMAL,
+          });
+          break;
+        }
+        case "error": {
+          const cause = part.error;
+          throw cause instanceof Error ? cause : new Error(String(cause));
+        }
+        default:
+          break;
       }
     }
   };

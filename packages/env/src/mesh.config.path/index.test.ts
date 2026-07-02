@@ -14,11 +14,7 @@ describe("resolveMeshConfigPath", () => {
     const prev = process.env["XDG_CONFIG_HOME"];
     process.env["XDG_CONFIG_HOME"] = "/xdg";
     expect(resolveMeshConfigPath()).toBe("/xdg/kuib/mesh.config.toml");
-    if (prev === undefined) {
-      delete process.env["XDG_CONFIG_HOME"];
-    } else {
-      process.env["XDG_CONFIG_HOME"] = prev;
-    }
+    process.env["XDG_CONFIG_HOME"] = prev;
   });
 
   it("falls back to ~/.config when XDG_CONFIG_HOME is unset", () => {
@@ -27,8 +23,6 @@ describe("resolveMeshConfigPath", () => {
     expect(resolveMeshConfigPath()).toBe(
       join(homedir(), ".config", "kuib", "mesh.config.toml"),
     );
-    if (prev !== undefined) {
-      process.env["XDG_CONFIG_HOME"] = prev;
-    }
+    process.env["XDG_CONFIG_HOME"] = prev;
   });
 });

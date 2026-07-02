@@ -16,3 +16,6 @@ dist
 !.env.example
 
 .firecrawl
+
+# design-session worktrees
+.claude/worktrees/

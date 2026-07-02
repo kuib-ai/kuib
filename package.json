@@ -7,9 +7,11 @@
     "format:all": "prettier --write .",
     "lint:all": "eslint",
     "check:circular": "madge --circular --extensions ts,tsx packages apps",
-    "typecheck": "pnpm -r exec tsc --noEmit",
+    "typecheck": "nx run-many -t typecheck --parallel=1000 --output-style=stream",
     "test": "bun test packages apps",
-    "reload": "bun scripts/reload.ts"
+    "reload": "bun scripts/reload.ts",
+    "wireframes": "pnpm --filter @kuib-ai/wireframes dev",
+    "design": "./scripts/design-session.sh"
   },
   "keywords": [],
   "author": {
@@ -46,7 +48,11 @@
     "typescript": "catalog:",
     "typescript-eslint": "catalog:"
   },
-  "nx": {},
+  "nx": {
+    "includedScripts": [
+      "format:all"
+    ]
+  },
   "dependencies": {
     "@trpc/server": "catalog:"
   }

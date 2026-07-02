@@ -92,3 +92,7 @@ React-derived rules can't be ported to Solid (different component model). Still 
 - State idioms (signals/stores/memos — the RTK replacement).
 - Props typing (`type` vs `interface`) for components.
 - Solid reactivity lints (effect deps, etc.).
+
+## prefer-guard-clauses rule (2026-07-03)
+
+New plugin rule `house/prefer-guard-clauses`: every `else` branch is an error — invert into a guard clause (early return/continue/throw); dispatch on a discriminant with `switch`. Reports once per chain (topmost `if`), distinct messages for plain `else` vs `else if` chains. Escape hatch is an eslint-disable comment, same convention as the try/catch ban. Lives in the plugin's recommended config — house preferences are never wired loosely into `eslint.config.ts`. The orchestrator's fullStream `else if` chain was converted to `switch` when the rule landed.

@@ -1,0 +1,23 @@
+{
+  "name": "@kuib-ai/wireframes",
+  "version": "0.0.1",
+  "description": "Terminal viewer for journal screen wireframes",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run src/index.tsx",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@kuib-ai/env": "workspace:*",
+    "@opentui/core": "catalog:",
+    "@opentui/solid": "catalog:",
+    "solid-js": "catalog:"
+  },
+  "devDependencies": {
+    "@kuib-ai/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "bun-types": "catalog:",
+    "typescript": "catalog:"
+  }
+}

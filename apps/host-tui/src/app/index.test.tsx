@@ -62,6 +62,38 @@ describe("App submit gating", () => {
     renderer.destroy();
   });
 
+  it("renders the right-prompt-pane layout at 80x24 (as-built frame)", async () => {
+    const eventLog = Engine.EventLog.createMemoryEventLog();
+
+    const { renderer, waitForFrame, captureCharFrame } = await testRender(
+      () => (
+        <App
+          eventLog={eventLog}
+          sessionID={sessionID}
+          deviceLabel="rs10@septimus"
+          onSubmit={() => {}}
+        />
+      ),
+      { width: 80, height: 24 },
+    );
+
+    await eventLog.append(sessionID, deviceID, {
+      type: Protocol.Event.EventTypeEnum.MESSAGE_STARTED,
+      messageID,
+    });
+    await eventLog.append(sessionID, deviceID, {
+      type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
+      messageID,
+      partID: Protocol.ID.PartID.parse("p1"),
+      delta: "The secret code is BANANA-42.",
+    });
+
+    await waitForFrame((frame) => frame.includes("BANANA-42"));
+    expect(captureCharFrame()).toMatchSnapshot();
+
+    renderer.destroy();
+  });
+
   it("subscribes on mount and folds appended envelopes into the transcript", async () => {
     const eventLog = Engine.EventLog.createMemoryEventLog();
 

@@ -1,0 +1,10 @@
+{
+  "extends": "@kuib-ai/tsconfig/base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "@opentui/solid",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["node", "bun-types"]
+  },
+  "include": ["src"]
+}

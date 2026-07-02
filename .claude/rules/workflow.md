@@ -69,6 +69,13 @@ When significant decisions or insights emerge from a conversation:
 3. Add wikilinks to related entries
 4. Update `journal/_index.md` to reflect any new entries or status changes
 
+## Wireframes (screen-level UX truth)
+
+- Every screen (route or dialog) has exactly ONE wireframe file: `journal/<entry>/wireframes/<screen>.md`. Screen-level only — components never get their own wireframes; a screen's runtime states are frames inside its single file.
+- Before designing or modifying any screen — code or design — read its wireframe first; it carries the motivation the code cannot.
+- When a screen's implementation permanently diverges from its sketch, mark the wireframe `status: superseded` (+ `superseded-by`) and clean it to motivation + verdicts — never silently edit a sketch to match code.
+- Browse all wireframes in the terminal with `pnpm wireframes`. Full conventions: [[ux-iteration-process]].
+
 ## Commit Conventions
 
 - Format: `feat/fix/chore/docs: <short message>`
