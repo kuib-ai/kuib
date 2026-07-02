@@ -1,3 +1,7 @@
 .gitignore
 pnpm-lock.yaml
 journal/_index.md
+
+.agents
+.claude
+journal
