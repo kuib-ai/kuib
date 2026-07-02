@@ -58,7 +58,9 @@ const returnsJsx = function (fn: FunctionNode): boolean {
             stack.push(item as TSESTree.Node);
           }
         }
-      } else if (value && typeof (value as TSESTree.Node).type === "string") {
+        continue;
+      }
+      if (value && typeof (value as TSESTree.Node).type === "string") {
         stack.push(value as TSESTree.Node);
       }
     }

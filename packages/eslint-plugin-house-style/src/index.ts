@@ -8,6 +8,7 @@ import noDestructureProps from "./rules/no.destructure.props/index.js";
 import noCrossPackageRelative from "./rules/no.cross.package.relative/index.js";
 import namedUnionMembers from "./rules/named.union.members/index.js";
 import namedSchemaUnion from "./rules/named.schema.union/index.js";
+import preferGuardClauses from "./rules/prefer.guard.clauses/index.js";
 
 const rules = {
   "require-context-link": requireContextLink,
@@ -19,6 +20,7 @@ const rules = {
   "no-cross-package-relative": noCrossPackageRelative,
   "named-union-members": namedUnionMembers,
   "named-schema-union": namedSchemaUnion,
+  "prefer-guard-clauses": preferGuardClauses,
 };
 
 const recommendedRules = {
@@ -31,6 +33,7 @@ const recommendedRules = {
   "house/no-cross-package-relative": "error",
   "house/named-union-members": "error",
   "house/named-schema-union": "error",
+  "house/prefer-guard-clauses": "error",
   "func-style": ["error", "expression"],
   eqeqeq: ["error", "always"],
   "no-labels": "off",

@@ -1,4 +1,10 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "analytics": false
+  "analytics": false,
+  "targetDefaults": {
+    "typecheck": {
+      "cache": true,
+      "inputs": ["default", "^default"]
+    }
+  }
 }

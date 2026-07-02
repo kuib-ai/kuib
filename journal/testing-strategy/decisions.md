@@ -6,7 +6,7 @@ status: decided
 created: 2026-07-02
 tags: [testing, bun-test, coverage, hermeticity, conventions]
 depends-on: ["[[house-style-linting]]", "[[architecture-overview]]"]
-informs: []
+informs: ["[[ux-iteration-process]]"]
 ---
 
 # Testing Strategy

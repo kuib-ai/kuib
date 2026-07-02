@@ -36,8 +36,14 @@ interface EntryMeta {
   dependsOn: string[];
   informs: string[];
   children: string[];
+  wireframes: WireframeMeta[];
   bodyWikilinks: string[];
   dir: string;
+}
+
+interface WireframeMeta {
+  child: string;
+  status: string;
 }
 
 interface ValidationIssue {
@@ -158,6 +164,91 @@ function listChildren(dir: string, entryName: string): string[] {
   return children;
 }
 
+const REPO_ROOT = join(__dirname, "..");
+const WIREFRAME_STATUSES = ["exploring", "adopted", "superseded"];
+const WIREFRAME_KINDS = ["route", "dialog"];
+
+function collectWireframes(
+  entryDir: string,
+  entryName: string,
+  issues: ValidationIssue[],
+): WireframeMeta[] {
+  const wireframeDir = join(entryDir, "wireframes");
+  if (!existsSync(wireframeDir)) return [];
+
+  const wireframes: WireframeMeta[] = [];
+  const files = readdirSync(wireframeDir).filter((f) => f.endsWith(".md"));
+
+  for (const file of files) {
+    const name = file.replace(".md", "");
+    const child = `${entryName}/wireframes/${name}`;
+    const fm = parseFrontmatter(
+      readFileSync(join(wireframeDir, file), "utf-8"),
+    );
+    const status = (fm.status as string) || "";
+
+    if (fm.screen !== name) {
+      issues.push({
+        level: "warning",
+        entry: child,
+        message: `Wireframe frontmatter screen "${fm.screen}" must match filename "${name}"`,
+      });
+    }
+    if (!WIREFRAME_KINDS.includes(fm.kind as string)) {
+      issues.push({
+        level: "warning",
+        entry: child,
+        message: `Wireframe kind must be ${WIREFRAME_KINDS.join("|")} (got "${fm.kind}")`,
+      });
+    }
+    if (!WIREFRAME_STATUSES.includes(status)) {
+      issues.push({
+        level: "warning",
+        entry: child,
+        message: `Wireframe status must be ${WIREFRAME_STATUSES.join("|")} (got "${status}")`,
+      });
+    }
+    if (!fm.sizes) {
+      issues.push({
+        level: "warning",
+        entry: child,
+        message:
+          "Wireframe missing sizes (terminal dimensions frames are drawn at)",
+      });
+    }
+    if (status === "superseded" && !fm["superseded-by"]) {
+      issues.push({
+        level: "warning",
+        entry: child,
+        message: "Superseded wireframe must set superseded-by",
+      });
+    }
+    if (status !== "superseded" && fm["superseded-by"]) {
+      issues.push({
+        level: "warning",
+        entry: child,
+        message: "Wireframe sets superseded-by but status is not superseded",
+      });
+    }
+    const implementsList = Array.isArray(fm.implements)
+      ? (fm.implements as string[])
+      : [];
+    for (const impl of implementsList) {
+      if (!existsSync(join(REPO_ROOT, impl))) {
+        issues.push({
+          level: "warning",
+          entry: child,
+          message: `Wireframe implements path not found: ${impl}`,
+        });
+      }
+    }
+
+    wireframes.push({ child, status: status || "unknown" });
+  }
+
+  return wireframes;
+}
+
 const LAYER_ORDER: JournalLayer[] = [
   "product",
   "experience",
@@ -263,6 +354,7 @@ function main() {
     }
 
     const children = listChildren(join(JOURNAL_DIR, dir), dir);
+    const wireframes = collectWireframes(join(JOURNAL_DIR, dir), dir, issues);
     const bodyWikilinks = extractWikilinks(content);
 
     entries.set(dir, {
@@ -275,6 +367,7 @@ function main() {
       dependsOn,
       informs,
       children,
+      wireframes,
       bodyWikilinks,
       dir,
     });
@@ -374,6 +467,10 @@ function main() {
 
       for (const child of entry.children) {
         index += `  - [[${child}]]\n`;
+      }
+
+      for (const wireframe of entry.wireframes) {
+        index += `  - [[${wireframe.child}]] | wireframe:${wireframe.status}\n`;
       }
     }
   }

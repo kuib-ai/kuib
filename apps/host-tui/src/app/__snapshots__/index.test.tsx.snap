@@ -1,0 +1,29 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`App submit gating renders the right-prompt-pane layout at 80x24 (as-built frame) 1`] = `
+"┌─Conversation────────────────────────────────┐┌─Prompt────────────────────────┐
+│assistant: The secret code is BANANA-42.     ││                rs10@septimus  │
+│                                             ││                               │
+│                                             ││ ┌───────────────────────────┐ │
+│                                             ││ │Message kuib…              │ │
+│                                             ││ │                           │ │
+│                                             ││ │                           │ │
+│                                             ││ └───────────────────────────┘ │
+│                                             ││                               │
+│                                             ││ Enter sends · queues mid-turn │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+└─────────────────────────────────────────────┘└───────────────────────────────┘
+"
+`;

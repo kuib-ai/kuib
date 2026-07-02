@@ -18,6 +18,7 @@ informs:
     "[[discussions-ux]]",
     "[[nvim-integration]]",
     "[[multi-device-ux]]",
+    "[[ux-iteration-process]]",
   ]
 ---
 
@@ -249,3 +250,31 @@ The web host lags the TUI on the newer seams — all traceable to it assembling 
 - Shares: provider v2 config resolution ✓, telemetry ✓, SQLite db + fold ✓.
 
 **Resolution path:** extract a shared host bootstrap (model + daemon client + event log + telemetry + submit path) consumed by both hosts — also kills the duplication smell flagged in the coverage sweep.
+
+## TUI structure — provider stack, route store, dialog overlay (2026-07-03)
+
+Adopted from the opencode study (their `packages/tui` — same `@opentui/solid` stack, fully grown). Three layers; **no router library**:
+
+- **Provider stack** — Solid contexts at the root for shared state (event-log store, config, theme, keymap); screens consume hooks. Several of these become shared with host-web — this is the host-unification seam.
+- **Route store** — `Route` as a discriminated union (Zod-first, protocol idiom) held in a Solid store; `navigate()` = `reconcile()`; the root renders `<Switch>/<Match>` on `route.type`. No URLs, no history stack — navigation in a TUI is just swapping which screen is mounted. Screens live in `routes/`.
+- **Dialog overlay layer** — dialogs (pickers, approvals, help, palette) stack _above_ the current route via a dialog context; they are NOT routes. The remote-daemon picker for command execution lands here.
+
+The Route union + dialog list enumerates the product's screens — and is therefore the table of contents of the wireframe set ([[ux-iteration-process]]): one wireframe file per route screen or dialog, screen-level only, states as frames within the file.
+
+Current state: `apps/host-tui` is a single fixed screen (no providers/routes/dialogs yet); this structure is the target as the UX phase begins.
+
+## TUI dev loop — no HMR anywhere; watch-restart against the persistent engine (2026-07-03)
+
+Verified (multi-agent research with adversarial verification, 2026-07-03): **opencode has zero hot-reload machinery.** No `--hot`/`--watch`/`import.meta.hot` anywhere in their repo; `packages/tui` has no dev script; their own skill doc says config "is not hot-reloaded… tell the user to quit and restart opencode". Their actual iteration story = **fast cold restarts** (Bun runs TS directly, no build) + **serve/attach split** (all session state server-side; the TUI is a disposable thin client: `opencode serve` + `opencode attach --continue`) + **kv.json-persisted UI state** (theme, toggles, prompt history/stash) so restarts feel seamless. Their SIGUSR2 handling reloads config/theme _data_, never code.
+
+Adopted for kuib — we already have the split (engine-service survives host detach):
+
+- **Tier 1 (now):** `dev:watch` = `bun --watch --no-clear-screen run src/index.tsx`. Hard restart on edit → reattach to `engine.sock` → refold from the log. `--no-clear-screen` is required: Bun's clear escapes corrupt alternate-screen TUIs.
+- **Tier 1b (with the first new screens):** kv.json-style UI-state persistence + prompt history/stash, mirroring opencode's `tui/src/context/kv.tsx`.
+- **Tier 2 (experimental, deferred):** `bun --hot` same-PID re-eval + opentui's `singleton()` renderer reuse. Possible but self-plumbed: no Solid refresh exists (solid-refresh is bundler-only; only React got in-place refresh, opentui PR #446), re-creating the renderer throws stdin-exclusivity, and listeners/timers leak without manual disposal. opentui maintainers recommend `--watch`.
+- **Tier 3 (cheap, later):** SIGUSR2 → re-read config/theme without restart.
+- **Standing rule:** never embed the engine in the host process — a TUI restart must never kill a run. (opencode's default single-process dev mode has this trap; their escape is serve+attach, ours is the socket split.)
+
+## Session screen — sticky right prompt pane (2026-07-03)
+
+Composition moved out of the transcript: the session screen is now two bordered panes — transcript flowing free in the left (sticky-bottom), a fixed-width (33 col) sticky right pane holding the device badge and a multi-line prompt box (textarea: min 3 rows, grows to 8; Enter submits, Shift+Enter newline; trimmed/whitespace-only gating unchanged). Adopted from a design-session sketch, implemented same day in `apps/host-tui/src/app/index.tsx`, locked with an 80x24 `captureCharFrame` snapshot test. Sketch, as-built frame, and the retired single-pane layout: [[host-layer/wireframes/session]]. The empty lower-right of the prompt pane is deliberate headroom — candidate home for queued mid-turn prompts or the v1 Ledger (v1 Frontend above).

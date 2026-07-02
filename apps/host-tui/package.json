@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run src/index.tsx",
+    "dev:watch": "bun --watch --no-clear-screen run src/index.tsx",
     "typecheck": "tsc --noEmit",
     "test": "bun test"
   },

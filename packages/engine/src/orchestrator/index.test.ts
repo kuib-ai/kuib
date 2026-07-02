@@ -142,6 +142,57 @@ describe("orchestrator runAgent", () => {
     ).toBe(Protocol.ID.ToolCallID.parse("call-1"));
   });
 
+  it("maps reasoning-delta chunks to REASONING_DELTA events", async () => {
+    const model = new MockLanguageModelV3({
+      doStream: async () => ({
+        stream: simulateReadableStream({
+          chunks: [
+            { type: "reasoning-start", id: "r1" },
+            { type: "reasoning-delta", id: "r1", delta: "thinking" },
+            { type: "reasoning-end", id: "r1" },
+            { type: "text-start", id: "t1" },
+            { type: "text-delta", id: "t1", delta: "answer" },
+            { type: "text-end", id: "t1" },
+            {
+              type: "finish",
+              finishReason: { unified: "stop", raw: "stop" },
+              usage: {
+                inputTokens: {
+                  total: 1,
+                  noCache: 1,
+                  cacheRead: 0,
+                  cacheWrite: 0,
+                },
+                outputTokens: { total: 2, text: 1, reasoning: 1 },
+              },
+            },
+          ],
+        }),
+      }),
+    });
+
+    const eventLog = Engine.EventLog.createMemoryEventLog();
+    await Engine.runAgent({
+      prompt: "think first",
+      sessionID,
+      deviceID,
+      model,
+      daemonClient,
+      eventLog,
+    });
+
+    const events = collect(eventLog);
+    const reasoning = events
+      .filter((e) => e.type === Protocol.Event.EventTypeEnum.REASONING_DELTA)
+      .map((e) =>
+        e.type === Protocol.Event.EventTypeEnum.REASONING_DELTA ? e.delta : "",
+      )
+      .join("");
+    expect(reasoning).toBe("thinking");
+    const types = events.map((e) => e.type);
+    expect(types).toContain(Protocol.Event.EventTypeEnum.MESSAGE_COMPLETED);
+  });
+
   it("drains pending user messages into the log and the step messages", async () => {
     const seenPrompts: unknown[] = [];
     const model = new MockLanguageModelV3({
