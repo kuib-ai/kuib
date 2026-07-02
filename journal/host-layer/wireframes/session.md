@@ -110,3 +110,44 @@ The original layout: full-width transcript with a one-line input at the bottom.
 Transcript entries keep their fold semantics (reasoning dim before the answer, tool boundaries break assistant segmentation, true chronological order) — unchanged from v0, so not re-annotated here.
 
 The empty session is the same layout with an empty conversation pane — no distinct frame. No empty-state copy yet; an open gap the greenfield bootstrap flow ([[context-bootstrap]]) will define.
+
+## Exploring — queued prompts in the pane (2026-07-03)
+
+The unclaimed lower-right of the prompt pane claims its purpose: mid-turn submits (which queue and steer at step boundaries) become visible as a QUEUED list under the hint line. The queue was previously invisible — you had to trust that your mid-turn Enter went somewhere. Not implemented yet.
+
+```
+┌─Conversation────────────────────────────────┐┌─Prompt────────────────────────┐
+│user: run the full test suite and fix        ││                rs10@septimus ①│
+│failures                                     ││                               │
+│                                             ││ ┌───────────────────────────┐ │
+│reasoning: running bun test first to see     ││ │Message kuib…              │ │
+│what breaks…                                 ││ │                           │ │
+│                                             ││ │                           │ │
+│tool: ⠧ bun test — running                   ││ └───────────────────────────┘ │
+│                                             ││                               │
+│                                             ││ Enter sends · queues mid-turn │
+│                                             ││                               │
+│                                             ││ QUEUED · steer at step end  ② │
+│                                             ││ 1 also lint the new rule…   ③ │
+│                                             ││ 2 then commit everything      │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+│                                             ││                               │
+└─────────────────────────────────────────────┘└───────────────────────────────┘
+```
+
+① device badge, unchanged
+② queue section — visible only while a turn is streaming AND the queue is non-empty; items apply in send order at the next step boundary, then leave the list as they enter the transcript
+③ one queued prompt per line, truncated with …; numbering is send order (1 steers first)
+
+Open questions before adopting:
+
+- Editing/removing a queued item (e.g. `Ctrl+X` drops the last one?) — needs a keybinding decision that doesn't fight the textarea.
+- Overflow: more queued items than rows — scroll, or cap with `+N more`?
+- Does a queued item show a spinner/highlight the moment it starts steering, or does it just move to the transcript?

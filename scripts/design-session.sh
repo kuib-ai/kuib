@@ -8,7 +8,8 @@
 #   - pnpm install runs every time (no-op when current), so rebases that add packages just work
 #   - branch rebased onto master only when the worktree is clean; on conflict the rebase is left
 #     in place and claude launches with a resolve-the-rebase-with-Rupsha prompt instead of /wireframe
-#   - claude window: left alone if running (never kills a live conversation), started if idle
+#   - claude window: left alone if running IN THE WORKTREE (never kills a live conversation),
+#     started if idle, replaced if rooted in the wrong directory
 #   - picker window: always killed and re-inited fresh
 #   - wrong session shape: salvages a running claude window, rebuilds everything else around it
 # Run locally or over ssh:  ssh -t rs10@septimus /home/rs10/developer/kuib-ai/kuib/scripts/design-session.sh
@@ -71,8 +72,8 @@ build() {
 }
 
 find_claude_pane() {
-  tmux list-panes -s -t "$SESSION" -F "#{window_id}:#{pane_id}:#{pane_current_command}" |
-    awk -F: -v bin="$CLAUDE_BIN" '$3 == bin { print $1 ":" $2; exit }'
+  tmux list-panes -s -t "$SESSION" -F "#{window_id}:#{pane_id}:#{pane_current_command}:#{pane_current_path}" |
+    awk -F: -v bin="$CLAUDE_BIN" -v wt="$WORKTREE" '$3 == bin && $4 == wt { print $1 ":" $2; exit }'
 }
 
 salvage() {
@@ -97,9 +98,13 @@ salvage() {
 converge_windows() {
   local position=0
   local window_id pane_cmd
-  while IFS=: read -r window_id pane_cmd; do
+  while IFS=: read -r window_id pane_cmd pane_path; do
     if [ "$position" -eq 0 ]; then
       if [ "$pane_cmd" = "zsh" ] || [ "$pane_cmd" = "bash" ]; then
+        tmux send-keys -t "$window_id" "cd $WORKTREE" C-m
+        tmux send-keys -t "$window_id" "$CLAUDE_CMD" C-m
+      elif [ "$pane_path" != "$WORKTREE" ]; then
+        tmux respawn-pane -k -t "$window_id"
         tmux send-keys -t "$window_id" "cd $WORKTREE" C-m
         tmux send-keys -t "$window_id" "$CLAUDE_CMD" C-m
       fi
@@ -113,7 +118,7 @@ converge_windows() {
       fi
     fi
     position=$((position + 1))
-  done < <(tmux list-windows -t "$SESSION" -F "#{window_id}:#{pane_current_command}")
+  done < <(tmux list-windows -t "$SESSION" -F "#{window_id}:#{pane_current_command}:#{pane_current_path}")
 }
 
 ensure_session() {
