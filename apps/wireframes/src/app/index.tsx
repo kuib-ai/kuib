@@ -41,6 +41,7 @@ const WireframeApp = function (props: WireframeAppProps) {
   return (
     <KeymapProvider keymap={keymap}>
       <Picker
+        workspaceRoot={props.workspaceRoot}
         wireframes={wireframes()}
         focus={focus()}
         onQuit={() => renderer.destroy()}

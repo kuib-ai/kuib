@@ -1,14 +1,17 @@
 // @context @journal/ux-iteration-process
 import { createEffect, createSignal, on, Show } from "solid-js";
+import * as path from "node:path";
 import type { ScrollBoxRenderable } from "@opentui/core";
 import { useBindings, useKeymap } from "@opentui/keymap/solid";
 import type { Wireframe } from "../load.wireframes";
+import { createPersistentSignal } from "../persistent";
 
 type PickerFocus = {
   path: string;
 };
 
 type PickerProps = {
+  workspaceRoot: string;
   wireframes: Wireframe[];
   focus?: PickerFocus;
   onQuit: () => void;
@@ -23,7 +26,16 @@ const statusColor: Record<string, string> = {
 const Picker = function (props: PickerProps) {
   const keymap = useKeymap();
   const [index, setIndex] = createSignal(0);
-  const [leftPaneOpen, setLeftPaneOpen] = createSignal(true);
+  const stateFile = path.join(
+    props.workspaceRoot,
+    "node_modules",
+    ".cache",
+    "kuib-wireframes.json",
+  );
+  const [leftPaneOpen, setLeftPaneOpen] = createPersistentSignal(
+    stateFile,
+    true,
+  );
   let preview: ScrollBoxRenderable | undefined;
   const current = (): Wireframe | undefined => props.wireframes[index()];
 
@@ -93,18 +105,12 @@ const Picker = function (props: PickerProps) {
       {
         name: "move-left",
         run: () => {
-          if (!leftPaneOpen()) {
-            return;
-          }
           move(-1);
         },
       },
       {
         name: "move-right",
         run: () => {
-          if (!leftPaneOpen()) {
-            return;
-          }
           move(1);
         },
       },
@@ -182,9 +188,11 @@ const Picker = function (props: PickerProps) {
         </box>
       </Show>
       <box flexDirection="column" flexGrow={1}>
-        <text fg={statusColor[current()?.status ?? ""] ?? "#e0af68"}>
-          {current()?.path ?? "no wireframes found"}
-        </text>
+        <box width="100%" backgroundColor="black" height={1}>
+          <text fg={statusColor[current()?.status ?? ""] ?? "#e0af68"}>
+            {current()?.path ?? "no wireframes found"}
+          </text>
+        </box>
         <scrollbox
           ref={(renderable: ScrollBoxRenderable) => {
             preview = renderable;
@@ -198,7 +206,7 @@ const Picker = function (props: PickerProps) {
         <text fg="#565f89" marginTop={1}>
           {leftPaneOpen()
             ? "h/l · j/k move · <leader>p pane · q quit"
-            : "j/k scroll · g/G top/bottom · <leader>p pane · q quit"}
+            : "h/l move · j/k scroll · g/G top/bottom · <leader>p pane · q quit"}
         </text>
       </box>
     </box>

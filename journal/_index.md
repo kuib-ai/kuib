@@ -19,15 +19,15 @@
 ### [[discussions-ux]] | status:open | tags:discussions,context,selection,ux,v1
   Not linear "last N messages" focus. Users can:
   - [[discussions-ux/wireframes/cache-edit-confirm]] | wireframe:exploring
-  - [[discussions-ux/wireframes/payload-preview]] | wireframe:exploring
   - [[discussions-ux/wireframes/conversation]] | wireframe:exploring
   - [[discussions-ux/wireframes/discussion-manager]] | wireframe:exploring
+  - [[discussions-ux/wireframes/payload-preview]] | wireframe:exploring
 
 ### [[host-layer]] | status:open | tags:host,opentui,solid,bun,nvim,ui,panes,adapter
   Host adapter responsibilities:
   - [[host-layer/research/tui-framework]]
-  - [[host-layer/wireframes/session]] | wireframe:adopted
   - [[host-layer/wireframes/session-layout]] | wireframe:exploring
+  - [[host-layer/wireframes/session]] | wireframe:adopted
 
 ### [[multi-device-ux]] | status:open | tags:multi-device,cwd,working-context,device,ux,agent-awareness,mesh
   From one chat, the agent runs commands / accesses files across the user's mesh of devices. This entry covers how "curren...
@@ -63,9 +63,9 @@
 
 ### [[protocol-design]] | status:in-progress | tags:protocol,types,zod,events,state-management,tsgo
   Config uses `module: "NodeNext"`, `moduleResolution: "NodeNext"`. No deprecated options (`target: es5`, `moduleResolutio...
-  - [[protocol-design/research/superseded]]
-  - [[protocol-design/progress]]
   - [[protocol-design/plan]]
+  - [[protocol-design/progress]]
+  - [[protocol-design/research/superseded]]
 
 ## Process
 
