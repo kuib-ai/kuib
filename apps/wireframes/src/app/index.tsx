@@ -1,9 +1,11 @@
 // @context @journal/ux-iteration-process
 import { createSignal, onCleanup, onMount } from "solid-js";
 import { useRenderer } from "@opentui/solid";
+import { KeymapProvider } from "@opentui/keymap/solid";
 import loadWireframes from "../load.wireframes";
 import type { Wireframe } from "../load.wireframes";
 import watchWireframes from "../watch.wireframes";
+import createWireframeKeymap from "../keymap";
 import Picker from "../picker";
 import type { PickerFocus } from "../picker";
 
@@ -13,6 +15,7 @@ type WireframeAppProps = {
 
 const WireframeApp = function (props: WireframeAppProps) {
   const renderer = useRenderer();
+  const keymap = createWireframeKeymap(renderer);
   const [wireframes, setWireframes] = createSignal<Wireframe[]>(
     loadWireframes(props.workspaceRoot),
   );
@@ -36,11 +39,13 @@ const WireframeApp = function (props: WireframeAppProps) {
   });
 
   return (
-    <Picker
-      wireframes={wireframes()}
-      focus={focus()}
-      onQuit={() => renderer.destroy()}
-    />
+    <KeymapProvider keymap={keymap}>
+      <Picker
+        wireframes={wireframes()}
+        focus={focus()}
+        onQuit={() => renderer.destroy()}
+      />
+    </KeymapProvider>
   );
 };
 

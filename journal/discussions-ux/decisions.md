@@ -43,6 +43,8 @@ Linear `Message[]` is the render base. Discussion view overlays via `Set<PartID>
 - Toggle discussion included in next context build
 - Preview payload before send (transparency — [[vision]])
 
+Wireframes (exploring, 2026-07-05): [[discussions-ux/wireframes/conversation]], [[discussions-ux/wireframes/payload-preview]], [[discussions-ux/wireframes/cache-edit-confirm]], [[discussions-ux/wireframes/discussion-manager]]. v1 shell: [[host-layer/wireframes/session-layout]].
+
 ## Open Questions
 
 - Discussion included by default on create, or opt-in?

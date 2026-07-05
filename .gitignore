@@ -2,6 +2,8 @@
 
 node_modules
 
+.pnpm-store
+
 .claude/*.local
 .claude/worktrees
 
@@ -19,3 +21,4 @@ dist
 
 # design-session worktrees
 .claude/worktrees/
+.aider*

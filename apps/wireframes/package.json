@@ -4,13 +4,14 @@
   "description": "Terminal viewer for journal screen wireframes",
   "type": "module",
   "scripts": {
-    "dev": "bun run src/index.tsx",
+    "dev": "bun run --watch ./src src/index.tsx",
     "typecheck": "tsc --noEmit",
     "test": "bun test"
   },
   "dependencies": {
     "@kuib-ai/env": "workspace:*",
     "@opentui/core": "catalog:",
+    "@opentui/keymap": "catalog:",
     "@opentui/solid": "catalog:",
     "solid-js": "catalog:"
   },

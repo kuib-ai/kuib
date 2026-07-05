@@ -1,6 +1,7 @@
 // @context @journal/ux-iteration-process
-import { createEffect, createSignal, on } from "solid-js";
-import { useKeyboard } from "@opentui/solid";
+import { createEffect, createSignal, on, Show } from "solid-js";
+import type { ScrollBoxRenderable } from "@opentui/core";
+import { useBindings, useKeymap } from "@opentui/keymap/solid";
 import type { Wireframe } from "../load.wireframes";
 
 type PickerFocus = {
@@ -20,7 +21,10 @@ const statusColor: Record<string, string> = {
 };
 
 const Picker = function (props: PickerProps) {
+  const keymap = useKeymap();
   const [index, setIndex] = createSignal(0);
+  const [leftPaneOpen, setLeftPaneOpen] = createSignal(true);
+  let preview: ScrollBoxRenderable | undefined;
   const current = (): Wireframe | undefined => props.wireframes[index()];
 
   const move = function (delta: number): void {
@@ -51,40 +55,151 @@ const Picker = function (props: PickerProps) {
     setIndex((prev) => Math.min(prev, lastIndex));
   });
 
-  useKeyboard((key) => {
-    if (key.name === "q" || key.name === "escape") {
-      props.onQuit();
+  createEffect(
+    on(
+      () => current()?.path,
+      () => {
+        preview?.scrollTo(0);
+      },
+    ),
+  );
+
+  const scrollPreview = function (delta: number): void {
+    preview?.scrollBy(delta);
+  };
+
+  const scrollPreviewTop = function (): void {
+    preview?.scrollTo(0);
+  };
+
+  const scrollPreviewBottom = function (): void {
+    if (preview === undefined) {
       return;
     }
-    if (key.name === "h" || key.name === "k" || key.name === "up") {
-      move(-1);
-    }
-    if (key.name === "l" || key.name === "j" || key.name === "down") {
-      move(1);
-    }
-  });
+    const maxTop = Math.max(preview.scrollHeight - preview.viewport.height, 0);
+    preview.scrollTo({ x: preview.scrollLeft, y: maxTop });
+  };
+
+  useBindings(() => ({
+    commands: [
+      { name: "quit", run: () => props.onQuit() },
+      {
+        name: "toggle-left-pane",
+        run: () => {
+          setLeftPaneOpen((open) => !open);
+          keymap.clearPendingSequence();
+        },
+      },
+      {
+        name: "move-left",
+        run: () => {
+          if (!leftPaneOpen()) {
+            return;
+          }
+          move(-1);
+        },
+      },
+      {
+        name: "move-right",
+        run: () => {
+          if (!leftPaneOpen()) {
+            return;
+          }
+          move(1);
+        },
+      },
+      {
+        name: "step-down",
+        run: () => {
+          if (leftPaneOpen()) {
+            move(1);
+            return;
+          }
+          scrollPreview(1);
+        },
+      },
+      {
+        name: "step-up",
+        run: () => {
+          if (leftPaneOpen()) {
+            move(-1);
+            return;
+          }
+          scrollPreview(-1);
+        },
+      },
+      {
+        name: "scroll-top",
+        run: () => {
+          if (leftPaneOpen()) {
+            return;
+          }
+          scrollPreviewTop();
+        },
+      },
+      {
+        name: "scroll-bottom",
+        run: () => {
+          if (leftPaneOpen()) {
+            return;
+          }
+          scrollPreviewBottom();
+        },
+      },
+    ],
+    bindings: [
+      { key: "q", cmd: "quit" },
+      { key: "escape", cmd: "quit" },
+      { key: "<leader>p", cmd: "toggle-left-pane" },
+      { key: "h", cmd: "move-left" },
+      { key: "l", cmd: "move-right" },
+      { key: "j", cmd: "step-down" },
+      { key: "k", cmd: "step-up" },
+      { key: "down", cmd: "step-down" },
+      { key: "up", cmd: "step-up" },
+      { key: "g", cmd: "scroll-top" },
+      { key: "shift+g", cmd: "scroll-bottom" },
+    ],
+  }));
 
   return (
     <box flexDirection="row" flexGrow={1}>
-      <box flexDirection="column" width={34} paddingLeft={1} paddingRight={1}>
-        <text fg="#7aa2f7">wireframes</text>
-        <select
-          flexGrow={1}
-          options={props.wireframes.map((wireframe) => ({
-            name: `${wireframe.entry}/${wireframe.screen}`,
-            description: wireframe.status,
-          }))}
-          selectedIndex={index()}
-        />
-        <text fg="#565f89">h/l · j/k move · q quit</text>
-      </box>
+      <Show when={leftPaneOpen()}>
+        <box flexDirection="column" width={34} paddingLeft={1} paddingRight={1}>
+          <text fg="#7aa2f7">wireframes</text>
+          <select
+            focused={leftPaneOpen()}
+            flexGrow={1}
+            options={props.wireframes.map((wireframe) => ({
+              name: `${wireframe.entry}/${wireframe.screen}`,
+              description: wireframe.status,
+            }))}
+            selectedIndex={index()}
+          />
+          <text fg="#565f89">
+            h/l · j/k move · &lt;leader&gt;p pane · q quit
+          </text>
+        </box>
+      </Show>
       <box flexDirection="column" flexGrow={1}>
         <text fg={statusColor[current()?.status ?? ""] ?? "#e0af68"}>
           {current()?.path ?? "no wireframes found"}
         </text>
-        <scrollbox flexGrow={1} scrollX>
+        <scrollbox
+          ref={(renderable: ScrollBoxRenderable) => {
+            preview = renderable;
+          }}
+          flexGrow={1}
+          scrollX
+          focusable={false}
+        >
           <text wrapMode="none">{current()?.content ?? ""}</text>
         </scrollbox>
+        <text fg="#565f89" marginTop={1}>
+          {leftPaneOpen()
+            ? "h/l · j/k move · <leader>p pane · q quit"
+            : "j/k scroll · g/G top/bottom · <leader>p pane · q quit"}
+        </text>
       </box>
     </box>
   );

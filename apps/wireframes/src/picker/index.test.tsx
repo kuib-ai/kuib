@@ -1,9 +1,34 @@
 import { describe, it, expect } from "bun:test";
 import { createSignal } from "solid-js";
-import { testRender } from "@opentui/solid";
+import { testRender, useRenderer } from "@opentui/solid";
+import { KeymapProvider } from "@opentui/keymap/solid";
 import Picker from "./index";
-import type { PickerFocus } from "./index";
+import type { PickerFocus, PickerProps } from "./index";
 import type { Wireframe } from "../load.wireframes";
+import createWireframeKeymap from "../keymap";
+import type { Keymap } from "@opentui/keymap";
+import type { KeyEvent, Renderable } from "@opentui/core";
+
+let harnessKeymap: Keymap<Renderable, KeyEvent> | undefined;
+
+const PickerHarness = function (props: PickerProps) {
+  const renderer = useRenderer();
+  const keymap = createWireframeKeymap(renderer);
+  harnessKeymap = keymap;
+  return (
+    <KeymapProvider keymap={keymap}>
+      <Picker {...props} />
+    </KeymapProvider>
+  );
+};
+
+const pressLeaderP = async function (
+  mockInput: Awaited<ReturnType<typeof testRender>>["mockInput"],
+  renderOnce: Awaited<ReturnType<typeof testRender>>["renderOnce"],
+): Promise<void> {
+  await mockInput.pressKeys([" ", "p"], 50);
+  await renderOnce();
+};
 
 const fixtures: Wireframe[] = [
   {
@@ -28,7 +53,7 @@ describe("wireframe picker", () => {
   it("renders the first wireframe with its file path and flips with l/h", async () => {
     const { renderer, mockInput, waitForFrame, captureCharFrame } =
       await testRender(
-        () => <Picker wireframes={fixtures} onQuit={() => {}} />,
+        () => <PickerHarness wireframes={fixtures} onQuit={() => {}} />,
         { width: 110, height: 24 },
       );
 
@@ -53,7 +78,7 @@ describe("wireframe picker", () => {
 
   it("clamps navigation at list boundaries", async () => {
     const { renderer, mockInput, waitForFrame } = await testRender(
-      () => <Picker wireframes={fixtures} onQuit={() => {}} />,
+      () => <PickerHarness wireframes={fixtures} onQuit={() => {}} />,
       { width: 110, height: 24 },
     );
 
@@ -72,7 +97,11 @@ describe("wireframe picker", () => {
 
     const { renderer, waitForFrame } = await testRender(
       () => (
-        <Picker wireframes={wireframes()} focus={focus()} onQuit={() => {}} />
+        <PickerHarness
+          wireframes={wireframes()}
+          focus={focus()}
+          onQuit={() => {}}
+        />
       ),
       { width: 110, height: 24 },
     );
@@ -99,7 +128,7 @@ describe("wireframe picker", () => {
     const [wireframes, setWireframes] = createSignal(fixtures);
 
     const { renderer, mockInput, waitForFrame } = await testRender(
-      () => <Picker wireframes={wireframes()} onQuit={() => {}} />,
+      () => <PickerHarness wireframes={wireframes()} onQuit={() => {}} />,
       { width: 110, height: 24 },
     );
 
@@ -123,7 +152,7 @@ describe("wireframe picker", () => {
     };
 
     const { renderer, waitForFrame, captureCharFrame } = await testRender(
-      () => <Picker wireframes={[wide]} onQuit={() => {}} />,
+      () => <PickerHarness wireframes={[wide]} onQuit={() => {}} />,
       { width: 110, height: 24 },
     );
 
@@ -137,7 +166,7 @@ describe("wireframe picker", () => {
     let quits = 0;
     const { renderer, mockInput, waitFor } = await testRender(
       () => (
-        <Picker
+        <PickerHarness
           wireframes={fixtures}
           onQuit={() => {
             quits++;
@@ -150,6 +179,74 @@ describe("wireframe picker", () => {
     await mockInput.typeText("q");
     await waitFor(() => quits === 1);
     expect(quits).toBe(1);
+
+    renderer.destroy();
+  });
+
+  it("toggles the left pane with <leader>p", async () => {
+    const { renderer, mockInput, renderOnce, waitForFrame, captureCharFrame } =
+      await testRender(
+        () => <PickerHarness wireframes={fixtures} onQuit={() => {}} />,
+        { width: 110, height: 24 },
+      );
+
+    await waitForFrame((frame) => frame.includes("wireframes"));
+    expect(captureCharFrame().includes("host-layer/session")).toBe(true);
+
+    await pressLeaderP(mockInput, renderOnce);
+    expect(captureCharFrame().includes("j/k scroll")).toBe(true);
+    harnessKeymap?.clearPendingSequence();
+
+    await pressLeaderP(mockInput, renderOnce);
+    expect(captureCharFrame().includes("h/l · j/k move · <leader>p")).toBe(
+      true,
+    );
+    expect(captureCharFrame().includes("host-layer/session")).toBe(true);
+
+    renderer.destroy();
+  });
+
+  it("scrolls the preview with j/k when the left pane is closed", async () => {
+    const lines = Array.from({ length: 40 }, (_, index) => `LINE-${index}`);
+    const tall: Wireframe = {
+      path: "journal/host-layer/wireframes/tall.md",
+      entry: "host-layer",
+      screen: "tall",
+      status: "exploring",
+      content: lines.join("\n"),
+      modifiedAt: 1,
+    };
+
+    const { renderer, mockInput, renderOnce, waitForFrame, captureCharFrame } =
+      await testRender(
+        () => <PickerHarness wireframes={[tall]} onQuit={() => {}} />,
+        { width: 110, height: 24 },
+      );
+
+    await waitForFrame((frame) => frame.includes("LINE-0"));
+    harnessKeymap?.runCommand("toggle-left-pane");
+    await renderOnce();
+    expect(captureCharFrame().includes("j/k scroll")).toBe(true);
+    harnessKeymap?.clearPendingSequence();
+
+    for (let step = 0; step < 10; step++) {
+      await mockInput.pressKey("j");
+      await renderOnce();
+    }
+    expect(captureCharFrame().includes("LINE-0")).toBe(false);
+    expect(captureCharFrame().includes("LINE-10")).toBe(true);
+
+    harnessKeymap?.runCommand("scroll-bottom");
+    await renderOnce();
+    expect(captureCharFrame().includes("LINE-39")).toBe(true);
+
+    harnessKeymap?.runCommand("scroll-top");
+    await renderOnce();
+    expect(captureCharFrame().includes("LINE-0")).toBe(true);
+
+    await mockInput.pressKey("g", { shift: true });
+    await renderOnce();
+    expect(captureCharFrame().includes("LINE-39")).toBe(true);
 
     renderer.destroy();
   });
