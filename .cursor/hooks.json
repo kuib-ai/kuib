@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": ".cursor/hooks/check-journal-index.sh",
+        "timeout": 30
+      }
+    ],
+    "preCompact": [
+      {
+        "command": ".cursor/hooks/pre-compact.sh",
+        "timeout": 60
+      }
+    ]
+  }
+}

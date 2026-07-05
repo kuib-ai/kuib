@@ -13,6 +13,7 @@ informs:
     "[[context-bootstrap]]",
     "[[architecture-overview]]",
     "[[nvim-integration]]",
+    "[[context-engine]]",
   ]
 ---
 

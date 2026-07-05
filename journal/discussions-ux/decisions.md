@@ -6,7 +6,7 @@ layer: experience
 created: 2026-06-18
 tags: [discussions, context, selection, ux, v1]
 depends-on: ["[[protocol-design]]", "[[comprehension-model]]", "[[host-layer]]"]
-informs: ["[[context-bootstrap]]"]
+informs: ["[[context-bootstrap]]", "[[context-engine]]"]
 ---
 
 # Discussions UX

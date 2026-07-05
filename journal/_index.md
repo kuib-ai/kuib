@@ -35,6 +35,9 @@
 ### [[consensus-model]] | status:in-progress | tags:consensus,mesh,raft,quorum,lease,fencing,leader-election,local-first,p2p
   How the local-first P2P mesh stays correct. This is the load-bearing, highest-risk subsystem. The model below was reason...
 
+### [[context-engine]] | status:decided | tags:engine,context,branches,forks,ux,doom-loops,ai-messages
+  Absolute control over the context window to prevent LLM context pollution and recover from doom loops, implemented in th...
+
 ### [[distributed-mesh-state]] | status:decided | tags:mesh,tailscale,crdt,yjs,zero-trust
   We need a secure, distributed way to store user configuration, AI model preferences, and API keys across multiple device...
 
@@ -55,8 +58,8 @@
 
 ### [[protocol-design]] | status:in-progress | tags:protocol,types,zod,events,state-management,tsgo
   Config uses `module: "NodeNext"`, `moduleResolution: "NodeNext"`. No deprecated options (`target: es5`, `moduleResolutio...
-  - [[protocol-design/progress]]
   - [[protocol-design/plan]]
+  - [[protocol-design/progress]]
   - [[protocol-design/research/superseded]]
 
 ## Process
