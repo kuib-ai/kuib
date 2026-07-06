@@ -135,6 +135,32 @@ const Picker = function (props: PickerProps) {
         },
       },
       {
+        name: "page-down",
+        run: () => {
+          if (leftPaneOpen()) {
+            move(10);
+            return;
+          }
+          if (preview) {
+            scrollPreview(Math.max(1, Math.floor(preview.viewport.height / 2)));
+          }
+        },
+      },
+      {
+        name: "page-up",
+        run: () => {
+          if (leftPaneOpen()) {
+            move(-10);
+            return;
+          }
+          if (preview) {
+            scrollPreview(
+              -Math.max(1, Math.floor(preview.viewport.height / 2)),
+            );
+          }
+        },
+      },
+      {
         name: "scroll-top",
         run: () => {
           if (leftPaneOpen()) {
@@ -163,6 +189,10 @@ const Picker = function (props: PickerProps) {
       { key: "k", cmd: "step-up" },
       { key: "down", cmd: "step-down" },
       { key: "up", cmd: "step-up" },
+      { key: "ctrl+d", cmd: "page-down" },
+      { key: "ctrl+u", cmd: "page-up" },
+      { key: "pagedown", cmd: "page-down" },
+      { key: "pageup", cmd: "page-up" },
       { key: "g", cmd: "scroll-top" },
       { key: "shift+g", cmd: "scroll-bottom" },
     ],
