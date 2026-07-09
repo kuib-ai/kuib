@@ -4,7 +4,7 @@ import * as path from "node:path";
 import type { ScrollBoxRenderable } from "@opentui/core";
 import { useBindings, useKeymap } from "@opentui/keymap/solid";
 import type { Wireframe } from "../load.wireframes";
-import { createPersistentSignal } from "../persistent";
+import createPersistentSignal from "../persistent";
 
 type PickerFocus = {
   path: string;
@@ -98,7 +98,7 @@ const Picker = function (props: PickerProps) {
       {
         name: "toggle-left-pane",
         run: () => {
-          setLeftPaneOpen((open) => !open);
+          setLeftPaneOpen((open: boolean) => !open);
           keymap.clearPendingSequence();
         },
       },

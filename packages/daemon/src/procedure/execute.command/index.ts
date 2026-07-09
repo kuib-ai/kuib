@@ -12,7 +12,7 @@ const executeCommand = Trpc.procedure
   .input(ExecuteCommandInput)
   .output(ExecuteCommandOutput)
   .mutation(async ({ input }) => {
-    const [error, result] = await Std.asyncWithError(
+    const [error, result] = await Std.withError(
       execAsync(input.command, {
         cwd: input.cwd ?? process.cwd(),
         env: { ...process.env, ...input.env },

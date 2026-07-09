@@ -5,7 +5,8 @@ import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
 import Daemon from "@kuib-ai/daemon";
 import EventLogSqlite from "@kuib-ai/event-log-sqlite";
-import Env from "@kuib-ai/env";
+
+import Std from "@kuib-ai/std";
 import Telemetry from "@kuib-ai/telemetry";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 
@@ -39,29 +40,30 @@ const mintPairingCode = function (): string {
 const detectTailscaleIp = function (
   override: string | undefined,
 ): string | null {
-  if (override) {
+  if (override !== undefined && override.length > 0) {
     return override;
   }
-  // eslint-disable-next-line no-restricted-syntax
-  try {
-    const out = Bun.spawnSync(["tailscale", "ip", "-4"])
-      .stdout.toString()
-      .trim();
-    const first = out.split("\n")[0]?.trim();
-    return first && /^\d+\.\d+\.\d+\.\d+$/.test(first) ? first : null;
-  } catch {
+  const [err, out] = Std.withError(() =>
+    Bun.spawnSync(["tailscale", "ip", "-4"]).stdout.toString().trim(),
+  );
+
+  if (err || !out) {
     return null;
   }
+
+  const first = out.split("\n")[0]?.trim();
+  return first && /^\d+\.\d+\.\d+\.\d+$/.test(first) ? first : null;
 };
 
+import env from "./env";
+
 const main = async function (): Promise<void> {
-  const env = Env.bootstrapEnv();
   Telemetry.startTelemetry({
     endpoint: env.KUIB_TRACE_ENDPOINT,
     serviceName: env.KUIB_TRACE_SERVICE,
   });
   const port = env.KUIB_WEB_PORT;
-  const dbPath = Env.resolveDbPath(env.KUIB_DB_PATH);
+  const dbPath = env.KUIB_DB_PATH;
   const deviceID = Protocol.ID.DeviceID.parse(crypto.randomUUID());
   const tsIp = detectTailscaleIp(env.KUIB_WEB_TAILSCALE_IP);
 
@@ -302,12 +304,7 @@ const main = async function (): Promise<void> {
         start(controller): void {
           const enc = new TextEncoder();
           const push = function (text: string): void {
-            // eslint-disable-next-line no-restricted-syntax
-            try {
-              controller.enqueue(enc.encode(text));
-            } catch {
-              return;
-            }
+            Std.withError(() => controller.enqueue(enc.encode(text)));
           };
           const send = function (envelope: EventEnvelope): void {
             push(

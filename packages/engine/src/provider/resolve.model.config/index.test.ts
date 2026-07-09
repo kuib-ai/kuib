@@ -5,7 +5,7 @@ const base = {
   baseURL: "http://localhost:11434/v1",
   apiKey: "ollama",
   modelID: "gemma3:12b",
-  anthropicApiKey: undefined,
+  anthropicApiKey: undefined as string | undefined,
 };
 
 describe("resolveModelConfig", () => {

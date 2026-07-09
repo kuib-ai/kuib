@@ -53,7 +53,13 @@ describe("wireframe picker", () => {
   it("renders the first wireframe with its file path and flips with l/h", async () => {
     const { renderer, mockInput, waitForFrame, captureCharFrame } =
       await testRender(
-        () => <PickerHarness wireframes={fixtures} onQuit={() => {}} />,
+        () => (
+          <PickerHarness
+            workspaceRoot="/"
+            wireframes={fixtures}
+            onQuit={() => {}}
+          />
+        ),
         { width: 110, height: 24 },
       );
 
@@ -78,7 +84,13 @@ describe("wireframe picker", () => {
 
   it("clamps navigation at list boundaries", async () => {
     const { renderer, mockInput, waitForFrame } = await testRender(
-      () => <PickerHarness wireframes={fixtures} onQuit={() => {}} />,
+      () => (
+        <PickerHarness
+          workspaceRoot="/"
+          wireframes={fixtures}
+          onQuit={() => {}}
+        />
+      ),
       { width: 110, height: 24 },
     );
 
@@ -98,6 +110,7 @@ describe("wireframe picker", () => {
     const { renderer, waitForFrame } = await testRender(
       () => (
         <PickerHarness
+          workspaceRoot="/"
           wireframes={wireframes()}
           focus={focus()}
           onQuit={() => {}}
@@ -128,7 +141,13 @@ describe("wireframe picker", () => {
     const [wireframes, setWireframes] = createSignal(fixtures);
 
     const { renderer, mockInput, waitForFrame } = await testRender(
-      () => <PickerHarness wireframes={wireframes()} onQuit={() => {}} />,
+      () => (
+        <PickerHarness
+          workspaceRoot="/"
+          wireframes={wireframes()}
+          onQuit={() => {}}
+        />
+      ),
       { width: 110, height: 24 },
     );
 
@@ -152,7 +171,13 @@ describe("wireframe picker", () => {
     };
 
     const { renderer, waitForFrame, captureCharFrame } = await testRender(
-      () => <PickerHarness wireframes={[wide]} onQuit={() => {}} />,
+      () => (
+        <PickerHarness
+          workspaceRoot="/"
+          wireframes={[wide]}
+          onQuit={() => {}}
+        />
+      ),
       { width: 110, height: 24 },
     );
 
@@ -167,6 +192,7 @@ describe("wireframe picker", () => {
     const { renderer, mockInput, waitFor } = await testRender(
       () => (
         <PickerHarness
+          workspaceRoot="/"
           wireframes={fixtures}
           onQuit={() => {
             quits++;
@@ -186,7 +212,13 @@ describe("wireframe picker", () => {
   it("toggles the left pane with <leader>p", async () => {
     const { renderer, mockInput, renderOnce, waitForFrame, captureCharFrame } =
       await testRender(
-        () => <PickerHarness wireframes={fixtures} onQuit={() => {}} />,
+        () => (
+          <PickerHarness
+            workspaceRoot="/"
+            wireframes={fixtures}
+            onQuit={() => {}}
+          />
+        ),
         { width: 110, height: 24 },
       );
 
@@ -219,7 +251,13 @@ describe("wireframe picker", () => {
 
     const { renderer, mockInput, renderOnce, waitForFrame, captureCharFrame } =
       await testRender(
-        () => <PickerHarness wireframes={[tall]} onQuit={() => {}} />,
+        () => (
+          <PickerHarness
+            workspaceRoot="/"
+            wireframes={[tall]}
+            onQuit={() => {}}
+          />
+        ),
         { width: 110, height: 24 },
       );
 

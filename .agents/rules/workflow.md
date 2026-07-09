@@ -81,3 +81,10 @@ When significant decisions or insights emerge from a conversation:
 - Format: `feat/fix/chore/docs: <short message>`
 - Never mention AI/Claude in commits
 - Never push without explicit user instruction
+
+## Code Quality & Command Running
+
+- **Crucial Rule**: You must always ensure that the codebase is completely green before ending your task.
+- Run `pnpm run check` from the workspace root to execute typechecking, linting, and formatting (cached via Nx) across the monorepo.
+- If you create a new package, ensure it includes `"lint": "eslint ."` and `"format": "prettier --write ."` in its `package.json` so it participates in the `nx run-many` caching loop.
+- Never silently ignore type errors or lint failures. Fix them.

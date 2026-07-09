@@ -2,21 +2,21 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { config as loadDotenv } from "dotenv";
-import EnvSchema from "../env.schema";
-import type { Env } from "../env.schema";
 import findWorkspaceRoot from "../workspace.root";
+import type { ZodTypeAny, z } from "zod";
 
-const bootstrapEnv = function (
+const bootstrapEnv = function <T extends ZodTypeAny>(
+  schema: T,
   mode: string = process.env["NODE_ENV"] ?? "development",
-): Env {
+): z.infer<T> {
   const root = findWorkspaceRoot(process.cwd());
   const candidates = [resolve(root, ".env"), resolve(root, `.env.${mode}`)];
   for (const path of candidates) {
     if (existsSync(path)) {
-      loadDotenv({ path, override: true });
+      loadDotenv({ path, override: true, quiet: true });
     }
   }
-  return EnvSchema.parse(process.env);
+  return schema.parse(process.env);
 };
 
 export default bootstrapEnv;

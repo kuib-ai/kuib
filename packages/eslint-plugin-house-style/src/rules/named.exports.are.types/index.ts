@@ -33,6 +33,16 @@ const namedExportsAreTypes = createRule<[], MessageIds>({
     return {
       ExportNamedDeclaration(node) {
         if (node.declaration === null) {
+          if (node.exportKind === "type") {
+            return;
+          }
+
+          for (const specifier of node.specifiers) {
+            if (specifier.exportKind === "type") {
+              continue;
+            }
+            context.report({ node: specifier, messageId: "mustBeDefault" });
+          }
           return;
         }
 

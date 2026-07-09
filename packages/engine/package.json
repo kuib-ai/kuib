@@ -1,7 +1,7 @@
 {
   "name": "@kuib-ai/engine",
   "version": "0.0.1",
-  "description": "kuib engine — agent loop, event log, daemon dispatch",
+  "description": "kuib engine \u2014 agent loop, event log, daemon dispatch",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -10,7 +10,9 @@
     }
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@ai-sdk/anthropic": "catalog:",

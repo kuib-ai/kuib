@@ -1,7 +1,7 @@
 {
   "name": "@kuib-ai/protocol",
   "version": "0.0.1",
-  "description": "kuib protocol — schemas, events, and interfaces",
+  "description": "kuib protocol \u2014 schemas, events, and interfaces",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -10,7 +10,9 @@
     }
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "zod": "catalog:"

@@ -61,7 +61,7 @@ const startEngineService = function (
     }
     sockets.clear();
     await new Promise<void>((res) => server.close(() => res()));
-    await Std.asyncWithError(
+    await Std.withError(
       Promise.resolve().then(() => unlinkSync(params.socketPath)),
     );
   };
@@ -93,7 +93,7 @@ const startEngineService = function (
   };
 
   const handleFrame = async function (line: string): Promise<void> {
-    const [parseErr, raw] = await Std.asyncWithError(
+    const [parseErr, raw] = await Std.withError(
       Promise.resolve().then(() => JSON.parse(line)),
     );
     if (parseErr) {
@@ -119,7 +119,7 @@ const startEngineService = function (
       clearReapTimer();
       let prompt: string | undefined = msg.prompt;
       while (prompt !== undefined) {
-        const [runErr] = await Std.asyncWithError(
+        const [runErr] = await Std.withError(
           params.runTurn({
             sessionID: msg.sessionID,
             prompt,
@@ -177,7 +177,7 @@ const startEngineService = function (
         });
         probe.once("error", () => {
           void (async () => {
-            await Std.asyncWithError(
+            await Std.withError(
               Promise.resolve().then(() => unlinkSync(params.socketPath)),
             );
             server.listen(params.socketPath);

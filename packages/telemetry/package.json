@@ -1,7 +1,7 @@
 {
   "name": "@kuib-ai/telemetry",
   "version": "0.0.1",
-  "description": "kuib telemetry — OpenTelemetry span export for the AI SDK to Phoenix",
+  "description": "kuib telemetry \u2014 OpenTelemetry span export for the AI SDK to Phoenix",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -10,7 +10,9 @@
     }
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@ai-sdk/otel": "catalog:",

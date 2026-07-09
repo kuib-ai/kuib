@@ -1,7 +1,7 @@
 {
   "name": "@kuib-ai/tools",
   "version": "0.0.1",
-  "description": "kuib tool definitions — single source of truth, backed by protocol interfaces",
+  "description": "kuib tool definitions \u2014 single source of truth, backed by protocol interfaces",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -10,7 +10,9 @@
     }
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@kuib-ai/protocol": "workspace:*",

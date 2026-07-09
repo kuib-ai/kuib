@@ -1,32 +1,36 @@
-import { createSignal, type Signal } from "solid-js";
+// @context @journal/ux-iteration-process
+import { createSignal, type Signal, type Setter } from "solid-js";
+import Std from "@kuib-ai/std";
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 
-export function createPersistentSignal<T>(
+const createPersistentSignal = function <T>(
   filePath: string,
   initialValue: T,
 ): Signal<T> {
   let initial = initialValue;
-  try {
-    const raw = readFileSync(filePath, "utf-8");
-    initial = JSON.parse(raw);
-  } catch (e) {
-    // File doesn't exist or is invalid, fallback to initialValue
+  const [readErr, raw] = Std.withError(() => readFileSync(filePath, "utf-8"));
+  if (!readErr) {
+    const [parseErr, parsed] = Std.withError(() => JSON.parse(raw) as T);
+    if (!parseErr) {
+      initial = parsed;
+    }
   }
 
   const [state, setState] = createSignal<T>(initial);
 
-  const setPersistentState = (next: any) => {
-    const nextValue = typeof next === "function" ? next(state()) : next;
-    setState(nextValue);
-    try {
+  const setPersistentState = function (next: T | ((prev: T) => T)): T {
+    const nextValue =
+      typeof next === "function" ? (next as (prev: T) => T)(state()) : next;
+    setState(() => nextValue);
+    Std.withError(() => {
       mkdirSync(dirname(filePath), { recursive: true });
       writeFileSync(filePath, JSON.stringify(nextValue));
-    } catch (e) {
-      // Ignore write errors
-    }
+    });
     return nextValue;
   };
 
-  return [state, setPersistentState as any];
-}
+  return [state, setPersistentState as Setter<T>];
+};
+
+export default createPersistentSignal;

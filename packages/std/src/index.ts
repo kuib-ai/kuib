@@ -1,8 +1,9 @@
 // @context @journal/house-style-linting
-import asyncWithError from "./async.with.error";
+import withError, { type Result } from "./with.error";
 
 const Std = {
-  asyncWithError,
+  withError,
 };
 
 export default Std;
+export type { Result };

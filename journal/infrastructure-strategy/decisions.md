@@ -47,7 +47,7 @@ Security/hardening is deliberately **light for v1** (acknowledged, not yet built
 
 ### Detailed build roadmap (2026-07-01)
 
-**Done (foundation, tsc + lint + 12 tests green):** `@kuib-ai/protocol` (Zod state + event schemas, `_version`/`(epoch,seq)`), `@kuib-ai/std` (`asyncWithError`), `@kuib-ai/env` (config bootstrap), `@kuib-ai/daemon` (tRPC executor, user-scoped, `.output()`-validated, tuple errors), `@kuib-ai/engine` (in-memory `EventLogPort`, HTTP `DaemonClient`/`TransportFactory`, orchestrator emitting events, config-driven provider). Connect/proto + hardcoded provider fully removed.
+**Done (foundation, tsc + lint + 12 tests green):** `@kuib-ai/protocol` (Zod state + event schemas, `_version`/`(epoch,seq)`), `@kuib-ai/std` (`withError`), `@kuib-ai/env` (config bootstrap), `@kuib-ai/daemon` (tRPC executor, user-scoped, `.output()`-validated, tuple errors), `@kuib-ai/engine` (in-memory `EventLogPort`, HTTP `DaemonClient`/`TransportFactory`, orchestrator emitting events, config-driven provider). Connect/proto + hardcoded provider fully removed.
 
 **v1 (single-device, no mesh/consensus):**
 

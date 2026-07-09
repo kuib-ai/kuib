@@ -145,7 +145,7 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
     }
   };
 
-  const [streamError] = await Std.asyncWithError(consume());
+  const [streamError] = await Std.withError(consume());
   if (streamError) {
     await emit({
       type: Protocol.Event.EventTypeEnum.TEXT_DELTA,

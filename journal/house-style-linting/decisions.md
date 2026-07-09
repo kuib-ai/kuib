@@ -26,7 +26,7 @@ The author's cleanest hand-written code. Conventions:
 - **C1** the unit is `export default`; named exports must be types/interfaces/enums.
 - **C2** units are `const x = function (...) {}` — never `function foo(){}` declarations, never arrows (allows generic `function <T>`). React/Solid components too.
 - **C3** strict equality; loose/truthy only in direct boolean checks (`if (data)`).
-- **C4** no `try/catch` — errors handled explicitly via Go-style tuple helper (`const [err, val] = await asyncWithError(...)`). Override via `eslint-disable`.
+- **C4** no `try/catch` — errors handled explicitly via Go-style tuple helper (`const [err, val] = await withError(...)`). Override via `eslint-disable`.
 - **C5** labeled blocks (`Label: { … break Label; }`) are an intentional construct — `no-labels` stays OFF.
 - **C6** **zero comments.** The only allowed comments are `@context` links and `eslint-disable`/`ts-` directives. Code is self-explanatory by style.
 
@@ -80,7 +80,7 @@ Author is fine with the current config (within-package relative + `@kuib-ai/<pkg
 
 - **All house rules are now `error`** (was `warn`). Flipping surfaced **zero** violations beyond relative-imports — the codebase was already clean on every other rule.
 - **Rule config lives in the plugin**, not `eslint.config.ts`: the plugin exports `configs.recommended` (custom `house/*` rules + reused built-ins `func-style`/`eqeqeq`/`no-restricted-imports`/`no-restricted-syntax`/`no-unused-vars`, all `error`); `eslint.config.ts` just does `rules: houseStylePlugin.configs.recommended.rules`.
-- **The plugin dogfoods itself** — removed from the ignore list; `@context` added to every rule file; plugin typecheck + `eslint .` green. It uses `@typescript-eslint/utils` + `node:path` (the right tools); it correctly does **not** depend on `@kuib-ai/std` (rules are synchronous, so `asyncWithError` doesn't apply).
+- **The plugin dogfoods itself** — removed from the ignore list; `@context` added to every rule file; plugin typecheck + `eslint .` green. It uses `@typescript-eslint/utils` + `node:path` (the right tools); it correctly does **not** depend on `@kuib-ai/std` (rules are synchronous, so `withError` doesn't apply).
 - **Circular-dependency detection via `madge`** — `pnpm check:circular` (`madge --circular --extensions ts,tsx packages apps`); currently **0 cycles** across 143 files. This is the real guard against barrel cycles, independent of import path style.
 
 ## Open Questions — Solid-JSX linting bucket (deferred)

@@ -2,7 +2,7 @@
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { mkdirSync } from "node:fs";
-import findWorkspaceRoot from "../workspace.root";
+import Env from "@kuib-ai/env";
 
 const resolveDbPath = function (configured?: string): string {
   if (configured) {
@@ -14,7 +14,7 @@ const resolveDbPath = function (configured?: string): string {
           process.env["XDG_DATA_HOME"] ?? join(homedir(), ".local", "share"),
           "kuib",
         )
-      : join(findWorkspaceRoot(process.cwd()), "dist");
+      : join(Env.findWorkspaceRoot(process.cwd()), "dist");
   mkdirSync(base, { recursive: true });
   return join(base, "kuib.db");
 };

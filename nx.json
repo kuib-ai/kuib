@@ -5,6 +5,14 @@
     "typecheck": {
       "cache": true,
       "inputs": ["default", "^default"]
+    },
+    "lint": {
+      "cache": true,
+      "inputs": ["default"]
+    },
+    "format": {
+      "cache": true,
+      "inputs": ["default"]
     }
   }
 }

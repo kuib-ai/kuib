@@ -6,6 +6,8 @@ import ensureDaemon from "./ensure.daemon";
 import ensureLocalDaemon from "./ensure.local.daemon";
 import resolveDaemonEndpoint from "./resolve.daemon.endpoint";
 import resolveDaemonSocketPath from "./daemon.socket.path";
+import resolveNodeLabel from "./resolve.node.label";
+import resolveMeshConfigPath from "./resolve.mesh.config.path";
 
 const Daemon = {
   daemonRouter,
@@ -15,6 +17,8 @@ const Daemon = {
   ensureLocalDaemon,
   resolveDaemonEndpoint,
   resolveDaemonSocketPath,
+  resolveNodeLabel,
+  resolveMeshConfigPath,
 };
 
 export default Daemon;

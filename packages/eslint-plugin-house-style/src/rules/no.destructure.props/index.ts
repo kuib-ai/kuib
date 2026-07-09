@@ -25,6 +25,10 @@ const returnsJsx = function (fn: FunctionNode): boolean {
 
   const stack: TSESTree.Node[] = [...body.body];
 
+  const isNode = function (val: unknown): val is TSESTree.Node {
+    return !!val && typeof (val as Record<string, unknown>).type === "string";
+  };
+
   while (stack.length > 0) {
     const current = stack.pop();
     if (!current || typeof current.type !== "string") {
@@ -46,22 +50,21 @@ const returnsJsx = function (fn: FunctionNode): boolean {
       continue;
     }
 
-    for (const key of Object.keys(current)) {
+    for (const key of Object.keys(current) as (keyof TSESTree.Node)[]) {
       if (key === "parent") {
         continue;
       }
-      // eslint-disable-next-line no-restricted-syntax
-      const value = (current as unknown as Record<string, unknown>)[key];
+      const value = current[key];
       if (Array.isArray(value)) {
         for (const item of value) {
-          if (item && typeof (item as TSESTree.Node).type === "string") {
-            stack.push(item as TSESTree.Node);
+          if (isNode(item)) {
+            stack.push(item);
           }
         }
         continue;
       }
-      if (value && typeof (value as TSESTree.Node).type === "string") {
-        stack.push(value as TSESTree.Node);
+      if (isNode(value)) {
+        stack.push(value);
       }
     }
   }

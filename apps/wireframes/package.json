@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "bun run --watch ./src src/index.tsx",
     "typecheck": "tsc --noEmit",
-    "test": "bun test"
+    "test": "bun test",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@kuib-ai/env": "workspace:*",
+    "@kuib-ai/std": "workspace:*",
     "@opentui/core": "catalog:",
     "@opentui/keymap": "catalog:",
     "@opentui/solid": "catalog:",

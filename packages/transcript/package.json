@@ -1,7 +1,7 @@
 {
   "name": "@kuib-ai/transcript",
   "version": "0.0.1",
-  "description": "kuib transcript fold — event log → display entries, shared by host adapters",
+  "description": "kuib transcript fold \u2014 event log \u2192 display entries, shared by host adapters",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -10,7 +10,9 @@
     }
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@kuib-ai/protocol": "workspace:*"

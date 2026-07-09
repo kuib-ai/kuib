@@ -11,7 +11,9 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "start": "bun run src/start.daemon/index.ts"
+    "start": "bun run src/start.daemon/index.ts",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@kuib-ai/env": "workspace:*",

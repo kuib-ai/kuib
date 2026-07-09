@@ -3,8 +3,8 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { mkdtempSync } from "node:fs";
-import findWorkspaceRoot from "../workspace.root";
-import resolveDbPath from ".";
+import Env from "@kuib-ai/env";
+import resolveDbPath from "./index";
 
 describe("resolveDbPath", () => {
   it("returns the configured path verbatim without touching env", () => {
@@ -35,7 +35,7 @@ describe("resolveDbPath", () => {
 
     process.env["NODE_ENV"] = prevNodeEnv;
 
-    const dist = join(findWorkspaceRoot(process.cwd()), "dist");
+    const dist = join(Env.findWorkspaceRoot(process.cwd()), "dist");
     expect(result).toBe(join(dist, "kuib.db"));
     expect(existsSync(dist)).toBe(true);
   });

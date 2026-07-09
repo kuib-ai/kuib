@@ -11,7 +11,7 @@ const writeFileProcedure = Trpc.procedure
   .input(WriteFileInput)
   .output(WriteFileOutput)
   .mutation(async ({ input }) => {
-    const [error] = await Std.asyncWithError(
+    const [error] = await Std.withError(
       writeFile(expandHomePath(input.path), input.content),
     );
     if (error) {

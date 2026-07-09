@@ -7,9 +7,12 @@
     "dev": "bun run src/index.tsx",
     "dev:watch": "bun --watch --no-clear-screen run src/index.tsx",
     "typecheck": "tsc --noEmit",
-    "test": "bun test"
+    "test": "bun test",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "@kuib-ai/cli": "workspace:*",
     "@kuib-ai/daemon": "workspace:*",
     "@kuib-ai/engine": "workspace:*",
     "@kuib-ai/engine-service": "workspace:*",
@@ -20,7 +23,8 @@
     "@kuib-ai/transcript": "workspace:*",
     "@opentui/core": "catalog:",
     "@opentui/solid": "catalog:",
-    "solid-js": "catalog:"
+    "solid-js": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@kuib-ai/tsconfig": "workspace:*",

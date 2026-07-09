@@ -13,7 +13,7 @@ type ResolveModelConfigParams = {
 const resolveModelConfig = function (
   params: ResolveModelConfigParams,
 ): ModelConfig {
-  if (params.model === undefined) {
+  if (params.model === undefined || params.model.length === 0) {
     return Protocol.Provider.ModelConfig.parse({
       npm: "@ai-sdk/openai-compatible",
       modelID: params.modelID,

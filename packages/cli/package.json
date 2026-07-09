@@ -1,7 +1,7 @@
 {
-  "name": "@kuib-ai/event-log-sqlite",
+  "name": "@kuib-ai/cli",
   "version": "0.0.1",
-  "description": "kuib event log \u2014 bun:sqlite adapter (Bun-quarantined)",
+  "description": "kuib lightweight cli parser and help generator",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -11,16 +11,15 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "bun test",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@kuib-ai/env": "workspace:*",
-    "@kuib-ai/protocol": "workspace:*"
+    "@kuib-ai/std": "workspace:*"
   },
   "devDependencies": {
     "@kuib-ai/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
     "bun-types": "catalog:"
   }
 }

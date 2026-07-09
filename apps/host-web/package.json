@@ -8,7 +8,9 @@
     "web": "vite build && bun run src/server/index.ts",
     "serve": "bun run src/server/index.ts",
     "dev": "KUIB_WEB_DEV=1 concurrently -k \"bun run src/server/index.ts\" \"vite\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@kuib-ai/daemon": "workspace:*",
@@ -16,9 +18,11 @@
     "@kuib-ai/env": "workspace:*",
     "@kuib-ai/event-log-sqlite": "workspace:*",
     "@kuib-ai/protocol": "workspace:*",
+    "@kuib-ai/std": "workspace:*",
     "@kuib-ai/telemetry": "workspace:*",
     "@kuib-ai/transcript": "workspace:*",
-    "solid-js": "catalog:"
+    "solid-js": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@kuib-ai/tsconfig": "workspace:*",

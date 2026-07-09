@@ -10,7 +10,7 @@ const readFileProcedure = Trpc.procedure
   .input(Protocol.FileSystem.ReadFileInput)
   .output(Protocol.FileSystem.ReadFileOutput)
   .query(async ({ input }) => {
-    const [error, content] = await Std.asyncWithError(
+    const [error, content] = await Std.withError(
       readFile(expandHomePath(input.path), "utf8"),
     );
     if (error) {

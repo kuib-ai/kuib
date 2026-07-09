@@ -1,7 +1,7 @@
 {
   "name": "@kuib-ai/engine-service",
   "version": "0.0.1",
-  "description": "kuib engine-service — process host for the agent loop (Bun-quarantined)",
+  "description": "kuib engine-service \u2014 process host for the agent loop (Bun-quarantined)",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -11,7 +11,9 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "bun test"
+    "test": "bun test",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@kuib-ai/engine": "workspace:*",
