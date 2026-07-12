@@ -24,9 +24,7 @@ const main = async function (): Promise<void> {
   });
 
   if (parsed === null) {
-    throw Std.build(Protocol.Error.ErrorConfigInvalid, {
-      message: "please use the correct options",
-    });
+    return;
   }
 
   const dbPath = env.KUIB_DB_PATH;
