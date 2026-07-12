@@ -8,6 +8,20 @@ type ResolveModelConfigParams = {
   apiKey: string;
   modelID: string;
   anthropicApiKey: string | undefined;
+  groqApiKey: string | undefined;
+};
+
+const requireKey = function (
+  key: string | undefined,
+  envName: string,
+  providerID: string,
+): string {
+  if (key === undefined || key.length === 0) {
+    throw new Error(
+      `${envName} is required when KUIB_MODEL selects the ${providerID} provider`,
+    );
+  }
+  return key;
 };
 
 const resolveModelConfig = function (
@@ -15,9 +29,11 @@ const resolveModelConfig = function (
 ): ModelConfig {
   if (params.model === undefined || params.model.length === 0) {
     return Protocol.Provider.ModelConfig.parse({
-      npm: "@ai-sdk/openai-compatible",
+      npm: "@ai-sdk/groq",
       modelID: params.modelID,
-      options: { baseURL: params.baseURL, apiKey: params.apiKey },
+      options: {
+        apiKey: requireKey(params.groqApiKey, "KUIB_GROQ_API_KEY", "groq"),
+      },
     });
   }
   const separator = params.model.indexOf("/");
@@ -28,19 +44,26 @@ const resolveModelConfig = function (
   }
   const providerID = params.model.slice(0, separator);
   const modelID = params.model.slice(separator + 1);
+  if (providerID === "groq") {
+    return Protocol.Provider.ModelConfig.parse({
+      npm: "@ai-sdk/groq",
+      modelID,
+      options: {
+        apiKey: requireKey(params.groqApiKey, "KUIB_GROQ_API_KEY", "groq"),
+      },
+    });
+  }
   if (providerID === "anthropic") {
-    if (
-      params.anthropicApiKey === undefined ||
-      params.anthropicApiKey.length === 0
-    ) {
-      throw new Error(
-        "KUIB_ANTHROPIC_API_KEY is required when KUIB_MODEL selects the anthropic provider",
-      );
-    }
     return Protocol.Provider.ModelConfig.parse({
       npm: "@ai-sdk/anthropic",
       modelID,
-      options: { apiKey: params.anthropicApiKey },
+      options: {
+        apiKey: requireKey(
+          params.anthropicApiKey,
+          "KUIB_ANTHROPIC_API_KEY",
+          "anthropic",
+        ),
+      },
     });
   }
   if (providerID === "openai-compatible") {
@@ -51,7 +74,7 @@ const resolveModelConfig = function (
     });
   }
   throw new Error(
-    `unknown provider in KUIB_MODEL: ${providerID} (supported: anthropic, openai-compatible)`,
+    `unknown provider in KUIB_MODEL: ${providerID} (supported: groq, anthropic, openai-compatible)`,
   );
 };
 

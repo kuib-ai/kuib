@@ -6,7 +6,7 @@
     "format:modified": "prettier --write $(git ls-files --others --exclude-standard --modified)",
     "format:all": "prettier --write .",
     "lint:all": "eslint",
-    "check": "nx run-many -t typecheck lint format",
+    "check": "nx run-many --parallel=10 -t typecheck lint format",
     "check:circular": "madge --circular --extensions ts,tsx packages apps",
     "typecheck": "nx run-many -t typecheck --output-style=stream",
     "test": "bun test packages apps",

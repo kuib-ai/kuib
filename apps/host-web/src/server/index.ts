@@ -82,6 +82,7 @@ const main = async function (): Promise<void> {
     apiKey: env.KUIB_MODEL_API_KEY,
     modelID: env.KUIB_MODEL_ID,
     anthropicApiKey: env.KUIB_ANTHROPIC_API_KEY,
+    groqApiKey: env.KUIB_GROQ_API_KEY,
   });
   const model = Engine.Provider.createModel(modelConfig);
   const daemonEndpoint = await Daemon.resolveDaemonEndpoint(

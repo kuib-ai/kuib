@@ -1,7 +1,7 @@
 import { describe, it, expect } from "bun:test";
 import { z } from "zod";
 import Tools from "@kuib-ai/tools";
-import type { ToolContext } from "@kuib-ai/tools";
+import type { ToolContext } from "@kuib-ai/tools/tool.spec";
 import buildTools from "./index";
 
 const ctx: ToolContext = {

@@ -11,9 +11,10 @@ const WebEnvSchema = z.object({
   KUIB_DB_PATH: z.string().default(() => EventLogSqlite.resolveDbPath()),
   KUIB_WEB_TAILSCALE_IP: z.string().optional(),
   KUIB_MODEL: z.string().optional(),
-  KUIB_MODEL_BASE_URL: z.url().default("http://minerva:11434/v1"),
+  KUIB_MODEL_BASE_URL: z.url().default("http://localhost:11434/v1"),
   KUIB_MODEL_API_KEY: z.string().default("ollama"),
-  KUIB_MODEL_ID: z.string().default("gemma4:12b"),
+  KUIB_MODEL_ID: z.string().default("llama-3.3-70b-versatile"),
+  KUIB_GROQ_API_KEY: z.string().optional(),
   KUIB_ANTHROPIC_API_KEY: z.string().optional(),
   KUIB_DAEMON_URL: z.url().optional(),
   KUIB_DAEMON_SOCKET: z

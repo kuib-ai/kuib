@@ -1,6 +1,7 @@
 // @context @journal/provider-architecture
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { createAnthropic } from "@ai-sdk/anthropic";
+import { createGroq } from "@ai-sdk/groq";
 import type { LanguageModel } from "ai";
 import type { ModelConfig } from "@kuib-ai/protocol/provider/model.config";
 
@@ -24,9 +25,15 @@ const anthropicFactory: ModelFactory = function (config) {
   return provider(config.modelID);
 };
 
+const groqFactory: ModelFactory = function (config) {
+  const provider = createGroq({ ...config.options });
+  return provider(config.modelID);
+};
+
 const FACTORIES: Record<string, ModelFactory> = {
   "@ai-sdk/openai-compatible": openAICompatibleFactory,
   "@ai-sdk/anthropic": anthropicFactory,
+  "@ai-sdk/groq": groqFactory,
 };
 
 const createModel = function (config: ModelConfig): LanguageModel {

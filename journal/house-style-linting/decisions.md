@@ -23,7 +23,7 @@ The author's cleanest hand-written code. Conventions:
 - **S2** each unit is `index.ts`/`index.tsx` in its own directory; the directory name is the unit name.
 - **S3** directory/file names are **dot.case** (`is.active`, `theme.toggle`). Exempt: `index`, `*.slice`, `*.middleware`, `deprecated`, `*.d`.
 - **S4** pure-module barrels compose a **namespace object** (default-exported), never `export *`. (Component/service barrel conventions for Solid are still OPEN.)
-- **C1** the unit is `export default`; named exports must be types/interfaces/enums.
+- **C1** the unit is `export default`; named exports must be types/interfaces/enums. **Package/app root barrels are stricter:** only `export default` the namespace object — no named type re-exports. Types are imported from section subpaths (`@kuib-ai/cli/cli.schema`), never from the package root. Enforced by `no-package-barrel-named-exports` + `no-named-import-from-package-root`.
 - **C2** units are `const x = function (...) {}` — never `function foo(){}` declarations, never arrows (allows generic `function <T>`). React/Solid components too.
 - **C3** strict equality; loose/truthy only in direct boolean checks (`if (data)`).
 - **C4** no `try/catch` — errors handled explicitly via Go-style tuple helper (`const [err, val] = await withError(...)`). Override via `eslint-disable`.
@@ -37,7 +37,7 @@ The author's cleanest hand-written code. Conventions:
 Custom (in the plugin), all `error` (severity flipped from `warn` 2026-07-01):
 
 - `require-context-link` — each file must carry one `@context @journal/<entry>` → resolves to `journal/<entry>/decisions.md` (flat layout; the resolver walks up past the `kuib/` monorepo root to find the `journal/` dir, since the journal sits one level above). Flags missing / dead / stale (stale = the target ADR still contains the unfilled scaffolding placeholder token, i.e. `FEATURE_NAME` wrapped in double braces). Per-file granularity (synergy with S1).
-- `dot-case-filename` (S3) · `no-top-level-arrow` (C2, arrows) · `named-exports-are-types` (C1/S1) · `no-prose-comments` (C6) · `no-destructure-props` (Solid: destructuring props breaks reactivity — `.tsx` only, on JSX-returning functions) · `no-cross-package-relative` (bans relative imports that escape the `packages/*`/`apps/*` boundary — pure path math, no resolver; see RESOLVED section below).
+- `dot-case-filename` (S3) · `no-top-level-arrow` (C2, arrows) · `named-exports-are-types` (C1/S1) · `no-package-barrel-named-exports` / `no-named-import-from-package-root` (C1 barrel: default-only root, types via section subpaths) · `no-re-exports` (ban `export … from` / `export * from` — import the defining unit) · `no-prose-comments` (C6) · `no-destructure-props` (Solid: destructuring props breaks reactivity — `.tsx` only, on JSX-returning functions) · `no-cross-package-relative` (bans relative imports that escape the `packages/*`/`apps/*` boundary — pure path math, no resolver; see RESOLVED section below).
 
 Reused built-ins (per "reuse existing plugins"), all `error`:
 

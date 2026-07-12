@@ -9,6 +9,9 @@ import noCrossPackageRelative from "./rules/no.cross.package.relative/index.js";
 import namedUnionMembers from "./rules/named.union.members/index.js";
 import namedSchemaUnion from "./rules/named.schema.union/index.js";
 import preferGuardClauses from "./rules/prefer.guard.clauses/index.js";
+import noPackageBarrelNamedExports from "./rules/no.package.barrel.named.exports/index.js";
+import noNamedImportFromPackageRoot from "./rules/no.named.import.from.package.root/index.js";
+import noReExports from "./rules/no.re.exports/index.js";
 
 const rules = {
   "require-context-link": requireContextLink,
@@ -21,6 +24,9 @@ const rules = {
   "named-union-members": namedUnionMembers,
   "named-schema-union": namedSchemaUnion,
   "prefer-guard-clauses": preferGuardClauses,
+  "no-package-barrel-named-exports": noPackageBarrelNamedExports,
+  "no-named-import-from-package-root": noNamedImportFromPackageRoot,
+  "no-re-exports": noReExports,
 };
 
 const recommendedRules = {
@@ -34,6 +40,9 @@ const recommendedRules = {
   "house/named-union-members": "error",
   "house/named-schema-union": "error",
   "house/prefer-guard-clauses": "error",
+  "house/no-package-barrel-named-exports": "error",
+  "house/no-named-import-from-package-root": "error",
+  "house/no-re-exports": "error",
   "func-style": ["error", "expression"],
   eqeqeq: ["error", "always"],
   "no-labels": "off",

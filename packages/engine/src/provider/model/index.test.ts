@@ -25,6 +25,17 @@ describe("createModel", () => {
     expect(model).toBeDefined();
   });
 
+  it("builds a groq model from the factory map", () => {
+    const model = createModel(
+      Protocol.Provider.ModelConfig.parse({
+        npm: "@ai-sdk/groq",
+        modelID: "llama-3.3-70b-versatile",
+        options: { apiKey: "gsk-test" },
+      }),
+    );
+    expect(model).toBeDefined();
+  });
+
   it("throws on an unknown provider package", () => {
     expect(() =>
       createModel(

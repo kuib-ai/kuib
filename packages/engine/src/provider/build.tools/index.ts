@@ -1,6 +1,6 @@
 // @context @journal/tool-system
 import { tool, type Tool } from "ai";
-import type { ToolSpec, ToolContext } from "@kuib-ai/tools";
+import type { ToolSpec, ToolContext } from "@kuib-ai/tools/tool.spec";
 
 const buildTools = function (
   specs: readonly ToolSpec[],

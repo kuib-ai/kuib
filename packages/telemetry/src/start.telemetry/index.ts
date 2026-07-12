@@ -8,8 +8,6 @@ import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
 import { SEMRESATTRS_PROJECT_NAME } from "@arizeai/openinference-semantic-conventions";
 import { OpenInferenceSimpleSpanProcessor } from "@arizeai/openinference-vercel";
 
-const DEFAULT_SERVICE_NAME = "kuib-engine";
-
 type StartTelemetryConfig = {
   endpoint: string | undefined;
   serviceName: string | undefined;
@@ -19,7 +17,12 @@ const startTelemetry = function (config: StartTelemetryConfig): boolean {
   if (config.endpoint === undefined || config.endpoint.length === 0) {
     return false;
   }
-  const serviceName = config.serviceName ?? DEFAULT_SERVICE_NAME;
+  const serviceName = config.serviceName;
+
+  if (serviceName === undefined || serviceName.length === 0) {
+    throw new Error("serviceName is required");
+  }
+
   const exporter = new OTLPTraceExporter({
     url: `${config.endpoint}/v1/traces`,
   });

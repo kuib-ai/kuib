@@ -1,12 +1,4 @@
 {
   "mcpServers": {
-    "firecrawl": {
-      "command": "npx",
-      "args": ["-y", "firecrawl-mcp"],
-      "env": {
-        "FIRECRAWL_API_KEY": "test",
-        "FIRECRAWL_API_URL": "http://cornelius:3002"
-      }
-    }
   }
 }

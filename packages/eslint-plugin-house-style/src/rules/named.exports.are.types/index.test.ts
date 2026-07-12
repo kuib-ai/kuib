@@ -14,8 +14,7 @@ ruleTester.run("named-exports-are-types", rule, {
     "export interface I { a: number }",
     "export enum E { A }",
     "export namespace N {}",
-    "export { foo } from './x';",
-    "const v = 1; export { v };",
+    "export type { foo };",
   ],
   invalid: [
     {
@@ -24,6 +23,10 @@ ruleTester.run("named-exports-are-types", rule, {
     },
     {
       code: "export function f() {}",
+      errors: [{ messageId: "mustBeDefault" }],
+    },
+    {
+      code: "const v = 1; export { v };",
       errors: [{ messageId: "mustBeDefault" }],
     },
   ],

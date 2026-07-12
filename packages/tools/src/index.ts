@@ -1,11 +1,10 @@
 // @context @journal/tool-system
-import toolRegistry from "./tool.registry";
 import defineTool from "./tool.spec";
+import readFile from "./read.file";
 
 const Tools = {
-  registry: toolRegistry,
   defineTool,
+  readFile,
 };
 
 export default Tools;
-export type { ToolSpec, ToolContext, ToolDefinition } from "./tool.spec";

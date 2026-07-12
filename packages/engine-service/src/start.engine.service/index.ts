@@ -117,18 +117,20 @@ const startEngineService = function (
       state.running = true;
       activeRuns++;
       clearReapTimer();
-      let prompt: string | undefined = msg.prompt;
-      while (prompt !== undefined) {
-        const [runErr] = await Std.withError(
-          params.runTurn({
-            sessionID: msg.sessionID,
-            prompt,
-            takePending: () => state.pending.splice(0),
-          }),
-        );
-        void runErr;
-        prompt = state.pending.shift();
-      }
+      await Std.withScope({ sessionID: msg.sessionID }, async () => {
+        let prompt: string | undefined = msg.prompt;
+        while (prompt !== undefined) {
+          const [runErr] = await Std.withError(
+            params.runTurn({
+              sessionID: msg.sessionID,
+              prompt,
+              takePending: () => state.pending.splice(0),
+            }),
+          );
+          void runErr;
+          prompt = state.pending.shift();
+        }
+      });
       state.running = false;
       activeRuns--;
       maybeReap();

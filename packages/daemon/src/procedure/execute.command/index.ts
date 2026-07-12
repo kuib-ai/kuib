@@ -19,15 +19,10 @@ const executeCommand = Trpc.procedure
       }),
     );
     if (error) {
-      const execError = error as Error & {
-        code?: number;
-        stdout?: string;
-        stderr?: string;
-      };
       return {
-        stdout: execError.stdout ?? "",
-        stderr: execError.stderr ?? error.message,
-        exitCode: execError.code ?? 1,
+        stdout: String(error.details?.stdout ?? ""),
+        stderr: String(error.details?.stderr ?? error.message),
+        exitCode: Number(error.details?.code ?? 1),
       };
     }
     return { stdout: result.stdout, stderr: result.stderr, exitCode: 0 };
