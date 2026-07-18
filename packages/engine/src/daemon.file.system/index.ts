@@ -7,6 +7,9 @@ const createDaemonFileSystem = function (client: DaemonClient): FileSystemPort {
     readFile: function (input) {
       return client.readFile.query(input);
     },
+    readDir: function (input) {
+      return client.readDir.query(input);
+    },
   };
 };
 

@@ -7,7 +7,7 @@ import { join, dirname } from "node:path";
 import { spawnSync } from "node:child_process";
 
 const repoRoot = join(dirname(new URL(import.meta.url).pathname), "..");
-const distDir = join(repoRoot, "dist");
+const runtimeDir = join(repoRoot, "dist", "runtime", "kuib");
 
 const patterns = ["start.daemon", "index.tsx serve", "server/index.ts serve"];
 for (const pattern of patterns) {
@@ -16,9 +16,9 @@ for (const pattern of patterns) {
 
 const sockets = ["daemon.sock", "engine.sock"];
 for (const name of sockets) {
-  rmSync(join(distDir, name), { force: true });
+  rmSync(join(runtimeDir, name), { force: true });
 }
 
 process.stdout.write(
-  `kuib reloaded — killed daemon/engine-service, cleared ${distDir}/{${sockets.join(",")}}\n`,
+  `kuib reloaded — killed daemon/engine-service, cleared ${runtimeDir}/{${sockets.join(",")}}\n`,
 );

@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@kuib-ai/cli": "workspace:*",
+    "@kuib-ai/config": "workspace:*",
     "@kuib-ai/daemon": "workspace:*",
     "@kuib-ai/engine": "workspace:*",
     "@kuib-ai/engine-service": "workspace:*",
-    "@kuib-ai/env": "workspace:*",
     "@kuib-ai/event-log-sqlite": "workspace:*",
     "@kuib-ai/protocol": "workspace:*",
     "@kuib-ai/std": "workspace:*",
@@ -24,8 +24,7 @@
     "@kuib-ai/transcript": "workspace:*",
     "@opentui/core": "catalog:",
     "@opentui/solid": "catalog:",
-    "solid-js": "catalog:",
-    "zod": "catalog:"
+    "solid-js": "catalog:"
   },
   "devDependencies": {
     "@kuib-ai/tsconfig": "workspace:*",

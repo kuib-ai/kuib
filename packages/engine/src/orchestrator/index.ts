@@ -55,7 +55,9 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
     });
 
     const fileSystem = createDaemonFileSystem(daemonClient);
-    const tools = Provider.buildTools([Tools.readFile], { fs: fileSystem });
+    const tools = Provider.buildTools([Tools.readFile, Tools.readDir], {
+      fs: fileSystem,
+    });
 
     const messages = buildMessages(eventLog, sessionID);
 

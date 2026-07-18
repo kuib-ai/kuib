@@ -52,4 +52,20 @@ describe("bootstrapEnv", () => {
 
     expect(() => bootstrapEnv(TestSchema, "test")).toThrow();
   });
+
+  it("keeps OS environment above mode and base dotenv files", () => {
+    writeFileSync(resolve(workspace, ".env"), "KUIB_SESSION_ID=base\n");
+    writeFileSync(resolve(workspace, ".env.test"), "KUIB_SESSION_ID=mode\n");
+    process.env["KUIB_SESSION_ID"] = "os";
+
+    expect(bootstrapEnv(TestSchema, "test").KUIB_SESSION_ID).toBe("os");
+  });
+
+  it("keeps the mode dotenv file above the base dotenv file", () => {
+    writeFileSync(resolve(workspace, ".env"), "KUIB_SESSION_ID=base\n");
+    writeFileSync(resolve(workspace, ".env.test"), "KUIB_SESSION_ID=mode\n");
+    delete process.env["KUIB_SESSION_ID"];
+
+    expect(bootstrapEnv(TestSchema, "test").KUIB_SESSION_ID).toBe("mode");
+  });
 });

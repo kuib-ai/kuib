@@ -14,6 +14,7 @@ depends-on:
   ]
 informs:
   [
+    "[[application-directories]]",
     "[[context-bootstrap]]",
     "[[discussions-ux]]",
     "[[nvim-integration]]",

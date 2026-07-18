@@ -3,35 +3,44 @@
 import Engine from "@kuib-ai/engine";
 import EngineService from "@kuib-ai/engine-service";
 import EventLogSqlite from "@kuib-ai/event-log-sqlite";
+import type { BootstrapConfig } from "@kuib-ai/config/bootstrap.config";
 import type { DeviceID } from "@kuib-ai/protocol/id/device.id";
 import Std from "@kuib-ai/std";
 import Telemetry from "@kuib-ai/telemetry";
-import log from "../../log";
+import type createLog from "../../log";
 import resolveDaemonClient from "../../resolve.daemon.client";
-import env from "../../env";
 
 const serve = async function (
-  dbPath: string,
-  socketPath: string,
+  bootstrap: BootstrapConfig,
   deviceID: DeviceID,
-  localLabel: string,
+  log: ReturnType<typeof createLog>,
 ): Promise<void> {
+  const dbPath = bootstrap.paths.database;
+  const socketPath = bootstrap.paths.engineSocket;
+  const localLabel = bootstrap.config.node.label;
   const serveLog = log.child({ command: "serve" });
   serveLog.info({ socketPath, deviceID, localLabel }, "engine serve starting");
   Telemetry.startTelemetry({
-    endpoint: env.KUIB_TRACE_ENDPOINT,
-    serviceName: env.KUIB_TRACE_SERVICE,
+    endpoint: bootstrap.config.telemetry.endpoint,
+    serviceName: "kuib-engine",
   });
   const modelConfig = Engine.Provider.resolveModelConfig({
-    model: env.KUIB_MODEL,
-    baseURL: env.KUIB_MODEL_BASE_URL,
-    apiKey: env.KUIB_MODEL_API_KEY,
-    modelID: env.KUIB_MODEL_ID,
-    anthropicApiKey: env.KUIB_ANTHROPIC_API_KEY,
-    groqApiKey: env.KUIB_GROQ_API_KEY,
+    model: bootstrap.config.model.default,
+    baseURL: bootstrap.config.model.baseURL,
+    apiKey: bootstrap.secrets.modelApiKey,
+    anthropicApiKey: bootstrap.secrets.anthropicApiKey,
+    groqApiKey: bootstrap.secrets.groqApiKey,
   });
   const model = Engine.Provider.createModel(modelConfig);
-  const daemonClient = await resolveDaemonClient(env, localLabel);
+  const daemonClient = await resolveDaemonClient(
+    {
+      targetNode: bootstrap.config.target.node,
+      meshConfigFile: bootstrap.paths.meshConfigFile,
+      daemonURL: bootstrap.runtime.daemonURL,
+      daemonSocket: bootstrap.paths.daemonSocket,
+    },
+    localLabel,
+  );
   const eventLog = EventLogSqlite.createSqliteEventLog(dbPath);
   await EngineService.startEngineService({
     socketPath,

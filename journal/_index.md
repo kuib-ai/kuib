@@ -34,6 +34,9 @@
 
 ## Architecture
 
+### [[application-directories]] | status:decided | tags:xdg,paths,config,directories,macos,windows,linux,fhs
+  Where kuib stores config, data, state, cache, logs, and runtime IPC — per OS — and how `@kuib-ai/env` exposes **base dir...
+
 ### [[architecture-overview]] | status:decided | tags:architecture,monorepo,packages,host
   packages/
 

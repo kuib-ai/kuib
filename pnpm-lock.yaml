@@ -207,6 +207,9 @@ importers:
       '@kuib-ai/cli':
         specifier: workspace:*
         version: link:../../packages/cli
+      '@kuib-ai/config':
+        specifier: workspace:*
+        version: link:../../packages/config
       '@kuib-ai/daemon':
         specifier: workspace:*
         version: link:../../packages/daemon
@@ -216,9 +219,6 @@ importers:
       '@kuib-ai/engine-service':
         specifier: workspace:*
         version: link:../../packages/engine-service
-      '@kuib-ai/env':
-        specifier: workspace:*
-        version: link:../../packages/env
       '@kuib-ai/event-log-sqlite':
         specifier: workspace:*
         version: link:../../packages/event-log-sqlite
@@ -243,9 +243,6 @@ importers:
       solid-js:
         specifier: 'catalog:'
         version: 1.9.14
-      zod:
-        specifier: 'catalog:'
-        version: 4.4.3
     devDependencies:
       '@kuib-ai/tsconfig':
         specifier: workspace:*
@@ -265,15 +262,18 @@ importers:
 
   apps/host-web:
     dependencies:
+      '@kuib-ai/cli':
+        specifier: workspace:*
+        version: link:../../packages/cli
+      '@kuib-ai/config':
+        specifier: workspace:*
+        version: link:../../packages/config
       '@kuib-ai/daemon':
         specifier: workspace:*
         version: link:../../packages/daemon
       '@kuib-ai/engine':
         specifier: workspace:*
         version: link:../../packages/engine
-      '@kuib-ai/env':
-        specifier: workspace:*
-        version: link:../../packages/env
       '@kuib-ai/event-log-sqlite':
         specifier: workspace:*
         version: link:../../packages/event-log-sqlite
@@ -292,9 +292,6 @@ importers:
       solid-js:
         specifier: 'catalog:'
         version: 1.9.14
-      zod:
-        specifier: 'catalog:'
-        version: 4.4.3
     devDependencies:
       '@kuib-ai/tsconfig':
         specifier: workspace:*
@@ -368,11 +365,33 @@ importers:
         specifier: 'catalog:'
         version: 1.3.14
 
-  packages/daemon:
+  packages/config:
     dependencies:
       '@kuib-ai/env':
         specifier: workspace:*
         version: link:../env
+      '@kuib-ai/std':
+        specifier: workspace:*
+        version: link:../std
+      zod:
+        specifier: 'catalog:'
+        version: 4.4.3
+    devDependencies:
+      '@kuib-ai/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.1.0
+      bun-types:
+        specifier: 'catalog:'
+        version: 1.3.14
+
+  packages/daemon:
+    dependencies:
+      '@kuib-ai/config':
+        specifier: workspace:*
+        version: link:../config
       '@kuib-ai/protocol':
         specifier: workspace:*
         version: link:../protocol
@@ -509,9 +528,6 @@ importers:
 
   packages/event-log-sqlite:
     dependencies:
-      '@kuib-ai/env':
-        specifier: workspace:*
-        version: link:../env
       '@kuib-ai/protocol':
         specifier: workspace:*
         version: link:../protocol

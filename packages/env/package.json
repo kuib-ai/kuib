@@ -1,7 +1,7 @@
 {
   "name": "@kuib-ai/env",
   "version": "0.0.1",
-  "description": "kuib environment bootstrap + validated config",
+  "description": "kuib environment bootstrap and platform base directories",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",

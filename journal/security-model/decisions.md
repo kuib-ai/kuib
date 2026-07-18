@@ -8,6 +8,7 @@ tags: [security, permissions, sandbox, access-control, command-parsing]
 depends-on: ["[[architecture-overview]]", "[[infrastructure-strategy]]"]
 informs:
   [
+    "[[application-directories]]",
     "[[provider-architecture]]",
     "[[protocol-design]]",
     "[[consensus-model]]",

@@ -2,7 +2,8 @@
 import type { CliSchema } from "../cli.schema";
 
 const printHelp = function (command: string, schema: CliSchema): void {
-  process.stdout.write(`\nUsage: kuib ${command} [options]\n`);
+  const invocation = command.length === 0 ? "kuib" : `kuib ${command}`;
+  process.stdout.write(`\nUsage: ${invocation} [options]\n`);
   process.stdout.write(`${schema.description}\n\nOptions:\n`);
 
   for (const [flag, details] of Object.entries(schema.options)) {

@@ -30,6 +30,21 @@ type EngineServiceHandle = {
 
 const DEFAULT_REAP_IDLE_MS = 5000;
 
+const socketIsLive = function (socketPath: string): Promise<boolean> {
+  return new Promise<boolean>((resolve) => {
+    const probe = new net.Socket();
+    probe.once("connect", () => {
+      probe.destroy();
+      resolve(true);
+    });
+    probe.once("error", () => {
+      probe.destroy();
+      resolve(false);
+    });
+    probe.connect(socketPath);
+  });
+};
+
 const startEngineService = function (
   params: StartEngineServiceParams,
 ): Promise<EngineServiceHandle> {
@@ -166,39 +181,40 @@ const startEngineService = function (
   };
 
   return new Promise<EngineServiceHandle>((resolve, reject) => {
-    const onError = async function (err: NodeJS.ErrnoException): Promise<void> {
+    const onError = function (err: NodeJS.ErrnoException): void {
       if (err.code === "EADDRINUSE") {
-        const probe = net.connect(params.socketPath);
-        probe.once("connect", () => {
-          probe.destroy();
-          const bindErr: NodeJS.ErrnoException = new Error(
-            `engine-service already running at ${params.socketPath}`,
-          );
-          bindErr.code = "EADDRINUSE";
-          reject(bindErr);
-        });
-        probe.once("error", () => {
-          void (async () => {
-            await Std.withError(
-              Promise.resolve().then(() => unlinkSync(params.socketPath)),
-            );
-            server.listen(params.socketPath);
-          })();
-        });
+        const bindErr: NodeJS.ErrnoException = new Error(
+          `engine-service already running at ${params.socketPath}`,
+        );
+        bindErr.code = "EADDRINUSE";
+        reject(bindErr);
         return;
       }
       reject(err);
     };
 
     server.on("error", (err: NodeJS.ErrnoException) => {
-      void onError(err);
+      onError(err);
     });
     server.on("connection", onConnection);
-    server.listen(params.socketPath, () => {
-      server.removeAllListeners("error");
-      server.on("error", () => {});
-      maybeReap();
-      resolve({ close: doClose });
+    void socketIsLive(params.socketPath).then(async (live) => {
+      if (live) {
+        const bindErr: NodeJS.ErrnoException = new Error(
+          `engine-service already running at ${params.socketPath}`,
+        );
+        bindErr.code = "EADDRINUSE";
+        reject(bindErr);
+        return;
+      }
+      await Std.withError(
+        Promise.resolve().then(() => unlinkSync(params.socketPath)),
+      );
+      server.listen(params.socketPath, () => {
+        server.removeAllListeners("error");
+        server.on("error", () => {});
+        maybeReap();
+        resolve({ close: doClose });
+      });
     });
   });
 };

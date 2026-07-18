@@ -1,0 +1,24 @@
+# Persistent, non-secret Kuib configuration.
+# Production default: ~/.config/kuib/config.toml
+
+[node]
+# label = "user@machine"
+
+[target]
+# node = "user@machine"
+
+[model]
+default = "groq/llama-3.3-70b-versatile"
+# base_url = "http://localhost:11434/v1"
+
+[logging]
+level = "info"
+
+[telemetry]
+# endpoint = "http://localhost:6006"
+
+[web]
+port = 4321
+
+[security]
+profile = "development"

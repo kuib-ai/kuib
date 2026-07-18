@@ -16,7 +16,7 @@ describe("startTelemetry", () => {
     expect(
       startTelemetry({
         endpoint: "http://localhost:4318",
-        serviceName: undefined,
+        serviceName: "kuib-engine",
       }),
     ).toBe(true);
   });

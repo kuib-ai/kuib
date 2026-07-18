@@ -16,6 +16,7 @@ informs:
     "[[house-style-linting]]",
     "[[tool-system]]",
     "[[testing-strategy]]",
+    "[[application-directories]]",
   ]
 ---
 

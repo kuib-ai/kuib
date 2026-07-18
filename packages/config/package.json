@@ -1,0 +1,28 @@
+{
+  "name": "@kuib-ai/config",
+  "version": "0.0.1",
+  "description": "kuib configuration loading, precedence, and application paths",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": {
+      "types": "./src/*/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@kuib-ai/env": "workspace:*",
+    "@kuib-ai/std": "workspace:*",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@kuib-ai/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "bun-types": "catalog:"
+  }
+}

@@ -4,26 +4,26 @@ import Engine from "@kuib-ai/engine";
 import Daemon from "@kuib-ai/daemon";
 import type { DaemonClient } from "@kuib-ai/engine/daemon.client/transport.factory";
 
-export type EnvArgs = {
-  KUIB_TARGET_NODE: string;
-  KUIB_MESH_CONFIG: string;
-  KUIB_DAEMON_URL?: string;
-  KUIB_DAEMON_SOCKET: string;
+export type DaemonConfig = {
+  targetNode: string;
+  meshConfigFile: string;
+  daemonURL?: string;
+  daemonSocket: string;
 };
 
 const resolveDaemonClient = function (
-  env: EnvArgs,
+  config: DaemonConfig,
   localLabel: string,
 ): Promise<DaemonClient> {
-  if (env.KUIB_TARGET_NODE !== localLabel) {
-    const nodes = Engine.Mesh.loadMeshConfig(env.KUIB_MESH_CONFIG);
+  if (config.targetNode !== localLabel) {
+    const nodes = Engine.Mesh.loadMeshConfig(config.meshConfigFile);
     const discovery = Engine.Mesh.createStaticDiscovery(nodes);
-    const nodeID = Protocol.ID.NodeID.parse(env.KUIB_TARGET_NODE);
+    const nodeID = Protocol.ID.NodeID.parse(config.targetNode);
     return Engine.Mesh.createTransportFactory(discovery)(nodeID);
   }
   return Daemon.resolveDaemonEndpoint(
-    env.KUIB_DAEMON_URL,
-    env.KUIB_DAEMON_SOCKET,
+    config.daemonURL,
+    config.daemonSocket,
   ).then((endpoint) => Engine.DaemonClient.createDaemonClient(endpoint));
 };
 

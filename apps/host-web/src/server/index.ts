@@ -1,6 +1,8 @@
 // @context @journal/host-layer @journal/security-model
 import { dirname, join, extname } from "node:path";
 import { readFileSync, existsSync } from "node:fs";
+import Cli from "@kuib-ai/cli";
+import Config from "@kuib-ai/config";
 import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
 import Daemon from "@kuib-ai/daemon";
@@ -9,8 +11,33 @@ import EventLogSqlite from "@kuib-ai/event-log-sqlite";
 import Std from "@kuib-ai/std";
 import Telemetry from "@kuib-ai/telemetry";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
+import type { CliSchema } from "@kuib-ai/cli/cli.schema";
 
 const HOSTED_ORIGIN = "https://code.kuib.ai";
+
+const cliSchema: CliSchema = {
+  description: "Kuib AI Web Host",
+  options: {
+    config: { type: "string", description: "Alternate config.toml path" },
+    session: { type: "string", description: "Default session ID" },
+    model: { type: "string", description: "Model selector" },
+    port: { type: "string", description: "Web listen port" },
+    "db-path": { type: "string", description: "Alternate SQLite path" },
+    "daemon-socket": {
+      type: "string",
+      description: "Alternate daemon socket",
+    },
+  },
+};
+
+type WebCliValues = {
+  config?: string;
+  session?: string;
+  model?: string;
+  port?: string;
+  "db-path"?: string;
+  "daemon-socket"?: string;
+};
 
 type Pairing = {
   code: string;
@@ -55,17 +82,32 @@ const detectTailscaleIp = function (
   return first && /^\d+\.\d+\.\d+\.\d+$/.test(first) ? first : null;
 };
 
-import env from "./env";
-
 const main = async function (): Promise<void> {
-  Telemetry.startTelemetry({
-    endpoint: env.KUIB_TRACE_ENDPOINT,
-    serviceName: env.KUIB_TRACE_SERVICE,
+  const parsed = Cli.parseCli<WebCliValues>("web", cliSchema);
+  if (parsed === null) {
+    return;
+  }
+  const values = parsed.values;
+  const bootstrap = Config.bootstrapConfig({
+    cli: {
+      configFile: values.config,
+      sessionID: values.session,
+      model: values.model,
+      webPort: values.port,
+      database: values["db-path"],
+      daemonSocket: values["daemon-socket"],
+    },
   });
-  const port = env.KUIB_WEB_PORT;
-  const dbPath = env.KUIB_DB_PATH;
+  Config.ensureAppPaths(bootstrap.paths);
+
+  Telemetry.startTelemetry({
+    endpoint: bootstrap.config.telemetry.endpoint,
+    serviceName: "kuib-engine",
+  });
+  const port = bootstrap.config.web.port;
+  const dbPath = bootstrap.paths.database;
   const deviceID = Protocol.ID.DeviceID.parse(crypto.randomUUID());
-  const tsIp = detectTailscaleIp(env.KUIB_WEB_TAILSCALE_IP);
+  const tsIp = detectTailscaleIp(bootstrap.runtime.webTailscaleIP);
 
   const tsIpEsc = tsIp?.replace(/\./g, "\\.");
   const loopFrag = `localhost|127\\.0\\.0\\.1${tsIpEsc ? "|" + tsIpEsc : ""}`;
@@ -77,17 +119,16 @@ const main = async function (): Promise<void> {
   );
 
   const modelConfig = Engine.Provider.resolveModelConfig({
-    model: env.KUIB_MODEL,
-    baseURL: env.KUIB_MODEL_BASE_URL,
-    apiKey: env.KUIB_MODEL_API_KEY,
-    modelID: env.KUIB_MODEL_ID,
-    anthropicApiKey: env.KUIB_ANTHROPIC_API_KEY,
-    groqApiKey: env.KUIB_GROQ_API_KEY,
+    model: bootstrap.config.model.default,
+    baseURL: bootstrap.config.model.baseURL,
+    apiKey: bootstrap.secrets.modelApiKey,
+    anthropicApiKey: bootstrap.secrets.anthropicApiKey,
+    groqApiKey: bootstrap.secrets.groqApiKey,
   });
   const model = Engine.Provider.createModel(modelConfig);
   const daemonEndpoint = await Daemon.resolveDaemonEndpoint(
-    env.KUIB_DAEMON_URL,
-    env.KUIB_DAEMON_SOCKET,
+    bootstrap.runtime.daemonURL,
+    bootstrap.paths.daemonSocket,
   );
   const daemonClient = Engine.DaemonClient.createDaemonClient(daemonEndpoint);
   const eventLog = EventLogSqlite.createSqliteEventLog(dbPath);
@@ -193,7 +234,7 @@ const main = async function (): Promise<void> {
     }
 
     if (url.pathname === "/api/token" && req.method === "GET") {
-      if (!env.KUIB_WEB_DEV || origin === HOSTED_ORIGIN) {
+      if (!bootstrap.runtime.webDev || origin === HOSTED_ORIGIN) {
         return json({ error: "not available" }, 404, ch);
       }
       return json({ token }, 200, ch);
@@ -235,7 +276,7 @@ const main = async function (): Promise<void> {
     }
 
     const sessionParam =
-      url.searchParams.get("sessionID") ?? env.KUIB_SESSION_ID;
+      url.searchParams.get("sessionID") ?? bootstrap.runtime.sessionID;
     const sessionID = Protocol.ID.SessionID.parse(sessionParam);
 
     if (url.pathname === "/api/events/since" && req.method === "GET") {

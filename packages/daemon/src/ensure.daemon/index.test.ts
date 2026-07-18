@@ -2,7 +2,7 @@ import { describe, it, expect } from "bun:test";
 import net from "node:net";
 import os from "node:os";
 import { join } from "node:path";
-import { mkdtempSync } from "node:fs";
+import { mkdtempSync, writeFileSync } from "node:fs";
 import ensureDaemon from "./index";
 
 const makeDir = function (): string {
@@ -42,10 +42,12 @@ describe("ensureDaemon", () => {
 
   it("rejects after the timeout when the socket never becomes reachable", async () => {
     const dir = makeDir();
-    const socketPathInMissingParentDir = join(dir, "missing", "never.sock");
+    const blockedParent = join(dir, "not-a-directory");
+    writeFileSync(blockedParent, "blocked");
+    const unreachableSocket = join(blockedParent, "never.sock");
 
     const started = Date.now();
-    await expect(ensureDaemon(socketPathInMissingParentDir)).rejects.toThrow(
+    await expect(ensureDaemon(unreachableSocket)).rejects.toThrow(
       /did not become reachable/,
     );
     const elapsed = Date.now() - started;

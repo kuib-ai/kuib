@@ -4,26 +4,11 @@ import resolveModelConfig from "./index";
 const base = {
   baseURL: "http://localhost:11434/v1",
   apiKey: "ollama",
-  modelID: "llama-3.3-70b-versatile",
   anthropicApiKey: undefined as string | undefined,
   groqApiKey: "gsk-test" as string | undefined,
 };
 
 describe("resolveModelConfig", () => {
-  it("defaults to groq from KUIB_MODEL_ID when no selector is set", () => {
-    const config = resolveModelConfig({ ...base, model: undefined });
-    expect(config.npm).toBe("@ai-sdk/groq");
-    expect(config.modelID).toBe("llama-3.3-70b-versatile");
-    expect(config.options.apiKey).toBe("gsk-test");
-    expect(config.options.baseURL).toBe(undefined);
-  });
-
-  it("throws when the default groq path has no KUIB_GROQ_API_KEY", () => {
-    expect(() =>
-      resolveModelConfig({ ...base, model: undefined, groqApiKey: undefined }),
-    ).toThrow(/KUIB_GROQ_API_KEY is required/);
-  });
-
   it("resolves groq/<model> with the groq key", () => {
     const config = resolveModelConfig({
       ...base,
@@ -70,6 +55,16 @@ describe("resolveModelConfig", () => {
     expect(config.npm).toBe("@ai-sdk/openai-compatible");
     expect(config.modelID).toBe("qwen3.5:9b");
     expect(config.options.baseURL).toBe("http://localhost:11434/v1");
+  });
+
+  it("requires a base URL for an openai-compatible model", () => {
+    expect(() =>
+      resolveModelConfig({
+        ...base,
+        model: "openai-compatible/qwen3.5:9b",
+        baseURL: undefined,
+      }),
+    ).toThrow(/model\.base_url or KUIB_MODEL_BASE_URL is required/);
   });
 
   it("throws on a selector without a slash", () => {

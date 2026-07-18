@@ -6,19 +6,21 @@ import type { SessionID } from "@kuib-ai/protocol/id/session.id";
 import Std from "@kuib-ai/std";
 import { render } from "@opentui/solid";
 import App from "../../app";
-import log from "../../log";
+import type createLog from "../../log";
 
 const ui = async function (
   dbPath: string,
   socketPath: string,
   sessionID: SessionID,
   deviceLabel: string,
+  spawnArgv: string[],
+  log: ReturnType<typeof createLog>,
 ): Promise<void> {
   const uiLog = log.child({ command: "ui" });
   uiLog.info({ socketPath, sessionID, deviceLabel }, "tui starting");
   const client = await EngineService.connectOrSpawn({
     socketPath,
-    spawnArgv: [process.argv[1] ?? "", "serve"],
+    spawnArgv,
   });
   const eventLog = EventLogSqlite.createSqliteReader(dbPath);
   const onSubmit = function (prompt: string): void {

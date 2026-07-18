@@ -3,22 +3,21 @@ import Protocol from "@kuib-ai/protocol";
 import type { ModelConfig } from "@kuib-ai/protocol/provider/model.config";
 
 type ResolveModelConfigParams = {
-  model: string | undefined;
-  baseURL: string;
-  apiKey: string;
-  modelID: string;
+  model: string;
+  baseURL: string | undefined;
+  apiKey: string | undefined;
   anthropicApiKey: string | undefined;
   groqApiKey: string | undefined;
 };
 
 const requireKey = function (
   key: string | undefined,
-  envName: string,
+  name: string,
   providerID: string,
 ): string {
   if (key === undefined || key.length === 0) {
     throw new Error(
-      `${envName} is required when KUIB_MODEL selects the ${providerID} provider`,
+      `${name} is required when model.default selects the ${providerID} provider`,
     );
   }
   return key;
@@ -27,19 +26,10 @@ const requireKey = function (
 const resolveModelConfig = function (
   params: ResolveModelConfigParams,
 ): ModelConfig {
-  if (params.model === undefined || params.model.length === 0) {
-    return Protocol.Provider.ModelConfig.parse({
-      npm: "@ai-sdk/groq",
-      modelID: params.modelID,
-      options: {
-        apiKey: requireKey(params.groqApiKey, "KUIB_GROQ_API_KEY", "groq"),
-      },
-    });
-  }
   const separator = params.model.indexOf("/");
   if (separator === -1) {
     throw new Error(
-      `KUIB_MODEL must be "<provider>/<model>", got: ${params.model}`,
+      `model.default must be "<provider>/<model>", got: ${params.model}`,
     );
   }
   const providerID = params.model.slice(0, separator);
@@ -70,11 +60,18 @@ const resolveModelConfig = function (
     return Protocol.Provider.ModelConfig.parse({
       npm: "@ai-sdk/openai-compatible",
       modelID,
-      options: { baseURL: params.baseURL, apiKey: params.apiKey },
+      options: {
+        baseURL: requireKey(
+          params.baseURL,
+          "model.base_url or KUIB_MODEL_BASE_URL",
+          "openai-compatible",
+        ),
+        apiKey: params.apiKey,
+      },
     });
   }
   throw new Error(
-    `unknown provider in KUIB_MODEL: ${providerID} (supported: groq, anthropic, openai-compatible)`,
+    `unknown provider in model.default: ${providerID} (supported: groq, anthropic, openai-compatible)`,
   );
 };
 

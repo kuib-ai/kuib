@@ -16,7 +16,6 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@kuib-ai/env": "workspace:*",
     "@kuib-ai/protocol": "workspace:*"
   },
   "devDependencies": {

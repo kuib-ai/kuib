@@ -1,16 +1,14 @@
-// @context @journal/host-layer
-import { dirname, join } from "node:path";
+// @context @journal/host-layer @journal/application-directories
+import type { BootstrapConfig } from "@kuib-ai/config/bootstrap.config";
 import createPinoLogger from "@kuib-ai/std/pino";
-import env from "../env";
 
-const destination =
-  env.KUIB_LOG_PATH ?? join(dirname(env.KUIB_DB_PATH), "kuib.log");
+const createLog = function (bootstrap: BootstrapConfig) {
+  return createPinoLogger({
+    name: "host-tui",
+    level: bootstrap.config.logging.level,
+    destination: bootstrap.paths.log,
+    pretty: bootstrap.runtime.mode !== "production",
+  }).child({ logPath: bootstrap.paths.log });
+};
 
-const log = createPinoLogger({
-  name: "host-tui",
-  level: env.KUIB_LOG_LEVEL,
-  destination,
-  pretty: true,
-}).child({ logPath: destination });
-
-export default log;
+export default createLog;
