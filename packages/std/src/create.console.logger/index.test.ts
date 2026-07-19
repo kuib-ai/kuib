@@ -1,18 +1,18 @@
 import { describe, it, expect } from "bun:test";
 import createConsoleLogger from "./index";
 
-describe("createConsoleLogger", () => {
-  it("forwards info with bindings to the sink", () => {
+describe("createConsoleLogger", function () {
+  it("forwards info with bindings to the sink", function () {
     const calls: unknown[][] = [];
     const log = createConsoleLogger({
       name: "test",
       sink: {
-        debug: () => {},
-        info: (...args) => {
+        debug: function () {},
+        info: function (...args) {
           calls.push(args);
         },
-        warn: () => {},
-        error: () => {},
+        warn: function () {},
+        error: function () {},
       },
     });
 

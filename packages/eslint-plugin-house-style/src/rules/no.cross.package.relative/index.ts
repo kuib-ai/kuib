@@ -2,9 +2,9 @@
 import * as path from "node:path";
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 
-const createRule = ESLintUtils.RuleCreator(
-  (name) => `https://github.com/kuib-ai/kuib/tree/main/docs/rules/${name}.md`,
-);
+const createRule = ESLintUtils.RuleCreator(function (name) {
+  return `https://github.com/kuib-ai/kuib/tree/main/docs/rules/${name}.md`;
+});
 
 type MessageIds = "crossPackage";
 

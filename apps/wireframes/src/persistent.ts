@@ -9,9 +9,13 @@ const createPersistentSignal = function <T>(
   initialValue: T,
 ): Signal<T> {
   let initial = initialValue;
-  const [readErr, raw] = Std.withError(() => readFileSync(filePath, "utf-8"));
+  const [readErr, raw] = Std.withError(function () {
+    return readFileSync(filePath, "utf-8");
+  });
   if (!readErr) {
-    const [parseErr, parsed] = Std.withError(() => JSON.parse(raw) as T);
+    const [parseErr, parsed] = Std.withError(function () {
+      return JSON.parse(raw) as T;
+    });
     if (!parseErr) {
       initial = parsed;
     }
@@ -22,8 +26,10 @@ const createPersistentSignal = function <T>(
   const setPersistentState = function (next: T | ((prev: T) => T)): T {
     const nextValue =
       typeof next === "function" ? (next as (prev: T) => T)(state()) : next;
-    setState(() => nextValue);
-    Std.withError(() => {
+    setState(function () {
+      return nextValue;
+    });
+    Std.withError(function () {
       mkdirSync(dirname(filePath), { recursive: true });
       writeFileSync(filePath, JSON.stringify(nextValue));
     });

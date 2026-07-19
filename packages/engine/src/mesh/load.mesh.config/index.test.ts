@@ -7,12 +7,12 @@ import loadMeshConfig from "./index";
 
 const dir = mkdtempSync(join(tmpdir(), "mesh-config-"));
 
-describe("load mesh config", () => {
-  it("returns [] when the path does not exist", () => {
+describe("load mesh config", function () {
+  it("returns [] when the path does not exist", function () {
     expect(loadMeshConfig(join(dir, "missing.toml"))).toEqual([]);
   });
 
-  it("parses node descriptors from valid TOML", () => {
+  it("parses node descriptors from valid TOML", function () {
     const path = join(dir, "valid.toml");
     writeFileSync(
       path,
@@ -30,9 +30,11 @@ describe("load mesh config", () => {
     expect(nodes[0]?.capabilities).toEqual(["exec"]);
   });
 
-  it("throws when the config is invalid", () => {
+  it("throws when the config is invalid", function () {
     const path = join(dir, "invalid.toml");
     writeFileSync(path, ["[[nodes]]", 'osUser = "bob"'].join("\n"));
-    expect(() => loadMeshConfig(path)).toThrow();
+    expect(function () {
+      return loadMeshConfig(path);
+    }).toThrow();
   });
 });

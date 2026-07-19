@@ -10,8 +10,8 @@ const router = Trpc.router({ readFile: readFileProcedure });
 const createCaller = Trpc.createCallerFactory(router);
 const caller = createCaller({});
 
-describe("read.file procedure", () => {
-  it("reads an existing file with ~ expansion and returns its content", async () => {
+describe("read.file procedure", function () {
+  it("reads an existing file with ~ expansion and returns its content", async function () {
     const dir = mkdtempSync(join(homedir(), ".kuib-read-file-test-"));
     const filePath = join(dir, "hello.txt");
     writeFileSync(filePath, "hello world", "utf8");
@@ -22,7 +22,7 @@ describe("read.file procedure", () => {
     expect(result.content).toBe("hello world");
   });
 
-  it("throws a TRPCError INTERNAL_SERVER_ERROR when the read fails", async () => {
+  it("throws a TRPCError INTERNAL_SERVER_ERROR when the read fails", async function () {
     const missing = join(mkdtempSync(join(tmpdir(), "kuib-rf-")), "nope.txt");
 
     const promise = caller.readFile({ path: missing });

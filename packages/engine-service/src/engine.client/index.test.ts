@@ -19,28 +19,40 @@ const submitMessage: SubmitMessage = {
   prompt: "hello there",
 };
 
-describe("connectOrSpawn", () => {
-  it("connects to an already-listening socket and submits framed JSON", async () => {
+describe("connectOrSpawn", function () {
+  it("connects to an already-listening socket and submits framed JSON", async function () {
     const p = socketPath();
     const received: string[] = [];
-    const server = net.createServer((conn) => {
+    const server = net.createServer(function (conn) {
       conn.setEncoding("utf8");
-      conn.on("data", (chunk: string) => received.push(chunk));
+      conn.on("data", function (chunk: string) {
+        return received.push(chunk);
+      });
     });
-    await new Promise<void>((resolve) => server.listen(p, () => resolve()));
+    await new Promise<void>(function (resolve) {
+      return server.listen(p, function () {
+        return resolve();
+      });
+    });
 
     const client = await connectOrSpawn({ socketPath: p, spawnArgv: [] });
     await client.submit(submitMessage);
 
-    await new Promise<void>((resolve) => setTimeout(resolve, 50));
+    await new Promise<void>(function (resolve) {
+      return setTimeout(resolve, 50);
+    });
 
     expect(received.join("")).toBe(JSON.stringify(submitMessage) + "\n");
 
     client.close();
-    await new Promise<void>((resolve) => server.close(() => resolve()));
+    await new Promise<void>(function (resolve) {
+      return server.close(function () {
+        return resolve();
+      });
+    });
   });
 
-  it("rejects when no server exists and the spawned child never becomes reachable", async () => {
+  it("rejects when no server exists and the spawned child never becomes reachable", async function () {
     const p = socketPath();
 
     await expect(

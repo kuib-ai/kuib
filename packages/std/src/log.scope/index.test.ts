@@ -3,14 +3,14 @@ import createConsoleLogger from "../create.console.logger";
 import withError from "../with.error";
 import LogScope from "./index";
 
-describe("log.scope", () => {
-  it("merges nested scopes; inner wins on key clash", () => {
+describe("log.scope", function () {
+  it("merges nested scopes; inner wins on key clash", function () {
     expect(LogScope.currentScope()).toEqual({});
 
-    LogScope.withScope({ runId: "r1", phase: "outer" }, () => {
+    LogScope.withScope({ runId: "r1", phase: "outer" }, function () {
       expect(LogScope.currentScope()).toEqual({ runId: "r1", phase: "outer" });
 
-      LogScope.withScope({ phase: "tool", toolName: "readFile" }, () => {
+      LogScope.withScope({ phase: "tool", toolName: "readFile" }, function () {
         expect(LogScope.currentScope()).toEqual({
           runId: "r1",
           phase: "tool",
@@ -24,23 +24,23 @@ describe("log.scope", () => {
     expect(LogScope.currentScope()).toEqual({});
   });
 
-  it("survives await under the root scope", async () => {
-    await LogScope.withScope({ runId: "async-1" }, async () => {
+  it("survives await under the root scope", async function () {
+    await LogScope.withScope({ runId: "async-1" }, async function () {
       await Bun.sleep(5);
       expect(LogScope.currentScope()).toEqual({ runId: "async-1" });
     });
     expect(LogScope.currentScope()).toEqual({});
   });
 
-  it("isolates concurrent roots", async () => {
+  it("isolates concurrent roots", async function () {
     const seen: string[] = [];
 
-    const a = LogScope.withScope({ runId: "A" }, async () => {
+    const a = LogScope.withScope({ runId: "A" }, async function () {
       await Bun.sleep(10);
       seen.push(`a:${LogScope.currentScope().runId}`);
     });
 
-    const b = LogScope.withScope({ runId: "B" }, async () => {
+    const b = LogScope.withScope({ runId: "B" }, async function () {
       await Bun.sleep(1);
       seen.push(`b:${LogScope.currentScope().runId}`);
     });
@@ -49,24 +49,24 @@ describe("log.scope", () => {
     expect(seen).toEqual(["b:B", "a:A"]);
   });
 
-  it("logger emit picks up ambient scope (example)", () => {
+  it("logger emit picks up ambient scope (example)", function () {
     const calls: unknown[][] = [];
     const log = createConsoleLogger({
       name: "demo",
       sink: {
-        debug: () => {},
-        info: (...args) => {
+        debug: function () {},
+        info: function (...args) {
           calls.push(args);
         },
-        warn: () => {},
-        error: () => {},
+        warn: function () {},
+        error: function () {},
       },
     });
 
-    LogScope.withScope({ runId: "run_42", sessionID: "sess_1" }, () => {
+    LogScope.withScope({ runId: "run_42", sessionID: "sess_1" }, function () {
       log.info("turn started");
 
-      LogScope.withScope({ toolName: "readFile", callID: "c1" }, () => {
+      LogScope.withScope({ toolName: "readFile", callID: "c1" }, function () {
         log.info({ path: "/tmp/x" }, "tool done");
       });
 
@@ -98,10 +98,10 @@ describe("log.scope", () => {
     ]);
   });
 
-  it("pops nested scope when the inner async work rejects", async () => {
-    await LogScope.withScope({ runId: "r" }, async () => {
+  it("pops nested scope when the inner async work rejects", async function () {
+    await LogScope.withScope({ runId: "r" }, async function () {
       const [error] = await withError(
-        LogScope.withScope({ toolName: "boom" }, async () => {
+        LogScope.withScope({ toolName: "boom" }, async function () {
           await Bun.sleep(1);
           throw new Error("tool failed");
         }),

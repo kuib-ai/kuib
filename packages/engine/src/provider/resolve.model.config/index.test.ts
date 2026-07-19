@@ -8,8 +8,8 @@ const base = {
   groqApiKey: "gsk-test" as string | undefined,
 };
 
-describe("resolveModelConfig", () => {
-  it("resolves groq/<model> with the groq key", () => {
+describe("resolveModelConfig", function () {
+  it("resolves groq/<model> with the groq key", function () {
     const config = resolveModelConfig({
       ...base,
       model: "groq/moonshotai/kimi-k2-instruct-0905",
@@ -19,7 +19,7 @@ describe("resolveModelConfig", () => {
     expect(config.options.apiKey).toBe("gsk-test");
   });
 
-  it("resolves anthropic/<model> with the anthropic key", () => {
+  it("resolves anthropic/<model> with the anthropic key", function () {
     const config = resolveModelConfig({
       ...base,
       model: "anthropic/claude-opus-4-8",
@@ -31,23 +31,26 @@ describe("resolveModelConfig", () => {
     expect(config.options.baseURL).toBe(undefined);
   });
 
-  it("throws when anthropic is selected without KUIB_ANTHROPIC_API_KEY", () => {
-    expect(() =>
-      resolveModelConfig({ ...base, model: "anthropic/claude-opus-4-8" }),
-    ).toThrow(/KUIB_ANTHROPIC_API_KEY is required/);
+  it("throws when anthropic is selected without KUIB_ANTHROPIC_API_KEY", function () {
+    expect(function () {
+      return resolveModelConfig({
+        ...base,
+        model: "anthropic/claude-opus-4-8",
+      });
+    }).toThrow(/KUIB_ANTHROPIC_API_KEY is required/);
   });
 
-  it("treats an empty KUIB_ANTHROPIC_API_KEY as missing", () => {
-    expect(() =>
-      resolveModelConfig({
+  it("treats an empty KUIB_ANTHROPIC_API_KEY as missing", function () {
+    expect(function () {
+      return resolveModelConfig({
         ...base,
         model: "anthropic/claude-opus-4-8",
         anthropicApiKey: "",
-      }),
-    ).toThrow(/KUIB_ANTHROPIC_API_KEY is required/);
+      });
+    }).toThrow(/KUIB_ANTHROPIC_API_KEY is required/);
   });
 
-  it("resolves openai-compatible/<model> keeping the base transport vars", () => {
+  it("resolves openai-compatible/<model> keeping the base transport vars", function () {
     const config = resolveModelConfig({
       ...base,
       model: "openai-compatible/qwen3.5:9b",
@@ -57,25 +60,25 @@ describe("resolveModelConfig", () => {
     expect(config.options.baseURL).toBe("http://localhost:11434/v1");
   });
 
-  it("requires a base URL for an openai-compatible model", () => {
-    expect(() =>
-      resolveModelConfig({
+  it("requires a base URL for an openai-compatible model", function () {
+    expect(function () {
+      return resolveModelConfig({
         ...base,
         model: "openai-compatible/qwen3.5:9b",
         baseURL: undefined,
-      }),
-    ).toThrow(/model\.base_url or KUIB_MODEL_BASE_URL is required/);
+      });
+    }).toThrow(/model\.base_url or KUIB_MODEL_BASE_URL is required/);
   });
 
-  it("throws on a selector without a slash", () => {
-    expect(() => resolveModelConfig({ ...base, model: "anthropic" })).toThrow(
-      /must be "<provider>\/<model>"/,
-    );
+  it("throws on a selector without a slash", function () {
+    expect(function () {
+      return resolveModelConfig({ ...base, model: "anthropic" });
+    }).toThrow(/must be "<provider>\/<model>"/);
   });
 
-  it("throws on an unknown provider id", () => {
-    expect(() =>
-      resolveModelConfig({ ...base, model: "mystery/model-1" }),
-    ).toThrow(/unknown provider/);
+  it("throws on an unknown provider id", function () {
+    expect(function () {
+      return resolveModelConfig({ ...base, model: "mystery/model-1" });
+    }).toThrow(/unknown provider/);
   });
 });

@@ -21,21 +21,29 @@ const WireframeApp = function (props: WireframeAppProps) {
   );
   const [focus, setFocus] = createSignal<PickerFocus | undefined>(undefined);
 
-  onMount(() => {
-    const handle = watchWireframes(props.workspaceRoot, (next) => {
+  onMount(function () {
+    const handle = watchWireframes(props.workspaceRoot, function (next) {
       const previousPaths = new Set(
-        wireframes().map((wireframe) => wireframe.path),
+        wireframes().map(function (wireframe) {
+          return wireframe.path;
+        }),
       );
       setWireframes(next);
       const added = next
-        .filter((wireframe) => !previousPaths.has(wireframe.path))
-        .sort((a, b) => a.modifiedAt - b.modifiedAt);
+        .filter(function (wireframe) {
+          return !previousPaths.has(wireframe.path);
+        })
+        .sort(function (a, b) {
+          return a.modifiedAt - b.modifiedAt;
+        });
       const newest = added[added.length - 1];
       if (newest !== undefined) {
         setFocus({ path: newest.path });
       }
     });
-    onCleanup(() => handle.close());
+    onCleanup(function () {
+      return handle.close();
+    });
   });
 
   return (
@@ -44,7 +52,9 @@ const WireframeApp = function (props: WireframeAppProps) {
         workspaceRoot={props.workspaceRoot}
         wireframes={wireframes()}
         focus={focus()}
-        onQuit={() => renderer.destroy()}
+        onQuit={function () {
+          return renderer.destroy();
+        }}
       />
     </KeymapProvider>
   );

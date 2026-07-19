@@ -37,11 +37,11 @@ const withScope = function <T>(bindings: LogBindings, fn: () => T): T {
     const result = fn();
     if (isThenable(result)) {
       return result.then(
-        (value) => {
+        function (value) {
           parent.stack.pop();
           return value;
         },
-        (error: unknown) => {
+        function (error: unknown) {
           parent.stack.pop();
           throw error;
         },

@@ -14,10 +14,16 @@ const envOr = function (key: string, fallback: () => string): string {
 
 const resolveWindowsBase = function (kind: PathKindType): string {
   const parsed = PathKind.parse(kind);
-  const roaming = () =>
-    envOr("APPDATA", () => join(homedir(), "AppData", "Roaming"));
-  const local = () =>
-    envOr("LOCALAPPDATA", () => join(homedir(), "AppData", "Local"));
+  const roaming = function () {
+    return envOr("APPDATA", function () {
+      return join(homedir(), "AppData", "Roaming");
+    });
+  };
+  const local = function () {
+    return envOr("LOCALAPPDATA", function () {
+      return join(homedir(), "AppData", "Local");
+    });
+  };
 
   switch (parsed) {
     case PathKindEnum.CONFIG:
@@ -29,7 +35,11 @@ const resolveWindowsBase = function (kind: PathKindType): string {
     case PathKindEnum.CACHE:
       return envOr("XDG_CACHE_HOME", local);
     case PathKindEnum.RUNTIME:
-      return envOr("XDG_RUNTIME_DIR", () => envOr("TEMP", () => tmpdir()));
+      return envOr("XDG_RUNTIME_DIR", function () {
+        return envOr("TEMP", function () {
+          return tmpdir();
+        });
+      });
   }
 };
 

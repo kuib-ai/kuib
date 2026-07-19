@@ -37,24 +37,28 @@ const Picker = function (props: PickerProps) {
     true,
   );
   let preview: ScrollBoxRenderable | undefined;
-  const current = (): Wireframe | undefined => props.wireframes[index()];
+  const current = function (): Wireframe | undefined {
+    return props.wireframes[index()];
+  };
 
   const move = function (delta: number): void {
-    setIndex((prev) =>
-      Math.min(Math.max(prev + delta, 0), props.wireframes.length - 1),
-    );
+    setIndex(function (prev) {
+      return Math.min(Math.max(prev + delta, 0), props.wireframes.length - 1);
+    });
   };
 
   createEffect(
     on(
-      () => props.focus,
-      (focus) => {
+      function () {
+        return props.focus;
+      },
+      function (focus) {
         if (focus === undefined) {
           return;
         }
-        const at = props.wireframes.findIndex(
-          (wireframe) => wireframe.path === focus.path,
-        );
+        const at = props.wireframes.findIndex(function (wireframe) {
+          return wireframe.path === focus.path;
+        });
         if (at >= 0) {
           setIndex(at);
         }
@@ -62,15 +66,19 @@ const Picker = function (props: PickerProps) {
     ),
   );
 
-  createEffect(() => {
+  createEffect(function () {
     const lastIndex = Math.max(props.wireframes.length - 1, 0);
-    setIndex((prev) => Math.min(prev, lastIndex));
+    setIndex(function (prev) {
+      return Math.min(prev, lastIndex);
+    });
   });
 
   createEffect(
     on(
-      () => current()?.path,
-      () => {
+      function () {
+        return current()?.path;
+      },
+      function () {
         preview?.scrollTo(0);
       },
     ),
@@ -92,111 +100,122 @@ const Picker = function (props: PickerProps) {
     preview.scrollTo({ x: preview.scrollLeft, y: maxTop });
   };
 
-  useBindings(() => ({
-    commands: [
-      { name: "quit", run: () => props.onQuit() },
-      {
-        name: "toggle-left-pane",
-        run: () => {
-          setLeftPaneOpen((open: boolean) => !open);
-          keymap.clearPendingSequence();
+  useBindings(function () {
+    return {
+      commands: [
+        {
+          name: "quit",
+          run: function () {
+            return props.onQuit();
+          },
         },
-      },
-      {
-        name: "move-left",
-        run: () => {
-          move(-1);
+        {
+          name: "toggle-left-pane",
+          run: function () {
+            setLeftPaneOpen(function (open: boolean) {
+              return !open;
+            });
+            keymap.clearPendingSequence();
+          },
         },
-      },
-      {
-        name: "move-right",
-        run: () => {
-          move(1);
-        },
-      },
-      {
-        name: "step-down",
-        run: () => {
-          if (leftPaneOpen()) {
-            move(1);
-            return;
-          }
-          scrollPreview(1);
-        },
-      },
-      {
-        name: "step-up",
-        run: () => {
-          if (leftPaneOpen()) {
+        {
+          name: "move-left",
+          run: function () {
             move(-1);
-            return;
-          }
-          scrollPreview(-1);
+          },
         },
-      },
-      {
-        name: "page-down",
-        run: () => {
-          if (leftPaneOpen()) {
-            move(10);
-            return;
-          }
-          if (preview) {
-            scrollPreview(Math.max(1, Math.floor(preview.viewport.height / 2)));
-          }
+        {
+          name: "move-right",
+          run: function () {
+            move(1);
+          },
         },
-      },
-      {
-        name: "page-up",
-        run: () => {
-          if (leftPaneOpen()) {
-            move(-10);
-            return;
-          }
-          if (preview) {
-            scrollPreview(
-              -Math.max(1, Math.floor(preview.viewport.height / 2)),
-            );
-          }
+        {
+          name: "step-down",
+          run: function () {
+            if (leftPaneOpen()) {
+              move(1);
+              return;
+            }
+            scrollPreview(1);
+          },
         },
-      },
-      {
-        name: "scroll-top",
-        run: () => {
-          if (leftPaneOpen()) {
-            return;
-          }
-          scrollPreviewTop();
+        {
+          name: "step-up",
+          run: function () {
+            if (leftPaneOpen()) {
+              move(-1);
+              return;
+            }
+            scrollPreview(-1);
+          },
         },
-      },
-      {
-        name: "scroll-bottom",
-        run: () => {
-          if (leftPaneOpen()) {
-            return;
-          }
-          scrollPreviewBottom();
+        {
+          name: "page-down",
+          run: function () {
+            if (leftPaneOpen()) {
+              move(10);
+              return;
+            }
+            if (preview) {
+              scrollPreview(
+                Math.max(1, Math.floor(preview.viewport.height / 2)),
+              );
+            }
+          },
         },
-      },
-    ],
-    bindings: [
-      { key: "q", cmd: "quit" },
-      { key: "escape", cmd: "quit" },
-      { key: "<leader>p", cmd: "toggle-left-pane" },
-      { key: "h", cmd: "move-left" },
-      { key: "l", cmd: "move-right" },
-      { key: "j", cmd: "step-down" },
-      { key: "k", cmd: "step-up" },
-      { key: "down", cmd: "step-down" },
-      { key: "up", cmd: "step-up" },
-      { key: "ctrl+d", cmd: "page-down" },
-      { key: "ctrl+u", cmd: "page-up" },
-      { key: "pagedown", cmd: "page-down" },
-      { key: "pageup", cmd: "page-up" },
-      { key: "g", cmd: "scroll-top" },
-      { key: "shift+g", cmd: "scroll-bottom" },
-    ],
-  }));
+        {
+          name: "page-up",
+          run: function () {
+            if (leftPaneOpen()) {
+              move(-10);
+              return;
+            }
+            if (preview) {
+              scrollPreview(
+                -Math.max(1, Math.floor(preview.viewport.height / 2)),
+              );
+            }
+          },
+        },
+        {
+          name: "scroll-top",
+          run: function () {
+            if (leftPaneOpen()) {
+              return;
+            }
+            scrollPreviewTop();
+          },
+        },
+        {
+          name: "scroll-bottom",
+          run: function () {
+            if (leftPaneOpen()) {
+              return;
+            }
+            scrollPreviewBottom();
+          },
+        },
+      ],
+      bindings: [
+        { key: "q", cmd: "quit" },
+        { key: "escape", cmd: "quit" },
+        { key: "<leader>p", cmd: "toggle-left-pane" },
+        { key: "h", cmd: "move-left" },
+        { key: "l", cmd: "move-right" },
+        { key: "j", cmd: "step-down" },
+        { key: "k", cmd: "step-up" },
+        { key: "down", cmd: "step-down" },
+        { key: "up", cmd: "step-up" },
+        { key: "ctrl+d", cmd: "page-down" },
+        { key: "ctrl+u", cmd: "page-up" },
+        { key: "pagedown", cmd: "page-down" },
+        { key: "pageup", cmd: "page-up" },
+        { key: "g", cmd: "scroll-top" },
+        { key: "shift+g", cmd: "scroll-bottom" },
+      ],
+    };
+  });
 
   return (
     <box flexDirection="row" flexGrow={1}>
@@ -206,10 +225,12 @@ const Picker = function (props: PickerProps) {
           <select
             focused={leftPaneOpen()}
             flexGrow={1}
-            options={props.wireframes.map((wireframe) => ({
-              name: `${wireframe.entry}/${wireframe.screen}`,
-              description: wireframe.status,
-            }))}
+            options={props.wireframes.map(function (wireframe) {
+              return {
+                name: `${wireframe.entry}/${wireframe.screen}`,
+                description: wireframe.status,
+              };
+            })}
             selectedIndex={index()}
           />
           <text fg="#565f89">
@@ -224,7 +245,7 @@ const Picker = function (props: PickerProps) {
           </text>
         </box>
         <scrollbox
-          ref={(renderable: ScrollBoxRenderable) => {
+          ref={function (renderable: ScrollBoxRenderable) {
             preview = renderable;
           }}
           flexGrow={1}

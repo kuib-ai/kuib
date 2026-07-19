@@ -7,13 +7,13 @@ const PROBE_TIMEOUT_MS = 5000;
 const PROBE_INTERVAL_MS = 50;
 
 const probe = function (socketPath: string): Promise<boolean> {
-  return new Promise<boolean>((resolve) => {
+  return new Promise<boolean>(function (resolve) {
     const socket = net.connect(socketPath);
-    socket.once("connect", () => {
+    socket.once("connect", function () {
       socket.destroy();
       resolve(true);
     });
-    socket.once("error", () => {
+    socket.once("error", function () {
       socket.destroy();
       resolve(false);
     });
@@ -21,7 +21,9 @@ const probe = function (socketPath: string): Promise<boolean> {
 };
 
 const sleep = function (ms: number): Promise<void> {
-  return new Promise<void>((resolve) => setTimeout(resolve, ms));
+  return new Promise<void>(function (resolve) {
+    return setTimeout(resolve, ms);
+  });
 };
 
 const ensureDaemon = async function (socketPath: string): Promise<void> {

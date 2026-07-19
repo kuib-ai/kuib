@@ -10,8 +10,8 @@ const router = Trpc.router({ writeFile: writeFileProcedure });
 const createCaller = Trpc.createCallerFactory(router);
 const caller = createCaller({});
 
-describe("writeFile procedure", () => {
-  it("writes the content and returns success", async () => {
+describe("writeFile procedure", function () {
+  it("writes the content and returns success", async function () {
     const path = join(tmpdir(), `kuib-write-file-${Date.now()}.txt`);
     const result = await caller.writeFile({ path, content: "hello" });
     expect(result.success).toBe(true);
@@ -20,7 +20,7 @@ describe("writeFile procedure", () => {
     await rm(path);
   });
 
-  it("throws INTERNAL_SERVER_ERROR when the write fails", async () => {
+  it("throws INTERNAL_SERVER_ERROR when the write fails", async function () {
     const path = join(tmpdir(), "kuib-missing-dir", "nested", "file.txt");
     const promise = caller.writeFile({ path, content: "data" });
     await expect(promise).rejects.toBeInstanceOf(TRPCError);

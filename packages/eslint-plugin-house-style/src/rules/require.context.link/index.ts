@@ -5,9 +5,9 @@ import * as path from "node:path";
 
 const STALE_ADR_MARKER = "{{FEATURE_NAME}}";
 
-const createRule = ESLintUtils.RuleCreator(
-  (name) => `https://github.com/kuib-ai/kuib/tree/main/docs/rules/${name}.md`,
-);
+const createRule = ESLintUtils.RuleCreator(function (name) {
+  return `https://github.com/kuib-ai/kuib/tree/main/docs/rules/${name}.md`;
+});
 
 type MessageIds = "missingContext" | "deadContextLink" | "staleContextLink";
 

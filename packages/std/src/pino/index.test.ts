@@ -6,8 +6,8 @@ import Protocol from "@kuib-ai/protocol";
 import createPinoLogger from "./index";
 import { LogLevelEnum } from "../log.level.enum";
 
-describe("createPinoLogger", () => {
-  it("writes structured lines to a file destination", () => {
+describe("createPinoLogger", function () {
+  it("writes structured lines to a file destination", function () {
     const dir = mkdtempSync(join(tmpdir(), "kuib-log-"));
     const destination = join(dir, "kuib.log");
     const log = createPinoLogger({
@@ -31,7 +31,9 @@ describe("createPinoLogger", () => {
     const lines = readFileSync(destination, "utf8")
       .trim()
       .split("\n")
-      .map((line) => JSON.parse(line) as Record<string, unknown>);
+      .map(function (line) {
+        return JSON.parse(line) as Record<string, unknown>;
+      });
 
     expect(lines).toHaveLength(2);
     expect(lines[0]?.msg).toBe("started");

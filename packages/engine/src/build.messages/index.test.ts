@@ -31,8 +31,8 @@ const textDelta = function (messageID: string, delta: string): AnyEvent {
   };
 };
 
-describe("buildMessages fold", () => {
-  it("folds a user message then accumulated text deltas into user/assistant messages", async () => {
+describe("buildMessages fold", function () {
+  it("folds a user message then accumulated text deltas into user/assistant messages", async function () {
     const log = Engine.EventLog.createMemoryEventLog();
     await log.append(sessionID, deviceID, userEvent("m1", "hi there"));
     await log.append(sessionID, deviceID, textDelta("a1", "Hello"));
@@ -46,7 +46,7 @@ describe("buildMessages fold", () => {
     ]);
   });
 
-  it("does not flush an assistant accumulator that has no text", async () => {
+  it("does not flush an assistant accumulator that has no text", async function () {
     const log = Engine.EventLog.createMemoryEventLog();
     await log.append(sessionID, deviceID, userEvent("m1", "q"));
     await log.append(sessionID, deviceID, textDelta("a1", ""));
@@ -61,7 +61,7 @@ describe("buildMessages fold", () => {
     expect(messages).toEqual([{ role: "user", content: "q" }]);
   });
 
-  it("flushes the current assistant when the messageID switches mid-stream", async () => {
+  it("flushes the current assistant when the messageID switches mid-stream", async function () {
     const log = Engine.EventLog.createMemoryEventLog();
     await log.append(sessionID, deviceID, textDelta("a1", "first"));
     await log.append(sessionID, deviceID, textDelta("a2", "second"));

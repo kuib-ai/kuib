@@ -5,10 +5,17 @@ import WireframeApp from "./app";
 
 const main = function (): void {
   const workspaceRoot = Env.findWorkspaceRoot(import.meta.dir);
-  render(() => <WireframeApp workspaceRoot={workspaceRoot} />, {
-    exitOnCtrlC: true,
-    onDestroy: () => process.exit(0),
-  });
+  render(
+    function () {
+      return <WireframeApp workspaceRoot={workspaceRoot} />;
+    },
+    {
+      exitOnCtrlC: true,
+      onDestroy: function () {
+        return process.exit(0);
+      },
+    },
+  );
 };
 
 main();

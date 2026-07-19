@@ -9,7 +9,7 @@ import expandHomePath from "../../expand.home.path";
 const readFileProcedure = Trpc.procedure
   .input(Protocol.FileSystem.ReadFileInput)
   .output(Protocol.FileSystem.ReadFileOutput)
-  .query(async ({ input }) => {
+  .query(async function ({ input }) {
     const [error, content] = await Std.withError(
       readFile(expandHomePath(input.path), "utf8"),
     );

@@ -11,8 +11,8 @@ const event: AnyEvent = {
   messageID,
 };
 
-describe("memory event log", () => {
-  it("assigns monotonic seq from 0 with epoch 0 and stamps the envelope", async () => {
+describe("memory event log", function () {
+  it("assigns monotonic seq from 0 with epoch 0 and stamps the envelope", async function () {
     const log = Engine.EventLog.createMemoryEventLog();
     const a = await log.append(sessionID, deviceID, event);
     const b = await log.append(sessionID, deviceID, event);
@@ -23,40 +23,50 @@ describe("memory event log", () => {
     expect(a.originDeviceID).toBe(deviceID);
   });
 
-  it("delivers appended events to subscribers", async () => {
+  it("delivers appended events to subscribers", async function () {
     const log = Engine.EventLog.createMemoryEventLog();
     const seen: number[] = [];
-    log.subscribe(sessionID, (envelope) => seen.push(envelope.seq));
+    log.subscribe(sessionID, function (envelope) {
+      return seen.push(envelope.seq);
+    });
     await log.append(sessionID, deviceID, event);
     await log.append(sessionID, deviceID, event);
     expect(seen).toEqual([0, 1]);
   });
 
-  it("replays only events after the seq cursor", async () => {
+  it("replays only events after the seq cursor", async function () {
     const log = Engine.EventLog.createMemoryEventLog();
     await log.append(sessionID, deviceID, event);
     await log.append(sessionID, deviceID, event);
     const seen: number[] = [];
-    log.replay(sessionID, 0, (envelope) => seen.push(envelope.seq));
+    log.replay(sessionID, 0, function (envelope) {
+      return seen.push(envelope.seq);
+    });
     expect(seen).toEqual([1]);
   });
 
-  it("subscribe with afterSeq replays past events then delivers live ones", async () => {
+  it("subscribe with afterSeq replays past events then delivers live ones", async function () {
     const log = Engine.EventLog.createMemoryEventLog();
     await log.append(sessionID, deviceID, event);
     await log.append(sessionID, deviceID, event);
     const seen: number[] = [];
-    log.subscribe(sessionID, (envelope) => seen.push(envelope.seq), 0);
+    log.subscribe(
+      sessionID,
+      function (envelope) {
+        return seen.push(envelope.seq);
+      },
+      0,
+    );
     await log.append(sessionID, deviceID, event);
     expect(seen).toEqual([1, 2]);
   });
 
-  it("stops delivering after unsubscribe", async () => {
+  it("stops delivering after unsubscribe", async function () {
     const log = Engine.EventLog.createMemoryEventLog();
     const seen: number[] = [];
-    const unsubscribe = log.subscribe(sessionID, (envelope) =>
-      seen.push(envelope.seq),
-    );
+    const unsubscribe = log.subscribe(sessionID, function (envelope) {
+      return seen.push(envelope.seq);
+    });
     await log.append(sessionID, deviceID, event);
     unsubscribe();
     await log.append(sessionID, deviceID, event);

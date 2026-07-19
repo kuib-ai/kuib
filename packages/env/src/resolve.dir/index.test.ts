@@ -12,8 +12,8 @@ import { join } from "node:path";
 import { PathKindEnum } from "../path.kind";
 import resolveDir from "./index";
 
-describe("resolveDir", () => {
-  it("uses dist/<kind> as the base dir outside production", () => {
+describe("resolveDir", function () {
+  it("uses dist/<kind> as the base dir outside production", function () {
     const root = realpathSync(mkdtempSync(join(tmpdir(), "env-dir-")));
     writeFileSync(join(root, "pnpm-workspace.yaml"), "packages: []\n");
     const nested = join(root, "packages", "env");
@@ -32,7 +32,7 @@ describe("resolveDir", () => {
     process.env["NODE_ENV"] = prevNodeEnv;
   });
 
-  it("uses the platform base in production (no app suffix)", () => {
+  it("uses the platform base in production (no app suffix)", function () {
     const xdg = mkdtempSync(join(tmpdir(), "env-xdg-"));
     const prevNodeEnv = process.env["NODE_ENV"];
     const prevConfig = process.env["XDG_CONFIG_HOME"];
@@ -45,7 +45,7 @@ describe("resolveDir", () => {
     process.env["XDG_CONFIG_HOME"] = prevConfig;
   });
 
-  it("honors { dev: false } outside production", () => {
+  it("honors { dev: false } outside production", function () {
     const xdg = mkdtempSync(join(tmpdir(), "env-xdg-"));
     const prevNodeEnv = process.env["NODE_ENV"];
     const prevConfig = process.env["XDG_CONFIG_HOME"];
@@ -58,7 +58,7 @@ describe("resolveDir", () => {
     process.env["XDG_CONFIG_HOME"] = prevConfig;
   });
 
-  it("honors { dev: true } in production", () => {
+  it("honors { dev: true } in production", function () {
     const root = realpathSync(mkdtempSync(join(tmpdir(), "env-dir-")));
     writeFileSync(join(root, "pnpm-workspace.yaml"), "packages: []\n");
 

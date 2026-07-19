@@ -22,3 +22,5 @@ dist
 # design-session worktrees
 .claude/worktrees/
 .aider*
+
+.scratchpad

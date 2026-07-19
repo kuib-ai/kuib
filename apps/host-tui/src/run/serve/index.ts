@@ -46,8 +46,8 @@ const serve = async function (
     socketPath,
     eventLog,
     reapIdleMs: 5000,
-    runTurn: ({ sessionID: sid, prompt, takePending }) =>
-      Std.withScope({ sessionID: sid, deviceID }, () => {
+    runTurn: function ({ sessionID: sid, prompt, takePending }) {
+      return Std.withScope({ sessionID: sid, deviceID }, function () {
         serveLog.info("turn starting");
         return Engine.runAgent({
           prompt,
@@ -58,7 +58,8 @@ const serve = async function (
           eventLog,
           takePending,
         });
-      }),
+      });
+    },
   });
 };
 

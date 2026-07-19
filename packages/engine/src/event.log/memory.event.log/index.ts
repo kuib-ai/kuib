@@ -4,7 +4,10 @@ import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";
 import type { SessionID } from "@kuib-ai/protocol/id/session.id";
 import type { DeviceID } from "@kuib-ai/protocol/id/device.id";
-import type { EventLogPort, EventHandler } from "../event.log.port";
+import type {
+  EventHandler,
+  EventLogPort,
+} from "@kuib-ai/protocol/event.log.port";
 
 const createMemoryEventLog = function (): EventLogPort {
   const logs = new Map<string, EventEnvelope[]>();

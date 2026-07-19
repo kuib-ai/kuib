@@ -60,8 +60,6 @@ const main = async function (): Promise<void> {
       meshConfigFile: values["mesh-config"],
       database: values["db-path"],
       log: values["log-path"],
-      daemonSocket: values["daemon-socket"],
-      engineSocket: values["engine-socket"],
       sessionID: values.session,
       targetNode: values["target-node"],
       model: values.model,
@@ -91,9 +89,9 @@ const main = async function (): Promise<void> {
       return run.serve(bootstrap, deviceID, log);
     }
     case "ui": {
-      const forwarded = Object.entries(values).flatMap(([key, value]) =>
-        value === undefined ? [] : [`--${key}`, value],
-      );
+      const forwarded = Object.entries(values).flatMap(function ([key, value]) {
+        return value === undefined ? [] : [`--${key}`, value];
+      });
       return run.ui(
         bootstrap.paths.database,
         bootstrap.paths.engineSocket,

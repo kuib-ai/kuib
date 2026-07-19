@@ -11,7 +11,7 @@ const execAsync = promisify(exec);
 const executeCommand = Trpc.procedure
   .input(ExecuteCommandInput)
   .output(ExecuteCommandOutput)
-  .mutation(async ({ input }) => {
+  .mutation(async function ({ input }) {
     const [error, result] = await Std.withError(
       execAsync(input.command, {
         cwd: input.cwd ?? process.cwd(),

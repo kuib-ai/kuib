@@ -70,9 +70,9 @@ const detectTailscaleIp = function (
   if (override !== undefined && override.length > 0) {
     return override;
   }
-  const [err, out] = Std.withError(() =>
-    Bun.spawnSync(["tailscale", "ip", "-4"]).stdout.toString().trim(),
-  );
+  const [err, out] = Std.withError(function () {
+    return Bun.spawnSync(["tailscale", "ip", "-4"]).stdout.toString().trim();
+  });
 
   if (err || !out) {
     return null;
@@ -225,7 +225,9 @@ const main = async function (): Promise<void> {
         return json({ error: "too many attempts" }, 429, ch);
       }
       pairAttempts++;
-      const body = (await req.json().catch(() => ({}))) as { code?: string };
+      const body = (await req.json().catch(function () {
+        return {};
+      })) as { code?: string };
       if (body.code !== pairing.code) {
         return json({ error: "bad code" }, 401, ch);
       }
@@ -282,13 +284,15 @@ const main = async function (): Promise<void> {
     if (url.pathname === "/api/events/since" && req.method === "GET") {
       const afterSeq = Number(url.searchParams.get("afterSeq") ?? "-1");
       const batch: EventEnvelope[] = [];
-      reader.replay(sessionID, afterSeq, (envelope) => batch.push(envelope));
+      reader.replay(sessionID, afterSeq, function (envelope) {
+        return batch.push(envelope);
+      });
       return json({ events: batch }, 200, ch);
     }
 
     if (url.pathname === "/api/status" && req.method === "GET") {
       let headSeq = -1;
-      reader.replay(sessionID, -1, (envelope) => {
+      reader.replay(sessionID, -1, function (envelope) {
         if (envelope.seq > headSeq) {
           headSeq = envelope.seq;
         }
@@ -308,7 +312,9 @@ const main = async function (): Promise<void> {
           ch,
         );
       }
-      const body = (await req.json().catch(() => ({}))) as {
+      const body = (await req.json().catch(function () {
+        return {};
+      })) as {
         prompt?: string;
         sessionID?: string;
       };
@@ -328,8 +334,10 @@ const main = async function (): Promise<void> {
         daemonClient,
         eventLog,
       })
-        .catch(() => {})
-        .finally(() => bump(submitSession, -1));
+        .catch(function () {})
+        .finally(function () {
+          return bump(submitSession, -1);
+        });
       return json({ ok: true }, 202, ch);
     }
 
@@ -346,7 +354,9 @@ const main = async function (): Promise<void> {
         start(controller): void {
           const enc = new TextEncoder();
           const push = function (text: string): void {
-            Std.withError(() => controller.enqueue(enc.encode(text)));
+            Std.withError(function () {
+              return controller.enqueue(enc.encode(text));
+            });
           };
           const send = function (envelope: EventEnvelope): void {
             push(
@@ -354,7 +364,9 @@ const main = async function (): Promise<void> {
             );
           };
           unsubscribe = reader.subscribe(sessionID, send, afterSeq);
-          heartbeat = setInterval(() => push(`: ping\n\n`), 15000);
+          heartbeat = setInterval(function () {
+            return push(`: ping\n\n`);
+          }, 15000);
         },
         cancel(): void {
           if (heartbeat !== null) {
@@ -377,9 +389,9 @@ const main = async function (): Promise<void> {
   };
 
   const bindHosts = ["127.0.0.1", ...(tsIp ? [tsIp] : [])];
-  const servers = bindHosts.map((hostname) =>
-    Bun.serve({ hostname, port, idleTimeout: 255, fetch: handler }),
-  );
+  const servers = bindHosts.map(function (hostname) {
+    return Bun.serve({ hostname, port, idleTimeout: 255, fetch: handler });
+  });
   const server = servers[0]!;
 
   pairing = { code: mintPairingCode(), expiresAt: Date.now() + 5 * 60 * 1000 };
@@ -394,7 +406,7 @@ const main = async function (): Promise<void> {
   );
 };
 
-void main().catch((error: Error) => {
+void main().catch(function (error: Error) {
   process.stderr.write(`kuib web failed to start: ${error.message}\n`);
   process.exit(1);
 });

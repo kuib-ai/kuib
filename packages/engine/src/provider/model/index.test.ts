@@ -2,8 +2,8 @@ import { describe, it, expect } from "bun:test";
 import Protocol from "@kuib-ai/protocol";
 import createModel from "./index";
 
-describe("createModel", () => {
-  it("builds an openai-compatible model from the factory map", () => {
+describe("createModel", function () {
+  it("builds an openai-compatible model from the factory map", function () {
     const model = createModel(
       Protocol.Provider.ModelConfig.parse({
         npm: "@ai-sdk/openai-compatible",
@@ -14,7 +14,7 @@ describe("createModel", () => {
     expect(model).toBeDefined();
   });
 
-  it("builds an anthropic model from the factory map", () => {
+  it("builds an anthropic model from the factory map", function () {
     const model = createModel(
       Protocol.Provider.ModelConfig.parse({
         npm: "@ai-sdk/anthropic",
@@ -25,7 +25,7 @@ describe("createModel", () => {
     expect(model).toBeDefined();
   });
 
-  it("builds a groq model from the factory map", () => {
+  it("builds a groq model from the factory map", function () {
     const model = createModel(
       Protocol.Provider.ModelConfig.parse({
         npm: "@ai-sdk/groq",
@@ -36,27 +36,27 @@ describe("createModel", () => {
     expect(model).toBeDefined();
   });
 
-  it("throws on an unknown provider package", () => {
-    expect(() =>
-      createModel(
+  it("throws on an unknown provider package", function () {
+    expect(function () {
+      return createModel(
         Protocol.Provider.ModelConfig.parse({
           npm: "@ai-sdk/mystery",
           modelID: "m1",
           options: {},
         }),
-      ),
-    ).toThrow(/unknown provider package/);
+      );
+    }).toThrow(/unknown provider package/);
   });
 
-  it("throws when openai-compatible is missing baseURL", () => {
-    expect(() =>
-      createModel(
+  it("throws when openai-compatible is missing baseURL", function () {
+    expect(function () {
+      return createModel(
         Protocol.Provider.ModelConfig.parse({
           npm: "@ai-sdk/openai-compatible",
           modelID: "m1",
           options: { apiKey: "k" },
         }),
-      ),
-    ).toThrow(/baseURL is required/);
+      );
+    }).toThrow(/baseURL is required/);
   });
 });

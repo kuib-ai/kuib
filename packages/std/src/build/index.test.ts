@@ -3,8 +3,8 @@ import { z } from "zod";
 import Protocol from "@kuib-ai/protocol";
 import build from "./index";
 
-describe("build", () => {
-  it("fills literal code with autocomplete-friendly input", () => {
+describe("build", function () {
+  it("fills literal code with autocomplete-friendly input", function () {
     const err = build(Protocol.Error.ErrorDaemonUnreachable, {
       message: "socket down",
       endpoint: "/tmp/x.sock",
@@ -17,14 +17,14 @@ describe("build", () => {
     });
   });
 
-  it("works for ErrorUnknown with only message", () => {
+  it("works for ErrorUnknown with only message", function () {
     expect(build(Protocol.Error.ErrorUnknown, { message: "boom" })).toEqual({
       code: Protocol.Error.ErrorCodeEnum.UNKNOWN,
       message: "boom",
     });
   });
 
-  it("keeps schema literals even if input tries to override them", () => {
+  it("keeps schema literals even if input tries to override them", function () {
     const schema = z.object({
       code: z.literal("X"),
       message: z.string(),
@@ -36,7 +36,7 @@ describe("build", () => {
     });
   });
 
-  it("fills literals wrapped in optional/default", () => {
+  it("fills literals wrapped in optional/default", function () {
     const schema = z.object({
       code: z.literal("X").optional(),
       message: z.string(),
@@ -48,18 +48,18 @@ describe("build", () => {
     });
   });
 
-  it("rejects multi-value literals", () => {
+  it("rejects multi-value literals", function () {
     const schema = z.object({
       code: z.literal(["A", "B"]),
       message: z.string(),
     });
 
-    expect(() => build(schema, { message: "m" })).toThrow(
-      /multi-value literal/,
-    );
+    expect(function () {
+      return build(schema, { message: "m" });
+    }).toThrow(/multi-value literal/);
   });
 
-  it("applies zod defaults for non-literal fields", () => {
+  it("applies zod defaults for non-literal fields", function () {
     const schema = z.object({
       code: z.literal("X"),
       message: z.string(),
@@ -73,7 +73,7 @@ describe("build", () => {
     });
   });
 
-  it("caches literals per schema object identity", () => {
+  it("caches literals per schema object identity", function () {
     const schema = z.object({
       code: z.literal("X"),
       message: z.string(),

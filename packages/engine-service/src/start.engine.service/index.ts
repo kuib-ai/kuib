@@ -31,13 +31,13 @@ type EngineServiceHandle = {
 const DEFAULT_REAP_IDLE_MS = 5000;
 
 const socketIsLive = function (socketPath: string): Promise<boolean> {
-  return new Promise<boolean>((resolve) => {
+  return new Promise<boolean>(function (resolve) {
     const probe = new net.Socket();
-    probe.once("connect", () => {
+    probe.once("connect", function () {
       probe.destroy();
       resolve(true);
     });
-    probe.once("error", () => {
+    probe.once("error", function () {
       probe.destroy();
       resolve(false);
     });
@@ -75,9 +75,15 @@ const startEngineService = function (
       socket.destroy();
     }
     sockets.clear();
-    await new Promise<void>((res) => server.close(() => res()));
+    await new Promise<void>(function (res) {
+      return server.close(function () {
+        return res();
+      });
+    });
     await Std.withError(
-      Promise.resolve().then(() => unlinkSync(params.socketPath)),
+      Promise.resolve().then(function () {
+        return unlinkSync(params.socketPath);
+      }),
     );
   };
 
@@ -86,7 +92,7 @@ const startEngineService = function (
     if (activeRuns !== 0 || attachedConnections !== 0) {
       return;
     }
-    setImmediate(() => {
+    setImmediate(function () {
       if (closed || activeRuns !== 0 || attachedConnections !== 0) {
         return;
       }
@@ -109,7 +115,9 @@ const startEngineService = function (
 
   const handleFrame = async function (line: string): Promise<void> {
     const [parseErr, raw] = await Std.withError(
-      Promise.resolve().then(() => JSON.parse(line)),
+      Promise.resolve().then(function () {
+        return JSON.parse(line);
+      }),
     );
     if (parseErr) {
       return;
@@ -132,14 +140,16 @@ const startEngineService = function (
       state.running = true;
       activeRuns++;
       clearReapTimer();
-      await Std.withScope({ sessionID: msg.sessionID }, async () => {
+      await Std.withScope({ sessionID: msg.sessionID }, async function () {
         let prompt: string | undefined = msg.prompt;
         while (prompt !== undefined) {
           const [runErr] = await Std.withError(
             params.runTurn({
               sessionID: msg.sessionID,
               prompt,
-              takePending: () => state.pending.splice(0),
+              takePending: function () {
+                return state.pending.splice(0);
+              },
             }),
           );
           void runErr;
@@ -162,7 +172,7 @@ const startEngineService = function (
     clearReapTimer();
     let buf = "";
     socket.setEncoding("utf8");
-    socket.on("data", (chunk: string) => {
+    socket.on("data", function (chunk: string) {
       buf += chunk;
       const lines = buf.split("\n");
       buf = lines.pop() ?? "";
@@ -172,15 +182,15 @@ const startEngineService = function (
         }
       }
     });
-    socket.on("close", () => {
+    socket.on("close", function () {
       sockets.delete(socket);
       attachedConnections--;
       maybeReap();
     });
-    socket.on("error", () => {});
+    socket.on("error", function () {});
   };
 
-  return new Promise<EngineServiceHandle>((resolve, reject) => {
+  return new Promise<EngineServiceHandle>(function (resolve, reject) {
     const onError = function (err: NodeJS.ErrnoException): void {
       if (err.code === "EADDRINUSE") {
         const bindErr: NodeJS.ErrnoException = new Error(
@@ -193,11 +203,11 @@ const startEngineService = function (
       reject(err);
     };
 
-    server.on("error", (err: NodeJS.ErrnoException) => {
+    server.on("error", function (err: NodeJS.ErrnoException) {
       onError(err);
     });
     server.on("connection", onConnection);
-    void socketIsLive(params.socketPath).then(async (live) => {
+    void socketIsLive(params.socketPath).then(async function (live) {
       if (live) {
         const bindErr: NodeJS.ErrnoException = new Error(
           `engine-service already running at ${params.socketPath}`,
@@ -207,11 +217,13 @@ const startEngineService = function (
         return;
       }
       await Std.withError(
-        Promise.resolve().then(() => unlinkSync(params.socketPath)),
+        Promise.resolve().then(function () {
+          return unlinkSync(params.socketPath);
+        }),
       );
-      server.listen(params.socketPath, () => {
+      server.listen(params.socketPath, function () {
         server.removeAllListeners("error");
-        server.on("error", () => {});
+        server.on("error", function () {});
         maybeReap();
         resolve({ close: doClose });
       });

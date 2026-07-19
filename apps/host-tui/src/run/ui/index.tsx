@@ -24,7 +24,7 @@ const ui = async function (
   });
   const eventLog = EventLogSqlite.createSqliteReader(dbPath);
   const onSubmit = function (prompt: string): void {
-    void Std.withScope({ sessionID }, async () => {
+    void Std.withScope({ sessionID }, async function () {
       const [cause] = await Std.withError(
         client.submit({
           type: Protocol.ServiceMessage.ServiceMessageTypeEnum.SUBMIT,
@@ -39,15 +39,22 @@ const ui = async function (
   };
 
   render(
-    () => (
-      <App
-        eventLog={eventLog}
-        sessionID={sessionID}
-        deviceLabel={deviceLabel}
-        onSubmit={onSubmit}
-      />
-    ),
-    { exitOnCtrlC: true, onDestroy: () => process.exit(0) },
+    function () {
+      return (
+        <App
+          eventLog={eventLog}
+          sessionID={sessionID}
+          deviceLabel={deviceLabel}
+          onSubmit={onSubmit}
+        />
+      );
+    },
+    {
+      exitOnCtrlC: true,
+      onDestroy: function () {
+        return process.exit(0);
+      },
+    },
   );
 };
 

@@ -24,7 +24,9 @@ const resolveDaemonClient = function (
   return Daemon.resolveDaemonEndpoint(
     config.daemonURL,
     config.daemonSocket,
-  ).then((endpoint) => Engine.DaemonClient.createDaemonClient(endpoint));
+  ).then(function (endpoint) {
+    return Engine.DaemonClient.createDaemonClient(endpoint);
+  });
 };
 
 export default resolveDaemonClient;

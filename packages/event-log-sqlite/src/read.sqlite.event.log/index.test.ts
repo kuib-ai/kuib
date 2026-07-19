@@ -26,7 +26,9 @@ const dbPath = function (slug: string): string {
 };
 
 const wait = function (ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(function (resolve) {
+    return setTimeout(resolve, ms);
+  });
 };
 
 const waitUntil = function (
@@ -46,12 +48,16 @@ const waitUntil = function (
       reject(new Error("waitUntil timed out"));
       return;
     }
-    setTimeout(() => tick(resolve, reject), POLL_MS);
+    setTimeout(function () {
+      return tick(resolve, reject);
+    }, POLL_MS);
   };
-  return new Promise<void>((resolve, reject) => tick(resolve, reject));
+  return new Promise<void>(function (resolve, reject) {
+    return tick(resolve, reject);
+  });
 };
 
-afterAll(() => {
+afterAll(function () {
   for (const p of paths) {
     rmSync(p, { force: true });
     rmSync(`${p}-wal`, { force: true });
@@ -59,8 +65,8 @@ afterAll(() => {
   }
 });
 
-describe("read sqlite event log", () => {
-  it("rejects append with a read-only error", async () => {
+describe("read sqlite event log", function () {
+  it("rejects append with a read-only error", async function () {
     const path = dbPath("readonly");
     createSqliteEventLog(path);
     const reader = createSqliteReader(path, POLL_MS);
@@ -69,7 +75,7 @@ describe("read sqlite event log", () => {
     );
   });
 
-  it("subscribe without afterSeq only delivers events appended after subscription", async () => {
+  it("subscribe without afterSeq only delivers events appended after subscription", async function () {
     const path = dbPath("tail-only");
     const writer = createSqliteEventLog(path);
     await writer.append(sessionID, deviceID, event);
@@ -77,15 +83,19 @@ describe("read sqlite event log", () => {
 
     const reader = createSqliteReader(path, POLL_MS);
     const seen: number[] = [];
-    const cancel = reader.subscribe(sessionID, (e) => seen.push(e.seq));
+    const cancel = reader.subscribe(sessionID, function (e) {
+      return seen.push(e.seq);
+    });
     await writer.append(sessionID, deviceID, event);
-    await waitUntil(() => seen.length === 1, 2000);
+    await waitUntil(function () {
+      return seen.length === 1;
+    }, 2000);
     cancel();
 
     expect(seen).toEqual([2]);
   });
 
-  it("subscribe with afterSeq replays from floor then tails new rows", async () => {
+  it("subscribe with afterSeq replays from floor then tails new rows", async function () {
     const path = dbPath("replay-then-tail");
     const writer = createSqliteEventLog(path);
     await writer.append(sessionID, deviceID, event);
@@ -93,22 +103,32 @@ describe("read sqlite event log", () => {
 
     const reader = createSqliteReader(path, POLL_MS);
     const seen: number[] = [];
-    const cancel = reader.subscribe(sessionID, (e) => seen.push(e.seq), 0);
+    const cancel = reader.subscribe(
+      sessionID,
+      function (e) {
+        return seen.push(e.seq);
+      },
+      0,
+    );
     expect(seen).toEqual([1]);
 
     await writer.append(sessionID, deviceID, event);
-    await waitUntil(() => seen.length === 2, 2000);
+    await waitUntil(function () {
+      return seen.length === 2;
+    }, 2000);
     cancel();
 
     expect(seen).toEqual([1, 2]);
   });
 
-  it("cancel clears the interval so no further events arrive", async () => {
+  it("cancel clears the interval so no further events arrive", async function () {
     const path = dbPath("cancel");
     const writer = createSqliteEventLog(path);
     const reader = createSqliteReader(path, POLL_MS);
     const seen: number[] = [];
-    const cancel = reader.subscribe(sessionID, (e) => seen.push(e.seq));
+    const cancel = reader.subscribe(sessionID, function (e) {
+      return seen.push(e.seq);
+    });
     cancel();
     await writer.append(sessionID, deviceID, event);
     await wait(POLL_MS * 5);

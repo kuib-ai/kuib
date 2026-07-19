@@ -5,11 +5,13 @@ import { tmpdir } from "node:os";
 import Protocol from "@kuib-ai/protocol";
 import ensureLocalDaemon from "./index";
 
-describe("ensureLocalDaemon", () => {
-  it("threads socketOverride through resolve+ensure and returns a UNIX endpoint with the resolved socketPath", async () => {
+describe("ensureLocalDaemon", function () {
+  it("threads socketOverride through resolve+ensure and returns a UNIX endpoint with the resolved socketPath", async function () {
     const socketPath = join(tmpdir(), `kuib-test-${Date.now()}.sock`);
     const server = net.createServer();
-    await new Promise<void>((resolve) => server.listen(socketPath, resolve));
+    await new Promise<void>(function (resolve) {
+      return server.listen(socketPath, resolve);
+    });
 
     const endpoint = await ensureLocalDaemon(socketPath);
 
@@ -20,6 +22,10 @@ describe("ensureLocalDaemon", () => {
         : "",
     ).toBe(socketPath);
 
-    await new Promise<void>((resolve) => server.close(() => resolve()));
+    await new Promise<void>(function (resolve) {
+      return server.close(function () {
+        return resolve();
+      });
+    });
   });
 });

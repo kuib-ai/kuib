@@ -6,8 +6,8 @@ const router = Trpc.router({ executeCommand });
 const createCaller = Trpc.createCallerFactory(router);
 const caller = createCaller({});
 
-describe("executeCommand procedure", () => {
-  it("returns stdout, empty stderr and exitCode 0 for a successful command", async () => {
+describe("executeCommand procedure", function () {
+  it("returns stdout, empty stderr and exitCode 0 for a successful command", async function () {
     const result = await caller.executeCommand({
       command: "printf 'hello'",
     });
@@ -16,7 +16,7 @@ describe("executeCommand procedure", () => {
     expect(result.exitCode).toBe(0);
   });
 
-  it("maps a failing command to its exit code with captured stdout/stderr", async () => {
+  it("maps a failing command to its exit code with captured stdout/stderr", async function () {
     const result = await caller.executeCommand({
       command: "printf 'out'; printf 'err' 1>&2; exit 3",
     });
@@ -25,7 +25,7 @@ describe("executeCommand procedure", () => {
     expect(result.exitCode).toBe(3);
   });
 
-  it("falls back to exitCode 1 and error.message for a non-existent command", async () => {
+  it("falls back to exitCode 1 and error.message for a non-existent command", async function () {
     const result = await caller.executeCommand({
       command: "this_command_definitely_does_not_exist_kuib",
     });
@@ -33,7 +33,7 @@ describe("executeCommand procedure", () => {
     expect(result.stderr.length).toBeGreaterThan(0);
   });
 
-  it("honours cwd and merges provided env over process defaults", async () => {
+  it("honours cwd and merges provided env over process defaults", async function () {
     const result = await caller.executeCommand({
       command: "pwd; printf '%s' \"$KUIB_TEST_VAR\"",
       cwd: "/",

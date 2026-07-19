@@ -29,7 +29,7 @@ const writeConfig = function (source: string): string {
   return path;
 };
 
-beforeEach(() => {
+beforeEach(function () {
   workspace = mkdtempSync(join(tmpdir(), "kuib-config-"));
   writeFileSync(join(workspace, "pnpm-workspace.yaml"), "packages: []\n");
   for (const key of Object.keys(process.env)) {
@@ -39,13 +39,13 @@ beforeEach(() => {
   }
 });
 
-afterEach(() => {
+afterEach(function () {
   rmSync(workspace, { recursive: true, force: true });
   resetEnv();
 });
 
-describe("bootstrapConfig", () => {
-  it("loads defaults and derives all development application paths", () => {
+describe("bootstrapConfig", function () {
+  it("loads defaults and derives all development application paths", function () {
     const result = bootstrapConfig({ cwd: workspace, mode: "test" });
 
     expect(result.config.model.default).toBe("groq/llama-3.3-70b-versatile");
@@ -69,7 +69,7 @@ describe("bootstrapConfig", () => {
     expect(existsSync(dirname(result.paths.database))).toBe(false);
   });
 
-  it("applies config file, environment, then CLI precedence", () => {
+  it("applies config file, environment, then CLI precedence", function () {
     writeConfig(`
 [node]
 label = "file@node"
@@ -102,7 +102,7 @@ port = 4000
     expect(result.config.web.port).toBe(6000);
   });
 
-  it("loads an alternate config file selected by CLI", () => {
+  it("loads an alternate config file selected by CLI", function () {
     const path = join(workspace, "alternate.toml");
     writeFileSync(path, '[model]\ndefault = "groq/alternate"\n');
 
@@ -116,7 +116,7 @@ port = 4000
     expect(result.config.model.default).toBe("groq/alternate");
   });
 
-  it("derives production paths from platform base directories", () => {
+  it("derives production paths from platform base directories", function () {
     const base = join(workspace, "xdg");
     process.env["XDG_CONFIG_HOME"] = join(base, "config");
     process.env["XDG_DATA_HOME"] = join(base, "data");
@@ -137,7 +137,7 @@ port = 4000
     expect(result.paths.cacheDir).toBe(join(base, "cache", "kuib"));
   });
 
-  it("keeps secrets and operational overrides outside KuibConfig", () => {
+  it("keeps secrets and operational overrides outside KuibConfig", function () {
     process.env["KUIB_GROQ_API_KEY"] = "secret";
     process.env["KUIB_DAEMON_URL"] = "http://node.test:8080";
     process.env["KUIB_DB_PATH"] = join(workspace, "custom.db");
@@ -150,7 +150,7 @@ port = 4000
     expect("groqApiKey" in result.config).toBe(false);
   });
 
-  it("creates application directories only when explicitly requested", () => {
+  it("creates application directories only when explicitly requested", function () {
     const result = bootstrapConfig({ cwd: workspace, mode: "test" });
 
     ensureAppPaths(result.paths);
@@ -161,9 +161,11 @@ port = 4000
     expect(existsSync(result.paths.cacheDir)).toBe(true);
   });
 
-  it("rejects unknown config fields instead of silently ignoring typos", () => {
+  it("rejects unknown config fields instead of silently ignoring typos", function () {
     writeConfig('[logging]\nlevle = "debug"\n');
 
-    expect(() => bootstrapConfig({ cwd: workspace, mode: "test" })).toThrow();
+    expect(function () {
+      return bootstrapConfig({ cwd: workspace, mode: "test" });
+    }).toThrow();
   });
 });

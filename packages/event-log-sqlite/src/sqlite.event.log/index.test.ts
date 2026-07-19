@@ -15,11 +15,13 @@ const newLog = function () {
   return createSqliteEventLog(":memory:");
 };
 
-describe("sqlite event log", () => {
-  it("assigns monotonic seq from 0 and notifies subscribers", async () => {
+describe("sqlite event log", function () {
+  it("assigns monotonic seq from 0 and notifies subscribers", async function () {
     const log = newLog();
     const seen: number[] = [];
-    log.subscribe(sessionID, (envelope) => seen.push(envelope.seq));
+    log.subscribe(sessionID, function (envelope) {
+      return seen.push(envelope.seq);
+    });
     const a = await log.append(sessionID, deviceID, event);
     const b = await log.append(sessionID, deviceID, event);
     expect(a.seq).toBe(0);
@@ -27,32 +29,40 @@ describe("sqlite event log", () => {
     expect(seen).toEqual([0, 1]);
   });
 
-  it("replays only events after the seq cursor in order", async () => {
+  it("replays only events after the seq cursor in order", async function () {
     const log = newLog();
     await log.append(sessionID, deviceID, event);
     await log.append(sessionID, deviceID, event);
     await log.append(sessionID, deviceID, event);
     const seen: number[] = [];
-    log.replay(sessionID, 0, (envelope) => seen.push(envelope.seq));
+    log.replay(sessionID, 0, function (envelope) {
+      return seen.push(envelope.seq);
+    });
     expect(seen).toEqual([1, 2]);
   });
 
-  it("subscribe with afterSeq replays then delivers live appends", async () => {
+  it("subscribe with afterSeq replays then delivers live appends", async function () {
     const log = newLog();
     await log.append(sessionID, deviceID, event);
     await log.append(sessionID, deviceID, event);
     const seen: number[] = [];
-    log.subscribe(sessionID, (envelope) => seen.push(envelope.seq), 0);
-    await log.append(sessionID, deviceID, event);
-    expect(seen).toEqual([1, 2]);
-  });
-
-  it("stops delivering after unsubscribe", async () => {
-    const log = newLog();
-    const seen: number[] = [];
-    const unsubscribe = log.subscribe(sessionID, (envelope) =>
-      seen.push(envelope.seq),
+    log.subscribe(
+      sessionID,
+      function (envelope) {
+        return seen.push(envelope.seq);
+      },
+      0,
     );
+    await log.append(sessionID, deviceID, event);
+    expect(seen).toEqual([1, 2]);
+  });
+
+  it("stops delivering after unsubscribe", async function () {
+    const log = newLog();
+    const seen: number[] = [];
+    const unsubscribe = log.subscribe(sessionID, function (envelope) {
+      return seen.push(envelope.seq);
+    });
     await log.append(sessionID, deviceID, event);
     unsubscribe();
     await log.append(sessionID, deviceID, event);

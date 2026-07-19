@@ -1,7 +1,7 @@
 // @context @journal/house-style-linting
 import requireContextLink from "./rules/require.context.link/index.js";
 import dotCaseFilename from "./rules/dot.case.filename/index.js";
-import noTopLevelArrow from "./rules/no.top.level.arrow/index.js";
+import noArrow from "./rules/no.arrow/index.js";
 import namedExportsAreTypes from "./rules/named.exports.are.types/index.js";
 import noProseComments from "./rules/no.prose.comments/index.js";
 import noDestructureProps from "./rules/no.destructure.props/index.js";
@@ -16,7 +16,7 @@ import noReExports from "./rules/no.re.exports/index.js";
 const rules = {
   "require-context-link": requireContextLink,
   "dot-case-filename": dotCaseFilename,
-  "no-top-level-arrow": noTopLevelArrow,
+  "no-arrow": noArrow,
   "named-exports-are-types": namedExportsAreTypes,
   "no-prose-comments": noProseComments,
   "no-destructure-props": noDestructureProps,
@@ -32,7 +32,7 @@ const rules = {
 const recommendedRules = {
   "house/require-context-link": "error",
   "house/dot-case-filename": "error",
-  "house/no-top-level-arrow": "error",
+  "house/no-arrow": "error",
   "house/named-exports-are-types": "error",
   "house/no-prose-comments": "error",
   "house/no-destructure-props": "error",

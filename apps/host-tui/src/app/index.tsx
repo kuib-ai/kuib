@@ -30,13 +30,18 @@ const App = function (props: AppProps) {
   const [promptRows, setPromptRows] = createSignal(PROMPT_MIN_ROWS);
   let prompt: TextareaRenderable | undefined;
 
-  const entries = (): TranscriptEntry[] =>
-    Transcript.foldTranscript(envelopes());
+  const entries = function (): TranscriptEntry[] {
+    return Transcript.foldTranscript(envelopes());
+  };
 
-  onMount(() => {
+  onMount(function () {
     const unsubscribe = props.eventLog.subscribe(
       props.sessionID,
-      (envelope) => setEnvelopes((prev) => [...prev, envelope]),
+      function (envelope) {
+        return setEnvelopes(function (prev) {
+          return [...prev, envelope];
+        });
+      },
       -1,
     );
     onCleanup(unsubscribe);
@@ -68,11 +73,13 @@ const App = function (props: AppProps) {
       <box border title="Conversation" flexDirection="column" flexGrow={1}>
         <scrollbox flexGrow={1} stickyScroll stickyStart="bottom">
           <For each={entries()}>
-            {(entry) => (
-              <text fg={roleColor[entry.role]}>
-                {entry.role}: {entry.text}
-              </text>
-            )}
+            {function (entry) {
+              return (
+                <text fg={roleColor[entry.role]}>
+                  {entry.role}: {entry.text}
+                </text>
+              );
+            }}
           </For>
         </scrollbox>
       </box>
@@ -92,7 +99,7 @@ const App = function (props: AppProps) {
         </box>
         <box border height={promptRows() + 2} marginTop={1}>
           <textarea
-            ref={(renderable: TextareaRenderable) => {
+            ref={function (renderable: TextareaRenderable) {
               prompt = renderable;
             }}
             focused

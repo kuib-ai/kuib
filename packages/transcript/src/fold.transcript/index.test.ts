@@ -20,8 +20,8 @@ const envelope = function (event: AnyEvent, seq: number): EventEnvelope {
   });
 };
 
-describe("foldTranscript", () => {
-  it("joins user message text parts into a single user entry", () => {
+describe("foldTranscript", function () {
+  it("joins user message text parts into a single user entry", function () {
     const event = Protocol.Event.UserMessageSubmitted.parse({
       type: Protocol.Event.EventTypeEnum.USER_MESSAGE_SUBMITTED,
       messageID: "m1",
@@ -48,7 +48,7 @@ describe("foldTranscript", () => {
     ]);
   });
 
-  it("accumulates reasoning and text deltas per messageID preserving order", () => {
+  it("accumulates reasoning and text deltas per messageID preserving order", function () {
     const reasoning = function (delta: string): AnyEvent {
       return Protocol.Event.ReasoningDelta.parse({
         type: Protocol.Event.EventTypeEnum.REASONING_DELTA,
@@ -83,7 +83,7 @@ describe("foldTranscript", () => {
     ]);
   });
 
-  it("segments assistant text around tool results preserving chronology", () => {
+  it("segments assistant text around tool results preserving chronology", function () {
     const text = function (delta: string): AnyEvent {
       return Protocol.Event.TextDelta.parse({
         type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
@@ -119,7 +119,7 @@ describe("foldTranscript", () => {
     ]);
   });
 
-  it("segments assistant text around an injected mid-turn user message", () => {
+  it("segments assistant text around an injected mid-turn user message", function () {
     const text = function (delta: string): AnyEvent {
       return Protocol.Event.TextDelta.parse({
         type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
@@ -154,7 +154,7 @@ describe("foldTranscript", () => {
     ]);
   });
 
-  it("prefixes completed tool output with ✓ and failed with ✗, ignoring unknown events", () => {
+  it("prefixes completed tool output with ✓ and failed with ✗, ignoring unknown events", function () {
     const completed = Protocol.Event.ToolCallCompleted.parse({
       type: Protocol.Event.EventTypeEnum.TOOL_CALL_COMPLETED,
       messageID: "m3",

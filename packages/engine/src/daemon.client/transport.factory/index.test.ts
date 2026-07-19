@@ -27,12 +27,12 @@ const installCapturingFetch = function (): Capture[] {
   return captured;
 };
 
-describe("createDaemonClient transport factory", () => {
-  afterEach(() => {
+describe("createDaemonClient transport factory", function () {
+  afterEach(function () {
     globalThis.fetch = realFetch;
   });
 
-  it("routes the TCP branch through endpoint.url with no unix socket init", async () => {
+  it("routes the TCP branch through endpoint.url with no unix socket init", async function () {
     const captured = installCapturingFetch();
     const endpoint: AnyEndpoint = {
       kind: Protocol.Endpoint.EndpointKindEnum.TCP,
@@ -47,7 +47,7 @@ describe("createDaemonClient transport factory", () => {
     expect(captured[0]!.init?.unix).toBe(undefined);
   });
 
-  it("injects the unix socketPath via custom fetch init for the unix branch", async () => {
+  it("injects the unix socketPath via custom fetch init for the unix branch", async function () {
     const captured = installCapturingFetch();
     const endpoint: AnyEndpoint = {
       kind: Protocol.Endpoint.EndpointKindEnum.UNIX,

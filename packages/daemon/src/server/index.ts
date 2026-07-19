@@ -9,7 +9,7 @@ const createDaemonServer = function (socketPath: string, port?: number) {
   server.listen(socketPath);
   if (port !== undefined && !Number.isNaN(port)) {
     const tcpServer = createHTTPServer({ router: daemonRouter });
-    tcpServer.on("error", () => {});
+    tcpServer.on("error", function () {});
     tcpServer.listen(port);
   }
   return server;

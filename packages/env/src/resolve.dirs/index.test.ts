@@ -5,8 +5,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import resolveDirs from "./index";
 
-describe("resolveDirs", () => {
-  it("returns the five bases under dist in development", () => {
+describe("resolveDirs", function () {
+  it("returns the five bases under dist in development", function () {
     const root = realpathSync(mkdtempSync(join(tmpdir(), "env-dirs-")));
     writeFileSync(join(root, "pnpm-workspace.yaml"), "packages: []\n");
     const nested = join(root, "apps", "host-tui");
@@ -29,7 +29,7 @@ describe("resolveDirs", () => {
     process.env["NODE_ENV"] = prevNodeEnv;
   });
 
-  it("returns platform bases when { dev: false }", () => {
+  it("returns platform bases when { dev: false }", function () {
     const base = mkdtempSync(join(tmpdir(), "env-bases-"));
     const prevNodeEnv = process.env["NODE_ENV"];
     const prevConfig = process.env["XDG_CONFIG_HOME"];

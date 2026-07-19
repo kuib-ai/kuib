@@ -32,8 +32,8 @@ ruleTester.run("no-cross-package-relative", rule, {
   ],
 });
 
-describe("no-cross-package-relative message", () => {
-  it("names the escaped package boundary", () => {
+describe("no-cross-package-relative message", function () {
+  it("names the escaped package boundary", function () {
     expect(rule.meta.messages.crossPackage).toContain("escapes package");
   });
 });

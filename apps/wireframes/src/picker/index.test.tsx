@@ -49,27 +49,33 @@ const fixtures: Wireframe[] = [
   },
 ];
 
-describe("wireframe picker", () => {
-  it("renders the first wireframe with its file path and flips with l/h", async () => {
+describe("wireframe picker", function () {
+  it("renders the first wireframe with its file path and flips with l/h", async function () {
     const { renderer, mockInput, waitForFrame, captureCharFrame } =
       await testRender(
-        () => (
-          <PickerHarness
-            workspaceRoot="/"
-            wireframes={fixtures}
-            onQuit={() => {}}
-          />
-        ),
+        function () {
+          return (
+            <PickerHarness
+              workspaceRoot="/"
+              wireframes={fixtures}
+              onQuit={function () {}}
+            />
+          );
+        },
         { width: 110, height: 24 },
       );
 
-    await waitForFrame((frame) => frame.includes("FRAME-SESSION"));
+    await waitForFrame(function (frame) {
+      return frame.includes("FRAME-SESSION");
+    });
     expect(
       captureCharFrame().includes("journal/host-layer/wireframes/session.md"),
     ).toBe(true);
 
     await mockInput.typeText("l");
-    await waitForFrame((frame) => frame.includes("FRAME-SELECTOR"));
+    await waitForFrame(function (frame) {
+      return frame.includes("FRAME-SELECTOR");
+    });
     expect(
       captureCharFrame().includes(
         "journal/discussions-ux/wireframes/selector.md",
@@ -77,49 +83,61 @@ describe("wireframe picker", () => {
     ).toBe(true);
 
     await mockInput.typeText("h");
-    await waitForFrame((frame) => frame.includes("FRAME-SESSION"));
+    await waitForFrame(function (frame) {
+      return frame.includes("FRAME-SESSION");
+    });
 
     renderer.destroy();
   });
 
-  it("clamps navigation at list boundaries", async () => {
+  it("clamps navigation at list boundaries", async function () {
     const { renderer, mockInput, waitForFrame } = await testRender(
-      () => (
-        <PickerHarness
-          workspaceRoot="/"
-          wireframes={fixtures}
-          onQuit={() => {}}
-        />
-      ),
+      function () {
+        return (
+          <PickerHarness
+            workspaceRoot="/"
+            wireframes={fixtures}
+            onQuit={function () {}}
+          />
+        );
+      },
       { width: 110, height: 24 },
     );
 
     await mockInput.typeText("h");
-    await waitForFrame((frame) => frame.includes("FRAME-SESSION"));
+    await waitForFrame(function (frame) {
+      return frame.includes("FRAME-SESSION");
+    });
 
     await mockInput.typeText("lll");
-    await waitForFrame((frame) => frame.includes("FRAME-SELECTOR"));
+    await waitForFrame(function (frame) {
+      return frame.includes("FRAME-SELECTOR");
+    });
 
     renderer.destroy();
   });
 
-  it("focuses a newly added wireframe when focus changes", async () => {
+  it("focuses a newly added wireframe when focus changes", async function () {
     const [wireframes, setWireframes] = createSignal(fixtures);
     const [focus, setFocus] = createSignal<PickerFocus | undefined>(undefined);
 
     const { renderer, waitForFrame } = await testRender(
-      () => (
-        <PickerHarness
-          workspaceRoot="/"
-          wireframes={wireframes()}
-          focus={focus()}
-          onQuit={() => {}}
-        />
-      ),
+      function () {
+        return (
+          <PickerHarness
+            workspaceRoot="/"
+            wireframes={wireframes()}
+            focus={focus()}
+            onQuit={function () {}}
+          />
+        );
+      },
       { width: 110, height: 24 },
     );
 
-    await waitForFrame((frame) => frame.includes("FRAME-SESSION"));
+    await waitForFrame(function (frame) {
+      return frame.includes("FRAME-SESSION");
+    });
 
     const added: Wireframe = {
       path: "journal/context-bootstrap/wireframes/project-map.md",
@@ -132,35 +150,43 @@ describe("wireframe picker", () => {
     setWireframes([...fixtures, added]);
     setFocus({ path: added.path });
 
-    await waitForFrame((frame) => frame.includes("FRAME-PROJECT-MAP"));
+    await waitForFrame(function (frame) {
+      return frame.includes("FRAME-PROJECT-MAP");
+    });
 
     renderer.destroy();
   });
 
-  it("clamps the selection when the list shrinks", async () => {
+  it("clamps the selection when the list shrinks", async function () {
     const [wireframes, setWireframes] = createSignal(fixtures);
 
     const { renderer, mockInput, waitForFrame } = await testRender(
-      () => (
-        <PickerHarness
-          workspaceRoot="/"
-          wireframes={wireframes()}
-          onQuit={() => {}}
-        />
-      ),
+      function () {
+        return (
+          <PickerHarness
+            workspaceRoot="/"
+            wireframes={wireframes()}
+            onQuit={function () {}}
+          />
+        );
+      },
       { width: 110, height: 24 },
     );
 
     await mockInput.typeText("l");
-    await waitForFrame((frame) => frame.includes("FRAME-SELECTOR"));
+    await waitForFrame(function (frame) {
+      return frame.includes("FRAME-SELECTOR");
+    });
 
     setWireframes(fixtures.slice(0, 1));
-    await waitForFrame((frame) => frame.includes("FRAME-SESSION"));
+    await waitForFrame(function (frame) {
+      return frame.includes("FRAME-SESSION");
+    });
 
     renderer.destroy();
   });
 
-  it("clips frame lines wider than the preview pane instead of wrapping", async () => {
+  it("clips frame lines wider than the preview pane instead of wrapping", async function () {
     const wide: Wireframe = {
       path: "journal/host-layer/wireframes/wide.md",
       entry: "host-layer",
@@ -171,58 +197,70 @@ describe("wireframe picker", () => {
     };
 
     const { renderer, waitForFrame, captureCharFrame } = await testRender(
-      () => (
-        <PickerHarness
-          workspaceRoot="/"
-          wireframes={[wide]}
-          onQuit={() => {}}
-        />
-      ),
+      function () {
+        return (
+          <PickerHarness
+            workspaceRoot="/"
+            wireframes={[wide]}
+            onQuit={function () {}}
+          />
+        );
+      },
       { width: 110, height: 24 },
     );
 
-    await waitForFrame((frame) => frame.includes("┌────"));
+    await waitForFrame(function (frame) {
+      return frame.includes("┌────");
+    });
     expect(captureCharFrame().includes("WRAPMARK")).toBe(false);
 
     renderer.destroy();
   });
 
-  it("calls onQuit on q", async () => {
+  it("calls onQuit on q", async function () {
     let quits = 0;
     const { renderer, mockInput, waitFor } = await testRender(
-      () => (
-        <PickerHarness
-          workspaceRoot="/"
-          wireframes={fixtures}
-          onQuit={() => {
-            quits++;
-          }}
-        />
-      ),
+      function () {
+        return (
+          <PickerHarness
+            workspaceRoot="/"
+            wireframes={fixtures}
+            onQuit={function () {
+              quits++;
+            }}
+          />
+        );
+      },
       { width: 110, height: 24 },
     );
 
     await mockInput.typeText("q");
-    await waitFor(() => quits === 1);
+    await waitFor(function () {
+      return quits === 1;
+    });
     expect(quits).toBe(1);
 
     renderer.destroy();
   });
 
-  it("toggles the left pane with <leader>p", async () => {
+  it("toggles the left pane with <leader>p", async function () {
     const { renderer, mockInput, renderOnce, waitForFrame, captureCharFrame } =
       await testRender(
-        () => (
-          <PickerHarness
-            workspaceRoot="/"
-            wireframes={fixtures}
-            onQuit={() => {}}
-          />
-        ),
+        function () {
+          return (
+            <PickerHarness
+              workspaceRoot="/"
+              wireframes={fixtures}
+              onQuit={function () {}}
+            />
+          );
+        },
         { width: 110, height: 24 },
       );
 
-    await waitForFrame((frame) => frame.includes("wireframes"));
+    await waitForFrame(function (frame) {
+      return frame.includes("wireframes");
+    });
     expect(captureCharFrame().includes("host-layer/session")).toBe(true);
 
     await pressLeaderP(mockInput, renderOnce);
@@ -238,8 +276,10 @@ describe("wireframe picker", () => {
     renderer.destroy();
   });
 
-  it("scrolls the preview with j/k when the left pane is closed", async () => {
-    const lines = Array.from({ length: 40 }, (_, index) => `LINE-${index}`);
+  it("scrolls the preview with j/k when the left pane is closed", async function () {
+    const lines = Array.from({ length: 40 }, function (_, index) {
+      return `LINE-${index}`;
+    });
     const tall: Wireframe = {
       path: "journal/host-layer/wireframes/tall.md",
       entry: "host-layer",
@@ -251,17 +291,21 @@ describe("wireframe picker", () => {
 
     const { renderer, mockInput, renderOnce, waitForFrame, captureCharFrame } =
       await testRender(
-        () => (
-          <PickerHarness
-            workspaceRoot="/"
-            wireframes={[tall]}
-            onQuit={() => {}}
-          />
-        ),
+        function () {
+          return (
+            <PickerHarness
+              workspaceRoot="/"
+              wireframes={[tall]}
+              onQuit={function () {}}
+            />
+          );
+        },
         { width: 110, height: 24 },
       );
 
-    await waitForFrame((frame) => frame.includes("LINE-0"));
+    await waitForFrame(function (frame) {
+      return frame.includes("LINE-0");
+    });
     harnessKeymap?.runCommand("toggle-left-pane");
     await renderOnce();
     expect(captureCharFrame().includes("j/k scroll")).toBe(true);

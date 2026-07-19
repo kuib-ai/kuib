@@ -2,9 +2,9 @@
 import { ESLintUtils } from "@typescript-eslint/utils";
 import * as path from "node:path";
 
-const createRule = ESLintUtils.RuleCreator(
-  (name) => `https://github.com/kuib-ai/kuib/tree/main/docs/rules/${name}.md`,
-);
+const createRule = ESLintUtils.RuleCreator(function (name) {
+  return `https://github.com/kuib-ai/kuib/tree/main/docs/rules/${name}.md`;
+});
 
 type MessageIds = "badDirectory" | "badFilename";
 

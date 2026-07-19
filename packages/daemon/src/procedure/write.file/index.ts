@@ -10,7 +10,7 @@ import WriteFileOutput from "../../io/write.file.output";
 const writeFileProcedure = Trpc.procedure
   .input(WriteFileInput)
   .output(WriteFileOutput)
-  .mutation(async ({ input }) => {
+  .mutation(async function ({ input }) {
     const [error] = await Std.withError(
       writeFile(expandHomePath(input.path), input.content),
     );

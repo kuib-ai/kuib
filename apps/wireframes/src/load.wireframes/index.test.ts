@@ -4,8 +4,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import loadWireframes from "./index";
 
-describe("loadWireframes", () => {
-  it("discovers journal/*/wireframes/*.md with entry, screen, and status", () => {
+describe("loadWireframes", function () {
+  it("discovers journal/*/wireframes/*.md with entry, screen, and status", function () {
     const root = mkdtempSync(join(tmpdir(), "kuib-wireframes-"));
     const dir = join(root, "journal", "host-layer", "wireframes");
     mkdirSync(dir, { recursive: true });
@@ -23,14 +23,14 @@ describe("loadWireframes", () => {
     expect(result[0]?.content.includes("FRAME")).toBe(true);
   });
 
-  it("returns empty for a journal without wireframes", () => {
+  it("returns empty for a journal without wireframes", function () {
     const root = mkdtempSync(join(tmpdir(), "kuib-wireframes-"));
     mkdirSync(join(root, "journal", "vision"), { recursive: true });
 
     expect(loadWireframes(root)).toEqual([]);
   });
 
-  it("marks missing frontmatter status as unknown", () => {
+  it("marks missing frontmatter status as unknown", function () {
     const root = mkdtempSync(join(tmpdir(), "kuib-wireframes-"));
     const dir = join(root, "journal", "discussions-ux", "wireframes");
     mkdirSync(dir, { recursive: true });

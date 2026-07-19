@@ -24,7 +24,7 @@ The author's cleanest hand-written code. Conventions:
 - **S3** directory/file names are **dot.case** (`is.active`, `theme.toggle`). Exempt: `index`, `*.slice`, `*.middleware`, `deprecated`, `*.d`.
 - **S4** pure-module barrels compose a **namespace object** (default-exported), never `export *`. (Component/service barrel conventions for Solid are still OPEN.)
 - **C1** the unit is `export default`; named exports must be types/interfaces/enums. **Package/app root barrels are stricter:** only `export default` the namespace object — no named type re-exports. Types are imported from section subpaths (`@kuib-ai/cli/cli.schema`), never from the package root. Enforced by `no-package-barrel-named-exports` + `no-named-import-from-package-root`.
-- **C2** units are `const x = function (...) {}` — never `function foo(){}` declarations, never arrows (allows generic `function <T>`). React/Solid components too.
+- **C2** units are `const x = function (...) {}` — never `function foo(){}` declarations, never arrows (allows generic `function <T>`). React/Solid components too. **Arrows are banned everywhere** (callbacks, object properties, nested) — not only top-level units. Escape hatch: `eslint-disable` (and `no-prose-comments` if a prose explanation is genuinely needed). Rule: `house/no-arrow` (renamed from `no-top-level-arrow`).
 - **C3** strict equality; loose/truthy only in direct boolean checks (`if (data)`).
 - **C4** no `try/catch` — errors handled explicitly via Go-style tuple helper (`const [err, val] = await withError(...)`). Override via `eslint-disable`.
 - **C5** labeled blocks (`Label: { … break Label; }`) are an intentional construct — `no-labels` stays OFF.
@@ -37,7 +37,7 @@ The author's cleanest hand-written code. Conventions:
 Custom (in the plugin), all `error` (severity flipped from `warn` 2026-07-01):
 
 - `require-context-link` — each file must carry one `@context @journal/<entry>` → resolves to `journal/<entry>/decisions.md` (flat layout; the resolver walks up past the `kuib/` monorepo root to find the `journal/` dir, since the journal sits one level above). Flags missing / dead / stale (stale = the target ADR still contains the unfilled scaffolding placeholder token, i.e. `FEATURE_NAME` wrapped in double braces). Per-file granularity (synergy with S1).
-- `dot-case-filename` (S3) · `no-top-level-arrow` (C2, arrows) · `named-exports-are-types` (C1/S1) · `no-package-barrel-named-exports` / `no-named-import-from-package-root` (C1 barrel: default-only root, types via section subpaths) · `no-re-exports` (ban `export … from` / `export * from` — import the defining unit) · `no-prose-comments` (C6) · `no-destructure-props` (Solid: destructuring props breaks reactivity — `.tsx` only, on JSX-returning functions) · `no-cross-package-relative` (bans relative imports that escape the `packages/*`/`apps/*` boundary — pure path math, no resolver; see RESOLVED section below).
+- `dot-case-filename` (S3) · `no-arrow` (C2, arrows banned everywhere) · `named-exports-are-types` (C1/S1) · `no-package-barrel-named-exports` / `no-named-import-from-package-root` (C1 barrel: default-only root, types via section subpaths) · `no-re-exports` (ban `export … from` / `export * from` — import the defining unit) · `no-prose-comments` (C6) · `no-destructure-props` (Solid: destructuring props breaks reactivity — `.tsx` only, on JSX-returning functions) · `no-cross-package-relative` (bans relative imports that escape the `packages/*`/`apps/*` boundary — pure path math, no resolver; see RESOLVED section below).
 
 Reused built-ins (per "reuse existing plugins"), all `error`:
 
@@ -96,3 +96,7 @@ React-derived rules can't be ported to Solid (different component model). Still 
 ## prefer-guard-clauses rule (2026-07-03)
 
 New plugin rule `house/prefer-guard-clauses`: every `else` branch is an error — invert into a guard clause (early return/continue/throw); dispatch on a discriminant with `switch`. Reports once per chain (topmost `if`), distinct messages for plain `else` vs `else if` chains. Escape hatch is an eslint-disable comment, same convention as the try/catch ban. Lives in the plugin's recommended config — house preferences are never wired loosely into `eslint.config.ts`. The orchestrator's fullStream `else if` chain was converted to `switch` when the rule landed.
+
+## no-arrow: ban everywhere (2026-07-19)
+
+`house/no-top-level-arrow` only flagged module-level `const x = () =>` / `export default () =>`. Nested arrows (callbacks, object properties) were a hole relative to C2. Renamed to `house/no-arrow` and now reports **every** `ArrowFunctionExpression`. Autofix rewrites to `function (...) {}` (with parens when the expression is a callee / default export / member object). Bulk-fixed the monorepo (~570 sites). One-off lexical-`this` cases: plain `eslint-disable` (optionally also `no-prose-comments` if a prose note is warranted) — not special-cased in the rule.

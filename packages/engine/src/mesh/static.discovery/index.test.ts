@@ -11,8 +11,8 @@ const makeDescriptor = function (id: string): NodeDescriptor {
   });
 };
 
-describe("createStaticDiscovery", () => {
-  it("listNodes returns deduped descriptors keyed by nodeID", async () => {
+describe("createStaticDiscovery", function () {
+  it("listNodes returns deduped descriptors keyed by nodeID", async function () {
     const first = makeDescriptor("n1");
     const duplicate = { ...makeDescriptor("n1"), osUser: "bob" };
     const second = makeDescriptor("n2");
@@ -21,15 +21,20 @@ describe("createStaticDiscovery", () => {
     const nodes = await discovery.listNodes();
 
     expect(nodes.length).toBe(2);
-    expect(nodes.map((node) => node.nodeID).sort()).toEqual([
-      Protocol.ID.NodeID.parse("n1"),
-      Protocol.ID.NodeID.parse("n2"),
-    ]);
-    const resolvedFirst = nodes.find((node) => node.nodeID === first.nodeID);
+    expect(
+      nodes
+        .map(function (node) {
+          return node.nodeID;
+        })
+        .sort(),
+    ).toEqual([Protocol.ID.NodeID.parse("n1"), Protocol.ID.NodeID.parse("n2")]);
+    const resolvedFirst = nodes.find(function (node) {
+      return node.nodeID === first.nodeID;
+    });
     expect(resolvedFirst?.osUser).toBe("bob");
   });
 
-  it("resolve returns the descriptor for a known id", async () => {
+  it("resolve returns the descriptor for a known id", async function () {
     const descriptor = makeDescriptor("n1");
     const discovery = createStaticDiscovery([descriptor]);
 
@@ -38,7 +43,7 @@ describe("createStaticDiscovery", () => {
     expect(resolved).toBe(descriptor);
   });
 
-  it("resolve rejects with 'unknown node' for an unknown id", async () => {
+  it("resolve rejects with 'unknown node' for an unknown id", async function () {
     const discovery = createStaticDiscovery([makeDescriptor("n1")]);
 
     await expect(

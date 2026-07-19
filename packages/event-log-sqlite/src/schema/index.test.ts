@@ -4,8 +4,8 @@ import initSchema from "./index";
 
 type TableNameRow = { name: string };
 
-describe("initSchema", () => {
-  it("creates the events table and is idempotent across repeated calls", () => {
+describe("initSchema", function () {
+  it("creates the events table and is idempotent across repeated calls", function () {
     const db = new Database(":memory:");
     initSchema(db);
     initSchema(db);
@@ -17,7 +17,7 @@ describe("initSchema", () => {
     expect(row?.name).toBe("events");
   });
 
-  it("enables inserts into the events table", () => {
+  it("enables inserts into the events table", function () {
     const db = new Database(":memory:");
     initSchema(db);
     db.run(

@@ -1,17 +1,19 @@
 // @context @journal/architecture-overview
 import { streamText, stepCountIs, type LanguageModel } from "ai";
+
 import Protocol from "@kuib-ai/protocol";
 import Std from "@kuib-ai/std";
 import Tools from "@kuib-ai/tools";
-import newID from "../new.id";
-import buildMessages from "../build.messages";
-import Provider from "../provider";
-import createDaemonFileSystem from "../daemon.file.system";
-import type { DaemonClient } from "../daemon.client/transport.factory";
-import type { EventLogPort } from "../event.log/event.log.port";
 import type { SessionID } from "@kuib-ai/protocol/id/session.id";
 import type { DeviceID } from "@kuib-ai/protocol/id/device.id";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";
+import type { EventLogPort } from "@kuib-ai/protocol/event.log.port";
+
+import newID from "#new.id";
+import Provider from "#provider";
+import buildMessages from "#build.messages";
+import type { DaemonClient } from "#daemon.client/transport.factory";
+import createDaemonFileSystem from "#daemon.file.system";
 
 type RunAgentParams = {
   prompt: string;
@@ -27,7 +29,7 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
   const { prompt, sessionID, deviceID, model, daemonClient, eventLog } = params;
   const messageID = newID(Protocol.ID.MessageID);
 
-  await Std.withScope({ sessionID, deviceID, messageID }, async () => {
+  await Std.withScope({ sessionID, deviceID, messageID }, async function () {
     const emit = function (event: AnyEvent) {
       return eventLog.append(sessionID, deviceID, event);
     };

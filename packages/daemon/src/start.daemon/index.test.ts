@@ -29,14 +29,14 @@ const runDaemonLine = async function (
   return buffer.slice(0, buffer.indexOf("\n"));
 };
 
-describe("start.daemon main", () => {
-  it("resolves the configured socket and omits the tcp suffix when no port is set", async () => {
+describe("start.daemon main", function () {
+  it("resolves the configured socket and omits the tcp suffix when no port is set", async function () {
     const socketPath = join(mkdtempSync(join(tmpdir(), "kuib-")), "d.sock");
     const line = await runDaemonLine({ KUIB_DAEMON_SOCKET: socketPath });
     expect(line).toBe(`kuib daemon → ${socketPath}`);
   });
 
-  it("coerces KUIB_DAEMON_PORT to a number and appends the tcp suffix", async () => {
+  it("coerces KUIB_DAEMON_PORT to a number and appends the tcp suffix", async function () {
     const socketPath = join(mkdtempSync(join(tmpdir(), "kuib-")), "d.sock");
     const port = 20000 + (process.pid % 20000);
     const line = await runDaemonLine({

@@ -16,15 +16,25 @@ const resolveUnixBase = function (kind: PathKindType): string {
   const parsed = PathKind.parse(kind);
   switch (parsed) {
     case PathKindEnum.CONFIG:
-      return envOr("XDG_CONFIG_HOME", () => join(homedir(), ".config"));
+      return envOr("XDG_CONFIG_HOME", function () {
+        return join(homedir(), ".config");
+      });
     case PathKindEnum.DATA:
-      return envOr("XDG_DATA_HOME", () => join(homedir(), ".local", "share"));
+      return envOr("XDG_DATA_HOME", function () {
+        return join(homedir(), ".local", "share");
+      });
     case PathKindEnum.STATE:
-      return envOr("XDG_STATE_HOME", () => join(homedir(), ".local", "state"));
+      return envOr("XDG_STATE_HOME", function () {
+        return join(homedir(), ".local", "state");
+      });
     case PathKindEnum.CACHE:
-      return envOr("XDG_CACHE_HOME", () => join(homedir(), ".cache"));
+      return envOr("XDG_CACHE_HOME", function () {
+        return join(homedir(), ".cache");
+      });
     case PathKindEnum.RUNTIME:
-      return envOr("XDG_RUNTIME_DIR", () => tmpdir());
+      return envOr("XDG_RUNTIME_DIR", function () {
+        return tmpdir();
+      });
   }
 };
 

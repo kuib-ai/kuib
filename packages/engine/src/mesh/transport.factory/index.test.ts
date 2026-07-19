@@ -9,13 +9,17 @@ const nodeID = Protocol.ID.NodeID.parse("n1");
 
 const makeDiscovery = function (descriptor: NodeDescriptor): DiscoveryPort {
   return {
-    listNodes: () => Promise.resolve([descriptor]),
-    resolve: (_id: NodeID) => Promise.resolve(descriptor),
+    listNodes: function () {
+      return Promise.resolve([descriptor]);
+    },
+    resolve: function (_id: NodeID) {
+      return Promise.resolve(descriptor);
+    },
   };
 };
 
-describe("mesh transportFactory", () => {
-  it("resolves a descriptor with an endpoint and creates a daemon client", async () => {
+describe("mesh transportFactory", function () {
+  it("resolves a descriptor with an endpoint and creates a daemon client", async function () {
     const descriptor = Protocol.Node.NodeDescriptor.parse({
       nodeID,
       osUser: "u",
@@ -30,7 +34,7 @@ describe("mesh transportFactory", () => {
     expect(typeof client.readFile.query).toBe("function");
   });
 
-  it("throws when the resolved descriptor has no endpoint", async () => {
+  it("throws when the resolved descriptor has no endpoint", async function () {
     const descriptor = Protocol.Node.NodeDescriptor.parse({
       nodeID,
       osUser: "u",

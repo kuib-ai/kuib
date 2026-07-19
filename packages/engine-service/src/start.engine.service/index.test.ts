@@ -15,7 +15,9 @@ const uniqueSocketPath = function (): string {
 };
 
 const delay = function (ms: number): Promise<void> {
-  return new Promise<void>((res) => setTimeout(res, ms));
+  return new Promise<void>(function (res) {
+    return setTimeout(res, ms);
+  });
 };
 
 const waitUntil = function (
@@ -36,10 +38,14 @@ const waitUntil = function (
 };
 
 const connectClient = function (socketPath: string): Promise<net.Socket> {
-  return new Promise<net.Socket>((resolve, reject) => {
+  return new Promise<net.Socket>(function (resolve, reject) {
     const socket = net.connect(socketPath);
-    socket.once("connect", () => resolve(socket));
-    socket.once("error", (err) => reject(err));
+    socket.once("connect", function () {
+      return resolve(socket);
+    });
+    socket.once("error", function (err) {
+      return reject(err);
+    });
   });
 };
 
@@ -47,8 +53,8 @@ const noopRunTurn: RunTurn = function (): Promise<void> {
   return Promise.resolve();
 };
 
-describe("startEngineService", () => {
-  it("invokes runTurn with sessionID/prompt on a valid SUBMIT and reaps after idle", async () => {
+describe("startEngineService", function () {
+  it("invokes runTurn with sessionID/prompt on a valid SUBMIT and reaps after idle", async function () {
     const socketPath = uniqueSocketPath();
     const calls: Array<{ sessionID: string; prompt: string }> = [];
     const handle = await startEngineService({
@@ -66,20 +72,24 @@ describe("startEngineService", () => {
       `${JSON.stringify({ type: "submit", sessionID: "s1", prompt: "hello" })}\n`,
     );
 
-    const gotCall = await waitUntil(() => calls.length === 1, 1000);
+    const gotCall = await waitUntil(function () {
+      return calls.length === 1;
+    }, 1000);
     expect(gotCall).toBe(true);
     expect(calls[0]?.sessionID).toBe("s1");
     expect(calls[0]?.prompt).toBe("hello");
 
     client.end();
-    const reaped = await waitUntil(() => !existsSync(socketPath), 2000);
+    const reaped = await waitUntil(function () {
+      return !existsSync(socketPath);
+    }, 2000);
     expect(reaped).toBe(true);
 
     await handle.close();
     rmSync(socketPath, { force: true });
   });
 
-  it("ignores malformed JSON and schema-invalid frames without invoking runTurn", async () => {
+  it("ignores malformed JSON and schema-invalid frames without invoking runTurn", async function () {
     const socketPath = uniqueSocketPath();
     let called = 0;
     const handle = await startEngineService({
@@ -105,7 +115,7 @@ describe("startEngineService", () => {
     rmSync(socketPath, { force: true });
   });
 
-  it("queues submits arriving mid-turn and runs them in order without overlap", async () => {
+  it("queues submits arriving mid-turn and runs them in order without overlap", async function () {
     const socketPath = uniqueSocketPath();
     const trace: string[] = [];
     const handle = await startEngineService({
@@ -125,7 +135,9 @@ describe("startEngineService", () => {
     };
     client.write(frame("a") + frame("b") + frame("c"));
 
-    const done = await waitUntil(() => trace.length === 6, 3000);
+    const done = await waitUntil(function () {
+      return trace.length === 6;
+    }, 3000);
     expect(done).toBe(true);
     expect(trace).toEqual([
       "start:a",
@@ -141,7 +153,7 @@ describe("startEngineService", () => {
     rmSync(socketPath, { force: true });
   });
 
-  it("hands queued prompts to the running turn via takePending", async () => {
+  it("hands queued prompts to the running turn via takePending", async function () {
     const socketPath = uniqueSocketPath();
     const drained: string[][] = [];
     let turns = 0;
@@ -164,7 +176,9 @@ describe("startEngineService", () => {
     await delay(20);
     client.write(frame("second") + frame("third"));
 
-    const done = await waitUntil(() => drained.length === 1, 3000);
+    const done = await waitUntil(function () {
+      return drained.length === 1;
+    }, 3000);
     expect(done).toBe(true);
     expect(drained[0]).toEqual(["second", "third"]);
     await delay(100);
@@ -175,7 +189,7 @@ describe("startEngineService", () => {
     rmSync(socketPath, { force: true });
   });
 
-  it("rejects with EADDRINUSE while a live server owns the socket", async () => {
+  it("rejects with EADDRINUSE while a live server owns the socket", async function () {
     const socketPath = uniqueSocketPath();
     const first = await startEngineService({
       socketPath,
@@ -197,7 +211,7 @@ describe("startEngineService", () => {
     rmSync(socketPath, { force: true });
   });
 
-  it("unlinks a stale socket file and rebinds when nothing is listening", async () => {
+  it("unlinks a stale socket file and rebinds when nothing is listening", async function () {
     const socketPath = uniqueSocketPath();
     writeFileSync(socketPath, "");
     expect(existsSync(socketPath)).toBe(true);

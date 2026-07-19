@@ -6,19 +6,19 @@ import Daemon from "@kuib-ai/daemon";
 
 const caller = Daemon.createDaemonCaller({});
 
-describe("daemon procedures", () => {
-  it("executeCommand returns stdout and exitCode 0", async () => {
+describe("daemon procedures", function () {
+  it("executeCommand returns stdout and exitCode 0", async function () {
     const res = await caller.executeCommand({ command: "echo hello" });
     expect(res.stdout.trim()).toBe("hello");
     expect(res.exitCode).toBe(0);
   });
 
-  it("executeCommand surfaces a nonzero exitCode", async () => {
+  it("executeCommand surfaces a nonzero exitCode", async function () {
     const res = await caller.executeCommand({ command: "exit 3" });
     expect(res.exitCode).toBe(3);
   });
 
-  it("writeFile then readFile round-trips content", async () => {
+  it("writeFile then readFile round-trips content", async function () {
     const dir = await mkdtemp(join(tmpdir(), "kuib-daemon-"));
     const path = join(dir, "note.txt");
     const written = await caller.writeFile({ path, content: "data" });
@@ -28,7 +28,7 @@ describe("daemon procedures", () => {
     await rm(dir, { recursive: true, force: true });
   });
 
-  it("readFile throws on a missing file", async () => {
+  it("readFile throws on a missing file", async function () {
     await expect(
       caller.readFile({ path: "/nonexistent/kuib/x" }),
     ).rejects.toThrow();

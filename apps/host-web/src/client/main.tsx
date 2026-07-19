@@ -14,7 +14,9 @@ const getToken = async function (): Promise<string> {
   if (meta !== null && meta !== undefined && meta !== "__KUIB_TOKEN__") {
     return meta;
   }
-  const response = await fetch("/api/token").catch(() => null);
+  const response = await fetch("/api/token").catch(function () {
+    return null;
+  });
   if (response !== null && response.ok) {
     return ((await response.json()) as { token: string }).token;
   }
@@ -25,7 +27,9 @@ const App = function () {
   const [envelopes, setEnvelopes] = createSignal<EventEnvelope[]>([]);
   const [status, setStatus] = createSignal("connecting…");
   const [draft, setDraft] = createSignal("");
-  const entries = createMemo(() => Transcript.foldTranscript(envelopes()));
+  const entries = createMemo(function () {
+    return Transcript.foldTranscript(envelopes());
+  });
 
   const bySeq = new Map<number, EventEnvelope>();
   let lastSeq = -1;
@@ -33,9 +37,9 @@ const App = function () {
   let reconciling = false;
 
   const commit = function (): void {
-    const ordered = [...bySeq.values()].sort(
-      (a, b) => a.epoch * 1e9 + a.seq - (b.epoch * 1e9 + b.seq),
-    );
+    const ordered = [...bySeq.values()].sort(function (a, b) {
+      return a.epoch * 1e9 + a.seq - (b.epoch * 1e9 + b.seq);
+    });
     setEnvelopes(ordered);
   };
 
@@ -112,14 +116,16 @@ const App = function () {
     });
   };
 
-  onMount(async () => {
+  onMount(async function () {
     token = await getToken();
-    document.addEventListener("visibilitychange", () => {
+    document.addEventListener("visibilitychange", function () {
       if (document.visibilityState === "visible") {
         void reconcile("refocus");
       }
     });
-    window.addEventListener("online", () => void reconcile("online"));
+    window.addEventListener("online", function () {
+      return void reconcile("online");
+    });
     await reconcile("initial");
     openStream();
   });
@@ -128,11 +134,13 @@ const App = function () {
     <>
       <div id="log">
         <For each={entries()}>
-          {(entry) => (
-            <div class={`entry ${entry.role}`}>
-              {entry.role}: {entry.text}
-            </div>
-          )}
+          {function (entry) {
+            return (
+              <div class={`entry ${entry.role}`}>
+                {entry.role}: {entry.text}
+              </div>
+            );
+          }}
         </For>
       </div>
       <div id="status">{status()}</div>
@@ -142,7 +150,9 @@ const App = function () {
           autofocus
           autocomplete="off"
           value={draft()}
-          onInput={(event) => setDraft(event.currentTarget.value)}
+          onInput={function (event) {
+            return setDraft(event.currentTarget.value);
+          }}
         />
         <button type="submit">Send</button>
       </form>
@@ -150,4 +160,6 @@ const App = function () {
   );
 };
 
-render(() => <App />, document.getElementById("root")!);
+render(function () {
+  return <App />;
+}, document.getElementById("root")!);

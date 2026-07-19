@@ -40,8 +40,12 @@ const withError: IWithError = function (
 ) {
   if (isPromise(input)) {
     return input.then(
-      (value) => [null, value],
-      (error) => [toMapped(error, map), null],
+      function (value) {
+        return [null, value];
+      },
+      function (error) {
+        return [toMapped(error, map), null];
+      },
     );
   }
 
@@ -52,8 +56,12 @@ const withError: IWithError = function (
 
       if (isPromise(result)) {
         return result.then(
-          (value) => [null, value],
-          (error) => [toMapped(error, map), null],
+          function (value) {
+            return [null, value];
+          },
+          function (error) {
+            return [toMapped(error, map), null];
+          },
         );
       }
 

@@ -33,7 +33,9 @@ const foldTranscript = function (
         breakSegment();
         const text = event.parts
           .filter(isTextPart)
-          .map((part) => part.text)
+          .map(function (part) {
+            return part.text;
+          })
           .join("");
         entries.push({
           id: event.messageID,

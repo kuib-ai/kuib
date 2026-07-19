@@ -21,39 +21,43 @@ const resetEnv = function (): void {
   Object.assign(process.env, originalEnv);
 };
 
-beforeEach(() => {
+beforeEach(function () {
   workspace = mkdtempSync(resolve(tmpdir(), "kuib-env-"));
   writeFileSync(resolve(workspace, "pnpm-workspace.yaml"), "packages: []\n");
   process.chdir(workspace);
 });
 
-afterEach(() => {
+afterEach(function () {
   process.chdir(originalCwd);
   rmSync(workspace, { recursive: true, force: true });
   resetEnv();
 });
 
-describe("bootstrapEnv", () => {
-  it("returns a valid parsed Env with the expected keys and types", () => {
+describe("bootstrapEnv", function () {
+  it("returns a valid parsed Env with the expected keys and types", function () {
     const env = bootstrapEnv(TestSchema, "test");
 
     expect(typeof env.KUIB_MODEL_BASE_URL).toBe("string");
     expect(typeof env.KUIB_SESSION_ID).toBe("string");
   });
 
-  it("skips a missing .env.<mode> file and still returns a parsed Env", () => {
+  it("skips a missing .env.<mode> file and still returns a parsed Env", function () {
     const env = bootstrapEnv(TestSchema, "nonexistent-mode");
 
-    expect(() => TestSchema.parse(env)).not.toThrow();
+    expect(function () {
+      return TestSchema.parse(env);
+    }).not.toThrow();
   });
 
-  it("throws when the resolved env is invalid", () => {
+  it("throws when the resolved env is invalid", function () {
     process.env["KUIB_MODEL_BASE_URL"] = "not-a-url";
 
-    expect(() => bootstrapEnv(TestSchema, "test")).toThrow();
+    expect(function () {
+      return bootstrapEnv(TestSchema, "test");
+    }).toThrow();
   });
 
-  it("keeps OS environment above mode and base dotenv files", () => {
+  it("keeps OS environment above mode and base dotenv files", function () {
     writeFileSync(resolve(workspace, ".env"), "KUIB_SESSION_ID=base\n");
     writeFileSync(resolve(workspace, ".env.test"), "KUIB_SESSION_ID=mode\n");
     process.env["KUIB_SESSION_ID"] = "os";
@@ -61,7 +65,7 @@ describe("bootstrapEnv", () => {
     expect(bootstrapEnv(TestSchema, "test").KUIB_SESSION_ID).toBe("os");
   });
 
-  it("keeps the mode dotenv file above the base dotenv file", () => {
+  it("keeps the mode dotenv file above the base dotenv file", function () {
     writeFileSync(resolve(workspace, ".env"), "KUIB_SESSION_ID=base\n");
     writeFileSync(resolve(workspace, ".env.test"), "KUIB_SESSION_ID=mode\n");
     delete process.env["KUIB_SESSION_ID"];

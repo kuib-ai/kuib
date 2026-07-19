@@ -9,12 +9,14 @@ const makeDir = function (): string {
   return mkdtempSync(join(os.tmpdir(), "kuib-ensure-"));
 };
 
-describe("ensureDaemon", () => {
-  it("returns without spawning when the socket is already alive", async () => {
+describe("ensureDaemon", function () {
+  it("returns without spawning when the socket is already alive", async function () {
     const dir = makeDir();
     const socketPath = join(dir, "alive.sock");
     const server = net.createServer();
-    await new Promise<void>((resolve) => server.listen(socketPath, resolve));
+    await new Promise<void>(function (resolve) {
+      return server.listen(socketPath, resolve);
+    });
 
     const started = Date.now();
     const result = await ensureDaemon(socketPath);
@@ -25,22 +27,26 @@ describe("ensureDaemon", () => {
     expect(elapsed).toBeLessThan(1000);
   });
 
-  it("spawns a child on a dead socket then resolves once the probe succeeds", async () => {
+  it("spawns a child on a dead socket then resolves once the probe succeeds", async function () {
     const dir = makeDir();
     const socketPath = join(dir, "spawn.sock");
     const server = net.createServer();
 
     const ensured = ensureDaemon(socketPath);
 
-    await new Promise<void>((resolve) => setTimeout(resolve, 40));
-    await new Promise<void>((resolve) => server.listen(socketPath, resolve));
+    await new Promise<void>(function (resolve) {
+      return setTimeout(resolve, 40);
+    });
+    await new Promise<void>(function (resolve) {
+      return server.listen(socketPath, resolve);
+    });
 
     await ensured;
     expect(server.listening).toBe(true);
     server.close();
   }, 15000);
 
-  it("rejects after the timeout when the socket never becomes reachable", async () => {
+  it("rejects after the timeout when the socket never becomes reachable", async function () {
     const dir = makeDir();
     const blockedParent = join(dir, "not-a-directory");
     writeFileSync(blockedParent, "blocked");

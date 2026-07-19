@@ -6,36 +6,45 @@ import buildTools from "./index";
 
 const ctx: ToolContext = {
   fs: {
-    readFile: async () => ({ content: "" }),
+    readFile: async function () {
+      return { content: "" };
+    },
+    async readDir() {
+      return { content: "" };
+    },
   },
 };
 
-describe("buildTools", () => {
-  it("builds a record keyed by spec.name", () => {
+describe("buildTools", function () {
+  it("builds a record keyed by spec.name", function () {
     const alpha = Tools.defineTool({
       name: "alpha",
       description: "a",
       input: z.object({ x: z.number() }),
-      execute: async () => "ok",
+      execute: async function () {
+        return "ok";
+      },
     });
     const beta = Tools.defineTool({
       name: "beta",
       description: "b",
       input: z.object({}),
-      execute: async () => "ok",
+      execute: async function () {
+        return "ok";
+      },
     });
     const tools = buildTools([alpha, beta], ctx);
     expect(Object.keys(tools)).toEqual(["alpha", "beta"]);
   });
 
-  it("parses input before calling definition.execute with ctx", async () => {
+  it("parses input before calling definition.execute with ctx", async function () {
     const receivedInputs: unknown[] = [];
     const receivedCtxs: ToolContext[] = [];
     const spec = Tools.defineTool({
       name: "coerce",
       description: "c",
       input: z.object({ n: z.coerce.number() }),
-      execute: async (input, execCtx) => {
+      execute: async function (input, execCtx) {
         receivedInputs.push(input);
         receivedCtxs.push(execCtx);
         return "done";

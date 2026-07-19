@@ -5,7 +5,9 @@ import type { ToolDefinition, ToolContext } from "./index";
 
 const ctx: ToolContext = {
   fs: {
-    readFile: async () => ({ content: "" }),
+    readFile: async function () {
+      return { content: "" };
+    },
   },
 };
 
@@ -15,30 +17,36 @@ const definition: ToolDefinition<typeof input> = {
   name: "read-file",
   description: "reads a file",
   input,
-  execute: async (args) => `read:${args.path}`,
+  execute: async function (args) {
+    return `read:${args.path}`;
+  },
 };
 
-describe("defineTool", () => {
-  it("mirrors name and description onto the spec", () => {
+describe("defineTool", function () {
+  it("mirrors name and description onto the spec", function () {
     const spec = defineTool(definition);
     expect(spec.name).toBe("read-file");
     expect(spec.description).toBe("reads a file");
   });
 
-  it("use invokes consume with the original definition and returns its result", () => {
+  it("use invokes consume with the original definition and returns its result", function () {
     const spec = defineTool(definition);
-    const seen = spec.use((d) => d);
+    const seen = spec.use(function (d) {
+      return d;
+    });
     expect(seen).toBe(definition);
 
-    const names = spec.use((d) => d.name);
+    const names = spec.use(function (d) {
+      return d.name;
+    });
     expect(names).toBe("read-file");
   });
 
-  it("exposes execute through the definition passed to consume", async () => {
+  it("exposes execute through the definition passed to consume", async function () {
     const spec = defineTool(definition);
-    const result = await spec.use((d) =>
-      d.execute(d.input.parse({ path: "a.txt" }), ctx),
-    );
+    const result = await spec.use(function (d) {
+      return d.execute(d.input.parse({ path: "a.txt" }), ctx);
+    });
     expect(result).toBe("read:a.txt");
   });
 });

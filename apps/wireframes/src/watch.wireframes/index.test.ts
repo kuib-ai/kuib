@@ -11,55 +11,65 @@ const waitFor = async function (predicate: () => boolean): Promise<boolean> {
     if (predicate()) {
       return true;
     }
-    await new Promise((resolve) => setTimeout(resolve, 20));
+    await new Promise(function (resolve) {
+      return setTimeout(resolve, 20);
+    });
   }
   return predicate();
 };
 
-describe("watchWireframes", () => {
-  it("delivers the new list when a wireframe is added to an existing entry", async () => {
+describe("watchWireframes", function () {
+  it("delivers the new list when a wireframe is added to an existing entry", async function () {
     const root = mkdtempSync(join(tmpdir(), "kuib-watch-"));
     const dir = join(root, "journal", "host-layer", "wireframes");
     mkdirSync(dir, { recursive: true });
 
     const seen: { latest: Wireframe[] | null } = { latest: null };
-    const handle = watchWireframes(root, (next) => {
+    const handle = watchWireframes(root, function (next) {
       seen.latest = next;
     });
 
     writeFileSync(join(dir, "session.md"), "---\nstatus: exploring\n---\n");
-    expect(await waitFor(() => seen.latest !== null)).toBe(true);
+    expect(
+      await waitFor(function () {
+        return seen.latest !== null;
+      }),
+    ).toBe(true);
     expect(seen.latest?.[0]?.screen).toBe("session");
 
     handle.close();
   });
 
-  it("detects a wireframe inside a brand-new entry directory", async () => {
+  it("detects a wireframe inside a brand-new entry directory", async function () {
     const root = mkdtempSync(join(tmpdir(), "kuib-watch-"));
     mkdirSync(join(root, "journal"), { recursive: true });
 
     const seen: { latest: Wireframe[] | null } = { latest: null };
-    const handle = watchWireframes(root, (next) => {
+    const handle = watchWireframes(root, function (next) {
       seen.latest = next;
     });
 
     const dir = join(root, "journal", "discussions-ux", "wireframes");
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, "selector.md"), "---\nstatus: exploring\n---\n");
-    expect(await waitFor(() => (seen.latest?.length ?? 0) > 0)).toBe(true);
+    expect(
+      await waitFor(function () {
+        return (seen.latest?.length ?? 0) > 0;
+      }),
+    ).toBe(true);
     expect(seen.latest?.[0]?.entry).toBe("discussions-ux");
 
     handle.close();
   });
 
-  it("detects content edits to an existing wireframe", async () => {
+  it("detects content edits to an existing wireframe", async function () {
     const root = mkdtempSync(join(tmpdir(), "kuib-watch-"));
     const dir = join(root, "journal", "host-layer", "wireframes");
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, "session.md"), "---\nstatus: exploring\n---\nv1\n");
 
     const seen: { latest: Wireframe[] | null } = { latest: null };
-    const handle = watchWireframes(root, (next) => {
+    const handle = watchWireframes(root, function (next) {
       seen.latest = next;
     });
 
@@ -67,9 +77,11 @@ describe("watchWireframes", () => {
       join(dir, "session.md"),
       "---\nstatus: adopted\n---\nv2 longer\n",
     );
-    expect(await waitFor(() => seen.latest?.[0]?.status === "adopted")).toBe(
-      true,
-    );
+    expect(
+      await waitFor(function () {
+        return seen.latest?.[0]?.status === "adopted";
+      }),
+    ).toBe(true);
 
     handle.close();
   });

@@ -23,13 +23,13 @@ const parseCli = function <T extends Record<string, unknown>>(
     return null;
   }
 
-  const [err, parsed] = Std.withError(() =>
-    parseArgs({
+  const [err, parsed] = Std.withError(function () {
+    return parseArgs({
       args: argv,
       options,
       allowPositionals: true,
-    }),
-  );
+    });
+  });
 
   if (err !== null) {
     process.stderr.write(`Error parsing arguments: ${err.message}\n`);

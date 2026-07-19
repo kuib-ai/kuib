@@ -37,13 +37,13 @@ const localConfig = function (
   };
 };
 
-describe("resolveDaemonClient", () => {
-  it("takes the local path when targetNode equals the local label", async () => {
+describe("resolveDaemonClient", function () {
+  it("takes the local path when targetNode equals the local label", async function () {
     const client = await resolveDaemonClient(localConfig(), "local");
     expect(client).toBeDefined();
   });
 
-  it("takes the remote mesh path resolving the target NodeID from the mesh config", async () => {
+  it("takes the remote mesh path resolving the target NodeID from the mesh config", async function () {
     const path = writeMeshConfig("remote", "http://127.0.0.1:9999");
     const client = await resolveDaemonClient(
       localConfig({ targetNode: "remote", meshConfigFile: path }),
@@ -52,7 +52,7 @@ describe("resolveDaemonClient", () => {
     expect(client).toBeDefined();
   });
 
-  it("takes the remote mesh path and rejects when the target node is not in the mesh config", async () => {
+  it("takes the remote mesh path and rejects when the target node is not in the mesh config", async function () {
     await expect(
       resolveDaemonClient(localConfig({ targetNode: "remote" }), "local"),
     ).rejects.toThrow("unknown node: remote");

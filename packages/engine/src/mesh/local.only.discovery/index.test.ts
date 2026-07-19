@@ -10,14 +10,14 @@ const self: NodeDescriptor = {
   capabilities: [],
 };
 
-describe("local only discovery", () => {
-  it("lists only self", async () => {
+describe("local only discovery", function () {
+  it("lists only self", async function () {
     const discovery = Engine.Mesh.createLocalOnlyDiscovery(self);
     const nodes = await discovery.listNodes();
     expect(nodes).toEqual([self]);
   });
 
-  it("resolves any nodeID to self", async () => {
+  it("resolves any nodeID to self", async function () {
     const discovery = Engine.Mesh.createLocalOnlyDiscovery(self);
     const other = Protocol.ID.NodeID.parse("some-other-node");
     const resolved = await discovery.resolve(other);

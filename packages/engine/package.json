@@ -1,8 +1,13 @@
 {
   "name": "@kuib-ai/engine",
   "version": "0.0.1",
-  "description": "kuib engine \u2014 agent loop, event log, daemon dispatch",
+  "description": "kuib engine — agent loop, event log, daemon dispatch",
   "type": "module",
+  "imports": {
+    "#*": "./src/*/index.ts",
+    "#*.ts": "./src/*.ts",
+    "#*.json": "./src/*.json"
+  },
   "exports": {
     ".": "./src/index.ts",
     "./*": {

@@ -2,8 +2,8 @@
 import type { ModelMessage } from "ai";
 import Protocol from "@kuib-ai/protocol";
 import type { PartText } from "@kuib-ai/protocol/part/part.text";
-import type { EventLogPort } from "../event.log/event.log.port";
 import type { SessionID } from "@kuib-ai/protocol/id/session.id";
+import type { EventLogPort } from "@kuib-ai/protocol/event.log.port";
 
 const isTextPart = function (part: { type: string }): part is PartText {
   return part.type === Protocol.Part.PartTypeEnum.TEXT;
@@ -28,13 +28,15 @@ const buildMessages = function (
     assistant = null;
   };
 
-  eventLog.replay(sessionID, -1, ({ event }) => {
+  eventLog.replay(sessionID, -1, function ({ event }) {
     switch (event.type) {
       case Protocol.Event.EventTypeEnum.USER_MESSAGE_SUBMITTED: {
         flushAssistant();
         const text = event.parts
           .filter(isTextPart)
-          .map((part) => part.text)
+          .map(function (part) {
+            return part.text;
+          })
           .join("");
         messages.push({ role: "user", content: text });
         break;

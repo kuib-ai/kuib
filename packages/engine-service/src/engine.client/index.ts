@@ -19,14 +19,14 @@ const DEFAULT_CONNECT_TIMEOUT_MS = 5000;
 const DEFAULT_CONNECT_INTERVAL_MS = 50;
 
 const tryConnect = function (socketPath: string): Promise<net.Socket | null> {
-  return new Promise<net.Socket | null>((resolve) => {
+  return new Promise<net.Socket | null>(function (resolve) {
     const socket = net.connect(socketPath);
-    socket.once("connect", () => {
+    socket.once("connect", function () {
       socket.removeAllListeners("error");
-      socket.on("error", () => {});
+      socket.on("error", function () {});
       resolve(socket);
     });
-    socket.once("error", () => {
+    socket.once("error", function () {
       socket.destroy();
       resolve(null);
     });
@@ -35,10 +35,10 @@ const tryConnect = function (socketPath: string): Promise<net.Socket | null> {
 
 const wrap = function (socket: net.Socket): EngineServiceClient {
   const submit = function (msg: SubmitMessage): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      socket.write(JSON.stringify(msg) + "\n", (err) =>
-        err ? reject(err) : resolve(),
-      );
+    return new Promise<void>(function (resolve, reject) {
+      socket.write(JSON.stringify(msg) + "\n", function (err) {
+        return err ? reject(err) : resolve();
+      });
     });
   };
   const close = function (): void {
@@ -48,7 +48,9 @@ const wrap = function (socket: net.Socket): EngineServiceClient {
 };
 
 const sleep = function (ms: number): Promise<void> {
-  return new Promise<void>((resolve) => setTimeout(resolve, ms));
+  return new Promise<void>(function (resolve) {
+    return setTimeout(resolve, ms);
+  });
 };
 
 const connectOrSpawn = function (
@@ -59,7 +61,7 @@ const connectOrSpawn = function (
   const connectIntervalMs =
     params.connectIntervalMs ?? DEFAULT_CONNECT_INTERVAL_MS;
 
-  return tryConnect(params.socketPath).then((existing) => {
+  return tryConnect(params.socketPath).then(function (existing) {
     if (existing !== null) {
       return wrap(existing);
     }
@@ -71,7 +73,7 @@ const connectOrSpawn = function (
 
     const deadline = Date.now() + connectTimeoutMs;
     const poll = function (): Promise<EngineServiceClient> {
-      return tryConnect(params.socketPath).then((socket) => {
+      return tryConnect(params.socketPath).then(function (socket) {
         if (socket !== null) {
           return wrap(socket);
         }

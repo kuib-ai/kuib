@@ -37,7 +37,7 @@ const createSqliteEventLog = function (path: string): EventLogPort {
     originDeviceID: DeviceID,
     event: AnyEvent,
   ): Promise<EventEnvelope> {
-    const commit = db.transaction((): EventEnvelope => {
+    const commit = db.transaction(function (): EventEnvelope {
       const row = nextSeqStmt.get(sessionID, EPOCH);
       const seq = row?.next ?? 0;
       const createdAt = Date.now();

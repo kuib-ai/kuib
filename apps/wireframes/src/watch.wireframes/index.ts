@@ -10,10 +10,9 @@ type WatchHandle = {
 
 const signatureOf = function (wireframes: Wireframe[]): string {
   return wireframes
-    .map(
-      (wireframe) =>
-        `${wireframe.path}:${wireframe.modifiedAt}:${wireframe.content.length}`,
-    )
+    .map(function (wireframe) {
+      return `${wireframe.path}:${wireframe.modifiedAt}:${wireframe.content.length}`;
+    })
     .join("|");
 };
 
@@ -46,7 +45,7 @@ const watchWireframes = function (
   const poll = setInterval(check, 2000);
 
   return {
-    close: () => {
+    close: function () {
       if (timer !== null) {
         clearTimeout(timer);
       }

@@ -46,7 +46,9 @@ const loadWireframes = function (workspaceRoot: string): Wireframe[] {
       });
     }
   }
-  return wireframes.sort((a, b) => a.path.localeCompare(b.path));
+  return wireframes.sort(function (a, b) {
+    return a.path.localeCompare(b.path);
+  });
 };
 
 export default loadWireframes;
