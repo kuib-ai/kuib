@@ -6,6 +6,9 @@ const base = {
   apiKey: "ollama",
   anthropicApiKey: undefined as string | undefined,
   groqApiKey: "gsk-test" as string | undefined,
+  metaApiKey: undefined as string | undefined,
+  mimoApiKey: undefined as string | undefined,
+  mimoBaseURL: undefined as string | undefined,
 };
 
 describe("resolveModelConfig", function () {
@@ -48,6 +51,94 @@ describe("resolveModelConfig", function () {
         anthropicApiKey: "",
       });
     }).toThrow(/KUIB_ANTHROPIC_API_KEY is required/);
+  });
+
+  it("resolves meta/<model> onto openai-compatible with the Meta base URL", function () {
+    const config = resolveModelConfig({
+      ...base,
+      model: "meta/muse-spark-1.1",
+      metaApiKey: "meta-test",
+    });
+    expect(config.npm).toBe("@ai-sdk/openai-compatible");
+    expect(config.modelID).toBe("muse-spark-1.1");
+    expect(config.options.apiKey).toBe("meta-test");
+    expect(config.options.baseURL).toBe("https://api.meta.ai/v1");
+  });
+
+  it("ignores KUIB_MODEL_BASE_URL when meta is selected", function () {
+    const config = resolveModelConfig({
+      ...base,
+      model: "meta/muse-spark-1.2",
+      metaApiKey: "meta-test",
+    });
+    expect(config.options.baseURL).toBe("https://api.meta.ai/v1");
+  });
+
+  it("does not force reasoningEffort on meta", function () {
+    const config = resolveModelConfig({
+      ...base,
+      model: "meta/muse-spark-1.1",
+      metaApiKey: "meta-test",
+    });
+    expect(config.providerOptions).toEqual({});
+  });
+
+  it("keeps reasoningEffort none for generic openai-compatible endpoints", function () {
+    const config = resolveModelConfig({
+      ...base,
+      model: "openai-compatible/gemma4:12b",
+    });
+    expect(config.providerOptions).toEqual({ reasoningEffort: "none" });
+  });
+
+  it("throws when meta is selected without KUIB_META_API_KEY", function () {
+    expect(function () {
+      return resolveModelConfig({ ...base, model: "meta/muse-spark-1.1" });
+    }).toThrow(/KUIB_META_API_KEY is required/);
+  });
+
+  it("resolves mimo/<model> onto the token-plan base URL with thinking enabled", function () {
+    const config = resolveModelConfig({
+      ...base,
+      model: "mimo/mimo-v2.5-pro",
+      mimoApiKey: "mimo-test",
+    });
+    expect(config.npm).toBe("@ai-sdk/openai-compatible");
+    expect(config.modelID).toBe("mimo-v2.5-pro");
+    expect(config.options.apiKey).toBe("mimo-test");
+    expect(config.options.baseURL).toBe(
+      "https://token-plan-sgp.xiaomimimo.com/v1",
+    );
+    expect(config.providerOptions).toEqual({ thinking: { type: "enabled" } });
+  });
+
+  it("lets KUIB_MIMO_BASE_URL override the plan region", function () {
+    const config = resolveModelConfig({
+      ...base,
+      model: "mimo/mimo-v2.5",
+      mimoApiKey: "mimo-test",
+      mimoBaseURL: "https://token-plan-usa.xiaomimimo.com/v1",
+    });
+    expect(config.options.baseURL).toBe(
+      "https://token-plan-usa.xiaomimimo.com/v1",
+    );
+  });
+
+  it("ignores KUIB_MODEL_BASE_URL when mimo is selected", function () {
+    const config = resolveModelConfig({
+      ...base,
+      model: "mimo/mimo-v2.5-pro",
+      mimoApiKey: "mimo-test",
+    });
+    expect(config.options.baseURL).toBe(
+      "https://token-plan-sgp.xiaomimimo.com/v1",
+    );
+  });
+
+  it("throws when mimo is selected without KUIB_MIMO_API_KEY", function () {
+    expect(function () {
+      return resolveModelConfig({ ...base, model: "mimo/mimo-v2.5-pro" });
+    }).toThrow(/KUIB_MIMO_API_KEY is required/);
   });
 
   it("resolves openai-compatible/<model> keeping the base transport vars", function () {

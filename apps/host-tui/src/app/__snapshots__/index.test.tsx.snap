@@ -3,15 +3,15 @@
 exports[`App submit gating renders the right-prompt-pane layout at 80x24 (as-built frame) 1`] = `
 "┌─Conversation────────────────────────────────┐┌─Prompt────────────────────────┐
 │assistant: The secret code is BANANA-42.     ││                rs10@septimus  │
-│                                             ││                               │
+│⠋ Working… 0s                                ││                               │
 │                                             ││ ┌───────────────────────────┐ │
 │                                             ││ │Message kuib…              │ │
 │                                             ││ │                           │ │
 │                                             ││ │                           │ │
 │                                             ││ └───────────────────────────┘ │
 │                                             ││                               │
-│                                             ││ Enter sends · queues mid-turn │
-│                                             ││                               │
+│                                             ││ Enter queues · esc interrupts │
+│                                             ││ Context —                     │
 │                                             ││                               │
 │                                             ││                               │
 │                                             ││                               │

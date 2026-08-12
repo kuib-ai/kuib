@@ -2,6 +2,7 @@
 import net from "node:net";
 import { spawn } from "node:child_process";
 import type { SubmitMessage } from "@kuib-ai/protocol/service.message/submit.message";
+import type { InterruptMessage } from "@kuib-ai/protocol/service.message/interrupt.message";
 
 type ConnectOrSpawnParams = {
   socketPath: string;
@@ -12,6 +13,7 @@ type ConnectOrSpawnParams = {
 
 type EngineServiceClient = {
   submit: (msg: SubmitMessage) => Promise<void>;
+  interrupt: (msg: InterruptMessage) => Promise<void>;
   close: () => void;
 };
 
@@ -34,6 +36,13 @@ const tryConnect = function (socketPath: string): Promise<net.Socket | null> {
 };
 
 const wrap = function (socket: net.Socket): EngineServiceClient {
+  const interrupt = function (msg: InterruptMessage): Promise<void> {
+    return new Promise<void>(function (resolve, reject) {
+      socket.write(JSON.stringify(msg) + "\n", function (err) {
+        return err ? reject(err) : resolve();
+      });
+    });
+  };
   const submit = function (msg: SubmitMessage): Promise<void> {
     return new Promise<void>(function (resolve, reject) {
       socket.write(JSON.stringify(msg) + "\n", function (err) {
@@ -44,7 +53,7 @@ const wrap = function (socket: net.Socket): EngineServiceClient {
   const close = function (): void {
     socket.end();
   };
-  return { submit, close };
+  return { submit, interrupt, close };
 };
 
 const sleep = function (ms: number): Promise<void> {

@@ -7,6 +7,7 @@ describe("createModel", function () {
     const model = createModel(
       Protocol.Provider.ModelConfig.parse({
         npm: "@ai-sdk/openai-compatible",
+        providerID: "openai-compatible",
         modelID: "gemma3:12b",
         options: { baseURL: "http://localhost:11434/v1", apiKey: "ollama" },
       }),
@@ -18,6 +19,7 @@ describe("createModel", function () {
     const model = createModel(
       Protocol.Provider.ModelConfig.parse({
         npm: "@ai-sdk/anthropic",
+        providerID: "anthropic",
         modelID: "claude-opus-4-8",
         options: { apiKey: "sk-ant-test" },
       }),
@@ -29,6 +31,7 @@ describe("createModel", function () {
     const model = createModel(
       Protocol.Provider.ModelConfig.parse({
         npm: "@ai-sdk/groq",
+        providerID: "groq",
         modelID: "llama-3.3-70b-versatile",
         options: { apiKey: "gsk-test" },
       }),
@@ -41,6 +44,7 @@ describe("createModel", function () {
       return createModel(
         Protocol.Provider.ModelConfig.parse({
           npm: "@ai-sdk/mystery",
+          providerID: "mystery",
           modelID: "m1",
           options: {},
         }),
@@ -53,6 +57,7 @@ describe("createModel", function () {
       return createModel(
         Protocol.Provider.ModelConfig.parse({
           npm: "@ai-sdk/openai-compatible",
+          providerID: "openai-compatible",
           modelID: "m1",
           options: { apiKey: "k" },
         }),

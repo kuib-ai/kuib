@@ -19,10 +19,13 @@ describe("readFile tool", function () {
   it("delegates input to ctx.fs.readFile and returns its result", async function () {
     const seen: ReadFileInput[] = [];
     const output: ReadFileOutput = { content: "hello world" };
-    const fs: Pick<FileSystemPort, "readFile"> = {
+    const fs: FileSystemPort = {
       readFile: async function (input) {
         seen.push(input);
         return output;
+      },
+      readDir: async function () {
+        return { content: "" };
       },
     };
     const ctx: ToolContext = { fs };

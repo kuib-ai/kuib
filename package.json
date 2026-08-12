@@ -10,6 +10,7 @@
     "check:circular": "madge --circular --extensions ts,tsx packages apps",
     "typecheck": "nx run-many -t typecheck --output-style=stream",
     "test": "bun test packages apps",
+    "test:llm": "KUIB_LLM_TESTS=1 bun test packages/engine/src/provider/live.test.ts",
     "reload": "bun scripts/reload.ts",
     "wireframes": "pnpm --filter @kuib-ai/wireframes dev",
     "design": "./scripts/design-session.sh"

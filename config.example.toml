@@ -9,7 +9,9 @@
 
 [model]
 default = "groq/llama-3.3-70b-versatile"
-# base_url = "http://localhost:11434/v1"
+# default = "meta/muse-spark-1.1"     # needs KUIB_META_API_KEY
+# default = "mimo/mimo-v2.5-pro"      # needs KUIB_MIMO_API_KEY
+# base_url = "http://localhost:11434/v1"   # openai-compatible only
 
 [logging]
 level = "info"

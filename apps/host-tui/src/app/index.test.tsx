@@ -24,6 +24,7 @@ describe("App submit gating", function () {
               onSubmit={function (text) {
                 return submitted.push(text);
               }}
+              onInterrupt={function () {}}
             />
           );
         },
@@ -59,6 +60,7 @@ describe("App submit gating", function () {
             onSubmit={function (text) {
               return submitted.push(text);
             }}
+            onInterrupt={function () {}}
           />
         );
       },
@@ -87,6 +89,7 @@ describe("App submit gating", function () {
             sessionID={sessionID}
             deviceLabel="rs10@septimus"
             onSubmit={function () {}}
+            onInterrupt={function () {}}
           />
         );
       },
@@ -123,6 +126,7 @@ describe("App submit gating", function () {
             sessionID={sessionID}
             deviceLabel="rs10@septimus"
             onSubmit={function () {}}
+            onInterrupt={function () {}}
           />
         );
       },

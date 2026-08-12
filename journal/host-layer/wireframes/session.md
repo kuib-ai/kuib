@@ -111,6 +111,34 @@ Transcript entries keep their fold semantics (reasoning dim before the answer, t
 
 The empty session is the same layout with an empty conversation pane — no distinct frame. No empty-state copy yet; an open gap the greenfield bootstrap flow ([[context-bootstrap]]) will define.
 
+## Variant — generic loader + context meter (ADOPTED 2026-08-12, as-built)
+
+Two additions, both driven by events that already existed in the protocol but were never emitted until the `STEP_STARTED`/`STEP_FINISHED` work ([[provider-architecture]]).
+
+```
+┌─Conversation────────────────────────────────┐┌─Prompt────────────────────────┐
+│user: how long for 100 machines?             ││                rs10@septimus ①│
+│                                             ││                               │
+│⠹ Thinking… 7s · …so the rate is 1 widget pe⑤││ ┌───────────────────────────┐ │
+│                                             ││ │Message kuib…              │②│
+│                                             ││ │                           │ │
+│                                             ││ │                           │ │
+│                                             ││ └───────────────────────────┘ │
+│                                             ││                               │
+│                                             ││ Enter sends · queues mid-turn③│
+│                                             ││ Context 12.3k/1.0M · 1%      ⑥│
+│                                             ││                               │
+└─────────────────────────────────────────────┘└───────────────────────────────┘
+```
+
+⑤ **generic loader**, pinned to the bottom of the transcript — visible for the whole turn (`MESSAGE_STARTED` → `MESSAGE_COMPLETED`/`MESSAGE_FAILED`), braille spinner + elapsed seconds. Reasoning is shown **inside the loader**, not as a separate transcript row: the tail (48 chars, whitespace-collapsed) of the current message's accumulated `REASONING_DELTA`. Label is `Working…` until reasoning arrives, `Thinking… · <tail>` after. This is the convention every agentic TUI uses, and it keeps a 200-line chain of thought from burying the answer.
+
+⑥ **context meter**, under the submit hint — `input + output` tokens from the most recent `STEP_FINISHED`, against a local window table. Reads `Context —` before the first step completes.
+
+**The window is hardcoded because no API exposes it.** Verified against MiMo: raw `GET /v1/models` returns only `{id, object, owned_by}`, the single-model retrieve path 404s, and the published docs carry no response schema — the 1M figure exists only in prose. Meta's API is the same. So `CONTEXT_WINDOWS` is a `modelID` → tokens map in the TUI; an unknown model degrades to a bare token count rather than a wrong percentage. Revisit if any provider ships a capabilities endpoint (Anthropic's `/v1/models` does return `max_input_tokens` — that one could be live-queried).
+
+**Deliberately not shown: an interrupt affordance.** A first draft of the loader read `esc to interrupt`; that was removed rather than shipped, because no interrupt exists — `runAgent` takes no `AbortSignal` and never passes one to `streamText`, and the TUI has no cancel binding. Advertising a key that does nothing is worse than omitting it. This became materially more important once `stopWhen` was removed (see below): a runaway loop currently has no stop short of killing the process. **Open gap — the next thing to build on this screen.**
+
 ## Exploring — queued prompts in the pane (2026-07-03)
 
 The unclaimed lower-right of the prompt pane claims its purpose: mid-turn submits (which queue and steer at step boundaries) become visible as a QUEUED list under the hint line. The queue was previously invisible — you had to trust that your mid-turn Enter went somewhere. Not implemented yet.

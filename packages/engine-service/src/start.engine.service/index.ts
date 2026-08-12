@@ -10,11 +10,13 @@ type RunTurn = (input: {
   sessionID: SessionID;
   prompt: string;
   takePending: () => string[];
+  onAbort: (abort: () => void) => void;
 }) => Promise<void>;
 
 type SessionTurnState = {
   running: boolean;
   pending: string[];
+  abort?: () => void;
 };
 
 type StartEngineServiceParams = {
@@ -127,6 +129,10 @@ const startEngineService = function (
       return;
     }
     const msg = decoded.data;
+    if (msg.type === Protocol.ServiceMessage.ServiceMessageTypeEnum.INTERRUPT) {
+      sessions.get(msg.sessionID)?.abort?.();
+      return;
+    }
     if (msg.type === Protocol.ServiceMessage.ServiceMessageTypeEnum.SUBMIT) {
       const state = sessions.get(msg.sessionID) ?? {
         running: false,
@@ -149,6 +155,9 @@ const startEngineService = function (
               prompt,
               takePending: function () {
                 return state.pending.splice(0);
+              },
+              onAbort: function (abort) {
+                state.abort = abort;
               },
             }),
           );

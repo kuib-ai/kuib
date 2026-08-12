@@ -1,5 +1,6 @@
 // @context @journal/architecture-overview
-import { streamText, stepCountIs, type LanguageModel } from "ai";
+import { streamText, type LanguageModel } from "ai";
+import type { ProviderOptions } from "#provider/build.provider.options";
 
 import Protocol from "@kuib-ai/protocol";
 import Std from "@kuib-ai/std";
@@ -7,6 +8,8 @@ import Tools from "@kuib-ai/tools";
 import type { SessionID } from "@kuib-ai/protocol/id/session.id";
 import type { DeviceID } from "@kuib-ai/protocol/id/device.id";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";
+import type { ModelRef } from "@kuib-ai/protocol/model.ref";
+import type { StepBoundaryStopReasonEnum } from "@kuib-ai/protocol/part/step.boundary.stop.reason.enum";
 import type { EventLogPort } from "@kuib-ai/protocol/event.log.port";
 
 import newID from "#new.id";
@@ -20,9 +23,26 @@ type RunAgentParams = {
   sessionID: SessionID;
   deviceID: DeviceID;
   model: LanguageModel;
+  modelRef: ModelRef;
+  providerOptions?: ProviderOptions;
+  maxSteps?: number;
+  onAbort?: (abort: () => void) => void;
   daemonClient: DaemonClient;
   eventLog: EventLogPort;
   takePending?: () => string[];
+};
+
+const STOP_REASONS: Record<string, StepBoundaryStopReasonEnum> = {
+  stop: Protocol.Part.StepBoundaryStopReasonEnum.NORMAL,
+  "tool-calls": Protocol.Part.StepBoundaryStopReasonEnum.TOOL_CALL_REQUEST,
+  length: Protocol.Part.StepBoundaryStopReasonEnum.LENGTH,
+  "content-filter": Protocol.Part.StepBoundaryStopReasonEnum.CONTENT_FILTER,
+};
+
+const stopReason = function (reason: string): StepBoundaryStopReasonEnum {
+  return (
+    STOP_REASONS[reason] ?? Protocol.Part.StepBoundaryStopReasonEnum.INTERRUPTED
+  );
 };
 
 const runAgent = async function (params: RunAgentParams): Promise<void> {
@@ -63,17 +83,24 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
 
     const messages = buildMessages(eventLog, sessionID);
 
+    const controller = new AbortController();
+    params.onAbort?.(function () {
+      controller.abort();
+    });
+
     const result = streamText({
       model,
       messages,
       tools,
-      stopWhen: stepCountIs(5),
-      telemetry: { isEnabled: true, functionId: "runAgent" },
-      providerOptions: {
-        kuib: {
-          reasoningEffort: "none",
-        },
+      abortSignal: controller.signal,
+      stopWhen: function ({ steps }) {
+        if (params.maxSteps === undefined) {
+          return false;
+        }
+        return steps.length >= params.maxSteps;
       },
+      telemetry: { isEnabled: true, functionId: "runAgent" },
+      providerOptions: params.providerOptions ?? {},
       prepareStep: async function (step) {
         const pending = params.takePending?.() ?? [];
         if (pending.length === 0) {
@@ -89,9 +116,38 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
     });
 
     const errorPartID = newID(Protocol.ID.PartID);
+    let stepPartID = newID(Protocol.ID.PartID);
     const consume = async function (): Promise<void> {
       for await (const part of result.fullStream) {
         switch (part.type) {
+          case "start-step": {
+            stepPartID = newID(Protocol.ID.PartID);
+            await emit({
+              type: Protocol.Event.EventTypeEnum.STEP_STARTED,
+              messageID,
+              partID: stepPartID,
+            });
+            break;
+          }
+          case "finish-step": {
+            await emit({
+              type: Protocol.Event.EventTypeEnum.STEP_FINISHED,
+              messageID,
+              partID: stepPartID,
+              reason: stopReason(part.finishReason),
+              model: params.modelRef,
+              tokens: {
+                input: part.usage.inputTokens ?? 0,
+                output: part.usage.outputTokens ?? 0,
+                reasoning: part.usage.outputTokenDetails.reasoningTokens,
+                cache: {
+                  read: part.usage.inputTokenDetails.cacheReadTokens ?? 0,
+                  write: part.usage.inputTokenDetails.cacheWriteTokens ?? 0,
+                },
+              },
+            });
+            break;
+          }
           case "text-delta": {
             await emit({
               type: Protocol.Event.EventTypeEnum.TEXT_DELTA,
@@ -114,6 +170,8 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
             await emit({
               type: Protocol.Event.EventTypeEnum.TOOL_CALL_STARTED,
               callID: Protocol.ID.ToolCallID.parse(part.toolCallId),
+              name: part.toolName,
+              input: JSON.stringify(part.input),
             });
             break;
           }
@@ -156,6 +214,14 @@ const runAgent = async function (params: RunAgentParams): Promise<void> {
     };
 
     const [streamError] = await Std.withError(consume());
+    if (streamError && controller.signal.aborted) {
+      await emit({
+        type: Protocol.Event.EventTypeEnum.MESSAGE_COMPLETED,
+        messageID,
+        completedAt: Date.now(),
+      });
+      return;
+    }
     if (streamError) {
       await emit({
         type: Protocol.Event.EventTypeEnum.TEXT_DELTA,

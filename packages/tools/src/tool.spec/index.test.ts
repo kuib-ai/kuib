@@ -8,6 +8,9 @@ const ctx: ToolContext = {
     readFile: async function () {
       return { content: "" };
     },
+    readDir: async function () {
+      return { content: "" };
+    },
   },
 };
 

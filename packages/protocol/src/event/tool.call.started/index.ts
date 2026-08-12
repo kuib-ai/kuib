@@ -6,6 +6,8 @@ import ToolCallID from "../../id/tool.call.id";
 const ToolCallStarted = z.object({
   type: z.literal(EventTypeEnum.TOOL_CALL_STARTED),
   callID: ToolCallID,
+  name: z.string().min(1).optional(),
+  input: z.string().optional(),
 });
 type ToolCallStarted = z.infer<typeof ToolCallStarted>;
 

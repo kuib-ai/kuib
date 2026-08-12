@@ -4,6 +4,11 @@ import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";
 
+const modelRef = Protocol.ModelRef.parse({
+  providerID: "test",
+  modelID: "test-model",
+});
+
 const sessionID = Protocol.ID.SessionID.parse("s1");
 const deviceID = Protocol.ID.DeviceID.parse("d1");
 
@@ -60,6 +65,8 @@ describe("orchestrator runAgent", function () {
       sessionID,
       deviceID,
       model,
+      modelRef,
+      maxSteps: 5,
       daemonClient,
       eventLog,
     });
@@ -142,6 +149,8 @@ describe("orchestrator runAgent", function () {
       sessionID,
       deviceID,
       model,
+      modelRef,
+      maxSteps: 5,
       daemonClient,
       eventLog,
     });
@@ -193,6 +202,8 @@ describe("orchestrator runAgent", function () {
       sessionID,
       deviceID,
       model,
+      modelRef,
+      maxSteps: 5,
       daemonClient,
       eventLog,
     });
@@ -260,6 +271,8 @@ describe("orchestrator runAgent", function () {
       sessionID,
       deviceID,
       model,
+      modelRef,
+      maxSteps: 5,
       daemonClient,
       eventLog,
       takePending,
@@ -319,6 +332,8 @@ describe("orchestrator runAgent", function () {
       sessionID,
       deviceID,
       model,
+      modelRef,
+      maxSteps: 5,
       daemonClient,
       eventLog,
     });
@@ -359,6 +374,8 @@ describe("orchestrator runAgent", function () {
       sessionID,
       deviceID,
       model,
+      modelRef,
+      maxSteps: 5,
       daemonClient,
       eventLog,
     });

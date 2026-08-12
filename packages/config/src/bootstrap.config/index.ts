@@ -27,6 +27,9 @@ const BootstrapEnv = z.object({
   KUIB_MODEL_ID: z.string().optional(),
   KUIB_GROQ_API_KEY: z.string().optional(),
   KUIB_ANTHROPIC_API_KEY: z.string().optional(),
+  KUIB_META_API_KEY: z.string().optional(),
+  KUIB_MIMO_API_KEY: z.string().optional(),
+  KUIB_MIMO_BASE_URL: z.url().optional(),
   KUIB_LOG_LEVEL: z.string().optional(),
   KUIB_TRACE_ENDPOINT: z.url().optional(),
   KUIB_WEB_PORT: z.string().optional(),
@@ -46,6 +49,8 @@ type BootstrapConfigOptions = {
 type ProviderSecrets = {
   groqApiKey?: string;
   anthropicApiKey?: string;
+  metaApiKey?: string;
+  mimoApiKey?: string;
   modelApiKey?: string;
 };
 
@@ -56,6 +61,7 @@ type RuntimeConfig = {
   daemonPort?: number;
   webTailscaleIP?: string;
   webDev: boolean;
+  mimoBaseURL?: string;
 };
 
 type BootstrapConfig = {
@@ -169,6 +175,8 @@ const bootstrapConfig = function (
     secrets: {
       groqApiKey: env.KUIB_GROQ_API_KEY,
       anthropicApiKey: env.KUIB_ANTHROPIC_API_KEY,
+      metaApiKey: env.KUIB_META_API_KEY,
+      mimoApiKey: env.KUIB_MIMO_API_KEY,
       modelApiKey: env.KUIB_MODEL_API_KEY,
     },
     runtime: {
@@ -178,6 +186,7 @@ const bootstrapConfig = function (
       daemonPort: env.KUIB_DAEMON_PORT,
       webTailscaleIP: env.KUIB_WEB_TAILSCALE_IP,
       webDev: env.KUIB_WEB_DEV !== undefined,
+      mimoBaseURL: env.KUIB_MIMO_BASE_URL,
     },
   };
 };

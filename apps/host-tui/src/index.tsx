@@ -74,12 +74,6 @@ const main = async function (): Promise<void> {
     configFile: bootstrap.paths.configFile,
   });
 
-  log.info(
-    Std.build(Protocol.Error.ErrorLlmFailed, {
-      message: "Failed to load LLM",
-    }),
-  );
-
   const sessionID = Protocol.ID.SessionID.parse(bootstrap.runtime.sessionID);
   const deviceID = Protocol.ID.DeviceID.parse(crypto.randomUUID());
   const command = parsed.positionals[0] ?? "ui";

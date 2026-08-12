@@ -8,7 +8,13 @@ type ResolveModelConfigParams = {
   apiKey: string | undefined;
   anthropicApiKey: string | undefined;
   groqApiKey: string | undefined;
+  metaApiKey: string | undefined;
+  mimoApiKey: string | undefined;
+  mimoBaseURL: string | undefined;
 };
+
+const META_BASE_URL = "https://api.meta.ai/v1";
+const MIMO_BASE_URL = "https://token-plan-sgp.xiaomimimo.com/v1";
 
 const requireKey = function (
   key: string | undefined,
@@ -37,6 +43,7 @@ const resolveModelConfig = function (
   if (providerID === "groq") {
     return Protocol.Provider.ModelConfig.parse({
       npm: "@ai-sdk/groq",
+      providerID,
       modelID,
       options: {
         apiKey: requireKey(params.groqApiKey, "KUIB_GROQ_API_KEY", "groq"),
@@ -46,6 +53,7 @@ const resolveModelConfig = function (
   if (providerID === "anthropic") {
     return Protocol.Provider.ModelConfig.parse({
       npm: "@ai-sdk/anthropic",
+      providerID,
       modelID,
       options: {
         apiKey: requireKey(
@@ -56,9 +64,33 @@ const resolveModelConfig = function (
       },
     });
   }
+  if (providerID === "meta") {
+    return Protocol.Provider.ModelConfig.parse({
+      npm: "@ai-sdk/openai-compatible",
+      providerID,
+      modelID,
+      options: {
+        baseURL: META_BASE_URL,
+        apiKey: requireKey(params.metaApiKey, "KUIB_META_API_KEY", "meta"),
+      },
+    });
+  }
+  if (providerID === "mimo") {
+    return Protocol.Provider.ModelConfig.parse({
+      npm: "@ai-sdk/openai-compatible",
+      providerID,
+      modelID,
+      options: {
+        baseURL: params.mimoBaseURL ?? MIMO_BASE_URL,
+        apiKey: requireKey(params.mimoApiKey, "KUIB_MIMO_API_KEY", "mimo"),
+      },
+      providerOptions: { thinking: { type: "enabled" } },
+    });
+  }
   if (providerID === "openai-compatible") {
     return Protocol.Provider.ModelConfig.parse({
       npm: "@ai-sdk/openai-compatible",
+      providerID,
       modelID,
       options: {
         baseURL: requireKey(
@@ -68,10 +100,11 @@ const resolveModelConfig = function (
         ),
         apiKey: params.apiKey,
       },
+      providerOptions: { reasoningEffort: "none" },
     });
   }
   throw new Error(
-    `unknown provider in model.default: ${providerID} (supported: groq, anthropic, openai-compatible)`,
+    `unknown provider in model.default: ${providerID} (supported: groq, anthropic, meta, mimo, openai-compatible)`,
   );
 };
 

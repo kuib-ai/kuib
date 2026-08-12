@@ -1,7 +1,6 @@
 // @context @journal/house-style-linting
 import Protocol from "@kuib-ai/protocol";
 import type { AnyError } from "@kuib-ai/protocol/error/error.any";
-import build from "../build";
 
 const detailsFromCause = function (
   cause: unknown,
@@ -44,7 +43,8 @@ const mapError = function (cause: unknown): AnyError {
   if (parsed.success) {
     return parsed.data;
   }
-  return build(Protocol.Error.ErrorUnknown, {
+  return Protocol.Error.ErrorUnknown.decode({
+    code: Protocol.Error.ErrorCodeEnum.UNKNOWN,
     message: messageFromCause(cause),
     details: detailsFromCause(cause),
   });

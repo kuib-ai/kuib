@@ -38,6 +38,20 @@ const ui = async function (
     });
   };
 
+  const onInterrupt = function (): void {
+    void Std.withScope({ sessionID }, async function () {
+      const [cause] = await Std.withError(
+        client.interrupt({
+          type: Protocol.ServiceMessage.ServiceMessageTypeEnum.INTERRUPT,
+          sessionID,
+        }),
+      );
+      if (cause !== null) {
+        uiLog.error(Std.errorFields(cause), "interrupt failed");
+      }
+    });
+  };
+
   render(
     function () {
       return (
@@ -46,6 +60,7 @@ const ui = async function (
           sessionID={sessionID}
           deviceLabel={deviceLabel}
           onSubmit={onSubmit}
+          onInterrupt={onInterrupt}
         />
       );
     },

@@ -18,8 +18,7 @@
   "dependencies": {
     "@kuib-ai/protocol": "workspace:*",
     "pino": "catalog:",
-    "pino-pretty": "catalog:",
-    "zod": "catalog:"
+    "pino-pretty": "catalog:"
   },
   "devDependencies": {
     "@kuib-ai/tsconfig": "workspace:*",

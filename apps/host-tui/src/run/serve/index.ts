@@ -1,5 +1,6 @@
 // @context @journal/host-layer
 
+import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
 import EngineService from "@kuib-ai/engine-service";
 import EventLogSqlite from "@kuib-ai/event-log-sqlite";
@@ -30,8 +31,16 @@ const serve = async function (
     apiKey: bootstrap.secrets.modelApiKey,
     anthropicApiKey: bootstrap.secrets.anthropicApiKey,
     groqApiKey: bootstrap.secrets.groqApiKey,
+    metaApiKey: bootstrap.secrets.metaApiKey,
+    mimoApiKey: bootstrap.secrets.mimoApiKey,
+    mimoBaseURL: bootstrap.runtime.mimoBaseURL,
   });
   const model = Engine.Provider.createModel(modelConfig);
+  const providerOptions = Engine.Provider.buildProviderOptions(modelConfig);
+  const modelRef = Protocol.ModelRef.parse({
+    providerID: modelConfig.providerID,
+    modelID: modelConfig.modelID,
+  });
   const daemonClient = await resolveDaemonClient(
     {
       targetNode: bootstrap.config.target.node,
@@ -46,7 +55,7 @@ const serve = async function (
     socketPath,
     eventLog,
     reapIdleMs: 5000,
-    runTurn: function ({ sessionID: sid, prompt, takePending }) {
+    runTurn: function ({ sessionID: sid, prompt, takePending, onAbort }) {
       return Std.withScope({ sessionID: sid, deviceID }, function () {
         serveLog.info("turn starting");
         return Engine.runAgent({
@@ -54,9 +63,12 @@ const serve = async function (
           sessionID: sid,
           deviceID,
           model,
+          modelRef,
+          providerOptions,
           daemonClient,
           eventLog,
           takePending,
+          onAbort,
         });
       });
     },

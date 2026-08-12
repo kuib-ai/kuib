@@ -124,8 +124,16 @@ const main = async function (): Promise<void> {
     apiKey: bootstrap.secrets.modelApiKey,
     anthropicApiKey: bootstrap.secrets.anthropicApiKey,
     groqApiKey: bootstrap.secrets.groqApiKey,
+    metaApiKey: bootstrap.secrets.metaApiKey,
+    mimoApiKey: bootstrap.secrets.mimoApiKey,
+    mimoBaseURL: bootstrap.runtime.mimoBaseURL,
   });
   const model = Engine.Provider.createModel(modelConfig);
+  const providerOptions = Engine.Provider.buildProviderOptions(modelConfig);
+  const modelRef = Protocol.ModelRef.parse({
+    providerID: modelConfig.providerID,
+    modelID: modelConfig.modelID,
+  });
   const daemonEndpoint = await Daemon.resolveDaemonEndpoint(
     bootstrap.runtime.daemonURL,
     bootstrap.paths.daemonSocket,
@@ -331,6 +339,8 @@ const main = async function (): Promise<void> {
         sessionID: submitSession,
         deviceID,
         model,
+        modelRef,
+        providerOptions,
         daemonClient,
         eventLog,
       })
