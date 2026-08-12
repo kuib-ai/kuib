@@ -125,6 +125,7 @@ const buildMessages = function (
         break;
       }
       case Protocol.Event.EventTypeEnum.MESSAGE_COMPLETED:
+      case Protocol.Event.EventTypeEnum.MESSAGE_FAILED:
         flushAssistant();
         break;
       default:
