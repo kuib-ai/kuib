@@ -92,6 +92,11 @@ const buildMessages = function (
       }
       case Protocol.Event.EventTypeEnum.TOOL_CALL_COMPLETED: {
         if (!toolNames.has(event.callID)) {
+          flushAssistant();
+          messages.push({
+            role: "user",
+            content: `[earlier tool result] ${event.output}`,
+          });
           break;
         }
         messages.push({
