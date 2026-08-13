@@ -3,8 +3,8 @@
     "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "80"
   },
   "permissions": {
-    "allow": ["Read(**)", "Glob(**)", "Grep(**)"],
-    "deny": ["Bash(git push --force *)"]
+    "allow": [],
+    "deny": []
   },
   "hooks": {
     "SessionStart": [
