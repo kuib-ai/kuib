@@ -2,6 +2,11 @@
 
 ## Product
 
+### [[ana]] | status:open | tags:ana,assistant,voice,stt,tts,mimo,mesh,proactive,context
+  Ana is a voice-driven personal AI assistant. It is the first application built on the Kuib engine, living at `apps/ana` ...
+  - [[ana/research/hardware-topology]]
+  - [[ana/research/voice-io-landscape]]
+
 ### [[comprehension-model]] | status:decided | tags:comprehension,hunks,ledger,intent,pair,cognition
   Everything is one ordered event log: agent hunks, user hunks, decisions, captures, sub-chats, lens switches. Projections...
 
