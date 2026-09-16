@@ -1,46 +1,36 @@
 ---
 name: journal-start
-description: Start or extend a journal entry. Invoke at the start of any new architectural decision, domain definition, or strategy contract.
+description: Start optional scratchpad notes for an unclear task. Creates journal/scratchpad/<name>/notes.md. Use /journal-graduate directly when the plan is already clear.
+user-invocable: true
+argument-hint: [experiment-name]
 ---
 
 # Journal Start
 
-You are starting or extending a journal entry.
+You are starting a working journal named: "$ARGUMENTS"
+
+The layout contract is `journal/SPEC.md` — read it if you haven't this session.
 
 ## Steps
 
-1. **Search for existing journals**:
-   - Use `list_dir` to look in `journal/architecture/`
-   - Read related `decisions.md` frontmatter to see if the topic is already covered.
+1. **Check for existing work:**
+   - `journal/features/$ARGUMENTS/` exists → a feature already exists. Read its `plan.md` +
+     `implementation.toml` and continue there.
+   - Grep `journal/_index.md` for the name or topic → an existing context entry may cover this.
+   - `journal/scratchpad/$ARGUMENTS/` exists → ongoing provisional work; read `notes.md`.
 
-2. **If a matching journal exists:**
-   - Read its `decisions.md` to understand current state.
-   - Tell the user you found an existing journal and ask what new decisions to add.
+2. **Choose the entry path:**
+   - If objectives, phases, and acceptance criteria are already concrete → run
+     `/journal-graduate $ARGUMENTS` directly. Do not create a scratchpad.
+   - Otherwise create `journal/scratchpad/$ARGUMENTS/notes.md` with a 2–3 line statement of
+     what is being explored and why. Optional `research/` subfolder for findings.
 
-3. **If no matching journal exists:**
-   - Ask the user for a short, hyphenated domain name (e.g. `order-execution`).
-   - Create the directory `journal/architecture/[domain-name]/`.
-   - Create `journal/architecture/[domain-name]/decisions.md` with the following frontmatter:
-     ```yaml
-     ---
-     title: [Human Readable Title]
-     type: implementation
-     layer: architecture
-     status: decided
-     created: [YYYY-MM-DD]
-     tags: [tag1, tag2]
-     depends-on: []
-     informs: []
-     ---
-     ```
-   - Add the initial architectural decisions based on user context.
+3. **Tell the user** the scratchpad is provisional. When the plan is concrete, run
+   `/journal-graduate $ARGUMENTS` to create the canonical feature entry.
 
-4. **Update the index**:
-   - Run `pnpm exec tsx scripts/compile-journal-index.ts`.
-   - Ensure the new entry passes all structural validation checks.
+## Rules
 
-5. **Set context**: Tell the user the ADR is created and they can now run the domain generator (`pnpm generate`) and manually link `@context @journal/[domain-name]/decisions.md`.
-
-## Wikilinks
-
-When creating entries, add `[references]` in the frontmatter `depends-on` and `informs` fields pointing to related journal entries (e.g. `[grpc-tailnet-topology]`). Use reciprocal links.
+- Scratchpad content is not project truth — it becomes truth after graduation.
+- Do NOT start a journal for bug-fix sessions (tracked via commits).
+- Existing context entries in `journal/<name>/` are reference material with the old format
+  (decisions.md, wikilinks). Features under `journal/features/` use the new strict schema.
