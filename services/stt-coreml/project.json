@@ -1,0 +1,19 @@
+{
+  "name": "stt-coreml",
+  "targets": {
+    "build": {
+      "command": "swift build -c release",
+      "options": {
+        "cwd": "services/stt-coreml"
+      },
+      "cache": true,
+      "inputs": ["{projectRoot}/Sources/**/*.swift", "{projectRoot}/Package.swift"]
+    },
+    "run": {
+      "command": "swift run stt-coreml",
+      "options": {
+        "cwd": "services/stt-coreml"
+      }
+    }
+  }
+}
