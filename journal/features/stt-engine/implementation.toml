@@ -3,8 +3,8 @@ state = "implementing"
 current_phase = "P01"
 
 [checkpoint]
-summary = "P01 implemented. Renamed to services/stt-coreml (platform-explicit naming). Swift 6.4, SwiftNIO for socket server. Files: Package.swift, SttBackend protocol, ParakeetBackend (FluidAudio), Protocol (JSON wire types), Server (NIO unix socket listener with length-prefix framing), Main (@main entry point). Ready for first build on minerva."
-next = ["Build and test on minerva", "P02-I01"]
+summary = "P01 code complete. Renamed to services/stt-coreml. Swift 6.0 (toolchain 6.3.3 on minerva), SwiftNIO for socket server, Nx project.json wired. All P01 items done. Shifting to minerva for first build + FluidAudio version verification."
+next = ["swift build on minerva — verify FluidAudio resolves", "Test transcription end-to-end", "P02-I01"]
 blockers = []
 
 [phases.P01]
