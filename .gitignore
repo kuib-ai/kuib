@@ -26,3 +26,13 @@ dist
 .scratchpad
 
 .obsidian
+
+# Journal scratchpads (provisional, local-only)
+journal/scratchpad/*
+!journal/scratchpad/.gitkeep
+
+# Swift
+.build/
+.swiftpm/
+*.xcodeproj
+xcuserdata/
