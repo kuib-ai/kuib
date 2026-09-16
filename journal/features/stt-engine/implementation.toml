@@ -1,0 +1,74 @@
+feature = "stt-engine"
+state = "implementing"
+current_phase = "P01"
+
+[checkpoint]
+summary = "P01 implemented. Renamed to services/stt-coreml (platform-explicit naming). Swift 6.4, SwiftNIO for socket server. Files: Package.swift, SttBackend protocol, ParakeetBackend (FluidAudio), Protocol (JSON wire types), Server (NIO unix socket listener with length-prefix framing), Main (@main entry point). Ready for first build on minerva."
+next = ["Build and test on minerva", "P02-I01"]
+blockers = []
+
+[phases.P01]
+state = "in_progress"
+
+[phases.P02]
+state = "planned"
+
+[phases.P03]
+state = "planned"
+
+[phases.P04]
+state = "planned"
+
+[items."P01-I01"]
+state = "done"
+decisions = ["D001", "D002", "D003", "D005"]
+addresses = ["G001"]
+refs = ["services/stt-coreml/Package.swift", "services/stt-coreml/Sources/SttCoreML/ParakeetBackend.swift"]
+
+[items."P01-I02"]
+state = "done"
+decisions = ["D004"]
+addresses = []
+refs = ["services/stt-coreml/Sources/SttCoreML/Server.swift", "services/stt-coreml/Sources/SttCoreML/Protocol.swift", "services/stt-coreml/Sources/SttCoreML/Main.swift"]
+
+[items."P01-I03"]
+state = "done"
+decisions = ["D006"]
+addresses = []
+refs = ["services/stt-coreml/Sources/SttCoreML/SttBackend.swift"]
+
+[items."P02-I01"]
+state = "planned"
+decisions = []
+addresses = ["G003"]
+refs = []
+
+[items."P02-I02"]
+state = "planned"
+decisions = []
+addresses = []
+refs = []
+
+[items."P03-I01"]
+state = "planned"
+decisions = ["D001", "D006"]
+addresses = []
+refs = []
+
+[items."P03-I02"]
+state = "planned"
+decisions = []
+addresses = []
+refs = []
+
+[items."P04-I01"]
+state = "planned"
+decisions = []
+addresses = ["G004"]
+refs = []
+
+[items."P04-I02"]
+state = "planned"
+decisions = []
+addresses = []
+refs = []
