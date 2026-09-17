@@ -1,3 +1,4 @@
+import FluidAudio
 import Foundation
 
 @main
@@ -11,14 +12,23 @@ struct SttCoreMLApp {
             atPath: socketDir, withIntermediateDirectories: true
         )
 
-        let backend = ParakeetBackend()
         log("Loading parakeet model...")
-        try await backend.loadModel()
+        let models = try await AsrModels.downloadAndLoad()
         log("Model loaded")
+
+        let parakeet = ParakeetBackend(models: models)
+
+        let eou = EouBackend()
+        log("Loading parakeet-eou model...")
+        try await eou.loadModel()
+        log("EOU model loaded")
 
         let server = SttServer(
             socketPath: socketPath,
-            backends: [backend]
+            tcpHost: "100.70.111.96",
+            tcpPort: 9009,
+            backends: [parakeet, eou],
+            models: models
         )
         try await server.run()
     }

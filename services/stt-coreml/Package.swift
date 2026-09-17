@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.3
 import PackageDescription
 
 let package = Package(
@@ -7,7 +7,7 @@ let package = Package(
         .macOS(.v14),
     ],
     dependencies: [
-        .package(url: "https://github.com/FluidInference/FluidAudio.git", from: "0.37.0"),
+        .package(url: "https://github.com/FluidInference/FluidAudio.git", from: "0.9.1"),
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.70.0"),
     ],
     targets: [

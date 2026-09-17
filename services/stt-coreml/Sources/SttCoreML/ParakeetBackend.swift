@@ -1,4 +1,3 @@
-import AVFoundation
 import FluidAudio
 import Foundation
 
@@ -8,20 +7,19 @@ actor ParakeetBackend: SttBackend {
     private var manager: AsrManager?
     private var decoderState: TdtDecoderState?
 
-    func loadModel() async throws {
-        let config = ASRConfig.default
-        let manager = AsrManager(config: config)
-        try await manager.loadModels(AsrModels())
-        self.manager = manager
-        self.decoderState = TdtDecoderState()
+    init(models: AsrModels) {
+        self.manager = AsrManager(models: models)
+        self.decoderState = try? TdtDecoderState()
     }
+
+    func loadModel() async throws {}
 
     func transcribe(audio: Data, sampleRate: Int) async throws -> TranscriptionResult {
         guard let manager else {
             throw SttEngineError.modelNotLoaded
         }
         if decoderState == nil {
-            decoderState = TdtDecoderState()
+            decoderState = try TdtDecoderState()
         }
 
         let floats = audio.withUnsafeBytes { raw in
@@ -29,10 +27,9 @@ actor ParakeetBackend: SttBackend {
             return int16s.map { Float($0) / 32768.0 }
         }
 
-        let result = try await manager.transcribe(
-            floats,
-            decoderState: &decoderState!
-        )
+        var state = decoderState!
+        let result = try await manager.transcribe(floats, decoderState: &state)
+        decoderState = state
 
         return TranscriptionResult(
             text: result.text,
