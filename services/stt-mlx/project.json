@@ -1,0 +1,11 @@
+{
+  "name": "stt-mlx",
+  "targets": {
+    "run": {
+      "command": "uv run python server.py",
+      "options": {
+        "cwd": "services/stt-mlx"
+      }
+    }
+  }
+}

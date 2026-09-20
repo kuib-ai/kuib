@@ -1,0 +1,11 @@
+[project]
+name = "stt-mlx"
+version = "0.1.0"
+description = "Qwen3-ASR inference service via MLX on Apple Silicon"
+requires-python = ">=3.12"
+dependencies = [
+    "mlx-qwen3-asr>=0.4.0",
+]
+
+[project.optional-dependencies]
+dev = ["ruff"]

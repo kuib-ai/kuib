@@ -97,14 +97,20 @@ if len(sys.argv) > 1 and sys.argv[1] != "--":
         offset += len(chunk)
         time.sleep(SEND_INTERVAL_MS / 1000)
 else:
-    # Mic mode: stream from parec
-    rec = subprocess.Popen(
-        ["parec", "--format=s16le", "--rate=16000", "--channels=1", "--raw"],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-    )
+    # Mic mode: stream from parec (Linux) or sox (macOS)
+    if sys.platform == "darwin":
+        rec = subprocess.Popen(
+            ["sox", "-d", "-r", "16000", "-b", "16", "-c", "1", "-e", "signed-integer", "-t", "raw", "-"],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        )
+    else:
+        rec = subprocess.Popen(
+            ["parec", "--format=s16le", "--rate=16000", "--channels=1", "--raw"],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        )
     time.sleep(0.3)
     if rec.poll() is not None:
-        print(f"parec failed: {rec.stderr.read().decode()}")
+        print(f"recorder failed: {rec.stderr.read().decode()}")
         sys.exit(1)
     print("Speak now (Ctrl+C to stop)")
     try:

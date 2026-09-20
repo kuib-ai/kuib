@@ -11,12 +11,15 @@ import base64, json, os, socket, struct, subprocess, sys, time
 HOST = os.environ.get("STT_HOST", "100.70.111.96")
 PORT = int(os.environ.get("STT_PORT", "9009"))
 ENGINE = os.environ.get("STT_ENGINE", None)
+LANGUAGE = os.environ.get("STT_LANG", None)
 
 def transcribe(host, port, pcm_data):
     audio = base64.b64encode(pcm_data).decode()
     msg = {"action": "transcribe", "audio": audio, "sampleRate": 16000}
     if ENGINE:
         msg["engine"] = ENGINE
+    if LANGUAGE:
+        msg["language"] = LANGUAGE
     req = json.dumps(msg).encode()
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(60)
@@ -39,13 +42,19 @@ if len(sys.argv) > 1:
     print(f"File: {path} ({len(pcm)/1024:.0f} KB, {len(pcm)/32000:.1f}s)")
 else:
     print("Recording... speak now, Ctrl+C to stop.")
-    rec = subprocess.Popen(
-        ["parec", "--format=s16le", "--rate=16000", "--channels=1", "--raw"],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-    )
+    if sys.platform == "darwin":
+        rec = subprocess.Popen(
+            ["sox", "-d", "-r", "16000", "-b", "16", "-c", "1", "-e", "signed-integer", "-t", "raw", "-"],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        )
+    else:
+        rec = subprocess.Popen(
+            ["parec", "--format=s16le", "--rate=16000", "--channels=1", "--raw"],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        )
     time.sleep(0.3)
     if rec.poll() is not None:
-        print(f"parec failed: {rec.stderr.read().decode()}")
+        print(f"recorder failed: {rec.stderr.read().decode()}")
         sys.exit(1)
     try:
         pcm = b""
