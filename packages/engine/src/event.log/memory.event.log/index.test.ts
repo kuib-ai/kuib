@@ -1,4 +1,5 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";

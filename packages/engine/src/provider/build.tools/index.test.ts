@@ -1,8 +1,9 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { z } from "zod";
 import Tools from "@kuib-ai/tools";
 import type { ToolContext } from "@kuib-ai/tools/tool.spec";
-import buildTools from "./index";
+import buildTools from "./index.ts";
 
 const ctx: ToolContext = {
   fs: {

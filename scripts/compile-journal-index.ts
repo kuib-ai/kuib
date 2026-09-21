@@ -1,4 +1,4 @@
-#!/usr/bin/env pnpm dlx tsx
+#!/usr/bin/env -S deno run -A
 
 import {
   readFileSync,
@@ -6,9 +6,9 @@ import {
   readdirSync,
   statSync,
   existsSync,
-} from "fs";
-import { join, relative, dirname } from "path";
-import { fileURLToPath } from "url";
+} from "node:fs";
+import { join, relative, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const JOURNAL_DIR = join(__dirname, "..", "journal");

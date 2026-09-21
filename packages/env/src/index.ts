@@ -1,8 +1,8 @@
 // @context @journal/application-directories
-import bootstrapEnv from "./bootstrap.env";
-import findWorkspaceRoot from "./workspace.root";
-import resolveDir from "./resolve.dir";
-import resolveDirs from "./resolve.dirs";
+import bootstrapEnv from "./bootstrap.env/index.ts";
+import findWorkspaceRoot from "./workspace.root/index.ts";
+import resolveDir from "./resolve.dir/index.ts";
+import resolveDirs from "./resolve.dirs/index.ts";
 
 const Env = {
   bootstrapEnv,

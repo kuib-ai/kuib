@@ -1,4 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { afterEach, beforeEach, describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import {
   mkdirSync,
   mkdtempSync,
@@ -9,8 +10,8 @@ import {
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import Std from "@kuib-ai/std";
-import bootstrapConfig from ".";
-import ensureAppPaths from "../ensure.app.paths";
+import bootstrapConfig from "./index.ts";
+import ensureAppPaths from "../ensure.app.paths/index.ts";
 
 const originalEnv = { ...process.env };
 let workspace = "";

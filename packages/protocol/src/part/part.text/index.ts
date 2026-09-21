@@ -1,7 +1,7 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { PartTypeEnum } from "../part.type.enum";
-import PartBase from "../part.base";
+import { PartTypeEnum } from "../part.type.enum/index.ts";
+import PartBase from "../part.base/index.ts";
 
 const PartText = PartBase.extend({
   type: z.literal(PartTypeEnum.TEXT),

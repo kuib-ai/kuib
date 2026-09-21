@@ -1,7 +1,8 @@
 // @context @journal/application-directories
-import { describe, it, expect } from "bun:test";
-import { PathKindEnum } from "../path.kind";
-import resolvePlatformBase from "./index";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
+import { PathKindEnum } from "../path.kind/index.ts";
+import resolvePlatformBase from "./index.ts";
 
 describe("resolvePlatformBase", function () {
   it("routes win32 to Windows bases", function () {

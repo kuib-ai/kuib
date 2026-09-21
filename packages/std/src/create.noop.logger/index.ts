@@ -1,5 +1,5 @@
 // @context @journal/observability
-import type { Logger, LogBindings, LogFn } from "../logger.port";
+import type { Logger, LogBindings, LogFn } from "../logger.port/index.ts";
 
 const noop: LogFn = function () {};
 

@@ -2,9 +2,17 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "analytics": false,
   "targetDefaults": {
+    "generate": {
+      "cache": true
+    },
     "typecheck": {
       "cache": true,
-      "inputs": ["default", "^default"]
+      "dependsOn": ["^generate"],
+      "inputs": ["default", "^default", { "runtime": "deno --version" }]
+    },
+    "test": {
+      "cache": true,
+      "inputs": ["default", "^default", { "runtime": "deno --version" }]
     },
     "lint": {
       "cache": true,

@@ -1,10 +1,11 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import Protocol from "@kuib-ai/protocol";
-import createPinoLogger from "./index";
-import { LogLevelEnum } from "../log.level.enum";
+import createPinoLogger from "./index.ts";
+import { LogLevelEnum } from "../log.level.enum/index.ts";
 
 describe("createPinoLogger", function () {
   it("writes structured lines to a file destination", function () {

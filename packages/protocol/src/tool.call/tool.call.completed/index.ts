@@ -1,9 +1,9 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { ToolCallStatusEnum } from "../tool.call.status.enum";
-import { ToolCallKindEnum } from "../tool.call.kind.enum";
-import ModelRef from "../../model.ref";
-import TokenUsage from "../../token.usage";
+import { ToolCallStatusEnum } from "../tool.call.status.enum/index.ts";
+import { ToolCallKindEnum } from "../tool.call.kind.enum/index.ts";
+import ModelRef from "../../model.ref/index.ts";
+import TokenUsage from "../../token.usage/index.ts";
 
 const ToolCallCompletedBase = z.object({
   status: z.literal(ToolCallStatusEnum.COMPLETED),

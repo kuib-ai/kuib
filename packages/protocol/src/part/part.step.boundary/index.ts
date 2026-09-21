@@ -1,11 +1,11 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { PartTypeEnum } from "../part.type.enum";
-import { StepBoundaryKindEnum } from "../step.boundary.kind.enum";
-import { StepBoundaryStopReasonEnum } from "../step.boundary.stop.reason.enum";
-import PartBase from "../part.base";
-import ModelRef from "../../model.ref";
-import TokenUsage from "../../token.usage";
+import { PartTypeEnum } from "../part.type.enum/index.ts";
+import { StepBoundaryKindEnum } from "../step.boundary.kind.enum/index.ts";
+import { StepBoundaryStopReasonEnum } from "../step.boundary.stop.reason.enum/index.ts";
+import PartBase from "../part.base/index.ts";
+import ModelRef from "../../model.ref/index.ts";
+import TokenUsage from "../../token.usage/index.ts";
 
 const StepBoundaryPartBase = PartBase.extend({
   type: z.literal(PartTypeEnum.STEP_BOUNDARY),

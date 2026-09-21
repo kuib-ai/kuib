@@ -1,8 +1,8 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import MessageID from "../../id/message.id";
-import SessionID from "../../id/session.id";
-import DiscussionID from "../../id/discussion.id";
+import MessageID from "../../id/message.id/index.ts";
+import SessionID from "../../id/session.id/index.ts";
+import DiscussionID from "../../id/discussion.id/index.ts";
 
 const MessageBase = z.object({
   _version: z.literal(1),

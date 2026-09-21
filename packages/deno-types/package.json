@@ -1,0 +1,29 @@
+{
+  "name": "@kuib-ai/deno-types",
+  "version": "0.0.1",
+  "description": "Deno runtime declarations for tsgo, generated from the installed deno binary",
+  "private": true,
+  "type": "module",
+  "types": "./index.d.ts",
+  "scripts": {
+    "generate": "deno types > index.d.ts",
+    "postinstall": "deno types > index.d.ts",
+    "lint": "eslint . --no-error-on-unmatched-pattern",
+    "format": "prettier --write ."
+  },
+  "nx": {
+    "targets": {
+      "generate": {
+        "cache": true,
+        "inputs": [
+          {
+            "runtime": "deno --version"
+          }
+        ],
+        "outputs": [
+          "{projectRoot}/index.d.ts"
+        ]
+      }
+    }
+  }
+}

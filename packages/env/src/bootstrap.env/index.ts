@@ -2,7 +2,7 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { config as loadDotenv } from "dotenv";
-import findWorkspaceRoot from "../workspace.root";
+import findWorkspaceRoot from "../workspace.root/index.ts";
 import type { ZodTypeAny, z } from "zod";
 
 const bootstrapEnv = function <T extends ZodTypeAny>(

@@ -1,6 +1,7 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import Protocol from "@kuib-ai/protocol";
-import Std from "../index";
+import Std from "../index.ts";
 
 describe("withError", function () {
   it("resolves async Promise successfully", async function () {

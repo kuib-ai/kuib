@@ -1,7 +1,7 @@
 // @context @journal/house-style-linting
 import type { AnyError } from "@kuib-ai/protocol/error/error.any";
-import mapError from "../map.error";
-import type { Result } from "../is.err";
+import mapError from "../map.error/index.ts";
+import type { Result } from "../is.err/index.ts";
 
 interface IWithError {
   <T, E = AnyError>(

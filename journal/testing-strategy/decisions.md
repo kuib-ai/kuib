@@ -13,6 +13,8 @@ informs: ["[[ux-iteration-process]]"]
 
 ## Runner — bun:test only (2026-07-02)
 
+**Superseded (2026-09-22):** the runner is `deno test -A --no-check` per project via Nx (`corepack pnpm nx run-many -t test`); suites import `describe`/`it`/hooks from `@std/testing/bdd` and `expect` from `@std/expect`; type-checking is `tsgo` (the `typecheck` targets), never the runner. Deno does not auto-load `.env`. See `journal/features/deno-runtime/plan.md`.
+
 One runtime, one runner. vitest was removed (config, catalog entry, root devDep); every suite imports from `"bun:test"`. Root script: `pnpm test` → `bun test packages apps`. Rationale: the product runs on Bun, tests should exercise the same runtime (this also unlocked testing `Bun.TOML`-dependent units that vitest-on-Node could not load), and one runner removes the split-brain config. Consequence discovered at migration: **bun auto-loads the repo `.env`**, so tests must never assert on values a real `.env` can override.
 
 ## What gets a test

@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach, afterEach } from "bun:test";
+import { describe, it, beforeEach, afterEach } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import bootstrapEnv from ".";
+import bootstrapEnv from "./index.ts";
 import { z } from "zod";
 
 const TestSchema = z.object({

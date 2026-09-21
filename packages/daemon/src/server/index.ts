@@ -1,7 +1,7 @@
 // @context @journal/host-layer
 import { rmSync } from "node:fs";
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
-import daemonRouter from "../daemon.router";
+import daemonRouter from "../daemon.router/index.ts";
 
 const createDaemonServer = function (socketPath: string, port?: number) {
   rmSync(socketPath, { force: true });

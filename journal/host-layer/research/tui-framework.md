@@ -1,5 +1,7 @@
 # Research: TUI Framework (OpenTUI)
 
+**Superseded (2026-09-22):** OpenTUI, Solid-on-OpenTUI, and Bun were removed; kuib builds its own terminal UI library. See `journal/features/deno-runtime/plan.md` D005/D006.
+
 Session 2026-06-30. De-risking the v1 frontend stack. Conclusion: **OpenTUI + Solid reconciler, run on Bun.** See [[host-layer]], [[architecture-overview]].
 
 ## OpenTUI maturity (github.com/anomalyco/opentui, under the SST org)

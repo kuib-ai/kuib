@@ -1,10 +1,10 @@
 // @context @journal/host-layer
-import daemonRouter from "./daemon.router";
-import createDaemonServer from "./server";
-import createDaemonCaller from "./daemon.caller";
-import ensureDaemon from "./ensure.daemon";
-import ensureLocalDaemon from "./ensure.local.daemon";
-import resolveDaemonEndpoint from "./resolve.daemon.endpoint";
+import daemonRouter from "./daemon.router/index.ts";
+import createDaemonServer from "./server/index.ts";
+import createDaemonCaller from "./daemon.caller/index.ts";
+import ensureDaemon from "./ensure.daemon/index.ts";
+import ensureLocalDaemon from "./ensure.local.daemon/index.ts";
+import resolveDaemonEndpoint from "./resolve.daemon.endpoint/index.ts";
 
 const Daemon = {
   daemonRouter,

@@ -2,9 +2,9 @@
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import Std from "@kuib-ai/std";
-import Trpc from "../../trpc";
-import ExecuteCommandInput from "../../io/execute.command.input";
-import ExecuteCommandOutput from "../../io/execute.command.output";
+import Trpc from "../../trpc/index.ts";
+import ExecuteCommandInput from "../../io/execute.command.input/index.ts";
+import ExecuteCommandOutput from "../../io/execute.command.output/index.ts";
 
 const execAsync = promisify(exec);
 

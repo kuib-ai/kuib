@@ -1,11 +1,11 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { EventTypeEnum } from "../event.type.enum";
-import { StepBoundaryStopReasonEnum } from "../../part/step.boundary.stop.reason.enum";
-import MessageID from "../../id/message.id";
-import PartID from "../../id/part.id";
-import ModelRef from "../../model.ref";
-import TokenUsage from "../../token.usage";
+import { EventTypeEnum } from "../event.type.enum/index.ts";
+import { StepBoundaryStopReasonEnum } from "../../part/step.boundary.stop.reason.enum/index.ts";
+import MessageID from "../../id/message.id/index.ts";
+import PartID from "../../id/part.id/index.ts";
+import ModelRef from "../../model.ref/index.ts";
+import TokenUsage from "../../token.usage/index.ts";
 
 const StepFinished = z.object({
   type: z.literal(EventTypeEnum.STEP_FINISHED),

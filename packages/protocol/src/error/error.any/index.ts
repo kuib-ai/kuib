@@ -1,10 +1,10 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import ErrorUnknown from "../error.unknown";
-import ErrorConfigInvalid from "../error.config.invalid";
-import ErrorDaemonUnreachable from "../error.daemon.unreachable";
-import ErrorToolFailed from "../error.tool.failed";
-import ErrorLlmFailed from "../error.llm.failed";
+import ErrorUnknown from "../error.unknown/index.ts";
+import ErrorConfigInvalid from "../error.config.invalid/index.ts";
+import ErrorDaemonUnreachable from "../error.daemon.unreachable/index.ts";
+import ErrorToolFailed from "../error.tool.failed/index.ts";
+import ErrorLlmFailed from "../error.llm.failed/index.ts";
 
 const AnyError = z.discriminatedUnion("code", [
   ErrorUnknown,

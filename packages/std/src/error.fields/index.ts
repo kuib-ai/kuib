@@ -1,6 +1,6 @@
 // @context @journal/observability
 import type { AnyError } from "@kuib-ai/protocol/error/error.any";
-import mapError from "../map.error";
+import mapError from "../map.error/index.ts";
 
 type ErrorLogFields = {
   err: AnyError;

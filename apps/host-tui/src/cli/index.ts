@@ -1,5 +1,5 @@
 // @context @journal/host-layer
-import schema from "./schema";
+import schema from "./schema/index.ts";
 
 const cli = {
   schema,

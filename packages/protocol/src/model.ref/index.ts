@@ -1,7 +1,7 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import ProviderID from "../id/provider.id";
-import ModelID from "../id/model.id";
+import ProviderID from "../id/provider.id/index.ts";
+import ModelID from "../id/model.id/index.ts";
 
 const ModelRef = z.object({
   providerID: ProviderID,

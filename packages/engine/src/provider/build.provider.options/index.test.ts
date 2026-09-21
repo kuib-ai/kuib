@@ -1,6 +1,7 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import Protocol from "@kuib-ai/protocol";
-import buildProviderOptions from "./index";
+import buildProviderOptions from "./index.ts";
 
 describe("buildProviderOptions", function () {
   it("nests providerOptions under the sdk provider name", function () {

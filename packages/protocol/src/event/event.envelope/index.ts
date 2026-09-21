@@ -1,8 +1,8 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import AnyEvent from "../event.any";
-import SessionID from "../../id/session.id";
-import DeviceID from "../../id/device.id";
+import AnyEvent from "../event.any/index.ts";
+import SessionID from "../../id/session.id/index.ts";
+import DeviceID from "../../id/device.id/index.ts";
 
 const EventEnvelope = z.object({
   _version: z.literal(1),

@@ -1,5 +1,6 @@
-import { describe, it, expect } from "bun:test";
-import createConsoleLogger from "./index";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
+import createConsoleLogger from "./index.ts";
 
 describe("createConsoleLogger", function () {
   it("forwards info with bindings to the sink", function () {

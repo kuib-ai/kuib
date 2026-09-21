@@ -1,9 +1,10 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import net from "node:net";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import Protocol from "@kuib-ai/protocol";
-import resolveDaemonEndpoint from "./index";
+import resolveDaemonEndpoint from "./index.ts";
 
 describe("resolveDaemonEndpoint", function () {
   it("returns a TCP endpoint carrying the remoteUrl when one is provided", async function () {

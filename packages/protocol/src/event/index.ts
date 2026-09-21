@@ -1,20 +1,20 @@
 // @context @journal/protocol-design
-import { EventTypeEnum } from "./event.type.enum";
-import UserMessageSubmitted from "./user.message.submitted";
-import MessageStarted from "./message.started";
-import MessageUpdated from "./message.updated";
-import StepStarted from "./step.started";
-import StepFinished from "./step.finished";
-import TextDelta from "./text.delta";
-import ReasoningDelta from "./reasoning.delta";
-import ToolCallStarted from "./tool.call.started";
-import ToolCallOutputDelta from "./tool.call.output.delta";
-import ToolCallCompleted from "./tool.call.completed";
-import ToolCallFailed from "./tool.call.failed";
-import MessageCompleted from "./message.completed";
-import MessageFailed from "./message.failed";
-import AnyEvent from "./event.any";
-import EventEnvelope from "./event.envelope";
+import { EventTypeEnum } from "./event.type.enum/index.ts";
+import UserMessageSubmitted from "./user.message.submitted/index.ts";
+import MessageStarted from "./message.started/index.ts";
+import MessageUpdated from "./message.updated/index.ts";
+import StepStarted from "./step.started/index.ts";
+import StepFinished from "./step.finished/index.ts";
+import TextDelta from "./text.delta/index.ts";
+import ReasoningDelta from "./reasoning.delta/index.ts";
+import ToolCallStarted from "./tool.call.started/index.ts";
+import ToolCallOutputDelta from "./tool.call.output.delta/index.ts";
+import ToolCallCompleted from "./tool.call.completed/index.ts";
+import ToolCallFailed from "./tool.call.failed/index.ts";
+import MessageCompleted from "./message.completed/index.ts";
+import MessageFailed from "./message.failed/index.ts";
+import AnyEvent from "./event.any/index.ts";
+import EventEnvelope from "./event.envelope/index.ts";
 
 const Event = {
   EventTypeEnum,

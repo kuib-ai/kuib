@@ -1,11 +1,11 @@
 // @context @journal/protocol-design
-import { MessageRoleEnum } from "./message.role.enum";
-import { MessageAssistantStatusEnum } from "./message.assistant.status.enum";
-import { MessageAssistantErrorKindEnum } from "./message.assistant.error.kind.enum";
-import MessageUser from "./message.user";
-import MessageAssistant from "./message.assistant";
-import MessageAssistantError from "./message.assistant.error";
-import AnyMessage from "./message.any";
+import { MessageRoleEnum } from "./message.role.enum/index.ts";
+import { MessageAssistantStatusEnum } from "./message.assistant.status.enum/index.ts";
+import { MessageAssistantErrorKindEnum } from "./message.assistant.error.kind.enum/index.ts";
+import MessageUser from "./message.user/index.ts";
+import MessageAssistant from "./message.assistant/index.ts";
+import MessageAssistantError from "./message.assistant.error/index.ts";
+import AnyMessage from "./message.any/index.ts";
 
 const Message = {
   MessageRoleEnum,

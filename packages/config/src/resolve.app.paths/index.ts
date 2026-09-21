@@ -1,9 +1,9 @@
 // @context @journal/application-directories
 import { join } from "node:path";
 import Env from "@kuib-ai/env";
-import AppPaths from "../app.paths";
-import type { AppPaths as AppPathsType } from "../app.paths";
-import type { ConfigOverrides } from "../config.overrides";
+import AppPaths from "../app.paths/index.ts";
+import type { AppPaths as AppPathsType } from "../app.paths/index.ts";
+import type { ConfigOverrides } from "../config.overrides/index.ts";
 import type { ResolveDirsOptions } from "@kuib-ai/env/resolve.dirs.options";
 
 const resolveAppPaths = function (

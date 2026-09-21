@@ -1,8 +1,9 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import net from "node:net";
 import os from "node:os";
 import path from "node:path";
-import connectOrSpawn from "./index";
+import connectOrSpawn from "./index.ts";
 import type { SubmitMessage } from "@kuib-ai/protocol/service.message/submit.message";
 import Protocol from "@kuib-ai/protocol";
 

@@ -1,10 +1,11 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir, homedir } from "node:os";
 import { join, relative } from "node:path";
 import { TRPCError } from "@trpc/server";
-import Trpc from "../../trpc";
-import readFileProcedure from "./index";
+import Trpc from "../../trpc/index.ts";
+import readFileProcedure from "./index.ts";
 
 const router = Trpc.router({ readFile: readFileProcedure });
 const createCaller = Trpc.createCallerFactory(router);

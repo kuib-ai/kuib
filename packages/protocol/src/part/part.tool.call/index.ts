@@ -1,9 +1,9 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { PartTypeEnum } from "../part.type.enum";
-import PartBase from "../part.base";
-import ToolCallID from "../../id/tool.call.id";
-import ToolCallState from "../../tool.call/tool.call.state";
+import { PartTypeEnum } from "../part.type.enum/index.ts";
+import PartBase from "../part.base/index.ts";
+import ToolCallID from "../../id/tool.call.id/index.ts";
+import ToolCallState from "../../tool.call/tool.call.state/index.ts";
 
 const PartToolCall = PartBase.extend({
   type: z.literal(PartTypeEnum.TOOL_CALL),

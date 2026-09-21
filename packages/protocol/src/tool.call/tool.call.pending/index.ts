@@ -1,6 +1,6 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { ToolCallStatusEnum } from "../tool.call.status.enum";
+import { ToolCallStatusEnum } from "../tool.call.status.enum/index.ts";
 
 const ToolCallPending = z.object({
   status: z.literal(ToolCallStatusEnum.PENDING),

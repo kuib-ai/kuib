@@ -1,9 +1,9 @@
 // @context @journal/application-directories
-import BaseDirs from "../base.dirs";
-import type { BaseDirs as BaseDirsType } from "../base.dirs";
-import { PathKindEnum } from "../path.kind";
-import type { ResolveDirsOptions } from "../resolve.dirs.options";
-import resolveDir from "../resolve.dir";
+import BaseDirs from "../base.dirs/index.ts";
+import type { BaseDirs as BaseDirsType } from "../base.dirs/index.ts";
+import { PathKindEnum } from "../path.kind/index.ts";
+import type { ResolveDirsOptions } from "../resolve.dirs.options/index.ts";
+import resolveDir from "../resolve.dir/index.ts";
 
 const resolveDirs = function (options?: ResolveDirsOptions): BaseDirsType {
   return BaseDirs.parse({

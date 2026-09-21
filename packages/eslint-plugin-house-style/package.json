@@ -8,16 +8,18 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsgo --noEmit",
+    "test": "deno test -A --no-check",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@std/expect": "catalog:",
+    "@std/testing": "catalog:",
     "@types/node": "catalog:",
     "@typescript-eslint/parser": "catalog:",
     "@typescript-eslint/rule-tester": "catalog:",
     "@typescript-eslint/utils": "catalog:",
-    "bun-types": "catalog:",
     "typescript": "catalog:"
   }
 }

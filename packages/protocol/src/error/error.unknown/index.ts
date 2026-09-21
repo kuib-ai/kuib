@@ -1,7 +1,7 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { ErrorCodeEnum } from "../error.code.enum";
-import ErrorBase from "../error.base";
+import { ErrorCodeEnum } from "../error.code.enum/index.ts";
+import ErrorBase from "../error.base/index.ts";
 
 const ErrorUnknown = ErrorBase.extend({
   code: z.literal(ErrorCodeEnum.UNKNOWN),

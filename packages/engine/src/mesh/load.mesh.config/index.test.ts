@@ -1,9 +1,10 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import Protocol from "@kuib-ai/protocol";
-import loadMeshConfig from "./index";
+import loadMeshConfig from "./index.ts";
 
 const dir = mkdtempSync(join(tmpdir(), "mesh-config-"));
 

@@ -1,9 +1,10 @@
-import { describe, it, expect, afterEach } from "bun:test";
+import { describe, it, afterEach } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import Protocol from "@kuib-ai/protocol";
 import type { AnyEndpoint } from "@kuib-ai/protocol/endpoint/endpoint.any";
-import createDaemonClient from "./index";
+import createDaemonClient from "./index.ts";
 
-type UnixRequestInit = RequestInit & { unix?: string };
+type UnixRequestInit = RequestInit & { client?: Deno.HttpClient };
 
 const realFetch = globalThis.fetch;
 
@@ -21,9 +22,7 @@ const installCapturingFetch = function (): Capture[] {
     captured.push({ input, init });
     return Promise.reject(new Error("stubbed fetch"));
   };
-  globalThis.fetch = Object.assign(stub, {
-    preconnect: realFetch.preconnect,
-  });
+  globalThis.fetch = stub;
   return captured;
 };
 
@@ -44,10 +43,10 @@ describe("createDaemonClient transport factory", function () {
     expect(String(captured[0]!.input).startsWith("http://127.0.0.1:9999")).toBe(
       true,
     );
-    expect(captured[0]!.init?.unix).toBe(undefined);
+    expect(captured[0]!.init?.client).toBe(undefined);
   });
 
-  it("injects the unix socketPath via custom fetch init for the unix branch", async function () {
+  it("routes the unix branch through a unix-socket Deno.HttpClient", async function () {
     const captured = installCapturingFetch();
     const endpoint: AnyEndpoint = {
       kind: Protocol.Endpoint.EndpointKindEnum.UNIX,
@@ -56,7 +55,7 @@ describe("createDaemonClient transport factory", function () {
     const client = createDaemonClient(endpoint);
     await expect(client.readFile.query({ path: "/x" })).rejects.toThrow();
     expect(captured).toHaveLength(1);
-    expect(captured[0]!.init?.unix).toBe("/run/kuib/daemon.sock");
+    expect(captured[0]!.init?.client).toBeInstanceOf(Deno.HttpClient);
     expect(String(captured[0]!.input).startsWith("http://daemon")).toBe(true);
   });
 });

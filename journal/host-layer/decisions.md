@@ -44,6 +44,8 @@ Migration path: same protocol for NvimHost (v1), DesktopHost, WebHost later.
 
 ### v1 Frontend — OpenTUI + Solid (nvim-flavored)
 
+**Superseded (2026-09-22):** OpenTUI and the Solid/Vite front ends were removed; host-tui keeps only its non-UI plumbing (`serve`). The pane layout and nvim-flavored interaction below remain the UX intent for kuib's own terminal UI library (`journal/features/deno-runtime/plan.md` D002, D005). The OpenTUI mechanics described here no longer apply.
+
 v1 frontend is an **OpenTUI** app (Zig native core) driven by the **Solid** reconciler, run on **Bun** (FFI for the native renderer). Fixed pane layout (Yoga/flexbox):
 
 ```
@@ -63,7 +65,9 @@ v1 frontend is an **OpenTUI** app (Zig native core) driven by the **Solid** reco
 
 ### Runtime
 
-Host app runs on **Bun** — stable FFI for the OpenTUI native renderer (the Node 26.3.0 `--experimental-ffi` path is more fragile, worse distribution). Bun is **quarantined to this adapter**; engine + core packages stay runtime-agnostic (see [[architecture-overview]]). Distribution: `bun build --compile` → per-platform self-contained binary.
+**Superseded (2026-09-22):** the host runs on Deno as a pure runtime (`journal/features/deno-runtime/plan.md` D006).
+
+~~Host app runs on **Bun**~~ — stable FFI for the OpenTUI native renderer (the Node 26.3.0 `--experimental-ffi` path is more fragile, worse distribution). Bun is **quarantined to this adapter**; engine + core packages stay runtime-agnostic (see [[architecture-overview]]). Distribution: `bun build --compile` → per-platform self-contained binary.
 
 ### Coupling Rule
 

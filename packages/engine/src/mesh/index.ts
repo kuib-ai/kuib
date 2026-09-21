@@ -1,9 +1,9 @@
 // @context @journal/distributed-mesh-state
-import MeshConfig from "./mesh.config";
-import loadMeshConfig from "./load.mesh.config";
-import createStaticDiscovery from "./static.discovery";
-import createLocalOnlyDiscovery from "./local.only.discovery";
-import createTransportFactory from "./transport.factory";
+import MeshConfig from "./mesh.config/index.ts";
+import loadMeshConfig from "./load.mesh.config/index.ts";
+import createStaticDiscovery from "./static.discovery/index.ts";
+import createLocalOnlyDiscovery from "./local.only.discovery/index.ts";
+import createTransportFactory from "./transport.factory/index.ts";
 
 const Mesh = {
   MeshConfig,

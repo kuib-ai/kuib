@@ -1,6 +1,6 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import PartID from "../../id/part.id";
+import PartID from "../../id/part.id/index.ts";
 
 const PartBase = z.object({
   partID: PartID,

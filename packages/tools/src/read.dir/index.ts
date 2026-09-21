@@ -1,6 +1,6 @@
 // @context @journal/tool-system
 import Protocol from "@kuib-ai/protocol";
-import defineTool from "../tool.spec";
+import defineTool from "../tool.spec/index.ts";
 
 const readDir = defineTool({
   name: "readDir",

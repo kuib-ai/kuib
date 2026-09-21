@@ -1,9 +1,9 @@
 import { RuleTester } from "@typescript-eslint/rule-tester";
-import { afterAll, describe, it } from "bun:test";
+import { afterAll, describe, it } from "@std/testing/bdd";
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
-import rule from "./index.js";
+import rule from "./index.ts";
 
 RuleTester.afterAll = afterAll;
 RuleTester.describe = describe;

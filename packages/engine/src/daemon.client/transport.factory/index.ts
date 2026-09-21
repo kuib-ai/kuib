@@ -4,7 +4,7 @@ import Protocol from "@kuib-ai/protocol";
 import type { DaemonRouter } from "@kuib-ai/daemon/daemon.router";
 import type { AnyEndpoint } from "@kuib-ai/protocol/endpoint/endpoint.any";
 
-type UnixRequestInit = RequestInit & { unix?: string };
+type UnixRequestInit = RequestInit & { client: Deno.HttpClient };
 
 const createDaemonClient = function (endpoint: AnyEndpoint) {
   if (endpoint.kind === Protocol.Endpoint.EndpointKindEnum.TCP) {
@@ -12,12 +12,14 @@ const createDaemonClient = function (endpoint: AnyEndpoint) {
       links: [httpBatchLink({ url: endpoint.url })],
     });
   }
-  const socketPath = endpoint.socketPath;
+  const client = Deno.createHttpClient({
+    proxy: { transport: "unix", path: endpoint.socketPath },
+  });
   const unixFetch = function (
     input: RequestInfo | URL,
     init?: RequestInit,
   ): Promise<Response> {
-    const unixInit: UnixRequestInit = { ...init, unix: socketPath };
+    const unixInit: UnixRequestInit = { ...init, client };
     return fetch(input, unixInit);
   };
   return createTRPCClient<DaemonRouter>({

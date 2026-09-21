@@ -1,7 +1,7 @@
 // @context @journal/application-directories @journal/security-model
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
-import type { AppPaths } from "../app.paths";
+import type { AppPaths } from "../app.paths/index.ts";
 
 const ensureAppPaths = function (paths: AppPaths): void {
   const ordinaryDirs = new Set([

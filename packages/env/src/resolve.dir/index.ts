@@ -1,12 +1,12 @@
 // @context @journal/application-directories
 import { join } from "node:path";
-import PathKind from "../path.kind";
-import type { PathKind as PathKindType } from "../path.kind";
-import ResolveDirsOptions from "../resolve.dirs.options";
-import type { ResolveDirsOptions as ResolveDirsOptionsType } from "../resolve.dirs.options";
-import resolveIsDev from "../resolve.is.dev";
-import resolveDevRoot from "../resolve.dev.root";
-import resolvePlatformBase from "../resolve.platform.base";
+import PathKind from "../path.kind/index.ts";
+import type { PathKind as PathKindType } from "../path.kind/index.ts";
+import ResolveDirsOptions from "../resolve.dirs.options/index.ts";
+import type { ResolveDirsOptions as ResolveDirsOptionsType } from "../resolve.dirs.options/index.ts";
+import resolveIsDev from "../resolve.is.dev/index.ts";
+import resolveDevRoot from "../resolve.dev.root/index.ts";
+import resolvePlatformBase from "../resolve.platform.base/index.ts";
 
 const resolveDir = function (
   kind: PathKindType,

@@ -3,8 +3,8 @@ import { readdir } from "node:fs/promises";
 import { TRPCError } from "@trpc/server";
 import Std from "@kuib-ai/std";
 import Protocol from "@kuib-ai/protocol";
-import Trpc from "../../trpc";
-import expandHomePath from "../../expand.home.path";
+import Trpc from "../../trpc/index.ts";
+import expandHomePath from "../../expand.home.path/index.ts";
 
 const readDirProcedure = Trpc.procedure
   .input(Protocol.FileSystem.ReadDirInput)

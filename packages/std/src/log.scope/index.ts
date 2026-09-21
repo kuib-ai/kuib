@@ -1,6 +1,6 @@
 // @context @journal/observability
 import { AsyncLocalStorage } from "node:async_hooks";
-import type { Logger, LogBindings, LogFn } from "../logger.port";
+import type { Logger, LogBindings, LogFn } from "../logger.port/index.ts";
 
 type ScopeStore = {
   stack: LogBindings[];

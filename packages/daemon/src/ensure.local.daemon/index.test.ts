@@ -1,9 +1,10 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import net from "node:net";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import Protocol from "@kuib-ai/protocol";
-import ensureLocalDaemon from "./index";
+import ensureLocalDaemon from "./index.ts";
 
 describe("ensureLocalDaemon", function () {
   it("threads socketOverride through resolve+ensure and returns a UNIX endpoint with the resolved socketPath", async function () {

@@ -1,12 +1,13 @@
 // @context @journal/host-layer
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import net from "node:net";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { existsSync, rmSync, writeFileSync } from "node:fs";
 import Engine from "@kuib-ai/engine";
-import startEngineService from "./index";
-import type { RunTurn } from "./index";
+import startEngineService from "./index.ts";
+import type { RunTurn } from "./index.ts";
 
 let counter = 0;
 const uniqueSocketPath = function (): string {

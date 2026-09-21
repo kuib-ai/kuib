@@ -1,10 +1,10 @@
 // @context @journal/application-directories
-import ResolveDirsOptions from "../resolve.dirs.options";
-import type { ResolveDirsOptions as ResolveDirsOptionsType } from "../resolve.dirs.options";
-import PathKind from "../path.kind";
-import type { PathKind as PathKindType } from "../path.kind";
-import resolveUnixBase from "../resolve.unix.base";
-import resolveWindowsBase from "../resolve.windows.base";
+import ResolveDirsOptions from "../resolve.dirs.options/index.ts";
+import type { ResolveDirsOptions as ResolveDirsOptionsType } from "../resolve.dirs.options/index.ts";
+import PathKind from "../path.kind/index.ts";
+import type { PathKind as PathKindType } from "../path.kind/index.ts";
+import resolveUnixBase from "../resolve.unix.base/index.ts";
+import resolveWindowsBase from "../resolve.windows.base/index.ts";
 
 const resolvePlatformBase = function (
   kind: PathKindType,

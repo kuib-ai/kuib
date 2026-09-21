@@ -1,9 +1,9 @@
 // @context @journal/architecture-overview
-import EventLog from "./event.log";
-import DaemonClient from "./daemon.client";
-import Provider from "./provider";
-import runAgent from "./orchestrator";
-import Mesh from "./mesh";
+import EventLog from "./event.log/index.ts";
+import DaemonClient from "./daemon.client/index.ts";
+import Provider from "./provider/index.ts";
+import runAgent from "./orchestrator/index.ts";
+import Mesh from "./mesh/index.ts";
 
 const Engine = {
   EventLog,

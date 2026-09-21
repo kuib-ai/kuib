@@ -1,5 +1,5 @@
 // @context @journal/host-layer
-import type { CliSchema } from "../cli.schema";
+import type { CliSchema } from "../cli.schema/index.ts";
 
 const printHelp = function (command: string, schema: CliSchema): void {
   const invocation = command.length === 0 ? "kuib" : `kuib ${command}`;

@@ -1,6 +1,6 @@
 // @context @journal/infrastructure-strategy
 import { z } from "zod";
-import { EndpointKindEnum } from "../endpoint.kind.enum";
+import { EndpointKindEnum } from "../endpoint.kind.enum/index.ts";
 
 const UnixEndpoint = z.object({
   kind: z.literal(EndpointKindEnum.UNIX),

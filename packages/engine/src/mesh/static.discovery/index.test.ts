@@ -1,7 +1,8 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import Protocol from "@kuib-ai/protocol";
 import type { NodeDescriptor } from "@kuib-ai/protocol/node/node.descriptor";
-import createStaticDiscovery from "./index";
+import createStaticDiscovery from "./index.ts";
 
 const makeDescriptor = function (id: string): NodeDescriptor {
   return Protocol.Node.NodeDescriptor.parse({

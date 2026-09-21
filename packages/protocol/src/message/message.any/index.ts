@@ -1,7 +1,7 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import MessageUser from "../message.user";
-import MessageAssistant from "../message.assistant";
+import MessageUser from "../message.user/index.ts";
+import MessageAssistant from "../message.assistant/index.ts";
 
 const AnyMessage = z.discriminatedUnion("role", [
   MessageUser,

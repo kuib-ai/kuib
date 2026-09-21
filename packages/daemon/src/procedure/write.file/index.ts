@@ -2,10 +2,10 @@
 import { writeFile } from "node:fs/promises";
 import { TRPCError } from "@trpc/server";
 import Std from "@kuib-ai/std";
-import Trpc from "../../trpc";
-import expandHomePath from "../../expand.home.path";
-import WriteFileInput from "../../io/write.file.input";
-import WriteFileOutput from "../../io/write.file.output";
+import Trpc from "../../trpc/index.ts";
+import expandHomePath from "../../expand.home.path/index.ts";
+import WriteFileInput from "../../io/write.file.input/index.ts";
+import WriteFileOutput from "../../io/write.file.output/index.ts";
 
 const writeFileProcedure = Trpc.procedure
   .input(WriteFileInput)

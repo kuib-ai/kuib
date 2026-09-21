@@ -1,5 +1,5 @@
 // @context @journal/protocol-design
-import { Database } from "bun:sqlite";
+import { DatabaseSync } from "node:sqlite";
 import Protocol from "@kuib-ai/protocol";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";
@@ -9,26 +9,30 @@ import type {
   EventLogPort,
   EventHandler,
 } from "@kuib-ai/protocol/event.log.port";
-import initSchema from "../schema";
+import Std from "@kuib-ai/std";
+import initSchema from "../schema/index.ts";
 
 const EPOCH = 0;
 
+type NextSeqRow = { next: number };
+type EnvelopeRow = { envelope: string };
+
 const createSqliteEventLog = function (path: string): EventLogPort {
-  const db = new Database(path, { create: true });
+  const db = new DatabaseSync(path);
   initSchema(db);
 
   const subscribers = new Map<string, Set<EventHandler>>();
 
-  const nextSeqStmt = db.query<{ next: number }, [string, number]>(
+  const beginStmt = db.prepare("BEGIN IMMEDIATE");
+  const commitStmt = db.prepare("COMMIT");
+  const rollbackStmt = db.prepare("ROLLBACK");
+  const nextSeqStmt = db.prepare(
     "SELECT COALESCE(MAX(seq), -1) + 1 AS next FROM events WHERE sessionID = ? AND epoch = ?",
   );
-  const insertStmt = db.query<
-    unknown,
-    [string, number, number, string, number]
-  >(
+  const insertStmt = db.prepare(
     "INSERT INTO events (sessionID, epoch, seq, envelope, createdAt) VALUES (?, ?, ?, ?, ?)",
   );
-  const replayStmt = db.query<{ envelope: string }, [string, number]>(
+  const replayStmt = db.prepare(
     "SELECT envelope FROM events WHERE sessionID = ? AND seq > ? ORDER BY epoch, seq",
   );
 
@@ -37,8 +41,8 @@ const createSqliteEventLog = function (path: string): EventLogPort {
     originDeviceID: DeviceID,
     event: AnyEvent,
   ): Promise<EventEnvelope> {
-    const commit = db.transaction(function (): EventEnvelope {
-      const row = nextSeqStmt.get(sessionID, EPOCH);
+    const write = function (): EventEnvelope {
+      const row = nextSeqStmt.get(sessionID, EPOCH) as NextSeqRow | undefined;
       const seq = row?.next ?? 0;
       const createdAt = Date.now();
       const envelope = Protocol.Event.EventEnvelope.parse({
@@ -58,8 +62,16 @@ const createSqliteEventLog = function (path: string): EventLogPort {
         createdAt,
       );
       return envelope;
+    };
+    beginStmt.run();
+    const [error, envelope] = Std.withError(write, function (cause) {
+      return { cause };
     });
-    const envelope = commit.immediate();
+    if (error !== null) {
+      rollbackStmt.run();
+      throw error.cause;
+    }
+    commitStmt.run();
 
     const subs = subscribers.get(sessionID);
     if (subs) {
@@ -75,7 +87,8 @@ const createSqliteEventLog = function (path: string): EventLogPort {
     afterSeq: number,
     handler: EventHandler,
   ): void {
-    for (const row of replayStmt.all(sessionID, afterSeq)) {
+    const rows = replayStmt.all(sessionID, afterSeq) as EnvelopeRow[];
+    for (const row of rows) {
       handler(Protocol.Event.EventEnvelope.parse(JSON.parse(row.envelope)));
     }
   };

@@ -8,8 +8,8 @@ import type { BootstrapConfig } from "@kuib-ai/config/bootstrap.config";
 import type { DeviceID } from "@kuib-ai/protocol/id/device.id";
 import Std from "@kuib-ai/std";
 import Telemetry from "@kuib-ai/telemetry";
-import type createLog from "../../log";
-import resolveDaemonClient from "../../resolve.daemon.client";
+import type createLog from "../../log/index.ts";
+import resolveDaemonClient from "../../resolve.daemon.client/index.ts";
 
 const serve = async function (
   bootstrap: BootstrapConfig,

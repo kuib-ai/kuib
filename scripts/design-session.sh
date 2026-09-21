@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # One-command design session in an isolated worktree.
-#   window 0 = claude "/wireframe", window 1 = live wireframe picker,
-#   window 2 = host TUI under bun --watch (auto-restarts on file changes) — all in the worktree.
+#   a single window running claude "/wireframe" in the worktree.
 # Every action is idempotent; the script converges to the desired state on every run:
 #   - worktree at .claude/worktrees/rupsha-design on branch rupsha/design (created from master if missing)
 #   - root .env copied in when missing (never overwritten)
@@ -10,8 +9,7 @@
 #     in place and claude launches with a resolve-the-rebase-with-Rupsha prompt instead of /wireframe
 #   - claude window: left alone if running IN THE WORKTREE (never kills a live conversation),
 #     started if idle, replaced if rooted in the wrong directory
-#   - picker window: always killed and re-inited fresh
-#   - wrong session shape: salvages a running claude window, rebuilds everything else around it
+#   - wrong session shape: salvages a running claude pane, drops every other window and pane
 # Run locally or over ssh:  ssh -t rs10@septimus /home/rs10/developer/kuib-ai/kuib/scripts/design-session.sh
 set -euo pipefail
 
@@ -23,8 +21,6 @@ SESSION="${SESSION:-kuib/rupsha}"
 BRANCH="${BRANCH:-rupsha/design}"
 WORKTREE="${WORKTREE:-$REPO/.claude/worktrees/rupsha-design}"
 CLAUDE_CMD="${CLAUDE_CMD:-claude \"/wireframe\"}"
-PICKER_CMD="${PICKER_CMD:-pnpm wireframes}"
-HOST_CMD="${HOST_CMD:-pnpm -F @kuib-ai/host-tui dev:watch}"
 CLAUDE_BIN="${CLAUDE_CMD%% *}"
 
 ensure_worktree() {
@@ -64,11 +60,6 @@ ensure_rebased() {
 build() {
   tmux new-session -d -s "$SESSION" -c "$WORKTREE"
   tmux send-keys -t "$SESSION" "$CLAUDE_CMD" C-m
-  tmux new-window -t "$SESSION" -c "$WORKTREE"
-  tmux send-keys -t "$SESSION" "$PICKER_CMD" C-m
-  tmux new-window -t "$SESSION" -c "$WORKTREE"
-  tmux send-keys -t "$SESSION" "$HOST_CMD" C-m
-  tmux select-window -t "$SESSION:^"
 }
 
 find_claude_pane() {
@@ -88,37 +79,19 @@ salvage() {
       tmux kill-pane -t "$pane_id" 2>/dev/null || true
     fi
   done < <(tmux list-panes -s -t "$SESSION" -F "#{window_id}:#{pane_id}")
-  tmux new-window -t "$SESSION" -c "$WORKTREE"
-  tmux send-keys -t "$SESSION" "$PICKER_CMD" C-m
-  tmux new-window -t "$SESSION" -c "$WORKTREE"
-  tmux send-keys -t "$SESSION" "$HOST_CMD" C-m
-  tmux select-window -t "$SESSION:^"
 }
 
-converge_windows() {
-  local position=0
-  local window_id pane_cmd
-  while IFS=: read -r window_id pane_cmd pane_path; do
-    if [ "$position" -eq 0 ]; then
-      if [ "$pane_cmd" = "zsh" ] || [ "$pane_cmd" = "bash" ]; then
-        tmux send-keys -t "$window_id" "cd $WORKTREE" C-m
-        tmux send-keys -t "$window_id" "$CLAUDE_CMD" C-m
-      elif [ "$pane_path" != "$WORKTREE" ]; then
-        tmux respawn-pane -k -t "$window_id"
-        tmux send-keys -t "$window_id" "cd $WORKTREE" C-m
-        tmux send-keys -t "$window_id" "$CLAUDE_CMD" C-m
-      fi
-    else
-      tmux respawn-pane -k -t "$window_id"
-      tmux send-keys -t "$window_id" "cd $WORKTREE" C-m
-      if [ "$position" -eq 1 ]; then
-        tmux send-keys -t "$window_id" "$PICKER_CMD" C-m
-      else
-        tmux send-keys -t "$window_id" "$HOST_CMD" C-m
-      fi
-    fi
-    position=$((position + 1))
-  done < <(tmux list-windows -t "$SESSION" -F "#{window_id}:#{pane_current_command}:#{pane_current_path}")
+converge_window() {
+  local window_id pane_cmd pane_path
+  IFS=: read -r window_id pane_cmd pane_path < <(tmux list-windows -t "$SESSION" -F "#{window_id}:#{pane_current_command}:#{pane_current_path}")
+  if [ "$pane_cmd" = "zsh" ] || [ "$pane_cmd" = "bash" ]; then
+    tmux send-keys -t "$window_id" "cd $WORKTREE" C-m
+    tmux send-keys -t "$window_id" "$CLAUDE_CMD" C-m
+  elif [ "$pane_path" != "$WORKTREE" ]; then
+    tmux respawn-pane -k -t "$window_id"
+    tmux send-keys -t "$window_id" "cd $WORKTREE" C-m
+    tmux send-keys -t "$window_id" "$CLAUDE_CMD" C-m
+  fi
 }
 
 ensure_session() {
@@ -129,8 +102,8 @@ ensure_session() {
   local windows panes claude_pane
   windows=$(tmux list-windows -t "$SESSION" -F x | wc -l)
   panes=$(tmux list-panes -s -t "$SESSION" -F x | wc -l)
-  if [ "$windows" -eq 3 ] && [ "$panes" -eq 3 ]; then
-    converge_windows
+  if [ "$windows" -eq 1 ] && [ "$panes" -eq 1 ]; then
+    converge_window
     return
   fi
   claude_pane=$(find_claude_pane)

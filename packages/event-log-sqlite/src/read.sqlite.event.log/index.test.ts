@@ -1,12 +1,13 @@
 // @context @journal/protocol-design
-import { describe, it, expect, afterAll } from "bun:test";
+import { describe, it, afterAll } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { rmSync } from "node:fs";
 import Protocol from "@kuib-ai/protocol";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";
-import createSqliteEventLog from "../sqlite.event.log";
-import createSqliteReader from "./index";
+import createSqliteEventLog from "../sqlite.event.log/index.ts";
+import createSqliteReader from "./index.ts";
 
 const sessionID = Protocol.ID.SessionID.parse("s1");
 const deviceID = Protocol.ID.DeviceID.parse("d1");

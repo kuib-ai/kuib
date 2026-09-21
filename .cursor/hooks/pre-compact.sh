@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT="${CURSOR_PROJECT_DIR:-${CLAUDE_PROJECT_DIR:?project dir not set}}"
 cd "$ROOT"
 
-pnpm exec tsx scripts/compile-journal-index.ts
+deno run -A scripts/compile-journal-index.ts
 
 cat <<'EOF'
 {

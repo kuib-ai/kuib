@@ -1,16 +1,17 @@
 // @context @journal/provider-architecture @journal/testing-strategy
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import Protocol from "@kuib-ai/protocol";
-import Provider from "./index";
-import runAgent from "../orchestrator";
-import createMemoryEventLog from "../event.log/memory.event.log";
+import Provider from "./index.ts";
+import runAgent from "../orchestrator/index.ts";
+import createMemoryEventLog from "../event.log/memory.event.log/index.ts";
 
 const ENABLED = process.env["KUIB_LLM_TESTS"] === "1";
 
 const loadDotEnv = function (): void {
-  const path = resolve(import.meta.dir, "../../../../.env");
+  const path = resolve(import.meta.dirname!, "../../../../.env");
   if (!existsSync(path)) {
     return;
   }
@@ -77,17 +78,17 @@ const runTurn = async function (prompt: string) {
   return { config, text, reasoning, tokens };
 };
 
-describe.skipIf(!ENABLED)("live provider", function () {
+describe({ name: "live provider", ignore: !ENABLED }, function () {
   it("streams an answer from the configured provider", async function () {
     const { text } = await runTurn("Reply with exactly: OK");
     expect(text.trim().length).toBeGreaterThan(0);
-  }, 120000);
+  });
 
   it("reports token usage on the step boundary", async function () {
     const { tokens } = await runTurn("Reply with exactly: OK");
     expect(tokens).not.toBeNull();
     expect(tokens!["input"]).toBeGreaterThan(0);
-  }, 120000);
+  });
 
   it("streams reasoning when the provider exposes it", async function () {
     const { config, reasoning } = await runTurn(
@@ -97,5 +98,5 @@ describe.skipIf(!ENABLED)("live provider", function () {
       return;
     }
     expect(reasoning.trim().length).toBeGreaterThan(0);
-  }, 120000);
+  });
 });

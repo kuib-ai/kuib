@@ -1,9 +1,10 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { createServer, connect } from "node:net";
 import { rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import createDaemonServer from "./index";
+import createDaemonServer from "./index.ts";
 
 const uniqueSocketPath = function () {
   return join(

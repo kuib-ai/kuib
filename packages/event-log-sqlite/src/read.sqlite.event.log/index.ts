@@ -1,5 +1,5 @@
 // @context @journal/protocol-design
-import { Database } from "bun:sqlite";
+import { DatabaseSync } from "node:sqlite";
 import Protocol from "@kuib-ai/protocol";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";
@@ -12,25 +12,27 @@ import type {
 
 const DEFAULT_POLL_MS = 150;
 
+type EnvelopeRow = { envelope: string };
+type TailRow = { rowid: number; envelope: string };
+type MaxRowidRow = { max: number };
+type FloorRow = { floor: number };
+
 const createSqliteReader = function (
   path: string,
   pollIntervalMs: number = DEFAULT_POLL_MS,
 ): EventLogPort {
-  const db = new Database(path, { readonly: true });
+  const db = new DatabaseSync(path, { readOnly: true });
 
-  const replayStmt = db.query<{ envelope: string }, [string, number]>(
+  const replayStmt = db.prepare(
     "SELECT envelope FROM events WHERE sessionID = ? AND seq > ? ORDER BY epoch, seq",
   );
-  const tailStmt = db.query<
-    { rowid: number; envelope: string },
-    [string, number]
-  >(
+  const tailStmt = db.prepare(
     "SELECT rowid AS rowid, envelope FROM events WHERE sessionID = ? AND rowid > ? ORDER BY rowid",
   );
-  const floorStmt = db.query<{ floor: number }, [string, number]>(
+  const floorStmt = db.prepare(
     "SELECT COALESCE(MAX(rowid), 0) AS floor FROM events WHERE sessionID = ? AND seq <= ?",
   );
-  const maxRowidStmt = db.query<{ max: number }, [string]>(
+  const maxRowidStmt = db.prepare(
     "SELECT COALESCE(MAX(rowid), 0) AS max FROM events WHERE sessionID = ?",
   );
 
@@ -49,7 +51,8 @@ const createSqliteReader = function (
     afterSeq: number,
     handler: EventHandler,
   ): void {
-    for (const row of replayStmt.all(sessionID, afterSeq)) {
+    const rows = replayStmt.all(sessionID, afterSeq) as EnvelopeRow[];
+    for (const row of rows) {
       handler(Protocol.Event.EventEnvelope.parse(JSON.parse(row.envelope)));
     }
   };
@@ -59,13 +62,15 @@ const createSqliteReader = function (
     handler: EventHandler,
     afterSeq?: number,
   ): () => void {
-    let rowidCursor =
+    const cursorRow =
       afterSeq === undefined
-        ? (maxRowidStmt.get(sessionID)?.max ?? 0)
-        : (floorStmt.get(sessionID, afterSeq)?.floor ?? 0);
+        ? (maxRowidStmt.get(sessionID) as MaxRowidRow | undefined)?.max
+        : (floorStmt.get(sessionID, afterSeq) as FloorRow | undefined)?.floor;
+    let rowidCursor = cursorRow ?? 0;
 
     const drain = function (): void {
-      for (const row of tailStmt.all(sessionID, rowidCursor)) {
+      const rows = tailStmt.all(sessionID, rowidCursor) as TailRow[];
+      for (const row of rows) {
         handler(Protocol.Event.EventEnvelope.parse(JSON.parse(row.envelope)));
         rowidCursor = row.rowid;
       }

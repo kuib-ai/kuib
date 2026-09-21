@@ -1,5 +1,5 @@
 // @context @journal/observability
-import startTelemetry from "./start.telemetry";
+import startTelemetry from "./start.telemetry/index.ts";
 
 const Telemetry = {
   startTelemetry,

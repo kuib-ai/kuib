@@ -1,9 +1,9 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { ErrorCodeEnum } from "../error.code.enum";
-import { ToolCallErrorReasonEnum } from "../../tool.call/tool.call.error.reason.enum";
-import ToolCallID from "../../id/tool.call.id";
-import ErrorBase from "../error.base";
+import { ErrorCodeEnum } from "../error.code.enum/index.ts";
+import { ToolCallErrorReasonEnum } from "../../tool.call/tool.call.error.reason.enum/index.ts";
+import ToolCallID from "../../id/tool.call.id/index.ts";
+import ErrorBase from "../error.base/index.ts";
 
 const ErrorToolFailed = ErrorBase.extend({
   code: z.literal(ErrorCodeEnum.TOOL_FAILED),

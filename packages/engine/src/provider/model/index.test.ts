@@ -1,6 +1,7 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import Protocol from "@kuib-ai/protocol";
-import createModel from "./index";
+import createModel from "./index.ts";
 
 describe("createModel", function () {
   it("builds an openai-compatible model from the factory map", function () {

@@ -1,8 +1,8 @@
 // @context @journal/host-layer
 import { parseArgs } from "node:util";
 import Std from "@kuib-ai/std";
-import printHelp from "../print.help";
-import type { CliSchema } from "../cli.schema";
+import printHelp from "../print.help/index.ts";
+import type { CliSchema } from "../cli.schema/index.ts";
 
 export type ParseCliResult<T> = {
   values: T;

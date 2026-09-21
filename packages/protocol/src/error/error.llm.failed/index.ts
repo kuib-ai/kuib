@@ -1,8 +1,8 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { ErrorCodeEnum } from "../error.code.enum";
-import { MessageAssistantErrorKindEnum } from "../../message/message.assistant.error.kind.enum";
-import ErrorBase from "../error.base";
+import { ErrorCodeEnum } from "../error.code.enum/index.ts";
+import { MessageAssistantErrorKindEnum } from "../../message/message.assistant.error.kind.enum/index.ts";
+import ErrorBase from "../error.base/index.ts";
 
 const ErrorLlmFailed = ErrorBase.extend({
   code: z.literal(ErrorCodeEnum.LLM_FAILED),

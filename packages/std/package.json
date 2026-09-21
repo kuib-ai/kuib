@@ -6,12 +6,11 @@
   "exports": {
     ".": "./src/index.ts",
     "./pino": "./src/pino/index.ts",
-    "./*": {
-      "types": "./src/*/index.ts"
-    }
+    "./*": "./src/*/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsgo --noEmit",
+    "test": "deno test -A --no-check",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -21,7 +20,10 @@
     "pino-pretty": "catalog:"
   },
   "devDependencies": {
+    "@kuib-ai/deno-types": "workspace:*",
     "@kuib-ai/tsconfig": "workspace:*",
-    "bun-types": "catalog:"
+    "@std/expect": "catalog:",
+    "@std/testing": "catalog:",
+    "@types/node": "catalog:"
   }
 }

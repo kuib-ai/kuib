@@ -3,8 +3,8 @@ import Cli from "@kuib-ai/cli";
 import Config from "@kuib-ai/config";
 import Protocol from "@kuib-ai/protocol";
 import Std from "@kuib-ai/std";
-import createLog from "./log";
-import run from "./run";
+import createLog from "./log/index.ts";
+import run from "./run/index.ts";
 import type { CliSchema } from "@kuib-ai/cli/cli.schema";
 
 const cliSchema: CliSchema = {
@@ -74,26 +74,16 @@ const main = async function (): Promise<void> {
     configFile: bootstrap.paths.configFile,
   });
 
-  const sessionID = Protocol.ID.SessionID.parse(bootstrap.runtime.sessionID);
   const deviceID = Protocol.ID.DeviceID.parse(crypto.randomUUID());
-  const command = parsed.positionals[0] ?? "ui";
+  const command = parsed.positionals[0];
 
   switch (command) {
+    case undefined: {
+      Cli.printHelp("", cliSchema);
+      return;
+    }
     case "serve": {
       return run.serve(bootstrap, deviceID, log);
-    }
-    case "ui": {
-      const forwarded = Object.entries(values).flatMap(function ([key, value]) {
-        return value === undefined ? [] : [`--${key}`, value];
-      });
-      return run.ui(
-        bootstrap.paths.database,
-        bootstrap.paths.engineSocket,
-        sessionID,
-        bootstrap.config.target.node,
-        [process.argv[1] ?? "", "serve", ...forwarded],
-        log,
-      );
     }
     default: {
       process.stderr.write(`Unknown command: ${command}\n`);

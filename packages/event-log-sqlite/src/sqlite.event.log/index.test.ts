@@ -1,7 +1,8 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import Protocol from "@kuib-ai/protocol";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";
-import createSqliteEventLog from "./index";
+import createSqliteEventLog from "./index.ts";
 
 const sessionID = Protocol.ID.SessionID.parse("s1");
 const deviceID = Protocol.ID.DeviceID.parse("d1");

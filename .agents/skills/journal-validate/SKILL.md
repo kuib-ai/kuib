@@ -33,7 +33,7 @@ For each `journal/features/<feature>/`:
 Run the compiler script:
 
 ```bash
-pnpm exec tsx scripts/compile-journal-index.ts
+deno run -A scripts/compile-journal-index.ts
 ```
 
 This validates existing context entries (`journal/<name>/decisions.md`):

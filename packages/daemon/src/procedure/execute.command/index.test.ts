@@ -1,6 +1,7 @@
-import { describe, it, expect } from "bun:test";
-import Trpc from "../../trpc";
-import executeCommand from "./index";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
+import Trpc from "../../trpc/index.ts";
+import executeCommand from "./index.ts";
 
 const router = Trpc.router({ executeCommand });
 const createCaller = Trpc.createCallerFactory(router);

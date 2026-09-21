@@ -1,9 +1,10 @@
 // @context @journal/application-directories
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { mkdtempSync, mkdirSync, writeFileSync, realpathSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import resolveDirs from "./index";
+import resolveDirs from "./index.ts";
 
 describe("resolveDirs", function () {
   it("returns the five bases under dist in development", function () {

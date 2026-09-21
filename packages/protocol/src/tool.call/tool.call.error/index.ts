@@ -1,10 +1,10 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { ToolCallStatusEnum } from "../tool.call.status.enum";
-import { ToolCallKindEnum } from "../tool.call.kind.enum";
-import { ToolCallErrorReasonEnum } from "../tool.call.error.reason.enum";
-import ModelRef from "../../model.ref";
-import TokenUsage from "../../token.usage";
+import { ToolCallStatusEnum } from "../tool.call.status.enum/index.ts";
+import { ToolCallKindEnum } from "../tool.call.kind.enum/index.ts";
+import { ToolCallErrorReasonEnum } from "../tool.call.error.reason.enum/index.ts";
+import ModelRef from "../../model.ref/index.ts";
+import TokenUsage from "../../token.usage/index.ts";
 
 const ToolCallErrorBase = z.object({
   status: z.literal(ToolCallStatusEnum.ERROR),

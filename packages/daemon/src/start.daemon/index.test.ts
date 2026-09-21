@@ -1,18 +1,20 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { join } from "node:path";
 import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 
-const entry = join(import.meta.dir, "index.ts");
+const entry = join(import.meta.dirname!, "index.ts");
 
 const runDaemonLine = async function (
   env: Record<string, string>,
 ): Promise<string> {
-  const proc = Bun.spawn(["bun", entry], {
-    env: { ...process.env, ...env },
-    stdout: "pipe",
-    stderr: "ignore",
-  });
+  const proc = new Deno.Command(Deno.execPath(), {
+    args: ["run", "-A", entry],
+    env,
+    stdout: "piped",
+    stderr: "null",
+  }).spawn();
   const reader = proc.stdout.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
@@ -25,7 +27,7 @@ const runDaemonLine = async function (
   }
   await reader.cancel();
   proc.kill();
-  await proc.exited;
+  await proc.status;
   return buffer.slice(0, buffer.indexOf("\n"));
 };
 

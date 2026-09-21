@@ -1,5 +1,5 @@
 // @context @journal/host-layer
-import { TranscriptRoleEnum } from "../transcript.role.enum";
+import { TranscriptRoleEnum } from "../transcript.role.enum/index.ts";
 
 type TranscriptEntry = {
   id: string;

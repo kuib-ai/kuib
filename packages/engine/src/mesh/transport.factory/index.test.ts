@@ -1,6 +1,7 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import Protocol from "@kuib-ai/protocol";
-import createTransportFactory from "./index";
+import createTransportFactory from "./index.ts";
 import type { DiscoveryPort } from "@kuib-ai/protocol/discovery.port";
 import type { NodeDescriptor } from "@kuib-ai/protocol/node/node.descriptor";
 import type { NodeID } from "@kuib-ai/protocol/id/node.id";

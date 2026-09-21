@@ -1,8 +1,8 @@
 // @context @journal/tool-system
-import ReadDirInput from "./read.dir.input";
-import ReadDirOutput from "./read.dir.output";
-import ReadFileInput from "./read.file.input";
-import ReadFileOutput from "./read.file.output";
+import ReadDirInput from "./read.dir.input/index.ts";
+import ReadDirOutput from "./read.dir.output/index.ts";
+import ReadFileInput from "./read.file.input/index.ts";
+import ReadFileOutput from "./read.file.output/index.ts";
 
 const FileSystem = {
   ReadFileInput,

@@ -1,5 +1,6 @@
-import { describe, it, expect } from "bun:test";
-import resolveModelConfig from "./index";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
+import resolveModelConfig from "./index.ts";
 
 const base = {
   baseURL: "http://localhost:11434/v1",

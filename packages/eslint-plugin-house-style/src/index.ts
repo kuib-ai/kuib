@@ -1,17 +1,17 @@
 // @context @journal/house-style-linting
-import requireContextLink from "./rules/require.context.link/index.js";
-import dotCaseFilename from "./rules/dot.case.filename/index.js";
-import noArrow from "./rules/no.arrow/index.js";
-import namedExportsAreTypes from "./rules/named.exports.are.types/index.js";
-import noProseComments from "./rules/no.prose.comments/index.js";
-import noDestructureProps from "./rules/no.destructure.props/index.js";
-import noCrossPackageRelative from "./rules/no.cross.package.relative/index.js";
-import namedUnionMembers from "./rules/named.union.members/index.js";
-import namedSchemaUnion from "./rules/named.schema.union/index.js";
-import preferGuardClauses from "./rules/prefer.guard.clauses/index.js";
-import noPackageBarrelNamedExports from "./rules/no.package.barrel.named.exports/index.js";
-import noNamedImportFromPackageRoot from "./rules/no.named.import.from.package.root/index.js";
-import noReExports from "./rules/no.re.exports/index.js";
+import requireContextLink from "./rules/require.context.link/index.ts";
+import dotCaseFilename from "./rules/dot.case.filename/index.ts";
+import noArrow from "./rules/no.arrow/index.ts";
+import namedExportsAreTypes from "./rules/named.exports.are.types/index.ts";
+import noProseComments from "./rules/no.prose.comments/index.ts";
+import noDestructureProps from "./rules/no.destructure.props/index.ts";
+import noCrossPackageRelative from "./rules/no.cross.package.relative/index.ts";
+import namedUnionMembers from "./rules/named.union.members/index.ts";
+import namedSchemaUnion from "./rules/named.schema.union/index.ts";
+import preferGuardClauses from "./rules/prefer.guard.clauses/index.ts";
+import noPackageBarrelNamedExports from "./rules/no.package.barrel.named.exports/index.ts";
+import noNamedImportFromPackageRoot from "./rules/no.named.import.from.package.root/index.ts";
+import noReExports from "./rules/no.re.exports/index.ts";
 
 const rules = {
   "require-context-link": requireContextLink,

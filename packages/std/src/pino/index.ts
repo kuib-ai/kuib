@@ -1,9 +1,9 @@
 // @context @journal/observability
 import pino from "pino";
 import Protocol from "@kuib-ai/protocol";
-import type { Logger, LogBindings } from "../logger.port";
-import { LogLevelEnum } from "../log.level.enum";
-import LogScope from "../log.scope";
+import type { Logger, LogBindings } from "../logger.port/index.ts";
+import { LogLevelEnum } from "../log.level.enum/index.ts";
+import LogScope from "../log.scope/index.ts";
 
 type CreatePinoLoggerOptions = {
   name: string;

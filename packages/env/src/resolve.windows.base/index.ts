@@ -1,8 +1,8 @@
 // @context @journal/application-directories
 import { homedir, tmpdir } from "node:os";
 import { join, win32 } from "node:path";
-import PathKind, { PathKindEnum } from "../path.kind";
-import type { PathKind as PathKindType } from "../path.kind";
+import PathKind, { PathKindEnum } from "../path.kind/index.ts";
+import type { PathKind as PathKindType } from "../path.kind/index.ts";
 
 const envOr = function (key: string, fallback: () => string): string {
   const value = process.env[key];

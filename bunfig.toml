@@ -1,4 +1,0 @@
-preload = ["./apps/host-tui/node_modules/@opentui/solid/scripts/preload.js"]
-
-[test]
-preload = ["./apps/host-tui/node_modules/@opentui/solid/scripts/preload.js"]

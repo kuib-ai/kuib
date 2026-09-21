@@ -1,13 +1,13 @@
 {
   "name": "@kuib-ai/host-tui",
   "version": "0.0.1",
-  "description": "Terminal UI Host for Kuib AI using Solid",
+  "description": "Terminal host for Kuib AI",
   "type": "module",
   "scripts": {
-    "dev": "bun run src/index.tsx",
-    "dev:watch": "bun --watch --no-clear-screen run src/index.tsx",
-    "typecheck": "tsc --noEmit",
-    "test": "bun test",
+    "dev": "deno run -A src/index.ts",
+    "dev:watch": "deno run -A --watch src/index.ts",
+    "typecheck": "tsgo --noEmit",
+    "test": "deno test -A --no-check",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -21,16 +21,14 @@
     "@kuib-ai/protocol": "workspace:*",
     "@kuib-ai/std": "workspace:*",
     "@kuib-ai/telemetry": "workspace:*",
-    "@kuib-ai/transcript": "workspace:*",
-    "@opentui/core": "catalog:",
-    "@opentui/solid": "catalog:",
-    "solid-js": "catalog:"
+    "@kuib-ai/transcript": "workspace:*"
   },
   "devDependencies": {
+    "@kuib-ai/deno-types": "workspace:*",
     "@kuib-ai/tsconfig": "workspace:*",
+    "@std/expect": "catalog:",
+    "@std/testing": "catalog:",
     "@types/node": "catalog:",
-    "bun-types": "catalog:",
-    "tsx": "catalog:",
     "typescript": "catalog:"
   }
 }

@@ -1,8 +1,8 @@
 // @context @journal/tool-system
-import type { ReadDirInput } from "../file.system/read.dir.input";
-import type { ReadDirOutput } from "../file.system/read.dir.output";
-import type { ReadFileInput } from "../file.system/read.file.input";
-import type { ReadFileOutput } from "../file.system/read.file.output";
+import type { ReadDirInput } from "../file.system/read.dir.input/index.ts";
+import type { ReadDirOutput } from "../file.system/read.dir.output/index.ts";
+import type { ReadFileInput } from "../file.system/read.file.input/index.ts";
+import type { ReadFileOutput } from "../file.system/read.file.output/index.ts";
 
 interface FileSystemPort {
   readFile(input: ReadFileInput): Promise<ReadFileOutput>;

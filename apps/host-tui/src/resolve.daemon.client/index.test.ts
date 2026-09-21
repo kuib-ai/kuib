@@ -1,8 +1,9 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import resolveDaemonClient, { type DaemonConfig } from "./index";
+import resolveDaemonClient, { type DaemonConfig } from "./index.ts";
 
 const writeMeshConfig = function (nodeID: string, url: string): string {
   const dir = mkdtempSync(join(tmpdir(), "kuib-mesh-"));

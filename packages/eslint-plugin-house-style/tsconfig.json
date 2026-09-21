@@ -10,7 +10,8 @@
     "noEmit": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node", "bun-types"]
+    "types": ["node"],
+    "allowImportingTsExtensions": true
   },
   "include": ["src"]
 }

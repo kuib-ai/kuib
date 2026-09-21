@@ -9,7 +9,7 @@ import { spawnSync } from "node:child_process";
 const repoRoot = join(dirname(new URL(import.meta.url).pathname), "..");
 const runtimeDir = join(repoRoot, "dist", "runtime", "kuib");
 
-const patterns = ["start.daemon", "index.tsx serve", "server/index.ts serve"];
+const patterns = ["start.daemon", "host-tui/src/index.ts serve"];
 for (const pattern of patterns) {
   spawnSync("pkill", ["-f", pattern]);
 }

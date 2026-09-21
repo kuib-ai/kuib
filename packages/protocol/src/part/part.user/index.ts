@@ -1,7 +1,7 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import PartText from "../part.text";
-import PartFile from "../part.file";
+import PartText from "../part.text/index.ts";
+import PartFile from "../part.file/index.ts";
 
 const PartUser = z.discriminatedUnion("type", [PartText, PartFile]);
 type PartUser = z.infer<typeof PartUser>;

@@ -1,8 +1,9 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import findWorkspaceRoot from "./index";
+import findWorkspaceRoot from "./index.ts";
 
 describe("findWorkspaceRoot", function () {
   it("walks up to the directory containing pnpm-workspace.yaml", function () {

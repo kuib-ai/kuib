@@ -1,8 +1,8 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { EventTypeEnum } from "../event.type.enum";
-import MessageID from "../../id/message.id";
-import PartUser from "../../part/part.user";
+import { EventTypeEnum } from "../event.type.enum/index.ts";
+import MessageID from "../../id/message.id/index.ts";
+import PartUser from "../../part/part.user/index.ts";
 
 const UserMessageSubmitted = z.object({
   type: z.literal(EventTypeEnum.USER_MESSAGE_SUBMITTED),

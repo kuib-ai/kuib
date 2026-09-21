@@ -1,9 +1,10 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import type { FileSystemPort } from "@kuib-ai/protocol/file.system.port";
 import type { ReadFileInput } from "@kuib-ai/protocol/file.system/read.file.input";
 import type { ReadFileOutput } from "@kuib-ai/protocol/file.system/read.file.output";
-import type { ToolContext } from "../tool.spec";
-import readFile from "./index";
+import type { ToolContext } from "../tool.spec/index.ts";
+import readFile from "./index.ts";
 
 describe("readFile tool", function () {
   it("exposes name, description, and input schema", function () {

@@ -1,9 +1,9 @@
 // @context @journal/protocol-design
-import type { Database } from "bun:sqlite";
+import type { DatabaseSync } from "node:sqlite";
 
-const initSchema = function (db: Database): void {
-  db.run("PRAGMA journal_mode = WAL;");
-  db.run(
+const initSchema = function (db: DatabaseSync): void {
+  db.exec("PRAGMA journal_mode = WAL;");
+  db.exec(
     `CREATE TABLE IF NOT EXISTS events (
       sessionID TEXT NOT NULL,
       epoch INTEGER NOT NULL,

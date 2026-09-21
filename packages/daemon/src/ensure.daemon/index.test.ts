@@ -1,9 +1,10 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import net from "node:net";
 import os from "node:os";
 import { join } from "node:path";
 import { mkdtempSync, writeFileSync } from "node:fs";
-import ensureDaemon from "./index";
+import ensureDaemon from "./index.ts";
 
 const makeDir = function (): string {
   return mkdtempSync(join(os.tmpdir(), "kuib-ensure-"));
@@ -44,7 +45,7 @@ describe("ensureDaemon", function () {
     await ensured;
     expect(server.listening).toBe(true);
     server.close();
-  }, 15000);
+  });
 
   it("rejects after the timeout when the socket never becomes reachable", async function () {
     const dir = makeDir();
@@ -59,5 +60,5 @@ describe("ensureDaemon", function () {
     const elapsed = Date.now() - started;
 
     expect(elapsed).toBeGreaterThanOrEqual(4000);
-  }, 15000);
+  });
 });

@@ -1,7 +1,8 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { z } from "zod";
-import defineTool from "./index";
-import type { ToolDefinition, ToolContext } from "./index";
+import defineTool from "./index.ts";
+import type { ToolDefinition, ToolContext } from "./index.ts";
 
 const ctx: ToolContext = {
   fs: {

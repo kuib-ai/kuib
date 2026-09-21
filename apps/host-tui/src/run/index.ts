@@ -1,9 +1,7 @@
 // @context @journal/host-layer
-import serve from "./serve";
-import ui from "./ui";
+import serve from "./serve/index.ts";
 
 const run = {
-  ui,
   serve,
 };
 

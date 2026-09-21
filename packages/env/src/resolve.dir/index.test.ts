@@ -1,5 +1,6 @@
 // @context @journal/application-directories
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import {
   mkdtempSync,
   mkdirSync,
@@ -9,8 +10,8 @@ import {
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { PathKindEnum } from "../path.kind";
-import resolveDir from "./index";
+import { PathKindEnum } from "../path.kind/index.ts";
+import resolveDir from "./index.ts";
 
 describe("resolveDir", function () {
   it("uses dist/<kind> as the base dir outside production", function () {

@@ -1,7 +1,8 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import expandHomePath from "./index";
+import expandHomePath from "./index.ts";
 
 describe("expandHomePath", function () {
   it("expands bare '~' to the home directory", function () {

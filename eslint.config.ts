@@ -10,6 +10,7 @@ export default defineConfig(
       "**/node_modules/**",
       "**/.nx/**",
       ".references/**",
+      "packages/deno-types/index.d.ts",
     ],
   },
   jseslint.configs.recommended,

@@ -1,6 +1,6 @@
 // @context @journal/tool-system
 import type { FileSystemPort } from "@kuib-ai/protocol/file.system.port";
-import type { DaemonClient } from "../daemon.client/transport.factory";
+import type { DaemonClient } from "../daemon.client/transport.factory/index.ts";
 
 const createDaemonFileSystem = function (client: DaemonClient): FileSystemPort {
   return {

@@ -1,8 +1,8 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { EventTypeEnum } from "../event.type.enum";
-import MessageID from "../../id/message.id";
-import AnyMessage from "../../message/message.any";
+import { EventTypeEnum } from "../event.type.enum/index.ts";
+import MessageID from "../../id/message.id/index.ts";
+import AnyMessage from "../../message/message.any/index.ts";
 
 const MessageUpdated = z.object({
   type: z.literal(EventTypeEnum.MESSAGE_UPDATED),

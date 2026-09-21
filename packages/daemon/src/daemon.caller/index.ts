@@ -1,6 +1,6 @@
 // @context @journal/architecture-overview
-import Trpc from "../trpc";
-import daemonRouter from "../daemon.router";
+import Trpc from "../trpc/index.ts";
+import daemonRouter from "../daemon.router/index.ts";
 
 const createDaemonCaller = Trpc.createCallerFactory(daemonRouter);
 

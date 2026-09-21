@@ -1,7 +1,7 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import SubmitMessage from "../submit.message";
-import InterruptMessage from "../interrupt.message";
+import SubmitMessage from "../submit.message/index.ts";
+import InterruptMessage from "../interrupt.message/index.ts";
 
 const ServiceMessageAny = z.discriminatedUnion("type", [
   SubmitMessage,

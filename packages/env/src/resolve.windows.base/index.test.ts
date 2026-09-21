@@ -1,9 +1,10 @@
 // @context @journal/application-directories
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
-import { PathKindEnum } from "../path.kind";
-import resolveWindowsBase from "./index";
+import { PathKindEnum } from "../path.kind/index.ts";
+import resolveWindowsBase from "./index.ts";
 
 describe("resolveWindowsBase", function () {
   it("maps config to APPDATA and data/state/cache to LOCALAPPDATA", function () {

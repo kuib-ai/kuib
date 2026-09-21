@@ -1,9 +1,10 @@
 // @context @journal/application-directories
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
-import { PathKindEnum } from "../path.kind";
-import resolveUnixBase from "./index";
+import { PathKindEnum } from "../path.kind/index.ts";
+import resolveUnixBase from "./index.ts";
 
 describe("resolveUnixBase", function () {
   it("prefers XDG_* env vars when set", function () {

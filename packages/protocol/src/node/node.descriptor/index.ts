@@ -1,7 +1,7 @@
 // @context @journal/distributed-mesh-state
 import { z } from "zod";
-import NodeID from "../../id/node.id";
-import AnyEndpoint from "../../endpoint/endpoint.any";
+import NodeID from "../../id/node.id/index.ts";
+import AnyEndpoint from "../../endpoint/endpoint.any/index.ts";
 
 const NodeDescriptor = z.object({
   nodeID: NodeID,

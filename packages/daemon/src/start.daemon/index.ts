@@ -1,7 +1,7 @@
 // @context @journal/host-layer
 
 import Config from "@kuib-ai/config";
-import createDaemonServer from "../server";
+import createDaemonServer from "../server/index.ts";
 
 const main = function (): void {
   const bootstrap = Config.bootstrapConfig();

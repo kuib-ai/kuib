@@ -1,10 +1,10 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { MessageRoleEnum } from "../message.role.enum";
-import { MessageAssistantStatusEnum } from "../message.assistant.status.enum";
-import { MessageAssistantErrorKindEnum } from "../message.assistant.error.kind.enum";
-import MessageBase from "../message.base";
-import PartAssistant from "../../part/part.assistant";
+import { MessageRoleEnum } from "../message.role.enum/index.ts";
+import { MessageAssistantStatusEnum } from "../message.assistant.status.enum/index.ts";
+import { MessageAssistantErrorKindEnum } from "../message.assistant.error.kind.enum/index.ts";
+import MessageBase from "../message.base/index.ts";
+import PartAssistant from "../../part/part.assistant/index.ts";
 
 const MessageAssistantErrorBase = MessageBase.extend({
   role: z.literal(MessageRoleEnum.ASSISTANT),

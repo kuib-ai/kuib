@@ -1,9 +1,9 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { MessageRoleEnum } from "../message.role.enum";
-import MessageBase from "../message.base";
-import PartUser from "../../part/part.user";
-import DeviceID from "../../id/device.id";
+import { MessageRoleEnum } from "../message.role.enum/index.ts";
+import MessageBase from "../message.base/index.ts";
+import PartUser from "../../part/part.user/index.ts";
+import DeviceID from "../../id/device.id/index.ts";
 
 const MessageUser = MessageBase.extend({
   role: z.literal(MessageRoleEnum.USER),

@@ -1,14 +1,15 @@
 // @context @journal/architecture-overview @journal/application-directories
 import { existsSync, readFileSync } from "node:fs";
+import { parse as parseToml } from "@std/toml";
 import { hostname, userInfo } from "node:os";
 import Env from "@kuib-ai/env";
 import { z } from "zod";
-import KuibConfigFile from "../kuib.config.file";
-import KuibConfigSchema from "../kuib.config";
-import resolveAppPaths from "../resolve.app.paths";
-import type { AppPaths } from "../app.paths";
-import type { ConfigOverrides } from "../config.overrides";
-import type { KuibConfig } from "../kuib.config";
+import KuibConfigFile from "../kuib.config.file/index.ts";
+import KuibConfigSchema from "../kuib.config/index.ts";
+import resolveAppPaths from "../resolve.app.paths/index.ts";
+import type { AppPaths } from "../app.paths/index.ts";
+import type { ConfigOverrides } from "../config.overrides/index.ts";
+import type { KuibConfig } from "../kuib.config/index.ts";
 
 const BootstrapEnv = z.object({
   NODE_ENV: z.string().optional(),
@@ -107,7 +108,7 @@ const loadFile = function (path: string): unknown {
   if (!existsSync(path)) {
     return {};
   }
-  return Bun.TOML.parse(readFileSync(path, "utf8"));
+  return parseToml(readFileSync(path, "utf8"));
 };
 
 const bootstrapConfig = function (

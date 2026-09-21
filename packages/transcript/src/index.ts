@@ -1,6 +1,6 @@
 // @context @journal/host-layer
-import { TranscriptRoleEnum } from "./transcript.role.enum";
-import foldTranscript from "./fold.transcript";
+import { TranscriptRoleEnum } from "./transcript.role.enum/index.ts";
+import foldTranscript from "./fold.transcript/index.ts";
 
 const Transcript = {
   TranscriptRoleEnum,

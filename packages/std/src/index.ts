@@ -1,12 +1,12 @@
 // @context @journal/house-style-linting
-import withError from "./with.error";
-import mapError from "./map.error";
-import isErr from "./is.err";
-import createNoopLogger from "./create.noop.logger";
-import createConsoleLogger from "./create.console.logger";
-import errorFields from "./error.fields";
-import { LogLevelEnum } from "./log.level.enum";
-import LogScope from "./log.scope";
+import withError from "./with.error/index.ts";
+import mapError from "./map.error/index.ts";
+import isErr from "./is.err/index.ts";
+import createNoopLogger from "./create.noop.logger/index.ts";
+import createConsoleLogger from "./create.console.logger/index.ts";
+import errorFields from "./error.fields/index.ts";
+import { LogLevelEnum } from "./log.level.enum/index.ts";
+import LogScope from "./log.scope/index.ts";
 
 const Std = {
   withError,

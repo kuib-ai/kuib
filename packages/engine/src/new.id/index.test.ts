@@ -1,6 +1,7 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { z } from "zod";
-import newID from ".";
+import newID from "./index.ts";
 
 describe("newID", function () {
   it("returns a schema-valid UUID", function () {

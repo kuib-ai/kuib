@@ -1,6 +1,6 @@
 // @context @journal/observability
-import type { Logger, LogBindings, LogFn } from "../logger.port";
-import LogScope from "../log.scope";
+import type { Logger, LogBindings, LogFn } from "../logger.port/index.ts";
+import LogScope from "../log.scope/index.ts";
 
 type ConsoleSink = {
   debug: (...args: unknown[]) => void;

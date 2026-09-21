@@ -1,5 +1,6 @@
-import { describe, it, expect } from "bun:test";
-import startTelemetry from "./index";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
+import startTelemetry from "./index.ts";
 
 describe("startTelemetry", function () {
   it("returns false when endpoint is undefined", function () {

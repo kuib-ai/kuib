@@ -2,7 +2,7 @@
 import Config from "@kuib-ai/config";
 import Protocol from "@kuib-ai/protocol";
 import type { AnyEndpoint } from "@kuib-ai/protocol/endpoint/endpoint.any";
-import ensureDaemon from "../ensure.daemon";
+import ensureDaemon from "../ensure.daemon/index.ts";
 
 const ensureLocalDaemon = async function (
   socketOverride?: string,

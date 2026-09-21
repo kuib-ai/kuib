@@ -1,11 +1,11 @@
 // @context @journal/protocol-design
-import { ToolCallStatusEnum } from "./tool.call.status.enum";
-import { ToolCallKindEnum } from "./tool.call.kind.enum";
-import { ToolCallErrorReasonEnum } from "./tool.call.error.reason.enum";
-import ToolCallPending from "./tool.call.pending";
-import ToolCallCompleted from "./tool.call.completed";
-import ToolCallError from "./tool.call.error";
-import ToolCallState from "./tool.call.state";
+import { ToolCallStatusEnum } from "./tool.call.status.enum/index.ts";
+import { ToolCallKindEnum } from "./tool.call.kind.enum/index.ts";
+import { ToolCallErrorReasonEnum } from "./tool.call.error.reason.enum/index.ts";
+import ToolCallPending from "./tool.call.pending/index.ts";
+import ToolCallCompleted from "./tool.call.completed/index.ts";
+import ToolCallError from "./tool.call.error/index.ts";
+import ToolCallState from "./tool.call.state/index.ts";
 
 const ToolCall = {
   ToolCallStatusEnum,

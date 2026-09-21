@@ -1,6 +1,6 @@
 ---
 name: wireframe
-description: Design or edit a screen wireframe. Loads the wireframe conventions, the OpenTUI skill, and the current state of every screen, then helps draw ASCII frames that represent screen states properly.
+description: Design or edit a screen wireframe. Loads the wireframe conventions and the current state of every screen, then helps draw ASCII frames that represent screen states properly.
 ---
 
 # Wireframe
@@ -10,7 +10,7 @@ You are designing or editing a **screen wireframe** — the motivation + intende
 ## 1. Load context (always, in this order)
 
 1. Read `journal/ux-iteration-process/decisions.md` — the full wireframe conventions (file format, lifecycle, screen-level rule). This is the contract; do not improvise around it.
-2. Invoke the `opentui` skill (Skill tool) — the frames must be drawable with real OpenTUI primitives (`box`, `scrollbox`, `select`, `text`, `input`, `markdown`, `code`, `diff`, tree-sitter panes), so know what exists before sketching.
+2. Sketch in cell-grid terms (boxes, text runs, scroll regions, lists, inputs). Screens render through kuib's own terminal UI library (see `journal/features/deno-runtime/plan.md` D005); do not assume any third-party component set.
 3. Load the current state of the codebase:
    - `journal/_index.md` — which entries exist, which wireframes exist and their statuses (lines like `[[<entry>/wireframes/<screen>]] | wireframe:<status>`).
    - List all wireframe files: `find journal -path '*/wireframes/*.md'`. Read any that relate to the screen being worked on.
@@ -32,9 +32,8 @@ You are designing or editing a **screen wireframe** — the motivation + intende
 
 ## 4. Validate and hand off
 
-1. Run `bun scripts/compile-journal-index.ts` — must pass with zero new warnings (it validates frontmatter and rebuilds the index).
-2. The picker (`pnpm wireframes`, apps/wireframes) auto-detects the new/edited file within ~2s and jumps to it — tell the user it's already visible there; no reload needed.
-3. When a variant is adopted or a screen supersedes, record the decision + wikilink in the owning entry's `decisions.md`.
+1. Run `deno run -A scripts/compile-journal-index.ts` — must pass with zero new warnings (it validates frontmatter and rebuilds the index).
+2. When a variant is adopted or a screen supersedes, record the decision + wikilink in the owning entry's `decisions.md`.
 
 ## Rules that override everything
 

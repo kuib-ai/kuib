@@ -3,7 +3,7 @@ screen: session
 kind: route
 status: adopted
 sizes: [80x24]
-implements: [apps/host-tui/src/app/index.tsx]
+implements: []
 ---
 
 # session

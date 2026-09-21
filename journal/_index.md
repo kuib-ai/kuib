@@ -4,6 +4,7 @@
 
 ### [[ana]] | status:open | tags:ana,assistant,voice,stt,tts,mimo,mesh,proactive,context
   Ana is a voice-driven personal AI assistant. It is the first application built on the Kuib engine, living at `apps/ana` ...
+  - [[ana/echo-dot-hack-checklist]]
   - [[ana/research/hardware-topology]]
   - [[ana/research/voice-io-landscape]]
 

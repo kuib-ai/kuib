@@ -1,7 +1,4 @@
 {
   "extends": "@kuib-ai/tsconfig/base.json",
-  "include": ["src"],
-  "compilerOptions": {
-    "types": ["node", "bun-types"]
-  }
+  "include": ["src"]
 }

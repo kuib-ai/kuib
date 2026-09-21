@@ -1,5 +1,5 @@
-import { describe, it } from "bun:test";
-import createNoopLogger from "./index";
+import { describe, it } from "@std/testing/bdd";
+import createNoopLogger from "./index.ts";
 
 describe("createNoopLogger", function () {
   it("accepts log calls without throwing", function () {

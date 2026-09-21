@@ -1,12 +1,12 @@
 // @context @journal/protocol-design
 import { z } from "zod";
-import { EventTypeEnum } from "../event.type.enum";
-import { ToolCallKindEnum } from "../../tool.call/tool.call.kind.enum";
-import MessageID from "../../id/message.id";
-import PartID from "../../id/part.id";
-import ToolCallID from "../../id/tool.call.id";
-import ModelRef from "../../model.ref";
-import TokenUsage from "../../token.usage";
+import { EventTypeEnum } from "../event.type.enum/index.ts";
+import { ToolCallKindEnum } from "../../tool.call/tool.call.kind.enum/index.ts";
+import MessageID from "../../id/message.id/index.ts";
+import PartID from "../../id/part.id/index.ts";
+import ToolCallID from "../../id/tool.call.id/index.ts";
+import ModelRef from "../../model.ref/index.ts";
+import TokenUsage from "../../token.usage/index.ts";
 
 const ToolCallCompleted = z.object({
   type: z.literal(EventTypeEnum.TOOL_CALL_COMPLETED),

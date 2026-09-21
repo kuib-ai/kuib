@@ -1,10 +1,11 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { TRPCError } from "@trpc/server";
-import Trpc from "../../trpc";
-import writeFileProcedure from "./index";
+import Trpc from "../../trpc/index.ts";
+import writeFileProcedure from "./index.ts";
 
 const router = Trpc.router({ writeFile: writeFileProcedure });
 const createCaller = Trpc.createCallerFactory(router);

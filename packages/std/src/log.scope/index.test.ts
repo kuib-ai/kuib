@@ -1,7 +1,14 @@
-import { describe, it, expect } from "bun:test";
-import createConsoleLogger from "../create.console.logger";
-import withError from "../with.error";
-import LogScope from "./index";
+import { describe, it } from "@std/testing/bdd";
+import { expect } from "@std/expect";
+import createConsoleLogger from "../create.console.logger/index.ts";
+import withError from "../with.error/index.ts";
+import LogScope from "./index.ts";
+
+const sleep = function (ms: number): Promise<void> {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, ms);
+  });
+};
 
 describe("log.scope", function () {
   it("merges nested scopes; inner wins on key clash", function () {
@@ -26,7 +33,7 @@ describe("log.scope", function () {
 
   it("survives await under the root scope", async function () {
     await LogScope.withScope({ runId: "async-1" }, async function () {
-      await Bun.sleep(5);
+      await sleep(5);
       expect(LogScope.currentScope()).toEqual({ runId: "async-1" });
     });
     expect(LogScope.currentScope()).toEqual({});
@@ -36,12 +43,12 @@ describe("log.scope", function () {
     const seen: string[] = [];
 
     const a = LogScope.withScope({ runId: "A" }, async function () {
-      await Bun.sleep(10);
+      await sleep(10);
       seen.push(`a:${LogScope.currentScope().runId}`);
     });
 
     const b = LogScope.withScope({ runId: "B" }, async function () {
-      await Bun.sleep(1);
+      await sleep(1);
       seen.push(`b:${LogScope.currentScope().runId}`);
     });
 
@@ -102,7 +109,7 @@ describe("log.scope", function () {
     await LogScope.withScope({ runId: "r" }, async function () {
       const [error] = await withError(
         LogScope.withScope({ toolName: "boom" }, async function () {
-          await Bun.sleep(1);
+          await sleep(1);
           throw new Error("tool failed");
         }),
       );

@@ -2,8 +2,8 @@
 import Protocol from "@kuib-ai/protocol";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 import type { PartText } from "@kuib-ai/protocol/part/part.text";
-import { TranscriptRoleEnum } from "../transcript.role.enum";
-import type { TranscriptEntry } from "../transcript.entry";
+import { TranscriptRoleEnum } from "../transcript.role.enum/index.ts";
+import type { TranscriptEntry } from "../transcript.entry/index.ts";
 
 const isTextPart = function (part: { type: string }): part is PartText {
   return part.type === Protocol.Part.PartTypeEnum.TEXT;
