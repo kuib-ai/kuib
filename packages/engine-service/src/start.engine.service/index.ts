@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core#^C042
 import net from "node:net";
 import { unlinkSync } from "node:fs";
 import Std from "@kuib-ai/std";

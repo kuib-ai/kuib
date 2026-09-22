@@ -3,14 +3,14 @@
   "hooks": {
     "sessionStart": [
       {
-        "command": ".cursor/hooks/check-journal-index.sh",
+        "command": ".agents/hooks/journal-context cursor",
         "timeout": 30
       }
     ],
     "preCompact": [
       {
-        "command": ".cursor/hooks/pre-compact.sh",
-        "timeout": 60
+        "command": ".agents/hooks/journal-context cursor pre-compact",
+        "timeout": 30
       }
     ]
   }

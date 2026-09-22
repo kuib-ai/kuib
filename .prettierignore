@@ -5,3 +5,8 @@ journal/_index.md
 .agents
 .claude
 journal
+AGENTS.md
+CLAUDE.md
+.mcp.json
+.cursor
+.gemini

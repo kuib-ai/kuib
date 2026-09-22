@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C008
 export enum StepBoundaryStopReasonEnum {
   INTERRUPTED = "interrupted",
   TOOL_CALL_REQUEST = "tool-call-request",

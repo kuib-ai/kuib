@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C010
 import { z } from "zod";
 import { MessageRoleEnum } from "../message.role.enum/index.ts";
 import { MessageAssistantStatusEnum } from "../message.assistant.status.enum/index.ts";

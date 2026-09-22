@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview @journal/application-directories
+// @context @journal/domains/infra#^C015
 type ConfigOverrides = {
   configFile?: string;
   meshConfigFile?: string;

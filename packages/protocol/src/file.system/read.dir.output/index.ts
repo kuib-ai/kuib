@@ -1,4 +1,4 @@
-// @context @journal/tool-system
+// @context @journal/domains/core#^C014
 import { z } from "zod";
 
 const ReadDirOutput = z.object({

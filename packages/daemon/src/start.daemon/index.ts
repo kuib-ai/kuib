@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core#^C039
 
 import Config from "@kuib-ai/config";
 import createDaemonServer from "../server/index.ts";

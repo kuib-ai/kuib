@@ -1,0 +1,22 @@
+entry = "observability"
+
+[[section]]
+file = "decisions.md"
+heading = "Context"
+to = ["infra#D014"]
+
+[[section]]
+file = "decisions.md"
+heading = "Decision"
+to = ["infra#D014", "infra#C022", "host#D006", "R410"]
+note = "KUIB_TRACE_SERVICE and the Deno end-to-end re-check are unbuilt (R410)."
+
+[[section]]
+file = "decisions.md"
+heading = "Why not Langfuse"
+to = ["infra#D014"]
+
+[[section]]
+file = "decisions.md"
+heading = "Consequences"
+to = ["infra#D014", "infra#C022"]

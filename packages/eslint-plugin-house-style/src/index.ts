@@ -1,4 +1,4 @@
-// @context @journal/house-style-linting
+// @context @journal/domains/infra#^C023
 import requireContextLink from "./rules/require.context.link/index.ts";
 import dotCaseFilename from "./rules/dot.case.filename/index.ts";
 import noArrow from "./rules/no.arrow/index.ts";

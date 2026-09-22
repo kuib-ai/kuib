@@ -1,54 +1,43 @@
 ---
 name: journal-validate
-description: Validate the journal graph. Checks features (plan + implementation coverage, state consistency, refs) and context entries (structural integrity, staleness).
+description: Validate the journal — structure, claim anchors, roadmap graph, features, archive ledgers, file ownership — then review semantic drift.
 user-invocable: true
 ---
 
 # Journal Validate
 
-Full validation of the journal: features + context graph.
+Layout contract: `journal/SPEC.md`.
 
-## Phase 1: Feature Validation
-
-For each `journal/features/<feature>/`:
-
-1. **Structure** — `plan.md` has valid frontmatter (owner, lifecycle, summary, topics).
-   Body has well-formed phases (P01, P02...), items (P01-I01), decisions (D001), gaps (G001).
-
-2. **Coverage** — every plan item has a matching `[items."P01-I01"]` in `implementation.toml`.
-   No orphan implementation entries.
-
-3. **State consistency:**
-   - Phase state derived from items: all planned → `planned`, any started → `in_progress`,
-     all implemented/verified → `implemented`.
-   - Feature `state` consistent with phases.
-   - Checkpoint `next` references live, non-terminal items.
-
-4. **Refs** — every `path` in implementation refs exists in the repo.
-
-5. **Report** discrepancies. Do NOT auto-fix — present to the user.
-
-## Phase 2: Context Graph Validation
-
-Run the compiler script:
+## Phase 1 — Structural (deterministic)
 
 ```bash
-deno run -A scripts/compile-journal-index.ts
+pnpm journal build   # regenerate _index.md, roadmap/ROADMAP.md, AGENTS.md block
+pnpm journal check   # errors fail; warnings are archive ledger progress
 ```
 
-This validates existing context entries (`journal/<name>/decisions.md`):
-- Index matches filesystem
-- Frontmatter consistency
-- Bidirectional edge check (depends-on vs informs)
-- Index rebuild
+`check` covers: roadmap items (frontmatter, edges resolve, reciprocal `converges-with`,
+acyclic `depends-on`), domain claims (callout format, anchors hold, `verified` is a commit),
+domain decisions, features (frontmatter, plan ↔ implementation coverage, derived phase states,
+checkpoint, refs), wireframes, archive ledgers, file ownership and `@context` headers, and
+freshness of generated files.
 
-## Phase 3: Semantic Staleness Detection
+Report errors grouped by area. Do NOT auto-fix — present them to the user, then fix what
+they approve.
 
-After structural checks pass, do a semantic review of context entries:
+## Phase 2 — Drift
 
-1. Read `journal/_index.md` for the graph topology.
-2. For entries with status `decided`: check for contradictions with related entries.
-3. Drift detection: entries sharing tags but not referencing each other.
-4. Report conflicts with specific quotes. Ask the user to decide resolution.
+```bash
+pnpm journal drift --files
+```
 
-Do NOT silently resolve conflicts.
+Summarize broken/changed/stale claims, stale roadmap items, and uncited source files per
+domain. Suggest `/context-audit <domain>` for domains with drift.
+
+## Phase 3 — Semantic review
+
+1. Contradictions between domains (the same behaviour described differently).
+2. Roadmap items whose idea now appears built (grep the code for their key terms) → propose
+   promoting or marking `shipped`.
+3. Features whose `context:` links point at claims that drifted.
+
+Report with specific quotes; ask the user to decide. Do not silently resolve.

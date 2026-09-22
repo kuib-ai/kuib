@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra#^C012
 import BaseDirs from "../base.dirs/index.ts";
 import type { BaseDirs as BaseDirsType } from "../base.dirs/index.ts";
 import { PathKindEnum } from "../path.kind/index.ts";

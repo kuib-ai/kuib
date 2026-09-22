@@ -1,0 +1,501 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = []
+# ///
+"""orchestra — coordinate agent CLIs running in tmux windows of one session.
+
+Every task is a journal record in the checkout the command runs in (main tree or worktree):
+
+    journal/features/<feature>/tasks/<task-id>/
+        brief.md       orchestrator: objective, scope, context      (`orchestra new` creates it)
+        prompt.md      the exact prompt typed into the worker
+        task.toml      status, agent, command, cwd, started, finished, reported
+        report.md      worker: result or findings                  (before `orchestra done`)
+
+Runtime lives in tmux only: a worker is the window `w:<task-id>` of this session. Workers do
+only the work they are assigned and never message the orchestrator: they write their own
+records, and the orchestrator finds out through `watch` (records + windows + screens), reads
+them, and decides the next step.
+
+Every command derives what to do from the task records and the live tmux state, so any
+command can be re-run safely: `watch` resumes from `reported`, `reconcile` repairs drift
+between records and windows.
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime
+import os
+import subprocess
+import sys
+import time
+import tomllib
+from dataclasses import dataclass
+from pathlib import Path
+
+STATUSES = ("draft", "running", "done", "blocked", "failed", "lost")
+ACTIVE = ("running",)
+EVENTS = ("done", "blocked", "failed", "lost")
+SHELLS = ("zsh", "bash", "sh", "fish")
+FIELD_ORDER = ("status", "agent", "command", "cwd", "started", "finished", "reported")
+
+AGENTS = {
+    "claude": "claude",
+    "kiro-claude": "kiro-claude",
+    "mimo-claude": "mimo-claude",
+    "cursor": "cursor-agent",
+    "cursor-agent": "cursor-agent",
+    "agy": "agy",
+    "antigravity": "agy",
+    "gemini": "gemini",
+    "codex": "codex",
+}
+
+WORKER_PROTOCOL = ".agents/skills/orchestrate/WORKER.md"
+
+
+class OrchestraError(Exception):
+    pass
+
+
+def run(*args: str, check: bool = True) -> str:
+    result = subprocess.run(args, capture_output=True, text=True)
+    if check and result.returncode != 0:
+        raise OrchestraError(f"{' '.join(args)}: {result.stderr.strip()}")
+    return result.stdout.strip()
+
+
+def now() -> str:
+    return datetime.datetime.now().isoformat(timespec="seconds")
+
+
+# ─── checkout + tasks ────────────────────────────────────────────────────────
+
+
+def repo_root() -> Path:
+    try:
+        return Path(run("git", "rev-parse", "--show-toplevel"))
+    except OrchestraError as error:
+        raise OrchestraError("not inside a git repository") from error
+
+
+ROOT = repo_root()
+FEATURES = ROOT / "journal" / "features"
+
+
+def check_id(task_id: str) -> None:
+    if not task_id or any(not (c.islower() or c.isdigit() or c == "-") for c in task_id):
+        raise OrchestraError(f"task id must be kebab-case: {task_id!r}")
+
+
+@dataclass
+class Task:
+    dir: Path
+
+    @property
+    def id(self) -> str:
+        return self.dir.name
+
+    @property
+    def feature(self) -> str:
+        return self.dir.parent.parent.name
+
+    @property
+    def rel(self) -> str:
+        return str(self.dir.relative_to(ROOT))
+
+    @property
+    def toml(self) -> Path:
+        return self.dir / "task.toml"
+
+    def fields(self) -> dict[str, str]:
+        if not self.toml.exists():
+            return {}
+        with self.toml.open("rb") as handle:
+            return {key: str(value) for key, value in tomllib.load(handle).items()}
+
+    def get(self, key: str) -> str:
+        return self.fields().get(key, "")
+
+    def update(self, **changes: str) -> None:
+        fields = self.fields() | changes
+        keys = [k for k in FIELD_ORDER if k in fields] + sorted(
+            k for k in fields if k not in FIELD_ORDER
+        )
+        lines = [f"{key} = {toml_string(fields[key])}" for key in keys]
+        self.toml.write_text("\n".join(lines) + "\n")
+
+    @property
+    def status(self) -> str:
+        return self.get("status") or "draft"
+
+
+def toml_string(value: str) -> str:
+    escaped = value.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
+    return f'"{escaped}"'
+
+
+def all_tasks() -> list[Task]:
+    return sorted(
+        (Task(path) for path in FEATURES.glob("*/tasks/*") if path.is_dir()),
+        key=lambda task: (task.feature, task.id),
+    )
+
+
+def find_task(task_id: str) -> Task:
+    check_id(task_id)
+    matches = [task for task in all_tasks() if task.id == task_id]
+    if not matches:
+        raise OrchestraError(
+            f"no task {task_id!r} under journal/features/*/tasks/ "
+            f"(create it with: orchestra new <feature> {task_id})"
+        )
+    if len(matches) > 1:
+        raise OrchestraError(f"task id {task_id!r} exists in several features")
+    return matches[0]
+
+
+# ─── tmux ────────────────────────────────────────────────────────────────────
+
+
+def session() -> str:
+    if not os.environ.get("TMUX"):
+        raise OrchestraError("not inside tmux")
+    target = os.environ.get("TMUX_PANE", "")
+    return run("tmux", "display-message", "-p", "-t", target, "#{session_name}")
+
+
+def windows() -> dict[str, str]:
+    """Worker windows of this session: task id → pane id."""
+    out = run("tmux", "list-windows", "-t", f"{session()}:", "-F", "#{window_name}\t#{pane_id}")
+    result = {}
+    for line in out.splitlines():
+        name, _, pane = line.partition("\t")
+        if name.startswith("w:"):
+            result[name[2:]] = pane
+    return result
+
+
+def pane_of(task_id: str) -> str | None:
+    return windows().get(task_id)
+
+
+def pane_command(pane: str) -> str:
+    return run("tmux", "display-message", "-p", "-t", pane, "#{pane_current_command}")
+
+
+def screen(pane: str, lines: int = 0) -> str:
+    args = ["tmux", "capture-pane", "-p", "-J", "-t", pane]
+    if lines:
+        args += ["-S", f"-{lines}"]
+    return run(*args)
+
+
+def type_into(pane: str, text: str) -> None:
+    run("tmux", "send-keys", "-t", pane, "-l", text)
+    time.sleep(0.5)
+    run("tmux", "send-keys", "-t", pane, "Enter")
+
+
+def orchestrator_pane() -> str:
+    return run("tmux", "show-options", "-v", "-t", f"{session()}:", "@orchestra_pane", check=False)
+
+
+def pane_alive(pane: str) -> bool:
+    return bool(pane) and pane in run("tmux", "list-panes", "-a", "-F", "#{pane_id}").split()
+
+
+def window_option(task_id: str, name: str, value: str | None = None) -> str:
+    """Runtime flags live on the worker's tmux window, never in the journal."""
+    target = f"{session()}:w:{task_id}"
+    if value is None:
+        return run("tmux", "show-options", "-wqv", "-t", target, f"@{name}", check=False)
+    run("tmux", "set-option", "-w", "-t", target, f"@{name}", value)
+    return value
+
+
+def wait_tui_ready(pane: str, timeout: int = 90) -> bool:
+    """True once the agent has replaced the shell and its screen stopped changing."""
+    last = ""
+    for _ in range(timeout):
+        time.sleep(1)
+        if pane_command(pane) in SHELLS:
+            continue
+        current = screen(pane)
+        if current and current == last:
+            return True
+        last = current
+    return False
+
+
+# ─── prompts ─────────────────────────────────────────────────────────────────
+
+
+def worker_prompt(task: Task) -> str:
+    return (
+        f"You are an orchestra worker for task '{task.id}'. Read {WORKER_PROTOCOL} and follow it "
+        f"exactly. Your brief is {task.rel}/brief.md; write your report to {task.rel}/report.md."
+    )
+
+
+def resume_prompt(task: Task) -> str:
+    return (
+        f"You are resuming orchestra task '{task.id}' after your previous window was lost. Read "
+        f"{WORKER_PROTOCOL} and {task.rel}/brief.md. If {task.rel}/report.md exists it is "
+        f"partial: continue it."
+    )
+
+
+def launch(task: Task, command: str, prompt: str, cwd: str, tui: bool) -> str:
+    pane = run(
+        "tmux", "new-window", "-d", "-P", "-F", "#{pane_id}",
+        "-t", f"{session()}:", "-n", f"w:{task.id}", "-c", cwd,
+    )
+    time.sleep(0.5)
+    (task.dir / "prompt.md").write_text(prompt + "\n")
+    if not tui:
+        type_into(pane, f"{command} \"$(cat '{task.dir / 'prompt.md'}')\"")
+        return pane
+    type_into(pane, command)
+    if not wait_tui_ready(pane):
+        raise OrchestraError(
+            f"agent TUI in w:{task.id} did not settle; type the prompt from {task.rel}/prompt.md by hand"
+        )
+    time.sleep(1)
+    type_into(pane, prompt)
+    return pane
+
+
+# ─── commands ────────────────────────────────────────────────────────────────
+
+
+def cmd_init(_: argparse.Namespace) -> None:
+    pane = os.environ.get("TMUX_PANE", "")
+    run("tmux", "set-option", "-t", f"{session()}:", "@orchestra_pane", pane)
+    print(f"orchestrator pane {pane} for session {session()}; tasks under journal/features/*/tasks/")
+
+
+def cmd_new(args: argparse.Namespace) -> None:
+    check_id(args.task)
+    if not (FEATURES / args.feature / "plan.md").exists():
+        raise OrchestraError(f"no feature journal/features/{args.feature}/")
+    if any(task.id == args.task for task in all_tasks()):
+        raise OrchestraError(f"task id {args.task!r} already exists")
+    task = Task(FEATURES / args.feature / "tasks" / args.task)
+    task.dir.mkdir(parents=True)
+    task.update(status="draft")
+    print(task.dir)
+
+
+def cmd_path(args: argparse.Namespace) -> None:
+    print(find_task(args.task).dir)
+
+
+def cmd_spawn(args: argparse.Namespace) -> None:
+    task = find_task(args.task)
+    if not (task.dir / "brief.md").exists():
+        raise OrchestraError(f"write {task.rel}/brief.md before spawning")
+    if pane_of(task.id):
+        raise OrchestraError(f"task {task.id} already has a live window w:{task.id}")
+    cwd = str(Path(args.cwd or ROOT).resolve())
+    if not Path(cwd).is_dir():
+        raise OrchestraError(f"cwd does not exist: {cwd}")
+    command = args.cmd or AGENTS.get(args.agent, args.agent)
+    task.update(
+        status="running", agent=args.agent, command=command, cwd=cwd,
+        started=now(), finished="", reported="",
+    )
+    launch(task, command, worker_prompt(task), cwd, tui=not args.arg)
+    print(f"spawned {task.id} ({command}) in window w:{task.id}")
+
+
+def cmd_send(args: argparse.Namespace) -> None:
+    task = find_task(args.task)
+    pane = pane_of(task.id)
+    if not pane:
+        raise OrchestraError(f"task {task.id} has no live window")
+    message = " ".join(args.message)
+    type_into(pane, message)
+    if task.status != "running":
+        task.update(status="running", finished="", reported="")
+
+
+def cmd_peek(args: argparse.Namespace) -> None:
+    pane = pane_of(args.task)
+    if not pane:
+        raise OrchestraError(f"task {args.task} has no live window")
+    print(screen(pane, args.lines))
+
+
+def cmd_status(_: argparse.Namespace) -> None:
+    live = windows()
+    print(f"{'TASK':<26} {'STATUS':<9} {'LIVE':<5} {'AGENT':<22} FEATURE")
+    for task in all_tasks():
+        print(
+            f"{task.id:<26} {task.status:<9} {'yes' if task.id in live else 'no':<5} "
+            f"{task.get('agent'):<22} {task.feature}"
+        )
+    orphans = sorted(set(live) - {task.id for task in all_tasks()})
+    for orphan in orphans:
+        print(f"{orphan:<26} {'orphan':<9} yes   (window w:{orphan} has no task record)")
+
+
+def reconcile(respawn: bool, quiet: bool = False) -> list[str]:
+    """Aligns task records with tmux. Returns human-readable changes."""
+    changes = []
+    live = windows()
+    for task in all_tasks():
+        if task.status in ACTIVE and task.id not in live:
+            if respawn and task.get("command"):
+                cwd = task.get("cwd") or str(ROOT)
+                task.update(status="running", started=now(), reported="")
+                launch(task, task.get("command"), resume_prompt(task), cwd, tui=True)
+                changes.append(f"{task.id}: window was gone — respawned with a resume prompt")
+            else:
+                task.update(status="lost")
+                changes.append(f"{task.id}: window is gone — marked lost (reconcile --respawn relaunches)")
+        elif task.status == "lost" and task.id in live:
+            task.update(status="running", reported="")
+            changes.append(f"{task.id}: window is back — marked running")
+    if not quiet:
+        for change in changes or ["records and windows agree"]:
+            print(change)
+    return changes
+
+
+def cmd_reconcile(args: argparse.Namespace) -> None:
+    reconcile(args.respawn)
+
+
+def cmd_watch(args: argparse.Namespace) -> None:
+    """Blocks until something needs the orchestrator, prints it, and exits.
+
+    The orchestrator finds out; workers never message it. Events come from the task records
+    (done, blocked, failed), from tmux (lost: window gone) and from the screens
+    (idle: an active worker's screen unchanged for `--idle` polls without a status change).
+    Each event is reported once — re-run to re-arm. `--follow` keeps running and prints one line
+    per event (for a streaming monitor) until no task is active. Exit 2 on timeout.
+    """
+    deadline = time.monotonic() + args.timeout if args.timeout else None
+    history: dict[str, list[str]] = {}
+    while True:
+        reconcile(respawn=False, quiet=True)
+        tasks = [task for task in all_tasks() if not args.tasks or task.id in args.tasks]
+        events = []
+        for task in tasks:
+            if task.status in EVENTS and task.get("reported") != task.status:
+                detail = {
+                                        "lost": "window is gone — `orchestra reconcile --respawn`",
+                }.get(task.status, f"report: {task.rel}/report.md")
+                events.append((task, task.status, detail))
+                task.update(reported=task.status)
+                continue
+            pane = pane_of(task.id)
+            if task.status != "running" or not pane or pane_command(pane) in SHELLS:
+                history.pop(task.id, None)
+                continue
+            seen = history.setdefault(task.id, [])
+            seen.append(str(hash(screen(pane))))
+            del seen[: -args.idle]
+            if len(seen) == args.idle and len(set(seen)) == 1 and window_option(task.id, "orchestra_idle") != seen[0]:
+                window_option(task.id, "orchestra_idle", seen[0])
+                events.append((task, "idle", "screen unchanged and no `done` — `orchestra peek` it"))
+        for task, kind, detail in events:
+            print(f"{task.id} {kind}: {detail}", flush=True)
+        if events and not args.follow:
+            return
+        if not any(task.status in ACTIVE for task in tasks):
+            print("no running tasks", flush=True)
+            return
+        if deadline and time.monotonic() > deadline:
+            sys.exit(2)
+        time.sleep(args.interval)
+
+
+def cmd_close(args: argparse.Namespace) -> None:
+    task = find_task(args.task)
+    if pane_of(task.id):
+        run("tmux", "kill-window", "-t", f"{session()}:w:{task.id}")
+    print(f"closed {task.id}")
+
+
+def cmd_done(args: argparse.Namespace) -> None:
+    task = find_task(args.task)
+    if not (task.dir / "report.md").exists():
+        raise OrchestraError(f"write {task.rel}/report.md before `orchestra done`")
+    task.update(status=args.status, finished=now(), reported="")
+
+
+def parser() -> argparse.ArgumentParser:
+    root = argparse.ArgumentParser(prog="orchestra", description=__doc__,
+                                   formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = root.add_subparsers(dest="command", required=True)
+
+    sub.add_parser("init", help="register this pane as the session's orchestrator").set_defaults(fn=cmd_init)
+
+    p = sub.add_parser("new", help="create journal/features/<feature>/tasks/<task>/")
+    p.add_argument("feature")
+    p.add_argument("task")
+    p.set_defaults(fn=cmd_new)
+
+    p = sub.add_parser("path", help="print a task's folder")
+    p.add_argument("task")
+    p.set_defaults(fn=cmd_path)
+
+    p = sub.add_parser("spawn", help="open window w:<task> running an agent TUI and type the prompt")
+    p.add_argument("task")
+    p.add_argument("agent", help=f"one of {', '.join(sorted(AGENTS))}, or any command")
+    p.add_argument("--cwd", help="working directory (default: this checkout's root)")
+    p.add_argument("--cmd", help="exact launch command, e.g. 'claude --model claude-opus-5 --effort xhigh'")
+    p.add_argument("--arg", action="store_true", help="pass the prompt as a CLI argument instead of typing it")
+    p.set_defaults(fn=cmd_spawn)
+
+    p = sub.add_parser("send", help="assign follow-up work to a worker (sets it running again)")
+    p.add_argument("task")
+    p.add_argument("message", nargs="+")
+    p.set_defaults(fn=cmd_send)
+
+    p = sub.add_parser("peek", help="print the tail of a worker's screen")
+    p.add_argument("task")
+    p.add_argument("lines", nargs="?", type=int, default=40)
+    p.set_defaults(fn=cmd_peek)
+
+    sub.add_parser("status", help="tasks in this checkout and their windows").set_defaults(fn=cmd_status)
+
+    p = sub.add_parser("reconcile", help="align task records with tmux windows")
+    p.add_argument("--respawn", action="store_true", help="relaunch lost workers with a resume prompt")
+    p.set_defaults(fn=cmd_reconcile)
+
+    p = sub.add_parser("watch", help="block until an unreported event (re-run to re-arm)")
+    p.add_argument("tasks", nargs="*")
+    p.add_argument("--timeout", type=int, default=0, help="seconds; exit 2 when reached")
+    p.add_argument("--interval", type=int, default=10)
+    p.add_argument("--idle", type=int, default=3, help="polls with an unchanged screen before `idle`")
+    p.add_argument("--follow", action="store_true", help="keep running; one line per event (for Monitor)")
+    p.set_defaults(fn=cmd_watch)
+
+    p = sub.add_parser("close", help="kill a worker's window")
+    p.add_argument("task")
+    p.set_defaults(fn=cmd_close)
+
+    p = sub.add_parser("done", help="worker: finish after writing report.md")
+    p.add_argument("task")
+    p.add_argument("status", nargs="?", default="done", choices=("done", "blocked", "failed"))
+    p.set_defaults(fn=cmd_done)
+
+    return root
+
+
+def main() -> None:
+    args = parser().parse_args()
+    try:
+        args.fn(args)
+    except OrchestraError as error:
+        print(f"orchestra: {error}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,36 +1,34 @@
 ---
 name: journal-start
-description: Start optional scratchpad notes for an unclear task. Creates journal/scratchpad/<name>/notes.md. Use /journal-graduate directly when the plan is already clear.
+description: Capture an idea into the roadmap (inbox line or item), or start optional scratchpad notes for an unclear task. Use /journal-graduate directly when the plan is already clear.
 user-invocable: true
-argument-hint: [experiment-name]
+argument-hint: [name or idea]
 ---
 
 # Journal Start
 
-You are starting a working journal named: "$ARGUMENTS"
-
-The layout contract is `journal/SPEC.md` — read it if you haven't this session.
+Starting: "$ARGUMENTS". Layout contract: `journal/SPEC.md` (read it if you haven't this session).
 
 ## Steps
 
-1. **Check for existing work:**
-   - `journal/features/$ARGUMENTS/` exists → a feature already exists. Read its `plan.md` +
-     `implementation.toml` and continue there.
-   - Grep `journal/_index.md` for the name or topic → an existing context entry may cover this.
-   - `journal/scratchpad/$ARGUMENTS/` exists → ongoing provisional work; read `notes.md`.
+1. **Check for existing work**
+   - `journal/features/<name>/` exists → continue there (`/remember <name>`).
+   - Grep `journal/roadmap/items/` and `journal/roadmap/inbox.md` for the topic → an item may
+     already hold this intent; extend it instead of duplicating.
+   - `journal/scratchpad/<name>/` exists → read `notes.md` and continue.
 
-2. **Choose the entry path:**
-   - If objectives, phases, and acceptance criteria are already concrete → run
-     `/journal-graduate $ARGUMENTS` directly. Do not create a scratchpad.
-   - Otherwise create `journal/scratchpad/$ARGUMENTS/notes.md` with a 2–3 line statement of
-     what is being explored and why. Optional `research/` subfolder for findings.
+2. **Choose the path**
+   - **A vague idea to keep** → append `- YYYY-MM-DD <idea>` to `journal/roadmap/inbox.md`.
+   - **An idea worth shaping** → create `journal/roadmap/items/R###-<slug>.md` per SPEC
+     (next free ID, `state: idea`, `origin: ["conversation YYYY-MM-DD"]`, `## Idea`). Add
+     `depends-on` / `converges-with` edges to related items.
+   - **Exploratory work session** → `journal/scratchpad/<name>/notes.md` with 2–3 lines on
+     what is being explored and why (git-ignored, provisional).
+   - **Objectives, phases and acceptance criteria already concrete** → `/journal-graduate`.
 
-3. **Tell the user** the scratchpad is provisional. When the plan is concrete, run
-   `/journal-graduate $ARGUMENTS` to create the canonical feature entry.
+3. Run `pnpm journal build && pnpm journal check` after touching roadmap files.
 
 ## Rules
 
-- Scratchpad content is not project truth — it becomes truth after graduation.
-- Do NOT start a journal for bug-fix sessions (tracked via commits).
-- Existing context entries in `journal/<name>/` are reference material with the old format
-  (decisions.md, wikilinks). Features under `journal/features/` use the new strict schema.
+- Roadmap and scratchpad content is intent, not truth. Truth lives in `journal/domains/`.
+- Do not start a journal entry for bug-fix sessions (tracked via commits).

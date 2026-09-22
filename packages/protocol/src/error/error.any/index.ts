@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C012
 import { z } from "zod";
 import ErrorUnknown from "../error.unknown/index.ts";
 import ErrorConfigInvalid from "../error.config.invalid/index.ts";

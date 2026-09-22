@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C006
 import { EventTypeEnum } from "./event.type.enum/index.ts";
 import UserMessageSubmitted from "./user.message.submitted/index.ts";
 import MessageStarted from "./message.started/index.ts";

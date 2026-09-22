@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core#^C002
 import daemonRouter from "./daemon.router/index.ts";
 import createDaemonServer from "./server/index.ts";
 import createDaemonCaller from "./daemon.caller/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C023
 import { streamText, type LanguageModel } from "ai";
 import type { ProviderOptions } from "#provider/build.provider.options";
 

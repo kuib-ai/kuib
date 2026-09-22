@@ -1,4 +1,4 @@
-// @context @journal/infrastructure-strategy
+// @context @journal/domains/core#^C015
 import { z } from "zod";
 import { EndpointKindEnum } from "../endpoint.kind.enum/index.ts";
 

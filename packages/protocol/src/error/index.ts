@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C012
 import { ErrorCodeEnum } from "./error.code.enum/index.ts";
 import ErrorBase from "./error.base/index.ts";
 import ErrorUnknown from "./error.unknown/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/house-style-linting
+// @context @journal/domains/infra#^C021
 import type { AnyError } from "@kuib-ai/protocol/error/error.any";
 
 type Result<T, E = AnyError> = [E, null] | [null, T];

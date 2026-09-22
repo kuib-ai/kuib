@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import net from "node:net";

@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C002
 import createDaemonClient from "./transport.factory/index.ts";
 
 const DaemonClient = {

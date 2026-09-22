@@ -1,0 +1,46 @@
+entry = "nvim-integration"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R308"]
+
+[[section]]
+file = "decisions.md"
+heading = "Stance for v1"
+to = ["R308"]
+
+[[section]]
+file = "decisions.md"
+heading = "Attach vs Embed"
+to = ["R308"]
+
+[[section]]
+file = "decisions.md"
+heading = "Poll vs Push"
+to = ["R308"]
+
+[[section]]
+file = "decisions.md"
+heading = "NvimBridge Pattern"
+to = ["R308"]
+
+[[section]]
+file = "decisions.md"
+heading = "Ranked Reference Projects"
+to = ["R308"]
+
+[[section]]
+file = "decisions.md"
+heading = "Quickfix as Blast Index"
+to = ["R308"]
+
+[[section]]
+file = "decisions.md"
+heading = "Fork Escape Hatch"
+to = ["R308"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R308", "R305"]

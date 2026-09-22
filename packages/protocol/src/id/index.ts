@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C004
 import SessionID from "./session.id/index.ts";
 import MessageID from "./message.id/index.ts";
 import PartID from "./part.id/index.ts";

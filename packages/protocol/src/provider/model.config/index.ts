@@ -1,4 +1,4 @@
-// @context @journal/provider-architecture
+// @context @journal/domains/core#^C017
 import { z } from "zod";
 
 const ModelConfig = z.object({

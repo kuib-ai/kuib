@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C011
 import { z } from "zod";
 
 const TokenUsage = z.object({

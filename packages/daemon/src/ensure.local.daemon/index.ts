@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core#^C040
 import Config from "@kuib-ai/config";
 import Protocol from "@kuib-ai/protocol";
 import type { AnyEndpoint } from "@kuib-ai/protocol/endpoint/endpoint.any";

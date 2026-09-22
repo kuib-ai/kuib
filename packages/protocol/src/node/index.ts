@@ -1,4 +1,4 @@
-// @context @journal/distributed-mesh-state
+// @context @journal/domains/core#^C015
 import NodeDescriptor from "./node.descriptor/index.ts";
 
 const Node = {

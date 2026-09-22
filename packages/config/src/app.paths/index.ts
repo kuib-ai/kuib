@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra#^C017
 import { z } from "zod";
 
 const AppPaths = z.object({

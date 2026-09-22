@@ -1,4 +1,4 @@
-// @context @journal/distributed-mesh-state
+// @context @journal/domains/core#^C048
 import type { NodeID } from "@kuib-ai/protocol/id/node.id";
 import type { NodeDescriptor } from "@kuib-ai/protocol/node/node.descriptor";
 import type { DiscoveryPort } from "@kuib-ai/protocol/discovery.port";

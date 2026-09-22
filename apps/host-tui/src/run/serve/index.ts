@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/host#^C008
 
 import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";

@@ -1,4 +1,4 @@
-// @context @journal/provider-architecture
+// @context @journal/domains/core#^C030
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGroq } from "@ai-sdk/groq";

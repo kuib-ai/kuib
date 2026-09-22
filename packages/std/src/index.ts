@@ -1,4 +1,4 @@
-// @context @journal/house-style-linting
+// @context @journal/domains/infra
 import withError from "./with.error/index.ts";
 import mapError from "./map.error/index.ts";
 import isErr from "./is.err/index.ts";

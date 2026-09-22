@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C009
 import { z } from "zod";
 import { ToolCallStatusEnum } from "../tool.call.status.enum/index.ts";
 import { ToolCallKindEnum } from "../tool.call.kind.enum/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C008
 import { z } from "zod";
 import PartAssistant from "../part.assistant/index.ts";
 import PartUser from "../part.user/index.ts";

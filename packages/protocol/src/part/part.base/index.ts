@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C008
 import { z } from "zod";
 import PartID from "../../id/part.id/index.ts";
 

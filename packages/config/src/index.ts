@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview @journal/application-directories
+// @context @journal/domains/infra
 import AppPaths from "./app.paths/index.ts";
 import KuibConfig from "./kuib.config/index.ts";
 import bootstrapConfig from "./bootstrap.config/index.ts";

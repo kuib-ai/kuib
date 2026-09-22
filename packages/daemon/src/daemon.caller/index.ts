@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C036
 import Trpc from "../trpc/index.ts";
 import daemonRouter from "../daemon.router/index.ts";
 

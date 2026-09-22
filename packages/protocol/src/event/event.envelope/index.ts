@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C007
 import { z } from "zod";
 import AnyEvent from "../event.any/index.ts";
 import SessionID from "../../id/session.id/index.ts";

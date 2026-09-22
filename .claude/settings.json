@@ -9,35 +9,12 @@
   "hooks": {
     "SessionStart": [
       {
-        "matcher": "startup|resume",
+        "matcher": "startup|resume|clear|compact",
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/check-journal-index.sh",
-            "args": [],
+            "command": "${CLAUDE_PROJECT_DIR}/.agents/hooks/journal-context claude",
             "timeout": 30
-          }
-        ]
-      },
-      {
-        "matcher": "compact",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/post-compact-reminder.sh",
-            "args": []
-          }
-        ]
-      }
-    ],
-    "PostCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/rebuild-journal-index.sh",
-            "args": [],
-            "timeout": 60
           }
         ]
       }

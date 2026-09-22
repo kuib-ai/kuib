@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C010
 import { z } from "zod";
 import MessageID from "../../id/message.id/index.ts";
 import SessionID from "../../id/session.id/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/observability
+// @context @journal/domains/infra#^C021
 import type { AnyError } from "@kuib-ai/protocol/error/error.any";
 import mapError from "../map.error/index.ts";
 

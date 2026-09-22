@@ -1,4 +1,4 @@
-// @context @journal/distributed-mesh-state
+// @context @journal/domains/core#^C002
 import MeshConfig from "./mesh.config/index.ts";
 import loadMeshConfig from "./load.mesh.config/index.ts";
 import createStaticDiscovery from "./static.discovery/index.ts";

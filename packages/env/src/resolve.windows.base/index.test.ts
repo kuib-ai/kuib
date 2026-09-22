@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import { homedir, tmpdir } from "node:os";

@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C006
 import { z } from "zod";
 import { EventTypeEnum } from "../event.type.enum/index.ts";
 import { StepBoundaryStopReasonEnum } from "../../part/step.boundary.stop.reason.enum/index.ts";

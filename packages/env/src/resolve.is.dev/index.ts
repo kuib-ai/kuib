@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra#^C012
 import ResolveDirsOptions from "../resolve.dirs.options/index.ts";
 import type { ResolveDirsOptions as ResolveDirsOptionsType } from "../resolve.dirs.options/index.ts";
 import isProduction from "../is.production/index.ts";

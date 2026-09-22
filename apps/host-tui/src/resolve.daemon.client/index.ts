@@ -1,4 +1,4 @@
-// @context @journal/distributed-mesh-state
+// @context @journal/domains/host#^C010
 import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
 import Daemon from "@kuib-ai/daemon";

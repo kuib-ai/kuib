@@ -19,6 +19,11 @@ const setup = function (): void {
     "# entry\n{{FEATURE_NAME}} still a placeholder\n",
   );
   fs.writeFileSync(path.join(journal, "plain.md"), "# plain\nreal content\n");
+  fs.mkdirSync(path.join(journal, "domains", "core"), { recursive: true });
+  fs.writeFileSync(
+    path.join(journal, "domains", "core", "current.md"),
+    "# Core\n\nThe engine runs the loop. ^C001\n",
+  );
   fs.mkdirSync(path.join(root, "src"), { recursive: true });
 };
 
@@ -34,6 +39,14 @@ ruleTester.run("require-context-link", rule, {
       code: "// @context @journal/plain\nconst x = 1;\n",
       filename,
     },
+    {
+      code: "// @context @journal/domains/core\nconst x = 1;\n",
+      filename,
+    },
+    {
+      code: "// @context @journal/domains/core#^C001\nconst x = 1;\n",
+      filename,
+    },
   ],
   invalid: [
     {
@@ -45,6 +58,11 @@ ruleTester.run("require-context-link", rule, {
       code: "// @context @journal/nope\nconst x = 1;\n",
       filename,
       errors: [{ messageId: "deadContextLink" }],
+    },
+    {
+      code: "// @context @journal/domains/core#^C999\nconst x = 1;\n",
+      filename,
+      errors: [{ messageId: "deadContextAnchor" }],
     },
     {
       code: "// @context @journal/entry\nconst x = 1;\n",

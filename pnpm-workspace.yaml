@@ -3,6 +3,7 @@ packages:
   - packages/*
 
 allowBuilds:
+  deno: true
   nx: true
 
 catalogMode: strict
@@ -26,6 +27,7 @@ catalogs:
     prettier: ^3.9.6
     typescript: ~6.0.3
     "@typescript/native-preview": 7.0.0-dev.20260707.2
+    deno: 2.9.6
     "@std/testing": jsr:^1.0.20
     "@std/expect": jsr:^1.0.20
     "@std/toml": jsr:^1.0.11

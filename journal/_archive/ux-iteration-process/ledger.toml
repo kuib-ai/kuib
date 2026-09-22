@@ -1,0 +1,45 @@
+entry = "ux-iteration-process"
+
+[[section]]
+file = "decisions.md"
+heading = "Wireframes are first-class journal nodes"
+to = ["spec"]
+
+[[section]]
+file = "decisions.md"
+heading = "Screen-level ONLY"
+to = ["spec"]
+
+[[section]]
+file = "decisions.md"
+heading = "Location"
+to = ["spec"]
+note = "locations now roadmap/wireframes and domains/<domain>/wireframes"
+
+[[section]]
+file = "decisions.md"
+heading = "File format"
+to = ["spec"]
+
+[[section]]
+file = "decisions.md"
+heading = "Lifecycle (the binding rules)"
+to = ["spec", "R311"]
+note = "as-built snapshot loop is R311"
+
+[[section]]
+file = "decisions.md"
+heading = "The iteration loop"
+to = ["R311", "host#D008"]
+
+[[section]]
+file = "decisions.md"
+heading = "Tooling decisions"
+to = ["R311", "infra#C029", "infra#D022"]
+note = "OpenTUI-specific tooling (anscribe, testRender, apps/wireframes) dropped"
+
+[[section]]
+file = "decisions.md"
+heading = "Not process"
+to = ["dropped"]
+note = "scope note only"

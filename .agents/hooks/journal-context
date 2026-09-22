@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Session hook shared by every agent tool: injects the features in flight (journal brief),
+# with a warning when `pnpm journal check` fails.
+# Usage: journal-context <claude|gemini|cursor> [session-start|pre-compact]
+#   claude, gemini  SessionStart JSON (hookSpecificOutput.additionalContext)
+#   cursor          sessionStart JSON (additional_context); pre-compact → user_message
+# Wired up by scripts/agents.ts sync; do not edit the per-tool configs by hand.
+set -euo pipefail
+
+format="${1:?format: claude|gemini|cursor}"
+event="${2:-session-start}"
+
+root="${CLAUDE_PROJECT_DIR:-${GEMINI_PROJECT_DIR:-${CURSOR_PROJECT_DIR:-}}}"
+[ -n "$root" ] || root=$(git rev-parse --show-toplevel)
+cd "$root"
+
+# Cursor also runs Claude's hooks; its own sessionStart hook covers it.
+if [ "$format" = "claude" ] && [ -n "${CURSOR_PROJECT_DIR:-}" ]; then
+  exit 0
+fi
+
+if [ "$format" = "cursor" ] && [ "$event" = "pre-compact" ]; then
+  printf '%s\n' '{"user_message":"Context is about to be compacted. Afterwards, run /remember <feature-name> to reload the feature plan and its domain context."}'
+  exit 0
+fi
+
+deno="./node_modules/.bin/deno"
+failing=()
+if ! "$deno" run -A scripts/journal.ts check >/dev/null 2>&1; then
+  failing=(--failing)
+fi
+exec "$deno" run -A scripts/journal.ts brief --hook "$format" ${failing[@]+"${failing[@]}"}

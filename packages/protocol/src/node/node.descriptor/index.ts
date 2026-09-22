@@ -1,4 +1,4 @@
-// @context @journal/distributed-mesh-state
+// @context @journal/domains/core#^C015
 import { z } from "zod";
 import NodeID from "../../id/node.id/index.ts";
 import AnyEndpoint from "../../endpoint/endpoint.any/index.ts";

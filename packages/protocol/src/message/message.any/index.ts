@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C010
 import { z } from "zod";
 import MessageUser from "../message.user/index.ts";
 import MessageAssistant from "../message.assistant/index.ts";

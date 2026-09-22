@@ -1,1 +1,0 @@
-- [Vim-native workflow](user_vim_workflow.md) — modal editing, fzf, leader keys; wants kuib TUI to mirror vim grammar

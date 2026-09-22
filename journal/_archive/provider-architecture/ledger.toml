@@ -1,0 +1,75 @@
+entry = "provider-architecture"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["core#D020"]
+note = "container heading; children mapped individually"
+
+[[section]]
+file = "decisions.md"
+heading = "Plugin-Based Providers"
+to = ["R216"]
+
+[[section]]
+file = "decisions.md"
+heading = "LLM Client Layer"
+to = ["core#D020", "core#C030"]
+note = "'engine never calls the SDK directly' adapter layering was not kept: the engine owns the AI SDK calls"
+
+[[section]]
+file = "decisions.md"
+heading = "Auth Models"
+to = ["R216"]
+
+[[section]]
+file = "decisions.md"
+heading = "Resolved (by [[protocol-design]])"
+to = ["core#D020", "dropped"]
+note = "own LanguageModel interface and 'engine never imports the AI SDK' contradicted by code"
+
+[[section]]
+file = "decisions.md"
+heading = "v1 provider = OpenAI-compatible client, config-driven via env (2026-07-01)"
+to = ["core#D021", "core#C029", "infra#C011", "infra#C015"]
+note = "env variable names and minerva host details are history"
+
+[[section]]
+file = "decisions.md"
+heading = "Provider contract v2 — flat config + factory map, NOT a discriminated union (2026-07-02)"
+to = ["core#D022", "core#C017", "core#C029", "core#C030", "R216", "R219"]
+
+[[section]]
+file = "decisions.md"
+heading = "Meta Model API = a provider ID, not a new npm package (2026-08-12)"
+to = ["core#D023", "core#C029", "R216"]
+
+[[section]]
+file = "decisions.md"
+heading = "Per-request provider options are a second axis, separate from client options (2026-08-12)"
+to = ["core#D024", "core#C031", "R219"]
+
+[[section]]
+file = "decisions.md"
+heading = "Meta caching is automatic; reasoning is not visible (2026-08-12)"
+to = ["core#D011", "core#C028", "R216"]
+
+[[section]]
+file = "decisions.md"
+heading = "MiMo (Xiaomi) — the first provider that actually streams plaintext reasoning (2026-08-12)"
+to = ["core#D023", "core#C029", "R216"]
+
+[[section]]
+file = "decisions.md"
+heading = "Agent loop is unguarded — `stopWhen` removed (2026-08-12)"
+to = ["core#D025", "core#C026", "core#C025"]
+
+[[section]]
+file = "decisions.md"
+heading = "Live provider tests are opt-in (2026-08-12)"
+to = ["core#D026", "core#C032"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R216"]

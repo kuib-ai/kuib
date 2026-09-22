@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C036
 import { initTRPC } from "@trpc/server";
 
 const t = initTRPC.create();

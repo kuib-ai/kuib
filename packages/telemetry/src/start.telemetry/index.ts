@@ -1,4 +1,4 @@
-// @context @journal/observability
+// @context @journal/domains/infra#^C022
 import { registerTelemetry } from "ai";
 import { OpenTelemetry } from "@ai-sdk/otel";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";

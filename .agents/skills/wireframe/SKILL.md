@@ -9,22 +9,23 @@ You are designing or editing a **screen wireframe** — the motivation + intende
 
 ## 1. Load context (always, in this order)
 
-1. Read `journal/ux-iteration-process/decisions.md` — the full wireframe conventions (file format, lifecycle, screen-level rule). This is the contract; do not improvise around it.
-2. Sketch in cell-grid terms (boxes, text runs, scroll regions, lists, inputs). Screens render through kuib's own terminal UI library (see `journal/features/deno-runtime/plan.md` D005); do not assume any third-party component set.
-3. Load the current state of the codebase:
-   - `journal/_index.md` — which entries exist, which wireframes exist and their statuses (lines like `[[<entry>/wireframes/<screen>]] | wireframe:<status>`).
-   - List all wireframe files: `find journal -path '*/wireframes/*.md'`. Read any that relate to the screen being worked on.
-   - If the target screen has an `implements:` path, read that component source — the wireframe must not contradict as-built truth without an explicit supersede decision.
-   - Read `journal/host-layer/decisions.md` sections "TUI structure" (routes/dialogs enumerate the screens) and "v1 Frontend" (pane layout direction).
+1. Read `journal/SPEC.md` → "Wireframes" — the contract (file format, lifecycle, screen-level rule). Do not improvise around it.
+2. Sketch in cell-grid terms (boxes, text runs, scroll regions, lists, inputs). Screens render through kuib's own terminal UI library (roadmap item for it: grep `journal/roadmap/items/` for "TUI library"); do not assume any third-party component set.
+3. Load the current state:
+   - `find journal/roadmap/wireframes journal/domains/*/wireframes -name '*.md'` — every screen and its status. Read any that relate to the screen being worked on.
+   - `journal/domains/host/current.md` — what the host actually renders today.
+   - The roadmap item(s) that link the screen — its intent, constraints and open questions.
+   - If the target screen has an `implements:` path, read that source — the wireframe must not contradict as-built truth without an explicit supersede decision.
 
 ## 2. Decide where the wireframe lives
 
-- One file per **screen** (a route or a dialog): `journal/<entry>/wireframes/<screen>.md`. Screen-level ONLY — components never get their own wireframes; a screen's runtime **states** are frames inside its single file.
-- The screen belongs to the feature entry that owns its UX; global chrome belongs to `host-layer`. New feature without an entry → `/journal-start` it first.
+- One file per **screen** (a route or a dialog). Screen-level ONLY — components never get their own wireframes; a screen's runtime **states** are frames inside its single file.
+- `exploring` → `journal/roadmap/wireframes/<screen>.md`, linked from the roadmap item that wants the screen (`## Idea` or `## Open questions`).
+- `adopted` → move it to `journal/domains/host/wireframes/<screen>.md` and record the adoption as a host decision.
 
 ## 3. Draw
 
-- Frontmatter is validated by `scripts/compile-journal-index.ts`: `screen` (must equal filename), `kind: route | dialog`, `status: exploring | adopted | superseded`, `sizes: [80x24, ...]`, `implements: []`, `superseded-by` only when superseded.
+- Frontmatter is validated by `scripts/journal.ts`: `screen` (must equal filename), `kind: route | dialog`, `status: exploring | adopted | superseded`, `sizes: [80x24, ...]`, `implements: []`, `superseded-by` only when superseded.
 - Start with a `## Motivation` section: why the screen exists, what the user is doing there, what it must never obscure. This is the part future iterations read first.
 - Frames go in fenced code blocks at the declared sizes. Box-drawing borders mark the terminal edge. Annotate with circled markers (①②③); the legend lives BELOW the frame, never inside it.
 - While exploring: `## Variant <X> — <name>` sections, one frame each, a one-line **Verdict** on every loser (keep losers — they are the archaeology).
@@ -32,8 +33,8 @@ You are designing or editing a **screen wireframe** — the motivation + intende
 
 ## 4. Validate and hand off
 
-1. Run `deno run -A scripts/compile-journal-index.ts` — must pass with zero new warnings (it validates frontmatter and rebuilds the index).
-2. When a variant is adopted or a screen supersedes, record the decision + wikilink in the owning entry's `decisions.md`.
+1. Run `pnpm journal build && pnpm journal check` — zero errors (it validates wireframe frontmatter and placement, and rebuilds the index).
+2. When a variant is adopted or a screen supersedes, record the decision in `journal/domains/host/decisions.md` (if built) or the roadmap item's `## Constraints already decided` (if not), with a wikilink to the wireframe.
 
 ## Rules that override everything
 

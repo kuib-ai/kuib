@@ -3,12 +3,12 @@ state = "implementing"
 current_phase = "P01"
 
 [checkpoint]
-summary = "P01 code complete. Renamed to services/stt-coreml. Swift 6.0 (toolchain 6.3.3 on minerva), SwiftNIO for socket server, Nx project.json wired. All P01 items done. Shifting to minerva for first build + FluidAudio version verification."
-next = ["swift build on minerva — verify FluidAudio resolves", "Test transcription end-to-end", "P02-I01"]
+summary = "P01 code complete. Renamed to services/stt-coreml. Swift 6.0 (toolchain 6.3.3 on minerva), SwiftNIO for socket server, Nx project.json wired. All P01 items done. Shifting to minerva for first build + FluidAudio version verification. Before P02: swift build on minerva (verify FluidAudio resolves), then test transcription end-to-end; P01 items move to verified after that."
+next = ["P02-I01"]
 blockers = []
 
 [phases.P01]
-state = "in_progress"
+state = "implemented"
 
 [phases.P02]
 state = "planned"
@@ -20,22 +20,31 @@ state = "planned"
 state = "planned"
 
 [items."P01-I01"]
-state = "done"
+state = "implemented"
 decisions = ["D001", "D002", "D003", "D005"]
 addresses = ["G001"]
-refs = ["services/stt-coreml/Package.swift", "services/stt-coreml/Sources/SttCoreML/ParakeetBackend.swift"]
+refs = [
+    { path = "services/stt-coreml/Package.swift", role = "Package.swift" },
+    { path = "services/stt-coreml/Sources/SttCoreML/ParakeetBackend.swift", role = "ParakeetBackend.swift" },
+]
 
 [items."P01-I02"]
-state = "done"
+state = "implemented"
 decisions = ["D004"]
 addresses = []
-refs = ["services/stt-coreml/Sources/SttCoreML/Server.swift", "services/stt-coreml/Sources/SttCoreML/Protocol.swift", "services/stt-coreml/Sources/SttCoreML/Main.swift"]
+refs = [
+    { path = "services/stt-coreml/Sources/SttCoreML/Server.swift", role = "Server.swift" },
+    { path = "services/stt-coreml/Sources/SttCoreML/Protocol.swift", role = "Protocol.swift" },
+    { path = "services/stt-coreml/Sources/SttCoreML/Main.swift", role = "Main.swift" },
+]
 
 [items."P01-I03"]
-state = "done"
+state = "implemented"
 decisions = ["D006"]
 addresses = []
-refs = ["services/stt-coreml/Sources/SttCoreML/SttBackend.swift"]
+refs = [
+    { path = "services/stt-coreml/Sources/SttCoreML/SttBackend.swift", role = "SttBackend.swift" },
+]
 
 [items."P02-I01"]
 state = "planned"

@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/host#^C012
 export type CliOption = {
   type: "string" | "boolean";
   short?: string;

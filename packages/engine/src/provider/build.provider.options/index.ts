@@ -1,4 +1,4 @@
-// @context @journal/provider-architecture
+// @context @journal/domains/core#^C031
 import type { streamText } from "ai";
 import type { ModelConfig } from "@kuib-ai/protocol/provider/model.config";
 

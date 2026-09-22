@@ -1,4 +1,4 @@
-// @context @journal/observability
+// @context @journal/domains/infra#^C019
 type LogBindings = Record<string, unknown>;
 
 type LogFn = {

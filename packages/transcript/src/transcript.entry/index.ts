@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core#^C046
 import { TranscriptRoleEnum } from "../transcript.role.enum/index.ts";
 
 type TranscriptEntry = {

@@ -1,0 +1,53 @@
+entry = "security-model"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R403"]
+
+[[section]]
+file = "decisions.md"
+heading = "Command Approval Flow"
+to = ["R403"]
+
+[[section]]
+file = "decisions.md"
+heading = "Risk Tiering (Command Parser)"
+to = ["R403"]
+
+[[section]]
+file = "decisions.md"
+heading = "Shell AST Parsing"
+to = ["R403"]
+
+[[section]]
+file = "decisions.md"
+heading = "Security Profiles — Per-Device (User-Configurable)"
+to = ["R404", "infra#C016"]
+note = "Only the [security] profile config key is built; no gate reads it."
+
+[[section]]
+file = "decisions.md"
+heading = "Daemon Threat Model (2026-06-30)"
+to = ["R405", "R406", "R407"]
+
+[[section]]
+file = "decisions.md"
+heading = "Per-user daemon scoping & local auth (2026-07-01)"
+to = ["R402", "infra#C017"]
+
+[[section]]
+file = "decisions.md"
+heading = "Coordinator/DERP isolation (2026-07-01)"
+to = ["R400"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R403", "R404"]
+
+[[section]]
+file = "decisions.md"
+heading = "Web host auth — `kuib web` + code.kuib.ai (2026-07-01)"
+to = ["R408"]
+note = "The implementation was deleted with host-web in the deno-runtime migration; the design lives in R408."

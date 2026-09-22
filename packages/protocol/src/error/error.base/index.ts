@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C012
 import { z } from "zod";
 
 const ErrorBase = z.object({

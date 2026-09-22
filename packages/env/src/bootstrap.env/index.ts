@@ -1,4 +1,4 @@
-// @context @journal/provider-architecture
+// @context @journal/domains/infra#^C011
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { config as loadDotenv } from "dotenv";

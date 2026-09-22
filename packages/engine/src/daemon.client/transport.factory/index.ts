@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core#^C041
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import Protocol from "@kuib-ai/protocol";
 import type { DaemonRouter } from "@kuib-ai/daemon/daemon.router";

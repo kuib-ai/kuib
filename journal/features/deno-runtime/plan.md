@@ -11,6 +11,8 @@ topics:
   - tooling
 supersedes: []
 superseded-by: []
+roadmap: R002
+context: []
 ---
 
 # Plan — deno-runtime
@@ -300,10 +302,17 @@ rather than ported, so the new library starts from an empty `host-tui` view laye
 
 ### G006 — Pinning the Deno version across machines
 
-- Status: open
+- Status: resolved
 - Context: Bun was provisioned by pnpm (catalog-pinned, `node_modules/.bin`), so every mesh
   node ran the same runtime with no system install. Deno is currently a per-machine install
   (`~/.deno/bin`, 2.9.7) that each developer must put on `PATH`; nothing pins its version.
   `@kuib-ai/deno-types` keys its cache on `deno --version`, so drift regenerates types
   rather than breaking silently. Options not yet evaluated: a pnpm-provisioned Deno
   binary, or a version check in `check`.
+  Resolved (2026-09-22): `deno` is a root devDependency, catalog-pinned to `2.9.6` (the
+  newest on npm; GitHub's 2.9.7 is not yet published there) with `allowBuilds: deno: true`,
+  so `pnpm install` provisions it into `node_modules/.bin` like Bun was. pnpm and Nx
+  scripts resolve it from there; the journal hooks call `./node_modules/.bin/deno`.
+  Verified green with no global `deno` on `PATH`. Cost: the `.bin` shim starts Node to
+  launch the binary (~40 ms per dev command vs ~10 ms direct); kuib's runtime startup is
+  unaffected.

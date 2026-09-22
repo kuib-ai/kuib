@@ -1,0 +1,57 @@
+entry = "infrastructure-strategy"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R401"]
+
+[[section]]
+file = "decisions.md"
+heading = "Mesh Topology (3-Tier)"
+to = ["R401", "core#D014", "host#D001"]
+note = "Daemon-as-separate-process and engine-outside-UI are built; leader-elected engine and per-user mesh nodes are intent."
+
+[[section]]
+file = "decisions.md"
+heading = "Transport & RPC"
+to = ["core#D001", "core#D014", "core#C041", "R400"]
+note = "Zod-native tRPC over unix socket / TCP is built; the WireGuard/tailnet substrate is R400."
+
+[[section]]
+file = "decisions.md"
+heading = "Distributed Correctness"
+to = ["dropped"]
+note = "Pointer only; the consensus model content is mapped by the consensus-model ledger."
+
+[[section]]
+file = "decisions.md"
+heading = "Phasing (decided 2026-06-30)"
+to = ["R401", "R405"]
+note = "Single-device-first phasing and 'do not hand-roll consensus' kept as constraints in R401."
+
+[[section]]
+file = "decisions.md"
+heading = "Detailed build roadmap (2026-07-01)"
+to = ["core#D010", "core#D017", "host#D004", "feature:deno-runtime", "R406", "R407", "R400", "R401"]
+note = "Foundation, persistence, local lifecycle and multi-role entry are built; Bun compile and OpenTUI steps superseded by deno-runtime; context control is mapped by the discussions-ux/host ledgers."
+
+[[section]]
+file = "decisions.md"
+heading = "Network Substrate & Control Plane — self-hosted Headscale + DERP (2026-07-01)"
+to = ["R400"]
+
+[[section]]
+file = "decisions.md"
+heading = "Keep the substrate behind a contract — do NOT double down on Headscale (2026-07-01)"
+to = ["core#D028", "core#C013", "core#C015", "core#C048", "R400"]
+
+[[section]]
+file = "decisions.md"
+heading = "Build progress + revised seams (2026-07-01)"
+to = ["core#D015", "core#D017", "core#D007", "core#D011", "core#D022", "host#D001", "R403", "R401"]
+note = "Engine-service, terminal events, context assembly and provider seam are built; Bun/vitest counts and the host-tui OpenTUI view are superseded history; sessions/discussions/subagents UX are mapped by the host-layer and discussions-ux ledgers."
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R400", "R401"]

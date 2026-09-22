@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C009
 import { z } from "zod";
 import ToolCallPending from "../tool.call.pending/index.ts";
 import ToolCallCompleted from "../tool.call.completed/index.ts";

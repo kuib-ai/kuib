@@ -1,4 +1,4 @@
-// @context @journal/observability
+// @context @journal/domains/infra#^C019
 import type { Logger, LogBindings, LogFn } from "../logger.port/index.ts";
 
 const noop: LogFn = function () {};

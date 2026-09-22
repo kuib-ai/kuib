@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview @journal/provider-architecture
+// @context @journal/domains/infra#^C016
 import { z } from "zod";
 import Std from "@kuib-ai/std";
 

@@ -1,4 +1,4 @@
-// @context @journal/distributed-mesh-state
+// @context @journal/domains/core#^C047
 import { existsSync, readFileSync } from "node:fs";
 import { parse as parseToml } from "@std/toml";
 import MeshConfig from "../mesh.config/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/provider-architecture
+// @context @journal/domains/core#^C029
 import Protocol from "@kuib-ai/protocol";
 import type { ModelConfig } from "@kuib-ai/protocol/provider/model.config";
 

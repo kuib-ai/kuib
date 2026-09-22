@@ -1,4 +1,4 @@
-// @context @journal/tool-system
+// @context @journal/domains/core#^C013
 import type { ReadDirInput } from "../file.system/read.dir.input/index.ts";
 import type { ReadDirOutput } from "../file.system/read.dir.output/index.ts";
 import type { ReadFileInput } from "../file.system/read.file.input/index.ts";

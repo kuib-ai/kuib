@@ -3,7 +3,7 @@ state = "implementing"
 current_phase = "P05"
 
 [checkpoint]
-summary = "Switch landed: OpenTUI/Solid/Bun removed (apps/wireframes, apps/host-web, host-tui view layer, OpenTUI skill); Deno runs code and tests per project via Nx; tsgo type-checks every package against Nx-generated Deno types; node:sqlite, @std/toml, Deno.Command, Deno.createHttpClient replace Bun APIs; NodeNext enforces explicit .ts imports; root manifest guard in check. pnpm run check and nx run-many -t test green. Journal decisions superseded. Remaining: G003 closure notes, G006 Deno version pinning."
+summary = "Switch landed: OpenTUI/Solid/Bun removed (apps/wireframes, apps/host-web, host-tui view layer, OpenTUI skill); Deno runs code and tests per project via Nx; tsgo type-checks every package against Nx-generated Deno types; node:sqlite, @std/toml, Deno.Command, Deno.createHttpClient replace Bun APIs; NodeNext enforces explicit .ts imports; root manifest guard in check. pnpm run check and nx run-many -t test green. Journal decisions superseded. Deno is pnpm-provisioned (catalog deno 2.9.6, G006 resolved). Remaining: G003 closure notes."
 next = ["P05-I01"]
 blockers = []
 
@@ -146,7 +146,7 @@ addresses = []
 refs = [
     { path = "package.json", role = "root test/test:llm/reload on Deno" },
     { path = "packages/daemon/package.json", role = "deno run start" },
-    { path = "scripts/compile-journal-index.ts", role = "deno shebang, node: builtins" },
+    { path = "scripts/journal.ts", role = "deno shebang, node: builtins" },
 ]
 
 [items."P04-I02"]
@@ -170,10 +170,10 @@ state = "in_progress"
 decisions = ["D002", "D005", "D006"]
 addresses = []
 refs = [
-    { path = "journal/host-layer/decisions.md", role = "frontend + runtime superseded" },
-    { path = "journal/architecture-overview/decisions.md", role = "runtime/distribution superseded" },
-    { path = "journal/testing-strategy/decisions.md", role = "runner superseded" },
-    { path = "journal/host-layer/research/tui-framework.md", role = "superseded research" },
+    { path = "journal/_archive/host-layer/decisions.md", role = "frontend + runtime superseded" },
+    { path = "journal/_archive/architecture-overview/decisions.md", role = "runtime/distribution superseded" },
+    { path = "journal/_archive/testing-strategy/decisions.md", role = "runner superseded" },
+    { path = "journal/_archive/host-layer/research/tui-framework.md", role = "superseded research" },
     { path = ".agents/skills/wireframe/SKILL.md", role = "no opentui/bun/pnpm wireframes" },
-    { path = ".agents/rules/workflow.md", role = "no pnpm wireframes" },
+    { path = "AGENTS.md", role = "no pnpm wireframes (rules merged into AGENTS.md)" },
 ]

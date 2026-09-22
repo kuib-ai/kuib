@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C037
 import { z } from "zod";
 
 const WriteFileInput = z.object({

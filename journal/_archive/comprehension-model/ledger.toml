@@ -1,0 +1,51 @@
+entry = "comprehension-model"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R102"]
+
+[[section]]
+file = "decisions.md"
+heading = "Core Insight"
+to = ["R102"]
+
+[[section]]
+file = "decisions.md"
+heading = "Unified Event Stream"
+to = ["R102"]
+
+[[section]]
+file = "decisions.md"
+heading = "Hunk Primitive"
+to = ["R102"]
+
+[[section]]
+file = "decisions.md"
+heading = "Comprehension Surfaces (v1 target)"
+to = ["R102", "R101"]
+
+[[section]]
+file = "decisions.md"
+heading = "Intervention Ladder"
+to = ["R103"]
+
+[[section]]
+file = "decisions.md"
+heading = "Resurface and Sub-chats"
+to = ["R102"]
+
+[[section]]
+file = "decisions.md"
+heading = "Phaseless Workflow"
+to = ["R100"]
+
+[[section]]
+file = "decisions.md"
+heading = "Agent Is Not the Editor"
+to = ["R104"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R102"]

@@ -1,0 +1,32 @@
+entry = "context-engine"
+
+[[section]]
+file = "decisions.md"
+heading = "Goal"
+to = ["R209", "R210"]
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R209"]
+note = "container heading; children mapped individually"
+
+[[section]]
+file = "decisions.md"
+heading = "1. Editable AI & User Messages"
+to = ["R209"]
+
+[[section]]
+file = "decisions.md"
+heading = "2. Forking and Branching Conversations"
+to = ["R209"]
+
+[[section]]
+file = "decisions.md"
+heading = "3. Context Curations"
+to = ["R210", "core#C008"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions (To Brainstorm)"
+to = ["R209"]

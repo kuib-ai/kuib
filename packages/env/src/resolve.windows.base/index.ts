@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra#^C014
 import { homedir, tmpdir } from "node:os";
 import { join, win32 } from "node:path";
 import PathKind, { PathKindEnum } from "../path.kind/index.ts";

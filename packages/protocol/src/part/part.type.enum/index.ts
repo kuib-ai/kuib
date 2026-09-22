@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C005
 export enum PartTypeEnum {
   STEP_BOUNDARY = "step-boundary",
   TEXT = "text",

@@ -1,0 +1,391 @@
+entry = "protocol-design"
+
+# decisions.md
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["core#D001"]
+note = "container heading with no content of its own; children mapped individually"
+
+[[section]]
+file = "decisions.md"
+heading = "Package: `@kuib/protocol`"
+to = ["core#D001", "core#C018", "core#C036"]
+
+[[section]]
+file = "decisions.md"
+heading = "Tooling — tsgo only, no tsc"
+to = ["infra#D004", "infra#D008", "infra#C006", "infra#C007"]
+note = "tsgo -b emit/composite builds dropped: tsgo is --noEmit only and Deno runs source"
+
+[[section]]
+file = "decisions.md"
+heading = "TS 7.0 Compatibility"
+to = ["infra#C007"]
+
+[[section]]
+file = "decisions.md"
+heading = "Native TS Enums for All Discriminators"
+to = ["core#D002", "core#C005"]
+
+[[section]]
+file = "decisions.md"
+heading = "Architecture Pattern: Unified Event Log (2026-04-28)"
+to = ["core#D004", "core#C006", "R201"]
+
+[[section]]
+file = "decisions.md"
+heading = "Two Worlds: Events vs Messages"
+to = ["R200", "core#C019"]
+note = "'events are ephemeral' is contradicted: every event is durably logged; the messages-snapshot half is unbuilt"
+
+[[section]]
+file = "decisions.md"
+heading = "Event System: EventLog with Envelopes (revised 2026-04-28)"
+to = ["core#D004", "core#C007"]
+
+[[section]]
+file = "decisions.md"
+heading = "Versioning boundaries (2026-06-30)"
+to = ["core#D005", "core#C007", "core#C010", "R212", "R209"]
+
+[[section]]
+file = "decisions.md"
+heading = "Atomic Commit Protocol (2026-04-28)"
+to = ["core#C021", "R200", "R201"]
+
+[[section]]
+file = "decisions.md"
+heading = "Materialization & resume — runtime model + mesh (2026-06-30)"
+to = ["R200", "R202", "R214"]
+
+[[section]]
+file = "decisions.md"
+heading = "SQLite backing — `bun:sqlite` now, `node:sqlite` later (LOCKED 2026-07-01, supersedes runtime-adaptive)"
+to = ["core#D010", "core#C013", "core#C020", "core#C021", "core#C022", "R200", "R214"]
+note = "bun:sqlite / bun test quarantine is history; messages/sessions/checkpoints tables -> R200, applyReplicated -> R214"
+
+[[section]]
+file = "decisions.md"
+heading = "The event log is one log = localDB + streams (2026-07-01)"
+to = ["core#C022", "R214"]
+
+[[section]]
+file = "decisions.md"
+heading = "Reasoning is content, not a tool call (2026-07-01)"
+to = ["core#D006", "core#C024", "R217"]
+
+[[section]]
+file = "decisions.md"
+heading = "Terminal events — needed, not yet in the union (2026-07-01)"
+to = ["core#D007", "core#C025"]
+
+[[section]]
+file = "decisions.md"
+heading = "Context assembly gap — model has no memory across turns (2026-07-01)"
+to = ["core#D011", "core#C028"]
+
+[[section]]
+file = "decisions.md"
+heading = "Three storage classes — do not conflate (2026-06-30)"
+to = ["core#C020", "infra#C018", "R219"]
+
+[[section]]
+file = "decisions.md"
+heading = "Race Condition Handling (2026-04-28)"
+to = ["R201"]
+
+[[section]]
+file = "decisions.md"
+heading = "Event Taxonomy — Revised (2026-04-26)"
+to = ["core#C006", "core#D007", "R203", "R204", "R210", "R211"]
+
+[[section]]
+file = "decisions.md"
+heading = "Pending Approval State Persistence (2026-04-26)"
+to = ["R204"]
+
+[[section]]
+file = "decisions.md"
+heading = "Message Format — Finalized (v3, 2026-04-25)"
+to = ["core#C010", "core#D009", "R203"]
+
+[[section]]
+file = "decisions.md"
+heading = "MessageUser.originDeviceID (2026-04-25)"
+to = ["core#C010", "R213"]
+
+[[section]]
+file = "decisions.md"
+heading = "Schema Versioning"
+to = ["R212", "core#D005"]
+
+[[section]]
+file = "decisions.md"
+heading = "Compaction — Just a Regular Message"
+to = ["R208"]
+
+[[section]]
+file = "decisions.md"
+heading = "Command Editing — Cache-Safe (Option B)"
+to = ["R204", "R209"]
+
+[[section]]
+file = "decisions.md"
+heading = "Checkpoint Model — Bookmarks, Not Snapshots"
+to = ["R207"]
+
+[[section]]
+file = "decisions.md"
+heading = "Part Types — Content + Step Boundaries"
+to = ["core#C008", "core#D009"]
+
+[[section]]
+file = "decisions.md"
+heading = "Tool Call Parts — Append-Only, No Mutation"
+to = ["core#C009", "core#D008", "R200"]
+
+[[section]]
+file = "decisions.md"
+heading = "Tool Call Error — Reason Enum"
+to = ["core#C009", "core#D008", "R206"]
+
+[[section]]
+file = "decisions.md"
+heading = "Interrupt Handling in the Parts Array"
+to = ["R206"]
+
+[[section]]
+file = "decisions.md"
+heading = "Tool Call Kind — Normal vs Subagent"
+to = ["core#C009", "core#D008", "R217"]
+
+[[section]]
+file = "decisions.md"
+heading = "Step Boundaries — Per-Step Model Tracking"
+to = ["core#C008", "core#C024", "core#D009", "R216"]
+
+[[section]]
+file = "decisions.md"
+heading = "Persistence Model — Three Layers (revised 2026-04-28)"
+to = ["R200", "R207"]
+
+[[section]]
+file = "decisions.md"
+heading = "State Management: LangGraph-inspired reducers (no LangGraph dependency)"
+to = ["R215"]
+
+[[section]]
+file = "decisions.md"
+heading = "XState v5 — Rejected"
+to = ["dropped"]
+note = "rejected alternative, pointer only; the loop is the AI SDK's streamText (core#D020)"
+
+[[section]]
+file = "decisions.md"
+heading = "Provider Interface"
+to = ["core#D020", "R216"]
+note = "own LanguageModel/Provider/ProviderRegistry interface was never built; engine uses the AI SDK directly. ModelInfo/capabilities catalog -> R216"
+
+[[section]]
+file = "decisions.md"
+heading = "Discussion Clustering"
+to = ["R211"]
+
+[[section]]
+file = "decisions.md"
+heading = "Mesh Architecture — Built-In, 3-Tier Model (2026-06-30)"
+to = ["core#D014", "core#D028", "R214"]
+
+[[section]]
+file = "decisions.md"
+heading = "Mesh Protocol, 3-Tier Runtime in v1 (2026-06-30)"
+to = ["core#D014", "core#C007", "R213", "R214"]
+
+[[section]]
+file = "decisions.md"
+heading = "Per-Device Security Profiles (2026-04-25)"
+to = ["R205"]
+
+[[section]]
+file = "decisions.md"
+heading = "Security: Operation x Target Risk Matrix"
+to = ["R205", "R204"]
+
+[[section]]
+file = "decisions.md"
+heading = "Module Structure"
+to = ["core#C002", "R205", "R213", "R215"]
+note = "single-file modules replaced by dot-case unit directories; provider/transport/io modules dropped (AI SDK, tRPC, ports)"
+
+[[section]]
+file = "decisions.md"
+heading = "Design Principles"
+to = ["core#D003", "core#D002", "core#D008", "core#C001"]
+
+[[section]]
+file = "decisions.md"
+heading = "Performance Strategy"
+to = ["R202", "R206"]
+
+[[section]]
+file = "decisions.md"
+heading = "Discussion Model — PartID[] Overlay (Updated 2026-04-25)"
+to = ["R211"]
+
+[[section]]
+file = "decisions.md"
+heading = "Tool-call backends — where the pieces live (2026-07-01)"
+to = ["core#D012", "core#C033", "core#C034", "core#C035"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["host#D001", "R217", "R211", "R200"]
+note = "project-map bootstrap pointer belongs to the context-bootstrap entry"
+
+[[section]]
+file = "decisions.md"
+heading = "Resolved Questions"
+to = ["core#D004", "core#D010", "core#D001", "core#D009", "core#D008", "R211", "R207", "R204", "R214"]
+
+# plan.md
+
+[[section]]
+file = "plan.md"
+heading = "Problem Statement"
+to = ["core#D001"]
+note = "SQ/EQ and cross-device resumption framing superseded (core#D004, R214)"
+
+[[section]]
+file = "plan.md"
+heading = "Proposed Solution"
+to = ["core#D001", "core#D003"]
+
+[[section]]
+file = "plan.md"
+heading = "Phases"
+to = ["core#C001"]
+note = "container heading"
+
+[[section]]
+file = "plan.md"
+heading = "Phase 1: Core Protocol (DONE)"
+to = ["core#C001", "core#D001"]
+
+[[section]]
+file = "plan.md"
+heading = "Phase 2: Engine"
+to = ["core#C023", "core#D020", "R215"]
+
+[[section]]
+file = "plan.md"
+heading = "Phase 3: Provider Adapters"
+to = ["core#C030", "core#D022", "R216"]
+
+[[section]]
+file = "plan.md"
+heading = "Phase 4: Tools"
+to = ["core#C034", "R217"]
+
+[[section]]
+file = "plan.md"
+heading = "Phase 5: TUI"
+to = ["host#D002", "R002"]
+note = "OpenTUI option dropped; kuib builds its own TUI library"
+
+[[section]]
+file = "plan.md"
+heading = "Verification"
+to = ["infra#C006"]
+note = "tsgo -b emit checks dropped: no build step, Deno runs source"
+
+# progress.md
+
+[[section]]
+file = "progress.md"
+heading = "Status: IN PROGRESS"
+to = ["dropped"]
+note = "status marker of the legacy entry"
+
+[[section]]
+file = "progress.md"
+heading = "Completed"
+to = ["dropped"]
+note = "history: the first-generation protocol modules were deleted and rebuilt; surviving designs are mapped from decisions.md"
+
+[[section]]
+file = "progress.md"
+heading = "In Progress — Protocol Review & Refinement (2026-04-23)"
+to = ["core#D008", "core#D009", "core#C008", "core#C009", "core#C010"]
+
+[[section]]
+file = "progress.md"
+heading = "Next — Rebuild Protocol Files (2026-04-25)"
+to = ["dropped"]
+note = "history: container for the rebuild checklist"
+
+[[section]]
+file = "progress.md"
+heading = "Mesh decisions affecting the rebuild (2026-04-25)"
+to = ["R205", "dropped"]
+note = "'tool dispatch only, engine never moves' superseded by the replicated-log design (R214); per-device profiles -> R205"
+
+[[section]]
+file = "progress.md"
+heading = "Rebuild list"
+to = ["core#C006", "R203", "R204", "R211", "R213", "R215", "R218"]
+
+[[section]]
+file = "progress.md"
+heading = "Remaining"
+to = ["host#D002", "core#C001", "R216", "R217"]
+
+# research/superseded.md
+
+[[section]]
+file = "research/superseded.md"
+heading = "SQ/EQ Separation (Superseded 2026-04-28)"
+to = ["dropped"]
+note = "superseded by the unified event log (core#D004)"
+
+[[section]]
+file = "research/superseded.md"
+heading = "MemoryEventLog (Superseded 2026-04-28)"
+to = ["dropped"]
+note = "superseded by the SQLite event log (core#D010); the memory log survives only for tests"
+
+[[section]]
+file = "research/superseded.md"
+heading = "ResumptionStrategy Enum (Superseded 2026-04-25)"
+to = ["dropped"]
+note = "superseded twice; current direction is R214"
+
+[[section]]
+file = "research/superseded.md"
+heading = "Event Envelope Evolution"
+to = ["core#D004"]
+
+[[section]]
+file = "research/superseded.md"
+heading = "Event Taxonomy — Dropped Items"
+to = ["R203"]
+
+[[section]]
+file = "research/superseded.md"
+heading = "XState v5 — Rejected"
+to = ["dropped"]
+note = "rejected alternative; the loop is the AI SDK's streamText (core#D020)"
+
+[[section]]
+file = "research/superseded.md"
+heading = "Archived Resolved Questions (Bulk)"
+to = ["dropped"]
+note = "archaeology; current resolutions live in core decisions"
+
+[[section]]
+file = "research/superseded.md"
+heading = "Contradiction Note"
+to = ["dropped"]
+note = "meta-note about the legacy file"

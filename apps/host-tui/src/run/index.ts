@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/host
 import serve from "./serve/index.ts";
 
 const run = {

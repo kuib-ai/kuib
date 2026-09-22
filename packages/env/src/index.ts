@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra
 import bootstrapEnv from "./bootstrap.env/index.ts";
 import findWorkspaceRoot from "./workspace.root/index.ts";
 import resolveDir from "./resolve.dir/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core#^C028
 import type { ModelMessage } from "ai";
 import Protocol from "@kuib-ai/protocol";
 import Std from "@kuib-ai/std";

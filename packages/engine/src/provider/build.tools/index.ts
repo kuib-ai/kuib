@@ -1,4 +1,4 @@
-// @context @journal/tool-system
+// @context @journal/domains/core#^C035
 import { tool, type Tool } from "ai";
 import type { ToolSpec, ToolContext } from "@kuib-ai/tools/tool.spec";
 

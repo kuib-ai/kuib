@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core#^C039
 import { rmSync } from "node:fs";
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import daemonRouter from "../daemon.router/index.ts";

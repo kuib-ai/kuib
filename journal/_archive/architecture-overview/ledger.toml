@@ -1,0 +1,62 @@
+entry = "architecture-overview"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["core#C001"]
+note = "container heading; children mapped individually"
+
+[[section]]
+file = "decisions.md"
+heading = "Language"
+to = ["dropped"]
+note = "'TypeScript only' no longer holds (Swift and Python STT services, product#D002); Headscale belongs to the infrastructure-strategy entry"
+
+[[section]]
+file = "decisions.md"
+heading = "Monorepo Structure (kuib repo)"
+to = ["core#C001", "host#C001", "R214"]
+note = "packages/host, apps/server, apps/daemon, apps/cli never built as sketched; the server role is part of R214"
+
+[[section]]
+file = "decisions.md"
+heading = "Repo Organization"
+to = ["spec", "infra#D001"]
+
+[[section]]
+file = "decisions.md"
+heading = "Package Dependency Flow"
+to = ["core#C001", "core#D014", "core#D028", "R214"]
+
+[[section]]
+file = "decisions.md"
+heading = "Interface-Based I/O"
+to = ["core#C013", "core#D012", "R218"]
+
+[[section]]
+file = "decisions.md"
+heading = "Build System"
+to = ["infra#C005", "infra#C006", "infra#D004", "infra#D008", "infra#D009"]
+
+[[section]]
+file = "decisions.md"
+heading = "Runtime & Distribution"
+to = ["infra#D004", "infra#D007", "R002"]
+note = "Bun/OpenTUI runtime and bun build --compile distribution are history"
+
+[[section]]
+file = "decisions.md"
+heading = "Config & Env Resolution (`@kuib-ai/env`, 2026-07-01)"
+to = ["infra#D013", "infra#C011", "infra#C015", "core#D027", "R219"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["infra#D023", "dropped"]
+note = "testing strategy resolved (infra#D023); web UI framework moot until a web host returns"
+
+[[section]]
+file = "decisions.md"
+heading = "Resolved"
+to = ["host#D002", "R002", "dropped"]
+note = "OpenTUI choice superseded by kuib's own TUI library; nvim embedding parked with the stale nvim-integration entry"

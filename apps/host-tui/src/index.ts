@@ -1,4 +1,4 @@
-// @context @journal/host-layer @journal/application-directories
+// @context @journal/domains/host
 import Cli from "@kuib-ai/cli";
 import Config from "@kuib-ai/config";
 import Protocol from "@kuib-ai/protocol";

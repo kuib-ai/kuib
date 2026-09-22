@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/host#^C013
 import { parseArgs } from "node:util";
 import Std from "@kuib-ai/std";
 import printHelp from "../print.help/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C016
 import { z } from "zod";
 import SubmitMessage from "../submit.message/index.ts";
 import InterruptMessage from "../interrupt.message/index.ts";

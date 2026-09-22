@@ -1,4 +1,4 @@
-// @context @journal/provider-architecture @journal/testing-strategy
+// @context @journal/domains/core#^C032
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import { readFileSync, existsSync } from "node:fs";

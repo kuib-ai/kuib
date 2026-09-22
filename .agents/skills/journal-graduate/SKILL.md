@@ -1,8 +1,8 @@
 ---
 name: journal-graduate
-description: Create a canonical feature entry with plan.md + implementation.toml. Works from a scratchpad or directly from clear conversation context.
+description: Create a canonical feature entry with plan.md + implementation.toml from a roadmap item, a scratchpad, or clear conversation context.
 user-invocable: true
-argument-hint: [feature-name]
+argument-hint: [feature-name] [R###]
 ---
 
 # Journal Graduate
@@ -14,44 +14,39 @@ enough to become project truth before implementation.
 
 ## Phase 1 — Gather claims
 
-If `journal/scratchpad/$ARGUMENTS/` exists, read `notes.md` and all material. If not, use
-the current conversation and repository as the source — direct graduation is valid when
-objectives, phases, and acceptance criteria are already clear.
+Sources, in order: the roadmap item (`journal/roadmap/items/R###-*.md` — idea, constraints
+already decided, open questions, edges), `journal/scratchpad/<name>/`, then the conversation.
+If no roadmap item exists yet, create one first (see `/journal-start`).
 
-List the claims being promoted: decisions, repository facts, planned behavior, files/paths,
-approaches rejected, gaps, and conclusions.
+List the claims being promoted: decisions, repository facts, planned behaviour, paths,
+rejected approaches, gaps.
 
-## Phase 2 — Verify against the codebase
+## Phase 2 — Verify against the codebase and domains
 
-For each repository claim:
-- Referenced files/paths exist?
-- Code state matches what was documented?
-- Anything superseded by later changes?
-
-Resolve contradictions with the user. Never promote a stale claim silently.
+- Repository claims: paths exist, code matches, nothing superseded.
+- Find the domain claims/decisions the feature builds on (`journal/domains/*/current.md`,
+  `decisions.md`). These become the plan's `context:` links.
+- Resolve contradictions with the user. Never promote a stale claim silently.
 
 ## Phase 3 — Construct the feature
 
-Create `journal/features/$ARGUMENTS/` with:
+Create `journal/features/<name>/`:
 
-- **`plan.md`**: owner, lifecycle, summary, topics. Objective, non-goals, principles.
-  Exact phases/items with acceptance criteria. Decisions with full context/options/consequences.
-  Gaps for known unknowns. No generic placeholders.
+- `plan.md` — frontmatter per SPEC including `roadmap: R###` and
+  `context: ["[[domains/<d>/current#^C###]]", …]`. Objective, non-goals, principles, phases
+  and items with acceptance criteria, decisions, gaps. No generic placeholders.
+- `implementation.toml` — every plan item mapped with state, decisions, addresses, and
+  `refs = [{ path, role }]` to real files.
+- `research/` — optional evidence.
 
-- **`implementation.toml`**: feature name, state, current_phase. Checkpoint with summary/next/blockers.
-  Phase states. Every plan item mapped with state, linked decisions, addresses (gaps), and refs
-  to actual code files.
-
-- **`research/`**: optional subfolder for investigation evidence cited by decisions or items.
+Update the roadmap item: `state: graduated`, `feature: <name>`, `touched: <today>`, and a
+`## History` line.
 
 ## Phase 4 — Validate
 
-Run `/journal-validate` to check structural integrity. All feature validation checks must pass:
-- Coverage (every plan item has an implementation entry)
-- State consistency
-- Refs exist
+`pnpm journal build && pnpm journal check` — zero errors.
 
 ## Phase 5 — Close
 
-- Report what was graduated, which claims were verified/corrected, and any remaining gaps.
-- The scratchpad (if any) is NOT deleted — remove it by hand if you want it gone.
+Report what graduated, which claims were verified or corrected, and remaining gaps. The
+scratchpad (if any) is not deleted.

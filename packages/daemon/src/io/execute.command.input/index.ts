@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C038
 import { z } from "zod";
 
 const ExecuteCommandInput = z.object({

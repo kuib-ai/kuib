@@ -1,4 +1,4 @@
-// @context @journal/observability
+// @context @journal/domains/infra#^C020
 import { AsyncLocalStorage } from "node:async_hooks";
 import type { Logger, LogBindings, LogFn } from "../logger.port/index.ts";
 

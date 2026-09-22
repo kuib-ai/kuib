@@ -1,0 +1,23 @@
+entry = "vision"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R100"]
+
+[[section]]
+file = "decisions.md"
+heading = "Mechanisms"
+to = ["R100", "R101", "R104"]
+
+[[section]]
+file = "decisions.md"
+heading = "External Design Reference"
+to = ["dropped"]
+note = "interaction prototypes are explored outside the journal; no build target here"
+
+[[section]]
+file = "decisions.md"
+heading = "Repo structure (2026-07-01)"
+to = ["infra#C005", "R105"]
+note = "flat monorepo with journal in-repo is built (infra); the dataless coordinator is mesh intent"

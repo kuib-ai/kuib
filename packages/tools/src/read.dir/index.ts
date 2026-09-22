@@ -1,4 +1,4 @@
-// @context @journal/tool-system
+// @context @journal/domains/core#^C034
 import Protocol from "@kuib-ai/protocol";
 import defineTool from "../tool.spec/index.ts";
 

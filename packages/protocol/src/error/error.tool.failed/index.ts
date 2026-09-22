@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C012
 import { z } from "zod";
 import { ErrorCodeEnum } from "../error.code.enum/index.ts";
 import { ToolCallErrorReasonEnum } from "../../tool.call/tool.call.error.reason.enum/index.ts";

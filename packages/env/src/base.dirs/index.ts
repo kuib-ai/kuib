@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra#^C012
 import { z } from "zod";
 
 const BaseDirs = z.object({

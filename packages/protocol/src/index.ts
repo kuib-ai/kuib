@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C002
 import ID from "./id/index.ts";
 import ToolCall from "./tool.call/index.ts";
 import Part from "./part/index.ts";

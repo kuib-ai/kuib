@@ -1,4 +1,4 @@
-// @context @journal/tool-system
+// @context @journal/domains/core#^C033
 import type { z } from "zod";
 import type { FileSystemPort } from "@kuib-ai/protocol/file.system.port";
 

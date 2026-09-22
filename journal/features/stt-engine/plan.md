@@ -10,6 +10,8 @@ topics:
   - ana
 supersedes: []
 superseded-by: []
+roadmap: R003
+context: []
 ---
 
 # Plan — stt-engine
@@ -226,6 +228,6 @@ platform-agnostic boundary; apps only depend on the client.
 ### G004 — Deno migration impact on client package
 
 - Status: open
-- Context: The Bun → Deno migration is planned. The STT client package must use
+- Context: The Bun → Deno migration is planned (landed 2026-09-22 — Deno is the runtime, `Deno.*` is used freely in host/runtime code; see `journal/features/deno-runtime/plan.md`). The STT client package must use
   runtime-agnostic APIs (no `bun:*` or `Deno.*` in the public interface). Unix socket
   access differs between runtimes — need an abstraction or conditional import.

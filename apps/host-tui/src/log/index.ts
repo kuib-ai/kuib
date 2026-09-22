@@ -1,4 +1,4 @@
-// @context @journal/host-layer @journal/application-directories
+// @context @journal/domains/host#^C011
 import type { BootstrapConfig } from "@kuib-ai/config/bootstrap.config";
 import createPinoLogger from "@kuib-ai/std/pino";
 

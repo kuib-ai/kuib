@@ -1,0 +1,52 @@
+entry = "multi-device-ux"
+
+[[section]]
+file = "decisions.md"
+heading = "Core reframe: a location is `(device, path)`, not `path`"
+to = ["R309"]
+
+[[section]]
+file = "decisions.md"
+heading = "Session state: one active working context, switchable"
+to = ["R309"]
+
+[[section]]
+file = "decisions.md"
+heading = "Orthogonality: active device ≠ leader"
+to = ["R309"]
+
+[[section]]
+file = "decisions.md"
+heading = "Agent awareness (the \"don't run bullshit when I switch machines\" guard)"
+to = ["R309"]
+
+[[section]]
+file = "decisions.md"
+heading = "TUI surface"
+to = ["R309"]
+
+[[section]]
+file = "decisions.md"
+heading = "Decisions"
+to = ["R309"]
+
+[[section]]
+file = "decisions.md"
+heading = "Edge cases (need handling)"
+to = ["R309"]
+
+[[section]]
+file = "decisions.md"
+heading = "Node identity & addressing — `user@device` (2026-07-01)"
+to = ["core#C015", "host#D005", "R309"]
+
+[[section]]
+file = "decisions.md"
+heading = "Discovery contracts (substrate-agnostic) (2026-07-01)"
+to = ["core#C013", "core#C015", "core#D028", "host#D005", "host#C010"]
+note = "coordinator-backed discovery impl belongs with the mesh/infrastructure-strategy roadmap"
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R309"]

@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra#^C012
 import { join } from "node:path";
 import PathKind from "../path.kind/index.ts";
 import type { PathKind as PathKindType } from "../path.kind/index.ts";

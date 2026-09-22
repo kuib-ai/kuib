@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C038
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import Std from "@kuib-ai/std";

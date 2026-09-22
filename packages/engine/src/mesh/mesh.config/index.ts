@@ -1,4 +1,4 @@
-// @context @journal/distributed-mesh-state
+// @context @journal/domains/core#^C047
 import { z } from "zod";
 import Protocol from "@kuib-ai/protocol";
 

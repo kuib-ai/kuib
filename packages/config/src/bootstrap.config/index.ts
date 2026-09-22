@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview @journal/application-directories
+// @context @journal/domains/infra#^C015
 import { existsSync, readFileSync } from "node:fs";
 import { parse as parseToml } from "@std/toml";
 import { hostname, userInfo } from "node:os";

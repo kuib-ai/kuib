@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C009
 import { ToolCallStatusEnum } from "./tool.call.status.enum/index.ts";
 import { ToolCallKindEnum } from "./tool.call.kind.enum/index.ts";
 import { ToolCallErrorReasonEnum } from "./tool.call.error.reason.enum/index.ts";

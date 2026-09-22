@@ -1,0 +1,32 @@
+entry = "discussions-ux"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R306"]
+
+[[section]]
+file = "decisions.md"
+heading = "Protocol vs UX Split"
+to = ["core#C008", "core#D009", "R306"]
+note = "PartBase.excluded built; discussion events and context filter unbuilt"
+
+[[section]]
+file = "decisions.md"
+heading = "Granular Context Control"
+to = ["R306"]
+
+[[section]]
+file = "decisions.md"
+heading = "v1 Merge with Comprehension"
+to = ["R306"]
+
+[[section]]
+file = "decisions.md"
+heading = "Host Affordances (To Build)"
+to = ["R306", "R307"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R306"]

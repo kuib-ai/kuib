@@ -1,4 +1,4 @@
-// @context @journal/observability
+// @context @journal/domains/infra#^C019
 import pino from "pino";
 import Protocol from "@kuib-ai/protocol";
 import type { Logger, LogBindings } from "../logger.port/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/core#^C045
 import net from "node:net";
 import { spawn } from "node:child_process";
 import type { SubmitMessage } from "@kuib-ai/protocol/service.message/submit.message";

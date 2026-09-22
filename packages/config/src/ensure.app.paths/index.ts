@@ -1,4 +1,4 @@
-// @context @journal/application-directories @journal/security-model
+// @context @journal/domains/infra#^C017
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import type { AppPaths } from "../app.paths/index.ts";

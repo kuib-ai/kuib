@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C009
 export enum ToolCallErrorReasonEnum {
   FAILED = "failed",
   INTERRUPTED = "interrupted",

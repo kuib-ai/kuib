@@ -1,0 +1,59 @@
+entry = "ana"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R106"]
+
+[[section]]
+file = "decisions.md"
+heading = "Placement & Relationship to Kuib"
+to = ["R106"]
+
+[[section]]
+file = "decisions.md"
+heading = "Core Capabilities"
+to = ["R106", "R113"]
+
+[[section]]
+file = "decisions.md"
+heading = "Voice I/O Architecture"
+to = ["product#D008", "product#D010", "R109", "R110", "R111"]
+note = "STT/TTS pieces: streaming and MiMo TTS are built (D008/D010); Kokoro fallback, MiMo ASR fallback and Hex-vs-FluidAudio remain intent"
+
+[[section]]
+file = "decisions.md"
+heading = "Context Management"
+to = ["R107"]
+
+[[section]]
+file = "decisions.md"
+heading = "Hardware Topology"
+to = ["R106"]
+note = "device inventory moved to roadmap/research/hardware-topology.md"
+
+[[section]]
+file = "decisions.md"
+heading = "Network"
+to = ["R114"]
+
+[[section]]
+file = "decisions.md"
+heading = "Provider"
+to = ["core#C029", "R106"]
+note = "mimo provider is built; Ana defaulting to it is app intent"
+
+[[section]]
+file = "decisions.md"
+heading = "Phone Dictation App"
+to = ["R112"]
+
+[[section]]
+file = "decisions.md"
+heading = "Echo Dot C78MP8 (parked)"
+to = ["R115"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R108", "R111", "R112", "R113", "R116"]

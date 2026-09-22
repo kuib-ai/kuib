@@ -1,4 +1,4 @@
-// @context @journal/distributed-mesh-state
+// @context @journal/domains/core#^C013
 import type { NodeID } from "../id/node.id/index.ts";
 import type { NodeDescriptor } from "../node/node.descriptor/index.ts";
 

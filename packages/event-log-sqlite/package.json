@@ -1,7 +1,7 @@
 {
   "name": "@kuib-ai/event-log-sqlite",
   "version": "0.0.1",
-  "description": "kuib event log \u2014 bun:sqlite adapter (Bun-quarantined)",
+  "description": "kuib event log \u2014 node:sqlite adapter",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",

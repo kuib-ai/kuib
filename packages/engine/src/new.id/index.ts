@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C004
 import { randomUUID } from "node:crypto";
 import type { z } from "zod";
 

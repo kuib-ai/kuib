@@ -1,0 +1,36 @@
+entry = "context-bootstrap"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Problem"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Context Engine (Before First Turn)"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Project Map Buffer (UX)"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Ideal First-Turn Behavior (Given Scaffolding)"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Empty States"
+to = ["R310", "R301"]

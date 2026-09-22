@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C006
 import { z } from "zod";
 import UserMessageSubmitted from "../user.message.submitted/index.ts";
 import MessageStarted from "../message.started/index.ts";

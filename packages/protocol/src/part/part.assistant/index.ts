@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C008
 import { z } from "zod";
 import PartText from "../part.text/index.ts";
 import PartReasoning from "../part.reasoning/index.ts";

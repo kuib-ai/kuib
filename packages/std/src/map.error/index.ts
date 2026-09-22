@@ -1,4 +1,4 @@
-// @context @journal/house-style-linting
+// @context @journal/domains/infra#^C021
 import Protocol from "@kuib-ai/protocol";
 import type { AnyError } from "@kuib-ai/protocol/error/error.any";
 

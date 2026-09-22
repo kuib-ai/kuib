@@ -1,4 +1,4 @@
-// @context @journal/tool-system
+// @context @journal/domains/core#^C035
 import type { FileSystemPort } from "@kuib-ai/protocol/file.system.port";
 import type { DaemonClient } from "../daemon.client/transport.factory/index.ts";
 

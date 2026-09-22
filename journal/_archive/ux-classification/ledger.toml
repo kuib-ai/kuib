@@ -1,0 +1,23 @@
+entry = "ux-classification"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R100"]
+
+[[section]]
+file = "decisions.md"
+heading = "Rule"
+to = ["R100"]
+note = "build UX and Context, never design around a weak model — folded into the north-star design principle"
+
+[[section]]
+file = "decisions.md"
+heading = "Examples (Scene 0)"
+to = ["R100"]
+
+[[section]]
+file = "decisions.md"
+heading = "Promotion"
+to = ["dropped"]
+note = "scene-file promotion workflow is superseded by the roadmap/domains lifecycle in SPEC.md"

@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra#^C012
 import { join } from "node:path";
 import findWorkspaceRoot from "../workspace.root/index.ts";
 

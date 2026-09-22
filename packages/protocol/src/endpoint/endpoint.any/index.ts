@@ -1,4 +1,4 @@
-// @context @journal/infrastructure-strategy
+// @context @journal/domains/core#^C015
 import { z } from "zod";
 import UnixEndpoint from "../unix.endpoint/index.ts";
 import TcpEndpoint from "../tcp.endpoint/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C016
 import { z } from "zod";
 import { ServiceMessageTypeEnum } from "../service.message.type.enum/index.ts";
 import SessionID from "../../id/session.id/index.ts";

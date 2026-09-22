@@ -1,4 +1,4 @@
-// @context @journal/observability
+// @context @journal/domains/infra#^C019
 export enum LogLevelEnum {
   FATAL = "fatal",
   ERROR = "error",

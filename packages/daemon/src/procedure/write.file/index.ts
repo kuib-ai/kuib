@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C037
 import { writeFile } from "node:fs/promises";
 import { TRPCError } from "@trpc/server";
 import Std from "@kuib-ai/std";

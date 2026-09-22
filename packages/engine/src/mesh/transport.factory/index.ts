@@ -1,4 +1,4 @@
-// @context @journal/distributed-mesh-state
+// @context @journal/domains/core#^C048
 import createDaemonClient from "../../daemon.client/transport.factory/index.ts";
 import type { NodeID } from "@kuib-ai/protocol/id/node.id";
 import type { DiscoveryPort } from "@kuib-ai/protocol/discovery.port";

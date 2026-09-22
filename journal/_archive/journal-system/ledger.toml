@@ -1,0 +1,75 @@
+entry = "journal-system"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["infra#D001"]
+note = "Replaced by the three-layer journal."
+
+[[section]]
+file = "decisions.md"
+heading = "Graph-Based Knowledge Store"
+to = ["dropped"]
+note = "Directory-as-node wikilink resolution replaced by SPEC Links (journal-relative file paths)."
+
+[[section]]
+file = "decisions.md"
+heading = "Two-Layer Retrieval"
+to = ["infra#D001", "infra#C002"]
+note = "Context now loads by layer; the generated _index.md survives as a build output, and features list their context for /remember."
+
+[[section]]
+file = "decisions.md"
+heading = "Entry Structure"
+to = ["spec"]
+
+[[section]]
+file = "decisions.md"
+heading = "Frontmatter Fields"
+to = ["spec"]
+
+[[section]]
+file = "decisions.md"
+heading = "Entry Types (metadata, not folders)"
+to = ["dropped"]
+note = "Entry types replaced by the roadmap/domains/features layers."
+
+[[section]]
+file = "decisions.md"
+heading = "Layer Taxonomy"
+to = ["dropped"]
+note = "Layers replaced by the four domains (context-system D003)."
+
+[[section]]
+file = "decisions.md"
+heading = "Supersession Pattern"
+to = ["spec"]
+
+[[section]]
+file = "decisions.md"
+heading = "Bootstrap → Journal Workflow"
+to = ["dropped"]
+note = "Bootstrap validation sessions are history."
+
+[[section]]
+file = "decisions.md"
+heading = "Validation"
+to = ["infra#C002", "infra#C003"]
+note = "compile-journal-index.ts replaced by scripts/journal.ts check/build/drift."
+
+[[section]]
+file = "decisions.md"
+heading = "Obsidian Compatibility"
+to = ["spec"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R414", "spec"]
+note = "Dated entries question settled by SPEC: current.md is undated, decisions are append-only."
+
+[[section]]
+file = "decisions.md"
+heading = "Resolved Questions"
+to = ["dropped"]
+note = "Bootstrap-session write workflow is history."

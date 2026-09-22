@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C002
 import EventLog from "./event.log/index.ts";
 import DaemonClient from "./daemon.client/index.ts";
 import Provider from "./provider/index.ts";

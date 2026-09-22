@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C010
 import { MessageRoleEnum } from "./message.role.enum/index.ts";
 import { MessageAssistantStatusEnum } from "./message.assistant.status.enum/index.ts";
 import { MessageAssistantErrorKindEnum } from "./message.assistant.error.kind.enum/index.ts";

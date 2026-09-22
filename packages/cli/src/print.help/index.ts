@@ -1,4 +1,4 @@
-// @context @journal/host-layer
+// @context @journal/domains/host#^C014
 import type { CliSchema } from "../cli.schema/index.ts";
 
 const printHelp = function (command: string, schema: CliSchema): void {

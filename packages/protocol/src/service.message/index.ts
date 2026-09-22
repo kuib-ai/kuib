@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C016
 import { ServiceMessageTypeEnum } from "./service.message.type.enum/index.ts";
 import SubmitMessage from "./submit.message/index.ts";
 import InterruptMessage from "./interrupt.message/index.ts";

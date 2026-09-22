@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C008
 import { z } from "zod";
 import { PartTypeEnum } from "../part.type.enum/index.ts";
 import { StepBoundaryKindEnum } from "../step.boundary.kind.enum/index.ts";

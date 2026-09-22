@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C013
 import type { EventEnvelope } from "../event/event.envelope/index.ts";
 import type { AnyEvent } from "../event/event.any/index.ts";
 import type { SessionID } from "../id/session.id/index.ts";

@@ -1,4 +1,4 @@
-// @context @journal/house-style-linting
+// @context @journal/domains/infra#^C024
 import * as path from "node:path";
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 

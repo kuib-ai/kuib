@@ -1,0 +1,27 @@
+entry = "distributed-mesh-state"
+
+[[section]]
+file = "decisions.md"
+heading = "Context"
+to = ["R401"]
+
+[[section]]
+file = "decisions.md"
+heading = "Decision"
+to = ["R401", "core#D028"]
+
+[[section]]
+file = "decisions.md"
+heading = "Scope"
+to = ["R401"]
+
+[[section]]
+file = "decisions.md"
+heading = "Consequences"
+to = ["R401"]
+
+[[section]]
+file = "decisions.md"
+heading = "Implementation status — Layer 1 (node resolution seam) — DONE"
+to = ["core#D028", "core#C013", "core#C015", "core#C041", "core#C047", "core#C048", "host#C010", "host#D005", "infra#C015", "infra#C017", "R400", "R401"]
+note = "Node resolution seam is built; the host-tui device badge was deleted with OpenTUI; Headscale discovery, CRDT SyncState and the device switcher are intent."

@@ -1,4 +1,4 @@
-// @context @journal/protocol-design
+// @context @journal/domains/core#^C006
 import { z } from "zod";
 import { EventTypeEnum } from "../event.type.enum/index.ts";
 import MessageID from "../../id/message.id/index.ts";

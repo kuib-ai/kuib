@@ -1,0 +1,144 @@
+entry = "consensus-model"
+
+[[section]]
+file = "decisions.md"
+heading = "Frame"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Core invariant: single active engine per session"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = '"One leader" is per-session-LOG, not global'
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "viewing ≠ leading"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Split-brain: where the boundary actually is"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "The safety mechanism: quorum + lease + fencing"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Quorum makes the log unforkable"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Lease + fencing closes the zombie window"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "`seq` becomes `(epoch, seq)`"
+to = ["core#D004", "R105"]
+note = "the (epoch, seq) envelope field is built; the leadership-generation semantics are intent"
+
+[[section]]
+file = "decisions.md"
+heading = "Risk-gated freshness check"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Failover: new leader must have the latest log"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "The two-regime model (quorum vs small mesh)"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Voters ≠ mesh (critical)"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Consensus is per-session, scoped — not one global group"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Session anchoring & the café case"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Honest status"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Replication is COPY, not merge (2026-07-01)"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "When election starts + how the zombie is handled (2026-07-01)"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Unified event-log model — one log, two regions, one interface (2026-07-01)"
+to = ["core#C019", "R105"]
+note = "EventLogPort.subscribe with afterSeq (replay then live) is built; the MeshEventLog region is intent"
+
+[[section]]
+file = "decisions.md"
+heading = "`(epoch, seq)` solves consistency; order by it, never timestamp"
+to = ["core#C020", "R105"]
+note = "PRIMARY KEY(sessionID, epoch, seq) and order-by-(epoch,seq) are built; cross-mesh convergence is intent"
+
+[[section]]
+file = "decisions.md"
+heading = "Commit watermark + provisional tail (the resume/edge-case rule)"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Author vs replicate — why a follower persisting the tail is NOT write access / NOT split-brain"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Replication granularity — do NOT push tokens through consensus (correction)"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Whose job is it to sync SQLite"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Substrate spectrum (so we don't over-commit to Raft) + 2-node"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Research grounding (2026-07-01)"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "RESOLVED: coordinator-as-lease-authority (2026-07-01, author-agreed)"
+to = ["R105"]
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R105"]

@@ -1,0 +1,23 @@
+{
+  "context": {
+    "fileName": [
+      "AGENTS.md"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "name": "journal-context",
+            "command": "$GEMINI_PROJECT_DIR/.agents/hooks/journal-context gemini",
+            "timeout": 30000
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {}
+}

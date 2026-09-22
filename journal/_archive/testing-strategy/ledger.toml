@@ -1,0 +1,28 @@
+entry = "testing-strategy"
+
+[[section]]
+file = "decisions.md"
+heading = "Runner — bun:test only (2026-07-02)"
+to = ["infra#D023", "infra#C006", "feature:deno-runtime"]
+note = "bun:test superseded by deno test; the one-runner rationale carries over."
+
+[[section]]
+file = "decisions.md"
+heading = "What gets a test"
+to = ["infra#D023"]
+note = "The host-web/server follow-up is moot; host-web was deleted."
+
+[[section]]
+file = "decisions.md"
+heading = "Hermeticity rules (each learned from a real failure)"
+to = ["infra#D023", "core#D030", "R412"]
+
+[[section]]
+file = "decisions.md"
+heading = "Package-specific idioms"
+to = ["infra#C023", "infra#D023", "core#D030"]
+
+[[section]]
+file = "decisions.md"
+heading = "Verification protocol"
+to = ["infra#D023", "R412"]

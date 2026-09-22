@@ -1,4 +1,4 @@
-// @context @journal/architecture-overview
+// @context @journal/domains/core#^C036
 import Trpc from "../trpc/index.ts";
 import executeCommand from "../procedure/execute.command/index.ts";
 import readFile from "../procedure/read.file/index.ts";

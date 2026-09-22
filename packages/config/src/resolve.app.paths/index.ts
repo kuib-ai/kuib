@@ -1,4 +1,4 @@
-// @context @journal/application-directories
+// @context @journal/domains/infra#^C017
 import { join } from "node:path";
 import Env from "@kuib-ai/env";
 import AppPaths from "../app.paths/index.ts";

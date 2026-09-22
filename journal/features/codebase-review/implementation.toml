@@ -1,0 +1,44 @@
+feature = "codebase-review"
+state = "implementing"
+current_phase = "P01"
+
+[checkpoint]
+summary = "Three Opus 5 xhigh reviews done; reports in tasks/*/report.md, not yet triaged. Next: P02-I01 triage (owner to choose order vs. agent-harness work — see journal/features/agent-harness/research/continuation-2026-09-22-a.md); P01-I04 migration review queued."
+next = ["P02-I01", "P01-I04"]
+blockers = []
+
+[phases.P01]
+state = "in_progress"
+
+[phases.P02]
+state = "planned"
+
+[items."P01-I01"]
+state = "implemented"
+decisions = []
+addresses = []
+refs = [{ path = "journal/features/codebase-review/tasks/review-tooling/brief.md", role = "brief" }]
+
+[items."P01-I02"]
+state = "implemented"
+decisions = []
+addresses = []
+refs = [{ path = "journal/features/codebase-review/tasks/review-core/brief.md", role = "brief" }]
+
+[items."P01-I03"]
+state = "implemented"
+decisions = []
+addresses = []
+refs = [{ path = "journal/features/codebase-review/tasks/review-rest/brief.md", role = "brief" }]
+
+[items."P01-I04"]
+state = "planned"
+decisions = []
+addresses = []
+refs = []
+
+[items."P02-I01"]
+state = "planned"
+decisions = []
+addresses = []
+refs = []

@@ -1,0 +1,38 @@
+entry = "bootstrap-validation"
+
+[[section]]
+file = "decisions.md"
+heading = "Current Decisions"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Methodology"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Roles"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Output Locations"
+to = ["dropped"]
+note = "old journal layout; findings now go to roadmap items and roadmap/research"
+
+[[section]]
+file = "decisions.md"
+heading = "Scope Classification Reminder"
+to = ["R310"]
+
+[[section]]
+file = "decisions.md"
+heading = "Scenes Completed"
+to = ["R310"]
+note = "scene-00 moved to roadmap/research/scene-00-cold-start"
+
+[[section]]
+file = "decisions.md"
+heading = "Open Questions"
+to = ["R310"]

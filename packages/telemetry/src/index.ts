@@ -1,4 +1,4 @@
-// @context @journal/observability
+// @context @journal/domains/infra
 import startTelemetry from "./start.telemetry/index.ts";
 
 const Telemetry = {
