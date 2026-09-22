@@ -94,13 +94,13 @@ to = ["R105"]
 [[section]]
 file = "decisions.md"
 heading = "Unified event-log model — one log, two regions, one interface (2026-07-01)"
-to = ["core#C019", "R105"]
+to = ["core/memory-event-log", "R105"]
 note = "EventLogPort.subscribe with afterSeq (replay then live) is built; the MeshEventLog region is intent"
 
 [[section]]
 file = "decisions.md"
 heading = "`(epoch, seq)` solves consistency; order by it, never timestamp"
-to = ["core#C020", "R105"]
+to = ["core/sqlite-schema", "R105"]
 note = "PRIMARY KEY(sessionID, epoch, seq) and order-by-(epoch,seq) are built; cross-mesh convergence is intent"
 
 [[section]]

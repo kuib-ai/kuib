@@ -1,6 +1,7 @@
-// @context @journal/domains/host#^C014
+// @claim host/print-help
 import type { CliSchema } from "../cli.schema/index.ts";
 
+// @claim host/print-help
 const printHelp = function (command: string, schema: CliSchema): void {
   const invocation = command.length === 0 ? "kuib" : `kuib ${command}`;
   process.stdout.write(`\nUsage: ${invocation} [options]\n`);

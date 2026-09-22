@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C015
+// @claim infra/bootstrap-config
 import { existsSync, readFileSync } from "node:fs";
 import { parse as parseToml } from "@std/toml";
 import { hostname, userInfo } from "node:os";
@@ -11,6 +11,7 @@ import type { AppPaths } from "../app.paths/index.ts";
 import type { ConfigOverrides } from "../config.overrides/index.ts";
 import type { KuibConfig } from "../kuib.config/index.ts";
 
+// @claim infra/bootstrap-config
 const BootstrapEnv = z.object({
   NODE_ENV: z.string().optional(),
   KUIB_CONFIG: z.string().optional(),
@@ -47,6 +48,7 @@ type BootstrapConfigOptions = {
   cli?: ConfigOverrides;
 };
 
+// @claim infra/config-secrets
 type ProviderSecrets = {
   groqApiKey?: string;
   anthropicApiKey?: string;
@@ -55,6 +57,7 @@ type ProviderSecrets = {
   modelApiKey?: string;
 };
 
+// @claim infra/config-secrets
 type RuntimeConfig = {
   mode: string;
   sessionID: string;
@@ -78,6 +81,7 @@ const isRecord = function (value: unknown): value is UnknownRecord {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 };
 
+// @claim infra/bootstrap-config
 const merge = function (base: unknown, overlay: unknown): unknown {
   if (!isRecord(base) || !isRecord(overlay)) {
     return overlay;
@@ -111,6 +115,7 @@ const loadFile = function (path: string): unknown {
   return parseToml(readFileSync(path, "utf8"));
 };
 
+// @claim infra/bootstrap-config
 const bootstrapConfig = function (
   options: BootstrapConfigOptions = {},
 ): BootstrapConfig {

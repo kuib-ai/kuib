@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C017
+// @claim infra/app-paths
 import { join } from "node:path";
 import Env from "@kuib-ai/env";
 import AppPaths from "../app.paths/index.ts";
@@ -6,6 +6,7 @@ import type { AppPaths as AppPathsType } from "../app.paths/index.ts";
 import type { ConfigOverrides } from "../config.overrides/index.ts";
 import type { ResolveDirsOptions } from "@kuib-ai/env/resolve.dirs.options";
 
+// @claim infra/app-paths
 const resolveAppPaths = function (
   overrides: ConfigOverrides = {},
   options?: ResolveDirsOptions,

@@ -54,7 +54,7 @@ one durable home.
 
 ## Constraints already decided
 
-- `CheckpointID` is already a branded protocol ID — [[domains/core/current#^C004]].
+- `CheckpointID` is already a branded protocol ID — [[domains/core/current#^protocol-ids]].
 - The message store is the single source of truth for content; checkpoints never duplicate it.
 
 ## History

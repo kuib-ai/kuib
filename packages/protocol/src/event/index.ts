@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C006
+// @claim core/protocol-events
 import { EventTypeEnum } from "./event.type.enum/index.ts";
 import UserMessageSubmitted from "./user.message.submitted/index.ts";
 import MessageStarted from "./message.started/index.ts";
@@ -16,6 +16,7 @@ import MessageFailed from "./message.failed/index.ts";
 import AnyEvent from "./event.any/index.ts";
 import EventEnvelope from "./event.envelope/index.ts";
 
+// @claim core/protocol-events
 const Event = {
   EventTypeEnum,
   UserMessageSubmitted,

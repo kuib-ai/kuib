@@ -13,30 +13,30 @@ to = ["infra#D011"]
 [[section]]
 file = "decisions.md"
 heading = "Linux — XDG (canonical)"
-to = ["infra#C013", "infra#D011"]
+to = ["infra/unix-dirs", "infra#D011"]
 
 [[section]]
 file = "decisions.md"
 heading = "macOS — Apple Library vs CLI expectation"
-to = ["infra#C013", "infra#D011", "R409"]
+to = ["infra/unix-dirs", "infra#D011", "R409"]
 
 [[section]]
 file = "decisions.md"
 heading = "Windows — Known Folders"
-to = ["infra#C014", "infra#D011", "R409"]
+to = ["infra/windows-dirs", "infra#D011", "R409"]
 
 [[section]]
 file = "decisions.md"
 heading = "Infra API contract (`@kuib-ai/env`)"
-to = ["infra#C012", "infra#D010", "infra#D012"]
+to = ["infra/base-dirs", "infra#D010", "infra#D012"]
 
 [[section]]
 file = "decisions.md"
 heading = "Example consumer layout (after app suffix)"
-to = ["infra#C017", "R409", "R407"]
+to = ["infra/app-paths", "R409", "R407"]
 
 [[section]]
 file = "decisions.md"
 heading = "Consequences"
-to = ["infra#D011", "infra#C017"]
+to = ["infra#D011", "infra/app-paths"]
 note = "One-off resolvers have migrated to resolveAppPaths."

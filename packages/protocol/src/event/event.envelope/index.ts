@@ -1,9 +1,10 @@
-// @context @journal/domains/core#^C007
+// @claim core/event-envelope
 import { z } from "zod";
 import AnyEvent from "../event.any/index.ts";
 import SessionID from "../../id/session.id/index.ts";
 import DeviceID from "../../id/device.id/index.ts";
 
+// @claim core/event-envelope
 const EventEnvelope = z.object({
   _version: z.literal(1),
   epoch: z.number().int(),

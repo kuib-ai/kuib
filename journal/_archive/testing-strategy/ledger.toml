@@ -3,7 +3,7 @@ entry = "testing-strategy"
 [[section]]
 file = "decisions.md"
 heading = "Runner — bun:test only (2026-07-02)"
-to = ["infra#D023", "infra#C006", "feature:deno-runtime"]
+to = ["infra#D023", "infra/nx-tasks", "feature:deno-runtime"]
 note = "bun:test superseded by deno test; the one-runner rationale carries over."
 
 [[section]]
@@ -20,7 +20,7 @@ to = ["infra#D023", "core#D030", "R412"]
 [[section]]
 file = "decisions.md"
 heading = "Package-specific idioms"
-to = ["infra#C023", "infra#D023", "core#D030"]
+to = ["infra/house-plugin", "infra#D023", "core#D030"]
 
 [[section]]
 file = "decisions.md"

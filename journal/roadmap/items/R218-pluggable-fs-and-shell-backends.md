@@ -43,7 +43,7 @@ A hosted/web offering needs sandboxed execution with the same daemon contract.
 ## Constraints already decided
 
 - `FileSystemPort` in protocol; the daemon is the only code touching the filesystem —
-  [[domains/core/decisions#^D012]], [[domains/core/current#^C013]].
+  [[domains/core/decisions#^D012]], [[domains/core/current#^protocol-ports]].
 - The daemon is always a separate process — [[domains/core/decisions#^D014]].
 
 ## History

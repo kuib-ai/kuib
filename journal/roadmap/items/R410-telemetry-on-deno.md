@@ -36,7 +36,7 @@ runtime.
 
 ## Constraints already decided
 
-- Tracing via OpenTelemetry to Phoenix, opt-in, injected: [[domains/infra/decisions#^D014]], [[domains/infra/current#^C022]].
+- Tracing via OpenTelemetry to Phoenix, opt-in, injected: [[domains/infra/decisions#^D014]], [[domains/infra/current#^start-telemetry]].
 - Telemetry is started by the process that runs the model: [[domains/host/decisions#^D006]].
 
 ## History

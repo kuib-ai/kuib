@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C028
+// @claim core/message-replay
 import type { ModelMessage } from "ai";
 import Protocol from "@kuib-ai/protocol";
 import Std from "@kuib-ai/std";
@@ -20,6 +20,7 @@ const parseInput = function (raw: string): Record<string, unknown> {
   return value;
 };
 
+// @claim core/message-replay
 const buildMessages = function (
   eventLog: EventLogPort,
   sessionID: SessionID,

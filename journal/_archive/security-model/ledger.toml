@@ -23,7 +23,7 @@ to = ["R403"]
 [[section]]
 file = "decisions.md"
 heading = "Security Profiles — Per-Device (User-Configurable)"
-to = ["R404", "infra#C016"]
+to = ["R404", "infra/config-schema"]
 note = "Only the [security] profile config key is built; no gate reads it."
 
 [[section]]
@@ -34,7 +34,7 @@ to = ["R405", "R406", "R407"]
 [[section]]
 file = "decisions.md"
 heading = "Per-user daemon scoping & local auth (2026-07-01)"
-to = ["R402", "infra#C017"]
+to = ["R402", "infra/app-paths"]
 
 [[section]]
 file = "decisions.md"

@@ -1,4 +1,5 @@
-// @context @journal/domains/infra#^C019
+// @claim infra/logger-port
+// @claim infra/logger-port
 export enum LogLevelEnum {
   FATAL = "fatal",
   ERROR = "error",

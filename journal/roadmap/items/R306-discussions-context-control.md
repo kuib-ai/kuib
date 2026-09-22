@@ -43,7 +43,7 @@ Screens:
 - The quick-toggle list lives in the Context pane of [[roadmap/wireframes/session-layout]].
 
 What exists: every part already carries `excluded` and a `PartID`, and messages carry a
-`discussionID` ([[domains/core/current#^C008]], [[domains/core/current#^C004]]). The
+`discussionID` ([[domains/core/current#^protocol-parts]], [[domains/core/current#^protocol-ids]]). The
 exclusion/discussion events and the context-build filter do not.
 
 ## Why

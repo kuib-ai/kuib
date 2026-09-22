@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C025
+// @claim infra/house-style-rules
 import { ESLintUtils } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
@@ -7,10 +7,11 @@ const createRule = ESLintUtils.RuleCreator(function (name) {
 
 type MessageIds = "noComments";
 
+// @claim infra/house-style-rules
 const isAllowedComment = function (value: string): boolean {
   const trimmed = value.trim();
   return (
-    trimmed.includes("@context") ||
+    /^@claim\s/.test(trimmed) ||
     /^eslint-disable/.test(trimmed) ||
     /^eslint-enable/.test(trimmed) ||
     /^eslint /.test(trimmed) ||
@@ -25,12 +26,12 @@ const noProseComments = createRule<[], MessageIds>({
     type: "suggestion",
     docs: {
       description:
-        "Disallow comments except @context links and eslint/ts tooling directives.",
+        "Disallow comments except @claim links and eslint/ts tooling directives.",
     },
     schema: [],
     messages: {
       noComments:
-        "Comments are not allowed except @context links and eslint-disable/ts directives. Code should be self-explanatory.",
+        "Comments are not allowed except @claim links and eslint-disable/ts directives. Code should be self-explanatory.",
     },
   },
   defaultOptions: [],

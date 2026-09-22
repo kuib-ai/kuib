@@ -1,8 +1,9 @@
-// @context @journal/domains/core#^C039
+// @claim core/daemon-server
 
 import Config from "@kuib-ai/config";
 import createDaemonServer from "../server/index.ts";
 
+// @claim core/daemon-server
 const main = function (): void {
   const bootstrap = Config.bootstrapConfig();
   Config.ensureAppPaths(bootstrap.paths);

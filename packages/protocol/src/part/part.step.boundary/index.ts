@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C008
+// @claim core/protocol-parts
 import { z } from "zod";
 import { PartTypeEnum } from "../part.type.enum/index.ts";
 import { StepBoundaryKindEnum } from "../step.boundary.kind.enum/index.ts";
@@ -24,6 +24,7 @@ const PartStepBoundaryStop = StepBoundaryPartBase.extend({
 });
 type PartStepBoundaryStop = z.infer<typeof PartStepBoundaryStop>;
 
+// @claim core/protocol-parts
 const PartStepBoundary = z.discriminatedUnion("kind", [
   PartStepBoundaryStart,
   PartStepBoundaryStop,

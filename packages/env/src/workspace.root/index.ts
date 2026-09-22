@@ -1,7 +1,8 @@
-// @context @journal/domains/infra#^C011
+// @claim infra/bootstrap-env
 import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
+// @claim infra/bootstrap-env
 const findWorkspaceRoot = function (start: string): string {
   let current = start;
   while (true) {

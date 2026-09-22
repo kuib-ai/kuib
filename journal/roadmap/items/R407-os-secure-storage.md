@@ -34,7 +34,7 @@ carry them.
 
 ## Constraints already decided
 
-- Secrets are returned beside the config, never inside it; `.env` is gitignored: [[domains/infra/current#^C018]], [[domains/infra/decisions#^D013]].
+- Secrets are returned beside the config, never inside it; `.env` is gitignored: [[domains/infra/current#^config-secrets]], [[domains/infra/decisions#^D013]].
 
 ## History
 

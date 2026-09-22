@@ -22,7 +22,7 @@ The original Ana plan spawned Hex's embedded service (`hex service --embedded`, 
 architecture supports streaming, and streaming (transcribe as chunks arrive) saves more
 perceived latency than where inference runs. The stt-engine feature already resolved this by
 talking to **FluidAudio directly** and offering streaming sessions ([[domains/product/decisions#^D008]],
-[[domains/product/current#^C009]]); this item tracks any remaining question of whether to keep
+[[domains/product/current#^coreml-stream-sessions]]); this item tracks any remaining question of whether to keep
 FluidAudio direct or go lower to NeMo for streaming. Landscape detail:
 [[roadmap/research/voice-io-landscape#Streaming vs Batch]].
 

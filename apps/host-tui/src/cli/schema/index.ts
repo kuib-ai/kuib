@@ -1,6 +1,6 @@
+// @claim host/cli-schema
 import type { CliSchema } from "@kuib-ai/cli/cli.schema";
 
-// @context @journal/domains/host#^C007
 const schema: CliSchema = {
   description: "Kuib AI Terminal Interface",
   options: {

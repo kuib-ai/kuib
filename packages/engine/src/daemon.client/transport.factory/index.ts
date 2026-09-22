@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C041
+// @claim core/daemon-client
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import Protocol from "@kuib-ai/protocol";
 import type { DaemonRouter } from "@kuib-ai/daemon/daemon.router";
@@ -6,6 +6,7 @@ import type { AnyEndpoint } from "@kuib-ai/protocol/endpoint/endpoint.any";
 
 type UnixRequestInit = RequestInit & { client: Deno.HttpClient };
 
+// @claim core/daemon-client
 const createDaemonClient = function (endpoint: AnyEndpoint) {
   if (endpoint.kind === Protocol.Endpoint.EndpointKindEnum.TCP) {
     return createTRPCClient<DaemonRouter>({

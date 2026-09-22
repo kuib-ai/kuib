@@ -68,7 +68,7 @@ The design is the only remaining record of the web boundary's security reasoning
 ## Constraints already decided
 
 - The engine runs in the serve process, never inside a UI host: [[domains/host/decisions#^D001]].
-- `[web] port` config already exists (default 4321): [[domains/infra/current#^C016]].
+- `[web] port` config already exists (default 4321): [[domains/infra/current#^config-schema]].
 
 ## History
 

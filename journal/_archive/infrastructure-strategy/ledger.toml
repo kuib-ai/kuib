@@ -14,7 +14,7 @@ note = "Daemon-as-separate-process and engine-outside-UI are built; leader-elect
 [[section]]
 file = "decisions.md"
 heading = "Transport & RPC"
-to = ["core#D001", "core#D014", "core#C041", "R400"]
+to = ["core#D001", "core#D014", "core/daemon-client", "R400"]
 note = "Zod-native tRPC over unix socket / TCP is built; the WireGuard/tailnet substrate is R400."
 
 [[section]]
@@ -43,7 +43,7 @@ to = ["R400"]
 [[section]]
 file = "decisions.md"
 heading = "Keep the substrate behind a contract — do NOT double down on Headscale (2026-07-01)"
-to = ["core#D028", "core#C013", "core#C015", "core#C048", "R400"]
+to = ["core#D028", "core/protocol-ports", "core/endpoints", "core/discovery", "R400"]
 
 [[section]]
 file = "decisions.md"

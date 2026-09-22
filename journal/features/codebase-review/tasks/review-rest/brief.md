@@ -1,3 +1,17 @@
+---
+status: "done"
+role: "reviewer"
+gate: "none"
+items: ["P01-I03"]
+grant: ["journal/features/codebase-review/tasks/review-rest/**"]
+agent: "claude"
+command: "claude --model claude-opus-5 --effort xhigh"
+cwd: "/Users/rs10/developer/kuib-ai/kuib"
+session: "kuib-ai/kuib/root"
+started: "2026-09-22T21:18:38"
+finished: "2026-09-22T21:38:04"
+reported: "done"
+---
 # review-rest — host, infra packages and services: bugs + claim truth
 
 Feature: journal/features/codebase-review/ · Item: P01-I03 · Roadmap: R005

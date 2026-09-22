@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C016
+// @claim infra/config-schema
 import { z } from "zod";
 import Std from "@kuib-ai/std";
 
@@ -16,6 +16,7 @@ const TargetConfigFile = z
   .strict()
   .prefault({});
 
+// @claim infra/config-schema
 const ModelConfigFile = z
   .object({
     default: z.string().min(1).default("groq/llama-3.3-70b-versatile"),
@@ -45,6 +46,7 @@ const WebConfigFile = z
   .strict()
   .prefault({});
 
+// @claim infra/config-schema
 const SecurityConfigFile = z
   .object({
     profile: z
@@ -54,6 +56,7 @@ const SecurityConfigFile = z
   .strict()
   .prefault({});
 
+// @claim infra/config-schema
 const KuibConfigFile = z
   .object({
     node: NodeConfigFile,

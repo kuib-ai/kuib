@@ -12,6 +12,11 @@ supersedes: []
 superseded-by: []
 roadmap: R003
 context: []
+checkpoint:
+  summary: "P01 code complete. Renamed to services/stt-coreml. Swift 6.0 (toolchain 6.3.3 on minerva), SwiftNIO for socket server, Nx project.json wired. All P01 items done. Shifting to minerva for first build + FluidAudio version verification. Before P02: swift build on minerva (verify FluidAudio resolves), then test transcription end-to-end; P01 items move to verified after that."
+  next: ["P02-I01"]
+  blockers: []
+  note: ""
 ---
 
 # Plan — stt-engine
@@ -31,7 +36,7 @@ platform-agnostic boundary; apps only depend on the client.
 - Cloud/API-based STT (MiMo ASR is a fallback, not the primary path).
 - Phone client or multi-device audio routing (later; Ana scope).
 - Wake word detection (separate concern).
-- TTS (separate feature; MiMo API + Kokoro decided in [[ana]]).
+- TTS (separate feature; MiMo API + Kokoro decided in [[_archive/ana/decisions|ana]]).
 
 ## Principles
 
@@ -50,12 +55,24 @@ platform-agnostic boundary; apps only depend on the client.
   dependency. Parakeet TDT v3 CoreML model loads on startup via FluidAudio's AsrManager.
   Model stays resident in memory. Measured cold load time and warm inference time on
   minerva's M4.
+- State: implemented
+- Decisions: D001, D002, D003, D005
+- Addresses: G001
+- Refs:
+  - `services/stt-coreml/Package.swift` — Package.swift
+  - `services/stt-coreml/Sources/SttCoreML/ParakeetBackend.swift` — ParakeetBackend.swift
 
 ### P01-I02 — Batch transcription over unix socket
 
 - Acceptance: Server listens on `~/.kuib/stt.sock`. Accepts PCM 16-bit 16kHz audio
   buffer, calls FluidAudio's transcribe API, returns transcript text. JSON protocol
   over the socket. Measured end-to-end latency for a 3-second utterance.
+- State: implemented
+- Decisions: D004
+- Refs:
+  - `services/stt-coreml/Sources/SttCoreML/Server.swift` — Server.swift
+  - `services/stt-coreml/Sources/SttCoreML/Protocol.swift` — Protocol.swift
+  - `services/stt-coreml/Sources/SttCoreML/Main.swift` — Main.swift
 
 ### P01-I03 — Backend abstraction for multi-engine support
 
@@ -63,6 +80,10 @@ platform-agnostic boundary; apps only depend on the client.
   FluidAudio is the first backend. The protocol allows adding mlx-swift backends (P03)
   without changing the server or socket protocol. Model selection per request via a
   `engine` field in the JSON protocol.
+- State: implemented
+- Decisions: D006
+- Refs:
+  - `services/stt-coreml/Sources/SttCoreML/SttBackend.swift` — SttBackend.swift
 
 ## P02 — Streaming inference
 
@@ -71,12 +92,15 @@ platform-agnostic boundary; apps only depend on the client.
 - Acceptance: Server processes audio chunks as they arrive (configurable chunk window).
   Emits partial transcripts as chunks complete. Final transcript emitted on end-of-utterance.
   Measured first-partial latency.
+- State: planned
+- Addresses: G003
 
 ### P02-I02 — VAD integration for end-of-utterance
 
 - Acceptance: Voice activity detection determines when user stops speaking. Silence
   threshold configurable. Avoids premature cutoff on pauses. Can use Silero VAD or
   similar lightweight model.
+- State: planned
 
 ## P03 — Qwen3-ASR via MLX Swift (accuracy path)
 
@@ -85,11 +109,14 @@ platform-agnostic boundary; apps only depend on the client.
 - Acceptance: Server can load Qwen3-ASR 0.6B (5-bit quantized) via mlx-swift alongside
   Parakeet CoreML. Model selection configurable. Measured WER and latency on minerva
   compared to Parakeet.
+- State: planned
+- Decisions: D001, D006
 
 ### P03-I02 — Model switching / dual-model pipeline
 
 - Acceptance: Configurable model selection per request. Option for dual-pipeline: fast
   partial via Parakeet, high-accuracy final via Qwen3-ASR when utterance completes.
+- State: planned
 
 ## P04 — TypeScript client package
 
@@ -98,11 +125,14 @@ platform-agnostic boundary; apps only depend on the client.
 - Acceptance: `packages/stt` with Zod-typed schemas for STT events (partial transcript,
   final transcript, error). Connects to the unix socket. Runtime-agnostic (no Bun or
   Deno-specific APIs in the public interface).
+- State: planned
+- Addresses: G004
 
 ### P04-I02 — Streaming API
 
 - Acceptance: Client exposes an async iterator / event emitter for streaming transcripts.
   Ana can subscribe to partial results as they arrive.
+- State: planned
 
 ## Decisions
 

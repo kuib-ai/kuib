@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C032
+// @claim core/live-provider-tests
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import { readFileSync, existsSync } from "node:fs";

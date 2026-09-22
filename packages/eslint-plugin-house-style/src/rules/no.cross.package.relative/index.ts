@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C024
+// @claim infra/house-structure-rules
 import * as path from "node:path";
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 
@@ -25,6 +25,7 @@ type SourcedNode =
   | TSESTree.ExportNamedDeclaration
   | TSESTree.ExportAllDeclaration;
 
+// @claim infra/house-structure-rules
 const noCrossPackageRelative = createRule<[], MessageIds>({
   name: "no-cross-package-relative",
   meta: {

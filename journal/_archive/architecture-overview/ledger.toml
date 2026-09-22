@@ -3,7 +3,7 @@ entry = "architecture-overview"
 [[section]]
 file = "decisions.md"
 heading = "Current Decisions"
-to = ["core#C001"]
+to = ["core/core-packages"]
 note = "container heading; children mapped individually"
 
 [[section]]
@@ -15,7 +15,7 @@ note = "'TypeScript only' no longer holds (Swift and Python STT services, produc
 [[section]]
 file = "decisions.md"
 heading = "Monorepo Structure (kuib repo)"
-to = ["core#C001", "host#C001", "R214"]
+to = ["core/core-packages", "host/host-layout", "R214"]
 note = "packages/host, apps/server, apps/daemon, apps/cli never built as sketched; the server role is part of R214"
 
 [[section]]
@@ -26,17 +26,17 @@ to = ["spec", "infra#D001"]
 [[section]]
 file = "decisions.md"
 heading = "Package Dependency Flow"
-to = ["core#C001", "core#D014", "core#D028", "R214"]
+to = ["core/core-packages", "core#D014", "core#D028", "R214"]
 
 [[section]]
 file = "decisions.md"
 heading = "Interface-Based I/O"
-to = ["core#C013", "core#D012", "R218"]
+to = ["core/protocol-ports", "core#D012", "R218"]
 
 [[section]]
 file = "decisions.md"
 heading = "Build System"
-to = ["infra#C005", "infra#C006", "infra#D004", "infra#D008", "infra#D009"]
+to = ["infra/pnpm-workspace", "infra/nx-tasks", "infra#D004", "infra#D008", "infra#D009"]
 
 [[section]]
 file = "decisions.md"
@@ -47,7 +47,7 @@ note = "Bun/OpenTUI runtime and bun build --compile distribution are history"
 [[section]]
 file = "decisions.md"
 heading = "Config & Env Resolution (`@kuib-ai/env`, 2026-07-01)"
-to = ["infra#D013", "infra#C011", "infra#C015", "core#D027", "R219"]
+to = ["infra#D013", "infra/bootstrap-env", "infra/bootstrap-config", "core#D027", "R219"]
 
 [[section]]
 file = "decisions.md"

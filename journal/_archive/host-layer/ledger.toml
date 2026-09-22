@@ -19,13 +19,13 @@ to = ["R313"]
 [[section]]
 file = "decisions.md"
 heading = "v1 Frontend — OpenTUI + Solid (nvim-flavored)"
-to = ["R300", "R301", "host#D002", "host#C001"]
+to = ["R300", "R301", "host#D002", "host/host-layout"]
 note = "OpenTUI/Bun mechanics dropped; layout and nvim-flavored interaction kept as intent"
 
 [[section]]
 file = "decisions.md"
 heading = "Runtime"
-to = ["host#D003", "host#C002"]
+to = ["host#D003", "host/host-runtime"]
 note = "Bun runtime superseded by Deno"
 
 [[section]]
@@ -46,13 +46,13 @@ to = ["host#D001", "core#D014", "core#D015"]
 [[section]]
 file = "decisions.md"
 heading = "Engine lifecycle & idempotent discovery"
-to = ["core#D017", "core#C045", "R302"]
+to = ["core#D017", "core/connect-or-spawn", "R302"]
 note = "mechanism built in core; host wiring is R302"
 
 [[section]]
 file = "decisions.md"
 heading = "Single binary, multi-role distribution"
-to = ["host#D004", "host#C004", "R303"]
+to = ["host#D004", "host/role-dispatch", "R303"]
 
 [[section]]
 file = "decisions.md"
@@ -62,7 +62,7 @@ to = ["R304"]
 [[section]]
 file = "decisions.md"
 heading = "Node composition + corrected lifecycle (2026-07-01, supersedes \"detached-child default\")"
-to = ["host#D001", "core#D017", "core#C040", "R304", "R302"]
+to = ["host#D001", "core#D017", "core/ensure-daemon", "R304", "R302"]
 
 [[section]]
 file = "decisions.md"
@@ -77,18 +77,18 @@ to = ["core#D015"]
 [[section]]
 file = "decisions.md"
 heading = "Control plane vs data plane"
-to = ["core#D016", "core#C042", "R302"]
+to = ["core#D016", "core/service-socket", "R302"]
 note = "doorbell unbuilt, in R302"
 
 [[section]]
 file = "decisions.md"
 heading = "How the host gets read access"
-to = ["core#D016", "core#C022", "R302"]
+to = ["core#D016", "core/sqlite-reader", "R302"]
 
 [[section]]
 file = "decisions.md"
 heading = "Lifecycle (single-device)"
-to = ["core#D017", "core#C044"]
+to = ["core#D017", "core/service-lifecycle"]
 
 [[section]]
 file = "decisions.md"
@@ -98,13 +98,13 @@ to = ["core#D016"]
 [[section]]
 file = "decisions.md"
 heading = "Turn scheduling — per-session queue + step-boundary steering (2026-07-02)"
-to = ["host#D007", "core#D018", "core#C043", "core#D019"]
+to = ["host#D007", "core#D018", "core/turn-queue", "core#D019"]
 note = "host-web gap and OpenTUI mouse note dropped"
 
 [[section]]
 file = "decisions.md"
 heading = "Open Questions"
-to = ["R313", "R301", "R304", "host#C009"]
+to = ["R313", "R301", "R304", "host/serve-wiring"]
 note = "idle-reap timeout resolved as reapIdleMs 5000 in serve"
 
 [[section]]
@@ -142,7 +142,7 @@ to = ["R300"]
 [[section]]
 file = "decisions.md"
 heading = "TUI dev loop — no HMR anywhere; watch-restart against the persistent engine (2026-07-03)"
-to = ["host#D008", "host#C002", "R312"]
+to = ["host#D008", "host/host-runtime", "R312"]
 note = "Bun --hot tier dropped"
 
 [[section]]

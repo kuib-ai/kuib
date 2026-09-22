@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C025
+// @claim infra/house-style-rules
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
@@ -72,6 +72,7 @@ const returnsJsx = function (fn: FunctionNode): boolean {
   return false;
 };
 
+// @claim infra/house-style-rules
 const noDestructureProps = createRule<[], MessageIds>({
   name: "no-destructure-props",
   meta: {

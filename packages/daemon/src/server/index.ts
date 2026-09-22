@@ -1,8 +1,9 @@
-// @context @journal/domains/core#^C039
+// @claim core/daemon-server
 import { rmSync } from "node:fs";
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import daemonRouter from "../daemon.router/index.ts";
 
+// @claim core/daemon-server
 const createDaemonServer = function (socketPath: string, port?: number) {
   rmSync(socketPath, { force: true });
   const server = createHTTPServer({ router: daemonRouter });

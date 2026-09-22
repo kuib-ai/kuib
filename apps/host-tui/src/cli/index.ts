@@ -1,6 +1,7 @@
-// @context @journal/domains/host#^C007
+// @claim host/cli-schema
 import schema from "./schema/index.ts";
 
+// @claim host/cli-schema
 const cli = {
   schema,
 };

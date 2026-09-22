@@ -1,4 +1,4 @@
-// @context @journal/domains/host#^C008
+// @claim host/serve-startup
 
 import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
@@ -11,6 +11,7 @@ import Telemetry from "@kuib-ai/telemetry";
 import type createLog from "../../log/index.ts";
 import resolveDaemonClient from "../../resolve.daemon.client/index.ts";
 
+// @claim host/serve-startup
 const serve = async function (
   bootstrap: BootstrapConfig,
   deviceID: DeviceID,

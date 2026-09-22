@@ -39,7 +39,7 @@ loop around live iteration is what makes it fast. The loop:
 `h/l` (and `j/k`) flip screens; the list shows screen + status; works over SSH so co-design
 sessions flip sketches next to the running UI in one tmux. It dogfoods the library's stock
 components (select, scroll box, text). It is the right-hand pane of the design session
-([[domains/infra/current#^C029]]), which currently has nothing to show there.
+([[domains/infra/current#^design-script]]), which currently has nothing to show there.
 
 Deferred/optional: a PTY driver for agent-run end-to-end tests, scripted GIF recordings for
 design review.

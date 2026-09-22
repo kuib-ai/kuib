@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C024
+// @claim infra/house-structure-rules
 import { ESLintUtils } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
@@ -9,6 +9,7 @@ type MessageIds = "namedFromRoot";
 
 const PACKAGE_ROOT = /^@kuib-ai\/[^/]+$/;
 
+// @claim infra/house-structure-rules
 const noNamedImportFromPackageRoot = createRule<[], MessageIds>({
   name: "no-named-import-from-package-root",
   meta: {

@@ -1,0 +1,10 @@
+{
+  "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+  ".claude/skills": "3c74c93317f015d16370349a76529b6f8332c808bdd589e7640eeba6a1b1b874",
+  ".claude/settings.json": "2efcc4ff48b71d30740383c5195a36e9018162e98f1e403fac052fcc127f331f",
+  ".mcp.json": "d8e397af03b5b032f21d0aa967086f0c78b33c87b76f2e9898ae0a144df7de02",
+  ".cursor/mcp.json": "d8e397af03b5b032f21d0aa967086f0c78b33c87b76f2e9898ae0a144df7de02",
+  ".cursor/hooks.json": "444f191fae75d5f721e102f5f9d4a66d7fbc840588e9b50ed0fae9df231c3807",
+  ".gemini/settings.json": "bc17f7017afd8a7b2739cecde6f1f35ec3c97e297261e4dff91c4228aca3a732",
+  ".agents/rules/agents.md": "1a6997a98466219763ec5ea086f118c97a0e890b85a8c99fba03186952de2f68"
+}

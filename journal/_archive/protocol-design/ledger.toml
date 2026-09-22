@@ -11,49 +11,49 @@ note = "container heading with no content of its own; children mapped individual
 [[section]]
 file = "decisions.md"
 heading = "Package: `@kuib/protocol`"
-to = ["core#D001", "core#C018", "core#C036"]
+to = ["core#D001", "core/proto-definitions", "core/daemon-router"]
 
 [[section]]
 file = "decisions.md"
 heading = "Tooling — tsgo only, no tsc"
-to = ["infra#D004", "infra#D008", "infra#C006", "infra#C007"]
+to = ["infra#D004", "infra#D008", "infra/nx-tasks", "infra/deno-runtime"]
 note = "tsgo -b emit/composite builds dropped: tsgo is --noEmit only and Deno runs source"
 
 [[section]]
 file = "decisions.md"
 heading = "TS 7.0 Compatibility"
-to = ["infra#C007"]
+to = ["infra/deno-runtime"]
 
 [[section]]
 file = "decisions.md"
 heading = "Native TS Enums for All Discriminators"
-to = ["core#D002", "core#C005"]
+to = ["core#D002", "core/protocol-enums"]
 
 [[section]]
 file = "decisions.md"
 heading = "Architecture Pattern: Unified Event Log (2026-04-28)"
-to = ["core#D004", "core#C006", "R201"]
+to = ["core#D004", "core/protocol-events", "R201"]
 
 [[section]]
 file = "decisions.md"
 heading = "Two Worlds: Events vs Messages"
-to = ["R200", "core#C019"]
+to = ["R200", "core/memory-event-log"]
 note = "'events are ephemeral' is contradicted: every event is durably logged; the messages-snapshot half is unbuilt"
 
 [[section]]
 file = "decisions.md"
 heading = "Event System: EventLog with Envelopes (revised 2026-04-28)"
-to = ["core#D004", "core#C007"]
+to = ["core#D004", "core/event-envelope"]
 
 [[section]]
 file = "decisions.md"
 heading = "Versioning boundaries (2026-06-30)"
-to = ["core#D005", "core#C007", "core#C010", "R212", "R209"]
+to = ["core#D005", "core/event-envelope", "core/protocol-messages", "R212", "R209"]
 
 [[section]]
 file = "decisions.md"
 heading = "Atomic Commit Protocol (2026-04-28)"
-to = ["core#C021", "R200", "R201"]
+to = ["core/sqlite-writer", "R200", "R201"]
 
 [[section]]
 file = "decisions.md"
@@ -63,33 +63,33 @@ to = ["R200", "R202", "R214"]
 [[section]]
 file = "decisions.md"
 heading = "SQLite backing — `bun:sqlite` now, `node:sqlite` later (LOCKED 2026-07-01, supersedes runtime-adaptive)"
-to = ["core#D010", "core#C013", "core#C020", "core#C021", "core#C022", "R200", "R214"]
+to = ["core#D010", "core/protocol-ports", "core/sqlite-schema", "core/sqlite-writer", "core/sqlite-reader", "R200", "R214"]
 note = "bun:sqlite / bun test quarantine is history; messages/sessions/checkpoints tables -> R200, applyReplicated -> R214"
 
 [[section]]
 file = "decisions.md"
 heading = "The event log is one log = localDB + streams (2026-07-01)"
-to = ["core#C022", "R214"]
+to = ["core/sqlite-reader", "R214"]
 
 [[section]]
 file = "decisions.md"
 heading = "Reasoning is content, not a tool call (2026-07-01)"
-to = ["core#D006", "core#C024", "R217"]
+to = ["core#D006", "core/finish-reasons", "R217"]
 
 [[section]]
 file = "decisions.md"
 heading = "Terminal events — needed, not yet in the union (2026-07-01)"
-to = ["core#D007", "core#C025"]
+to = ["core#D007", "core/turn-terminal-events"]
 
 [[section]]
 file = "decisions.md"
 heading = "Context assembly gap — model has no memory across turns (2026-07-01)"
-to = ["core#D011", "core#C028"]
+to = ["core#D011", "core/message-replay"]
 
 [[section]]
 file = "decisions.md"
 heading = "Three storage classes — do not conflate (2026-06-30)"
-to = ["core#C020", "infra#C018", "R219"]
+to = ["core/sqlite-schema", "infra/config-secrets", "R219"]
 
 [[section]]
 file = "decisions.md"
@@ -99,7 +99,7 @@ to = ["R201"]
 [[section]]
 file = "decisions.md"
 heading = "Event Taxonomy — Revised (2026-04-26)"
-to = ["core#C006", "core#D007", "R203", "R204", "R210", "R211"]
+to = ["core/protocol-events", "core#D007", "R203", "R204", "R210", "R211"]
 
 [[section]]
 file = "decisions.md"
@@ -109,12 +109,12 @@ to = ["R204"]
 [[section]]
 file = "decisions.md"
 heading = "Message Format — Finalized (v3, 2026-04-25)"
-to = ["core#C010", "core#D009", "R203"]
+to = ["core/protocol-messages", "core#D009", "R203"]
 
 [[section]]
 file = "decisions.md"
 heading = "MessageUser.originDeviceID (2026-04-25)"
-to = ["core#C010", "R213"]
+to = ["core/protocol-messages", "R213"]
 
 [[section]]
 file = "decisions.md"
@@ -139,17 +139,17 @@ to = ["R207"]
 [[section]]
 file = "decisions.md"
 heading = "Part Types — Content + Step Boundaries"
-to = ["core#C008", "core#D009"]
+to = ["core/protocol-parts", "core#D009"]
 
 [[section]]
 file = "decisions.md"
 heading = "Tool Call Parts — Append-Only, No Mutation"
-to = ["core#C009", "core#D008", "R200"]
+to = ["core/tool-call-states", "core#D008", "R200"]
 
 [[section]]
 file = "decisions.md"
 heading = "Tool Call Error — Reason Enum"
-to = ["core#C009", "core#D008", "R206"]
+to = ["core/tool-call-states", "core#D008", "R206"]
 
 [[section]]
 file = "decisions.md"
@@ -159,12 +159,12 @@ to = ["R206"]
 [[section]]
 file = "decisions.md"
 heading = "Tool Call Kind — Normal vs Subagent"
-to = ["core#C009", "core#D008", "R217"]
+to = ["core/tool-call-states", "core#D008", "R217"]
 
 [[section]]
 file = "decisions.md"
 heading = "Step Boundaries — Per-Step Model Tracking"
-to = ["core#C008", "core#C024", "core#D009", "R216"]
+to = ["core/protocol-parts", "core/finish-reasons", "core#D009", "R216"]
 
 [[section]]
 file = "decisions.md"
@@ -201,7 +201,7 @@ to = ["core#D014", "core#D028", "R214"]
 [[section]]
 file = "decisions.md"
 heading = "Mesh Protocol, 3-Tier Runtime in v1 (2026-06-30)"
-to = ["core#D014", "core#C007", "R213", "R214"]
+to = ["core#D014", "core/event-envelope", "R213", "R214"]
 
 [[section]]
 file = "decisions.md"
@@ -216,13 +216,13 @@ to = ["R205", "R204"]
 [[section]]
 file = "decisions.md"
 heading = "Module Structure"
-to = ["core#C002", "R205", "R213", "R215"]
+to = ["core/package-barrels", "R205", "R213", "R215"]
 note = "single-file modules replaced by dot-case unit directories; provider/transport/io modules dropped (AI SDK, tRPC, ports)"
 
 [[section]]
 file = "decisions.md"
 heading = "Design Principles"
-to = ["core#D003", "core#D002", "core#D008", "core#C001"]
+to = ["core#D003", "core#D002", "core#D008", "core/core-packages"]
 
 [[section]]
 file = "decisions.md"
@@ -237,7 +237,7 @@ to = ["R211"]
 [[section]]
 file = "decisions.md"
 heading = "Tool-call backends — where the pieces live (2026-07-01)"
-to = ["core#D012", "core#C033", "core#C034", "core#C035"]
+to = ["core#D012", "core/define-tool", "core/agent-tools", "core/build-tools"]
 
 [[section]]
 file = "decisions.md"
@@ -266,28 +266,28 @@ to = ["core#D001", "core#D003"]
 [[section]]
 file = "plan.md"
 heading = "Phases"
-to = ["core#C001"]
+to = ["core/core-packages"]
 note = "container heading"
 
 [[section]]
 file = "plan.md"
 heading = "Phase 1: Core Protocol (DONE)"
-to = ["core#C001", "core#D001"]
+to = ["core/core-packages", "core#D001"]
 
 [[section]]
 file = "plan.md"
 heading = "Phase 2: Engine"
-to = ["core#C023", "core#D020", "R215"]
+to = ["core/agent-turn", "core#D020", "R215"]
 
 [[section]]
 file = "plan.md"
 heading = "Phase 3: Provider Adapters"
-to = ["core#C030", "core#D022", "R216"]
+to = ["core/provider-factories", "core#D022", "R216"]
 
 [[section]]
 file = "plan.md"
 heading = "Phase 4: Tools"
-to = ["core#C034", "R217"]
+to = ["core/agent-tools", "R217"]
 
 [[section]]
 file = "plan.md"
@@ -298,7 +298,7 @@ note = "OpenTUI option dropped; kuib builds its own TUI library"
 [[section]]
 file = "plan.md"
 heading = "Verification"
-to = ["infra#C006"]
+to = ["infra/nx-tasks"]
 note = "tsgo -b emit checks dropped: no build step, Deno runs source"
 
 # progress.md
@@ -318,7 +318,7 @@ note = "history: the first-generation protocol modules were deleted and rebuilt;
 [[section]]
 file = "progress.md"
 heading = "In Progress — Protocol Review & Refinement (2026-04-23)"
-to = ["core#D008", "core#D009", "core#C008", "core#C009", "core#C010"]
+to = ["core#D008", "core#D009", "core/protocol-parts", "core/tool-call-states", "core/protocol-messages"]
 
 [[section]]
 file = "progress.md"
@@ -335,12 +335,12 @@ note = "'tool dispatch only, engine never moves' superseded by the replicated-lo
 [[section]]
 file = "progress.md"
 heading = "Rebuild list"
-to = ["core#C006", "R203", "R204", "R211", "R213", "R215", "R218"]
+to = ["core/protocol-events", "R203", "R204", "R211", "R213", "R215", "R218"]
 
 [[section]]
 file = "progress.md"
 heading = "Remaining"
-to = ["host#D002", "core#C001", "R216", "R217"]
+to = ["host#D002", "core/core-packages", "R216", "R217"]
 
 # research/superseded.md
 

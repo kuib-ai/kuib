@@ -1,6 +1,7 @@
-// @context @journal/domains/infra#^C017
+// @claim infra/app-paths
 import { z } from "zod";
 
+// @claim infra/app-paths
 const AppPaths = z.object({
   configFile: z.string().min(1),
   meshConfigFile: z.string().min(1),

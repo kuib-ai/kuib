@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C012
+// @claim core/protocol-errors
 import { ErrorCodeEnum } from "./error.code.enum/index.ts";
 import ErrorBase from "./error.base/index.ts";
 import ErrorUnknown from "./error.unknown/index.ts";
@@ -8,6 +8,7 @@ import ErrorToolFailed from "./error.tool.failed/index.ts";
 import ErrorLlmFailed from "./error.llm.failed/index.ts";
 import AnyError from "./error.any/index.ts";
 
+// @claim core/protocol-errors
 const Error = {
   ErrorCodeEnum,
   ErrorBase,

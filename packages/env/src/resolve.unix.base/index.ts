@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C013
+// @claim infra/unix-dirs
 import { homedir, tmpdir } from "node:os";
 import { isAbsolute, join } from "node:path";
 import PathKind, { PathKindEnum } from "../path.kind/index.ts";
@@ -12,6 +12,7 @@ const envOr = function (key: string, fallback: () => string): string {
   return fallback();
 };
 
+// @claim infra/unix-dirs
 const resolveUnixBase = function (kind: PathKindType): string {
   const parsed = PathKind.parse(kind);
   switch (parsed) {

@@ -15,7 +15,7 @@ note = "Directory-as-node wikilink resolution replaced by SPEC Links (journal-re
 [[section]]
 file = "decisions.md"
 heading = "Two-Layer Retrieval"
-to = ["infra#D001", "infra#C002"]
+to = ["infra#D001", "infra/journal-check"]
 note = "Context now loads by layer; the generated _index.md survives as a build output, and features list their context for /remember."
 
 [[section]]
@@ -54,7 +54,7 @@ note = "Bootstrap validation sessions are history."
 [[section]]
 file = "decisions.md"
 heading = "Validation"
-to = ["infra#C002", "infra#C003"]
+to = ["infra/journal-check", "infra/claim-verification"]
 note = "compile-journal-index.ts replaced by scripts/journal.ts check/build/drift."
 
 [[section]]

@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C025
+// @claim infra/house-style-rules
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
@@ -7,6 +7,7 @@ const createRule = ESLintUtils.RuleCreator(function (name) {
 
 type MessageIds = "inlineUnionMember";
 
+// @claim infra/house-style-rules
 const namedUnionMembers = createRule<[], MessageIds>({
   name: "named-union-members",
   meta: {

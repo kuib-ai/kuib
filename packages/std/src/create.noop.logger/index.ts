@@ -1,8 +1,9 @@
-// @context @journal/domains/infra#^C019
+// @claim infra/logger-port
 import type { Logger, LogBindings, LogFn } from "../logger.port/index.ts";
 
 const noop: LogFn = function () {};
 
+// @claim infra/logger-port
 const createNoopLogger = function (): Logger {
   const logger: Logger = {
     debug: noop,

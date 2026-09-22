@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C022
+// @claim infra/start-telemetry
 import { registerTelemetry } from "ai";
 import { OpenTelemetry } from "@ai-sdk/otel";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
@@ -13,6 +13,7 @@ type StartTelemetryConfig = {
   serviceName: string | undefined;
 };
 
+// @claim infra/start-telemetry
 const startTelemetry = function (config: StartTelemetryConfig): boolean {
   if (config.endpoint === undefined || config.endpoint.length === 0) {
     return false;

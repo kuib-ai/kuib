@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C022
+// @claim core/sqlite-reader
 import { DatabaseSync } from "node:sqlite";
 import Protocol from "@kuib-ai/protocol";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
@@ -17,6 +17,7 @@ type TailRow = { rowid: number; envelope: string };
 type MaxRowidRow = { max: number };
 type FloorRow = { floor: number };
 
+// @claim core/sqlite-reader
 const createSqliteReader = function (
   path: string,
   pollIntervalMs: number = DEFAULT_POLL_MS,

@@ -1,7 +1,8 @@
-// @context @journal/domains/infra#^C016
+// @claim infra/config-schema
 import { z } from "zod";
 import Std from "@kuib-ai/std";
 
+// @claim infra/config-schema
 const KuibConfig = z.object({
   node: z.object({ label: z.string().min(1) }),
   target: z.object({ node: z.string().min(1) }),

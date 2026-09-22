@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C040
+// @claim core/ensure-daemon
 import net from "node:net";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -26,6 +26,7 @@ const sleep = function (ms: number): Promise<void> {
   });
 };
 
+// @claim core/ensure-daemon
 const ensureDaemon = async function (socketPath: string): Promise<void> {
   if (await probe(socketPath)) {
     return;

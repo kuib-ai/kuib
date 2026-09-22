@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C038
+// @claim core/daemon-exec
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import Std from "@kuib-ai/std";
@@ -8,6 +8,7 @@ import ExecuteCommandOutput from "../../io/execute.command.output/index.ts";
 
 const execAsync = promisify(exec);
 
+// @claim core/daemon-exec
 const executeCommand = Trpc.procedure
   .input(ExecuteCommandInput)
   .output(ExecuteCommandOutput)

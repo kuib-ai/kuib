@@ -1,6 +1,7 @@
-// @context @journal/domains/infra#^C012
+// @claim infra/base-dirs
 import { z } from "zod";
 
+// @claim infra/base-dirs
 const BaseDirs = z.object({
   config: z.string().min(1),
   data: z.string().min(1),

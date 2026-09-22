@@ -1,7 +1,8 @@
-// @context @journal/domains/core#^C035
+// @claim core/build-tools
 import { tool, type Tool } from "ai";
 import type { ToolSpec, ToolContext } from "@kuib-ai/tools/tool.spec";
 
+// @claim core/build-tools
 const buildTools = function (
   specs: readonly ToolSpec[],
   ctx: ToolContext,

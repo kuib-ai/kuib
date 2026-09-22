@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C030
+// @claim core/provider-factories
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGroq } from "@ai-sdk/groq";
@@ -7,6 +7,7 @@ import type { ModelConfig } from "@kuib-ai/protocol/provider/model.config";
 
 type ModelFactory = (config: ModelConfig) => LanguageModel;
 
+// @claim core/provider-factories
 const openAICompatibleFactory: ModelFactory = function (config) {
   const baseURL = config.options.baseURL;
   if (baseURL === undefined) {
@@ -30,12 +31,14 @@ const groqFactory: ModelFactory = function (config) {
   return provider(config.modelID);
 };
 
+// @claim core/provider-factories
 const FACTORIES: Record<string, ModelFactory> = {
   "@ai-sdk/openai-compatible": openAICompatibleFactory,
   "@ai-sdk/anthropic": anthropicFactory,
   "@ai-sdk/groq": groqFactory,
 };
 
+// @claim core/provider-factories
 const createModel = function (config: ModelConfig): LanguageModel {
   const factory = FACTORIES[config.npm];
   if (factory === undefined) {

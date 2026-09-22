@@ -1,10 +1,11 @@
-// @context @journal/domains/core#^C010
+// @claim core/protocol-messages
 import { z } from "zod";
 import { MessageRoleEnum } from "../message.role.enum/index.ts";
 import MessageBase from "../message.base/index.ts";
 import PartUser from "../../part/part.user/index.ts";
 import DeviceID from "../../id/device.id/index.ts";
 
+// @claim core/protocol-messages
 const MessageUser = MessageBase.extend({
   role: z.literal(MessageRoleEnum.USER),
   parts: z.array(PartUser),

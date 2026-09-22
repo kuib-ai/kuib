@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C004
+// @claim core/protocol-ids
 import { z } from "zod";
 
+// @claim core/protocol-ids
 const DeviceID = z.string().min(1).brand("DeviceID");
 type DeviceID = z.infer<typeof DeviceID>;
 

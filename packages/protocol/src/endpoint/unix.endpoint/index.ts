@@ -1,7 +1,8 @@
-// @context @journal/domains/core#^C015
+// @claim core/endpoints
 import { z } from "zod";
 import { EndpointKindEnum } from "../endpoint.kind.enum/index.ts";
 
+// @claim core/endpoints
 const UnixEndpoint = z.object({
   kind: z.literal(EndpointKindEnum.UNIX),
   socketPath: z.string().min(1),

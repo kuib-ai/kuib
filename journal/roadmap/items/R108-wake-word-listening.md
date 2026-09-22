@@ -33,7 +33,7 @@ always-listening capture loop on the client device.
 
 ## Constraints already decided
 
-- No server-side VAD today; streams end only on client `streamEnd`: [[domains/product/current#^C009]].
+- No server-side VAD today; streams end only on client `streamEnd`: [[domains/product/current#^coreml-stream-sessions]].
 
 ## History
 

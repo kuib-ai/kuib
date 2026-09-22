@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C021
+// @claim core/sqlite-writer
 import { DatabaseSync } from "node:sqlite";
 import Protocol from "@kuib-ai/protocol";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
@@ -17,6 +17,7 @@ const EPOCH = 0;
 type NextSeqRow = { next: number };
 type EnvelopeRow = { envelope: string };
 
+// @claim core/sqlite-writer
 const createSqliteEventLog = function (path: string): EventLogPort {
   const db = new DatabaseSync(path);
   initSchema(db);

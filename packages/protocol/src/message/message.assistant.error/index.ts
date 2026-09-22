@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C010
+// @claim core/protocol-messages
 import { z } from "zod";
 import { MessageRoleEnum } from "../message.role.enum/index.ts";
 import { MessageAssistantStatusEnum } from "../message.assistant.status.enum/index.ts";
@@ -33,6 +33,7 @@ type MessageAssistantErrorContextOverflow = z.infer<
   typeof MessageAssistantErrorContextOverflow
 >;
 
+// @claim core/protocol-messages
 const MessageAssistantError = z.discriminatedUnion("kind", [
   MessageAssistantErrorApi,
   MessageAssistantErrorUnknown,

@@ -56,7 +56,7 @@ unambiguous order of events across devices.
 ## Constraints already decided
 
 - `EventEnvelope` already carries `epoch` and `seq`; `replay` orders by `epoch, seq` —
-  [[domains/core/current#^C007]], [[domains/core/current#^C021]].
+  [[domains/core/current#^event-envelope]], [[domains/core/current#^sqlite-writer]].
 - Daemons addressed by node identity — [[domains/core/decisions#^D028]]; daemon always a
   separate process — [[domains/core/decisions#^D014]].
 - Zod-first protocol; proto only as a later transport — [[domains/core/decisions#^D001]].

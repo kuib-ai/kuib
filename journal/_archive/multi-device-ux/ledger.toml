@@ -38,12 +38,12 @@ to = ["R309"]
 [[section]]
 file = "decisions.md"
 heading = "Node identity & addressing — `user@device` (2026-07-01)"
-to = ["core#C015", "host#D005", "R309"]
+to = ["core/endpoints", "host#D005", "R309"]
 
 [[section]]
 file = "decisions.md"
 heading = "Discovery contracts (substrate-agnostic) (2026-07-01)"
-to = ["core#C013", "core#C015", "core#D028", "host#D005", "host#C010"]
+to = ["core/protocol-ports", "core/endpoints", "core#D028", "host#D005", "host/daemon-resolution"]
 note = "coordinator-backed discovery impl belongs with the mesh/infrastructure-strategy roadmap"
 
 [[section]]

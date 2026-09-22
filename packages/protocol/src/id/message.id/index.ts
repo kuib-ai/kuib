@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C004
+// @claim core/protocol-ids
 import { z } from "zod";
 
+// @claim core/protocol-ids
 const MessageID = z.string().min(1).brand("MessageID");
 type MessageID = z.infer<typeof MessageID>;
 

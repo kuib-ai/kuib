@@ -1,10 +1,11 @@
-// @context @journal/domains/core#^C036
+// @claim core/daemon-router
 import Trpc from "../trpc/index.ts";
 import executeCommand from "../procedure/execute.command/index.ts";
 import readFile from "../procedure/read.file/index.ts";
 import readDir from "../procedure/read.dir/index.ts";
 import writeFile from "../procedure/write.file/index.ts";
 
+// @claim core/daemon-router
 const daemonRouter = Trpc.router({
   executeCommand,
   readFile,

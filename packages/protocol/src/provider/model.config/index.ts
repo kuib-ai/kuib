@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C017
+// @claim core/model-config
 import { z } from "zod";
 
+// @claim core/model-config
 const ModelConfig = z.object({
   npm: z.string().min(1),
   providerID: z.string().min(1),

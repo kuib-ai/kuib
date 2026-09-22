@@ -40,7 +40,7 @@ The green gate is only as honest as the checks it includes.
 ## Constraints already decided
 
 - Colocated, hermetic Deno tests; verification = tests plus `pnpm run check`: [[domains/infra/decisions#^D023]].
-- What `pnpm run check` runs today: [[domains/infra/current#^C008]].
+- What `pnpm run check` runs today: [[domains/infra/current#^check-pipeline]].
 - Reload clears the detached runtime: [[domains/infra/decisions#^D021]].
 
 ## History

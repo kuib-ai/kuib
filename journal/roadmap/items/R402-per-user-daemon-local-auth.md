@@ -42,8 +42,8 @@ not asserted anywhere, and the daemon's optional TCP listener binds all interfac
 
 ## Constraints already decided
 
-- Socket directories are created at mode `0700`: [[domains/infra/current#^C017]].
-- The daemon is a separate process reached over a unix socket locally: [[domains/core/decisions#^D014]], [[domains/core/current#^C039]].
+- Socket directories are created at mode `0700`: [[domains/infra/current#^app-paths]].
+- The daemon is a separate process reached over a unix socket locally: [[domains/core/decisions#^D014]], [[domains/core/current#^daemon-server]].
 
 ## History
 

@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C008
+// @claim core/protocol-parts
 import { PartTypeEnum } from "./part.type.enum/index.ts";
 import { StepBoundaryKindEnum } from "./step.boundary.kind.enum/index.ts";
 import { StepBoundaryStopReasonEnum } from "./step.boundary.stop.reason.enum/index.ts";
@@ -11,6 +11,7 @@ import PartUser from "./part.user/index.ts";
 import PartAssistant from "./part.assistant/index.ts";
 import AnyPart from "./part.any/index.ts";
 
+// @claim core/protocol-parts
 const Part = {
   PartTypeEnum,
   StepBoundaryKindEnum,

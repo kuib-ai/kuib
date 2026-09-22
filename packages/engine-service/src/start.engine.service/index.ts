@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C042
+// @claim core/service-socket
 import net from "node:net";
 import { unlinkSync } from "node:fs";
 import Std from "@kuib-ai/std";
@@ -6,6 +6,7 @@ import Protocol from "@kuib-ai/protocol";
 import type { EventLogPort } from "@kuib-ai/protocol/event.log.port";
 import type { SessionID } from "@kuib-ai/protocol/id/session.id";
 
+// @claim core/service-socket
 type RunTurn = (input: {
   sessionID: SessionID;
   prompt: string;
@@ -13,6 +14,7 @@ type RunTurn = (input: {
   onAbort: (abort: () => void) => void;
 }) => Promise<void>;
 
+// @claim core/turn-queue
 type SessionTurnState = {
   running: boolean;
   pending: string[];
@@ -47,6 +49,7 @@ const socketIsLive = function (socketPath: string): Promise<boolean> {
   });
 };
 
+// @claim core/service-socket
 const startEngineService = function (
   params: StartEngineServiceParams,
 ): Promise<EngineServiceHandle> {

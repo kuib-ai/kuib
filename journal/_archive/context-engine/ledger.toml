@@ -24,7 +24,7 @@ to = ["R209"]
 [[section]]
 file = "decisions.md"
 heading = "3. Context Curations"
-to = ["R210", "core#C008"]
+to = ["R210", "core/protocol-parts"]
 
 [[section]]
 file = "decisions.md"

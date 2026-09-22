@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C046
+// @claim core/transcript-fold
 import Protocol from "@kuib-ai/protocol";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 import type { PartText } from "@kuib-ai/protocol/part/part.text";
@@ -9,6 +9,7 @@ const isTextPart = function (part: { type: string }): part is PartText {
   return part.type === Protocol.Part.PartTypeEnum.TEXT;
 };
 
+// @claim core/transcript-fold
 const foldTranscript = function (
   envelopes: readonly EventEnvelope[],
 ): TranscriptEntry[] {

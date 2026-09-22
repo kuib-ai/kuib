@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C019
+// @claim infra/logger-port
 import pino from "pino";
 import Protocol from "@kuib-ai/protocol";
 import type { Logger, LogBindings } from "../logger.port/index.ts";
@@ -12,6 +12,7 @@ type CreatePinoLoggerOptions = {
   pretty?: boolean;
 };
 
+// @claim infra/logger-port
 const serializeErr = function (value: unknown): unknown {
   const parsed = Protocol.Error.AnyError.safeParse(value);
   if (parsed.success) {
@@ -35,6 +36,7 @@ const wrap = function (instance: pino.Logger): Logger {
   };
 };
 
+// @claim infra/logger-port
 const createPinoLogger = function (options: CreatePinoLoggerOptions): Logger {
   const level = options.level ?? LogLevelEnum.INFO;
   const base = {

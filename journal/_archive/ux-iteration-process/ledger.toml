@@ -35,7 +35,7 @@ to = ["R311", "host#D008"]
 [[section]]
 file = "decisions.md"
 heading = "Tooling decisions"
-to = ["R311", "infra#C029", "infra#D022"]
+to = ["R311", "infra/design-script", "infra#D022"]
 note = "OpenTUI-specific tooling (anscribe, testRender, apps/wireframes) dropped"
 
 [[section]]

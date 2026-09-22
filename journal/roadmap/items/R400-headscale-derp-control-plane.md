@@ -67,7 +67,7 @@ and an existing tailnet. A dynamic registry is the prerequisite for the multi-de
 
 ## Constraints already decided
 
-- Daemons are addressed by node identity through a discovery port: [[domains/core/decisions#^D028]], [[domains/core/current#^C013]], [[domains/core/current#^C015]].
+- Daemons are addressed by node identity through a discovery port: [[domains/core/decisions#^D028]], [[domains/core/current#^protocol-ports]], [[domains/core/current#^endpoints]].
 - The host already resolves remote daemons through static discovery: [[domains/host/decisions#^D005]].
 
 ## History

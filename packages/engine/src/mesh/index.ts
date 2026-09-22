@@ -1,10 +1,11 @@
-// @context @journal/domains/core#^C002
+// @claim core/package-barrels
 import MeshConfig from "./mesh.config/index.ts";
 import loadMeshConfig from "./load.mesh.config/index.ts";
 import createStaticDiscovery from "./static.discovery/index.ts";
 import createLocalOnlyDiscovery from "./local.only.discovery/index.ts";
 import createTransportFactory from "./transport.factory/index.ts";
 
+// @claim core/package-barrels
 const Mesh = {
   MeshConfig,
   loadMeshConfig,

@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C006
+// @claim core/protocol-events
 import { z } from "zod";
 import { EventTypeEnum } from "../event.type.enum/index.ts";
 import { ToolCallKindEnum } from "../../tool.call/tool.call.kind.enum/index.ts";
@@ -8,6 +8,7 @@ import ToolCallID from "../../id/tool.call.id/index.ts";
 import ModelRef from "../../model.ref/index.ts";
 import TokenUsage from "../../token.usage/index.ts";
 
+// @claim core/protocol-events
 const ToolCallCompleted = z.object({
   type: z.literal(EventTypeEnum.TOOL_CALL_COMPLETED),
   messageID: MessageID,

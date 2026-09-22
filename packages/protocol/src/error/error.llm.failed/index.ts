@@ -1,9 +1,10 @@
-// @context @journal/domains/core#^C012
+// @claim core/protocol-errors
 import { z } from "zod";
 import { ErrorCodeEnum } from "../error.code.enum/index.ts";
 import { MessageAssistantErrorKindEnum } from "../../message/message.assistant.error.kind.enum/index.ts";
 import ErrorBase from "../error.base/index.ts";
 
+// @claim core/protocol-errors
 const ErrorLlmFailed = ErrorBase.extend({
   code: z.literal(ErrorCodeEnum.LLM_FAILED),
   kind: z.enum(MessageAssistantErrorKindEnum).optional(),

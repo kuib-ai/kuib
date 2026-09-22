@@ -40,7 +40,7 @@ to = ["R114"]
 [[section]]
 file = "decisions.md"
 heading = "Provider"
-to = ["core#C029", "R106"]
+to = ["core/provider-errors", "R106"]
 note = "mimo provider is built; Ana defaulting to it is app intent"
 
 [[section]]

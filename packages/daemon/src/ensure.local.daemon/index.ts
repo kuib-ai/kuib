@@ -1,9 +1,10 @@
-// @context @journal/domains/core#^C040
+// @claim core/ensure-daemon
 import Config from "@kuib-ai/config";
 import Protocol from "@kuib-ai/protocol";
 import type { AnyEndpoint } from "@kuib-ai/protocol/endpoint/endpoint.any";
 import ensureDaemon from "../ensure.daemon/index.ts";
 
+// @claim core/ensure-daemon
 const ensureLocalDaemon = async function (
   socketOverride?: string,
 ): Promise<AnyEndpoint> {

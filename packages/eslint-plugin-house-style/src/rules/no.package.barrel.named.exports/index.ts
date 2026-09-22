@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C024
+// @claim infra/house-structure-rules
 import { ESLintUtils } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
@@ -12,6 +12,7 @@ const isPackageBarrel = function (filename: string): boolean {
   return /\/(?:packages|apps)\/[^/]+\/src\/index\.tsx?$/.test(normalized);
 };
 
+// @claim infra/house-structure-rules
 const noPackageBarrelNamedExports = createRule<[], MessageIds>({
   name: "no-package-barrel-named-exports",
   meta: {

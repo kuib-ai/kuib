@@ -46,7 +46,7 @@ makes mesh tool dispatch safe.
 ## Constraints already decided
 
 - `[security] profile` (`development | production | readonly`) already exists in the root config
-  schema — [[domains/infra/current#^C016]], [[domains/infra/decisions#^D013]].
+  schema — [[domains/infra/current#^config-schema]], [[domains/infra/decisions#^D013]].
 - Tools are defined once in `@kuib-ai/tools` — [[domains/core/decisions#^D012]].
 
 ## History

@@ -44,7 +44,7 @@ where each call ran; approvals (R204) need the target device.
 
 ## Constraints already decided
 
-- `MessageUser.originDeviceID` is required — [[domains/core/current#^C010]].
+- `MessageUser.originDeviceID` is required — [[domains/core/current#^protocol-messages]].
 - Daemons are addressed by node identity through a discovery port —
   [[domains/core/decisions#^D028]].
 - The local daemon is a separate process on the same RPC contract —

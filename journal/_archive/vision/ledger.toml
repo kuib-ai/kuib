@@ -19,5 +19,5 @@ note = "interaction prototypes are explored outside the journal; no build target
 [[section]]
 file = "decisions.md"
 heading = "Repo structure (2026-07-01)"
-to = ["infra#C005", "R105"]
+to = ["infra/pnpm-workspace", "R105"]
 note = "flat monorepo with journal in-repo is built (infra); the dataless coordinator is mesh intent"

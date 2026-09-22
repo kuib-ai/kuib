@@ -36,7 +36,7 @@ answer without editing or branching.
 
 ## Constraints already decided
 
-- `PartBase { partID, excluded }` on every part — [[domains/core/current#^C008]],
+- `PartBase { partID, excluded }` on every part — [[domains/core/current#^protocol-parts]],
   [[domains/core/decisions#^D009]].
 - Exclusion events are order-independent user actions needing no lock (R201).
 

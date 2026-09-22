@@ -1,9 +1,10 @@
-// @context @journal/domains/core#^C010
+// @claim core/protocol-messages
 import { z } from "zod";
 import MessageID from "../../id/message.id/index.ts";
 import SessionID from "../../id/session.id/index.ts";
 import DiscussionID from "../../id/discussion.id/index.ts";
 
+// @claim core/protocol-messages
 const MessageBase = z.object({
   _version: z.literal(1),
   id: MessageID,

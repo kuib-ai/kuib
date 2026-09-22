@@ -1,7 +1,8 @@
-// @context @journal/domains/core#^C034
+// @claim core/agent-tools
 import Protocol from "@kuib-ai/protocol";
 import defineTool from "../tool.spec/index.ts";
 
+// @claim core/agent-tools
 const readFile = defineTool({
   name: "readFile",
   description:

@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C013
+// @claim core/protocol-ports
 import type { EventEnvelope } from "../event/event.envelope/index.ts";
 import type { AnyEvent } from "../event/event.any/index.ts";
 import type { SessionID } from "../id/session.id/index.ts";
@@ -7,6 +7,7 @@ import type { DeviceID } from "../id/device.id/index.ts";
 type EventHandler = (envelope: EventEnvelope) => void;
 type Unsubscribe = () => void;
 
+// @claim core/protocol-ports
 interface EventLogPort {
   append(
     sessionID: SessionID,

@@ -19,7 +19,7 @@ touched: 2026-09-22
 
 Ana is the first application built on the kuib engine, at `apps/ana`. Building it forces the
 engine, provider and mesh packages to mature ahead of the coding agent. Today only a Python
-prototype loop exists ([[domains/product/current#^C013]]).
+prototype loop exists ([[domains/product/current#^voice-assistant]]).
 
 **Placement.** Ana is an application, not a package. It consumes `@kuib-ai/engine` (agent loop,
 orchestrator, provider), `@kuib-ai/protocol`, `@kuib-ai/tools` (device-composable via
@@ -56,7 +56,7 @@ A daily-use assistant is the fastest way to harden the engine, provider and mesh
 
 ## Constraints already decided
 
-- `mimo` provider exists in the engine: [[domains/core/current#^C029]], [[domains/core/decisions#^D021]].
+- `mimo` provider exists in the engine: [[domains/core/current#^provider-errors]], [[domains/core/decisions#^D021]].
 - Daemons are addressed by node identity through discovery: [[domains/core/decisions#^D028]].
 - minerva is the inference hub: [[domains/product/decisions#^D009]]; spoken replies via MiMo TTS: [[domains/product/decisions#^D010]].
 

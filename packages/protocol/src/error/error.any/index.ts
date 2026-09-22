@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C012
+// @claim core/protocol-errors
 import { z } from "zod";
 import ErrorUnknown from "../error.unknown/index.ts";
 import ErrorConfigInvalid from "../error.config.invalid/index.ts";
@@ -6,6 +6,7 @@ import ErrorDaemonUnreachable from "../error.daemon.unreachable/index.ts";
 import ErrorToolFailed from "../error.tool.failed/index.ts";
 import ErrorLlmFailed from "../error.llm.failed/index.ts";
 
+// @claim core/protocol-errors
 const AnyError = z.discriminatedUnion("code", [
   ErrorUnknown,
   ErrorConfigInvalid,

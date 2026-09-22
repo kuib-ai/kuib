@@ -30,8 +30,8 @@ Line numbers refer to the working tree as of 21:30.
   verified code is counted against the claim.
 - **Reproduced** in `/tmp/rt/repo`:
   1. Edit `src/a.ts`.
-  2. Run `stamp infra#C001`. Drift shows `dirty`, which is correct.
-  3. Commit. Drift now shows `stale infra#C001 — 1 commits since 135b87e`, although the claim
+  2. Run `stamp infra/journal-layers`. Drift shows `dirty`, which is correct.
+  3. Commit. Drift now shows `stale infra/journal-layers — 1 commits since 135b87e`, although the claim
      was verified against exactly that content.
 - **Impact on this repo.** All 106 claims say `verified 9374dfb`. 88 of them cite files that are
   modified in this working tree (current drift lists them as `dirty`). They all become `stale`
@@ -47,8 +47,8 @@ Line numbers refer to the working tree as of 21:30.
 `scripts/journal.ts:1607` uses `git status --porcelain`, which collapses a new directory to
 `?? dir/`. Anchored paths such as `dir/file` never match the `dirty` set.
 - **Reproduced in `/tmp`.** A claim citing the never-committed `newdir/b.ts` is reported `fresh`.
-- **Live tree.** The `dirty` list for `infra#C031` omits `bin/orchestra` and
-  `.agents/skills/orchestrate/{SKILL,WORKER}.md`. The list for `infra#C027` omits
+- **Live tree.** The `dirty` list for `infra/orchestra` omits `bin/orchestra` and
+  `.agents/skills/orchestrate/{SKILL,WORKER}.md`. The list for `infra/session-hook` omits
   `.agents/hooks/journal-context` and `.gemini/settings.json`.
 - **Fix.** Use `git status --porcelain -z --untracked-files=all`. The `-z` also fixes the second
   problem: paths with spaces or unicode are C-quoted today and never match.
@@ -79,14 +79,14 @@ Line numbers refer to the working tree as of 21:30.
 - **Consequences:**
   - `depends-on`, `converges-with` and `split-from` given as bare IDs create no edge. They also
     get no cycle or reciprocity check, and no error.
-  - A plan `context: ["core#C014"]` uses the short-ID form SPEC allows "in prose and TOML". It
+  - A plan `context: ["core/fs-io-schemas"]` uses the short-ID form SPEC allows "in prose and TOML". It
     makes `/remember` and `brief` load nothing, silently.
   - `absorbed-into: R017` produces the misleading error "absorbed-into is required exactly when
     state is absorbed".
 - **Fix.** Report an error for every list value that is not exactly one `[[…]]`.
 
 ### 6. CONFIRMED (medium, latent) — symbol hash is not formatting-invariant for object/array literals
-`scripts/journal.ts:305-310`. The comment there, and claim `infra#C003` / D002, say that
+`scripts/journal.ts:305-310`. The comment there, and claim `infra/claim-verification` / D002, say that
 formatting-only edits keep the same hash.
 - **Reproduced.** The TS printer keeps a literal's `hasTrailingComma` and its multi-line layout:
   - `const o = { a: 1, b: [1, 2] }` prints as `o = { a: 1, b: [1, 2] }`.
@@ -231,7 +231,7 @@ Each of these produces an error rather than silent acceptance, so the severity i
   - Claims with broken anchors are skipped.
   - An unknown claim exits 1.
   - Short SHAs fit `CALLOUT_HEADER`.
-- **Quote matching:** both the raw and the `\"`/`\\`-unescaped forms are tried. `infra#C027`'s
+- **Quote matching:** both the raw and the `\"`/`\\`-unescaped forms are tried. `infra/session-hook`'s
   escaped quotes match the hook file. Whitespace normalisation is symmetric.
 - **Callout parser:**
   - Orphan callouts are reported.
@@ -261,7 +261,7 @@ Each of these produces an error rather than silent acceptance, so the severity i
   - TOML string escaping is correct.
   - `notify` skips the calling pane.
   - `send` records an answer only for a pending question.
-  - `watch` re-arm via `reported` works as described in `infra#C031`.
+  - `watch` re-arm via `reported` works as described in `infra/orchestra`.
 
 ## Open questions
 
@@ -294,9 +294,9 @@ Each of these produces an error rather than silent acceptance, so the severity i
 
 - No claims edited (read-only task).
 - Claims whose text is contradicted by the findings:
-  - `infra#C003`: "formatting-only edits keep the same hash" (finding 6); "stale (commits since
+  - `infra/claim-verification`: "formatting-only edits keep the same hash" (finding 6); "stale (commits since
     `verified`)" misfires after a same-change stamp (finding 1).
-  - `infra#C031`: `--cwd` worktree behaviour (finding 10).
+  - `infra/orchestra`: `--cwd` worktree behaviour (finding 10).
 
 ## Verification
 

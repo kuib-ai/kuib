@@ -38,7 +38,7 @@ A voice assistant must remember across days without an ever-growing transcript i
 ## Constraints already decided
 
 - Context is rebuilt by folding the event log each run: [[domains/core/decisions#^D011]] — extraction changes what the fold includes.
-- The prototype keeps only the last 10 turns: [[domains/product/current#^C013]].
+- The prototype keeps only the last 10 turns: [[domains/product/current#^voice-assistant]].
 
 ## History
 

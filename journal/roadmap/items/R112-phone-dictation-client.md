@@ -20,7 +20,7 @@ touched: 2026-09-22
 A thin phone app captures audio and streams it to minerva's STT server over Tailscale, getting
 back near-instant transcription instead of slow local phone inference. Same WiFi ~105–205 ms
 total; over Tailscale ~120–280 ms — both far faster than on-device. The servers already accept
-remote TCP clients on minerva's tailnet address ([[domains/product/current#^C006]]).
+remote TCP clients on minerva's tailnet address ([[domains/product/current#^coreml-startup]]).
 
 ## Why
 
@@ -33,8 +33,8 @@ Current phone STT runs locally and is slow; a keepalive-warmed path to minerva i
 
 ## Constraints already decided
 
-- STT servers listen on minerva's tailnet TCP address in addition to the local socket: [[domains/product/decisions#^D009]], [[domains/product/current#^C006]].
-- Wire protocol is length-prefixed JSON, same for TCP and socket: [[domains/product/current#^C003]].
+- STT servers listen on minerva's tailnet TCP address in addition to the local socket: [[domains/product/decisions#^D009]], [[domains/product/current#^coreml-startup]].
+- Wire protocol is length-prefixed JSON, same for TCP and socket: [[domains/product/current#^wire-framing]].
 
 ## History
 

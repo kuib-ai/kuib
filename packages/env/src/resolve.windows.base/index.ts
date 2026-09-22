@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C014
+// @claim infra/windows-dirs
 import { homedir, tmpdir } from "node:os";
 import { join, win32 } from "node:path";
 import PathKind, { PathKindEnum } from "../path.kind/index.ts";
@@ -12,6 +12,7 @@ const envOr = function (key: string, fallback: () => string): string {
   return fallback();
 };
 
+// @claim infra/windows-dirs
 const resolveWindowsBase = function (kind: PathKindType): string {
   const parsed = PathKind.parse(kind);
   const roaming = function () {

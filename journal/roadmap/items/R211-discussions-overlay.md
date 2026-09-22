@@ -49,7 +49,7 @@ the model for a given question.
 ## Constraints already decided
 
 - `DiscussionID` exists and `MessageBase` carries `discussionID` —
-  [[domains/core/current#^C004]], [[domains/core/current#^C010]].
+  [[domains/core/current#^protocol-ids]], [[domains/core/current#^protocol-messages]].
 - Every part has a stable `partID` — [[domains/core/decisions#^D009]].
 
 ## History

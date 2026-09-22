@@ -1,4 +1,4 @@
-// @context @journal/domains/infra
+// @claim infra
 import withError from "./with.error/index.ts";
 import mapError from "./map.error/index.ts";
 import isErr from "./is.err/index.ts";
@@ -8,6 +8,7 @@ import errorFields from "./error.fields/index.ts";
 import { LogLevelEnum } from "./log.level.enum/index.ts";
 import LogScope from "./log.scope/index.ts";
 
+// @claim infra/package-exports
 const Std = {
   withError,
   mapError,

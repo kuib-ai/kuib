@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C012
+// @claim core/protocol-errors
 import { z } from "zod";
 
+// @claim core/protocol-errors
 const ErrorBase = z.object({
   message: z.string(),
   details: z.record(z.string(), z.unknown()).optional(),

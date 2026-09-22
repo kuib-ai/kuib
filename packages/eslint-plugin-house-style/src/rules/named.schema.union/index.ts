@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C025
+// @claim infra/house-style-rules
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
@@ -20,6 +20,7 @@ const isZodMethod = function (
   );
 };
 
+// @claim infra/house-style-rules
 const namedSchemaUnion = createRule<[], MessageIds>({
   name: "named-schema-union",
   meta: {

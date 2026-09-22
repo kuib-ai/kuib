@@ -24,11 +24,11 @@ argument selects the role:
   ([[roadmap/items/R302-ui-host-attach]]).
 - `kuib daemon` → daemon only (a remote mesh node — "remote hands").
 - `kuib serve` → service/engine only (headless leader / voter). Built today
-  ([[domains/host/current#^C004]]).
+  ([[domains/host/current#^role-dispatch]]).
 - `kuib up` → all-in-one local.
 
 The single entry wires protocol, engine, engine-service, daemon and dispatches on role. Today
-the daemon is spawned from its own `start.daemon` module ([[domains/core/current#^C040]]); in
+the daemon is spawned from its own `start.daemon` module ([[domains/core/current#^ensure-daemon]]); in
 the compiled binary it must become a role of the same executable so `spawn(execPath, [role])`
 works.
 

@@ -23,20 +23,20 @@ exist in core; nothing in `apps/host-tui` uses them yet because the host has no 
 - **Discovery / spawn:** on start the UI host probes the engine socket; if live it attaches,
   otherwise it spawns the same binary with the `serve` role, detached (not `fork` — the channel
   is the socket protocol, not Node IPC; and it is the same invocation an OS service unit runs).
-  `connectOrSpawn` ([[domains/core/current#^C045]]) and `ensureDaemon`
-  ([[domains/core/current#^C040]]) already implement probe-then-spawn.
+  `connectOrSpawn` ([[domains/core/current#^connect-or-spawn]]) and `ensureDaemon`
+  ([[domains/core/current#^ensure-daemon]]) already implement probe-then-spawn.
 - **Data plane:** the host reads the local SQLite log directly through the read-only
   `EventLogPort` reader (WAL, concurrent with the single writer) with
   `subscribe(sessionID, handler, afterSeq)` — replay from cursor, then live tail
-  ([[domains/core/current#^C022]]). Reads never go through the service. The read path is
+  ([[domains/core/current#^sqlite-reader]]). Reads never go through the service. The read path is
   replication-invariant: in the mesh, replication fills the same local DB.
 - **Control plane:** `submit({sessionID, prompt})` and `interrupt` over the socket
-  ([[domains/core/current#^C042]]).
+  ([[domains/core/current#^service-socket]]).
 - **Doorbell (unbuilt):** a one-line "new events for S" tick on the socket so the reader re-reads
   immediately instead of waiting out the 150 ms poll floor. Robust by construction — a missed
   tick is caught by the next poll because the DB is the truth.
 - **Attach counts as liveness:** an attached host connection keeps the service from reaping
-  ([[domains/core/current#^C044]]); detaching (closing the UI) leaves an in-flight run finishing.
+  ([[domains/core/current#^service-lifecycle]]); detaching (closing the UI) leaves an in-flight run finishing.
   Reopen → replay from cursor → resume.
 
 ## Why

@@ -120,9 +120,9 @@ budget on the domain; ship the single-device slice first.
 
 ## Constraints already decided
 
-- The envelope already carries `(epoch, seq)`; total order is `(epoch, seq)`, never timestamp: [[domains/core/decisions#^D004]], [[domains/core/current#^C007]].
-- SQLite log keyed `(sessionID, epoch, seq)` in WAL mode; single-device append uses epoch 0: [[domains/core/current#^C020]], [[domains/core/current#^C021]].
-- `subscribe` with `afterSeq` replays then goes live: [[domains/core/current#^C019]].
+- The envelope already carries `(epoch, seq)`; total order is `(epoch, seq)`, never timestamp: [[domains/core/decisions#^D004]], [[domains/core/current#^event-envelope]].
+- SQLite log keyed `(sessionID, epoch, seq)` in WAL mode; single-device append uses epoch 0: [[domains/core/current#^sqlite-schema]], [[domains/core/current#^sqlite-writer]].
+- `subscribe` with `afterSeq` replays then goes live: [[domains/core/current#^memory-event-log]].
 - Control plane on the socket, data plane in SQLite: [[domains/core/decisions#^D016]].
 - The engine runs only in `serve`, the single writer; UI hosts are attachable clients: [[domains/host/decisions#^D001]].
 - Daemons are addressed by node identity through a discovery port: [[domains/core/decisions#^D028]].

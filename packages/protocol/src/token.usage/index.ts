@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C011
+// @claim core/model-ref-usage
 import { z } from "zod";
 
+// @claim core/model-ref-usage
 const TokenUsage = z.object({
   input: z.number().int(),
   output: z.number().int(),

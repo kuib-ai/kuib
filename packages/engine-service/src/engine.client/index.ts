@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C045
+// @claim core/connect-or-spawn
 import net from "node:net";
 import { spawn } from "node:child_process";
 import type { SubmitMessage } from "@kuib-ai/protocol/service.message/submit.message";
@@ -11,6 +11,7 @@ type ConnectOrSpawnParams = {
   connectIntervalMs?: number;
 };
 
+// @claim core/connect-or-spawn
 type EngineServiceClient = {
   submit: (msg: SubmitMessage) => Promise<void>;
   interrupt: (msg: InterruptMessage) => Promise<void>;
@@ -62,6 +63,7 @@ const sleep = function (ms: number): Promise<void> {
   });
 };
 
+// @claim core/connect-or-spawn
 const connectOrSpawn = function (
   params: ConnectOrSpawnParams,
 ): Promise<EngineServiceClient> {

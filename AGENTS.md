@@ -10,87 +10,128 @@ This file is the single instruction source for every agent tool (Claude Code, Cu
 CLI, Antigravity, Codex). Tool-specific files are generated from it and from `.agents/` by
 `pnpm agents sync` — edit here or in `.agents/`, never in `.claude/`, `.cursor/`, `.gemini/`.
 
-## Working here
+## Working rules
 
-- pnpm workspace + Nx task runner; **Deno is the runtime** (no Bun, no `deno.json`); `tsgo`
-  type-checks against generated Deno types.
-- **Always leave the codebase green**: `pnpm run check` (agent-config sync, journal, typecheck,
-  lint, format — cached via Nx) must pass before ending a task. Never silently ignore type
-  errors or lint failures; fix them.
-- **Python always runs through uv**: `uv run …` / `uvx …`, never bare `python`, `python3` or
-  `pip`. Scripts carry PEP 723 inline metadata and the shebang
-  `#!/usr/bin/env -S uv run --script`; projects (e.g. `services/stt-mlx`) use `uv sync`/`uv run`.
-- New packages include `"lint": "eslint ."` and `"format": "prettier --write ."` in
-  `package.json` so they join the Nx caching loop.
-- Commits: `feat|fix|chore|docs: <short message>`; never mention AI/agents in commits; never
-  push without explicit instruction.
+- pnpm workspace + Nx task runner. **Deno is only the runtime**: the workspace's own Deno
+  (`./node_modules/.bin/deno`, on PATH inside `pnpm` scripts) runs code with `--no-check`;
+  there is no `deno.json`. Never run `deno check`, `deno install` or `deno add` — without a
+  `deno.json` Deno rewrites the root `package.json` from `pnpm-workspace.yaml`.
+- **`tsgo` is the only type-checker**, against the Deno declarations generated into
+  `packages/deno-types`. Dependencies are added through pnpm and the catalog.
+- **Always leave the codebase green**: `pnpm run check` (agent adapters, journal, typecheck,
+  lint, format — cached via Nx) must pass before ending a task. Never silence type errors or
+  lint failures; fix them.
+- **No prose comments in code** — code is self-explanatory. The only comments are directives:
+  `@claim` links, eslint/ts directives, shebangs.
+- **Python only through uv** (`uv run …`, `uvx …`, PEP 723 scripts, `uv sync` in projects such
+  as `services/stt-mlx`); never bare `python`, `python3` or `pip`. Workspace tooling is
+  TypeScript.
+- New packages include `"lint": "eslint ."` and `"format": "prettier --write ."`.
+- Commits: one line, `feat|refactor|chore: <description>`; no body, no attribution; never push
+  without explicit instruction. Never mention AI/agents in commits; commit only when asked.
+  Worktrees and branches belong to the owner.
 
-## Context: the journal
+## Why context lives on disk
 
-`journal/SPEC.md` is the contract — read it when working on the journal; never restate its rules
-from memory. Three layers, one job each:
+Everything a session learns that matters later is written to the journal, next to the code, in
+git. That is what makes this workspace work across sessions, tools and agents:
 
-1. **Roadmap** (`journal/roadmap/`) — intent: everything not built yet. Items `R###-<slug>.md`
-   with graph edges; `ROADMAP.md` (generated) lists them; `inbox.md` holds raw one-liners.
-2. **Domains** (`journal/domains/{product,core,host,infra}/`) — built truth. `current.md`
-   paragraphs end in `^C###` with a `[!sources]` callout citing the code; `decisions.md` is the
-   append-only why. Every tracked file is owned by exactly one domain.
-3. **Features** (`journal/features/<feature>/`) — work in flight: `plan.md` +
-   `implementation.toml`, linked to a roadmap item and to the domain claims it relies on.
+- **Any session picks up where another left off.** A fresh session, a compacted one, another
+  tool or another machine reads the same plan, checkpoint and handoff note — nothing important
+  lives only in a chat.
+- **Truth stays tied to the code.** Claims are anchored to the exact code scopes they describe,
+  so drift is detected mechanically the moment that code changes, and any agent editing a
+  function sees which truth it carries.
+- **Handoffs cost nothing.** State is recorded as work happens, so a handoff is rendered, not
+  written; only a short note is added.
+- **Decisions keep their reasons.** Rulings are stored in the owner's words and decisions are
+  append-only, so nobody re-litigates what was settled.
+- **Many agents can work at once.** Tasks, briefs and reports are files, so an orchestrator
+  learns what workers did by reading, not by being messaged.
+
+Persist early and often: a decision, ruling, finding or state change that is only in the
+conversation is lost at the next compaction.
+
+## The journal
+
+`journal/SPEC.md` is the contract (formats, fields, commands) — read it before editing journal
+files. Three layers, one job each, all markdown with YAML frontmatter:
+
+- **Roadmap** (`journal/roadmap/items/R###-<slug>.md`) — intent: everything not built yet, as a
+  graph (`depends-on`, `converges-with`, `split-from`, `absorbed-into`). A raw idea is an item
+  with `state: idea`. `ROADMAP.md` is generated.
+- **Domains** (`journal/domains/{product,core,host,infra}/`) — built truth. `current.md` holds
+  claims: paragraphs ending in `^<slug>` with a folded `[!sources]` callout; `decisions.md` is
+  the append-only why. Each domain owns files by `code:` globs.
+- **Features** (`journal/features/<feature>/plan.md`) — work in flight: objective, phases,
+  items with `State`/`Refs`, decisions (with the owner's rulings), gaps, and a frontmatter
+  checkpoint (summary, next, blockers, note). Delegated work lives in `tasks/<task>/`.
 
 `journal/_archive/` holds legacy entries being retired; never add to it or cite it as truth.
-Every TS module's first line `// @context @journal/domains/<domain>[#^C###]` names the context
-that explains it.
 
-### Lifecycle
+### Code ↔ truth
 
-- Idea → `/journal-start` (inbox line or roadmap item). Unclear exploration → scratchpad.
-- Concrete plan → `/journal-graduate <feature> <R###>` before implementation.
-- During implementation: update `implementation.toml` checkpoint/item states after every major
-  milestone; add decisions, phases and gaps to `plan.md` as they happen; point refs at real files.
-- Shipped → `/journal-promote <feature>`: truth into domain claims, rationale into domain
-  decisions, leftovers into roadmap items.
-- Bug-fix / debugging → tracked via commits, no journal entry needed.
-- After context compaction or in a fresh session → `/remember <feature>`.
+Code points at its explanation with `@claim` directives; nothing points back by hand:
 
-### Keeping context true
+- the first line of a module — `// @claim <domain>[/<claim>]` — names what explains it
+  (required for TS modules in `apps/` and `packages/`, enforced by lint);
+- `// @claim <domain>/<claim>` (or `# @claim …`) above a declaration, statement or block ties
+  that claim to that scope, in any language with line comments.
 
-- Changing code a claim cites → update the claim in the same change and
-  `pnpm journal stamp <domain>#C###`.
-- Periodically, or when `pnpm journal drift` shows drift → `/context-audit <domain>`.
-- New TS modules start with `// @context @journal/domains/<owner>` (narrow to `#^C###` when one
-  claim is primary).
-- `pnpm journal build && pnpm journal check` after journal changes; `/journal-validate` adds
-  drift and semantic review.
+`pnpm journal stamp` turns the links into the claim's sources with a hash per scope. When you
+change code under a link, the claim is flagged; before committing, read the claim against the
+code, rewrite it if it no longer holds, and stamp it. `pnpm journal claims <file>` lists the
+truth tied to a file.
 
-### Wireframes (screen-level UX truth)
+### What the tools can do
 
-- Every screen (route or dialog) has exactly ONE wireframe file: `exploring` ones in
-  `journal/roadmap/wireframes/`, `adopted` ones in `journal/domains/host/wireframes/`. Never per
-  component; runtime states are frames inside the screen's file.
-- Read a screen's wireframe before designing or modifying the screen.
-- When an implementation permanently diverges, mark the wireframe `superseded` (+
-  `superseded-by`) — never silently edit a sketch to match code. Details: SPEC → Wireframes,
-  `/wireframe`.
+- `pnpm journal check | build` — validate the journal and code links; regenerate indexes.
+- `pnpm journal drift [--files]` — claims whose evidence changed, stale roadmap items,
+  attribution coverage. `pnpm journal gate` — fails until every claim is fresh (commit time).
+- `pnpm journal stamp <domain>[/<claim>] | --all` — record that claims were verified.
+- `pnpm journal set <feature> <item> <state> [--ref path=role]` and `pnpm journal checkpoint
+  <feature> [--summary] [--next] [--blockers] [--note]` — write plan state.
+- `pnpm journal handoff <feature>` — the rendered handoff: checkpoint, note, rulings, open
+  questions, unfinished items, tasks, claims to re-verify.
+- `pnpm agents sync | check` — regenerate tool adapters; MCP servers a tool added are imported
+  back into `.agents/mcp_config.json`, other hand edits to generated files are refused.
+- `pnpm orchestra …` — run worker agents in tmux windows (see below).
+
+### The session hook
+
+Every tool runs `.agents/hooks/journal-context` at session start (Claude Code also after
+`/clear` and compaction). It injects what fits where the session runs: an orchestra worker
+window gets its task, brief and log; the orchestrator pane gets the rendered handoff of its
+feature; any other session gets the features in flight with their checkpoints, notes and the
+number of claims awaiting re-verification.
+
+### Skills
+
+`.agents/skills/<name>/SKILL.md`, invoked as `/<name>` where supported (otherwise read and
+follow the file):
+
+- `remember <feature>` — load a feature with exactly the context it declares;
+- `journal-start` — capture an idea as a roadmap item or start a scratchpad;
+- `journal-graduate <feature> <R###>` — turn a clear plan into a feature;
+- `journal-promote <feature>` — ship: truth into domain claims, rationale into decisions;
+- `journal-validate`, `context-audit [domain]` — structural checks and claim correction;
+- `wireframe` — screen wireframes (one file per screen; read it before touching a screen);
+- `orchestrate <feature>` — run this session as an orchestrator;
+- `firecrawl-*` — web research.
+
+Bug-fix sessions need no journal entry beyond keeping the touched claims true.
 
 ## Multi-agent work (tmux)
 
-One orchestrator per tmux session spawns worker agents as new windows of that session.
-Orchestrator: `/orchestrate <feature>` (`.agents/skills/orchestrate/SKILL.md`), tool
-`bin/orchestra`. Every task is a journal record under `journal/features/<feature>/tasks/`. A
-session started with a prompt naming an orchestra task is a worker: follow
-`.agents/skills/orchestrate/WORKER.md`. Worktrees are created and managed by the user only.
-`bin/` holds helper scripts meant to be run by hand.
-
-## Skills
-
-`.agents/skills/<name>/SKILL.md`: `remember`, `journal-start`, `journal-graduate`,
-`journal-validate`, `journal-promote`, `context-audit`, `wireframe`, `orchestrate`, plus the
-`firecrawl-*` web skills. Invoke as `/<name>` where the tool supports it; otherwise read the
-SKILL.md and follow it.
+One orchestrator per tmux session spawns worker agents as windows `w:<task>` of that session
+with `pnpm orchestra`; see `/orchestrate` (`.agents/skills/orchestrate/SKILL.md`). Every task is
+a journal record under `journal/features/<feature>/tasks/`. Workers never message the
+orchestrator: they write their own files and set their own status; the orchestrator finds out
+through `pnpm orchestra watch`. A session started with a prompt naming an orchestra task, or
+running in a `w:<task>` window, is a worker: follow `.agents/skills/orchestrate/WORKER.md`.
 
 <!-- journal:generated:start -->
-<!-- Generated by scripts/journal.ts build. Do not edit. -->
+<!-- Generated by pnpm journal build. Do not edit. -->
 
 ### Code map
 

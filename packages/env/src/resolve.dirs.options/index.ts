@@ -1,6 +1,7 @@
-// @context @journal/domains/infra#^C012
+// @claim infra/base-dirs
 import { z } from "zod";
 
+// @claim infra/base-dirs
 const ResolveDirsOptions = z.object({
   dev: z.boolean().optional(),
   cwd: z.string().optional(),

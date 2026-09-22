@@ -1,4 +1,5 @@
-// @context @journal/domains/core#^C046
+// @claim core/transcript-fold
+// @claim core/transcript-fold
 export enum TranscriptRoleEnum {
   USER = "user",
   ASSISTANT = "assistant",

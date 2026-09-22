@@ -1,8 +1,9 @@
-// @context @journal/domains/core#^C011
+// @claim core/model-ref-usage
 import { z } from "zod";
 import ProviderID from "../id/provider.id/index.ts";
 import ModelID from "../id/model.id/index.ts";
 
+// @claim core/model-ref-usage
 const ModelRef = z.object({
   providerID: ProviderID,
   modelID: ModelID,

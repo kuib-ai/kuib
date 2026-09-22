@@ -39,7 +39,7 @@ OpenTUI host and is re-explored for [[roadmap/items/R300-own-tui-library]]:
   `/v1/models` `max_input_tokens` could be live-queried). Unknown model → bare token count.
 - **Interrupt affordance** — the next thing to build: never advertise `esc to interrupt` until
   it works. The engine-service already accepts `interrupt` and wires `onAbort`
-  ([[domains/core/current#^C042]]); the screen needs the binding.
+  ([[domains/core/current#^service-socket]]); the screen needs the binding.
 - **Queued prompts (exploring):** the empty lower-right of the prompt pane shows a
   `QUEUED · steer at step end` list while a turn streams and the queue is non-empty; items in
   send order, truncated with `…`, leaving as they enter the transcript.

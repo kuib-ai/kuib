@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C004
+// @claim core/protocol-ids
 import { z } from "zod";
 
+// @claim core/protocol-ids
 const CheckpointID = z.string().min(1).brand("CheckpointID");
 type CheckpointID = z.infer<typeof CheckpointID>;
 

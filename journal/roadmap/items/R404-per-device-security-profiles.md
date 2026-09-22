@@ -50,8 +50,8 @@ A single global threshold is either too loose for a server or too strict for a d
 
 ## Constraints already decided
 
-- The config already carries `[security] profile` (`development | production | readonly`, default `development`), unused by any gate: [[domains/infra/current#^C016]].
-- `NodeDescriptor` shape: [[domains/core/current#^C015]].
+- The config already carries `[security] profile` (`development | production | readonly`, default `development`), unused by any gate: [[domains/infra/current#^config-schema]].
+- `NodeDescriptor` shape: [[domains/core/current#^endpoints]].
 
 ## History
 

@@ -1,14 +1,16 @@
-// @context @journal/domains/host#^C013
+// @claim host/parse-cli
 import { parseArgs } from "node:util";
 import Std from "@kuib-ai/std";
 import printHelp from "../print.help/index.ts";
 import type { CliSchema } from "../cli.schema/index.ts";
 
+// @claim host/parse-cli
 export type ParseCliResult<T> = {
   values: T;
   positionals: string[];
 };
 
+// @claim host/parse-cli
 const parseCli = function <T extends Record<string, unknown>>(
   command: string,
   schema: CliSchema,

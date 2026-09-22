@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C019
+// @claim infra/logger-port
 import type { Logger, LogBindings, LogFn } from "../logger.port/index.ts";
 import LogScope from "../log.scope/index.ts";
 
@@ -51,6 +51,7 @@ const createWithBindings = function (
   };
 };
 
+// @claim infra/logger-port
 const createConsoleLogger = function (
   options: CreateConsoleLoggerOptions = {},
 ): Logger {

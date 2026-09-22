@@ -1,6 +1,7 @@
-// @context @journal/domains/infra#^C012
+// @claim infra/base-dirs
 import { z } from "zod";
 
+// @claim infra/base-dirs
 export enum PathKindEnum {
   CONFIG = "config",
   DATA = "data",

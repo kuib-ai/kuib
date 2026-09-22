@@ -44,7 +44,7 @@ comprehension layer (hunks, ledger, blast radius), which was deferred to v1.x.
 
 ## Constraints already decided
 
-- `PartBase { partID, excluded }` and `discussionID` on messages exist in the protocol: [[domains/core/current#^C008]], [[domains/core/decisions#^D009]].
+- `PartBase { partID, excluded }` and `discussionID` on messages exist in the protocol: [[domains/core/current#^protocol-parts]], [[domains/core/decisions#^D009]].
 - Context is rebuilt by folding the event log each run: [[domains/core/decisions#^D011]].
 
 ## History

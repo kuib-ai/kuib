@@ -1,1 +1,0 @@
-You are an orchestra worker for task 'review-tooling' in tmux session 'kuib-ai/kuib/root'. Read .agents/skills/orchestrate/WORKER.md and follow it exactly. Your brief is /Users/rs10/developer/kuib-ai/kuib/.git/orchestra/kuib-ai-kuib-root/tasks/review-tooling/brief.md.

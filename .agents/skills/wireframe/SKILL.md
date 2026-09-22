@@ -25,7 +25,7 @@ You are designing or editing a **screen wireframe** — the motivation + intende
 
 ## 3. Draw
 
-- Frontmatter is validated by `scripts/journal.ts`: `screen` (must equal filename), `kind: route | dialog`, `status: exploring | adopted | superseded`, `sizes: [80x24, ...]`, `implements: []`, `superseded-by` only when superseded.
+- Frontmatter is validated by `tooling/journal.ts`: `screen` (must equal filename), `kind: route | dialog`, `status: exploring | adopted | superseded`, `sizes: [80x24, ...]`, `implements: []`, `superseded-by` only when superseded.
 - Start with a `## Motivation` section: why the screen exists, what the user is doing there, what it must never obscure. This is the part future iterations read first.
 - Frames go in fenced code blocks at the declared sizes. Box-drawing borders mark the terminal edge. Annotate with circled markers (①②③); the legend lives BELOW the frame, never inside it.
 - While exploring: `## Variant <X> — <name>` sections, one frame each, a one-line **Verdict** on every loser (keep losers — they are the archaeology).

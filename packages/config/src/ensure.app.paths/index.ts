@@ -1,8 +1,9 @@
-// @context @journal/domains/infra#^C017
+// @claim infra/app-paths
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import type { AppPaths } from "../app.paths/index.ts";
 
+// @claim infra/app-paths
 const ensureAppPaths = function (paths: AppPaths): void {
   const ordinaryDirs = new Set([
     dirname(paths.configFile),

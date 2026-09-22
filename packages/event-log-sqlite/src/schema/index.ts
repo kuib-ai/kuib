@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C020
+// @claim core/sqlite-schema
 import type { DatabaseSync } from "node:sqlite";
 
 const initSchema = function (db: DatabaseSync): void {

@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C015
+// @claim core/endpoints
 import NodeDescriptor from "./node.descriptor/index.ts";
 
+// @claim core/endpoints
 const Node = {
   NodeDescriptor,
 };

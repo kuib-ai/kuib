@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C021
+// @claim infra/with-error
 import Protocol from "@kuib-ai/protocol";
 import type { AnyError } from "@kuib-ai/protocol/error/error.any";
 
@@ -38,6 +38,7 @@ const messageFromCause = function (cause: unknown): string {
   return String(cause);
 };
 
+// @claim infra/with-error
 const mapError = function (cause: unknown): AnyError {
   const parsed = Protocol.Error.AnyError.safeParse(cause);
   if (parsed.success) {

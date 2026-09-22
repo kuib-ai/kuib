@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C006
+// @claim core/protocol-events
 import { z } from "zod";
 import UserMessageSubmitted from "../user.message.submitted/index.ts";
 import MessageStarted from "../message.started/index.ts";
@@ -14,6 +14,7 @@ import ToolCallFailed from "../tool.call.failed/index.ts";
 import MessageCompleted from "../message.completed/index.ts";
 import MessageFailed from "../message.failed/index.ts";
 
+// @claim core/protocol-events
 const AnyEvent = z.discriminatedUnion("type", [
   UserMessageSubmitted,
   MessageStarted,

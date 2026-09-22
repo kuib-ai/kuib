@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C029
+// @claim core/provider-errors
 import Protocol from "@kuib-ai/protocol";
 import type { ModelConfig } from "@kuib-ai/protocol/provider/model.config";
 
@@ -16,6 +16,7 @@ type ResolveModelConfigParams = {
 const META_BASE_URL = "https://api.meta.ai/v1";
 const MIMO_BASE_URL = "https://token-plan-sgp.xiaomimimo.com/v1";
 
+// @claim core/provider-errors
 const requireKey = function (
   key: string | undefined,
   name: string,
@@ -29,6 +30,7 @@ const requireKey = function (
   return key;
 };
 
+// @claim core/provider-errors
 const resolveModelConfig = function (
   params: ResolveModelConfigParams,
 ): ModelConfig {

@@ -8,7 +8,7 @@ to = ["R306"]
 [[section]]
 file = "decisions.md"
 heading = "Protocol vs UX Split"
-to = ["core#C008", "core#D009", "R306"]
+to = ["core/protocol-parts", "core#D009", "R306"]
 note = "PartBase.excluded built; discussion events and context filter unbuilt"
 
 [[section]]

@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C014
+// @claim core/fs-io-schemas
 import { z } from "zod";
 
+// @claim core/fs-io-schemas
 const ReadDirOutput = z.object({
   content: z.string(),
 });

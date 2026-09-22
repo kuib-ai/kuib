@@ -18,24 +18,24 @@ domain: infra
 
 ### D002 — Deterministic drift detection, model-assisted correction
 
-- Status: accepted
+- Status: superseded
 - Context: Domain context must be corrected periodically without re-reading the codebase.
 - Decision: Claims carry machine-checkable anchors and a `verified` commit; a script ranks drift, and a model re-verifies only flagged claims against the diff.
 - Consequences: Correction cost scales with code change, not codebase size.
 - Supersedes: —
-- Superseded by: —
+- Superseded by: D027
 - From: [[features/context-system/plan]]
 
 ^D002
 
 ### D003 — Code attribution through `@context` headers
 
-- Status: accepted
+- Status: superseded
 - Context: Every TS module already carried a lint-enforced `@context` link to a legacy entry.
 - Decision: Headers point at the owning domain or one of its claims; non-TS files are attributed by domain `code` globs.
 - Consequences: Archiving legacy entries required rewriting every header in the same change.
 - Supersedes: —
-- Superseded by: —
+- Superseded by: D027
 - From: [[features/context-system/plan]]
 
 ^D003
@@ -306,13 +306,60 @@ domain: infra
 
 ### D026 — Orchestra tasks are journal records; runtime lives in tmux
 
-- Status: accepted
+- Status: superseded
 - Context: D025 kept briefs and reports in the git common dir so worktrees could share them. The owner orchestrates inside a single worktree, wants briefs, prompts and review reports kept as project history, and wants the tool in Python rather than shell.
 - Decision: Each task is `journal/features/<feature>/tasks/<task-id>/` in the checkout the orchestrator runs in, committed with the work and validated by `journal.ts check`. Pane and window state is read from tmux (window `w:<task-id>`, session option `@orchestra_pane`). The tool is `bin/orchestra`, a PEP 723 uv script; `watch` and `reconcile` derive everything from records plus tmux so they can be re-run at any time.
 - Consequences: Tasks always belong to a feature. Orchestrations in different worktrees are independent until the owner merges them.
 - Supersedes: D025
-- Superseded by: —
+- Superseded by: D030
 - From: [[features/agent-harness/plan]]
 
 ^D026
 
+### D027 — Claims are tied to code by `@claim` links and verified by content hash
+
+- Status: accepted
+- Context: Claims listed their code by hand and code pointed back with `@context` headers, so both sides were maintained by hand and a renamed claim meant editing every header. `verified <sha>` tied truth to git history: stamping before a commit made the claim stale on commit, rebased or squashed commits left claims pointing at missing objects, and the sequential `C###` ids collided across parallel branches. Agents rarely saw which truth a function carried while editing it.
+- Decision: Code carries the only hand-kept link: a first-line `@claim <domain>[/<claim>]` names what explains a module and `@claim <domain>/<claim>` above a declaration, statement or indented block ties that claim to the scope. `journal.ts stamp` generates the claim's scope sources from the links with a hash of each scope (TS/JS through the syntax tree, other languages by indentation) and dates the claim. Drift compares hashes, not commits. Claim ids are slugs. `check` fails only on structure; `gate` fails while any claim is not fresh, so truth is due at commit.
+- Consequences: Links are directives, the one comment the house style allows. Verification works uncommitted, in worktrees and across history rewrites. Migrating put 232 scope links and 214 file links into the code.
+- Supersedes: D002, D003
+- Superseded by: —
+- From: [[features/context-system/plan]]
+
+^D027
+
+### D028 — One-file feature plans and rendered handoffs
+
+- Status: accepted
+- Context: `plan.md` and `implementation.toml` listed every item twice, stored derived phase states and two feature states, and had to be kept in sync by hand. Handoffs were hand-written continuation files that repeated state kept elsewhere.
+- Decision: A feature is one `plan.md`: items carry `- State:` and optional `- Decisions:`, `- Addresses:`, `- Refs:`; the frontmatter holds the lifecycle and a `checkpoint` (summary, next, blockers, note). Phase state is derived. `journal.ts set` and `checkpoint` write state; `journal.ts handoff` renders the handoff from plan, rulings (`- Ruling:` on decisions), open gaps (`- Recommendation:`), tasks and claims. The only thing written at handoff time is the note. Raw ideas are roadmap items with `state: idea`; there is no inbox.
+- Consequences: One storage format for everything in the journal: markdown with YAML frontmatter.
+- Supersedes: —
+- Superseded by: —
+- From: [[features/context-system/plan]]
+
+^D028
+
+### D029 — Agent sync imports MCP edits and refuses other hand edits
+
+- Status: accepted
+- Context: `agents sync` was one-way: an MCP server added through a tool's own command, or any hand edit to a generated file, was silently overwritten on the next sync.
+- Decision: `sync` records a hash of every file it writes in `.agents/generated.lock.json`. A tool's MCP file that differs from the lock is imported back into `.agents/mcp_config.json` before regenerating; any other file edited outside sync is shown as a diff and left untouched unless `--force`. `check` reports files edited outside sync.
+- Consequences: The lock is committed with the adapters.
+- Supersedes: —
+- Superseded by: —
+- From: [[features/agent-harness/plan]]
+
+^D029
+
+### D030 — Orchestra in TypeScript with a plan gate, restarts and watched workers
+
+- Status: accepted
+- Context: The Python `bin/orchestra` added a second language and interpreter next to the workspace Deno. Workers had no plan gate, no restart from a log, no acceptance step that updated the plan, and the orchestrator could not see context use, edits outside a task's scope or git writes; its own handoff was hand-written.
+- Decision: `tooling/orchestra.ts`, run as `pnpm orchestra`, keeps D026's model (tasks are journal records in the orchestrating checkout, runtime lives in tmux, workers never message the orchestrator) with task state in `brief.md` frontmatter, roles, an optional plan gate (`plan-ready` → `go`), `restart` from `log.md`, `accept` setting plan items implemented, `watch` events for records, idle and context screens, scope and git changes, and an orchestrator `handoff` guard.
+- Consequences: The three tools live in the private workspace package `@kuib-ai/tooling` (`tooling/`), which declares their dependencies and is type-checked and linted by Nx; each parses arguments with `@kuib-ai/cli`. One language and runtime for workspace tooling. Watch event lines carry an `orchestra:` prefix so a streaming monitor can tell them from other output.
+- Supersedes: D026
+- Superseded by: —
+- From: [[features/agent-harness/plan]]
+
+^D030

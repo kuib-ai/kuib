@@ -1,4 +1,4 @@
-// @context @journal/domains/core
+// @claim core
 import { describe, it, afterAll } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import { tmpdir } from "node:os";

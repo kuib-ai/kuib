@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C012
+// @claim infra/base-dirs
 import { join } from "node:path";
 import PathKind from "../path.kind/index.ts";
 import type { PathKind as PathKindType } from "../path.kind/index.ts";
@@ -8,6 +8,7 @@ import resolveIsDev from "../resolve.is.dev/index.ts";
 import resolveDevRoot from "../resolve.dev.root/index.ts";
 import resolvePlatformBase from "../resolve.platform.base/index.ts";
 
+// @claim infra/base-dirs
 const resolveDir = function (
   kind: PathKindType,
   options?: ResolveDirsOptionsType,

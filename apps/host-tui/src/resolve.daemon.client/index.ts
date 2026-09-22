@@ -1,9 +1,10 @@
-// @context @journal/domains/host#^C010
+// @claim host/daemon-resolution
 import Protocol from "@kuib-ai/protocol";
 import Engine from "@kuib-ai/engine";
 import Daemon from "@kuib-ai/daemon";
 import type { DaemonClient } from "@kuib-ai/engine/daemon.client/transport.factory";
 
+// @claim host/daemon-resolution
 export type DaemonConfig = {
   targetNode: string;
   meshConfigFile: string;
@@ -11,6 +12,7 @@ export type DaemonConfig = {
   daemonSocket: string;
 };
 
+// @claim host/daemon-resolution
 const resolveDaemonClient = function (
   config: DaemonConfig,
   localLabel: string,

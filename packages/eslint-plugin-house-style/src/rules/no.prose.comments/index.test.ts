@@ -10,7 +10,7 @@ const ruleTester = new RuleTester();
 
 ruleTester.run("no-prose-comments", rule, {
   valid: [
-    "// @context @journal/foo\nconst x = 1;\n",
+    "// @claim core/foo\nconst x = 1;\n",
     "// eslint-disable no-console\nconst x = 1;\n",
     "// eslint-enable\nconst x = 1;\n",
     "// eslint no-unused-vars: off\nconst x = 1;\n",

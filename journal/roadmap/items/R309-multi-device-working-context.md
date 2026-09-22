@@ -59,8 +59,8 @@ reminder); background processes stay on their device; the same repo out of sync 
 is treated as distinct (git-awareness matters).
 
 Built today: node identity and discovery (`NodeDescriptor { nodeID, osUser, machineID, … }`,
-`DiscoveryPort`) and target-node daemon resolution ([[domains/core/current#^C015]],
-[[domains/host/current#^C010]]). The badge currently would show a fixed `target.node`; there is
+`DiscoveryPort`) and target-node daemon resolution ([[domains/core/current#^endpoints]],
+[[domains/host/current#^daemon-resolution]]). The badge currently would show a fixed `target.node`; there is
 no switch, no per-tool `device`, no manifest.
 
 ## Why

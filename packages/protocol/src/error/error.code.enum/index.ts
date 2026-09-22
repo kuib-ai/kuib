@@ -1,4 +1,5 @@
-// @context @journal/domains/core#^C005
+// @claim core/protocol-enums
+// @claim core/protocol-enums
 export enum ErrorCodeEnum {
   UNKNOWN = "unknown",
   CONFIG_INVALID = "config.invalid",

@@ -1,9 +1,10 @@
-// @context @journal/domains/core#^C048
+// @claim core/discovery
 import createDaemonClient from "../../daemon.client/transport.factory/index.ts";
 import type { NodeID } from "@kuib-ai/protocol/id/node.id";
 import type { DiscoveryPort } from "@kuib-ai/protocol/discovery.port";
 import type { DaemonClient } from "../../daemon.client/transport.factory/index.ts";
 
+// @claim core/discovery
 const createTransportFactory = function (discovery: DiscoveryPort) {
   return function transportFactory(nodeID: NodeID): Promise<DaemonClient> {
     return discovery.resolve(nodeID).then(function (descriptor) {

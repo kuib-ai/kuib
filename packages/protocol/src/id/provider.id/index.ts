@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C004
+// @claim core/protocol-ids
 import { z } from "zod";
 
+// @claim core/protocol-ids
 const ProviderID = z.string().min(1).brand("ProviderID");
 type ProviderID = z.infer<typeof ProviderID>;
 

@@ -1,8 +1,9 @@
-// @context @journal/domains/core#^C015
+// @claim core/endpoints
 import { z } from "zod";
 import NodeID from "../../id/node.id/index.ts";
 import AnyEndpoint from "../../endpoint/endpoint.any/index.ts";
 
+// @claim core/endpoints
 const NodeDescriptor = z.object({
   nodeID: NodeID,
   osUser: z.string(),

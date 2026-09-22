@@ -1,4 +1,4 @@
-// @context @journal/domains/infra
+// @claim infra
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import { PathKindEnum } from "../path.kind/index.ts";

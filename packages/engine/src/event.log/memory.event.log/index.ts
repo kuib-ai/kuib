@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C019
+// @claim core/memory-event-log
 import Protocol from "@kuib-ai/protocol";
 import type { EventEnvelope } from "@kuib-ai/protocol/event/event.envelope";
 import type { AnyEvent } from "@kuib-ai/protocol/event/event.any";
@@ -9,6 +9,7 @@ import type {
   EventLogPort,
 } from "@kuib-ai/protocol/event.log.port";
 
+// @claim core/memory-event-log
 const createMemoryEventLog = function (): EventLogPort {
   const logs = new Map<string, EventEnvelope[]>();
   const subscribers = new Map<string, Set<EventHandler>>();

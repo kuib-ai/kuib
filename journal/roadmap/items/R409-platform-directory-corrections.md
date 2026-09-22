@@ -47,7 +47,7 @@ over-long paths on macOS.
 ## Constraints already decided
 
 - Base directories only in `@kuib-ai/env`: [[domains/infra/decisions#^D010]]; XDG on macOS, Known Folders on Windows: [[domains/infra/decisions#^D011]].
-- Current Windows bases and app paths: [[domains/infra/current#^C014]], [[domains/infra/current#^C017]].
+- Current Windows bases and app paths: [[domains/infra/current#^windows-dirs]], [[domains/infra/current#^app-paths]].
 
 ## History
 

@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C024
+// @claim infra/house-structure-rules
 import { ESLintUtils } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
@@ -7,6 +7,7 @@ const createRule = ESLintUtils.RuleCreator(function (name) {
 
 type MessageIds = "noReExport";
 
+// @claim infra/house-structure-rules
 const noReExports = createRule<[], MessageIds>({
   name: "no-re-exports",
   meta: {

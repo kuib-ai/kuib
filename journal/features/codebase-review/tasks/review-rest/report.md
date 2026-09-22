@@ -21,7 +21,7 @@ confirmed and 5 plausible. The most serious ones are below.
   ignored. I reproduced all three.
 - **Unenforced setting.** `[security] profile = "readonly"` is accepted but nothing enforces it.
 
-I checked 50 claims: 37 are TRUE, 11 PARTLY TRUE and 2 FALSE (host#C011, product#C006).
+I checked 50 claims: 37 are TRUE, 11 PARTLY TRUE and 2 FALSE (host/host-logging, product/coreml-startup).
 
 Every repro script is in `/tmp/kuib-review/`, outside the repo. Nothing in the repo was written
 except this file.
@@ -325,11 +325,11 @@ except this file.
 
 ### C. Claims that are not TRUE
 
-1. **host#C011 — FALSE.**
+1. **host/host-logging — FALSE.**
    - Claim: "writing to the resolved log path, pretty-printed outside production mode".
    - Code: the destination always wins, so the file gets JSON lines in every mode (A15).
 
-2. **product#C006 — FALSE.**
+2. **product/coreml-startup — FALSE.**
    - Claim: "SIGINT/SIGTERM close both listeners, shut the event loop group down and remove the
      socket".
    - Code: the signal sources are released immediately and both signals are set to `SIG_IGN`, so
@@ -337,18 +337,18 @@ except this file.
    - The claim also doesn't mention that the socket path is deleted without checking for a live
      server (A7).
 
-3. **product#C004 — PARTLY TRUE.**
+3. **product/wire-requests — PARTLY TRUE.**
    - Claim: "`sampleRate` (default 16000)". Code: the parakeet backend and both stream kinds
      ignore it and assume 16 kHz; only `parakeet-eou` batch uses it.
    - Claim: "`error` (`ok: false`)". Code: stt-mlx sends an error frame only for unknown or
      unexpected actions. Malformed input drops the connection (A17).
 
-4. **product#C013 — PARTLY TRUE.**
+4. **product/voice-assistant — PARTLY TRUE.**
    - Claim: "pre-seeded from `/tmp/llm.env`". Code: the file overrides the environment (A18).
    - Claim: "the last 10 turns of history". Code: `history[-10:]` is the last 10 messages, about
      5 exchanges.
 
-5. **infra#C015 — PARTLY TRUE.**
+5. **infra/bootstrap-config — PARTLY TRUE.**
    - Claim: "When only `KUIB_MODEL_ID` or `KUIB_MODEL_BASE_URL` is set, the model becomes
      `openai-compatible/<id>`". Code:
      - `<id>` defaults to `llama-3.3-70b-versatile` when only the URL is set.
@@ -356,32 +356,32 @@ except this file.
    - The paragraph also implies that the `mode` option is authoritative; `NODE_ENV` overrides it
      (A10).
 
-6. **infra#C017 — PARTLY TRUE.**
+6. **infra/app-paths — PARTLY TRUE.**
    - Claim: "socket directories at mode `0700`".
    - Code: the mode applies only when the directory is created. Existing directories keep
      whatever owner and mode they have, and nothing checks them (A8).
 
-7. **infra#C019 — PARTLY TRUE.**
+7. **infra/logger-port — PARTLY TRUE.**
    - Claim: "pretty-prints through `pino-pretty` when asked".
    - Code: `pretty` is ignored whenever `destination` is set; the order is destination, then
      pretty, then stdout (A15).
 
-8. **infra#C006 — PARTLY TRUE.**
+8. **infra/nx-tasks — PARTLY TRUE.**
    - Claim: "Each TS package defines the same four scripts".
    - Code: `packages/cli` and `packages/protocol` have no `test` script.
 
-9. **infra#C008 — PARTLY TRUE.**
+9. **infra/check-pipeline — PARTLY TRUE.**
    - Claim: the manifest check is followed "then `journal.ts check`".
    - Code: `scripts/agents.ts check` runs between the two (`package.json:9`).
    - The claim also doesn't say that the `format` step runs `prettier --write`.
 
-10. **infra#C010 — PARTLY TRUE.**
+10. **infra/eslint-config — PARTLY TRUE.**
     - Claim: "Prettier formats everything except the lockfile, `journal`, `.agents` and
       `.claude`".
     - Code: `.prettierignore` also excludes `.gitignore`, `journal/_index.md`, `AGENTS.md`,
       `CLAUDE.md`, `.mcp.json`, `.cursor` and `.gemini`.
 
-11. **infra#C024 — PARTLY TRUE.**
+11. **infra/house-structure-rules — PARTLY TRUE.**
     - Claim: `no-cross-package-relative` means "relative imports may not escape their
       `packages/*` or `apps/*` package".
     - Code: it only reports when the target is inside a different package
@@ -393,7 +393,7 @@ except this file.
     - Code: `dot-case-filename` exempts only directories, so a `[param]` file stem is reported.
       Directories above the last `/src/` are never checked.
 
-12. **infra#C025 — PARTLY TRUE.**
+12. **infra/house-style-rules — PARTLY TRUE.**
     - `prefer-guard-clauses` reports at the `else`/`else if` node (`node.alternate`), not at the
       top `if`.
     - `no-prose-comments` allows `@context` anywhere in a comment and any comment starting with
@@ -406,7 +406,7 @@ except this file.
       - `named-schema-union` misses `z.object(...).strict()` and `z.strictObject` members.
       - `named-union-members` misses object literals nested in intersections and generics.
 
-13. **infra#C028 — PARTLY TRUE.**
+13. **infra/reload-script — PARTLY TRUE.**
     - Claim: "so the next host run spawns them from current code".
     - Code: only the daemon is respawned (by `serve` through `ensureDaemon`). Nothing in the host
       spawns the engine-service any more, since `engine.client`'s spawn has no host caller.

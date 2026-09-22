@@ -44,7 +44,7 @@ a user change the model mid-session or keeps keys out of plaintext.
 ## Constraints already decided
 
 - One root config: defaults < `config.toml` < `KUIB_*` env < CLI; secrets returned beside the
-  config, never inside it — [[domains/infra/decisions#^D013]], [[domains/infra/current#^C018]].
+  config, never inside it — [[domains/infra/decisions#^D013]], [[domains/infra/current#^config-secrets]].
 - Engine packages take configuration as parameters — [[domains/core/decisions#^D027]].
 - Keys never touch the transcript or any synced store.
 

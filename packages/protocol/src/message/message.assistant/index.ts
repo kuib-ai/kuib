@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C010
+// @claim core/protocol-messages
 import { z } from "zod";
 import { MessageRoleEnum } from "../message.role.enum/index.ts";
 import { MessageAssistantStatusEnum } from "../message.assistant.status.enum/index.ts";
@@ -14,6 +14,7 @@ const MessageAssistantSuccess = MessageBase.extend({
 });
 type MessageAssistantSuccess = z.infer<typeof MessageAssistantSuccess>;
 
+// @claim core/protocol-messages
 const MessageAssistant = z.discriminatedUnion("status", [
   MessageAssistantSuccess,
   MessageAssistantError,

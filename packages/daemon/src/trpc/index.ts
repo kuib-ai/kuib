@@ -1,8 +1,9 @@
-// @context @journal/domains/core#^C036
+// @claim core/daemon-router
 import { initTRPC } from "@trpc/server";
 
 const t = initTRPC.create();
 
+// @claim core/daemon-router
 const Trpc = {
   router: t.router,
   procedure: t.procedure,

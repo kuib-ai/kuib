@@ -1,9 +1,10 @@
-// @context @journal/domains/core#^C006
+// @claim core/protocol-events
 import { z } from "zod";
 import { EventTypeEnum } from "../event.type.enum/index.ts";
 import MessageID from "../../id/message.id/index.ts";
 import PartUser from "../../part/part.user/index.ts";
 
+// @claim core/protocol-events
 const UserMessageSubmitted = z.object({
   type: z.literal(EventTypeEnum.USER_MESSAGE_SUBMITTED),
   messageID: MessageID,

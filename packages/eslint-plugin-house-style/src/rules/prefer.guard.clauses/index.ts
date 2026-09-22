@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C025
+// @claim infra/house-style-rules
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
@@ -7,6 +7,7 @@ const createRule = ESLintUtils.RuleCreator(function (name) {
 
 type MessageIds = "elseBranch" | "elseIfChain";
 
+// @claim infra/house-style-rules
 const preferGuardClauses = createRule<[], MessageIds>({
   name: "prefer-guard-clauses",
   meta: {

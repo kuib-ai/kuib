@@ -1,37 +1,24 @@
-// @context @journal/domains/infra#^C004
+// @claim infra/code-links
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 import * as fs from "node:fs";
 import * as path from "node:path";
-
-const STALE_ADR_MARKER = "{{FEATURE_NAME}}";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
   return `https://github.com/kuib-ai/kuib/tree/main/docs/rules/${name}.md`;
 });
 
-type MessageIds =
-  | "missingContext"
-  | "deadContextLink"
-  | "deadContextAnchor"
-  | "staleContextLink";
+type MessageIds = "missingClaim" | "badTarget" | "deadDomain" | "deadClaim";
 
-const DIRECTORY_ENTRY_FILES = ["current.md", "plan.md", "decisions.md"];
+const CLAIM_LINK = /^\s*@claim\s+(.+?)\s*$/;
+const LINK_TARGET = /^([a-z]+)(?:\/([a-z0-9]+(?:-[a-z0-9]+)*))?$/;
 
-const extractContextPath = function (
-  comments: readonly TSESTree.Comment[],
-): string | null {
-  for (const comment of comments) {
-    const match = comment.value.match(/@context\s+(\S+)/);
-    if (match) {
-      return match[1];
-    }
-  }
-  return null;
+const claimTargets = function (comment: TSESTree.Comment): string[] | null {
+  const match = comment.value.match(CLAIM_LINK);
+  return match ? match[1].split(/[\s,]+/).filter(Boolean) : null;
 };
 
 const findJournalRoot = function (startFile: string): string | null {
   let currentDir = path.dirname(startFile);
-
   while (currentDir !== path.dirname(currentDir)) {
     const candidate = path.join(currentDir, "journal");
     if (fs.existsSync(candidate)) {
@@ -39,62 +26,12 @@ const findJournalRoot = function (startFile: string): string | null {
     }
     currentDir = path.dirname(currentDir);
   }
-
   return null;
 };
 
-const resolveContextFile = function (
-  contextPath: string,
-  currentFilename: string,
-): { absolutePath: string; exists: boolean } {
-  if (contextPath.startsWith("@journal/")) {
-    const journalRoot = findJournalRoot(currentFilename);
-
-    if (journalRoot !== null) {
-      const relative = contextPath.replace("@journal/", "");
-      const base = path.join(journalRoot, relative);
-
-      if (fs.existsSync(base) && fs.statSync(base).isDirectory()) {
-        const entryFile = DIRECTORY_ENTRY_FILES.find(function (file) {
-          return fs.existsSync(path.join(base, file));
-        });
-        const target = path.join(base, entryFile ?? DIRECTORY_ENTRY_FILES[0]);
-        return { absolutePath: target, exists: entryFile !== undefined };
-      }
-
-      if (fs.existsSync(`${base}.md`)) {
-        return { absolutePath: `${base}.md`, exists: true };
-      }
-
-      return { absolutePath: base, exists: fs.existsSync(base) };
-    }
-  }
-
-  const absolutePath = path.resolve(path.dirname(currentFilename), contextPath);
-  return { absolutePath, exists: fs.existsSync(absolutePath) };
-};
-
-const splitAnchor = function (contextPath: string): {
-  target: string;
-  anchor: string | null;
-} {
-  const match = contextPath.match(/^(.*)#\^([A-Za-z0-9-]+)$/);
-  if (match === null) {
-    return { target: contextPath, anchor: null };
-  }
-  return { target: match[1], anchor: match[2] };
-};
-
-const hasBlockAnchor = function (
-  absolutePath: string,
-  anchor: string,
-): boolean {
-  const pattern = new RegExp(`(^|\\s)\\^${anchor}\\s*$`, "m");
-  return pattern.test(fs.readFileSync(absolutePath, "utf-8"));
-};
-
-const isStaleAdr = function (absolutePath: string): boolean {
-  return fs.readFileSync(absolutePath, "utf-8").includes(STALE_ADR_MARKER);
+const hasClaim = function (currentPath: string, claim: string): boolean {
+  const pattern = new RegExp(`(^|\\s)\\^${claim}\\s*$`, "m");
+  return pattern.test(fs.readFileSync(currentPath, "utf-8"));
 };
 
 const requireContextLink = createRule<[], MessageIds>({
@@ -103,63 +40,73 @@ const requireContextLink = createRule<[], MessageIds>({
     type: "problem",
     docs: {
       description:
-        "Require one @context link to a journal domain, claim, or entry per module file.",
+        "Require a first-line `@claim <domain>[/<claim>]` link, and every @claim link to resolve to a journal domain claim.",
     },
     schema: [],
     messages: {
-      missingContext:
-        "Missing @context link. Add `@context @journal/domains/<domain>` (optionally `#^C###`) linking this module to its journal context.",
-      deadContextLink:
-        "Dead context link. The journal entry '{{ contextPath }}' does not exist at {{ absolutePath }}.",
-      deadContextAnchor:
-        "Dead context anchor. '{{ contextPath }}' names block ^{{ anchor }}, which is not in {{ absolutePath }}.",
-      staleContextLink:
-        "Stale context link. The ADR at '{{ contextPath }}' still contains placeholder text and has not been filled in.",
+      missingClaim:
+        "Missing file link. Start the module with `// @claim <domain>[/<claim>]` naming the claim (or domain) that explains it.",
+      badTarget:
+        "`@claim {{ target }}` must be <domain>/<claim>; a domain alone is allowed only in the first-line file link.",
+      deadDomain:
+        "`@claim {{ target }}`: journal/domains/{{ domain }}/current.md does not exist.",
+      deadClaim:
+        "`@claim {{ target }}`: no claim ^{{ claim }} in journal/domains/{{ domain }}/current.md.",
     },
   },
   defaultOptions: [],
   create(context) {
     return {
       "Program:exit"(node) {
-        const contextPath = extractContextPath(
-          context.sourceCode.getAllComments(),
-        );
-
-        if (contextPath === null) {
-          context.report({ node, messageId: "missingContext" });
+        const comments = context.sourceCode.getAllComments();
+        const first = comments.find(function (comment) {
+          return comment.loc.start.line === 1;
+        });
+        if (!first || claimTargets(first) === null) {
+          context.report({ node, messageId: "missingClaim" });
+        }
+        const journal = findJournalRoot(context.filename);
+        if (journal === null) {
           return;
         }
-
-        const { target, anchor } = splitAnchor(contextPath);
-        const { exists, absolutePath } = resolveContextFile(
-          target,
-          context.filename,
-        );
-
-        if (!exists) {
-          context.report({
-            node,
-            messageId: "deadContextLink",
-            data: { contextPath, absolutePath },
-          });
-          return;
-        }
-
-        if (anchor !== null && !hasBlockAnchor(absolutePath, anchor)) {
-          context.report({
-            node,
-            messageId: "deadContextAnchor",
-            data: { contextPath, absolutePath, anchor },
-          });
-          return;
-        }
-
-        if (isStaleAdr(absolutePath)) {
-          context.report({
-            node,
-            messageId: "staleContextLink",
-            data: { contextPath },
-          });
+        for (const comment of comments) {
+          const targets = claimTargets(comment);
+          if (targets === null) {
+            continue;
+          }
+          for (const target of targets) {
+            const match = target.match(LINK_TARGET);
+            if (match === null || (comment !== first && !match[2])) {
+              context.report({
+                loc: comment.loc,
+                messageId: "badTarget",
+                data: { target },
+              });
+              continue;
+            }
+            const [, domain, claim] = match;
+            const currentPath = path.join(
+              journal,
+              "domains",
+              domain,
+              "current.md",
+            );
+            if (!fs.existsSync(currentPath)) {
+              context.report({
+                loc: comment.loc,
+                messageId: "deadDomain",
+                data: { target, domain },
+              });
+              continue;
+            }
+            if (claim && !hasClaim(currentPath, claim)) {
+              context.report({
+                loc: comment.loc,
+                messageId: "deadClaim",
+                data: { target, domain, claim },
+              });
+            }
+          }
         }
       },
     };

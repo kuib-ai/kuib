@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C004
+// @claim core/protocol-ids
 import SessionID from "./session.id/index.ts";
 import MessageID from "./message.id/index.ts";
 import PartID from "./part.id/index.ts";
@@ -11,6 +11,7 @@ import DeviceID from "./device.id/index.ts";
 import CheckpointID from "./checkpoint.id/index.ts";
 import NodeID from "./node.id/index.ts";
 
+// @claim core/protocol-ids
 const ID = {
   SessionID,
   MessageID,

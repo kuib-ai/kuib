@@ -8,7 +8,7 @@ to = ["infra#D014"]
 [[section]]
 file = "decisions.md"
 heading = "Decision"
-to = ["infra#D014", "infra#C022", "host#D006", "R410"]
+to = ["infra#D014", "infra/start-telemetry", "host#D006", "R410"]
 note = "KUIB_TRACE_SERVICE and the Deno end-to-end re-check are unbuilt (R410)."
 
 [[section]]
@@ -19,4 +19,4 @@ to = ["infra#D014"]
 [[section]]
 file = "decisions.md"
 heading = "Consequences"
-to = ["infra#D014", "infra#C022"]
+to = ["infra#D014", "infra/start-telemetry"]

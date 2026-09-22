@@ -1,7 +1,8 @@
-// @context @journal/domains/core#^C008
+// @claim core/protocol-parts
 import { z } from "zod";
 import PartID from "../../id/part.id/index.ts";
 
+// @claim core/protocol-parts
 const PartBase = z.object({
   partID: PartID,
   excluded: z.boolean(),

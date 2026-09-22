@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C024
+// @claim infra/house-structure-rules
 import { ESLintUtils } from "@typescript-eslint/utils";
 import * as path from "node:path";
 
@@ -37,6 +37,7 @@ const segmentsUnderSrc = function (filename: string): {
   return { dirs: parts.slice(0, -1), file };
 };
 
+// @claim infra/house-structure-rules
 const dotCaseFilename = createRule<[], MessageIds>({
   name: "dot-case-filename",
   meta: {

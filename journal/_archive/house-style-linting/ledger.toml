@@ -3,13 +3,13 @@ entry = "house-style-linting"
 [[section]]
 file = "decisions.md"
 heading = "The house style (audited from the author's hand-written reference codebase)"
-to = ["infra#D015", "infra#D016", "infra#C024", "infra#C025", "infra#C009", "R411"]
+to = ["infra#D015", "infra#D016", "infra/house-structure-rules", "infra/house-style-rules", "infra/package-exports", "R411"]
 note = "Component/service barrel archetypes are left to R411."
 
 [[section]]
 file = "decisions.md"
 heading = "Rules (final set)"
-to = ["infra#C023", "infra#C024", "infra#C025", "infra#C004", "infra#D015"]
+to = ["infra/house-plugin", "infra/house-structure-rules", "infra/house-style-rules", "infra/code-links", "infra#D015"]
 note = "require-context-link now resolves domains, not legacy entries (infra#D003)."
 
 [[section]]
@@ -25,12 +25,12 @@ to = ["infra#D020", "core#D002"]
 [[section]]
 file = "decisions.md"
 heading = "RESOLVED: relative imports — cross-package-only ban (2026-07-01)"
-to = ["infra#D017", "infra#C024", "R413"]
+to = ["infra#D017", "infra/house-structure-rules", "R413"]
 
 [[section]]
 file = "decisions.md"
 heading = "Lint infra changes (2026-07-01)"
-to = ["infra#D015", "infra#C023", "infra#C008", "R412"]
+to = ["infra#D015", "infra/house-plugin", "infra/check-pipeline", "R412"]
 
 [[section]]
 file = "decisions.md"
@@ -40,9 +40,9 @@ to = ["R411"]
 [[section]]
 file = "decisions.md"
 heading = "prefer-guard-clauses rule (2026-07-03)"
-to = ["infra#D019", "infra#C025"]
+to = ["infra#D019", "infra/house-style-rules"]
 
 [[section]]
 file = "decisions.md"
 heading = "no-arrow: ban everywhere (2026-07-19)"
-to = ["infra#D018", "infra#C025"]
+to = ["infra#D018", "infra/house-style-rules"]

@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C021
+// @claim infra/with-error
 import type { AnyError } from "@kuib-ai/protocol/error/error.any";
 import mapError from "../map.error/index.ts";
 import type { Result } from "../is.err/index.ts";
@@ -34,6 +34,7 @@ const toMapped = function <E>(
   return mapError(cause) as E;
 };
 
+// @claim infra/with-error
 const withError: IWithError = function (
   input: unknown,
   map?: (cause: unknown) => unknown,

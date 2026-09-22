@@ -1,4 +1,5 @@
-// @context @journal/domains/core#^C005
+// @claim core/protocol-enums
+// @claim core/protocol-enums
 export enum EventTypeEnum {
   USER_MESSAGE_SUBMITTED = "user-message-submitted",
   MESSAGE_STARTED = "message-started",

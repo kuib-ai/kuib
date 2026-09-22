@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C037
+// @claim core/daemon-file-procedures
 import { writeFile } from "node:fs/promises";
 import { TRPCError } from "@trpc/server";
 import Std from "@kuib-ai/std";
@@ -7,6 +7,7 @@ import expandHomePath from "../../expand.home.path/index.ts";
 import WriteFileInput from "../../io/write.file.input/index.ts";
 import WriteFileOutput from "../../io/write.file.output/index.ts";
 
+// @claim core/daemon-file-procedures
 const writeFileProcedure = Trpc.procedure
   .input(WriteFileInput)
   .output(WriteFileOutput)

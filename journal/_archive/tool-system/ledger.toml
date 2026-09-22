@@ -8,17 +8,17 @@ to = ["core#D012"]
 [[section]]
 file = "decisions.md"
 heading = "The model — single source of truth, three roles"
-to = ["core#D012", "core#C014", "core#C033", "core#C035", "R205"]
+to = ["core#D012", "core/fs-io-schemas", "core/define-tool", "core/build-tools", "R205"]
 
 [[section]]
 file = "decisions.md"
 heading = "Tool lifecycle events come from the stream, not the tool"
-to = ["core#D012", "core#C024"]
+to = ["core#D012", "core/finish-reasons"]
 
 [[section]]
 file = "decisions.md"
 heading = "v1 scope"
-to = ["core#D013", "core#C034", "core#C028"]
+to = ["core#D013", "core/agent-tools", "core/message-replay"]
 
 [[section]]
 file = "decisions.md"
@@ -29,9 +29,9 @@ note = "history: one-off end-to-end verification run"
 [[section]]
 file = "decisions.md"
 heading = "Open / follow-ups"
-to = ["core#C040", "core#D013", "core#D019", "core#D029", "R205", "R217", "R220"]
+to = ["core/ensure-daemon", "core#D013", "core#D019", "core#D029", "R205", "R217", "R220"]
 
 [[section]]
 file = "progress.md"
 heading = "2026-07-01 — initial build (readFile)"
-to = ["core#C033", "core#C035", "core#C039", "R205"]
+to = ["core/define-tool", "core/build-tools", "core/daemon-server", "R205"]

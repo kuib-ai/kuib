@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C019
+// @claim infra/logger-port
 type LogBindings = Record<string, unknown>;
 
 type LogFn = {
@@ -6,6 +6,7 @@ type LogFn = {
   (obj: LogBindings, msg?: string): void;
 };
 
+// @claim infra/logger-port
 interface Logger {
   debug: LogFn;
   info: LogFn;

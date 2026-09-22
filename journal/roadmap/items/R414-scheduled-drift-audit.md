@@ -31,7 +31,7 @@ Drift detection is cheap and deterministic; correction only happens if someone l
 
 ## Constraints already decided
 
-- Drift is deterministic and correction model-assisted: [[domains/infra/decisions#^D002]], [[domains/infra/current#^C003]].
+- Drift is deterministic and correction model-assisted: [[domains/infra/decisions#^D002]], [[domains/infra/current#^claim-verification]].
 
 ## History
 

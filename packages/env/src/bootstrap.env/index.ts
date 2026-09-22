@@ -1,10 +1,11 @@
-// @context @journal/domains/infra#^C011
+// @claim infra/bootstrap-env
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { config as loadDotenv } from "dotenv";
 import findWorkspaceRoot from "../workspace.root/index.ts";
 import type { ZodTypeAny, z } from "zod";
 
+// @claim infra/bootstrap-env
 const bootstrapEnv = function <T extends ZodTypeAny>(
   schema: T,
   mode: string = process.env["NODE_ENV"] ?? "development",

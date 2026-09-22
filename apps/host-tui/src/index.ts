@@ -1,4 +1,4 @@
-// @context @journal/domains/host
+// @claim host
 import Cli from "@kuib-ai/cli";
 import Config from "@kuib-ai/config";
 import Protocol from "@kuib-ai/protocol";
@@ -7,6 +7,7 @@ import createLog from "./log/index.ts";
 import run from "./run/index.ts";
 import type { CliSchema } from "@kuib-ai/cli/cli.schema";
 
+// @claim host/entry-flags
 const cliSchema: CliSchema = {
   description: "Kuib AI Terminal Interface",
   options: {
@@ -32,6 +33,7 @@ const cliSchema: CliSchema = {
   },
 };
 
+// @claim host/entry-flags
 type TuiCliValues = {
   config?: string;
   "mesh-config"?: string;
@@ -47,6 +49,7 @@ type TuiCliValues = {
 
 let log: ReturnType<typeof createLog> | undefined;
 
+// @claim host/host-layout host/entry-parse
 const main = async function (): Promise<void> {
   const parsed = Cli.parseCli<TuiCliValues>("", cliSchema);
   if (parsed === null) {

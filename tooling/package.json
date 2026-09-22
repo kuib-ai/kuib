@@ -1,0 +1,23 @@
+{
+  "name": "@kuib-ai/tooling",
+  "version": "0.0.1",
+  "description": "kuib repo tooling — journal, agent adapters and the tmux orchestra",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@kuib-ai/cli": "workspace:*",
+    "@std/toml": "catalog:",
+    "@std/yaml": "catalog:",
+    "typescript": "catalog:"
+  },
+  "devDependencies": {
+    "@kuib-ai/deno-types": "workspace:*",
+    "@kuib-ai/tsconfig": "workspace:*",
+    "@types/node": "catalog:"
+  }
+}

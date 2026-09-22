@@ -1,8 +1,9 @@
-// @context @journal/domains/core#^C016
+// @claim core/service-control-protocol
 import { z } from "zod";
 import { ServiceMessageTypeEnum } from "../service.message.type.enum/index.ts";
 import SessionID from "../../id/session.id/index.ts";
 
+// @claim core/service-control-protocol
 const SubmitMessage = z.object({
   type: z.literal(ServiceMessageTypeEnum.SUBMIT),
   sessionID: SessionID,

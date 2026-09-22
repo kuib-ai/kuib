@@ -1,6 +1,6 @@
 ---
 domain: product
-summary: Ana voice assistant: speech-to-text services and their clients.
+summary: "Ana voice assistant: speech-to-text services and their clients."
 code: ["services/**"]
 ---
 
@@ -15,9 +15,9 @@ voice loop that chains transcription, an LLM reply and spoken output.
 `services/` holds two STT servers. `stt-coreml` is a Swift package (macOS 14+, one executable
 target `stt-coreml`) built on FluidAudio for Parakeet inference on CoreML and SwiftNIO for its
 socket listeners. `stt-mlx` is a Python 3.12 project that serves Qwen3-ASR through
-`mlx-qwen3-asr`, managed with `uv`. ^C001
+`mlx-qwen3-asr`, managed with `uv`. ^stt-services
 
-> [!sources]- C001 · structure · verified 9374dfb
+> [!sources]- structure · verified 2026-09-23
 > - `services/stt-coreml/Package.swift` › ".package(url: "https://github.com/FluidInference/FluidAudio.git", from: "0.9.1")"
 > - `services/stt-coreml/Package.swift` › ".product(name: "NIO", package: "swift-nio")"
 > - `services/stt-mlx/pyproject.toml` › ""mlx-qwen3-asr>=0.4.0","
@@ -28,9 +28,9 @@ socket listeners. `stt-mlx` is a Python 3.12 project that serves Qwen3-ASR throu
 
 Both services are Nx projects. `stt-coreml` has a cached `build` target (`swift build -c
 release`, inputs `Sources/**/*.swift` and `Package.swift`) and a `run` target (`swift run
-stt-coreml`). `stt-mlx` has only a `run` target (`uv run python server.py`). ^C002
+stt-coreml`). `stt-mlx` has only a `run` target (`uv run python server.py`). ^services-nx-targets
 
-> [!sources]- C002 · structure · verified 9374dfb
+> [!sources]- structure · verified 2026-09-23
 > - `services/stt-coreml/project.json` › ""command": "swift build -c release","
 > - `services/stt-coreml/project.json` › ""command": "swift run stt-coreml","
 > - `services/stt-mlx/project.json` › ""command": "uv run python server.py","
@@ -40,9 +40,9 @@ stt-coreml`). `stt-mlx` has only a `run` target (`uv run python server.py`). ^C0
 Every message in both directions is a 4-byte big-endian length followed by a UTF-8 JSON body.
 `stt-coreml` implements the framing as a SwiftNIO decoder/encoder pair on every connection;
 `stt-mlx` reads and writes the same frames with `struct` so the same clients work against
-either server by changing only host and port. ^C003
+either server by changing only host and port. ^wire-framing
 
-> [!sources]- C003 · behaviour · verified 9374dfb
+> [!sources]- behaviour · verified 2026-09-23
 > - `services/stt-coreml/Sources/SttCoreML/Server.swift` › "// MARK: - Length-prefix framing (4-byte big-endian)"
 > - `services/stt-coreml/Sources/SttCoreML/Server.swift` › "ByteToMessageHandler(LengthPrefixDecoder()),"
 > - `services/stt-mlx/server.py` › "length = struct.unpack(">I", hdr)[0]"
@@ -55,9 +55,9 @@ plus optional `audio` (base64 of 16-bit little-endian mono PCM), `sampleRate` (d
 `engine` and `chunkSeconds`; `stt-mlx` additionally reads `language`. A response carries `ok`,
 `type` and, depending on type, `text`, `confirmed`, `confidence`, `durationSeconds`,
 `processingTimeSeconds`, `engine` or `error`. Types are `result` (batch transcript), `started`,
-`partial`, `confirmed`, `final` (stream events), `pong` and `error` (`ok: false`). ^C004
+`partial`, `confirmed`, `final` (stream events), `pong` and `error` (`ok: false`). ^wire-requests
 
-> [!sources]- C004 · behaviour · verified 9374dfb
+> [!sources]- behaviour · verified 2026-09-23
 > - `services/stt-coreml/Sources/SttCoreML/Protocol.swift` › "struct SttRequest: Codable, Sendable {"
 > - `services/stt-coreml/Sources/SttCoreML/Protocol.swift` › "ok: true, type: confirmed ? "confirmed" : "partial","
 > - `services/stt-coreml/Sources/SttCoreML/Protocol.swift` › "ok: false, type: "error","
@@ -66,9 +66,9 @@ plus optional `audio` (base64 of 16-bit little-endian mono PCM), `sampleRate` (d
 Streaming is per connection: `streamStart` answers `started`, each `streamAudio` frame is fed
 without a reply, transcript updates arrive asynchronously as `partial`/`confirmed`, and
 `streamEnd` produces one `final` with the full text. Sending `streamAudio` or `streamEnd`
-without an active stream returns an error. ^C005
+without an active stream returns an error. ^wire-streaming
 
-> [!sources]- C005 · behaviour · verified 9374dfb
+> [!sources]- behaviour · verified 2026-09-23
 > - `services/stt-coreml/Sources/SttCoreML/Server.swift` › "writeResponse(.error("No active stream. Send streamStart first."), context: context)"
 > - `services/stt-coreml/Sources/SttCoreML/Protocol.swift` › "static func streamEnd(text: String) -> SttResponse {"
 > - `services/stt-mlx/server.py` › "async def handle_stream(reader, writer, req):"
@@ -81,9 +81,9 @@ On start the server downloads (first run) and loads the Parakeet models through
 `~/.kuib/stt.sock` and on TCP `100.70.111.96:9009` (the Tailscale address of minerva, hard-coded
 in `Main.swift`). A stale socket file is removed before binding; SIGINT/SIGTERM close both
 listeners, shut the event loop group down and remove the socket. Logs go to stdout prefixed
-`[stt-coreml]`. ^C006
+`[stt-coreml]`. ^coreml-startup
 
-> [!sources]- C006 · behaviour · verified 9374dfb
+> [!sources]- behaviour · verified 2026-09-23
 > - `services/stt-coreml/Sources/SttCoreML/Main.swift` › "let models = try await AsrModels.downloadAndLoad()"
 > - `services/stt-coreml/Sources/SttCoreML/Main.swift` › "tcpHost: "100.70.111.96","
 > - `services/stt-coreml/Sources/SttCoreML/Server.swift` › "let unixChannel = try await unixBootstrap.bind(unixDomainSocketPath: socketPath).get()"
@@ -94,10 +94,10 @@ listeners, shut the event loop group down and remove the socket. Logs go to stdo
 Batch transcription goes through the `SttBackend` protocol (`engineName`, `loadModel()`,
 `transcribe(audio:sampleRate:)` returning text, confidence, audio duration, processing time and
 engine). Two backends are registered and selected by the request's `engine` field; the first,
-`parakeet`, is the default. An unknown engine returns an error listing the available ones. ^C007
+`parakeet`, is the default. An unknown engine returns an error listing the available ones. ^coreml-batch-backend
 
-> [!sources]- C007 · behaviour · verified 9374dfb
-> - `services/stt-coreml/Sources/SttCoreML/SttBackend.swift`
+> [!sources]- behaviour · verified 2026-09-23
+> - `services/stt-coreml/Sources/SttCoreML/SttBackend.swift` · #4275f924
 > - `services/stt-coreml/Sources/SttCoreML/Server.swift` › "self.defaultEngine = backends.first!.engineName"
 > - `services/stt-coreml/Sources/SttCoreML/Main.swift` › "backends: [parakeet, eou],"
 > - why: [[domains/product/decisions#^D006]]
@@ -107,9 +107,9 @@ engine). Two backends are registered and selected by the request's `engine` fiel
 | `parakeet` | `ParakeetBackend` | FluidAudio `AsrManager` with a TDT decoder state | Converts Int16 PCM to Float; reuses one decoder state across requests; returns the model's confidence |
 | `parakeet-eou` | `EouBackend` | `StreamingModelVariant.parakeetEou320ms` via its streaming manager | Resets the manager, feeds the whole buffer, calls `finish()`; confidence is always `0.0` |
 
- ^C008
+ ^coreml-engines
 
-> [!sources]- C008 · behaviour · verified 9374dfb
+> [!sources]- behaviour · verified 2026-09-23
 > - `services/stt-coreml/Sources/SttCoreML/ParakeetBackend.swift` › "let result = try await manager.transcribe(floats, decoderState: &state)"
 > - `services/stt-coreml/Sources/SttCoreML/ParakeetBackend.swift` › "enum SttEngineError: Error, LocalizedError {"
 > - `services/stt-coreml/Sources/SttCoreML/EouBackend.swift` › "init(variant: StreamingModelVariant = .parakeetEou320ms) {"
@@ -124,9 +124,9 @@ before confirmation and a 0.80 confirmation threshold; its updates become `parti
 creates and loads a fresh `parakeetEou320ms` manager for the stream and emits only `partial`
 updates from its partial-transcript callback. Both kinds treat incoming audio as 16 kHz, tag
 stream events with engine `parakeet-stream`, and are cancelled when the connection closes. No
-VAD runs server-side: the stream ends only when the client sends `streamEnd`. ^C009
+VAD runs server-side: the stream ends only when the client sends `streamEnd`. ^coreml-stream-sessions
 
-> [!sources]- C009 · behaviour · verified 9374dfb
+> [!sources]- behaviour · verified 2026-09-23
 > - `services/stt-coreml/Sources/SttCoreML/StreamingSession.swift` › "chunkSeconds: min(chunkSeconds, 11.0),"
 > - `services/stt-coreml/Sources/SttCoreML/StreamingSession.swift` › "confirmationThreshold: 0.80"
 > - `services/stt-coreml/Sources/SttCoreML/EouStreamingSession.swift` › "await manager.setPartialTranscriptCallback { text in"
@@ -142,9 +142,9 @@ VAD runs server-side: the stream ends only when the client sends `streamEnd`. ^C
 `Qwen/Qwen3-ASR-0.6B`) and listens on TCP `STT_MLX_HOST:STT_MLX_PORT` (default `0.0.0.0:9010`).
 All inference runs on a single-worker thread pool. Batch `transcribe` returns a `result` with
 engine `qwen3-asr-mlx` and a fixed confidence of `1.0`, passing the optional `language` through
-to the model. ^C010
+to the model. ^mlx-server
 
-> [!sources]- C010 · behaviour · verified 9374dfb
+> [!sources]- behaviour · verified 2026-09-23
 > - `services/stt-mlx/server.py` › "MODEL_ID = os.environ.get("STT_MLX_MODEL", "Qwen/Qwen3-ASR-0.6B")"
 > - `services/stt-mlx/server.py` › "PORT = int(os.environ.get("STT_MLX_PORT", "9010"))"
 > - `services/stt-mlx/server.py` › "executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="mlx-asr")"
@@ -155,9 +155,9 @@ After `streamStart`, `stt-mlx` sends `started`, initialises MLX streaming state
 (`chunkSeconds`, default 2.0) and takes over the connection's read loop: each `streamAudio`
 chunk is fed to the model and a `partial` is sent only when the text changed; `streamEnd`
 finishes the state, sends `final` and returns to the request loop; `ping` is answered mid-stream
-and any other action ends the stream with an error. It never emits `confirmed`. ^C011
+and any other action ends the stream with an error. It never emits `confirmed`. ^mlx-streaming
 
-> [!sources]- C011 · behaviour · verified 9374dfb
+> [!sources]- behaviour · verified 2026-09-23
 > - `services/stt-mlx/server.py` › "lambda: session.init_streaming(chunk_size_sec=req.get("chunkSeconds", 2.0)),"
 > - `services/stt-mlx/server.py` › "if state.text != prev_text:"
 > - `services/stt-mlx/server.py` › ""error": f"unexpected action during stream: {action}","
@@ -180,9 +180,9 @@ as 16 kHz mono s16le.
 | `client-stream.py` | TCP (`STT_HOST`/`STT_PORT`) | Streams mic or a file in 100 ms frames with `chunkSeconds: 3.0` (optional `STT_ENGINE`) |
 | `mimo-call.py` | HTTPS | `uv` script (`openai`): sends argv/stdin text to the MiMo chat API (`MIMO_MODEL`, default `mimo-v2.5-pro`) and streams the reply |
 
- ^C012
+ ^client-scripts
 
-> [!sources]- C012 · structure · verified 9374dfb
+> [!sources]- structure · verified 2026-09-23
 > - `services/stt-coreml/test-transcribe.py` › """"Test client for stt-coreml unix socket server.""""
 > - `services/stt-coreml/watch-and-transcribe.py` › "WATCH_FILE = "/tmp/stt-input.raw""
 > - `services/stt-coreml/stream-and-transcribe.py` › "CHUNK_BYTES = SAMPLE_RATE * 2 // 10  # 100ms chunks for smooth streaming"
@@ -201,9 +201,9 @@ with `--mlx`, stt-mlx on 9010, then streams a reply from an OpenAI-compatible LL
 `openai/gpt-oss-20b`) under a short "You are Ana" system prompt with the last 10 turns of
 history. Unless `--no-tts` is given or no `TTS_API_KEY` is set, the reply is spoken through
 MiMo TTS (`mimo-v2.5-tts`, voice `Milo`) and played with `afplay`/`paplay`. Keys and endpoints
-come from the environment, pre-seeded from `/tmp/llm.env`; `--loop` repeats the cycle. ^C013
+come from the environment, pre-seeded from `/tmp/llm.env`; `--loop` repeats the cycle. ^voice-assistant
 
-> [!sources]- C013 · behaviour · verified 9374dfb
+> [!sources]- behaviour · verified 2026-09-23
 > - `services/stt-coreml/voice-assistant.py` › "SYSTEM_PROMPT = f"""You are Ana, a helpful voice assistant."
 > - `services/stt-coreml/voice-assistant.py` › "STT_PORT = int(os.environ.get("STT_PORT", "9010" if _use_mlx else "9009"))"
 > - `services/stt-coreml/voice-assistant.py` › "LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.groq.com/openai/v1")"

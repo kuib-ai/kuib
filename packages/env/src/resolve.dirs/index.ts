@@ -1,10 +1,11 @@
-// @context @journal/domains/infra#^C012
+// @claim infra/base-dirs
 import BaseDirs from "../base.dirs/index.ts";
 import type { BaseDirs as BaseDirsType } from "../base.dirs/index.ts";
 import { PathKindEnum } from "../path.kind/index.ts";
 import type { ResolveDirsOptions } from "../resolve.dirs.options/index.ts";
 import resolveDir from "../resolve.dir/index.ts";
 
+// @claim infra/base-dirs
 const resolveDirs = function (options?: ResolveDirsOptions): BaseDirsType {
   return BaseDirs.parse({
     config: resolveDir(PathKindEnum.CONFIG, options),

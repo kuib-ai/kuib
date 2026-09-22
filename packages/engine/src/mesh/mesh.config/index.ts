@@ -1,7 +1,8 @@
-// @context @journal/domains/core#^C047
+// @claim core/mesh-config
 import { z } from "zod";
 import Protocol from "@kuib-ai/protocol";
 
+// @claim core/mesh-config
 const MeshConfig = z.object({
   nodes: z.array(Protocol.Node.NodeDescriptor).default([]),
 });

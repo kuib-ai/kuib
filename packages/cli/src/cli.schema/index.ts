@@ -1,4 +1,5 @@
-// @context @journal/domains/host#^C012
+// @claim host/cli-package
+// @claim host/cli-package
 export type CliOption = {
   type: "string" | "boolean";
   short?: string;
@@ -7,6 +8,7 @@ export type CliOption = {
   description?: string;
 };
 
+// @claim host/cli-package
 export type CliSchema = {
   description: string;
   options: Record<string, CliOption>;

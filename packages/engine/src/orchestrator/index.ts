@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C023
+// @claim core/agent-turn
 import { streamText, type LanguageModel } from "ai";
 import type { ProviderOptions } from "#provider/build.provider.options";
 
@@ -18,6 +18,7 @@ import buildMessages from "#build.messages";
 import type { DaemonClient } from "#daemon.client/transport.factory";
 import createDaemonFileSystem from "#daemon.file.system";
 
+// @claim core/agent-turn
 type RunAgentParams = {
   prompt: string;
   sessionID: SessionID;
@@ -32,6 +33,7 @@ type RunAgentParams = {
   takePending?: () => string[];
 };
 
+// @claim core/finish-reasons
 const STOP_REASONS: Record<string, StepBoundaryStopReasonEnum> = {
   stop: Protocol.Part.StepBoundaryStopReasonEnum.NORMAL,
   "tool-calls": Protocol.Part.StepBoundaryStopReasonEnum.TOOL_CALL_REQUEST,
@@ -39,12 +41,14 @@ const STOP_REASONS: Record<string, StepBoundaryStopReasonEnum> = {
   "content-filter": Protocol.Part.StepBoundaryStopReasonEnum.CONTENT_FILTER,
 };
 
+// @claim core/finish-reasons
 const stopReason = function (reason: string): StepBoundaryStopReasonEnum {
   return (
     STOP_REASONS[reason] ?? Protocol.Part.StepBoundaryStopReasonEnum.INTERRUPTED
   );
 };
 
+// @claim core/agent-turn
 const runAgent = async function (params: RunAgentParams): Promise<void> {
   const { prompt, sessionID, deviceID, model, daemonClient, eventLog } = params;
   const messageID = newID(Protocol.ID.MessageID);

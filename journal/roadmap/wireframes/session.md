@@ -115,7 +115,7 @@ The empty session is the same layout with an empty conversation pane — no dist
 
 ## Variant — generic loader + context meter (ADOPTED 2026-08-12, as-built)
 
-Two additions, both driven by events that already existed in the protocol but were never emitted until the `STEP_STARTED`/`STEP_FINISHED` work ([[domains/core/current#^C024]]).
+Two additions, both driven by events that already existed in the protocol but were never emitted until the `STEP_STARTED`/`STEP_FINISHED` work ([[domains/core/current#^finish-reasons]]).
 
 ```
 ┌─Conversation────────────────────────────────┐┌─Prompt────────────────────────┐

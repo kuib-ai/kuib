@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C025
+// @claim infra/house-style-rules
 import { ESLintUtils, type TSESTree } from "@typescript-eslint/utils";
 import type { TSESLint } from "@typescript-eslint/utils";
 
@@ -54,6 +54,7 @@ const toFunctionExpression = function (
   return expression;
 };
 
+// @claim infra/house-style-rules
 const noArrow = createRule<[], MessageIds>({
   name: "no-arrow",
   meta: {

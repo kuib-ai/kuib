@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C012
+// @claim infra/base-dirs
 import ResolveDirsOptions from "../resolve.dirs.options/index.ts";
 import type { ResolveDirsOptions as ResolveDirsOptionsType } from "../resolve.dirs.options/index.ts";
 import PathKind from "../path.kind/index.ts";
@@ -6,6 +6,7 @@ import type { PathKind as PathKindType } from "../path.kind/index.ts";
 import resolveUnixBase from "../resolve.unix.base/index.ts";
 import resolveWindowsBase from "../resolve.windows.base/index.ts";
 
+// @claim infra/base-dirs
 const resolvePlatformBase = function (
   kind: PathKindType,
   options?: ResolveDirsOptionsType,

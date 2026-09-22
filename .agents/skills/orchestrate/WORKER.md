@@ -1,35 +1,48 @@
 # Orchestra worker protocol
 
-You were started by an orchestrator agent in another window of this tmux session. You do ONE
-task, described in your brief, and report back. Your task is a journal record:
-`journal/features/<feature>/tasks/<task-id>/` holds your `brief.md`, `prompt.md`, `task.toml`
-and — once you write it — `report.md`. Tool: `bin/orchestra` (below:
-`orchestra`, run from the repo root of your cwd; it runs through uv).
+You were started by an orchestrator in another window of this tmux session. You do ONE task,
+described in your brief, and stop. Your task is a journal record:
+`journal/features/<feature>/tasks/<task>/` holds your `brief.md` (state in its frontmatter,
+the task below it) and — as you write them — `plan.md`, `log.md` and `report.md`. Tool:
+`pnpm orchestra`, run from the repository your prompt names (`ORCHESTRA_ROOT` is set in your
+window).
 
 ## Rules
 
-- **Read your brief first**, then only the context it lists (domain claims, plan sections).
-  Do not load the whole journal. `AGENTS.md` still applies.
-- **Do only the work you were assigned, and never communicate with the orchestrator.** Do not
-  type into other panes, drive tmux, or message anyone. You write your own task records; the
-  orchestrator watches, reads them, and decides what happens next.
-- **Stay in scope.** Edit only files the brief puts in scope. Needing anything outside it, or
+- **Read your brief first**, then only the context it lists. `AGENTS.md` still applies.
+- **Do only the assigned work, and never communicate with the orchestrator.** Do not type into
+  other panes, drive tmux or message anyone. You write your own files and set your own status;
+  the orchestrator watches and decides what happens next.
+- **Stay inside the grant** (`grant:` in the brief's frontmatter): changing anything else, or
   meeting a decision the brief and plan do not settle → do not guess and do not ask: write it
-  under `## Blocked on` in your report, finish with `orchestra done <task-id> blocked`, and stop.
-- **Do not touch** the feature's `plan.md` / `implementation.toml`, roadmap items, other
-  windows, branches or worktrees. Do not commit, push or rebase unless the brief says so.
-- **Keep the truth true.** Code you change that a domain claim cites → update the claim's
-  paragraph and anchors, then `pnpm journal stamp <domain>#C###`. New TS modules get
-  `// @context @journal/domains/<owner>[#^C###]`.
-- **Definition of done:** the brief's acceptance criteria hold, `pnpm run check` is green in
-  your cwd, relevant tests pass, `pnpm journal check` shows no errors.
+  under `## Blocked on` in `report.md`, run `pnpm orchestra done <task> blocked`, and stop.
+- **Do not touch** the feature's `plan.md`, roadmap items, other tasks, branches or worktrees.
+  No git writes (commit, rebase, checkout) unless the brief says so. No sub-agents unless the
+  brief allows them.
+- **Keep the truth true.** Code you change under a `@claim` link → reread that claim, rewrite
+  it if it no longer holds, then `pnpm journal stamp <domain>/<claim>`. New modules start with
+  `// @claim <domain>[/<claim>]`. No prose comments.
+- **Log as you go.** After every meaningful move, append to `log.md`: what changed (paths), what
+  was verified, what is next. It is your resume point after a restart or a lost window.
+
+## Plan gate (`gate: plan`)
+
+Write `plan.md` — the changes by path, the order of moves, how each is verified, anything the
+brief leaves undecided — then `pnpm orchestra done <task> plan-ready` and stop. Change no file
+before the orchestrator sends GO; its conditions are appended under `## Go` in your brief.
+
+## Context limit
+
+When the orchestrator asks, or you notice your context is nearly full: append your full state
+to `log.md` (done, in progress, next, findings you must not lose), run
+`pnpm orchestra done <task> restart`, and stop. You will be cleared and resumed from the log.
 
 ## Finish
 
-1. Write `report.md` next to your brief (`orchestra path <task-id>` prints the folder):
+1. Write `report.md` next to your brief (`pnpm orchestra path <task>` prints the folder):
 
    ```markdown
-   # <task-id> — report
+   # <task> — report
 
    Status: done | blocked | failed
 
@@ -41,21 +54,22 @@ and — once you write it — `report.md`. Tool: `bin/orchestra` (below:
 
    ## Plan updates (for the orchestrator)
    - P02-I01 → implemented
-   - New decision / gap / roadmap follow-up, if any, with one line of context
+   - New decision / gap / roadmap follow-up, with one line of context
 
    ## Journal
-   - Claims updated + stamped: core#C023, core#C027
+   - Claims rewritten and stamped: core/agent-turn
    - Claims possibly affected but not updated (and why)
 
    ## Verification
    - `pnpm run check`: green (or the failing output)
    - Tests run and results
 
-   ## Blocked on (only when status is blocked)
+   ## Findings (reviews)
+   - id · severity · path:line · what is wrong · how it fails · suggested fix
 
-   ## Risks
+   ## Blocked on (only when blocked)
    ```
 
-2. `orchestra done <task-id>` (or `orchestra done <task-id> blocked|failed` — the report says why).
-3. Stop and stay idle. The orchestrator reads your report and decides the next step; it may
-   type new assigned work into this window — treat it as a new brief and finish it the same way.
+2. `pnpm orchestra done <task>` (or `… blocked` / `… failed` — the report says why).
+3. Stop and stay idle. The orchestrator may type new assigned work into this window — treat it
+   as a new brief and finish it the same way.

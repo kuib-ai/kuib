@@ -1,7 +1,8 @@
-// @context @journal/domains/core#^C037
+// @claim core/daemon-file-procedures
 import { homedir } from "node:os";
 import { join } from "node:path";
 
+// @claim core/daemon-file-procedures
 const expandHomePath = function (path: string): string {
   if (path === "~") {
     return homedir();

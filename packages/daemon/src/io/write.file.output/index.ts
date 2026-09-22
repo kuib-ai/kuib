@@ -1,6 +1,7 @@
-// @context @journal/domains/core#^C037
+// @claim core/daemon-file-procedures
 import { z } from "zod";
 
+// @claim core/daemon-file-procedures
 const WriteFileOutput = z.object({
   success: z.literal(true),
 });

@@ -41,7 +41,7 @@ Agent-written UI code needs the same idiom enforcement as the rest of the codeba
 
 ## Constraints already decided
 
-- House style as a lint plugin at error severity: [[domains/infra/decisions#^D015]]; current rule set: [[domains/infra/current#^C025]].
+- House style as a lint plugin at error severity: [[domains/infra/decisions#^D015]]; current rule set: [[domains/infra/current#^house-style-rules]].
 
 ## History
 

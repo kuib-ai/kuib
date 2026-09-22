@@ -64,7 +64,7 @@ Mesh remote execution without these layers turns one poisoned file into a fleet 
 
 ## Constraints already decided
 
-- The daemon's optional TCP listener currently binds all interfaces: [[domains/core/current#^C039]].
+- The daemon's optional TCP listener currently binds all interfaces: [[domains/core/current#^daemon-server]].
 - Agent tools are read-only for now: [[domains/core/decisions#^D013]].
 
 ## History

@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C002
+// @claim core/package-barrels
 import ID from "./id/index.ts";
 import ToolCall from "./tool.call/index.ts";
 import Part from "./part/index.ts";
@@ -13,6 +13,7 @@ import Endpoint from "./endpoint/index.ts";
 import Node from "./node/index.ts";
 import Provider from "./provider/index.ts";
 
+// @claim core/package-barrels
 const Protocol = {
   ID,
   ToolCall,

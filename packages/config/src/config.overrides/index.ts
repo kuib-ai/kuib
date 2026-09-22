@@ -1,4 +1,5 @@
-// @context @journal/domains/infra#^C015
+// @claim infra/bootstrap-config
+// @claim infra/bootstrap-config
 type ConfigOverrides = {
   configFile?: string;
   meshConfigFile?: string;

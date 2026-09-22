@@ -1,4 +1,5 @@
-// @context @journal/domains/infra#^C012
+// @claim infra/base-dirs
+// @claim infra/base-dirs
 const isProduction = function (): boolean {
   return process.env["NODE_ENV"] === "production";
 };

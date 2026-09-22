@@ -12,17 +12,11 @@ RuleTester.it = it;
 const root = fs.mkdtempSync(path.join(os.tmpdir(), "require-context-link-"));
 
 const setup = function (): void {
-  const journal = path.join(root, "journal");
-  fs.mkdirSync(path.join(journal, "entry"), { recursive: true });
+  const domain = path.join(root, "journal", "domains", "core");
+  fs.mkdirSync(domain, { recursive: true });
   fs.writeFileSync(
-    path.join(journal, "entry", "decisions.md"),
-    "# entry\n{{FEATURE_NAME}} still a placeholder\n",
-  );
-  fs.writeFileSync(path.join(journal, "plain.md"), "# plain\nreal content\n");
-  fs.mkdirSync(path.join(journal, "domains", "core"), { recursive: true });
-  fs.writeFileSync(
-    path.join(journal, "domains", "core", "current.md"),
-    "# Core\n\nThe engine runs the loop. ^C001\n",
+    path.join(domain, "current.md"),
+    "# Core\n\nThe engine runs the loop. ^engine-loop\n",
   );
   fs.mkdirSync(path.join(root, "src"), { recursive: true });
 };
@@ -36,15 +30,15 @@ const ruleTester = new RuleTester();
 ruleTester.run("require-context-link", rule, {
   valid: [
     {
-      code: "// @context @journal/plain\nconst x = 1;\n",
+      code: "// @claim core\nconst x = 1;\n",
       filename,
     },
     {
-      code: "// @context @journal/domains/core\nconst x = 1;\n",
+      code: "// @claim core/engine-loop\nconst x = 1;\n",
       filename,
     },
     {
-      code: "// @context @journal/domains/core#^C001\nconst x = 1;\n",
+      code: "// @claim core\n// @claim core/engine-loop\nconst x = 1;\n",
       filename,
     },
   ],
@@ -52,22 +46,27 @@ ruleTester.run("require-context-link", rule, {
     {
       code: "const x = 1;\n",
       filename,
-      errors: [{ messageId: "missingContext" }],
+      errors: [{ messageId: "missingClaim" }],
     },
     {
-      code: "// @context @journal/nope\nconst x = 1;\n",
+      code: "const y = 2;\n// @claim core\nconst x = 1;\n",
       filename,
-      errors: [{ messageId: "deadContextLink" }],
+      errors: [{ messageId: "missingClaim" }, { messageId: "badTarget" }],
     },
     {
-      code: "// @context @journal/domains/core#^C999\nconst x = 1;\n",
+      code: "// @claim nope\nconst x = 1;\n",
       filename,
-      errors: [{ messageId: "deadContextAnchor" }],
+      errors: [{ messageId: "deadDomain" }],
     },
     {
-      code: "// @context @journal/entry\nconst x = 1;\n",
+      code: "// @claim core/missing\nconst x = 1;\n",
       filename,
-      errors: [{ messageId: "staleContextLink" }],
+      errors: [{ messageId: "deadClaim" }],
+    },
+    {
+      code: "// @claim core\n// @claim core\nconst x = 1;\n",
+      filename,
+      errors: [{ messageId: "badTarget" }],
     },
   ],
 });

@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C023
+// @claim infra/house-plugin
 import requireContextLink from "./rules/require.context.link/index.ts";
 import dotCaseFilename from "./rules/dot.case.filename/index.ts";
 import noArrow from "./rules/no.arrow/index.ts";
@@ -29,6 +29,7 @@ const rules = {
   "no-re-exports": noReExports,
 };
 
+// @claim infra/house-plugin
 const recommendedRules = {
   "house/require-context-link": "error",
   "house/dot-case-filename": "error",
@@ -88,6 +89,7 @@ const recommendedRules = {
   ],
 };
 
+// @claim infra/house-plugin
 const houseStylePlugin = {
   meta: { name: "eslint-plugin-house-style" },
   rules,

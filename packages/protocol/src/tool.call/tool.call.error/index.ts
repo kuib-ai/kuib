@@ -1,4 +1,4 @@
-// @context @journal/domains/core#^C009
+// @claim core/tool-call-states
 import { z } from "zod";
 import { ToolCallStatusEnum } from "../tool.call.status.enum/index.ts";
 import { ToolCallKindEnum } from "../tool.call.kind.enum/index.ts";
@@ -26,6 +26,7 @@ const ToolCallErrorSubagent = ToolCallErrorBase.extend({
 });
 type ToolCallErrorSubagent = z.infer<typeof ToolCallErrorSubagent>;
 
+// @claim core/tool-call-states
 const ToolCallError = z.discriminatedUnion("kind", [
   ToolCallErrorNormal,
   ToolCallErrorSubagent,

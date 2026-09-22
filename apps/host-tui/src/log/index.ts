@@ -1,7 +1,8 @@
-// @context @journal/domains/host#^C011
+// @claim host/host-logging
 import type { BootstrapConfig } from "@kuib-ai/config/bootstrap.config";
 import createPinoLogger from "@kuib-ai/std/pino";
 
+// @claim host/host-logging
 const createLog = function (bootstrap: BootstrapConfig) {
   return createPinoLogger({
     name: "host-tui",

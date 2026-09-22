@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C020
+// @claim infra/log-scopes
 import { AsyncLocalStorage } from "node:async_hooks";
 import type { Logger, LogBindings, LogFn } from "../logger.port/index.ts";
 
@@ -24,6 +24,7 @@ const currentScope = function (): LogBindings {
   return Object.assign({}, ...store.stack) as LogBindings;
 };
 
+// @claim infra/log-scopes
 const withScope = function <T>(bindings: LogBindings, fn: () => T): T {
   const parent = storage.getStore();
 
@@ -55,10 +56,12 @@ const withScope = function <T>(bindings: LogBindings, fn: () => T): T {
   }
 };
 
+// @claim infra/log-scopes
 const bindLogger = function (log: Logger): Logger {
   return log.child(currentScope());
 };
 
+// @claim infra/log-scopes
 const wrapLogFn = function (emit: LogFn): LogFn {
   return function (msgOrObj: string | LogBindings, maybeMsg?: string) {
     const scope = currentScope();

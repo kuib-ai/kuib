@@ -1,4 +1,4 @@
-// @context @journal/domains/infra#^C024
+// @claim infra/house-structure-rules
 import { ESLintUtils } from "@typescript-eslint/utils";
 
 const createRule = ESLintUtils.RuleCreator(function (name) {
@@ -14,6 +14,7 @@ const ALLOWED_KINDS = new Set([
   "TSModuleDeclaration",
 ]);
 
+// @claim infra/house-structure-rules
 const namedExportsAreTypes = createRule<[], MessageIds>({
   name: "named-exports-are-types",
   meta: {
