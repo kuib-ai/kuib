@@ -290,7 +290,8 @@ reported: ""
 
 - Task ids are kebab-case and unique across features.
 - `status`: `draft` → `running` → `plan-ready` | `done` | `blocked` | `failed` | `restart`;
-  `lost` when the window vanished; `accepted` after `orchestra accept`. `plan-ready` needs
+  `lost` when the window vanished; `accepted` after `orchestra accept`; `closed` when the
+  orchestrator closed an unfinished task (never respawned). `plan-ready` needs
   `plan.md`, `restart` needs `log.md`, `done`/`blocked`/`failed`/`accepted` need `report.md`.
 - `role`: `implementer | reviewer | probe`; `gate`: `none | plan`; `items` exist in the plan.
 - Workers never message the orchestrator: they set their own status and stop.

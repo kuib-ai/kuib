@@ -52,8 +52,11 @@ then marks the items `in_progress`. Check the model in the worker's status line.
 
 **Watch.** Events: `done`, `plan-ready`, `blocked`, `failed`, `restart`, `lost` (from records
 and windows), `idle` (screen still and calm without a stop), `context` (usage at or over
-`--cap`, default 60%), `scope` (a changed file outside the grant) and `git` (HEAD or branch
-moved). Each is printed once as `orchestra: <task> <kind>: <detail>`.
+`--cap`, default 60%), `scope` (a file changed outside the grant, committed or not; the
+journal files you write never count), `git` (HEAD or branch moved) and `broken` (a brief whose
+frontmatter cannot be read; the other tasks keep being watched). Each is printed once as
+`orchestra: <task> <kind>: <detail>`. `close <task>` ends a worker for good: an unfinished task
+becomes `closed` and is never respawned.
 - Claude Code: arm the Monitor tool on
   `./node_modules/.bin/deno run -A tooling/orchestra.ts watch --follow` (no pnpm banner line);
   it exits once nothing runs, so re-arm it after every spawn.

@@ -1317,6 +1317,7 @@ const TASK_STATUSES = [
   "restart",
   "lost",
   "accepted",
+  "closed",
 ];
 const TASK_ROLES = ["implementer", "reviewer", "probe"];
 const TASK_GATES = ["none", "plan"];

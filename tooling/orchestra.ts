@@ -7,12 +7,13 @@ import {
   mkdirSync,
   readFileSync,
   readdirSync,
+  realpathSync,
   renameSync,
   statSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join, relative, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "@std/yaml";
 import Cli from "@kuib-ai/cli";
@@ -41,6 +42,7 @@ const GATES = ["none", "plan"];
 const STOP_STATUSES = ["plan-ready", "done", "blocked", "failed", "restart"];
 const EVENT_STATUSES = [...STOP_STATUSES, "lost"];
 const FINISHED_STATUSES = ["done", "blocked", "failed"];
+const CLOSABLE_STATUSES = ["running", "restart", "plan-ready", "lost"];
 const WORKER_FILE_FOR_STATUS: Record<string, string> = {
   done: "report.md",
   blocked: "report.md",
@@ -62,7 +64,13 @@ const CONTEXT_DROP_MEANING_CLEARED = 10;
 const READY_TIMEOUT_SECONDS = 90;
 const PASTE_VISIBLE_TIMEOUT_SECONDS = 5;
 const HANDOFF_SETTLE_TIMEOUT_SECONDS = 600;
-const CLAIM_FILES = "journal/domains/*/current.md";
+const JOURNAL_FILES_THE_ORCHESTRATOR_WRITES = [
+  "journal/domains/*/current.md",
+  "journal/features/*/plan.md",
+  "journal/features/*/tasks/**",
+  "journal/_index.md",
+  "journal/roadmap/ROADMAP.md",
+];
 const WORKER_PROTOCOL = ".agents/skills/orchestrate/WORKER.md";
 const AGENTS: Record<string, string> = {
   claude: "claude",
@@ -90,7 +98,7 @@ journal/features/<feature>/tasks/<id>/ (brief.md, plan.md, log.md, report.md).
   go <task> [message..]                           approve a plan-ready worker's plan
   restart <task>                                  clear a worker's context and resume it from its log
   peek <task> [lines]                             print the tail of a worker's screen
-  close <task>                                    kill a worker's window
+  close <task>                                    kill a worker's window; an unfinished task becomes closed
   status                                          tasks, their windows and context use
   reconcile [--respawn]                           align this session's task records with its windows
   watch [tasks..] [--follow] [--interval 10] [--idle 3] [--cap 60] [--timeout 0]
@@ -230,11 +238,19 @@ const lexists = function (path: string): boolean {
 
 let rootCache = "";
 
+const realPath = function (path: string): string {
+  try {
+    return realpathSync(resolve(path));
+  } catch {
+    return resolve(path);
+  }
+};
+
 const root = function (): string {
   if (rootCache) return rootCache;
   const configured = process.env.ORCHESTRA_ROOT;
   if (configured) {
-    rootCache = resolve(configured);
+    rootCache = realPath(configured);
     return rootCache;
   }
   const top = run("git", ["rev-parse", "--show-toplevel"], {
@@ -245,7 +261,7 @@ const root = function (): string {
       "not inside a git repository (run from the repo or set ORCHESTRA_ROOT)",
     );
   }
-  rootCache = resolve(top);
+  rootCache = realPath(top);
   return rootCache;
 };
 
@@ -362,6 +378,23 @@ const findTask = function (taskId: string | undefined): Task {
     throw new OrchestraError(`task id '${taskId}' exists in several features`);
   }
   return task;
+};
+
+// @claim infra/orchestra
+const taskProblem = function (task: Task): string | null {
+  try {
+    readTask(task);
+    return null;
+  } catch (error) {
+    if (!(error instanceof OrchestraError)) throw error;
+    return error.message;
+  }
+};
+
+const readableTasks = function (tasks: Task[]): Task[] {
+  return tasks.filter(function (task) {
+    return taskProblem(task) === null;
+  });
 };
 
 const briefHasContent = function (body: string): boolean {
@@ -632,7 +665,7 @@ const repoTop = function (cwd: string): string {
     const top = run("git", ["-C", cwd, "rev-parse", "--show-toplevel"], {
       check: false,
     }).trim();
-    repoTops.set(cwd, top ? resolve(top) : "");
+    repoTops.set(cwd, top ? realPath(top) : "");
   }
   return repoTops.get(cwd)!;
 };
@@ -702,32 +735,61 @@ const takeBaseline = function (cwd: string): Snapshot {
   return top ? repoSnapshot(top) : { top: "", head: "", branch: "", dirty: {} };
 };
 
-const rebaseline = function (task: Task, file: string) {
-  const state = loadRuntime(task);
-  const baseline = state.baseline;
-  if (!baseline?.top) return;
-  const path = relative(baseline.top, resolve(file));
-  if (path.startsWith("..")) return;
-  const current = repoSnapshot(baseline.top).dirty[path];
-  const dirty = { ...baseline.dirty };
-  if (current === undefined) delete dirty[path];
-  else dirty[path] = current;
-  saveRuntime(task, { ...state, baseline: { ...baseline, dirty } });
+const committedSince = function (
+  baseline: Snapshot,
+  current: Snapshot,
+): string[] {
+  if (!baseline.head || !current.head || baseline.head === current.head)
+    return [];
+  return run(
+    "git",
+    [
+      "-C",
+      current.top,
+      "diff",
+      "--name-only",
+      "-z",
+      baseline.head,
+      current.head,
+    ],
+    { check: false },
+  )
+    .split("\0")
+    .filter(function (path) {
+      if (!path) return false;
+      const before = baseline.dirty[path];
+      if (before === undefined) return true;
+      const committed = run(
+        "git",
+        [
+          "-C",
+          current.top,
+          "rev-parse",
+          "-q",
+          "--verify",
+          `${current.head}:${path}`,
+        ],
+        { check: false },
+      ).trim();
+      return committed !== before;
+    });
 };
 
+// @claim infra/orchestra-watch
 const changedSince = function (
   baseline: Snapshot | undefined,
   current: Snapshot,
 ): string[] {
   const before = baseline?.dirty ?? {};
-  return Object.entries(current.dirty)
+  const uncommitted = Object.entries(current.dirty)
     .filter(function ([path, blob]) {
       return before[path] !== blob;
     })
     .map(function ([path]) {
       return path;
-    })
-    .sort();
+    });
+  const committed = baseline ? committedSince(baseline, current) : [];
+  return [...new Set([...uncommitted, ...committed])].sort();
 };
 
 const describeGitMoves = function (
@@ -798,10 +860,9 @@ const allowedGlobs = function (
       return other.id !== task.id && repoTop(taskGet(other, "cwd")) === top;
     }),
   ];
-  const globs = [CLAIM_FILES];
+  const globs = [...JOURNAL_FILES_THE_ORCHESTRATOR_WRITES];
   for (const member of sharingRepo) {
     globs.push(...taskList(member, "grant"));
-    if (top === root()) globs.push(relative(root(), member.folder));
   }
   return globs;
 };
@@ -922,7 +983,7 @@ const reconcile = function (respawn: boolean): string[] {
   const session = currentSession();
   const panes = workerPanes();
   const changes: string[] = [];
-  for (const task of allTasks()) {
+  for (const task of readableTasks(allTasks())) {
     if (taskGet(task, "session") !== session) continue;
     const status = taskStatus(task);
     const live = task.id in panes;
@@ -1172,7 +1233,7 @@ const cmdSpawn = function (parsed: Parsed) {
     throw new OrchestraError(
       `task ${task.id} already has a live window w:${task.id}`,
     );
-  const cwd = resolve((values.cwd as string | undefined) ?? root());
+  const cwd = realPath((values.cwd as string | undefined) ?? root());
   if (!isDirectory(cwd)) throw new OrchestraError(`cwd does not exist: ${cwd}`);
   const command = (values.cmd as string | undefined) ?? AGENTS[agent] ?? agent;
   const pane = openWorkerWindow(task, cwd);
@@ -1190,7 +1251,6 @@ const cmdSpawn = function (parsed: Parsed) {
   launchAgent(task, pane, command, workerPrompt(task), values.arg === true);
   for (const item of taskList(task, "items"))
     journalSet(task.feature, item, "in_progress");
-  rebaseline(task, join(task.folder, "..", "..", "plan.md"));
   console.log(
     `spawned ${task.id} (${command}) in window w:${task.id} (${pane})`,
   );
@@ -1263,22 +1323,39 @@ const cmdPeek = function (parsed: Parsed) {
   console.log(capture(pane, lines).split("\n").slice(-lines).join("\n"));
 };
 
+// @claim infra/orchestra
 const cmdClose = function (parsed: Parsed) {
   const task = findTask(parsed.positionals[0]);
   const pane = paneOf(task.id);
-  if (!pane) {
-    console.log(`${task.id} has no live window`);
-    return;
-  }
-  tmux(["kill-window", "-t", pane]);
-  console.log(`closed w:${task.id}`);
+  if (pane) tmux(["kill-window", "-t", pane]);
+  const closing = CLOSABLE_STATUSES.includes(taskStatus(task));
+  if (closing)
+    updateTask(task, { status: "closed", reported: "closed", finished: now() });
+  console.log(
+    `${pane ? `closed w:${task.id}` : `${task.id} has no live window`}${closing ? "; task marked closed (reconcile never respawns it)" : ""}`,
+  );
 };
 
 const cmdStatus = function () {
   const panes = workerPanes();
   const tasks = allTasks();
   const rows = [["TASK", "STATUS", "ROLE", "LIVE", "CTX", "AGENT", "FEATURE"]];
+  const problems: string[] = [];
   for (const task of tasks) {
+    const problem = taskProblem(task);
+    if (problem !== null) {
+      problems.push(`broken: ${problem}`);
+      rows.push([
+        task.id,
+        "broken",
+        "-",
+        panes[task.id] ? "yes" : "no",
+        "-",
+        "-",
+        task.feature,
+      ]);
+      continue;
+    }
     const { fields } = readTask(task);
     const pane = panes[task.id];
     rows.push([
@@ -1310,6 +1387,7 @@ const cmdStatus = function () {
     }
   }
   printTable(rows);
+  for (const problem of problems) console.log(problem);
 };
 
 const cmdReconcile = function (parsed: Parsed) {
@@ -1322,6 +1400,51 @@ const cmdReconcile = function (parsed: Parsed) {
   }
 };
 
+const brokenFile = function (): string {
+  const uid = process.getuid ? process.getuid() : 0;
+  return join(
+    tmpdir(),
+    `orchestra-${uid}`,
+    sha1(currentSession()).slice(0, 10),
+    "broken.json",
+  );
+};
+
+const readBrokenFile = function (): Record<string, string> {
+  try {
+    return JSON.parse(readFileSync(brokenFile(), "utf-8")) as Record<
+      string,
+      string
+    >;
+  } catch {
+    return {};
+  }
+};
+
+// @claim infra/orchestra-watch
+const brokenEvents = function (tasks: Task[], wanted: Set<string>): Event[] {
+  const known = readBrokenFile();
+  const current: Record<string, string> = {};
+  const events: Event[] = [];
+  for (const task of tasks) {
+    if (wanted.size > 0 && !wanted.has(task.id)) continue;
+    const problem = taskProblem(task);
+    if (problem === null) continue;
+    current[task.folder] = problem;
+    if (known[task.folder] !== problem)
+      events.push([
+        task.id,
+        "broken",
+        `${problem}; other tasks are still watched`,
+      ]);
+  }
+  if (JSON.stringify(current) !== JSON.stringify(known)) {
+    mkdirSync(dirname(brokenFile()), { recursive: true, mode: 0o700 });
+    writeAtomically(brokenFile(), JSON.stringify(current, null, 1));
+  }
+  return events;
+};
+
 // @claim infra/orchestra-watch
 const cmdWatch = function (parsed: Parsed) {
   const { positionals, values } = parsed;
@@ -1331,10 +1454,13 @@ const cmdWatch = function (parsed: Parsed) {
   const cap = numberOption(values.cap, 60);
   const timeout = numberOption(values.timeout, 0);
   const deadline = timeout > 0 ? monotonic() + timeout : null;
+  const reportedHere = new Set<string>();
   for (;;) {
     reconcile(false);
     const session = currentSession();
-    const everything = allTasks();
+    const all = allTasks();
+    const events: Event[] = brokenEvents(all, wanted);
+    const everything = readableTasks(all);
     const runningAnywhere = everything.filter(function (task) {
       return taskStatus(task) === "running";
     });
@@ -1346,13 +1472,20 @@ const cmdWatch = function (parsed: Parsed) {
     });
     const panes = workerPanes();
     const snapshots = new Map<string, Snapshot>();
-    const events: Event[] = [];
     for (const task of watched) {
-      events.push(...recordEvents(task));
-      const pane = panes[task.id];
-      if (pane && taskStatus(task) === "running") {
-        events.push(...screenEvents(task, pane, cap, idlePolls));
-        events.push(...repoEvents(task, runningAnywhere, snapshots));
+      try {
+        events.push(...recordEvents(task));
+        const pane = panes[task.id];
+        if (pane && taskStatus(task) === "running") {
+          events.push(...screenEvents(task, pane, cap, idlePolls));
+          events.push(...repoEvents(task, runningAnywhere, snapshots));
+        }
+      } catch (error) {
+        if (!(error instanceof OrchestraError)) throw error;
+        const key = `${task.id}\n${error.message}`;
+        if (reportedHere.has(key)) continue;
+        reportedHere.add(key);
+        events.push([task.id, "broken", error.message]);
       }
     }
     for (const [taskId, kind, detail] of events)
@@ -1408,12 +1541,15 @@ const cmdAccept = function (parsed: Parsed) {
   updateTask(task, { status: "accepted", reported: "accepted" });
   const pane = paneOf(task.id);
   if (values.close === true && pane) tmux(["kill-window", "-t", pane]);
+  const work = changed.filter(function (path) {
+    return !matchesAny(path, JOURNAL_FILES_THE_ORCHESTRATOR_WRITES);
+  });
   console.log(
-    changed.length > 0
+    work.length > 0
       ? `accepted ${task.id}; files changed since spawn:`
       : `accepted ${task.id}; no files changed since spawn`,
   );
-  for (const path of changed) {
+  for (const path of work) {
     console.log(
       `  ${path}${granted.includes(path) ? "" : "  (outside grant)"}`,
     );
@@ -1607,7 +1743,8 @@ const SUBCOMMANDS: Record<
   },
   close: {
     schema: {
-      description: "close <task>: kill a worker's window.",
+      description:
+        "close <task>: kill a worker's window; a task still in progress is marked closed so reconcile never respawns it.",
       options: {},
     },
     run: cmdClose,

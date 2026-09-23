@@ -584,18 +584,23 @@ message the orchestrator: `done` sets their own status (`done`, `blocked`, `fail
 `plan-ready` after writing `plan.md`, `restart` after writing `log.md`). The orchestrator
 answers with `go` (appends a `## Go` section and resumes a plan-ready worker), `send`,
 `restart` (clears the worker and resumes it from its log), `accept` (marks the items
-`implemented` with the granted changed files as refs), `peek`, `status` and `close`. ^orchestra
+`implemented`, with the files changed inside the grant since spawn, committed or not, as refs),
+`peek`, `status` and `close` (kills the window; a task still in progress becomes `closed`, which
+`reconcile` never respawns). A task whose `brief.md` cannot be read is reported and skipped;
+it never stops the others. ^orchestra
 
 > [!sources]- behaviour · verified 2026-09-23
 > - `tooling/journal.ts` › `loadTasks` · #675a8a1a
+> - `tooling/orchestra.ts` › `taskProblem` · #9f97462f
 > - `tooling/orchestra.ts` › `deliver` · #848ac51c
-> - `tooling/orchestra.ts` › `cmdSpawn` · #33961ece
+> - `tooling/orchestra.ts` › `cmdSpawn` · #bf642dcc
 > - `tooling/orchestra.ts` › `cmdGo` · #fe60ea15
 > - `tooling/orchestra.ts` › `cmdRestart` · #c19aa1c5
-> - `tooling/orchestra.ts` › `cmdAccept` · #787e7085
+> - `tooling/orchestra.ts` › `cmdClose` · #4ef24c34
+> - `tooling/orchestra.ts` › `cmdAccept` · #cd104d04
 > - `tooling/orchestra.ts` › `cmdDone` · #0a4e069f
 > - `package.json` › "\"orchestra\": \"deno run -A tooling/orchestra.ts\""
-> - `.agents/skills/orchestrate/SKILL.md` · #6a3f65de
+> - `.agents/skills/orchestrate/SKILL.md` · #255d323a
 > - `.agents/skills/orchestrate/WORKER.md` · #39a1ad28
 > - why: [[domains/infra/decisions#^D026]]
 > - why: [[domains/infra/decisions#^D030]]
@@ -603,21 +608,25 @@ answers with `go` (appends a `## Go` section and resumes a plan-ready worker), `
 `pnpm orchestra watch` is how the orchestrator finds out. Each poll it reconciles records with
 windows (a running task whose window is gone becomes `lost`) and prints unreported events as
 `orchestra: <task> <kind>: <detail>`, each once: from the records (`done`, `plan-ready`,
-`blocked`, `failed`, `restart`, `lost`), from the screen (`idle` when it stays unchanged and
+`blocked`, `failed`, `restart`, `lost`, and `broken` for a brief it cannot read), from the screen (`idle` when it stays unchanged and
 calm for `--idle` polls, `context` when the status line shows usage at or above `--cap`), and
-from the worker's repository against its spawn baseline (`scope` for a changed path outside the
-grant, the task folders and the domain claim files; `git` when HEAD or the branch moved). It exits
+from the worker's repository against its spawn baseline, counting both commits and uncommitted
+changes (`scope` for a changed path outside the grant and outside the journal files the
+orchestrator writes — claims, plans, task records, generated indexes; `git` when HEAD or the branch
+moved). It exits
 after the first poll with events, or keeps streaming with `--follow` until nothing runs;
 `reconcile --respawn` relaunches lost workers with a resume prompt. `handoff` arms a guard,
 run by the tmux server, that waits until the orchestrator pane is calm, sends `/clear` and types a
 resume line; the session hook then injects the rendered handoff. ^orchestra-watch
 
 > [!sources]- behaviour · verified 2026-09-23
-> - `tooling/orchestra.ts` › `reconcile` · #d384c2ae
+> - `tooling/orchestra.ts` › `changedSince` · #3c5655d4
+> - `tooling/orchestra.ts` › `reconcile` · #ca722c2a
 > - `tooling/orchestra.ts` › `recordEvents` · #381e7ac0
 > - `tooling/orchestra.ts` › `screenEvents` · #1be7ca48
 > - `tooling/orchestra.ts` › `repoEvents` · #b9f58c98
-> - `tooling/orchestra.ts` › `cmdWatch` · #c6073e69
+> - `tooling/orchestra.ts` › `brokenEvents` · #d6df28a7
+> - `tooling/orchestra.ts` › `cmdWatch` · #a56025af
 > - why: [[domains/infra/decisions#^D030]]
 
 ## Scripts
@@ -663,7 +672,7 @@ Other one-off scripts stay single files in `scripts/`. ^workspace-tools
 > [!sources]- structure · verified 2026-09-23
 > - `tooling/agents.ts` › `SUBCOMMANDS` · #5e720576
 > - `tooling/journal.ts` › `SUBCOMMANDS` · #4b3ccede
-> - `tooling/orchestra.ts` › `SUBCOMMANDS` · #d1b7291c
+> - `tooling/orchestra.ts` › `SUBCOMMANDS` · #1e559d87
 > - `package.json` › "\"journal\": \"deno run -A tooling/journal.ts\""
 > - `package.json` › "\"agents\": \"deno run -A tooling/agents.ts\""
 > - `tooling/package.json` › "\"@kuib-ai/cli\": \"workspace:*\""
