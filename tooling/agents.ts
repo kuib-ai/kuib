@@ -525,9 +525,11 @@ const printConflict = function (versions: ServerSet[]) {
   );
 };
 
-const printHandEdits = function (edits: GeneratedOutput[]) {
+const printHandEdits = function (edits: GeneratedOutput[], apply: boolean) {
   for (const output of edits) {
-    console.log(`  ${output.path} was edited by hand`);
+    console.log(
+      `  ${output.path} was edited by hand${apply ? "; overwritten" : "; --force will overwrite it"}`,
+    );
     const diff = lineDiff(
       describe(inspect(output.path)),
       describe(asOnDisk(output)),
@@ -535,9 +537,10 @@ const printHandEdits = function (edits: GeneratedOutput[]) {
     printIndented(diff.join("\n"));
     console.log("");
   }
-  console.log(
-    "  nothing written: move the edits into AGENTS.md or .agents/, or run `pnpm agents sync --force` to overwrite them",
-  );
+  if (!apply)
+    console.log(
+      "  to keep a hand edit, move it into AGENTS.md or .agents/ before running --force",
+    );
 };
 
 // @claim infra/agents-check
@@ -581,13 +584,11 @@ const write = function (output: Output) {
 };
 
 // @claim infra/agents-check
-const sync = function (force: boolean) {
+const sync = function (apply: boolean) {
   const lock = readLock() ?? {};
   const source = readMcpSource();
   const sourceServers = sourceServersOf(source);
-  const mcpImport: McpImport = force
-    ? { kind: "unchanged" }
-    : importMcpServers(sourceServers, lock);
+  const mcpImport = importMcpServers(sourceServers, lock);
   if (mcpImport.kind === "conflict") {
     printConflict(mcpImport.versions);
     process.exit(1);
@@ -602,28 +603,41 @@ const sync = function (force: boolean) {
   const handEdits = generated.filter(function (output) {
     return handEdited(output, lock, importedFrom);
   });
-  if (handEdits.length > 0 && !force) {
-    printHandEdits(handEdits);
-    process.exit(1);
-  }
+  const changes = planned.filter(function (output) {
+    return outOfDateReason(output) !== null;
+  });
+  const lockCurrent = generated.every(function (output) {
+    return lock[output.path] === sha256(generatedText(output));
+  });
   if (mcpImport.kind === "imported") {
+    console.log(
+      `  ${apply ? "imported" : "would import"} MCP servers from ${mcpImport.from.join(", ")}: ${serverChanges(sourceServers, servers)}`,
+    );
+  }
+  if (handEdits.length > 0) printHandEdits(handEdits, apply);
+  if (apply && mcpImport.kind === "imported") {
     writeFileSync(
       join(ROOT, MCP_SOURCE),
       json({ ...source, mcpServers: servers }),
     );
+  }
+  for (const output of changes) {
+    if (apply) write(output);
+    const verb = output.kind === "absent" ? "remove" : "write";
     console.log(
-      `  imported MCP servers from ${mcpImport.from.join(", ")}: ${serverChanges(sourceServers, servers)}`,
+      `  ${apply ? `${verb === "remove" ? "removed" : "wrote"}` : `would ${verb}`} ${output.path}`,
     );
   }
-  for (const output of planned) {
-    if (outOfDateReason(output) === null) continue;
-    write(output);
-    console.log(
-      `  ${output.kind === "absent" ? "removed" : "wrote"} ${output.path}`,
-    );
-  }
-  writeLock(generated);
+  if (apply) writeLock(generated);
   for (const issue of skillProblems()) console.log(`  [ERROR] ${issue}`);
+  const pending =
+    mcpImport.kind === "imported" || changes.length > 0 || !lockCurrent;
+  if (!pending)
+    console.log("  agent adapters already in sync; nothing to write");
+  else if (!apply)
+    console.log(
+      "\n  dry run: nothing written. `pnpm agents sync --force` applies it.",
+    );
 };
 
 // @claim infra/agents-check
@@ -632,7 +646,9 @@ const check = function () {
   const planned = outputs(sourceServersOf(readMcpSource()));
   const issues: string[] = [];
   if (lock === null) {
-    issues.push(`${LOCK}: missing or unreadable; run \`pnpm agents sync\``);
+    issues.push(
+      `${LOCK}: missing or unreadable; run \`pnpm agents sync --force\``,
+    );
   }
   for (const output of planned) {
     if (
@@ -641,7 +657,7 @@ const check = function () {
       editedOutsideSync(output, lock)
     ) {
       issues.push(
-        `${output.path}: edited outside sync; run \`pnpm agents sync\` to import or \`--force\` to overwrite`,
+        `${output.path}: edited outside sync; \`pnpm agents sync\` previews, \`--force\` imports MCP edits and overwrites the rest`,
       );
       continue;
     }
@@ -651,14 +667,16 @@ const check = function () {
   issues.push(...skillProblems());
   for (const issue of issues) console.log(`  [ERROR] ${issue}`);
   if (issues.length > 0) {
-    console.log(`\n  ${issues.length} errors — run \`pnpm agents sync\``);
+    console.log(
+      `\n  ${issues.length} errors — preview with \`pnpm agents sync\`, apply with \`--force\``,
+    );
     process.exit(1);
   }
   console.log("  agent adapters in sync (.agents/ → tools)");
 };
 
 const USAGE =
-  "usage: pnpm agents <command>\n  sync [--force]   write every adapter; import MCP edits; refuse other hand edits\n  check            fail when an adapter is missing, stale or edited outside sync";
+  "usage: pnpm agents <command>\n  sync [--force]   preview adapter changes (dry run); --force imports MCP edits and writes every adapter\n  check            fail when an adapter is missing, stale or edited outside sync";
 
 // @claim infra/workspace-tools
 const SUBCOMMANDS: Record<
@@ -668,11 +686,12 @@ const SUBCOMMANDS: Record<
   sync: {
     schema: {
       description:
-        "sync: write every tool adapter from AGENTS.md and .agents/, importing MCP servers a tool added and refusing to overwrite other hand edits.",
+        "sync: preview (dry run) what would change in the tool adapters generated from AGENTS.md and .agents/; --force applies it.",
       options: {
         force: {
           type: "boolean",
-          description: "overwrite hand edits and skip the MCP import",
+          description:
+            "apply: import MCP servers a tool added, write every adapter (overwriting hand edits), update the lock",
         },
       },
     },

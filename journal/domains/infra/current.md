@@ -74,13 +74,13 @@ links a session loads, and the `checkpoint` (summary, next items, blockers, and 
 previous session left). Its body holds phases, items, decisions and gaps; each item carries
 `- State:` and optional `- Decisions:`, `- Addresses:` and `- Refs:` fields, and a phase's state
 is derived from its items, never stored. `journal.ts set` writes an item's state and refs;
-`journal.ts checkpoint` rewrites the checkpoint. ^feature-plans
+`journal.ts checkpoint` rewrites the checkpoint; both regenerate the generated indexes. ^feature-plans
 
 > [!sources]- behaviour · verified 2026-09-23
 > - `tooling/journal.ts` › `phaseState` · #402b4e47
 > - `tooling/journal.ts` › `parsePlanBody` · #a2aefc5f
-> - `tooling/journal.ts` › `commandSet` · #08dde991
-> - `tooling/journal.ts` › `commandCheckpoint` · #96c3ecd9
+> - `tooling/journal.ts` › `commandSet` · #05816e7f
+> - `tooling/journal.ts` › `commandCheckpoint` · #52077489
 > - why: [[domains/infra/decisions#^D028]]
 
 `journal.ts handoff <feature>` renders a handoff from what is on disk: the checkpoint and note,
@@ -546,11 +546,12 @@ event and relies on its always-on rule. `.claude/settings.json` also raises auto
 > - `.cursor/hooks.json` › "journal-context cursor pre-compact"
 > - why: [[domains/infra/decisions#^D024]]
 
-`pnpm agents sync` writes every adapter and records a hash of each in
-`.agents/generated.lock.json`, so later edits are detectable. Before writing it imports MCP
-servers that a tool changed in its own file back into `.agents/mcp_config.json` (refusing when
-two tools disagree), and it refuses, with a diff, to overwrite any other hand edit unless given
-`--force`. `pnpm agents check` (first step of `pnpm run check` after the manifest guard) fails
+`pnpm agents sync` is a dry run: it prints the MCP servers it would import, the adapters it
+would write and any hand edits (with a diff) it would overwrite, and writes nothing. `pnpm agents
+sync --force` applies it: it imports MCP servers that a tool changed in its own file back into
+`.agents/mcp_config.json` (refusing when two tools disagree), rewrites every adapter, overwriting
+hand edits, and records a hash of each in `.agents/generated.lock.json`, so later edits are
+detectable. `pnpm agents check` (first step of `pnpm run check` after the manifest guard) fails
 when an adapter is missing, stale, edited outside sync, a symlink where a file belongs, or when a
 retired path (`.claude/rules`, `.claude/hooks`, `.cursor/hooks`, `.claude/templates`)
 reappears; it also requires every skill's `name` to equal its folder and a `description`. ^agents-check
@@ -559,8 +560,8 @@ reappears; it also requires every skill's `name` to equal its folder and a `desc
 > - `tooling/agents.ts` › `handEdited` · #2aa971e0
 > - `tooling/agents.ts` › `importMcpServers` · #71f1d642
 > - `tooling/agents.ts` › `skillProblems` · #c6d14143
-> - `tooling/agents.ts` › `sync` · #d8350509
-> - `tooling/agents.ts` › `check` · #f4bee4c2
+> - `tooling/agents.ts` › `sync` · #5adbcf3b
+> - `tooling/agents.ts` › `check` · #2b18a230
 > - `.agents/generated.lock.json` · #2b19a15f
 > - `package.json` › "deno run -A tooling/agents.ts check"
 > - why: [[domains/infra/decisions#^D024]]
@@ -660,7 +661,7 @@ and `--help` come from `@kuib-ai/cli`; with no or an unknown subcommand it print
 Other one-off scripts stay single files in `scripts/`. ^workspace-tools
 
 > [!sources]- structure · verified 2026-09-23
-> - `tooling/agents.ts` › `SUBCOMMANDS` · #63c38e79
+> - `tooling/agents.ts` › `SUBCOMMANDS` · #5e720576
 > - `tooling/journal.ts` › `SUBCOMMANDS` · #4b3ccede
 > - `tooling/orchestra.ts` › `SUBCOMMANDS` · #d1b7291c
 > - `package.json` › "\"journal\": \"deno run -A tooling/journal.ts\""

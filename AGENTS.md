@@ -93,8 +93,9 @@ truth tied to a file.
   <feature> [--summary] [--next] [--blockers] [--note]` — write plan state.
 - `pnpm journal handoff <feature>` — the rendered handoff: checkpoint, note, rulings, open
   questions, unfinished items, tasks, claims to re-verify.
-- `pnpm agents sync | check` — regenerate tool adapters; MCP servers a tool added are imported
-  back into `.agents/mcp_config.json`, other hand edits to generated files are refused.
+- `pnpm agents sync [--force] | check` — `sync` previews what would change in the generated tool
+  adapters and writes nothing; `--force` applies it: MCP servers a tool added are imported back
+  into `.agents/mcp_config.json`, every adapter is rewritten (hand edits are overwritten).
 - `pnpm orchestra …` — run worker agents in tmux windows (see below).
 
 ### The session hook
@@ -155,6 +156,7 @@ running in a `w:<task>` window, is a worker: follow `.agents/skills/orchestrate/
 | `packages/tsconfig` | infra |  |
 | `services/stt-coreml` | product |  |
 | `services/stt-mlx` | product | Qwen3-ASR inference service via MLX on Apple Silicon |
+| `tooling` | infra | kuib repo tooling — journal, agent adapters and the tmux orchestra |
 
 ### Domains
 
