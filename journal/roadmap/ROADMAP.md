@@ -11,6 +11,7 @@ Everything not built yet, one file per item in `roadmap/items/` (a raw idea is a
 - [[roadmap/items/R003-stt-engine|R003]] Local speech-to-text engine for Ana — graduated · product · → [[features/stt-engine/plan|stt-engine]]
 - [[roadmap/items/R004-agent-harness|R004]] Uniform agent harness and tmux orchestration — graduated · infra · → [[features/agent-harness/plan|agent-harness]]
 - [[roadmap/items/R005-codebase-review|R005]] Codebase review and fixes — graduated · core, host, infra, product · → [[features/codebase-review/plan|codebase-review]]
+- [[roadmap/items/R221-self-contained-engine|R221]] Self-contained engine — one entry that owns its wiring and its single-instance start — shaped · core, host
 
 ## Next
 
@@ -21,7 +22,7 @@ Everything not built yet, one file per item in `roadmap/items/` (a raw idea is a
 - [[roadmap/items/R206-interrupt-resolution-for-tool-calls|R206]] Interrupts resolve every pending tool call in the log — shaped · core, host
 - [[roadmap/items/R210-part-exclusion-and-context-curation|R210]] Per-part exclusion and context curation — shaped · core, host
 - [[roadmap/items/R220-daemon-idle-reap|R220]] Daemon idle self-reap and no leaked daemons from tests — idea · core
-- [[roadmap/items/R300-own-tui-library|R300]] kuib's own terminal UI library — shaped · host
+- [[roadmap/items/R300-own-tui-library|R300]] kuib's own native terminal UI — shaped · host
 - [[roadmap/items/R301-session-screen|R301]] Session screen and v1 pane layout — shaped · host
 - [[roadmap/items/R302-ui-host-attach|R302]] UI host attaches to serve — log reads, doorbell, submit — shaped · host, core
 - [[roadmap/items/R311-screen-iteration-harness|R311]] Screen iteration harness — frame dumps, snapshot tests, wireframe picker — shaped · host, infra
@@ -57,7 +58,7 @@ Everything not built yet, one file per item in `roadmap/items/` (a raw idea is a
 - [[roadmap/items/R216-provider-plugins-and-auth|R216]] Provider plugins, model catalog and auth-method union (API key | OAuth) — idea · core, infra
 - [[roadmap/items/R217-agent-tool-set-growth|R217]] Grow the agent tool set — write, exec, search, subagent and think tools — idea · core
 - [[roadmap/items/R219-config-store-and-secret-storage|R219]] ConfigStore seam for user preferences and OS secure storage for secrets — idea · infra, core
-- [[roadmap/items/R303-single-binary-roles|R303]] Single compiled binary with argv-selected roles — shaped · host, infra
+- [[roadmap/items/R303-single-binary-roles|R303]] One compiled TypeScript binary with argv-selected roles, beside the native UI — shaped · host, infra
 - [[roadmap/items/R304-background-service-install|R304]] Background service install (launchd / systemd) — shaped · host, infra
 - [[roadmap/items/R305-web-host-viewer|R305]] Web host as a pure viewer over SSE — shaped · host, core
 - [[roadmap/items/R306-discussions-context-control|R306]] Discussions and part-level context control in the conversation — shaped · host, core
@@ -102,6 +103,7 @@ flowchart LR
     R003["R003 · Local speech-to-text engine for Ana"]
     R004["R004 · Uniform agent harness and tmux orchestration"]
     R005["R005 · Codebase review and fixes"]
+    R221["R221 · Self-contained engine — one entry that owns its wiring and its single-instance start"]
   end
   subgraph next
     R101["R101 · Context transparency and control — inspect, compose and exclude what the model sees"]
@@ -111,7 +113,7 @@ flowchart LR
     R206["R206 · Interrupts resolve every pending tool call in the log"]
     R210["R210 · Per-part exclusion and context curation"]
     R220["R220 · Daemon idle self-reap and no leaked daemons from tests"]
-    R300["R300 · kuib's own terminal UI library"]
+    R300["R300 · kuib's own native terminal UI"]
     R301["R301 · Session screen and v1 pane layout"]
     R302["R302 · UI host attaches to serve — log reads, doorbell, submit"]
     R311["R311 · Screen iteration harness — frame dumps, snapshot tests, wireframe picker"]
@@ -146,7 +148,7 @@ flowchart LR
     R216["R216 · Provider plugins, model catalog and auth-method union (API key | OAuth)"]
     R217["R217 · Grow the agent tool set — write, exec, search, subagent and think tools"]
     R219["R219 · ConfigStore seam for user preferences and OS secure storage for secrets"]
-    R303["R303 · Single compiled binary with argv-selected roles"]
+    R303["R303 · One compiled TypeScript binary with argv-selected roles, beside the native UI"]
     R304["R304 · Background service install (launchd / systemd)"]
     R305["R305 · Web host as a pure viewer over SSE"]
     R306["R306 · Discussions and part-level context control in the conversation"]
@@ -224,12 +226,14 @@ flowchart LR
   R219 -. converges .- R407
   R219 -. converges .- R401
   R220 -. converges .- R412
-  R002 --> R300
+  R221 -. converges .- R302
+  R221 -. converges .- R313
   R300 --> R301
   R302 --> R301
   R200 --> R302
   R302 -. converges .- R313
   R002 --> R303
+  R221 --> R303
   R303 -. converges .- R406
   R303 --> R304
   R302 --> R305

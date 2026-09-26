@@ -313,7 +313,7 @@ rather than ported, so the new library starts from an empty `host-tui` view laye
 
 ### D005 — Direction for the follow-up TUI library
 
-- Status: accepted
+- Status: superseded
 - Context: recorded here so the removal is not mistaken for abandoning a UI. The user wants
   full control over rendering and look, peak performance, and fast startup; `dlopen`-based
   native cores hurt startup.
@@ -327,7 +327,7 @@ rather than ported, so the new library starts from an empty `host-tui` view laye
   shipped binaries. The renderer depends only on the universal-renderer contract, so Solid
   stays replaceable.
 - Supersedes: —
-- Superseded by: —
+- Superseded by: D007
 
 ### D006 — Deno as a pure runtime; tsgo type-checks against generated Deno types
 
@@ -355,6 +355,29 @@ rather than ported, so the new library starts from an empty `host-tui` view laye
   commands must run per project (P02-I06). The editor keeps `tsgo`; `denols` never starts
   in kuib (no Deno root marker).
 - Supersedes: D001
+- Superseded by: —
+
+### D007 — The terminal UI is native; engine, daemon and tooling stay TypeScript
+
+- Status: accepted
+- Ruling: "keep the engine and the daemon adn everything in typescript" — "and make the TUI in
+  a native language for extreemly fast startups" (owner, 2026-09-23)
+- Context: The owner wants "the fastest possible experience -- absolutely snappy" and noted
+  "i know typescript hurts my case". Measured on the dev Mac
+  ([[roadmap/research/startup-and-compile]]): a compiled Deno "hello" starts in 14 ms against
+  a 5 ms process floor, while `kuib --help` from a `deno compile --bundle --minify` binary
+  takes 90 ms because the entry imports every role's dependencies before dispatching.
+- Options considered: keep a TypeScript UI host and import each role's code only when that
+  role runs (estimated 20–30 ms); write the UI host in a native language (1–3 ms, no
+  garbage-collection pauses).
+- Decision: The UI host is written in a native language; the language is still open
+  ([[roadmap/items/R300-own-tui-library]]). The engine, the daemon and the workspace tooling
+  stay TypeScript on Deno. The UI host reaches the engine only through the engine socket's
+  control frames and the SQLite event log (core D016), which any language can use.
+- Consequences: D005's TypeScript-and-Solid library no longer applies to the UI, and with it
+  G005. The engine has to own its own wiring
+  ([[roadmap/items/R221-self-contained-engine]]) so a native host carries none of it.
+- Supersedes: D005
 - Superseded by: —
 
 ## Gaps
@@ -394,9 +417,10 @@ rather than ported, so the new library starts from an empty `host-tui` view laye
 
 ### G005 — Solid JSX compile pipeline on Deno
 
-- Status: open
+- Status: dismissed
 - Context: follow-up feature concern. Deno's built-in JSX transform cannot run
   `babel-preset-solid` (`generate: "universal"`); needs an esbuild + Babel build/watch step.
+  Dismissed by D007: the terminal UI is native, so no Solid JSX runs on Deno.
 
 ### G006 — Pinning the Deno version across machines
 

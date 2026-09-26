@@ -10,7 +10,7 @@ Contract: [[SPEC]]. Roadmap = intent, domains = built truth, features = in fligh
 |---|---|---|---|
 | [[domains/core/current\|core]] | Agent loop, protocol schemas, event log, tools, daemon and engine-service. | 48 | [[domains/core/decisions\|30]] |
 | [[domains/host/current\|host]] | Host adapters: the terminal host and its CLI surface. | 14 | [[domains/host/decisions\|9]] |
-| [[domains/infra/current\|infra]] | Workspace tooling, config/env/std/telemetry foundations, lint rules, agent wiring and the journal itself. | 35 | [[domains/infra/decisions\|30]] |
+| [[domains/infra/current\|infra]] | Workspace tooling, config/env/std/telemetry foundations, lint rules, agent wiring and the journal itself. | 39 | [[domains/infra/decisions\|31]] |
 | [[domains/product/current\|product]] | Ana voice assistant: speech-to-text services and their clients. | 13 | [[domains/product/decisions\|10]] |
 
 ## Features
@@ -33,13 +33,14 @@ Contract: [[SPEC]]. Roadmap = intent, domains = built truth, features = in fligh
 
 ## Roadmap
 
-[[roadmap/ROADMAP]] — 72 open items (now 5, next 16, later 40, maybe 11).
+[[roadmap/ROADMAP]] — 73 open items (now 6, next 16, later 40, maybe 11).
 
 - [[roadmap/items/R001-context-system|R001]] Three-layer context system with drift detection
 - [[roadmap/items/R002-deno-runtime|R002]] Deno as the only runtime
 - [[roadmap/items/R003-stt-engine|R003]] Local speech-to-text engine for Ana
 - [[roadmap/items/R004-agent-harness|R004]] Uniform agent harness and tmux orchestration
 - [[roadmap/items/R005-codebase-review|R005]] Codebase review and fixes
+- [[roadmap/items/R221-self-contained-engine|R221]] Self-contained engine — one entry that owns its wiring and its single-instance start
 
 ## Wireframes
 

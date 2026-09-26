@@ -180,5 +180,6 @@ running in a `w:<task>` window, is a worker: follow `.agents/skills/orchestrate/
 - R003 Local speech-to-text engine for Ana (graduated)
 - R004 Uniform agent harness and tmux orchestration (graduated)
 - R005 Codebase review and fixes (graduated)
+- R221 Self-contained engine — one entry that owns its wiring and its single-instance start (shaped)
 
 <!-- journal:generated:end -->

@@ -19,5 +19,18 @@
       }
     ]
   },
-  "mcpServers": {}
+  "mcpServers": {
+    "firecrawl": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp@latest"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "dummy",
+        "FIRECRAWL_API_URL": "http://statice:3002"
+      }
+    }
+  }
 }

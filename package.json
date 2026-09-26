@@ -11,6 +11,8 @@
     "agents": "deno run -A tooling/agents.ts",
     "journal": "deno run -A tooling/journal.ts",
     "orchestra": "deno run -A tooling/orchestra.ts",
+    "roadmap": "deno run -A scripts/roadmap.ts",
+    "roadmap:serve": "deno run -A scripts/roadmap.serve.ts",
     "typecheck": "nx run-many -t typecheck --output-style=stream",
     "test": "nx run-many -t test",
     "test:llm": "cd packages/engine && KUIB_LLM_TESTS=1 deno test -A --no-check src/provider/live.test.ts",
@@ -28,7 +30,7 @@
     "type": "git",
     "url": "git+https://github.com/kuib-ai/kuib"
   },
-  "packageManager": "pnpm@12.4.2+sha512.08adc6613180275c7c9edada39dcf08c9c61ad4e7eaf330a4f3461f102b0f907423454d117f98e72d47fef0616070644d7bffc973a6a57f5090a6d7c368b07c9",
+  "packageManager": "pnpm@12.6.0+sha512.3ef68f951cb111ac204b4a5a16f0b2ddf0da56a96e0413e81d855d9f0b55ef926714709028e1cd00c405c2c5fb7b9e8ec4dc46777c805d0373c2f2ff00fd20ec",
   "engineStrict": true,
   "engines": {
     "node": "25.4.0"
@@ -36,7 +38,9 @@
   "type": "module",
   "devDependencies": {
     "@eslint/js": "catalog:",
+    "@mermaid-js/layout-elk": "catalog:",
     "@typescript/native-preview": "catalog:",
+    "beautiful-mermaid": "catalog:",
     "deno": "catalog:",
     "eslint": "catalog:",
     "eslint-config-prettier": "catalog:",
@@ -45,6 +49,7 @@
     "jiti": "catalog:",
     "lint-staged": "catalog:",
     "madge": "catalog:",
+    "mermaid": "catalog:",
     "nx": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",

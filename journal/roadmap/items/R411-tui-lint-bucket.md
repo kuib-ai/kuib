@@ -10,7 +10,7 @@ split-from: []
 absorbed-into: ""
 feature: ""
 origin: ["[[_archive/house-style-linting/decisions#Open Questions — Solid-JSX linting bucket (deferred)]]", "[[_archive/house-style-linting/decisions#The house style (audited from the author's hand-written reference codebase)]]"]
-touched: 2026-09-22
+touched: 2026-09-25
 ---
 
 # R411 — Component-layer lint rules for kuib's own TUI library
@@ -36,6 +36,10 @@ Agent-written UI code needs the same idiom enforcement as the rest of the codeba
 
 ## Open questions
 
+- The UI is native
+  ([[features/deno-runtime/plan#D007 — The terminal UI is native; engine, daemon and tooling stay TypeScript]]),
+  so these ESLint rules for a TypeScript/Solid component layer may not apply: retarget them to
+  the native language's linter, or drop this item.
 - Target library: [[roadmap/items/R300-own-tui-library]].
 - Which of these still apply once the TUI library's component model exists?
 
@@ -46,3 +50,4 @@ Agent-written UI code needs the same idiom enforcement as the rest of the codeba
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-25 flagged: the UI is native (deno-runtime D007)

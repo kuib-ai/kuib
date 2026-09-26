@@ -10,7 +10,7 @@ split-from: []
 absorbed-into: ""
 feature: ""
 origin: ["[[_archive/ux-iteration-process/decisions#The iteration loop]]", "[[_archive/ux-iteration-process/decisions#Tooling decisions]]", "[[_archive/ux-iteration-process/decisions#Lifecycle (the binding rules)]]"]
-touched: 2026-09-22
+touched: 2026-09-25
 ---
 
 # R311 — Screen iteration harness — frame dumps, snapshot tests, wireframe picker
@@ -51,6 +51,10 @@ and regressions diffable.
 
 ## Open questions
 
+- The UI is native
+  ([[features/deno-runtime/plan#D007 — The terminal UI is native; engine, daemon and tooling stay TypeScript]]):
+  the frame-dump harness and the frame snapshots move to the native language's test runner
+  instead of `deno test` + `@std/testing/snapshot`.
 - Fixture format for event logs (recorded SQLite files vs event arrays).
 - Whether the picker lives as a role of the main binary or a separate dev script.
 
@@ -63,3 +67,4 @@ and regressions diffable.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-25 harness language follows the native UI (deno-runtime D007)

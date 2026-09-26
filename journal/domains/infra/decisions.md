@@ -363,3 +363,15 @@ domain: infra
 - From: [[features/agent-harness/plan]]
 
 ^D030
+
+### D031 — The roadmap viewer lays the graph out in the browser with Mermaid's ELK layout
+
+- Status: accepted
+- Context: The generated `ROADMAP.md` graph (70-odd items, horizon subgraphs, dotted converges links) was unreadable in terminal renderers: `mermaid-ascii` drew each dotted labelled link as a box, `termaid` and `beautiful-mermaid` put items in the wrong horizon frames, and `beautiful-mermaid`'s colours broke under tmux. The owner asked for "one TUI and one over http using a good mermaid renderer", viewed "from my browser through tailnet", with the renderer added "as the root dependency of the workspace" and "not of my system", no Chrome installed on the dev machine, and no address in the repository: "don't write the ip directly please" — "this is a public repo". A first browser page (Mermaid's default layout, left to right, drawn at full size) was too wide to read; the owner asked to "put it in a canvas so that i can zoom out and see it" and wanted it "spread out properly".
+- Decision: Two commands over one parser of the generated graph. `pnpm roadmap` stays in the terminal with `beautiful-mermaid`'s ASCII renderer: flat, labels carrying the horizon, no colour, paged sideways. `pnpm roadmap:serve` hands the graph to the viewer's own browser: official Mermaid with `@mermaid-js/layout-elk`, served from `node_modules`, top to bottom, Coffman–Graham layering bounded at 10 items per layer and unlinked items stacked into columns, inside a pan-and-zoom canvas where clicking an item focuses its neighbourhood. The server listens on localhost and on the tailnet address it looks up at start.
+- Consequences: The layout runs in whichever browser opens the page, so nothing headless runs on the dev machine; checking a render there takes the system WebKit. Three renderer packages are root devDependencies. Mermaid's ELK adapter exposes no component packing, hence the invisible-link columns. Both views depend on `scripts/roadmap.graph.ts` parsing the generated markdown, so a change to the graph syntax `journal.ts build` writes must update that parser.
+- Supersedes: —
+- Superseded by: —
+- From: conversation 2026-09-23
+
+^D031

@@ -5,12 +5,12 @@ state: idea
 horizon: next
 domains: [host, core]
 depends-on: []
-converges-with: ["[[roadmap/items/R302-ui-host-attach]]"]
+converges-with: ["[[roadmap/items/R302-ui-host-attach]]", "[[roadmap/items/R221-self-contained-engine]]"]
 split-from: []
 absorbed-into: ""
 feature: ""
 origin: ["[[_archive/host-layer/decisions#Current Decisions]]", "[[_archive/host-layer/decisions#Role]]", "[[_archive/host-layer/decisions#HostProtocol (Contract)]]", "[[_archive/host-layer/decisions#Not in Host]]", "[[_archive/host-layer/decisions#Open Questions]]", "[[_archive/host-layer/decisions#host-web parity gaps vs host-tui (audited 2026-07-02)]]"]
-touched: 2026-09-22
+touched: 2026-09-25
 ---
 
 # R313 — HostProtocol contract shared by every host
@@ -52,3 +52,4 @@ Every UI item assumes a host shape; defining it once keeps TUI, web and nvim hos
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-25 converges with [[roadmap/items/R221-self-contained-engine]]: the shared host bootstrap (model config, daemon client, event log, telemetry) moves into the engine, and the contract is language-neutral because the terminal host is native ([[features/deno-runtime/plan#D007 — The terminal UI is native; engine, daemon and tooling stay TypeScript]])
