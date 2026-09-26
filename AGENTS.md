@@ -117,8 +117,7 @@ follow the file):
 - `journal-promote <feature>` — ship: truth into domain claims, rationale into decisions;
 - `journal-validate`, `context-audit [domain]` — structural checks and claim correction;
 - `wireframe` — screen wireframes (one file per screen; read it before touching a screen);
-- `orchestrate <feature>` — run this session as an orchestrator;
-- `firecrawl-*` — web research.
+- `orchestrate <feature>` — run this session as an orchestrator.
 
 Bug-fix sessions need no journal entry beyond keeping the touched claims true.
 
@@ -139,6 +138,8 @@ running in a `w:<task>` window, is a worker: follow `.agents/skills/orchestrate/
 | Path | Domain | Description |
 |---|---|---|
 | `apps/host-tui` | host | Terminal host for Kuib AI |
+| `apps/host-web` | host |  |
+| `apps/wireframes` | host |  |
 | `packages/cli` | host | kuib lightweight cli parser and help generator |
 | `packages/config` | infra | kuib configuration loading, precedence, and application paths |
 | `packages/daemon` | core | kuib node-local fs/shell executor (tRPC) |
