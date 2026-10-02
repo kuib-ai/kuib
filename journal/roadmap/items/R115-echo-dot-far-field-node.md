@@ -1,16 +1,16 @@
 ---
 id: R115
 title: Echo Dot jailbreak into a far-field mic and speaker node (parked)
-state: idea
+state: absorbed
 horizon: maybe
 domains: [product]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R017-ana-voice]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Echo Dot C78MP8 (parked)]]", "[[roadmap/research/echo-dot-hack-checklist]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R115 — Echo Dot jailbreak into a far-field mic and speaker node (parked)
@@ -39,3 +39,4 @@ if it can be jailbroken.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R017-ana-voice]]

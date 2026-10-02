@@ -1,16 +1,16 @@
 ---
 id: R407
 title: OS secure storage for API keys and node keys
-state: shaped
+state: absorbed
 horizon: later
 domains: [infra]
 depends-on: []
 converges-with: ["[[roadmap/items/R219-config-store-and-secret-storage]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R014-security-and-secrets]]"
 feature: ""
 origin: ["[[_archive/infrastructure-strategy/decisions#Detailed build roadmap (2026-07-01)]]", "[[_archive/application-directories/decisions#Example consumer layout (after app suffix)]]", "[[_archive/security-model/decisions#Daemon Threat Model (2026-06-30)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R407 — OS secure storage for API keys and node keys
@@ -39,3 +39,4 @@ carry them.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R014-security-and-secrets]]

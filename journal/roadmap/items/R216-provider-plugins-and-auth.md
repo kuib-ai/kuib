@@ -1,16 +1,16 @@
 ---
 id: R216
 title: Provider plugins, model catalog and auth-method union (API key | OAuth)
-state: idea
+state: absorbed
 horizon: later
 domains: [core, infra]
 depends-on: ["[[roadmap/items/R219-config-store-and-secret-storage]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R009-agent-capabilities]]"
 feature: ""
 origin: ["[[_archive/provider-architecture/decisions#Plugin-Based Providers]]", "[[_archive/provider-architecture/decisions#Auth Models]]", "[[_archive/provider-architecture/decisions#Provider contract v2 — flat config + factory map, NOT a discriminated union (2026-07-02)]]", "[[_archive/provider-architecture/decisions#Meta Model API = a provider ID, not a new npm package (2026-08-12)]]", "[[_archive/provider-architecture/decisions#Meta caching is automatic; reasoning is not visible (2026-08-12)]]", "[[_archive/provider-architecture/decisions#MiMo (Xiaomi) — the first provider that actually streams plaintext reasoning (2026-08-12)]]", "[[_archive/provider-architecture/decisions#Open Questions]]", "[[_archive/protocol-design/decisions#Provider Interface]]", "[[_archive/protocol-design/decisions#Step Boundaries — Per-Step Model Tracking]]", "[[_archive/protocol-design/plan#Phase 3: Provider Adapters]]", "[[_archive/protocol-design/progress#Remaining]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R216 — Provider plugins, model catalog and auth-method union (API key | OAuth)
@@ -70,3 +70,4 @@ these attach without protocol changes.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R009-agent-capabilities]]

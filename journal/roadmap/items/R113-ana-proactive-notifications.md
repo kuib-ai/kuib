@@ -1,16 +1,16 @@
 ---
 id: R113
 title: Ana proactive monitoring and notifications
-state: idea
+state: absorbed
 horizon: later
 domains: [product]
 depends-on: ["[[roadmap/items/R106-ana-application]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R016-ana-assistant]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Core Capabilities]]", "[[_archive/ana/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R113 — Ana proactive monitoring and notifications
@@ -39,3 +39,4 @@ request/response assistant.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R016-ana-assistant]]

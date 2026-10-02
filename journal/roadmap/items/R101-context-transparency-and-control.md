@@ -1,16 +1,16 @@
 ---
 id: R101
 title: Context transparency and control — inspect, compose and exclude what the model sees
-state: shaped
+state: absorbed
 horizon: next
 domains: [core, host]
 depends-on: []
 converges-with: ["[[roadmap/items/R210-part-exclusion-and-context-curation]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R007-context-control]]"
 feature: ""
 origin: ["[[_archive/vision/decisions#Mechanisms]]", "[[_archive/comprehension-model/decisions#Comprehension Surfaces (v1 target)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R101 — Context transparency and control — inspect, compose and exclude what the model sees
@@ -50,3 +50,4 @@ comprehension layer (hunks, ledger, blast radius), which was deferred to v1.x.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R007-context-control]]

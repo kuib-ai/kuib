@@ -1,16 +1,16 @@
 ---
 id: R201
 title: Engine-side append validation, optimistic concurrency and edit locks
-state: shaped
+state: absorbed
 horizon: later
 domains: [core]
 depends-on: ["[[roadmap/items/R203-event-taxonomy-completion]]"]
 converges-with: ["[[roadmap/items/R204-tool-approval-gate]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R006-durable-event-log]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Architecture Pattern: Unified Event Log (2026-04-28)]]", "[[_archive/protocol-design/decisions#Atomic Commit Protocol (2026-04-28)]]", "[[_archive/protocol-design/decisions#Race Condition Handling (2026-04-28)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R201 — Engine-side append validation, optimistic concurrency and edit locks
@@ -66,3 +66,4 @@ answer to "who wins", surfaced to the loser instead of silently dropped.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R006-durable-event-log]]

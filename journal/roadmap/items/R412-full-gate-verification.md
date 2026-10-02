@@ -1,16 +1,16 @@
 ---
 id: R412
 title: Full-gate verification — madge in check, hermetic spawn teardown
-state: shaped
+state: absorbed
 horizon: next
 domains: [infra, core]
 depends-on: []
 converges-with: ["[[roadmap/items/R220-daemon-idle-reap]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R018-workspace-health]]"
 feature: ""
 origin: ["[[_archive/testing-strategy/decisions#Verification protocol]]", "[[_archive/testing-strategy/decisions#Hermeticity rules (each learned from a real failure)]]", "[[_archive/house-style-linting/decisions#Lint infra changes (2026-07-01)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R412 — Full-gate verification — madge in check, hermetic spawn teardown
@@ -46,3 +46,4 @@ The green gate is only as honest as the checks it includes.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R018-workspace-health]]

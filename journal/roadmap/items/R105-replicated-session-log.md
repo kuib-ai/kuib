@@ -1,16 +1,16 @@
 ---
 id: R105
 title: Multi-device sessions — replicated event log with coordinator-lease leadership
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, infra]
 depends-on: ["[[roadmap/items/R400-headscale-derp-control-plane]]"]
 converges-with: ["[[roadmap/items/R214-replicated-session-log]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R013-multi-device-mesh]]"
 feature: ""
 origin: ["[[_archive/consensus-model/decisions#Frame]]", "[[_archive/consensus-model/decisions#Core invariant: single active engine per session]]", "[[_archive/consensus-model/decisions#viewing ≠ leading]]", "[[_archive/consensus-model/decisions#Split-brain: where the boundary actually is]]", "[[_archive/consensus-model/decisions#The safety mechanism: quorum + lease + fencing]]", "[[_archive/consensus-model/decisions#Quorum makes the log unforkable]]", "[[_archive/consensus-model/decisions#Lease + fencing closes the zombie window]]", "[[_archive/consensus-model/decisions#Risk-gated freshness check]]", "[[_archive/consensus-model/decisions#Failover: new leader must have the latest log]]", "[[_archive/consensus-model/decisions#The two-regime model (quorum vs small mesh)]]", "[[_archive/consensus-model/decisions#Voters ≠ mesh (critical)]]", "[[_archive/consensus-model/decisions#Consensus is per-session, scoped — not one global group]]", "[[_archive/consensus-model/decisions#Session anchoring & the café case]]", "[[_archive/consensus-model/decisions#Honest status]]", "[[_archive/consensus-model/decisions#Replication is COPY, not merge (2026-07-01)]]", "[[_archive/consensus-model/decisions#When election starts + how the zombie is handled (2026-07-01)]]", "[[_archive/consensus-model/decisions#Unified event-log model — one log, two regions, one interface (2026-07-01)]]", "[[_archive/consensus-model/decisions#Commit watermark + provisional tail (the resume/edge-case rule)]]", "[[_archive/consensus-model/decisions#Author vs replicate — why a follower persisting the tail is NOT write access / NOT split-brain]]", "[[_archive/consensus-model/decisions#Replication granularity — do NOT push tokens through consensus (correction)]]", "[[_archive/consensus-model/decisions#Whose job is it to sync SQLite]]", "[[_archive/consensus-model/decisions#Substrate spectrum (so we don't over-commit to Raft) + 2-node]]", "[[_archive/consensus-model/decisions#Research grounding (2026-07-01)]]", "[[_archive/consensus-model/decisions#RESOLVED: coordinator-as-lease-authority (2026-07-01, author-agreed)]]", "[[_archive/consensus-model/decisions#Open Questions]]", "[[_archive/vision/decisions#Repo structure (2026-07-01)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R105 — Multi-device sessions — replicated event log with coordinator-lease leadership
@@ -130,3 +130,4 @@ budget on the domain; ship the single-device slice first.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R013-multi-device-mesh]]

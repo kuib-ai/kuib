@@ -1,16 +1,16 @@
 ---
 id: R219
 title: ConfigStore seam for user preferences and OS secure storage for secrets
-state: idea
+state: absorbed
 horizon: later
 domains: [infra, core]
 depends-on: []
 converges-with: ["[[roadmap/items/R407-os-secure-storage]]", "[[roadmap/items/R401-mesh-distributed-state]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R014-security-and-secrets]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Three storage classes — do not conflate (2026-06-30)]]", "[[_archive/provider-architecture/decisions#Provider contract v2 — flat config + factory map, NOT a discriminated union (2026-07-02)]]", "[[_archive/provider-architecture/decisions#Per-request provider options are a second axis, separate from client options (2026-08-12)]]", "[[_archive/architecture-overview/decisions#Config & Env Resolution (`@kuib-ai/env`, 2026-07-01)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R219 — ConfigStore seam for user preferences and OS secure storage for secrets
@@ -51,3 +51,4 @@ a user change the model mid-session or keeps keys out of plaintext.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R014-security-and-secrets]]

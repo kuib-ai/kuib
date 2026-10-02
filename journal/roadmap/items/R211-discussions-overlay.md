@@ -1,16 +1,16 @@
 ---
 id: R211
 title: Discussions — a PartID[] overlay, toggleable in context and shareable across sessions
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: ["[[roadmap/items/R207-checkpoints-and-context-assembly]]"]
 converges-with: ["[[roadmap/items/R306-discussions-context-control]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R007-context-control]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Discussion Clustering]]", "[[_archive/protocol-design/decisions#Event Taxonomy — Revised (2026-04-26)]]", "[[_archive/protocol-design/decisions#Open Questions]]", "[[_archive/protocol-design/decisions#Resolved Questions]]", "[[_archive/protocol-design/progress#Rebuild list]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R211 — Discussions — a PartID[] overlay, toggleable in context and shareable across sessions
@@ -56,3 +56,4 @@ the model for a given question.
 
 - 2026-09-22 migrated from the archive; also carries protocol-design's "Discussion Model —
   PartID[] Overlay (Updated 2026-04-25)" section, whose brackets cannot be wikilinked in `origin`.
+- 2026-09-28 absorbed into [[roadmap/items/R007-context-control]]

@@ -1,16 +1,16 @@
 ---
 id: R116
 title: Voice cloning for Ana's persona
-state: idea
+state: absorbed
 horizon: maybe
 domains: [product]
 depends-on: ["[[roadmap/items/R106-ana-application]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R016-ana-assistant]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R116 — Voice cloning for Ana's persona
@@ -37,3 +37,4 @@ A recognisable persona voice makes the assistant feel like a single continuous p
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R016-ana-assistant]]

@@ -1,16 +1,16 @@
 ---
 id: R214
 title: Replicated session log — leader-authored, epoch-fenced, snapshot derived per node
-state: idea
+state: absorbed
 horizon: maybe
 domains: [core, infra]
 depends-on: ["[[roadmap/items/R213-mesh-protocol-fields]]", "[[roadmap/items/R201-append-validation-and-conflicts]]", "[[roadmap/items/R400-headscale-derp-control-plane]]"]
 converges-with: ["[[roadmap/items/R200-message-materializer-and-crash-recovery]]", "[[roadmap/items/R105-replicated-session-log]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R013-multi-device-mesh]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Materialization & resume — runtime model + mesh (2026-06-30)]]", "[[_archive/protocol-design/decisions#SQLite backing — `bun:sqlite` now, `node:sqlite` later (LOCKED 2026-07-01, supersedes runtime-adaptive)]]", "[[_archive/protocol-design/decisions#The event log is one log = localDB + streams (2026-07-01)]]", "[[_archive/protocol-design/decisions#Mesh Architecture — Built-In, 3-Tier Model (2026-06-30)]]", "[[_archive/protocol-design/decisions#Mesh Protocol, 3-Tier Runtime in v1 (2026-06-30)]]", "[[_archive/architecture-overview/decisions#Monorepo Structure (kuib repo)]]", "[[_archive/architecture-overview/decisions#Package Dependency Flow]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R214 — Replicated session log — leader-authored, epoch-fenced, snapshot derived per node
@@ -64,3 +64,4 @@ unambiguous order of events across devices.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R013-multi-device-mesh]]

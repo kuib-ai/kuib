@@ -1,16 +1,16 @@
 ---
 id: R306
 title: Discussions and part-level context control in the conversation
-state: shaped
+state: absorbed
 horizon: later
 domains: [host, core]
 depends-on: ["[[roadmap/items/R301-session-screen]]"]
 converges-with: ["[[roadmap/items/R307-payload-preview-cache-cost]]", "[[roadmap/items/R210-part-exclusion-and-context-curation]]", "[[roadmap/items/R211-discussions-overlay]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R007-context-control]]"
 feature: ""
 origin: ["[[_archive/discussions-ux/decisions#Current Decisions]]", "[[_archive/discussions-ux/decisions#Protocol vs UX Split]]", "[[_archive/discussions-ux/decisions#Granular Context Control]]", "[[_archive/discussions-ux/decisions#v1 Merge with Comprehension]]", "[[_archive/discussions-ux/decisions#Host Affordances (To Build)]]", "[[_archive/discussions-ux/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R306 — Discussions and part-level context control in the conversation
@@ -67,3 +67,4 @@ discussions are how a user removes pollution without starting over.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R007-context-control]]

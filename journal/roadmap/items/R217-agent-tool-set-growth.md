@@ -1,16 +1,16 @@
 ---
 id: R217
 title: Grow the agent tool set — write, exec, search, subagent and think tools
-state: idea
+state: absorbed
 horizon: later
 domains: [core]
 depends-on: ["[[roadmap/items/R204-tool-approval-gate]]", "[[roadmap/items/R205-risk-scoring-and-security-profiles]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R009-agent-capabilities]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Reasoning is content, not a tool call (2026-07-01)]]", "[[_archive/protocol-design/decisions#Tool Call Kind — Normal vs Subagent]]", "[[_archive/protocol-design/decisions#Open Questions]]", "[[_archive/protocol-design/plan#Phase 4: Tools]]", "[[_archive/protocol-design/progress#Remaining]]", "[[_archive/tool-system/decisions#Open / follow-ups]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R217 — Grow the agent tool set — write, exec, search, subagent and think tools
@@ -50,3 +50,4 @@ A read-only agent cannot do coding work.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R009-agent-capabilities]]

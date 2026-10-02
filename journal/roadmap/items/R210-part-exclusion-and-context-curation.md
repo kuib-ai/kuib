@@ -1,16 +1,16 @@
 ---
 id: R210
 title: Per-part exclusion and context curation
-state: shaped
+state: absorbed
 horizon: next
 domains: [core, host]
 depends-on: []
 converges-with: ["[[roadmap/items/R209-message-editing-and-branching]]", "[[roadmap/items/R306-discussions-context-control]]", "[[roadmap/items/R101-context-transparency-and-control]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R007-context-control]]"
 feature: ""
 origin: ["[[_archive/context-engine/decisions#Goal]]", "[[_archive/context-engine/decisions#3. Context Curations]]", "[[_archive/protocol-design/decisions#Event Taxonomy — Revised (2026-04-26)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R210 — Per-part exclusion and context curation
@@ -43,3 +43,4 @@ answer without editing or branching.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R007-context-control]]

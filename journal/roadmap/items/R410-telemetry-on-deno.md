@@ -1,16 +1,16 @@
 ---
 id: R410
 title: Telemetry on Deno — service naming, span re-check, built-in OTel
-state: idea
+state: absorbed
 horizon: next
 domains: [infra, host]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R018-workspace-health]]"
 feature: ""
 origin: ["[[_archive/observability/decisions#Decision]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R410 — Telemetry on Deno — service naming, span re-check, built-in OTel
@@ -42,3 +42,4 @@ runtime.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R018-workspace-health]]

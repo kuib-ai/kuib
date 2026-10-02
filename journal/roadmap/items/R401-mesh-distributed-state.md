@@ -1,16 +1,16 @@
 ---
 id: R401
 title: Mesh node composition and distributed state
-state: idea
+state: absorbed
 horizon: later
 domains: [core, infra]
 depends-on: ["[[roadmap/items/R400-headscale-derp-control-plane]]"]
 converges-with: ["[[roadmap/items/R219-config-store-and-secret-storage]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R013-multi-device-mesh]]"
 feature: ""
 origin: ["[[_archive/infrastructure-strategy/decisions#Current Decisions]]", "[[_archive/infrastructure-strategy/decisions#Mesh Topology (3-Tier)]]", "[[_archive/infrastructure-strategy/decisions#Phasing (decided 2026-06-30)]]", "[[_archive/infrastructure-strategy/decisions#Detailed build roadmap (2026-07-01)]]", "[[_archive/infrastructure-strategy/decisions#Build progress + revised seams (2026-07-01)]]", "[[_archive/infrastructure-strategy/decisions#Open Questions]]", "[[_archive/distributed-mesh-state/decisions#Context]]", "[[_archive/distributed-mesh-state/decisions#Decision]]", "[[_archive/distributed-mesh-state/decisions#Scope]]", "[[_archive/distributed-mesh-state/decisions#Consequences]]", "[[_archive/distributed-mesh-state/decisions#Implementation status — Layer 1 (node resolution seam) — DONE]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R401 — Mesh node composition and distributed state
@@ -73,3 +73,4 @@ trust boundary and scales with the user's own hardware.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R013-multi-device-mesh]]

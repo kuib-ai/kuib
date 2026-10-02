@@ -1,16 +1,16 @@
 ---
 id: R111
 title: Streaming Parakeet — FluidAudio direct vs Hex SDK batch
-state: shaped
+state: absorbed
 horizon: later
 domains: [product]
 depends-on: ["[[roadmap/items/R003-stt-engine]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R017-ana-voice]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Voice I/O Architecture]]", "[[_archive/ana/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R111 — Streaming Parakeet — FluidAudio direct vs Hex SDK batch
@@ -42,3 +42,4 @@ Batch mode — waiting for the user to finish speaking — is the biggest latenc
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R017-ana-voice]]

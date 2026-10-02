@@ -1,16 +1,16 @@
 ---
 id: R406
 title: Signed single-binary distribution with service install
-state: idea
+state: absorbed
 horizon: later
 domains: [infra, host]
 depends-on: []
 converges-with: ["[[roadmap/items/R303-single-binary-roles]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R015-distribution]]"
 feature: ""
 origin: ["[[_archive/infrastructure-strategy/decisions#Detailed build roadmap (2026-07-01)]]", "[[_archive/security-model/decisions#Daemon Threat Model (2026-06-30)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R406 — Signed single-binary distribution with service install
@@ -46,3 +46,4 @@ is an easy fleet-wide foothold. Today every device needs a checkout and `pnpm in
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R015-distribution]]

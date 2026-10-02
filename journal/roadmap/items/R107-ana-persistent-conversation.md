@@ -1,16 +1,16 @@
 ---
 id: R107
 title: Ana persistent conversation with structured fact extraction
-state: shaped
+state: absorbed
 horizon: next
 domains: [product, core]
 depends-on: ["[[roadmap/items/R106-ana-application]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R016-ana-assistant]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Context Management]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R107 — Ana persistent conversation with structured fact extraction
@@ -43,3 +43,4 @@ A voice assistant must remember across days without an ever-growing transcript i
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R016-ana-assistant]]

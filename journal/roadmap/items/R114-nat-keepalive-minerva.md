@@ -1,16 +1,16 @@
 ---
 id: R114
 title: NAT keepalive service on minerva for warm voice paths
-state: shaped
+state: absorbed
 horizon: later
 domains: [infra]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R017-ana-voice]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Network]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R114 — NAT keepalive service on minerva for warm voice paths
@@ -38,3 +38,4 @@ Cold NAT mappings add hole-punching latency to the first voice packet after idle
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R017-ana-voice]]

@@ -1,16 +1,16 @@
 ---
 id: R404
 title: Per-device security profiles and approval thresholds
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, infra]
 depends-on: ["[[roadmap/items/R403-command-risk-approval-flow]]"]
 converges-with: ["[[roadmap/items/R205-risk-scoring-and-security-profiles]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R010-tool-safety-and-approvals]]"
 feature: ""
 origin: ["[[_archive/security-model/decisions#Security Profiles — Per-Device (User-Configurable)]]", "[[_archive/security-model/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R404 — Per-device security profiles and approval thresholds
@@ -56,3 +56,4 @@ A single global threshold is either too loose for a server or too strict for a d
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R010-tool-safety-and-approvals]]

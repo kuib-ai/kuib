@@ -1,16 +1,16 @@
 ---
 id: R307
 title: Payload preview and cache-cost transparency
-state: shaped
+state: absorbed
 horizon: later
 domains: [host, core]
 depends-on: ["[[roadmap/items/R301-session-screen]]"]
 converges-with: ["[[roadmap/items/R306-discussions-context-control]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R007-context-control]]"
 feature: ""
 origin: ["[[_archive/discussions-ux/decisions#Host Affordances (To Build)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R307 — Payload preview and cache-cost transparency
@@ -53,3 +53,4 @@ confirm makes cache invalidation a visible trade-off instead of a surprise bill.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R007-context-control]]

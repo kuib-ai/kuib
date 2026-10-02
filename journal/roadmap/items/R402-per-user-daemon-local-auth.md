@@ -1,16 +1,16 @@
 ---
 id: R402
 title: Per-user daemon scoping with socket-permission local auth
-state: shaped
+state: absorbed
 horizon: next
 domains: [core, infra]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R014-security-and-secrets]]"
 feature: ""
 origin: ["[[_archive/security-model/decisions#Per-user daemon scoping & local auth (2026-07-01)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R402 — Per-user daemon scoping with socket-permission local auth
@@ -48,3 +48,4 @@ not asserted anywhere, and the daemon's optional TCP listener binds all interfac
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R014-security-and-secrets]]

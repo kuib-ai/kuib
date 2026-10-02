@@ -1,16 +1,16 @@
 ---
 id: R303
 title: One compiled TypeScript binary with argv-selected roles, beside the native UI
-state: shaped
+state: absorbed
 horizon: later
 domains: [host, infra]
 depends-on: ["[[roadmap/items/R002-deno-runtime]]", "[[roadmap/items/R221-self-contained-engine]]"]
 converges-with: ["[[roadmap/items/R406-signed-binary-distribution]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R015-distribution]]"
 feature: ""
 origin: ["[[_archive/host-layer/decisions#Single binary, multi-role distribution]]", "conversation 2026-09-23"]
-touched: 2026-09-25
+touched: 2026-09-28
 ---
 
 # R303 — One compiled TypeScript binary with argv-selected roles, beside the native UI
@@ -64,3 +64,4 @@ manager and manual runs on the same invocation.
 - 2026-09-22 migrated from the archive
 - 2026-09-25 the UI leaves the binary (deno-runtime D007); compile requirements from
   [[roadmap/research/startup-and-compile]]
+- 2026-09-28 absorbed into [[roadmap/items/R015-distribution]]

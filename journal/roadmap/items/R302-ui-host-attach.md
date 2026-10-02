@@ -1,16 +1,16 @@
 ---
 id: R302
 title: UI host attaches to serve — log reads, doorbell, submit
-state: shaped
+state: absorbed
 horizon: next
 domains: [host, core]
 depends-on: ["[[roadmap/items/R200-message-materializer-and-crash-recovery]]"]
 converges-with: ["[[roadmap/items/R313-host-protocol-contract]]", "[[roadmap/items/R221-self-contained-engine]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R012-host-protocol-and-web-host]]"
 feature: ""
 origin: ["[[_archive/host-layer/decisions#Engine lifecycle & idempotent discovery]]", "[[_archive/host-layer/decisions#Control plane vs data plane]]", "[[_archive/host-layer/decisions#How the host gets read access]]", "[[_archive/host-layer/decisions#Current Decisions]]"]
-touched: 2026-09-25
+touched: 2026-09-28
 ---
 
 # R302 — UI host attaches to serve — log reads, doorbell, submit
@@ -61,3 +61,4 @@ Without this the host has no way to show or drive a session; it is the precondit
 
 - 2026-09-22 migrated from the archive
 - 2026-09-25 converges with [[roadmap/items/R221-self-contained-engine]]: the UI host is native ([[features/deno-runtime/plan#D007 — The terminal UI is native; engine, daemon and tooling stay TypeScript]]), so it spawns or attaches to the engine entry R221 defines and reads the log natively
+- 2026-09-28 absorbed into [[roadmap/items/R012-host-protocol-and-web-host]]

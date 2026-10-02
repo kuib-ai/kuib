@@ -1,16 +1,16 @@
 ---
 id: R413
 title: Literal `@/` self-alias for intra-package imports
-state: idea
+state: absorbed
 horizon: maybe
 domains: [infra]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R018-workspace-health]]"
 feature: ""
 origin: ["[[_archive/house-style-linting/decisions#RESOLVED: relative imports — cross-package-only ban (2026-07-01)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R413 — Literal `@/` self-alias for intra-package imports
@@ -51,3 +51,4 @@ is optional.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R018-workspace-health]]

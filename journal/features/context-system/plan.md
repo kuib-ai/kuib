@@ -20,7 +20,7 @@ context:
   - "[[domains/infra/current#^feature-plans]]"
   - "[[domains/infra/current#^handoff]]"
 checkpoint:
-  summary: "v2 landed (P06): @claim links tie claims to code scopes, claim sources are generated, evidence is content-hashed and gated at commit, plans hold their own state, handoffs are rendered, SPEC/AGENTS.md/skills rewritten. Open with the owner: converging roadmap merges (G004) and deleting the archive (P05-I01)."
+  summary: "v2 landed (P06): @claim links tie claims to code scopes, claim sources are generated, evidence is content-hashed and gated at commit, plans hold their own state, handoffs are rendered, SPEC/AGENTS.md/skills rewritten. Roadmap made abstract (D013, D014): 13 initiatives R006–R018 absorb the migrated items, ROADMAP.md renders only initiatives; owner is reviewing the graph. Open with the owner: deleting the archive (P05-I01)."
   next: ["P05-I01"]
   blockers: []
   note: ""
@@ -392,6 +392,39 @@ Everything stays viewable in Obsidian.
 - Supersedes: —
 - Superseded by: —
 
+### D013 — The roadmap holds abstract initiatives; the owner decides their parts
+
+- Status: accepted
+- Ruling: "i think the roadmapo currently is too expanded out"; "i would like to make it a bit more abstract"; "no roadmap file must show the smaller bucketed version"; "it's currently mixed up with the journal"; "i will pick up each initiative myself and then decide end to end what are the parts of it using the journal itself"; "and will run a weekly job or an after-completion job to update the domain specific knowledge"; "with all of the details" (owner, 2026-09-28)
+- Context: The migration mined 73 fine-grained items from the archive; many overlap (G004) and carry design detail that belongs in feature plans and domains, not in intent.
+- Options considered: merge only the converging pairs; group items under themes and list both; show only the initiatives.
+- Decision: the roadmap is a short list of initiatives and `ROADMAP.md` shows only them. The owner breaks an initiative down end to end through the journal when picking it up. Domain knowledge is refreshed in full by a weekly or after-completion job.
+- Consequences: the bucket membership and the fate of the detailed items are settled under G004; `renderRoadmap` stops listing absorbed items.
+- Supersedes: —
+- Superseded by: —
+
+### D014 — Thirteen initiatives absorb the migrated items
+
+- Status: accepted
+- Ruling: "very good"; "please update the roadmap first end ot ened"; "i will check the diagram it produces and will inform of further changes based on that" (owner, 2026-09-28)
+- Context: D013 left the buckets and the fate of the 67 detailed items open. None of the buckets was ready end to end: every detailed item still had open questions.
+- Options considered: absorb the detailed items and keep them on disk; delete them and repoint the archive ledgers.
+- Decision: R006–R018 are the initiatives, all `state: idea`, with horizons and edges lifted from their members; R001–R005 and R221 stay as they are. The detailed items are `absorbed` into their initiative and kept on disk as prior notes, so IDs and archive ledgers stay intact. `ROADMAP.md` renders no absorbed item and no edge touching one. Partial overlaps between initiatives are `converges-with`; `depends-on` is kept for whole prerequisites, which avoids the cycle R011 → R012 → R013 → R011 a mechanical lift produces.
+- Consequences: the owner reviews the generated graph and adjusts buckets, horizons and edges.
+- Supersedes: —
+- Superseded by: —
+
+### D015 — The roadmap graph reads top down, finished work on top
+
+- Status: accepted
+- Ruling: "please improve teh layout of the mermaid"; "please check what is used in @~/developer/portfolios/supriyoroy.com/"; "also the ones that finish should be around at the top or shown separately horizontally places"; "keep all of hte self contained horizontally arranged"; "and keep a proper viewable top donw"; "i think no overlaps should make ti cleaner?" (owner, 2026-09-28)
+- Context: The generated graph used horizon subgraphs in a left-to-right flowchart with the default theme; subgraphs fought the dependency layout, every edge crossed a subgraph border, labelled `converges` lines cut through the middle and long titles made tall boxes.
+- Options considered: horizon subgraphs; a boxed band subgraph for work in flight; invisible links pinning rows; rows computed by the generator and carried by edge length.
+- Decision: `flowchart TB` without subgraphs, configured like the portfolio's diagrams (base theme, basis curves, fixed spacing, wide wrapping). Graduated and shipped items form the top row; every other item sits one row below its last prerequisite (items without one on the second row), and each edge's length spans exactly its rows so the layout cannot slide nodes. Labels are the short title over `ID · horizon`; a single-hue ramp makes sooner darker. Overlaps are listed in the horizon lists, not drawn; dropped items and lineage edges are not drawn.
+- Consequences: an initiative title's subtitle after " — " is not shown in the graph.
+- Supersedes: —
+- Superseded by: —
+
 ## Gaps
 
 ### G001 — Swift and Python files carry no `@context` header
@@ -411,5 +444,5 @@ Everything stays viewable in Obsidian.
 
 ### G004 — Overlapping roadmap items from the parallel migration
 
-- Status: open
-- Context: Items mined per domain overlap (e.g. R403/R404 with R204/R205, R406 with R303, R219 with R407); they are linked with `converges-with` and await the owner's merge decisions (`absorbed-into`).
+- Status: resolved
+- Context: Items mined per domain overlap (e.g. R403/R404 with R204/R205, R406 with R303, R219 with R407); they are linked with `converges-with` and await the owner's merge decisions (`absorbed-into`). Resolved by D013 and D014: the items are absorbed into thirteen initiatives.

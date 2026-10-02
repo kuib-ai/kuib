@@ -1,16 +1,16 @@
 ---
 id: R208
 title: Context compaction as an ordinary summary message
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: ["[[roadmap/items/R207-checkpoints-and-context-assembly]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R007-context-control]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Compaction — Just a Regular Message]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R208 — Context compaction as an ordinary summary message
@@ -41,3 +41,4 @@ kind); compaction must stay reversible and transparent.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R007-context-control]]

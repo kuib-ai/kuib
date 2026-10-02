@@ -1,16 +1,16 @@
 ---
 id: R110
 title: MiMo ASR as cloud STT fallback
-state: idea
+state: absorbed
 horizon: maybe
 domains: [product]
 depends-on: ["[[roadmap/items/R003-stt-engine]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R017-ana-voice]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Voice I/O Architecture]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R110 — MiMo ASR as cloud STT fallback
@@ -37,3 +37,4 @@ Keeps Ana usable away from the mesh or when minerva is down.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R017-ana-voice]]

@@ -1,16 +1,16 @@
 ---
 id: R408
 title: Web host auth model for kuib web and code.kuib.ai
-state: shaped
+state: absorbed
 horizon: later
 domains: [host, infra]
 depends-on: []
 converges-with: ["[[roadmap/items/R305-web-host-viewer]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R012-host-protocol-and-web-host]]"
 feature: ""
 origin: ["[[_archive/security-model/decisions#Web host auth — `kuib web` + code.kuib.ai (2026-07-01)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R408 — Web host auth model for kuib web and code.kuib.ai
@@ -73,3 +73,4 @@ The design is the only remaining record of the web boundary's security reasoning
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R012-host-protocol-and-web-host]]

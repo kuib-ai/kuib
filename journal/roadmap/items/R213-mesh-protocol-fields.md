@@ -1,16 +1,16 @@
 ---
 id: R213
 title: Session and Device schemas, and mesh fields on tools and tool calls
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: []
 converges-with: ["[[roadmap/items/R309-multi-device-working-context]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R013-multi-device-mesh]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Mesh Protocol, 3-Tier Runtime in v1 (2026-06-30)]]", "[[_archive/protocol-design/decisions#MessageUser.originDeviceID (2026-04-25)]]", "[[_archive/protocol-design/decisions#Module Structure]]", "[[_archive/protocol-design/progress#Rebuild list]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R213 — Session and Device schemas, and mesh fields on tools and tool calls
@@ -53,3 +53,4 @@ where each call ran; approvals (R204) need the target device.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R013-multi-device-mesh]]

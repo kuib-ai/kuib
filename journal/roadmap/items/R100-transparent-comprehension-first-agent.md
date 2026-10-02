@@ -1,16 +1,16 @@
 ---
 id: R100
 title: Kuib north star — a transparent, comprehension-first coding agent
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: ["[[roadmap/items/R101-context-transparency-and-control]]", "[[roadmap/items/R102-comprehension-layer]]", "[[roadmap/items/R103-intervention-ladder]]", "[[roadmap/items/R104-editor-handoff]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R008-comprehension-first-coding]]"
 feature: ""
 origin: ["[[_archive/vision/decisions#Current Decisions]]", "[[_archive/vision/decisions#Mechanisms]]", "[[_archive/comprehension-model/decisions#Phaseless Workflow]]", "[[_archive/ux-classification/decisions#Current Decisions]]", "[[_archive/ux-classification/decisions#Rule]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R100 — Kuib north star — a transparent, comprehension-first coding agent
@@ -65,3 +65,4 @@ seeing and shaping the context, and comprehending changes on full files, is the 
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R008-comprehension-first-coding]]

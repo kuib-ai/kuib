@@ -1,16 +1,16 @@
 ---
 id: R206
 title: Interrupts resolve every pending tool call in the log
-state: shaped
+state: absorbed
 horizon: next
 domains: [core, host]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R006-durable-event-log]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Interrupt Handling in the Parts Array]]", "[[_archive/protocol-design/decisions#Tool Call Error — Reason Enum]]", "[[_archive/protocol-design/decisions#Performance Strategy]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R206 — Interrupts resolve every pending tool call in the log
@@ -72,3 +72,4 @@ silently vanishes; the model never learns it was stopped, and hosts cannot show 
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R006-durable-event-log]]

@@ -33,7 +33,7 @@ Contract: [[SPEC]]. Roadmap = intent, domains = built truth, features = in fligh
 
 ## Roadmap
 
-[[roadmap/ROADMAP]] — 73 open items (now 6, next 16, later 40, maybe 11).
+[[roadmap/ROADMAP]] — 19 open items (now 6, next 8, later 5, maybe 0).
 
 - [[roadmap/items/R001-context-system|R001]] Three-layer context system with drift detection
 - [[roadmap/items/R002-deno-runtime|R002]] Deno as the only runtime

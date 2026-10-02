@@ -1,16 +1,16 @@
 ---
 id: R205
 title: Operation × target risk scoring with per-device security profiles
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, infra]
 depends-on: ["[[roadmap/items/R213-mesh-protocol-fields]]"]
 converges-with: ["[[roadmap/items/R403-command-risk-approval-flow]]", "[[roadmap/items/R404-per-device-security-profiles]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R010-tool-safety-and-approvals]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Per-Device Security Profiles (2026-04-25)]]", "[[_archive/protocol-design/decisions#Security: Operation x Target Risk Matrix]]", "[[_archive/protocol-design/decisions#Module Structure]]", "[[_archive/protocol-design/progress#Mesh decisions affecting the rebuild (2026-04-25)]]", "[[_archive/tool-system/decisions#The model — single source of truth, three roles]]", "[[_archive/tool-system/decisions#Open / follow-ups]]", "[[_archive/tool-system/progress#2026-07-01 — initial build (readFile)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R205 — Operation × target risk scoring with per-device security profiles
@@ -52,3 +52,4 @@ makes mesh tool dispatch safe.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R010-tool-safety-and-approvals]]

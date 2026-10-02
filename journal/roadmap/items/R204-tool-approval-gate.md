@@ -1,16 +1,16 @@
 ---
 id: R204
 title: Tool approval gate with persisted approval state and command editing
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: ["[[roadmap/items/R205-risk-scoring-and-security-profiles]]", "[[roadmap/items/R203-event-taxonomy-completion]]"]
 converges-with: ["[[roadmap/items/R201-append-validation-and-conflicts]]", "[[roadmap/items/R403-command-risk-approval-flow]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R010-tool-safety-and-approvals]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Pending Approval State Persistence (2026-04-26)]]", "[[_archive/protocol-design/decisions#Command Editing — Cache-Safe (Option B)]]", "[[_archive/protocol-design/decisions#Security: Operation x Target Risk Matrix]]", "[[_archive/protocol-design/progress#Rebuild list]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R204 — Tool approval gate with persisted approval state and command editing
@@ -61,3 +61,4 @@ on reload is unusable across devices.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R010-tool-safety-and-approvals]]

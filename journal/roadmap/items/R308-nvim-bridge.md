@@ -1,16 +1,16 @@
 ---
 id: R308
 title: Embedded Neovim code pane (nvim bridge)
-state: idea
+state: absorbed
 horizon: maybe
 domains: [host]
 depends-on: ["[[roadmap/items/R301-session-screen]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R011-own-terminal-ui]]"
 feature: ""
 origin: ["[[_archive/nvim-integration/decisions#Current Decisions]]", "[[_archive/nvim-integration/decisions#Stance for v1]]", "[[_archive/nvim-integration/decisions#Attach vs Embed]]", "[[_archive/nvim-integration/decisions#Poll vs Push]]", "[[_archive/nvim-integration/decisions#NvimBridge Pattern]]", "[[_archive/nvim-integration/decisions#Ranked Reference Projects]]", "[[_archive/nvim-integration/decisions#Quickfix as Blast Index]]", "[[_archive/nvim-integration/decisions#Fork Escape Hatch]]", "[[_archive/nvim-integration/decisions#Open Questions]]", "[[_archive/host-layer/research/tui-framework#nvim fork (decided: flavored for v1)]]", "[[_archive/host-layer/decisions#Coupling Rule]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R308 — Embedded Neovim code pane (nvim bridge)
@@ -60,3 +60,4 @@ re-implemented code viewer.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R011-own-terminal-ui]]

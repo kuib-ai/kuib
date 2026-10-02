@@ -1,16 +1,16 @@
 ---
 id: R207
 title: Checkpoints as bookmarks and checkpoint-driven context assembly
-state: shaped
+state: absorbed
 horizon: later
 domains: [core]
 depends-on: ["[[roadmap/items/R200-message-materializer-and-crash-recovery]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R007-context-control]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Checkpoint Model — Bookmarks, Not Snapshots]]", "[[_archive/protocol-design/decisions#Persistence Model — Three Layers (revised 2026-04-28)]]", "[[_archive/protocol-design/decisions#Resolved Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R207 — Checkpoints as bookmarks and checkpoint-driven context assembly
@@ -60,3 +60,4 @@ one durable home.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R007-context-control]]

@@ -1,16 +1,16 @@
 ---
 id: R405
 title: Daemon threat-model hardening for the mesh
-state: idea
+state: absorbed
 horizon: later
 domains: [core, infra]
 depends-on: ["[[roadmap/items/R403-command-risk-approval-flow]]", "[[roadmap/items/R406-signed-binary-distribution]]", "[[roadmap/items/R407-os-secure-storage]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R014-security-and-secrets]]"
 feature: ""
 origin: ["[[_archive/security-model/decisions#Daemon Threat Model (2026-06-30)]]", "[[_archive/infrastructure-strategy/decisions#Phasing (decided 2026-06-30)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R405 — Daemon threat-model hardening for the mesh
@@ -70,3 +70,4 @@ Mesh remote execution without these layers turns one poisoned file into a fleet 
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R014-security-and-secrets]]

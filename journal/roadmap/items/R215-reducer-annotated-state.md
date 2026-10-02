@@ -1,16 +1,16 @@
 ---
 id: R215
 title: Reducer-annotated session state and thread-keyed checkpointing
-state: idea
+state: absorbed
 horizon: maybe
 domains: [core]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R006-durable-event-log]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#State Management: LangGraph-inspired reducers (no LangGraph dependency)]]", "[[_archive/protocol-design/decisions#Module Structure]]", "[[_archive/protocol-design/plan#Phase 2: Engine]]", "[[_archive/protocol-design/progress#Rebuild list]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R215 — Reducer-annotated session state and thread-keyed checkpointing
@@ -44,3 +44,4 @@ generic fold instead of hand-written per-event cases.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R006-durable-event-log]]

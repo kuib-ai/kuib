@@ -1,16 +1,16 @@
 ---
 id: R209
 title: Editable messages, message versions and conversation branching
-state: idea
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: ["[[roadmap/items/R207-checkpoints-and-context-assembly]]"]
 converges-with: ["[[roadmap/items/R210-part-exclusion-and-context-curation]]", "[[roadmap/items/R102-comprehension-layer]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R007-context-control]]"
 feature: ""
 origin: ["[[_archive/context-engine/decisions#Goal]]", "[[_archive/context-engine/decisions#1. Editable AI & User Messages]]", "[[_archive/context-engine/decisions#2. Forking and Branching Conversations]]", "[[_archive/context-engine/decisions#Open Questions (To Brainstorm)]]", "[[_archive/protocol-design/decisions#Command Editing — Cache-Safe (Option B)]]", "[[_archive/protocol-design/decisions#Versioning boundaries (2026-06-30)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R209 — Editable messages, message versions and conversation branching
@@ -57,3 +57,4 @@ with no way to replace an assumption.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R007-context-control]]

@@ -1,16 +1,16 @@
 ---
 id: R203
 title: Complete the event taxonomy — retries, session, model switch, versions, tool output
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R006-durable-event-log]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Event Taxonomy — Revised (2026-04-26)]]", "[[_archive/protocol-design/decisions#Message Format — Finalized (v3, 2026-04-25)]]", "[[_archive/protocol-design/decisions#Versioning boundaries (2026-06-30)]]", "[[_archive/protocol-design/progress#Rebuild list]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R203 — Complete the event taxonomy — retries, session, model switch, versions, tool output
@@ -80,3 +80,4 @@ the rest are prerequisites for the capability items above.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R006-durable-event-log]]

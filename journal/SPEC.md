@@ -136,7 +136,7 @@ decisions about unbuilt things stay in their roadmap item or feature plan.
 
 ```
 roadmap/
-  ROADMAP.md        generated — horizon lists + mermaid graph
+  ROADMAP.md        generated — initiatives by horizon + mermaid graph
   items/R###-<slug>.md
   research/         evidence cited by items
   wireframes/       exploring screen wireframes
@@ -146,12 +146,12 @@ roadmap/
 
 ```markdown
 ---
-id: R017
-title: Web host as a pure viewer over SSE
+id: R012
+title: Host protocol and web host
 state: idea
-horizon: later
-domains: [host, infra]
-depends-on: ["[[roadmap/items/R031-mesh-event-log]]"]
+horizon: next
+domains: [host, core, infra]
+depends-on: ["[[roadmap/items/R006-durable-event-log]]"]
 converges-with: []
 split-from: []
 absorbed-into: ""
@@ -160,7 +160,7 @@ origin: ["conversation 2026-09-22"]
 touched: 2026-09-22
 ---
 
-# R017 — Web host as a pure viewer over SSE
+# R012 — Host protocol and web host
 
 ## Idea
 ## Why
@@ -170,7 +170,11 @@ touched: 2026-09-22
 ```
 
 - Filename `R###-<kebab-slug>.md`; `id` matches. IDs are global and never reused.
+- An item is an initiative the owner picks up whole; its parts are decided end to end in the
+  feature plan it graduates into, not split in the roadmap beforehand.
 - A raw one-line idea is an item with `state: idea` and only `## Idea`.
+- An absorbed item stays on disk as prior notes behind the item that absorbed it and never
+  appears in `ROADMAP.md`.
 - `state`: `idea` → `shaped` → `graduated` (needs `feature`) → `shipped` (needs `feature`);
   terminal `absorbed` (needs `absorbed-into`), `dropped`.
 - `horizon`: `now | next | later | maybe`.

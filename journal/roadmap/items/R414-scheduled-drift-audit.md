@@ -1,16 +1,16 @@
 ---
 id: R414
 title: Scheduled drift audit of domain context
-state: idea
+state: absorbed
 horizon: maybe
 domains: [infra]
 depends-on: ["[[roadmap/items/R001-context-system]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R018-workspace-health]]"
 feature: ""
 origin: ["[[_archive/journal-system/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R414 — Scheduled drift audit of domain context
@@ -36,3 +36,4 @@ Drift detection is cheap and deterministic; correction only happens if someone l
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R018-workspace-health]]

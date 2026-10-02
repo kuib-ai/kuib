@@ -1,16 +1,16 @@
 ---
 id: R200
 title: Messages snapshot materializer, persistence cursor and crash recovery
-state: shaped
+state: absorbed
 horizon: next
 domains: [core]
 depends-on: []
 converges-with: ["[[roadmap/items/R214-replicated-session-log]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R006-durable-event-log]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Two Worlds: Events vs Messages]]", "[[_archive/protocol-design/decisions#Atomic Commit Protocol (2026-04-28)]]", "[[_archive/protocol-design/decisions#Materialization & resume — runtime model + mesh (2026-06-30)]]", "[[_archive/protocol-design/decisions#SQLite backing — `bun:sqlite` now, `node:sqlite` later (LOCKED 2026-07-01, supersedes runtime-adaptive)]]", "[[_archive/protocol-design/decisions#Persistence Model — Three Layers (revised 2026-04-28)]]", "[[_archive/protocol-design/decisions#Tool Call Parts — Append-Only, No Mutation]]", "[[_archive/protocol-design/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R200 — Messages snapshot materializer, persistence cursor and crash recovery
@@ -81,3 +81,4 @@ compaction, discussions) a stable aggregate to point at.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R006-durable-event-log]]

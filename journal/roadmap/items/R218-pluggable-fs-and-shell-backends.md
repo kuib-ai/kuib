@@ -1,16 +1,16 @@
 ---
 id: R218
 title: Pluggable fs and shell backends — local, Postgres, nsjail sandbox
-state: idea
+state: absorbed
 horizon: maybe
 domains: [core, infra]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R009-agent-capabilities]]"
 feature: ""
 origin: ["[[_archive/architecture-overview/decisions#Interface-Based I/O]]", "[[_archive/protocol-design/progress#Rebuild list]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R218 — Pluggable fs and shell backends — local, Postgres, nsjail sandbox
@@ -49,3 +49,4 @@ A hosted/web offering needs sandboxed execution with the same daemon contract.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R009-agent-capabilities]]

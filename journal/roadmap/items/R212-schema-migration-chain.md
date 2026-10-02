@@ -1,16 +1,16 @@
 ---
 id: R212
 title: Schema migration chain and JSON-schema snapshot test
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, infra]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R006-durable-event-log]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Schema Versioning]]", "[[_archive/protocol-design/decisions#Versioning boundaries (2026-06-30)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R212 — Schema migration chain and JSON-schema snapshot test
@@ -50,3 +50,4 @@ otherwise brick existing `kuib.db` files.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R006-durable-event-log]]

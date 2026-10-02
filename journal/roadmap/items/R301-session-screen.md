@@ -1,16 +1,16 @@
 ---
 id: R301
 title: Session screen and v1 pane layout
-state: shaped
+state: absorbed
 horizon: next
 domains: [host]
 depends-on: ["[[roadmap/items/R300-own-tui-library]]", "[[roadmap/items/R302-ui-host-attach]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R011-own-terminal-ui]]"
 feature: ""
 origin: ["[[_archive/host-layer/decisions#Session screen — sticky right prompt pane (2026-07-03)]]", "[[_archive/host-layer/decisions#v1 Frontend — OpenTUI + Solid (nvim-flavored)]]", "[[_archive/host-layer/decisions#Coupling Rule]]", "[[_archive/host-layer/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R301 — Session screen and v1 pane layout
@@ -84,3 +84,4 @@ device badge) lives in.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R011-own-terminal-ui]]

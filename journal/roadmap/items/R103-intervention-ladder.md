@@ -1,16 +1,16 @@
 ---
 id: R103
 title: Graded intervention ladder for autonomous runs
-state: idea
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: []
 converges-with: ["[[roadmap/items/R102-comprehension-layer]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R008-comprehension-first-coding]]"
 feature: ""
 origin: ["[[_archive/comprehension-model/decisions#Intervention Ladder]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R103 — Graded intervention ladder for autonomous runs
@@ -39,3 +39,4 @@ automation needs the agent to keep moving while still escalating what matters.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R008-comprehension-first-coding]]

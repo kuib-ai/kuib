@@ -1,16 +1,16 @@
 ---
 id: R109
 title: Kokoro local TTS for instant acknowledgments
-state: shaped
+state: absorbed
 horizon: later
 domains: [product]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R017-ana-voice]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Voice I/O Architecture]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R109 — Kokoro local TTS for instant acknowledgments
@@ -41,3 +41,4 @@ Every MiMo reply pays a round trip to Singapore; short acknowledgments should fe
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R017-ana-voice]]

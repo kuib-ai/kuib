@@ -1,16 +1,16 @@
 ---
 id: R106
 title: Ana — voice-driven personal assistant app on the kuib engine
-state: shaped
+state: absorbed
 horizon: next
 domains: [product, core]
 depends-on: ["[[roadmap/items/R003-stt-engine]]", "[[roadmap/items/R216-provider-plugins-and-auth]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R016-ana-assistant]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Current Decisions]]", "[[_archive/ana/decisions#Placement & Relationship to Kuib]]", "[[_archive/ana/decisions#Core Capabilities]]", "[[_archive/ana/decisions#Hardware Topology]]", "[[_archive/ana/decisions#Provider]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R106 — Ana — voice-driven personal assistant app on the kuib engine
@@ -63,3 +63,4 @@ A daily-use assistant is the fastest way to harden the engine, provider and mesh
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R016-ana-assistant]]

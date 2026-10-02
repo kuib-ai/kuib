@@ -1,16 +1,16 @@
 ---
 id: R102
 title: Comprehension layer — hunks on full files, ledger, intent and blast radius
-state: shaped
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: ["[[roadmap/items/R101-context-transparency-and-control]]"]
 converges-with: ["[[roadmap/items/R103-intervention-ladder]]", "[[roadmap/items/R209-message-editing-and-branching]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R008-comprehension-first-coding]]"
 feature: ""
 origin: ["[[_archive/comprehension-model/decisions#Current Decisions]]", "[[_archive/comprehension-model/decisions#Core Insight]]", "[[_archive/comprehension-model/decisions#Unified Event Stream]]", "[[_archive/comprehension-model/decisions#Hunk Primitive]]", "[[_archive/comprehension-model/decisions#Comprehension Surfaces (v1 target)]]", "[[_archive/comprehension-model/decisions#Resurface and Sub-chats]]", "[[_archive/comprehension-model/decisions#Open Questions]]", "[[_archive/vision/decisions#Mechanisms]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R102 — Comprehension layer — hunks on full files, ledger, intent and blast radius
@@ -67,3 +67,4 @@ the user keeps understanding of what the agent changed without reading raw diffs
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R008-comprehension-first-coding]]

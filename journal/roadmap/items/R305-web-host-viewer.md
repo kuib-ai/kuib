@@ -1,16 +1,16 @@
 ---
 id: R305
 title: Web host as a pure viewer over SSE
-state: shaped
+state: absorbed
 horizon: later
 domains: [host, core]
 depends-on: ["[[roadmap/items/R302-ui-host-attach]]", "[[roadmap/items/R313-host-protocol-contract]]", "[[roadmap/items/R214-replicated-session-log]]"]
 converges-with: ["[[roadmap/items/R408-web-host-auth]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R012-host-protocol-and-web-host]]"
 feature: ""
 origin: ["[[_archive/host-layer/decisions#Web host (`kuib web`) + SSE catch-up protocol (2026-07-01)]]", "[[_archive/host-layer/decisions#The catch-up / no-staleness protocol (the load-bearing part)]]", "[[_archive/host-layer/decisions#Run-liveness detection (co-viewing a TUI-started stream)]]", "[[_archive/host-layer/decisions#host-web parity gaps vs host-tui (audited 2026-07-02)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R305 — Web host as a pure viewer over SSE
@@ -76,3 +76,4 @@ Phone and other mesh devices can watch and drive a session without a terminal.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R012-host-protocol-and-web-host]]

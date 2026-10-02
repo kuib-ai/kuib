@@ -1,16 +1,16 @@
 ---
 id: R310
 title: Context bootstrap for greenfield repos
-state: idea
+state: absorbed
 horizon: later
 domains: [core, host]
 depends-on: ["[[roadmap/items/R301-session-screen]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R007-context-control]]"
 feature: ""
 origin: ["[[_archive/context-bootstrap/decisions#Current Decisions]]", "[[_archive/context-bootstrap/decisions#Problem]]", "[[_archive/context-bootstrap/decisions#Context Engine (Before First Turn)]]", "[[_archive/context-bootstrap/decisions#Project Map Buffer (UX)]]", "[[_archive/context-bootstrap/decisions#Empty States]]", "[[_archive/context-bootstrap/decisions#Ideal First-Turn Behavior (Given Scaffolding)]]", "[[_archive/context-bootstrap/decisions#Open Questions]]", "[[_archive/bootstrap-validation/decisions#Current Decisions]]", "[[_archive/bootstrap-validation/decisions#Methodology]]", "[[_archive/bootstrap-validation/decisions#Roles]]", "[[_archive/bootstrap-validation/decisions#Scope Classification Reminder]]", "[[_archive/bootstrap-validation/decisions#Scenes Completed]]", "[[_archive/bootstrap-validation/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R310 — Context bootstrap for greenfield repos
@@ -76,3 +76,4 @@ told it the project is still in design.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R007-context-control]]

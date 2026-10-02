@@ -1,16 +1,16 @@
 ---
 id: R304
 title: Background service install (launchd / systemd)
-state: shaped
+state: absorbed
 horizon: later
 domains: [host, infra]
 depends-on: ["[[roadmap/items/R303-single-binary-roles]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R015-distribution]]"
 feature: ""
 origin: ["[[_archive/host-layer/decisions#Current Decisions]]", "[[_archive/host-layer/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R304 — Background service install (launchd / systemd)
@@ -62,3 +62,4 @@ daemon runs without a terminal open.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R015-distribution]]

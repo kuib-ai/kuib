@@ -1,16 +1,16 @@
 ---
 id: R220
 title: Daemon idle self-reap and no leaked daemons from tests
-state: idea
+state: absorbed
 horizon: next
 domains: [core]
 depends-on: []
 converges-with: ["[[roadmap/items/R412-full-gate-verification]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R018-workspace-health]]"
 feature: ""
 origin: ["[[_archive/tool-system/decisions#Open / follow-ups]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R220 — Daemon idle self-reap and no leaked daemons from tests
@@ -38,3 +38,4 @@ Leaked daemons hold sockets and old code, confusing later runs and dev reloads.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R018-workspace-health]]

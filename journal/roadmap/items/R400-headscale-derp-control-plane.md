@@ -1,16 +1,16 @@
 ---
 id: R400
 title: Self-hosted Headscale + DERP control plane for the mesh
-state: shaped
+state: absorbed
 horizon: later
 domains: [infra, core]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R013-multi-device-mesh]]"
 feature: ""
 origin: ["[[_archive/infrastructure-strategy/decisions#Network Substrate & Control Plane — self-hosted Headscale + DERP (2026-07-01)]]", "[[_archive/infrastructure-strategy/decisions#Keep the substrate behind a contract — do NOT double down on Headscale (2026-07-01)]]", "[[_archive/infrastructure-strategy/decisions#Transport & RPC]]", "[[_archive/infrastructure-strategy/decisions#Detailed build roadmap (2026-07-01)]]", "[[_archive/infrastructure-strategy/decisions#Open Questions]]", "[[_archive/distributed-mesh-state/decisions#Implementation status — Layer 1 (node resolution seam) — DONE]]", "[[_archive/security-model/decisions#Coordinator/DERP isolation (2026-07-01)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R400 — Self-hosted Headscale + DERP control plane for the mesh
@@ -73,3 +73,4 @@ and an existing tailnet. A dynamic registry is the prerequisite for the multi-de
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R013-multi-device-mesh]]

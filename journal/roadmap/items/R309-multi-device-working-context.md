@@ -1,16 +1,16 @@
 ---
 id: R309
 title: Multi-device working context — device badge, switcher, per-device cwd
-state: shaped
+state: absorbed
 horizon: later
 domains: [host, core]
 depends-on: ["[[roadmap/items/R301-session-screen]]"]
 converges-with: ["[[roadmap/items/R213-mesh-protocol-fields]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R013-multi-device-mesh]]"
 feature: ""
 origin: ["[[_archive/multi-device-ux/decisions#Multi-Device UX & Working Context]]", "[[_archive/multi-device-ux/decisions#Core reframe: a location is `(device, path)`, not `path`]]", "[[_archive/multi-device-ux/decisions#Session state: one active working context, switchable]]", "[[_archive/multi-device-ux/decisions#Orthogonality: active device ≠ leader]]", "[[_archive/multi-device-ux/decisions#TUI surface]]", "[[_archive/multi-device-ux/decisions#Decisions]]", "[[_archive/multi-device-ux/decisions#Edge cases (need handling)]]", "[[_archive/multi-device-ux/decisions#Node identity & addressing — `user@device` (2026-07-01)]]", "[[_archive/multi-device-ux/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R309 — Multi-device working context — device badge, switcher, per-device cwd
@@ -83,3 +83,4 @@ machine after a switch.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R013-multi-device-mesh]]

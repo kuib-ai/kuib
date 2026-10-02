@@ -1,16 +1,16 @@
 ---
 id: R409
 title: Platform directory layout corrections for Windows and macOS runtime
-state: idea
+state: absorbed
 horizon: maybe
 domains: [infra]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R015-distribution]]"
 feature: ""
 origin: ["[[_archive/application-directories/decisions#Example consumer layout (after app suffix)]]", "[[_archive/application-directories/decisions#Windows — Known Folders]]", "[[_archive/application-directories/decisions#macOS — Apple Library vs CLI expectation]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R409 — Platform directory layout corrections for Windows and macOS runtime
@@ -52,3 +52,4 @@ over-long paths on macOS.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R015-distribution]]

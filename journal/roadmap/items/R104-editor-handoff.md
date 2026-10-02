@@ -1,16 +1,16 @@
 ---
 id: R104
 title: Editor handoff — read-first comprehension UI with explicit unlock to edit
-state: idea
+state: absorbed
 horizon: maybe
 domains: [host]
 depends-on: ["[[roadmap/items/R102-comprehension-layer]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R008-comprehension-first-coding]]"
 feature: ""
 origin: ["[[_archive/comprehension-model/decisions#Agent Is Not the Editor]]", "[[_archive/vision/decisions#Mechanisms]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R104 — Editor handoff — read-first comprehension UI with explicit unlock to edit
@@ -37,3 +37,4 @@ Keeps comprehension and editing separate so the agent loop never blocks on edito
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R008-comprehension-first-coding]]

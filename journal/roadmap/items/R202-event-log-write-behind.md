@@ -1,16 +1,16 @@
 ---
 id: R202
 title: Hot-path throughput — write-behind event log and validation only at boundaries
-state: shaped
+state: absorbed
 horizon: later
 domains: [core]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R006-durable-event-log]]"
 feature: ""
 origin: ["[[_archive/protocol-design/decisions#Materialization & resume — runtime model + mesh (2026-06-30)]]", "[[_archive/protocol-design/decisions#Performance Strategy]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R202 — Hot-path throughput — write-behind event log and validation only at boundaries
@@ -58,3 +58,4 @@ at the cost of a bounded, user-recoverable loss window.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R006-durable-event-log]]

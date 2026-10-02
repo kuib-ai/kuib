@@ -1,16 +1,16 @@
 ---
 id: R112
 title: Phone dictation client streaming to minerva
-state: idea
+state: absorbed
 horizon: later
 domains: [product]
 depends-on: ["[[roadmap/items/R003-stt-engine]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R017-ana-voice]]"
 feature: ""
 origin: ["[[_archive/ana/decisions#Phone Dictation App]]", "[[_archive/ana/decisions#Open Questions]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R112 — Phone dictation client streaming to minerva
@@ -39,3 +39,4 @@ Current phone STT runs locally and is slow; a keepalive-warmed path to minerva i
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R017-ana-voice]]

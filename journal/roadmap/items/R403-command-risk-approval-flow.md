@@ -1,16 +1,16 @@
 ---
 id: R403
 title: Command risk scoring and approval flow
-state: shaped
+state: absorbed
 horizon: next
 domains: [core, host]
 depends-on: []
 converges-with: ["[[roadmap/items/R205-risk-scoring-and-security-profiles]]", "[[roadmap/items/R204-tool-approval-gate]]"]
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R010-tool-safety-and-approvals]]"
 feature: ""
 origin: ["[[_archive/security-model/decisions#Current Decisions]]", "[[_archive/security-model/decisions#Command Approval Flow]]", "[[_archive/security-model/decisions#Risk Tiering (Command Parser)]]", "[[_archive/security-model/decisions#Shell AST Parsing]]", "[[_archive/security-model/decisions#Open Questions]]", "[[_archive/infrastructure-strategy/decisions#Build progress + revised seams (2026-07-01)]]"]
-touched: 2026-09-22
+touched: 2026-09-28
 ---
 
 # R403 — Command risk scoring and approval flow
@@ -74,3 +74,4 @@ gate is the precondition for exposing them to the model.
 ## History
 
 - 2026-09-22 migrated from the archive
+- 2026-09-28 absorbed into [[roadmap/items/R010-tool-safety-and-approvals]]

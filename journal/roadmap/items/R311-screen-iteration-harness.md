@@ -1,16 +1,16 @@
 ---
 id: R311
 title: Screen iteration harness — frame dumps, snapshot tests, wireframe picker
-state: shaped
+state: absorbed
 horizon: next
 domains: [host, infra]
 depends-on: ["[[roadmap/items/R300-own-tui-library]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R011-own-terminal-ui]]"
 feature: ""
 origin: ["[[_archive/ux-iteration-process/decisions#The iteration loop]]", "[[_archive/ux-iteration-process/decisions#Tooling decisions]]", "[[_archive/ux-iteration-process/decisions#Lifecycle (the binding rules)]]"]
-touched: 2026-09-25
+touched: 2026-09-28
 ---
 
 # R311 — Screen iteration harness — frame dumps, snapshot tests, wireframe picker
@@ -68,3 +68,4 @@ and regressions diffable.
 
 - 2026-09-22 migrated from the archive
 - 2026-09-25 harness language follows the native UI (deno-runtime D007)
+- 2026-09-28 absorbed into [[roadmap/items/R011-own-terminal-ui]]

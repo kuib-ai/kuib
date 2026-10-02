@@ -1,16 +1,16 @@
 ---
 id: R411
 title: Component-layer lint rules for kuib's own TUI library
-state: idea
+state: absorbed
 horizon: later
 domains: [infra]
 depends-on: ["[[roadmap/items/R300-own-tui-library]]"]
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R011-own-terminal-ui]]"
 feature: ""
 origin: ["[[_archive/house-style-linting/decisions#Open Questions — Solid-JSX linting bucket (deferred)]]", "[[_archive/house-style-linting/decisions#The house style (audited from the author's hand-written reference codebase)]]"]
-touched: 2026-09-25
+touched: 2026-09-28
 ---
 
 # R411 — Component-layer lint rules for kuib's own TUI library
@@ -51,3 +51,4 @@ Agent-written UI code needs the same idiom enforcement as the rest of the codeba
 
 - 2026-09-22 migrated from the archive
 - 2026-09-25 flagged: the UI is native (deno-runtime D007)
+- 2026-09-28 absorbed into [[roadmap/items/R011-own-terminal-ui]]

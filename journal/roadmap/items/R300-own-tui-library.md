@@ -1,16 +1,16 @@
 ---
 id: R300
 title: kuib's own native terminal UI
-state: shaped
+state: absorbed
 horizon: next
 domains: [host]
 depends-on: []
 converges-with: []
 split-from: []
-absorbed-into: ""
+absorbed-into: "[[roadmap/items/R011-own-terminal-ui]]"
 feature: ""
 origin: ["[[_archive/host-layer/decisions#v1 Frontend — OpenTUI + Solid (nvim-flavored)]]", "[[_archive/host-layer/decisions#TUI structure — provider stack, route store, dialog overlay (2026-07-03)]]", "[[_archive/host-layer/decisions#Current Decisions]]", "[[_archive/host-layer/research/tui-framework#Why OpenTUI+Solid (not Ink)]]", "[[_archive/host-layer/research/tui-framework#nvim fork (decided: flavored for v1)]]", "[[_archive/host-layer/research/tui-framework#Reference apps (proven OpenTUI, for study)]]", "[[features/deno-runtime/plan]]", "conversation 2026-09-23"]
-touched: 2026-09-25
+touched: 2026-09-28
 ---
 
 # R300 — kuib's own native terminal UI
@@ -93,3 +93,4 @@ garbage-collection pauses. Every UI item below depends on this library existing.
 - 2026-09-22 migrated from the archive
 - 2026-09-25 the UI is native (deno-runtime D007); TypeScript/Solid direction dropped, engine
   boundary and language questions added
+- 2026-09-28 absorbed into [[roadmap/items/R011-own-terminal-ui]]
