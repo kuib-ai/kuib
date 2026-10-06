@@ -1,0 +1,124 @@
+[Skip to content](https://github.com/evanw/esbuild/issues/2855#start-of-content)
+             
+
+You signed in with another tab or window. [Reload](https://github.com/evanw/esbuild/issues/2855)
+ to refresh your session. You signed out in another tab or window. [Reload](https://github.com/evanw/esbuild/issues/2855)
+ to refresh your session. You switched accounts on another tab or window. [Reload](https://github.com/evanw/esbuild/issues/2855)
+ to refresh your session. Dismiss alert
+
+[evanw](https://github.com/evanw) / **[esbuild](https://github.com/evanw/esbuild)** Public
+
+*   [Notifications](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+     You must be signed in to change notification settings
+*   [Fork 1.4k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+*   [Star 40.1k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+
+Support tree-shaking unused properties on an object literal #2855
+=================================================================
+
+New issue
+
+Copy link
+
+New issue
+
+Copy link
+
+Open
+
+Open
+
+[Support tree-shaking unused properties on an object literal](https://github.com/evanw/esbuild/issues/2855#top)
+#2855
+
+Copy link
+
+Labels
+
+[suboptimal-output](https://github.com/evanw/esbuild/issues?q=state%3Aopen%20label%3A%22suboptimal-output%22)
+
+Description
+-----------
+
+[![@fabiospampinato](https://avatars.githubusercontent.com/u/1812093?u=0d6a92ea991be8b4d893c64f017d10b26d60e581&v=4&size=48)](https://github.com/fabiospampinato)
+
+[fabiospampinato](https://github.com/fabiospampinato)
+
+opened [on Jan 20, 2023](https://github.com/evanw/esbuild/issues/2855#issue-1550979775)
+
+Issue body actions
+
+It'd be interesting if default exports could be tree-shaken too, perhaps on a global or per-module opt-in basis.
+
+The problem is that, for example, I want the DX that the following allows, where I can then just do a super clean `import Lib from 'lib'`, rather than having to write `* as` or having to import each little thing individually.
+
+```ts
+import foo from './foo';
+import bar from './bar';
+import baz from './baz';
+
+const Lib = { foo, bar, baz };
+
+export default Lib;
+```
+
+But I want the tree-shaking that this allows:
+
+```ts
+import foo from './foo';
+import bar from './bar';
+import baz from './baz';
+
+export {foo, bar, baz};
+```
+
+Basically I think there should be some mechanism for treating simple trivially analyzable default exports as tree-shakeable. Maybe if an ESM package says explicitly that it has `"sideEffects": false` this optimization could be performed? Maybe some other flag or `#PURE`\-like annotation could be introduced?
+
+Alternatively the simplest workaround I can think about is to have two entry points of your library, one exports things individually and the other imports everything from that and exports them together as the default export, then you import the default export, but rewrite the code with a simple transform to actually import everything from the other entry point with `* as`. It should work, and it's simple enough to be practical as a one-off, but if I need to modify every library entry point and account for each of them with a transform it gets impractical pretty quick, it'd be nice if this Just Worked™️
+
+Reactions are currently unavailable
+
+Activity
+--------
+
+[Sign up for free](https://github.com/signup?return_to=https://github.com/evanw/esbuild/issues/2855)
+ **to join this conversation on GitHub.** Already have an account? [Sign in to comment](https://github.com/login?return_to=https://github.com/evanw/esbuild/issues/2855)
+
+Metadata
+--------
+
+Metadata
+--------
+
+### Assignees
+
+No one assigned
+
+### Labels
+
+[suboptimal-output](https://github.com/evanw/esbuild/issues?q=state%3Aopen%20label%3A%22suboptimal-output%22)
+
+### Projects
+
+No projects
+
+### Milestone
+
+No milestone
+
+### Relationships
+
+None yet
+
+### Development
+
+No branches or pull requests
+
+Issue actions
+-------------
+
+*   ![](https://github.githubassets.com/assets/github-copilot-app-light-15ad5534265eeacd.svg)Open in GitHub Copilot app
+
+You can’t perform that action at this time.

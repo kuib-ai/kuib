@@ -75,7 +75,9 @@ becomes `closed` and is never respawned.
 - `lost` → `pnpm orchestra reconcile --respawn` relaunches it with the resume prompt.
 
 **Accept.** Read `report.md`; check the work yourself (`git diff`, `pnpm run check`, `pnpm
-journal drift` — claims under the worker's changes must be re-verified and stamped). Then
+journal drift` — claims under the worker's changes must be re-verified and stamped). Check the
+report's `## Names` list against the diff (`AGENTS.md`: names are symmetric with their siblings)
+and pass names without a sibling, and asymmetries the worker noticed, to the owner. Then
 `pnpm orchestra accept <task> [--close]` marks its items implemented with refs, and you apply
 the report's plan updates (decisions, gaps, follow-up roadmap items). Prefer one end-of-feature
 review task over a review per task; fix rounds narrow to what the previous round found.

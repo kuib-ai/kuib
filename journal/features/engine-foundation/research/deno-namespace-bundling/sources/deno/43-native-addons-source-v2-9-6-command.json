@@ -1,0 +1,1 @@
+{"args":["scrape","https://raw.githubusercontent.com/denoland/deno/v2.9.6/cli/standalone/native_addons.rs","--format","markdown","--json","-o","research_notes/Deno namespace bundling research/deno-sources/43-native-addons-source-v2-9-6.json"],"status":0,"cliOutput":"Scrape ID: 01a10f84-d910-71d6-b511-d558f863fab2\n"}

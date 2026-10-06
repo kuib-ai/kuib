@@ -27,19 +27,22 @@ Contract: [[SPEC]]. Roadmap = intent, domains = built truth, features = in fligh
 - [[features/deno-runtime/plan|deno-runtime]] — implementing · R002
   Strip OpenTUI/Solid/Bun and run every TS project on Deno as a pure runtime — pnpm resolves packages, Nx runs tasks, tsgo type-checks against Nx-generated Deno types. No deno.json. Clears the ground for kuib's own TUI library.
   next: P05-I01
+- [[features/engine-foundation/plan|engine-foundation]] — draft · R019
+  Shape the reusable engine for Kuib and Ana, preserving namespace APIs and establishing fast, low-overhead deployment as one Deno executable.
 - [[features/stt-engine/plan|stt-engine]] — implementing · R003
   Unified STT service on M4 Mac Mini (minerva) — FluidAudio for Parakeet CoreML/ANE, mlx-swift for Qwen3-ASR, single unix socket API. TypeScript client in monorepo.
   next: P02-I01
 
 ## Roadmap
 
-[[roadmap/ROADMAP]] — 19 open items (now 6, next 8, later 5, maybe 0).
+[[roadmap/ROADMAP]] — 20 open items (now 7, next 8, later 5, maybe 0).
 
 - [[roadmap/items/R001-context-system|R001]] Three-layer context system with drift detection
 - [[roadmap/items/R002-deno-runtime|R002]] Deno as the only runtime
 - [[roadmap/items/R003-stt-engine|R003]] Local speech-to-text engine for Ana
 - [[roadmap/items/R004-agent-harness|R004]] Uniform agent harness and tmux orchestration
 - [[roadmap/items/R005-codebase-review|R005]] Codebase review and fixes
+- [[roadmap/items/R019-engine-foundation|R019]] Reusable engine foundation — application boundaries and efficient Deno deployment
 - [[roadmap/items/R221-self-contained-engine|R221]] Self-contained engine — one entry that owns its wiring and its single-instance start
 
 ## Wireframes

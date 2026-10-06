@@ -1,0 +1,104 @@
+[Skip to content](https://github.com/evanw/esbuild/issues/3149#start-of-content)
+             
+
+You signed in with another tab or window. [Reload](https://github.com/evanw/esbuild/issues/3149)
+ to refresh your session. You signed out in another tab or window. [Reload](https://github.com/evanw/esbuild/issues/3149)
+ to refresh your session. You switched accounts on another tab or window. [Reload](https://github.com/evanw/esbuild/issues/3149)
+ to refresh your session. Dismiss alert
+
+[evanw](https://github.com/evanw) / **[esbuild](https://github.com/evanw/esbuild)** Public
+
+*   [Notifications](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+     You must be signed in to change notification settings
+*   [Fork 1.4k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+*   [Star 40.1k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+
+Support `#__NO_SIDE_EFFECTS__` comment from Rollup #3149
+========================================================
+
+New issue
+
+Copy link
+
+New issue
+
+Copy link
+
+Closed
+
+Closed
+
+[Support `#__NO_SIDE_EFFECTS__` comment from Rollup](https://github.com/evanw/esbuild/issues/3149#top)
+#3149
+
+Copy link
+
+Description
+-----------
+
+[![@antfu](https://avatars.githubusercontent.com/u/11247099?u=5c092d3773a443e480a294f2b67aa39395982f46&v=4&size=48)](https://github.com/antfu)
+
+[antfu](https://github.com/antfu)
+
+opened [on Jun 7, 2023](https://github.com/evanw/esbuild/issues/3149#issue-1745435559)
+
+Issue body actions
+
+With a similar reasoning:
+
+*   [Pure annotation for functions #1883](https://github.com/evanw/esbuild/issues/1883)
+    
+
+We recently shipped `#__NO_SIDE_EFFECTS__` in Rollup ([rollup/rollup#5024](https://github.com/rollup/rollup/pull/5024)
+). We wish to push this convention to be supported in other build tools and to benefit library authors to make more portable and flexible libraries.
+
+Would love the hear the thoughts from `esbuild` side. Thanks!
+
+Reactions are currently unavailable
+
+Activity
+--------
+
+[Sign up for free](https://github.com/signup?return_to=https://github.com/evanw/esbuild/issues/3149)
+ **to join this conversation on GitHub.** Already have an account? [Sign in to comment](https://github.com/login?return_to=https://github.com/evanw/esbuild/issues/3149)
+
+Metadata
+--------
+
+Metadata
+--------
+
+### Assignees
+
+No one assigned
+
+### Labels
+
+No labels
+
+No labels
+
+### Projects
+
+No projects
+
+### Milestone
+
+No milestone
+
+### Relationships
+
+None yet
+
+### Development
+
+No branches or pull requests
+
+Issue actions
+-------------
+
+*   ![](https://github.githubassets.com/assets/github-copilot-app-light-15ad5534265eeacd.svg)Open in GitHub Copilot app
+
+You can’t perform that action at this time.

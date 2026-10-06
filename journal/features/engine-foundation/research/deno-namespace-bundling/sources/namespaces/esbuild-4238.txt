@@ -1,0 +1,142 @@
+[Skip to content](https://github.com/evanw/esbuild/issues/4238#start-of-content)
+             
+
+You signed in with another tab or window. [Reload](https://github.com/evanw/esbuild/issues/4238)
+ to refresh your session. You signed out in another tab or window. [Reload](https://github.com/evanw/esbuild/issues/4238)
+ to refresh your session. You switched accounts on another tab or window. [Reload](https://github.com/evanw/esbuild/issues/4238)
+ to refresh your session. Dismiss alert
+
+[evanw](https://github.com/evanw) / **[esbuild](https://github.com/evanw/esbuild)** Public
+
+*   [Notifications](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+     You must be signed in to change notification settings
+*   [Fork 1.4k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+*   [Star 40.1k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+
+Feature Request: `import defer` #4238
+=====================================
+
+New issue
+
+Copy link
+
+New issue
+
+Copy link
+
+Closed
+
+Closed
+
+[Feature Request: `import defer`](https://github.com/evanw/esbuild/issues/4238#top)
+#4238
+
+Copy link
+
+Description
+-----------
+
+[![@robpalme](https://avatars.githubusercontent.com/u/6939381?u=846f7dd054f8efff306982eba21413cd6566653e&v=4&size=48)](https://github.com/robpalme)
+
+[robpalme](https://github.com/robpalme)
+
+opened [on Jul 10, 2025](https://github.com/evanw/esbuild/issues/4238#issue-3219484681)
+
+Issue body actions
+
+Feature Request: TC39 Stage 3 `import defer`
+--------------------------------------------
+
+Proposal repo: [https://github.com/tc39/proposal-defer-import-eval](https://github.com/tc39/proposal-defer-import-eval)
+
+The new import defer syntax is at Stage 3 in the TC39 process and implementations are starting to move forward in [browsers](https://github.com/tc39/proposal-defer-import-eval/issues/59)
+ and tools.
+
+This enables new optimizations in code splitting builds that avoid unnecessary code execution.
+
+Example:
+
+```js
+import defer * as mod from './mod.js';
+
+export function lazyModUser () {
+  mod.foo();
+}
+```
+
+where `mod` is a "Deferred Module" flavor of Module Namespace, whose accessors (including e.g. reading keys) cause evaluation to run.
+
+Desired support
+---------------
+
+At a minimum the syntax should be tolerated. Ideally this should be a fully compliant downlevel as that will benefit users the most. That requires function-wrapping the modules that will be lazily evaluated, i.e. they cannot be inlined (scope-hoisted).
+
+References
+----------
+
+*   [`import defer` proposal](https://github.com/tc39/proposal-defer-import-eval)
+     is Stage 3
+*   [Babel shipped support](https://babeljs.io/blog/2023/09/25/7.23.0)
+     - only works with CommonJS output
+*   [webpack merged experimental support](https://github.com/webpack/webpack/pull/16567)
+     with [some caveats](https://webpack.js.org/configuration/experiments/#experimentsdeferimport)
+    
+*   [TypeScript 5.9 Beta shipped support](https://devblogs.microsoft.com/typescript/announcing-typescript-5-9-beta/#support-for-import-defer)
+     - syntax passthrough, no downleveling
+*   [Rollup issue](https://github.com/rollup/rollup/issues/5932)
+    
+*   [Rolldown issue](https://github.com/rolldown/rolldown/issues/4857)
+    
+*   [RsPack issue](https://github.com/web-infra-dev/rspack/issues/10608)
+    
+*   [Deno issue](https://github.com/denoland/deno/issues/30053)
+    
+
+Reactions are currently unavailable
+
+Activity
+--------
+
+[Sign up for free](https://github.com/signup?return_to=https://github.com/evanw/esbuild/issues/4238)
+ **to join this conversation on GitHub.** Already have an account? [Sign in to comment](https://github.com/login?return_to=https://github.com/evanw/esbuild/issues/4238)
+
+Metadata
+--------
+
+Metadata
+--------
+
+### Assignees
+
+No one assigned
+
+### Labels
+
+No labels
+
+No labels
+
+### Projects
+
+No projects
+
+### Milestone
+
+No milestone
+
+### Relationships
+
+None yet
+
+### Development
+
+No branches or pull requests
+
+Issue actions
+-------------
+
+*   ![](https://github.githubassets.com/assets/github-copilot-app-light-15ad5534265eeacd.svg)Open in GitHub Copilot app
+
+You can’t perform that action at this time.

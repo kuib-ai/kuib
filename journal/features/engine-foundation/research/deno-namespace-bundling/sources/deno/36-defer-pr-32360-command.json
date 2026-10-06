@@ -1,0 +1,1 @@
+{"args":["scrape","https://github.com/denoland/deno/pull/32360","--format","markdown","--json","-o","research_notes/Deno namespace bundling research/deno-sources/36-defer-pr-32360.json"],"status":0,"cliOutput":"Scrape ID: 01a10f84-27a1-7561-9e48-62f92c9ccdcb\n"}

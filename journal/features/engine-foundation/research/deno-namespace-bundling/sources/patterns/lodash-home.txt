@@ -1,0 +1,134 @@
+[Lodash](https://lodash.com/ "Lodash")
+
+Lodash
+======
+
+A modern JavaScript utility library delivering modularity, performance & extras.
+--------------------------------------------------------------------------------
+
+[Documentation](https://lodash.com/docs/)
+ [FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide)
+ [Version Support](https://lodash.com/version-support)
+
+\_.defaults({ 'a': 1 }, { 'a': 3, 'b': 2 });
+
+// → { 'a': 1, 'b': 2 }
+
+\_.partition(\[1, 2, 3, 4\], n \=> n % 2);
+
+// → \[\[1, 3\], \[2, 4\]\]
+
+Download
+--------
+
+*   [Core build](https://raw.githubusercontent.com/lodash/lodash/4.18.1-npm/core.js)
+     ([~4kB gzipped](https://raw.githubusercontent.com/lodash/lodash/4.18.1-npm/core.min.js)
+    )
+*   [Full build](https://raw.githubusercontent.com/lodash/lodash/4.18.1-npm/lodash.js)
+     ([~24kB gzipped](https://raw.githubusercontent.com/lodash/lodash/4.18.1-npm/lodash.min.js)
+    )
+*   [CDN copies](https://www.jsdelivr.com/projects/lodash)
+    
+
+Lodash is released under the [MIT license](https://raw.githubusercontent.com/lodash/lodash/4.18.1-npm/LICENSE)
+ & supports modern environments. Review the [build differences](https://github.com/lodash/lodash/wiki/Build-Differences)
+ & pick one that’s right for you.
+
+Installation
+------------
+
+In a browser:
+
+<script src="lodash.js"\></script>
+
+Using npm:
+
+$ npm i -g npm
+
+$ npm i --save lodash
+
+In Node.js:
+
+// Load the full build.
+
+var \_ = require('lodash');
+
+// Load the core build.
+
+var \_ = require('lodash/core');
+
+// Load the FP build for immutable auto-curried iteratee-first data-last methods.
+
+var fp = require('lodash/fp');
+
+// Load method categories.
+
+var array = require('lodash/array');
+
+var object = require('lodash/fp/object');
+
+// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+
+var at = require('lodash/at');
+
+var curryN = require('lodash/fp/curryN');
+
+**Note:**  
+Install [n\_](https://www.npmjs.com/package/n_)
+ for Lodash use in the Node.js < 6 REPL.
+
+Why Lodash?
+-----------
+
+Lodash makes JavaScript easier by taking the hassle out of working with arrays, numbers, objects, strings, etc. Lodash’s modular methods are great for:
+
+*   Iterating arrays, objects, & strings
+*   Manipulating & testing values
+*   Creating composite functions
+
+Module Formats
+--------------
+
+Lodash is available in a [variety of builds](https://lodash.com/custom-builds)
+ & module formats.
+
+*   [lodash](https://www.npmjs.com/package/lodash)
+     & [per method packages](https://lodash.com/per-method-packages)
+    
+*   [lodash-es](https://www.npmjs.com/package/lodash-es)
+    , [babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash)
+    , & [lodash-webpack-plugin](https://www.npmjs.com/package/lodash-webpack-plugin)
+    
+*   [lodash/fp](https://github.com/lodash/lodash/tree/4.18.1-npm/fp)
+    
+*   [lodash-amd](https://www.npmjs.com/package/lodash-amd)
+    
+
+Complementary Tools
+-------------------
+
+*   [futil-js](https://github.com/smartprocure/futil-js)
+     is a set of functional utilities designed to complement lodash
+
+Further Reading
+---------------
+
+*   [Contributing](https://github.com/lodash/lodash/blob/master/.github/CONTRIBUTING.md)
+    
+*   [Release Notes](https://github.com/lodash/lodash/releases/tag/4.0.0)
+    
+*   [Wiki (Changelog, Roadmap, etc.)](https://github.com/lodash/lodash/wiki)
+    
+
+Support
+-------
+
+Tested in Node.js 4+, Bun 1.0+, and the latest Chromium, Firefox, WebKit, and Edge via Playwright, with a best-effort commitment to support Chrome 74+, Firefox 66+, IE 11, Edge 18, and Safari 11+.
+
+Site made with by [@veksenn](https://twitter.com/veksenn)
+ & [@zthall](https://twitter.com/ZTHall)
+.
+
+Maintained by the [core team](https://github.com/orgs/lodash/people)
+ with help from [our contributors](https://github.com/lodash/lodash/graphs/contributors)
+.

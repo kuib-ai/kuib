@@ -1,0 +1,1769 @@
+[Skip to content](https://github.com/mswjs/msw/discussions/2037#start-of-content)
+                
+
+Navigation Menu
+---------------
+
+[](https://github.com/)
+
+[Sign in](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fmswjs%2Fmsw%2Fdiscussions%2F2037)
+
+Appearance settings
+
+*   Platform
+    
+    *   AI CODE CREATION
+        
+        *   [GitHub CopilotWrite better code with AI](https://github.com/features/copilot)
+            
+        *   [GitHub Copilot appDirect agents from issue to merge](https://github.com/features/ai/github-app)
+            
+        *   [MCP RegistryIntegrate external tools](https://github.com/mcp)
+            
+        
+    *   DEVELOPER WORKFLOWS
+        
+        *   [ActionsAutomate any workflow](https://github.com/features/actions)
+            
+        *   [CodespacesInstant dev environments](https://github.com/features/codespaces)
+            
+        *   [IssuesPlan and track work](https://github.com/features/issues)
+            
+        *   [Code ReviewManage code changes](https://github.com/features/code-review)
+            
+        *   [Code QualityEnforce quality at merge](https://github.com/features/code-quality)
+            
+        
+    *   APPLICATION SECURITY
+        
+        *   [GitHub Advanced SecurityFind and fix vulnerabilities](https://github.com/security/advanced-security)
+            
+        *   [Code securitySecure your code as you build](https://github.com/security/advanced-security/code-security)
+            
+        *   [Secret protectionStop leaks before they start](https://github.com/security/advanced-security/secret-protection)
+            
+        
+    *   EXPLORE
+        
+        *   [Why GitHub](https://github.com/why-github)
+            
+        *   [Documentation](https://docs.github.com/)
+            
+        *   [Blog](https://github.blog/)
+            
+        *   [Changelog](https://github.blog/changelog)
+            
+        *   [Marketplace](https://github.com/marketplace)
+            
+        
+    
+    [View all features](https://github.com/features)
+    
+*   Solutions
+    
+    *   BY COMPANY SIZE
+        
+        *   [Enterprises](https://github.com/enterprise)
+            
+        *   [Small and medium teams](https://github.com/team)
+            
+        *   [Startups](https://github.com/enterprise/startups)
+            
+        *   [Nonprofits](https://github.com/solutions/industry/nonprofits)
+            
+        
+    *   BY USE CASE
+        
+        *   [App Modernization](https://github.com/solutions/use-case/app-modernization)
+            
+        *   [DevSecOps](https://github.com/solutions/use-case/devsecops)
+            
+        *   [DevOps](https://github.com/solutions/use-case/devops)
+            
+        *   [CI/CD](https://github.com/solutions/use-case/ci-cd)
+            
+        *   [View all use cases](https://github.com/solutions/use-case)
+            
+        
+    *   BY INDUSTRY
+        
+        *   [Healthcare](https://github.com/solutions/industry/healthcare)
+            
+        *   [Financial services](https://github.com/solutions/industry/financial-services)
+            
+        *   [Manufacturing](https://github.com/solutions/industry/manufacturing)
+            
+        *   [Government](https://github.com/solutions/industry/government)
+            
+        *   [View all industries](https://github.com/solutions/industry)
+            
+        
+    
+    [View all solutions](https://github.com/solutions)
+    
+*   Resources
+    
+    *   EXPLORE BY TOPIC
+        
+        *   [AI](https://github.com/resources/articles?topic=ai)
+            
+        *   [Software Development](https://github.com/resources/articles?topic=software-development)
+            
+        *   [DevOps](https://github.com/resources/articles?topic=devops)
+            
+        *   [Security](https://github.com/resources/articles?topic=security)
+            
+        *   [View all topics](https://github.com/resources/articles)
+            
+        
+    *   EXPLORE BY TYPE
+        
+        *   [Customer stories](https://github.com/customer-stories)
+            
+        *   [Events & webinars](https://github.com/resources/events)
+            
+        *   [Ebooks & reports](https://github.com/resources/whitepapers)
+            
+        *   [Business insights](https://github.com/solutions/executive-insights)
+            
+        *   [GitHub Skills](https://skills.github.com/)
+            
+        
+    *   SUPPORT & SERVICES
+        
+        *   [Documentation](https://docs.github.com/)
+            
+        *   [Customer support](https://support.github.com/)
+            
+        *   [Community forum](https://github.com/orgs/community/discussions)
+            
+        *   [Trust center](https://github.com/trust-center)
+            
+        *   [Partners](https://github.com/partners)
+            
+        
+    
+    [View all resources](https://github.com/resources)
+    
+*   Open Source
+    
+    *   COMMUNITY
+        
+        *   [GitHub SponsorsFund open source developers](https://github.com/open-source/sponsors)
+            
+        
+    *   PROGRAMS
+        
+        *   [Security Lab](https://securitylab.github.com/)
+            
+        *   [Maintainer Community](https://maintainers.github.com/)
+            
+        *   [GitHub Stars](https://stars.github.com/)
+            
+        *   [Archive Program](https://archiveprogram.github.com/)
+            
+        
+    *   REPOSITORIES
+        
+        *   [Topics](https://github.com/topics)
+            
+        *   [Trending](https://github.com/trending)
+            
+        *   [Collections](https://github.com/collections)
+            
+        
+    
+*   Enterprise
+    
+    *   ENTERPRISE SOLUTIONS
+        
+        *   [Enterprise platformAI-powered developer platform](https://github.com/enterprise)
+            
+        
+    *   AVAILABLE ADD-ONS
+        
+        *   [GitHub Advanced SecurityEnterprise-grade security features](https://github.com/security/advanced-security)
+            
+        *   [Copilot for BusinessEnterprise-grade AI features](https://github.com/features/copilot/copilot-business)
+            
+        *   [Premium SupportEnterprise-grade 24/7 support](https://github.com/enterprise/premium-support)
+            
+        
+    
+*   [Pricing](https://github.com/pricing)
+    
+
+Search/
+
+[Sign in](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fmswjs%2Fmsw%2Fdiscussions%2F2037)
+
+[Sign up](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fvoltron%2Fdiscussions_fragments%2Fdiscussion_layout&source=header-repo&source_repo=mswjs%2Fmsw)
+
+Appearance settings
+
+You signed in with another tab or window. [Reload](https://github.com/mswjs/msw/discussions/2037)
+ to refresh your session. You signed out in another tab or window. [Reload](https://github.com/mswjs/msw/discussions/2037)
+ to refresh your session. You switched accounts on another tab or window. [Reload](https://github.com/mswjs/msw/discussions/2037)
+ to refresh your session. Dismiss alert
+
+[mswjs](https://github.com/mswjs) / **[msw](https://github.com/mswjs/msw)** Public
+
+*   Sponsor
+    
+    Sponsor mswjs/msw
+    =================
+    
+    ##### GitHub Sponsors
+    
+    [Learn more about Sponsors](https://github.com/sponsors)
+    
+    [![@mswjs](https://avatars.githubusercontent.com/u/64637271?s=80&v=4)](https://github.com/mswjs)
+    
+    [mswjs](https://github.com/mswjs)
+    
+    [mswjs](https://github.com/mswjs)
+    
+    [Sponsor](https://github.com/sponsors/mswjs)
+    
+    ##### External links
+    
+    ![open_collective](https://github.githubassets.com/assets/open_collective-0a706523753d.svg)
+    
+    [opencollective.com/**mswjs**](https://opencollective.com/mswjs)
+    
+    [Learn more about funding links in repositories](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository)
+    .
+    
+    [Report abuse](https://github.com/contact/report-abuse?report=mswjs%2Fmsw+%28Repository+Funding+Links%29)
+    
+*   [Notifications](https://github.com/login?return_to=%2Fmswjs%2Fmsw)
+     You must be signed in to change notification settings
+*   [Fork 629](https://github.com/login?return_to=%2Fmswjs%2Fmsw)
+    
+*   [Star 18.3k](https://github.com/login?return_to=%2Fmswjs%2Fmsw)
+    
+
+*   [Code](https://github.com/mswjs/msw)
+    
+*   [Issues 12](https://github.com/mswjs/msw/issues)
+    
+*   [Pull requests 1](https://github.com/mswjs/msw/pulls)
+    
+*   [Discussions](https://github.com/mswjs/msw/discussions)
+    
+*   [Actions](https://github.com/mswjs/msw/actions)
+    
+*   [Security and quality 0](https://github.com/mswjs/msw/security)
+    
+*   [Insights](https://github.com/mswjs/msw/pulse)
+    
+
+Additional navigation options
+
+*   [Code](https://github.com/mswjs/msw)
+    
+*   [Issues](https://github.com/mswjs/msw/issues)
+    
+*   [Pull requests](https://github.com/mswjs/msw/pulls)
+    
+*   [Discussions](https://github.com/mswjs/msw/discussions)
+    
+*   [Actions](https://github.com/mswjs/msw/actions)
+    
+*   [Security and quality](https://github.com/mswjs/msw/security)
+    
+*   [Insights](https://github.com/mswjs/msw/pulse)
+    
+
+Avoid barrel file exports #2037
+===============================
+
+[thepassle](https://github.com/thepassle)
+ started this conversation in [Ideas](https://github.com/mswjs/msw/discussions/categories/ideas)
+
+[Avoid barrel file exports](https://github.com/mswjs/msw/discussions/2037#top)
+ #2037
+
+ [![@thepassle](https://avatars.githubusercontent.com/u/17054057?s=40&v=4) thepassle](https://github.com/thepassle)
+
+Jan 21, 2024 · 44 comments
+
+[Return to top](https://github.com/mswjs/msw/discussions/2037#top)
+
+Discussion options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 21, 2024](https://github.com/mswjs/msw/discussions/2037#discussion-6208868)
+
+Collaborator
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Scope
+
+Improves an existing behavior
+
+### Compatibility
+
+*   [ ]  This is a breaking change
+
+### Feature description
+
+I've mentioned this on discord, but figured I'd create some issues to have this public as well and to better keep track of it. Currently MSW uses barrel files, Marvin Hagemeister wrote a good blog on why they are problematic for dev dependencies: [https://marvinh.dev/blog/speeding-up-javascript-ecosystem-part-7/](https://marvinh.dev/blog/speeding-up-javascript-ecosystem-part-7/)
+
+It would be good to create a better separation of entrypoints rather than exposing a single barrel file. We should also look into this for any dependent packages under the `@mswjs/*` namespace.
+
+Removing barrel files and a better separation of entrypoints (and avoiding internal modules _importing_ from barrel files) can lead to some pretty significant performance wins
+
+1 You must be logged in to vote
+
+👍 9
+
+All reactions
+
+*   👍 9
+
+Replies: 44 comments
+--------------------
+
+*   [Oldest](https://github.com/mswjs/msw/discussions/2037?sort=old)
+    
+*   [Newest](https://github.com/mswjs/msw/discussions/2037?sort=new)
+    
+*   [Top](https://github.com/mswjs/msw/discussions/2037?sort=top)
+    
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 21, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439629)
+
+Maintainer
+
+Thanks for proposing this, [@thepassle](https://github.com/thepassle)
+! Totally support this, let's improve the way we import (and export, if talking about our ecosystem packages) things.
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 21, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439630)
+
+Collaborator Author
+
+Here's the PR that removes imports to a barrel file by an internally used module [#1987](https://github.com/mswjs/msw/pull/1987)
+
+Leads to a pretty nice change already:  
+Before:  
+[![Screenshot 2024-01-21 at 10 10 12](https://private-user-images.githubusercontent.com/17054057/298373259-4716c67b-7ee2-4db6-9b39-ef0541ed8152.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTEyNjIwMjMsIm5iZiI6MTc5MTI2MTcyMywicGF0aCI6Ii8xNzA1NDA1Ny8yOTgzNzMyNTktNDcxNmM2N2ItN2VlMi00ZGI2LTliMzktZWYwNTQxZWQ4MTUyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjEwMDYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYxMDA2VDA0NDIwM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTVmYjM5NDg5NTU1MWIxNTViY2NkNGU3MmM3NTRhMmVhZDNkODEwZDhhYTljMzZkN2RhMmZiYThkMDM1ZmE4YzgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRnBuZyJ9.OUyl0EmwE93y2y8jJgqWOB2ehWO4CCwLOv2yvg7Dmlc)](https://private-user-images.githubusercontent.com/17054057/298373259-4716c67b-7ee2-4db6-9b39-ef0541ed8152.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTEyNjIwMjMsIm5iZiI6MTc5MTI2MTcyMywicGF0aCI6Ii8xNzA1NDA1Ny8yOTgzNzMyNTktNDcxNmM2N2ItN2VlMi00ZGI2LTliMzktZWYwNTQxZWQ4MTUyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjEwMDYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYxMDA2VDA0NDIwM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTVmYjM5NDg5NTU1MWIxNTViY2NkNGU3MmM3NTRhMmVhZDNkODEwZDhhYTljMzZkN2RhMmZiYThkMDM1ZmE4YzgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRnBuZyJ9.OUyl0EmwE93y2y8jJgqWOB2ehWO4CCwLOv2yvg7Dmlc)
+  
+After:  
+[![Screenshot 2024-01-21 at 09 53 55](https://private-user-images.githubusercontent.com/17054057/298373262-67e91a68-a7b7-4dad-ab5a-9c939b8985b1.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTEyNjIwMjMsIm5iZiI6MTc5MTI2MTcyMywicGF0aCI6Ii8xNzA1NDA1Ny8yOTgzNzMyNjItNjdlOTFhNjgtYTdiNy00ZGFkLWFiNWEtOWM5MzliODk4NWIxLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjEwMDYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYxMDA2VDA0NDIwM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWM4NmQxZDcyYWU0ZjNlNzE0MDlmZjRjZmUxYTMzODQ3ZTNkZDVlYjZmZGNiMmY0YTM1MWI5MmI2YWM1Yjk4MjQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRnBuZyJ9.DbV-B_sT0R7zoqU5w3CvP16WrpvrmsQ2uvzrNCh_lrw)](https://private-user-images.githubusercontent.com/17054057/298373262-67e91a68-a7b7-4dad-ab5a-9c939b8985b1.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTEyNjIwMjMsIm5iZiI6MTc5MTI2MTcyMywicGF0aCI6Ii8xNzA1NDA1Ny8yOTgzNzMyNjItNjdlOTFhNjgtYTdiNy00ZGFkLWFiNWEtOWM5MzliODk4NWIxLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjEwMDYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYxMDA2VDA0NDIwM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWM4NmQxZDcyYWU0ZjNlNzE0MDlmZjRjZmUxYTMzODQ3ZTNkZDVlYjZmZGNiMmY0YTM1MWI5MmI2YWM1Yjk4MjQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRnBuZyJ9.DbV-B_sT0R7zoqU5w3CvP16WrpvrmsQ2uvzrNCh_lrw)
+
+1 You must be logged in to vote
+
+🎉 6 🚀 4
+
+All reactions
+
+*   🎉 6
+*   🚀 4
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 21, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439631)
+
+Maintainer
+
+Fixed by [#1987](https://github.com/mswjs/msw/pull/1987)
+. 👏
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 21, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439632)
+
+Collaborator Author
+
+Sorry, that PR just addresses one of the problems with barrel files; internal modules importing from a barrel file.
+
+The issue itself still exists: the barrel file. Importing `http` from `"msw"` leads you to importing _everything_ in MSW, most of which largely goes unused, so we should still consider splitting up imports into separate(/grouped) entrypoints
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 21, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439633)
+
+Maintainer
+
+[@thepassle](https://github.com/thepassle)
+, do you have the internal build entrypoints in mind (i.e. `tsup` config) or actually changing the way MSW exports things? Like `msw/http`? I have some concerns against the latter.
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 21, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439634)
+
+Collaborator Author
+
+The latter; the way MSW exposes exports to users. E.g.: currently if you import `http` from `"msw"`, you import _everything_ in MSW. I recommend giving this a good read for the reasoning why: [https://marvinh.dev/blog/speeding-up-javascript-ecosystem-part-7/](https://marvinh.dev/blog/speeding-up-javascript-ecosystem-part-7/)
+
+_Removing_ the barrel file entirely would be a breaking change, which I can understand is undesirable, especially having just done a big breaking change (although changes to imports often can easily be codemodded for users). However, what we can do is already add separate/grouped/more granular entrypoints so people can import only what they use and need, and keep the barrel file in place for compatibility and avoiding a breaking change. And then on a next major version we could decide if we want to drop the barrel file entirely (which arguably, I think would be better for everyone because it would improve perf all across the board, not just in the browser), but thats something i'll leave up to you :)
+
+1 You must be logged in to vote
+
+👍 1
+
+All reactions
+
+*   👍 1
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/4671486?s=64&v=4)\
+\
+scr2em](https://github.com/scr2em)
+[Jan 23, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439635)
+
+[@thepassle](https://github.com/thepassle)
+ what tool did you use to visualize the imports ?
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 23, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439636)
+
+Collaborator Author
+
+> [@thepassle](https://github.com/thepassle)
+>  what tool did you use to visualize the imports ?
+
+Madge
+
+1 You must be logged in to vote
+
+👍 2 👀 1
+
+All reactions
+
+*   👍 2
+*   👀 1
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 23, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439637)
+
+Maintainer
+
+[@thepassle](https://github.com/thepassle)
+, I will give that article a proper read. For now, sharing my initial thoughts.
+
+While imports like `msw/http` and `msw/graphql` solve this problem by providing more targeted entrpoints, this isn't a nice developer experience.
+
+```js
+import { http } from 'msw/http'
+import { graphql } from 'msw/graphql'
+import { setupWorker } from 'msw/worker'
+```
+
+This is a lot of typing to achieve a simple thing. I was quite against `msw/browser` and `msw/node` as well but the benefit they provide runtime- and type-wise persuaded me to adopt that approach.
+
+The benefit of `msw/http` is very slim, imo. I expect your compiler to tree-shake everything that ends up imported from `msw` that you don't use. I know you are working in a compiler-free environment so perhaps that's the reason why that's not happening (not trying to suggest a compiler to you, just asking)? As much as I respect that choice, compilers have become the norm and they are here to stay. All the frameworks I know rely on a compiler (Astro, Remix, Vue, Angular, Next). People use MSW in those frameworks so it's reasonable to expect the compiler to help with the dead code.
+
+My second point is that MSW is a devtool. While nobody wants 1MB of JavaScript being pulled by a random third-party tool, you have to consider the implications of it. 1MB on your local machine that gets fetched almost instantly and 1MB in production are two quite different things. I see little risk of large file sizes for developer tools. This is one thing we can openly benefit from, unlike third parties that also ship to production and have to constantly chase smaller build footprints. I most certainly wish to burden the end consumer as little as possible but if it's at a cost of developer experience, I'd say it's not worth it.
+
+2 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 23, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439638)
+
+Maintainer
+
+Fundamentally, this has the same problem as literally any other tooling:
+
+```js
+import { a } from 'react-query'
+```
+
+Most packages are structured as a barrel file. So I pull everything now from `react-query`. Happy to be proven wrong here.
+
+2 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/8616962?s=64&v=4)\
+\
+mattcosta7](https://github.com/mattcosta7)
+[Jan 23, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439639)
+
+Collaborator
+
+Depending on build tool/environment, `export {} from` might all get lumped together and not fully shaken, especially if it's possible there are sideffects. I believe any cjs build will do this because cjs can have dynamic getters which require static other code.
+
+Browser ESM is file-by-file imports of every file imported. They can't parse something they haven't imported, so treeshaking can't work in a browser environment (like a compiler-less solution)
+
+Generally these can add up, but we can probably get most value by _limiting_ barrel files.
+
+Internally, only keep 1, `exports.ts` that exports a public api, and otherwise avoid using them internally (also never allow internal imports from that/those file(s)), so the number of hops is minimal? that's probably a good 80/20 solution for now
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/8616962?s=64&v=4)\
+\
+mattcosta7](https://github.com/mattcosta7)
+[Jan 23, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439640)
+
+Collaborator
+
+> Fundamentally, this has the same problem as literally any other tooling:
+> 
+> import { a } from 'react-query'  
+> Most packages are structured as a barrel file. So I pull everything now from `react-query`. Happy to be proven wrong here.
+
+While this is _current state_ of the world, package exports are quite young, and I would hope more packages move away from them over time (although this is probably an idealistic assumption).
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 23, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439641)
+
+Collaborator Author
+
+> this isn't a nice developer experience.
+
+Hm, I feel this is subjective. I personally wouldn't mind these imports, especially if it means it means my development/ci will be faster.
+
+> I expect your compiler to tree-shake everything that ends up imported from msw that you don't use. I know you are working in a compiler-free environment so perhaps that's the reason why that's not happening (not trying to suggest a compiler to you, just asking)?
+
+I don't use a compiler, I develop in the browser
+
+> As much as I respect that choice, compilers have become the norm and they are here to stay. All the frameworks I know rely on a compiler (Astro, Remix, Vue, Angular, Next). People use MSW in those frameworks so it's reasonable to expect the compiler to help with the dead code.
+
+People can use compilers/transpilers to transpile their source code, but do they do this during local development and in unit tests? And do they also compile their unit test code itself, where they import/setup MSW? Because if not, they're loading a lot of unused, un-treeshaken modules. I know many test runners (one example of where MSW is typically used), like jest, karma, WTR, and more, where test code is _not_ bundled, and not treeshaken.
+
+> compilers have become the norm and they are here to stay
+
+I'm not arguing this for production code, but they're _much_ less common place in development tooling, like test runners.
+
+> I see little risk of large file sizes for developer tools
+
+I guess we see things differently then, for me anything that slows local development down and can be avoided, should be avoided, especially if they are quick-wins.
+
+> Most packages are structured as a barrel file. So I pull everything now from react-query. Happy to be proven wrong here.
+
+As far as I'm aware `react-query` is a library meant to be used in production code; I think the assumption to use a bundler there is more reasonable. For local development, there are many cases where code doesn't get bundled.
+
+Additionally, "other projects have barrel files too" is not really a good argument; it just shows that barrel files are a larger problem in the ecosystem.
+
+> I'd say it's not worth it.
+
+Thats fair enough, but I hope you can reconsider :) It'd be unfortunate to have to fork MSW again, I'd much more prefer to use the main package and contribute to improve things here, but the amount of modules we're currently loading in the browser is way too much, and it could be a lot less.
+
+Edit: nuance is sometimes hard to express in text, but just want to clarify that this discussion is all in good faith :)
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 25, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439642)
+
+Maintainer
+
+> I guess we see things differently then, for me anything that slows local development down and can be avoided, should be avoided, especially if they are quick-wins.
+
+I thought you were proposing the rework of the public API—the way people import `http` and friends. That's not a quick win though. That's a huge breaking change that may take years to properly roll out.
+
+> As far as I'm aware react-query is a library meant to be used in production code; I think the assumption to use a bundler there is more reasonable.
+
+I fail to see the point here. You can have an integration test of a code that relies on `react-query`. Like you say, test runners don't usually bundle the code, so you will still end up importing everything from that package, which was precisely my point.
+
+> Additionally, "other projects have barrel files too" is not really a good argument
+
+I don't mean to use other projects' behavior as an excuse to do or not to do something. I was simply bringing it up to illustrate that we should see and learn how others handle things. Some libraries may be times larger than MSW (pre-build) and if there are no issues reported about them slowing things down, then perhaps we are talking about a premature optimization here.
+
+> Thats fair enough, but I hope you can reconsider
+
+We aren't at the stage of saying yes or no. We are at the stage of discussion and search for a progressive solution to this. Swapping the root-level exports is not a progressive solution. Neither is having _both_ approaches allowed, which will only confuse the developer and their TypeScript:
+
+```ts
+import { http } from 'msw'
+import { http } from 'msw/http'
+```
+
+You have to also consider how MSW is built to allow proper type references across different entrypoints. It's achieved by those entrypoints referencing the core build. I have a concern that with the `msw/http` suggestion, its types (and more) will be duplicated in that export (the whole point of not loading everything from a barrel file), which would make things incompatible during type-checking and runtime as well (think of `instanceof` situations).
+
+This is not an easy problem to solve. Perhaps that's partially why the ecosystem suffers from it so greatly. While addressing this on the package level is likely the "perfect" solution, I encourage to put our effort into exploring the "progressive" solution, which we can adopt since the next release and already bring value.
+
+> I guess we see things differently then, for me anything that slows local development down and can be avoided, should be avoided, especially if they are quick-wins.
+
+Circling back to this, do you have any metrics that proves MSW slows you down by loading a bunch of imports from a barrel file? I'd much like to see numbers, and load time numbers, not MBs downloaded (I mentioned this before, downloading 1MB on your local machine may be extremely fast). Without concrete proof of performance degradation, any conversation about performance improvements becomes a premature conversation.
+
+> Edit: nuance is sometimes hard to express in text, but just want to clarify that this discussion is all in good faith :)
+
+I concur, respect, and appreciate that! The same from my side.
+
+2 You must be logged in to vote
+
+👍 2
+
+All reactions
+
+*   👍 2
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/58563?s=64&v=4)\
+\
+jacobrask](https://github.com/jacobrask)
+[Jan 25, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439643)
+
+Updating imports is something that a codemod should be able to do very reliably fwiw.
+
+I think there will be people who dislike this and that there’s a risk for a backlash, but I’d personally agree with this change.
+
+*   I fold all imports by default and use my editor/TypeScript's auto import feature.
+*   Splitting imports on multiple lines make git diffs easier to manage.
+*   Barrel files are bad for bundler performance as well.
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+14 hidden items Load more…
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439658)
+
+Maintainer
+
+Has anyone considered importing things from `msw/lib` directly? As [@thepassle](https://github.com/thepassle)
+ has pointed out, the core part isn't bundled, so you can do this:
+
+```js
+import { http } from 'msw/lib/core/http'
+import { HttpResponse } from 'msw/lib/core/HttpResponse'
+```
+
+You can follow this pattern for any public export we have. This looks and works quite similar to what is being proposed with `msw/http`. Does this solve the issue?
+
+I agree with [@mattcosta7](https://github.com/mattcosta7)
+ that this way the emitted folder structure becomes a part of the public API. However, I'm not going to recommend these imports to anyone by default. In fact, I'd treat relying on them the same as relying on internals. We cannot guarantee their structure so they may break at any point.
+
+I understand this isn't nice. But if we are looking at a small percentage of issue occurrence (always happy to be proven wrong, share your use cases!), then the price justifies the gain.
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439659)
+
+Collaborator Author
+
+> so you can do this
+
+You can't do this, because of the package exports
+
+1 You must be logged in to vote
+
+👍 1
+
+All reactions
+
+*   👍 1
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/8616962?s=64&v=4)\
+\
+mattcosta7](https://github.com/mattcosta7)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439660)
+
+Collaborator
+
+> > so you can do this
+> 
+> You can't do this, because of the package exports
+
+Yeah, we would need to add subpath exports like "./lib/_": "./lib/_..."
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439661)
+
+Maintainer
+
+I have a feeling this is slowly becoming unproductive. I suggest we approach the issue objectively, then define _all_ possible solutions there are, weight their pros and cons, and, eventually, arrive at the right one.
+
+I will try my best to do just that.
+
+The problem
+-----------
+
+1.  Barrel files pull in a bunch of unused code.
+2.  ~The problem is relevant only in a compiler-less setup~. (a [good point](https://github.com/mswjs/msw/issues/1984#issuecomment-1906743089)
+     from [@thepassle](https://github.com/thepassle)
+     that it's not specific to the compiler setup)
+
+Proposed solutions
+------------------
+
+### Add additional entrypoints
+
+```js
+import { http } from 'msw/http'
+import { HttpResponse } from 'msw/HttpResponse'
+```
+
+**Pros:**
+
+*   Import only what you need.
+*   Consequentially, improved performance.
+
+**Cons:**
+
+*   Confuses the IDE since now two things are available at two different places.
+*   Even the minimal usage of the library becomes verbose.
+*   Puts mental overhead "what should I import from where" and "what's the difference between two same things imported from different exports" (familiarity issue).
+
+**Compromise:**
+
+*   We can implement this on the export conditions level only. This way the source code remains in tact but provides you pointers to standalone modules.
+
+```json
+{
+  "exports": {
+    "http": "./lib/core/http.mjs"
+  }
+}
+```
+
+> If this was the proposal all along, then I have missed the point entirely. I've not read "export condition" once in this discussion.
+
+This also has its disadvantages. Not all tooling understands `exports` conditions. But since we are jumping ahead into the bright future of JavaScript, perhaps we can disregard this disadvantage.
+
+Another disadvantage is the mental overhead of deciding and maintaining those root-level exports. Should all root-level APIs from `msw` be represented in standalone exports? Does it truly solve the problem if `http` imports from a barrel file 20 imports-deep? If not, then how are we defining the area of the problem and how do we intend to keep it at bay? (this is what I struggle to understand the most).
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439662)
+
+Maintainer
+
+I want to make it absolutely clear that I have no intention of making rocket science out of this. I'm asking simple questions: how do we detect problematic imports? How do we prevent them as the library develops? Give me an eslint rule and a GitHub action and you have me on board.
+
+That which is not automated will never be followed. This has proven true in practice countless of times. I hear a solution but I don't hear how we write a "test" so the issue doesn't happen again. Naturally, such solutions are met with a bit of resistance as they are incomplete by nature.
+
+I've also voiced this before, we are discussing both the "perfect" solution as well as the "progressive" solution (if it leads us to the perfect solution that's great). This separation and transition is important because I often miss the context in which something is proposed. Please try to explicitly mention that.
+
+Not to mention that often the "right" solution and the "perfect" solution can be different things entirely. You can only discover this after a due discussion.
+
+2 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439663)
+
+Collaborator Author
+
+I would also add to the pros: "Increased performance"
+
+> Even the minimal usage of the library becomes verbose.
+
+How is:
+
+```js
+import { http } from 'msw';
+import { setupWorker } from 'msw/browser';
+```
+
+different than:
+
+```js
+import { http } from 'msw/http';
+import { setupWorker } from 'msw/browser';
+```
+
+?
+
+I understand that if your project also happens to use `graphql` you now have 3 imports instead of 2, but I don't feel thats a lot more verbose.
+
+> We can implement this on the export conditions level only. This way the source code remains in tact but provides you pointers to standalone modules.  
+> {  
+> "exports": {  
+> "http": "./lib/core/http.mjs"  
+> }  
+> }
+
+Im not sure what you mean with this, this is not how export conditions work. Here's an example of export conditions:
+
+```diff
+  "exports": {
++    "import": "./index-module.js",
++    "require": "./index-require.cjs"
+  },
+```
+
+The `import` and `require` are conditions. Can you clarify what you mean with "we can implement this on the export conditions level only"?
+
+> Not all tooling understands exports conditions
+
+I feel like we can safely disregard this, because the library has been using package exports for a long time already now
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439664)
+
+Collaborator Author
+
+To add to the previous post:
+
+> If this was the proposal all along, then I have missed the point entirely. I've not read "export condition" once in this discussion.
+
+This was indeed what I'm suggesting. The _only_ entrypoints to your package are what you define in your package exports. Given that (currently) MSW defines the following keys in the package exports:  
+`.`  
+`node`  
+`native`  
+`browser`  
+`mockServiceWorker.js`  
+`package.json`
+
+means that you can _only_ import those things, the _only_ valid module specifiers are:
+
+```js
+'msw';
+'msw/node';
+'msw/native';
+'msw/browser';
+'msw/mockServiceWorker.js';
+'msw/package.json';
+```
+
+Everything else, for example: `'msw/lib/core/http.js'` will fail, because they are not allowed by the package exports as defined in the package.json. I am indeed suggesting that we open these imports up to be imported, so that we can import:
+
+```js
+import { http } from 'msw/http';
+// or
+import { http } from 'msw/lib/core/http.js';
+// or whatever else we decide is the best way to make these publicly available
+```
+
+As an aside and just to clarify, I've previously written about how package exports work [here](https://dev.to/thepassle/the-javascript-ecosystem-for-the-dazed-and-confused-36il#:~:text=in%20the%20browser%20%F0%9F%99%82-,Package%20exports,-Another%20good%20thing)
+ and about export conditions [here](https://dev.to/thepassle/the-javascript-ecosystem-for-the-dazed-and-confused-36il#:~:text=smaller%20and%20simpler.-,Export%20conditions,-You%20can%20also)
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439665)
+
+Maintainer
+
+> How is: \[code\] different than: \[code\] ?
+
+First, `msw/browser` and `msw/node` are intention-based separations. Where do I want to use MSW? In the browser. So `msw/browser`. They are also runtime guards because one export depends on things that the other cannot (`msw/node` imports `node:` modules that will _fail_ in the browser). This makes is a required separation, not really an optimization thing. The fact that we get some optimization from this is a nice bonus but it was never the priority behind this decision.
+
+> Im not sure what you mean with this, this is not how export conditions work
+
+I simplified the code for brevity. This is the actual export condition:
+
+```json
+{
+  "exports": {
+    "./http": {
+      "types": "./lib/core/http.d.ts",
+      "default": "./lib/core/http.mjs",
+      "require": "./lib/core/http.js"
+    }
+  }
+}
+```
+
+Is this the suggested solution? Add these for exports like `http`, `HttpResponse`, etc? Should we also add these for all root-level exports, like `getResponse`? Is there somewhere we can draw the line? If so, by which criteria?
+
+> I feel like we can safely disregard this, because the library has been using package exports for a long time already now
+
+I wish this was true but we still ship with CJS support and even with modern tooling I've seen cases where simple export conditions were not enough. Tooling still needed root-level placeholder folders like `./node/package.json`.
+
+2 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439666)
+
+Maintainer
+
+> This was indeed what I'm suggesting
+
+See, I misunderstood you entirely. Apologies on my part. I'm happy we are on the same page now, and the discussion helped us arrive there.
+
+I think we can extend the `exports` we have. I still have some concerns about this (posted in my previous comment), as well as the educational aspect of this (when to recommend this?)
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/14984911?s=64&v=4)\
+\
+kettanaito](https://github.com/kettanaito)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439667)
+
+Maintainer
+
+A few more questions:
+
+1.  Isn't `msw/node` also a barrel file then? Do you propose we do `msw/node/foo` at some point too?
+2.  Do you have some materials on browser imports and why tree shaking is not possible? Because the browser doesn't do static code analyzis, just fetches the entire import tree? I feel if this is the future of web, it's a bit misaligned with reality. We are migrating away from the bundler to the browser but we lose a bunch of useful functionality along the way so then library authors would have to restructure their code... See, I'm likely not grasping the whole context here. I'd be thankful if you helped me improve at that.
+3.  Could you please open a pull request with minimal `exports` changes and share some of the performance results? It'd be nice to know what numbers we are talking about (that we aren't optimizing for `49ms`). That will help us with the cost/gain conversation later on.
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439668)
+
+Collaborator Author
+
+> when to recommend this
+
+Always 😜 (jk jk, or well, only partly joking, but I'll forfeit this point)
+
+> Is this the suggested solution? Add these for exports like http, HttpResponse, etc? Should we also add these for all root-level exports, like getResponse? Is there somewhere we can draw the line? If so, by which criteria?
+
+Pretty much, yes, but there are several ways we can go about this, and we can discuss what would be the best way to go.
+
+*   We can create entrypoints for grouped categories of things
+*   We can use subpath exports or wildcard exports as pointed out above
+
+**As a _starting point_ of discussion to see how we could split things up (note that this is just a suggestion and we can do lots of bikeshedding on how to actually group things):**
+
+Looking at the barrel file, we export the following:
+
+```js
+export {
+  GraphQLHandler,
+  HttpHandler,
+  HttpMethods,
+  RequestHandler,
+  SetupApi,
+  bypass,
+  cleanUrl,
+  getResponse,
+  graphql,
+  http,
+  matchRequestUrl,
+  passthrough
+};
+```
+
+You could consider creating a `handlers.js` entrypoint which would export all the handler stuff, like:
+
+```js
+export { GraphQLHandler, HttpHandler, RequestHandler, http, graphql };
+```
+
+but this is problematic, because graphql pulls in a lot of modules, this is why I'd consider splitting those up into a `msw/http` and `msw/graphql` entrypoint, e.g.:  
+`https.js`
+
+```js
+export { HttpHandler, http };
+```
+
+`graphql.js`
+
+```js
+export { GraphQLHandler, graphql };
+```
+
+`bypass` and `passthrough` also seem like similar functionalities that could be grouped together, im not sure what this entrypoint should be named, perhaps something like `builtins` or something like that?  
+`builtins.js`
+
+```js
+export {
+  bypass, 
+  passthrough 
+};
+```
+
+Then we have:  
+`utils.js`
+
+```js
+export {  
+  cleanUrl,
+  getResponse,
+  matchRequestUrl
+};
+```
+
+which seem like `utils` that could be grouped together, and that leaves us with:  
+`TODO.js`
+
+```js
+export {  
+  HttpMethods,
+  RequestHandler,
+  SetupApi
+};
+```
+
+I'm not sure how relevant those last ones are together, maybe those should be split up differently (or maybe other things should be split up differently), but that would lead to the following added exports:
+
+```json
+{
+  "exports": {
+    "./http": "./http.js",
+    "./graphql": "./graphql.js",
+    "./builtins": "./builtins.js",
+    "./utils": "./utils.js",
+    "./TODO": "./TODO.js"
+  }
+}
+```
+
+> note that I've left the export _conditions_ out for brevity, this is just to show which export keys would be added
+
+**Alternatively**, we could just expose a subpath, like [@mattcosta7](https://github.com/mattcosta7)
+ suggested above, or use a wildcard, like `./lib/core/*`
+
+**Alternatively**, maybe we dont have to create entrypoints for **all** of those things, maybe entrypoints for `http` and `graphql` are enough to be useful
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 26, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439669)
+
+Collaborator Author
+
+> Isn't msw/node also a barrel file then? Do you propose we do msw/node/foo at some point too?
+
+The difference here is that `msw/node` only exports 2 related things, rather than it being sort of a gathering point of a bunch of (potentially unrelated) exports.
+
+> Do you have some materials on browser imports and why tree shaking is not possible? Because the browser doesn't do static code analyzis, just fetches the entire import tree? I feel if this is the future of web, it's a bit misaligned with reality. We are migrating away from the bundler to the browser but we lose a bunch of useful functionality along the way so then library authors would have to restructure their code... See, I'm likely not grasping the whole context here. I'd be thankful if you helped me improve at that.
+
+To clarify, this is not a browser only-issue, this is how things work in Node as well. If a module imports another module, which imports 5 other modules, which import 10 other modules, you're loading all those modules. This is not a web problem exclusively.
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/17054057?s=64&v=4)\
+\
+thepassle](https://github.com/thepassle)
+[Jan 30, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439670)
+
+Collaborator Author
+
+> I think we can extend the exports we have
+
+I've created a PR here: [#2004](https://github.com/mswjs/msw/pull/2004)
+
+> Changes like this cannot really happen in a sustainable fashion unless there's tooling around them
+
+I've created two packages for this, in case anybody else is reading along/is interested:
+
+*   [eslint-plugin-barrel-files](https://github.com/thepassle/eslint-plugin-barrel-files)
+     eslint plugin to disallow barrel files and other related problems
+*   [barrel-begone](https://github.com/thepassle/barrel-begone)
+     Analyzes your packages entrypoints and warns about barrel files, module graph size, and other barrel-file related problems
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/182021?s=64&v=4)\
+\
+pleunv](https://github.com/pleunv)
+[Feb 1, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439671)
+
+Lowkey following this discussion because it's super interesting, and because I can tell from experience that barrel files and huge import graphs have a massively detrimental effect on the performance of tools such as Jest where tree shaking and DCE is non-existent.
+
+I don't immediately have anything meaningful to add to the barrel discussion, but I am in the middle of migrating a huge test suite to `msw` and the fact that the `graphql` import pulls in what I expect to be almost the whole `graphql-js` lib in every test suite is a little worrisome. [https://github.com/urql-graphql/urql](https://github.com/urql-graphql/urql)
+ for example managed to shed most of its `graphql-js` weight by [switching](https://github.com/urql-graphql/urql/blob/main/packages/core/src/gql.ts)
+ to [https://github.com/0no-co/graphql.web](https://github.com/0no-co/graphql.web)
+, I'm wondering if this is something you'd be willing to consider as well? Happy to help wherever.
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+Comment options
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+Quote reply
+
+edited
+
+### Uh oh!
+
+There was an error while loading. [Please reload this page](https://github.com/mswjs/msw/discussions/2037)
+.
+
+### 
+
+[![](https://avatars.githubusercontent.com/u/182021?s=64&v=4)\
+\
+pleunv](https://github.com/pleunv)
+[Feb 1, 2024](https://github.com/mswjs/msw/discussions/2037#discussioncomment-8439672)
+
+I quickly tested this out by linking `graphql` to `npm:graphql-web-lite@^16.6.0-3` as described [here](https://github.com/0no-co/graphql-web-lite#installation)
+. This is only a partial measure as I suspect you still include the barrel cost since the package structure remains the same as compared to directly using [https://github.com/0no-co/graphql.web](https://github.com/0no-co/graphql.web)
+, but you already shed a lot of overhead of the `graphql-js` package.
+
+Taking a test file containing 30 unit tests, using `msw` and `apollo`:
+
+**Using `graphql`**
+
+```shell
+hyperfine --warmup 3 'pnpm run test <snip>.spec.tsx'
+Benchmark 1: pnpm run test <snip>.spec.tsx
+  Time (mean ± σ):      9.123 s ±  0.101 s    [User: 9.508 s, System: 1.002 s]
+  Range (min … max):    9.008 s …  9.261 s    10 runs
+```
+
+**Using `graphql` aliased to `npm:graphql-web-lite@^16.6.0-3`**
+
+```shell
+hyperfine --warmup 3 'pnpm run test <snip>.spec.tsx'
+Benchmark 1: pnpm run test <snip>.spec.tsx
+  Time (mean ± σ):      8.703 s ±  0.065 s    [User: 9.242 s, System: 0.945 s]
+  Range (min … max):    8.645 s …  8.840 s    10 runs
+```
+
+Which in itself is already a very significant improvement. I suspect that this is also a cost you'd pay for every test file rather than every worker, but I'd have to investigate further.
+
+* * *
+
+**edit:** Turns out I'm wrong and you pay the cost only once per worker. This is 191 unit tests across 17 files running in band (1 worker):
+
+**Using `graphql`**
+
+```shell
+hyperfine --warmup 3 'pnpm run test <snip>'
+Benchmark 1: pnpm run test <snip>
+  Time (mean ± σ):     26.707 s ±  0.244 s    [User: 29.486 s, System: 2.705 s]
+  Range (min … max):   26.350 s … 27.173 s    10 runs
+```
+
+**Using `graphql` aliased to `npm:graphql-web-lite@^16.6.0-3`**
+
+```shell
+hyperfine --warmup 3 'pnpm run test <snip>'
+Benchmark 1: pnpm run test <snip>
+  Time (mean ± σ):     26.314 s ±  0.359 s    [User: 29.278 s, System: 2.569 s]
+  Range (min … max):   25.937 s … 27.134 s    10 runs
+```
+
+One package leading to a +400ms initialization cost is rather 🤯, though.
+
+1 You must be logged in to vote
+
+All reactions
+
+0 replies
+
+ 
+
+[Sign up for free](https://github.com/join?source=comment-repo)
+ **to join this conversation on GitHub**. Already have an account? [Sign in to comment](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fmswjs%2Fmsw%2Fdiscussions%2F2037)
+
+Category
+
+[💡\
+\
+Ideas](https://github.com/mswjs/msw/discussions/categories/ideas)
+
+Labels
+
+[chore](https://github.com/mswjs/msw/discussions?discussions_q=label%3Achore)
+ Tasks aimed at internal improvement [performance](https://github.com/mswjs/msw/discussions?discussions_q=label%3Aperformance)
+
+8 participants
+
+ [![@thepassle](https://avatars.githubusercontent.com/u/17054057?s=48&v=4)](https://github.com/thepassle)
+[![@derekr](https://avatars.githubusercontent.com/u/22249?s=48&v=4)](https://github.com/derekr)
+[![@jacobrask](https://avatars.githubusercontent.com/u/58563?s=48&v=4)](https://github.com/jacobrask)
+[![@pleunv](https://avatars.githubusercontent.com/u/182021?s=48&v=4)](https://github.com/pleunv)
+[![@scr2em](https://avatars.githubusercontent.com/u/4671486?s=48&v=4)](https://github.com/scr2em)
+[![@43081j](https://avatars.githubusercontent.com/u/5677153?s=48&v=4)](https://github.com/43081j)
+[![@mattcosta7](https://avatars.githubusercontent.com/u/8616962?s=48&v=4)](https://github.com/mattcosta7)
+[![@kettanaito](https://avatars.githubusercontent.com/u/14984911?s=48&v=4)](https://github.com/kettanaito)
+
+Converted from issue
+
+This discussion was converted from issue [#1984](https://github.com/mswjs/msw/issues/1984)
+ on February 12, 2024 10:14.
+
+Footer
+------
+
+[](https://github.com/)
+© 2026 GitHub, Inc.
+
+### Footer navigation
+
+*   [Terms](https://docs.github.com/site-policy/github-terms/github-terms-of-service)
+    
+*   [Privacy](https://docs.github.com/site-policy/privacy-policies/github-privacy-statement)
+    
+*   [Security](https://github.com/security)
+    
+*   [Status](https://www.githubstatus.com/)
+    
+*   [Community](https://github.community/)
+    
+*   [Docs](https://docs.github.com/)
+    
+*   [Contact](https://support.github.com/?tags=dotcom-footer)
+    
+*   Manage cookies
+*   Do not share my personal information
+
+You can’t perform that action at this time.

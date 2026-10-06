@@ -60,6 +60,11 @@ to `log.md` (done, in progress, next, findings you must not lose), run
    - Claims rewritten and stamped: core/agent-turn
    - Claims possibly affected but not updated (and why)
 
+   ## Names
+   - NewName — mirrors ExistingSibling
+   - NewName — no sibling (for the owner's review)
+   - Existing asymmetries noticed and left unchanged
+
    ## Verification
    - `pnpm run check`: green (or the failing output)
    - Tests run and results

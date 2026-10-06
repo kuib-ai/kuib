@@ -1,0 +1,166 @@
+[Skip to content](https://github.com/evanw/esbuild/issues/1420#start-of-content)
+             
+
+You signed in with another tab or window. [Reload](https://github.com/evanw/esbuild/issues/1420)
+ to refresh your session. You signed out in another tab or window. [Reload](https://github.com/evanw/esbuild/issues/1420)
+ to refresh your session. You switched accounts on another tab or window. [Reload](https://github.com/evanw/esbuild/issues/1420)
+ to refresh your session. Dismiss alert
+
+[evanw](https://github.com/evanw) / **[esbuild](https://github.com/evanw/esbuild)** Public
+
+*   [Notifications](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+     You must be signed in to change notification settings
+*   [Fork 1.4k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+*   [Star 40.1k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+
+re-exported namespaces cannot be tree-shaked #1420
+==================================================
+
+New issue
+
+Copy link
+
+New issue
+
+Copy link
+
+Open
+
+Open
+
+[re-exported namespaces cannot be tree-shaked](https://github.com/evanw/esbuild/issues/1420#top)
+#1420
+
+Copy link
+
+Labels
+
+[suboptimal-output](https://github.com/evanw/esbuild/issues?q=state%3Aopen%20label%3A%22suboptimal-output%22)
+
+Description
+-----------
+
+[![@Conaclos](https://avatars.githubusercontent.com/u/2358560?u=a1c44faaf0503bdc1c55bd4a0a5a9b5776c8594f&v=4&size=48)](https://github.com/Conaclos)
+
+[Conaclos](https://github.com/Conaclos)
+
+opened [on Jul 4, 2021](https://github.com/evanw/esbuild/issues/1420#issue-936537007)
+
+Issue body actions
+
+Hi!
+
+I am thinking about switching to _esbuild_. However I noticed a bump in the size of my projects when I switch to _esbuild_. A little investigation leads me to the following conclusion: _esbuild_ does not tree-shake star-exports. And unfortunately I am heavily use star-export for namespacing.
+
+Example
+-------
+
+Consider a project with three files: `constants.js`, `namespaced-constants.js` and `entry.js`.  
+`constants.js` exports `X` and `Y`, `namespaced-constants.js` exports these two constants under the namespace `constants`, and `entry.js` exports only `X` using the namspace `constants`.
+
+```js
+// constants.js
+export const X = "X"
+export const Y = "Y"
+```
+
+```js
+// namespaced-constants.js
+export * as constants from "./constants.js"
+```
+
+```js
+// entry.js
+import { constants } from "./namespaced-constants.js"
+export const X = constants.X
+```
+
+_esbuild_ generates the following code:
+
+```js
+// npx esbuild entry.js --format=esm --bundle
+var __defProp = Object.defineProperty;
+var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
+var __export = (target, all) => {
+  __markAsModule(target);
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+
+// constants.js
+var constants_exports = {};
+__export(constants_exports, {
+  X: () => X,
+  Y: () => Y
+});
+var X = "X";
+var Y = "Y";
+
+// entry.js
+var X2 = constants_exports.X;
+export {
+  X2 as X
+};
+```
+
+`Y` is not removed of the bundle while the constant is not used.
+
+In contrast, _rollup_ and _webpack_ support tree-shaking for star-export. For example, _rollup_ generates the following code:
+
+```js
+// npx rollup entry.js
+const X$1 = "X";
+
+const X = X$1;
+
+export { X };
+```
+
+esbuild is already a fantastic tool. It shines by its simplicity. It could be great to get better tree-shaking.
+
+Reactions are currently unavailable
+
+Activity
+--------
+
+[Sign up for free](https://github.com/signup?return_to=https://github.com/evanw/esbuild/issues/1420)
+ **to join this conversation on GitHub.** Already have an account? [Sign in to comment](https://github.com/login?return_to=https://github.com/evanw/esbuild/issues/1420)
+
+Metadata
+--------
+
+Metadata
+--------
+
+### Assignees
+
+No one assigned
+
+### Labels
+
+[suboptimal-output](https://github.com/evanw/esbuild/issues?q=state%3Aopen%20label%3A%22suboptimal-output%22)
+
+### Projects
+
+No projects
+
+### Milestone
+
+No milestone
+
+### Relationships
+
+None yet
+
+### Development
+
+No branches or pull requests
+
+Issue actions
+-------------
+
+*   ![](https://github.githubassets.com/assets/github-copilot-app-light-15ad5534265eeacd.svg)Open in GitHub Copilot app
+
+You can’t perform that action at this time.

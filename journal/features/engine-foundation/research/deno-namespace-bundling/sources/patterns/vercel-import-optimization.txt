@@ -1,0 +1,642 @@
+[Skip to content](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#geist-skip-nav)
+
+[](https://vercel.com/home)
+
+Copy WordmarkCopy Logo
+
+Download Brand AssetsBrand Guidelines
+
+Products
+
+Agent Stack
+
+*   [AI SDK](https://vercel.com/ai-sdk)
+    
+*   [AI Gateway](https://vercel.com/ai-gateway)
+    
+*   [Sandbox](https://vercel.com/sandbox)
+    
+*   [Passport](https://vercel.com/passport)
+    
+*   [Connect](https://vercel.com/connect)
+    
+*   [eve](https://vercel.com/eve)
+    
+
+Core Platform
+
+*   [Security](https://vercel.com/security)
+    
+*   [Content Delivery](https://vercel.com/cdn)
+    
+*   [Fluid Compute](https://vercel.com/fluid)
+    
+*   [Observability](https://vercel.com/products/observability)
+    
+*   [Workflows](https://vercel.com/workflows)
+    
+*   [CI/CD](https://vercel.com/products/previews)
+    
+
+Tools
+
+*   [Next.js](https://vercel.com/frameworks/nextjs)
+    
+*   [Vercel Agent](https://vercel.com/agent)
+    
+*   [Vercel Plugin](https://vercel.com/plugin)
+    
+*   [Open Source](https://vercel.com/oss)
+    
+*   [Domains↗](https://vercel.com/domains)
+    
+*   [v0↗](https://v0.app/)
+    
+
+Resources
+
+Learn
+
+*   [Docs](https://vercel.com/docs)
+    
+*   [About](https://vercel.com/about)
+    
+*   [Blog](https://vercel.com/blog)
+    
+*   [Changelog](https://vercel.com/changelog)
+    
+*   [Knowledge Base](https://vercel.com/kb)
+    
+
+Build
+
+*   [AI Apps](https://vercel.com/ai)
+    
+*   [Web Apps](https://vercel.com/for/web-apps)
+    
+*   [Marketing Sites](https://vercel.com/solutions/marketing-sites)
+    
+*   [Platforms](https://vercel.com/solutions/multi-tenant-saas)
+    
+*   [Commerce](https://vercel.com/for/retail)
+    
+
+Explore
+
+*   [Customers](https://vercel.com/customers)
+    
+*   [Marketplace](https://vercel.com/marketplace)
+    
+*   [Partner Finder](https://vercel.com/partners/solution-partners)
+    
+*   [AWS](https://vercel.com/partners/aws)
+    
+*   [Community↗](https://community.vercel.com/)
+    
+
+[Enterprise](https://vercel.com/enterprise)
+[Pricing](https://vercel.com/pricing)
+
+[Get a Demo](https://vercel.com/contact/sales)
+[Log In](https://vercel.com/login)
+[Sign Up](https://vercel.com/signup)
+
+Ask AI[Dashboard](https://vercel.com/dashboard)
+
+* * *
+
+Products
+
+Agent Stack
+
+*   [AI SDK](https://vercel.com/ai-sdk)
+    
+*   [AI Gateway](https://vercel.com/ai-gateway)
+    
+*   [Sandbox](https://vercel.com/sandbox)
+    
+*   [Passport](https://vercel.com/passport)
+    
+*   [Connect](https://vercel.com/connect)
+    
+*   [eve](https://vercel.com/eve)
+    
+
+Core Platform
+
+*   [Security](https://vercel.com/security)
+    
+*   [Content Delivery](https://vercel.com/cdn)
+    
+*   [Fluid Compute](https://vercel.com/fluid)
+    
+*   [Observability](https://vercel.com/products/observability)
+    
+*   [Workflows](https://vercel.com/workflows)
+    
+*   [CI/CD](https://vercel.com/products/previews)
+    
+
+Tools
+
+*   [Next.js](https://vercel.com/frameworks/nextjs)
+    
+*   [Vercel Agent](https://vercel.com/agent)
+    
+*   [Vercel Plugin](https://vercel.com/plugin)
+    
+*   [Open Source](https://vercel.com/oss)
+    
+*   [Domains↗](https://vercel.com/domains)
+    
+*   [v0↗](https://v0.app/)
+    
+
+Resources
+
+Learn
+
+*   [Docs](https://vercel.com/docs)
+    
+*   [About](https://vercel.com/about)
+    
+*   [Blog](https://vercel.com/blog)
+    
+*   [Changelog](https://vercel.com/changelog)
+    
+*   [Knowledge Base](https://vercel.com/kb)
+    
+
+Build
+
+*   [AI Apps](https://vercel.com/ai)
+    
+*   [Web Apps](https://vercel.com/for/web-apps)
+    
+*   [Marketing Sites](https://vercel.com/solutions/marketing-sites)
+    
+*   [Platforms](https://vercel.com/solutions/multi-tenant-saas)
+    
+*   [Commerce](https://vercel.com/for/retail)
+    
+
+Explore
+
+*   [Customers](https://vercel.com/customers)
+    
+*   [Marketplace](https://vercel.com/marketplace)
+    
+*   [Partner Finder](https://vercel.com/partners/solution-partners)
+    
+*   [AWS](https://vercel.com/partners/aws)
+    
+*   [Community↗](https://community.vercel.com/)
+    
+
+[Enterprise](https://vercel.com/enterprise)
+
+[Pricing](https://vercel.com/pricing)
+
+[Get a Demo](https://vercel.com/contact/sales)
+
+[Log In](https://vercel.com/login)
+[Sign Up](https://vercel.com/signup)
+
+How we optimized package imports in Next.js
+===========================================
+
+![](https://assets.vercel.com/image/upload/f_auto,c_fill,w_32,h_32,q_75/contentful/image/e5382hct74si/4GkdOhqIAAZSx1RkBh6VBy/2b0608ef3769d84feb0bfe5810b2d0fd/qNCeG9WK_400x400__1_.jpg)
+
+[Shu Ding](https://twitter.com/shuding)
+Software Engineer
+
+[Blog](https://vercel.com/blog)
+[Field Engineering](https://vercel.com/blog/category/engineering)
+
+13 Oct 2023
+
+5 min read
+
+Copy
+
+40% faster cold boots and 28% faster builds
+
+In the [latest version of Next.js](https://nextjs.org/blog/next-13-5)
+, we've made improvements to optimize package imports, improving both local dev performance and production cold starts, when using large icon or component libraries or other dependencies that re-export hundreds or thousands of modules.
+
+This post explains why this change was needed, how we've iterated towards our current solution, and what performance improvements we've seen.
+
+[Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#what-is-a-barrel-file)
+What is a barrel file?
+----------------------------------------------------------------------------------------------------------------------------------------
+
+A **barrel file** in JavaScript is a way to group and export multiple modules from a single file. It allows for easier importing of the grouped modules by providing a centralized location to access them.
+
+For example, let's say we have three modules (`module1.js`, `module2.js`, `module3.js`) within a `utils/` directory. We can create a barrel file named `index.js` within the same directory:
+
+index.js
+
+    1export { default as module1 } from './module1';2export { default as module2 } from './module2';3export { default as module3 } from './module3';
+
+Now, instead of importing each module individually like this in your application:
+
+    1import module1 from './utils/module1';2import module2 from './utils/module2';3import module3 from './utils/module3';
+
+We can import _all_ modules collectively using the barrel file, without needing to know about the internal structure:
+
+    import { module1, module2, module3 } from './utils';
+
+Barrel files can improve code organization and maintainability by providing an easily accessible interface for related modules. Because of this, it’s used widely by JavaScript packages, especially icon and component libraries.
+
+Some popular icon and component libraries have **up to 10,000 re-exports in their entry barrel file**.
+
+[Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#what's-the-problem-with-barrel-files)
+What's the problem with barrel files?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+There's a hidden cost with JavaScript runtimes in every `require(...)` and `import '...'`. If you want to use one single export from a barrel file that imports thousands of other things, you are still paying the price of importing other unneeded modules.
+
+For many popular React packages, **it takes 200~800ms just to import them**. In some extreme cases, it can [take a few seconds.](https://marvinh.dev/blog/speeding-up-javascript-ecosystem-part-7/)
+
+[![Malte Ubl](https://pbs.twimg.com/profile_images/1612178950775799808/BXN2OAjW_400x400.jpg)](https://x.com/cramforce/status/1699427661263557050)
+
+[Malte Ubl\
+\
+![Vercel](https://pbs.twimg.com/profile_images/1767351110228918272/3Pndc5OT_bigger.png)](https://x.com/cramforce/status/1699427661263557050)
+
+[@cramforce](https://x.com/cramforce/status/1699427661263557050)
+
+·[Follow](https://x.com/intent/follow?screen_name=cramforce)
+
+[](https://x.com/cramforce/status/1699427661263557050)
+
+Did some research on popular next.js dependencies and their impact on dev start/compile/cold-start times. Material UI reigns supreme at over 10K exports and just importing it on my Macbook Pro takes 3.5 seconds 🤯 Now working with [@shuding](https://x.com/shuding)
+ and [@feedthejim](https://x.com/feedthejim)
+ to make sure these all  [Show more](https://x.com/cramforce/status/1699427661263557050)
+
+[![Image](https://pbs.twimg.com/media/F5WTrbLXcAAi5Mg?format=jpg&name=small)](https://x.com/cramforce/status/1699427661263557050)
+
+[2:21 PM · Sep 6, 2023](https://x.com/cramforce/status/1699427661263557050)
+[](https://help.x.com/en/x-for-websites-ads-info-and-privacy)
+
+[142](https://x.com/intent/like?tweet_id=1699427661263557050)
+[Reply](https://x.com/intent/tweet?in_reply_to=1699427661263557050)
+
+Copy link
+
+[Read 4 replies](https://x.com/cramforce/status/1699427661263557050)
+
+These slowdowns affect both local development and production performance, especially in a serverless environment. Every time the app is started, we’ll have to import everything again.
+
+[Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#can%E2%80%99t-we-tree-shake-it)
+Can’t we tree-shake it?
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Tree-shaking is a _bundler_ feature (Webpack, Rollup, Parcel, esbuild, etc.), not a JavaScript runtime feature. If the library is marked as `external`, it remains a black box. The bundler can't do optimizations inside that box because the dependency would be required at runtime instead.
+
+![](https://vercel.com/vc-ap-vercel-marketing/_next/image?url=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Fcontentful%2Fimage%2Fe5382hct74si%2F1uvdi71hoXKaRi6vTls0qi%2F4cda29f439bf169b7166edb47e87369f%2Fbundle__12_.png&w=1920&q=95)![](https://vercel.com/vc-ap-vercel-marketing/_next/image?url=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Fcontentful%2Fimage%2Fe5382hct74si%2F2y0SENU7KUhl5uAuo4O1Nj%2Ff290bfe7e1dfa116a4467c670e626206%2Fbundle__13_.png&w=1920&q=95)
+
+If we choose to bundle the library together with the application code, tree-shaking will work if the import doesn’t have side effects (`sideEffects` in `package.json`). However, it will take more time to compile all modules, analyze the whole module graph, and then tree-shake properly. This causes substantially slower builds.
+
+![](https://vercel.com/vc-ap-vercel-marketing/_next/image?url=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Fcontentful%2Fimage%2Fe5382hct74si%2F5GDRnrI1GVaQvVIgm0HUUK%2Fcd2bbbb90f699071d6ffa630a4d7d0a4%2Fbundle__7_.png&w=1920&q=95)![](https://vercel.com/vc-ap-vercel-marketing/_next/image?url=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Fcontentful%2Fimage%2Fe5382hct74si%2F51xcJ5VwnREoAkuI6JhUZ7%2F3cc76e57dac2c7a1c16652713966542e%2Fbundle__6_.png&w=1920&q=95)
+
+[Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#our-first-attempt:-modularizeimports)
+Our first attempt: `modularizeImports`
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+The first approach we tried in Next.js was called [`modularizeImports`](https://nextjs.org/docs/architecture/nextjs-compiler#modularize-imports)
+. This option allows you to configure the mapping relationship of exported names and their original module paths behind a package’s barrel file entrypoint.
+
+For example, if the package `my-lib` has this `index.js` as the entry:
+
+my-lib/index.js
+
+    1export { default as module1 } from './module1';2export { default as module2 } from './module2';3export { default as module3 } from './module3';
+
+We can configure a compiler transform of `my-lib/{{member}}`, which tells Next.js to change the user's import `import { module2 } from 'my-lib'` into `import module2 from 'my-lib/module2'`. This means we can skip the barrel file and directly import from the target, preventing loading unnecessary modules.
+
+This change makes both the build time _and_ runtime fast:
+
+![](https://vercel.com/vc-ap-vercel-marketing/_next/image?url=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Fcontentful%2Fimage%2Fe5382hct74si%2F5MQ3kHxpyrYnXxSUMqX8gL%2Fa5740a5e0bed853b4ed0d5a9f7848bef%2Fbundle__9_.png&w=1920&q=95)![](https://vercel.com/vc-ap-vercel-marketing/_next/image?url=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Fcontentful%2Fimage%2Fe5382hct74si%2F2tpTkpBkvN8yj6T5olIgqc%2Fc29d6c982c990166a521a21443bdf167%2Fbundle__8_.png&w=1920&q=95)
+
+However, this configuration is based on the internal directory structure of the library, and is configured heavily by hand. There are millions of `npm` packages with different versions, and there’s no way to scale with this solution efficiently.
+
+If the bundler includes a default configuration for popular libraries without locking down the library’s version, this will make the import transformation invalid when the internal structure of that lib changes in the future. We needed a better solution.
+
+[Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#new-solution:-optimizepackageimports)
+New solution: `optimizePackageImports`
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+To solve the remaining difficulties of configuring the `modularizeImports` option, we’ve introduced a new `optimizePackageImports` option to do it automatically in [Next.js 13.5](https://nextjs.org/blog/next-13-5)
+.
+
+To start, you can configure which packages to opt in:
+
+next.config.js
+
+    1module.exports = {2  experimental: {3    optimizePackageImports: ["my-lib"]4  }5}
+
+When this option is enabled, Next.js will analyze the entry file of `my-lib` and figure out if it’s a barrel file. If so, it analyzes the file on the fly and automatically maps all imports, similarly to how `modularizeImports` works.
+
+This process is cheaper than tree-shaking, since it only scans the entry barrel files in one pass. It also recursively handles nested barrel files and wildcard exports (`export * from`), and bails out of the process when hitting a non-barrel file.
+
+Since this new option doesn’t depend on the package's internal implementations, we [pre-configured a list of common libraries](https://github.com/vercel/next.js/blob/12e888126ccf968193e7570a68db1bc35f90d52d/packages/next/src/server/config.ts#L710-L765)
+ that immediately benefit from this, such as `lucide-react` and `@headlessui/react.`
+
+In the future, we’re exploring ideas to automatically tell if a package should be opted-in or not. For now, the list can keep expanding as the community and our team discover new packages to optimize.
+
+[Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#measuring-performance-improvements)
+Measuring performance improvements
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+We've seen improvements in local development speed, production build speed, as well as faster cold starts.
+
+### [Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#local-development)
+Local development
+
+In our local benchmarking on a M2 MacBook Air, when using one of the most popular icon or component libraries, we are seeing **a 15%~70% development time boost** depending on the actual library:
+
+*   `@mui/material`: 7.1s (2225 modules) -> 2.9s (735 modules) (-4.2s)
+    
+*   `recharts`: 5.1s (1485 modules) -> 3.9s (1317 modules) (-1.2s)
+    
+*   `@material-ui/core`: 6.3s (1304 modules) -> 4.4s (596 modules) (-1.9s)
+    
+*   `react-use`: 5.3s (607 modules) -> 4.4s (337 modules) (-0.9s)
+    
+*   `lucide-react`: 5.8s (1583 modules) -> 3s (333 modules) (-2.8s)
+    
+*   `@material-ui/icons`: 10.2s (11738 modules) -> 2.9s (632 modules) (-7.3s)
+    
+*   `@tabler/icons-react`: 4.5s (4998 modules) -> 3.9s (349 modules) (-0.6s)
+    
+*   `rxjs`: 4.3s (770 modules) -> 3.3s (359 modules) (-1.0s)
+    
+
+These time savings are for the initial boot in local dev, but they _also_ affect the speed of Hot Module Replacement (HMR), letting live local dev feel much faster. The numbers add up quickly if you are using multiple libraries with many sub-modules.
+
+### [Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#production-builds)
+Production builds
+
+In a benchmark of a Next.js App Router page with `lucide-react` and `@headlessui/react`, built on a M2 MacBook Air, `next build` runs **~28% faster** because it no longer needs to do module resolution and tree-shaking.
+
+### [Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#faster-cold-boots)
+Faster cold boots
+
+In a local environment, we’re seeing the Node.js server start **~10% faster** when rendering a simple route that uses `lucide-react` and `@headlessui/react`.
+
+In a serverless environment like Vercel, this decreases both the deployed code size and the number of Node.js `require` calls. We’ve measured up to **40% faster cold starts** paired with other improvements included in [Next.js 13.5](https://nextjs.org/blog/next-13-5)
+.
+
+### [Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#recursive-barrel-files)
+Recursive Barrel Files
+
+[The last change](https://github.com/vercel/next.js/pull/56489)
+ we've made handles recursive barrel files, optimizing them into a single module. To test, we created [this module](https://unpkg.com/browse/recursive-barrel@1.0.0/)
+ with 4 levels of 10 `export *` expressions, equaling 10,000 modules in total.
+
+Before, this recursive package would take ~30 seconds to compile. After, it's just ~7s. We've seen 90% faster reloads from some [customers](https://github.com/vercel/next.js/pull/56489#issuecomment-1751099866)
+ with over 100,000 modules.
+
+[Copy link to heading](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#conclusion)
+Conclusion
+-----------------------------------------------------------------------------------------------------------------
+
+We recommend upgrading to the latest version of Next.js to see significant performance improvements in local dev performance and production cold starts. You might also consider adding [this ESLint rule](https://github.com/gajus/eslint-plugin-canonical#no-barrel-import)
+ to prevent barrel file imports.
+
+Explore
+-------
+
+[Vercel.com landing page\
+\
+### Incrementally adopt the App Router](https://www.youtube.com/watch?v=YQMSietiFm0)
+[Vercel Template\
+\
+Deploy this template\
+\
+### Examples of many Next.js App Router features.\
+\
+Next.js App Router Playground](https://vercel.com/templates/next.js/app-directory)
+
+* * *
+
+Ready to deploy?
+----------------
+
+[Start deploying](https://vercel.com/new)
+[Talk to an expert](https://vercel.com/contact/sales)
+
+Agent Stack
+-----------
+
+*   [AI SDK](https://vercel.com/ai-sdk)
+    
+*   [AI Gateway](https://vercel.com/ai-gateway)
+    
+*   [Sandbox](https://vercel.com/sandbox)
+    
+*   [Workflows](https://vercel.com/workflows)
+    
+*   [ConnectNew](https://vercel.com/connect)
+    
+*   [PassportNew](https://vercel.com/passport)
+    
+*   [eveNew](https://vercel.com/eve)
+    
+
+Core Platform
+-------------
+
+*   [CI/CD](https://vercel.com/products/previews)
+    
+*   [Content Delivery](https://vercel.com/cdn)
+    
+*   [Fluid Compute](https://vercel.com/fluid)
+    
+*   [Observability](https://vercel.com/products/observability)
+    
+
+Security
+--------
+
+*   [Platform Security](https://vercel.com/security)
+    
+*   [WAF](https://vercel.com/security/web-application-firewall)
+    
+*   [Bot Management](https://vercel.com/security/bot-management)
+    
+*   [BotID](https://vercel.com/botid)
+    
+
+Tools
+-----
+
+*   [Vercel DropNew](https://vercel.com/drop)
+    
+*   [Vercel Agent](https://vercel.com/agent)
+    
+*   [Vercel PluginNew](https://vercel.com/plugin)
+    
+*   [Agent Skills](https://skills.sh/)
+    
+*   [Domains](https://vercel.com/domains)
+    
+*   [v0](https://v0.app/)
+    
+
+Frameworks
+----------
+
+*   [eveNew](https://eve.dev/)
+    
+*   [Next.js](https://vercel.com/frameworks/nextjs)
+    
+*   [Nuxt](https://vercel.com/docs/frameworks/full-stack/nuxt)
+    
+*   [SvelteKit](https://vercel.com/docs/frameworks/full-stack/sveltekit)
+    
+*   [Nitro](https://vercel.com/docs/frameworks/backend/nitro)
+    
+*   [Turborepo](https://vercel.com/solutions/turborepo)
+    
+*   [Tanstack Start](https://vercel.com/docs/frameworks/full-stack/tanstack-start)
+    
+*   [FastAPI](https://vercel.com/docs/frameworks/backend/fastapi)
+    
+*   [All frameworks](https://vercel.com/docs/frameworks)
+    
+
+SDKs
+----
+
+*   [Vercel SDK](https://vercel.com/docs/rest-api/sdk)
+    
+*   [Workflow SDKNew](https://vercel.com/workflows)
+    
+*   [Flags SDK](https://vercel.com/docs/flags/flags-sdk-reference)
+    
+*   [Chat SDKNew](https://vercel.com/chat)
+    
+*   [Queues SDKNew](https://vercel.com/docs/queues/sdk)
+    
+*   [Streamdown](https://streamdown.ai/)
+    
+
+Build
+-----
+
+*   [AI Apps](https://vercel.com/solutions/ai-apps)
+    
+*   [Web Apps](https://vercel.com/for/web-apps)
+    
+*   [Marketing Sites](https://vercel.com/solutions/marketing-sites)
+    
+*   [Platforms](https://vercel.com/solutions/multi-tenant-saas)
+    
+*   [Commerce](https://vercel.com/solutions/composable-commerce)
+    
+*   [Platform Engineers](https://vercel.com/solutions/platform-engineering)
+    
+*   [Design Engineers](https://vercel.com/solutions/design-engineering)
+    
+
+Learn
+-----
+
+*   [Docs](https://vercel.com/docs)
+    
+*   [Blog](https://vercel.com/blog)
+    
+*   [Changelog](https://vercel.com/changelog)
+    
+*   [Knowledge Base](https://vercel.com/kb)
+    
+*   [Academy](https://vercel.com/academy)
+    
+*   [Articles](https://vercel.com/i)
+    
+*   [Community](https://community.vercel.com/)
+    
+*   [Is Agentic](https://is-agentic.com/)
+    
+
+Explore
+-------
+
+*   [Customers](https://vercel.com/customers)
+    
+*   [Marketplace](https://vercel.com/marketplace)
+    
+*   [Templates](https://vercel.com/templates)
+    
+*   [Partner Finder](https://vercel.com/partners/solution-partners)
+    
+*   [Vercel + AWS](https://vercel.com/partners/aws)
+    
+
+Company
+-------
+
+*   [About](https://vercel.com/about)
+    
+*   [Careers](https://vercel.com/careers)
+    
+*   [Press](https://vercel.com/press)
+    
+*   [Events](https://vercel.com/events)
+    
+*   [Startups](https://vercel.com/startups)
+    
+*   [Shipped on Vercel](https://vercel.com/shipped)
+    
+*   [Open Source Program](https://vercel.com/open-source-program)
+    
+*   [Enterprise](https://vercel.com/enterprise)
+    
+*   [Pricing](https://vercel.com/pricing)
+    
+*   [Help](https://vercel.com/help)
+    
+
+Legal & Trust
+-------------
+
+*   [Privacy Policy](https://vercel.com/legal/privacy-policy)
+    
+*   [Terms of Service](https://vercel.com/legal/terms)
+    
+*   [Cookie Policy](https://vercel.com/legal/cookie-policy)
+    
+*   [DPA](https://vercel.com/legal/dpa)
+    
+*   [Acceptable Use Policy](https://vercel.com/legal/acceptable-use-policy)
+    
+*   [Legal (all documents)](https://vercel.com/legal)
+    
+*   [Trust Center](https://security.vercel.com/)
+    
+*   [Status](https://www.vercel-status.com/)
+    
+*   Cookie Preferences
+
+Social
+------
+
+*   [GitHub](https://github.com/vercel)
+    
+*   [X](https://x.com/vercel)
+    
+*   [LinkedIn](https://linkedin.com/company/vercel)
+    
+*   [YouTube](https://youtube.com/@VercelHQ)
+    
+*   [Instagram](https://www.instagram.com/vercel/)
+    
+
+*   [![Vercel](https://vercel.com/vc-ap-vercel-marketing/_next/static/immutable/media/vercel-light.3_gxxexgi1nmy.svg)![Vercel](https://vercel.com/vc-ap-vercel-marketing/_next/static/immutable/media/vercel-dark.1f3cgy23m5_jy.svg)](https://vercel.com/home)
+    
+
+[Loading status…](https://www.vercel-status.com/)
+
+Select a display theme:systemlightdark

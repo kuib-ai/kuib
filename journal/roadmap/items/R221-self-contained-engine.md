@@ -5,12 +5,12 @@ state: shaped
 horizon: now
 domains: [core, host]
 depends-on: []
-converges-with: ["[[roadmap/items/R302-ui-host-attach]]", "[[roadmap/items/R313-host-protocol-contract]]", "[[roadmap/items/R012-host-protocol-and-web-host]]"]
+converges-with: ["[[roadmap/items/R302-ui-host-attach]]", "[[roadmap/items/R313-host-protocol-contract]]", "[[roadmap/items/R012-host-protocol-and-web-host]]", "[[roadmap/items/R019-engine-foundation]]"]
 split-from: []
 absorbed-into: ""
 feature: ""
 origin: ["conversation 2026-09-23"]
-touched: 2026-09-28
+touched: 2026-10-06
 ---
 
 # R221 — Self-contained engine — one entry that owns its wiring and its single-instance start
@@ -74,3 +74,5 @@ boundary that already exists: control frames on the socket, data in the log
 - 2026-09-23 raised by the owner as the next piece of work; shaped in conversation
 - 2026-09-25 recorded
 - 2026-09-28 converges with the initiative [[roadmap/items/R012-host-protocol-and-web-host]], which absorbed R302 and R313
+- 2026-10-06 [[features/engine-foundation/plan]] captures the owner's engine-shape work first;
+  "self-contained is a later problem" remains the sequencing ruling.

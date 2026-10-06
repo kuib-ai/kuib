@@ -1,0 +1,213 @@
+*   [Skip to main content](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#content)
+    
+*   [Skip to search](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#mdn-search)
+    
+
+import()
+========
+
+Baseline
+
+Widely available
+
+\*
+
+This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
+
+\* Some parts of this feature may have varying levels of support.
+
+*   [See full compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#browser_compatibility)
+    
+*   [Learn more](https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility)
+    
+
+The **`import()`** syntax, commonly called _dynamic import_, is a function-like expression that allows loading an ECMAScript module asynchronously and dynamically into a potentially non-module environment.
+
+Unlike the [declaration-style counterpart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+, dynamic imports are only evaluated when needed, and permit greater syntactic flexibility.
+
+[Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#syntax)
+
+----------------------------------------------------------------------------------------------------
+
+The `import()` call is a syntax that closely resembles a function call, but `import` itself is a keyword, not a function. You cannot alias it like `const myImport = import`, which will throw a [`SyntaxError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError)
+.
+
+[Trailing commas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas)
+ are only allowed if the runtime also supports `options`. Check [browser compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#browser_compatibility)
+.
+
+### [Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#parameters)
+
+[`moduleName`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#modulename)
+
+The module to import from. The evaluation of the specifier is host-specified, but always follows the same algorithm as static [import declarations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+.
+
+[`options`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#options)
+
+An object containing import options. The following key is recognized:
+
+[`with`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#with)
+
+The [import attributes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with)
+.
+
+### [Return value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#return_value)
+
+Returns a promise which:
+
+*   If the referenced module is loaded and evaluated successfully, fulfills to a [module namespace object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#module_namespace_object)
+    : an object containing all exports from `moduleName`.
+*   If the [coercion to string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#string_coercion)
+     of `moduleName` throws, rejects with the thrown error.
+*   If module fetching and loading fails for any reason, rejects with an implementation-defined error (Node uses a generic `Error`, while all browsers use `TypeError`). Common causes may include:
+    *   In a file-system-based module system (Node.js, for example), if accessing the file system fails (permission denied, file not found, etc.).
+    *   In a web-based module system (browsers, for example), if the network request fails (not connected to the Internet, CORS issue, etc.) or an HTTP error occurs (404, 500, etc.).
+*   If evaluation of the referenced module throws, rejects with the thrown error.
+
+**Note:** `import()` never synchronously throws an error.
+
+[Description](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#description)
+
+--------------------------------------------------------------------------------------------------------------
+
+The import declaration syntax (`import something from "somewhere"`) is static and will always result in the imported module being evaluated at load time. Dynamic imports allow one to circumvent the syntactic rigidity of import declarations and load a module conditionally or on demand. The following are some reasons why you might need to use dynamic import:
+
+*   When importing statically significantly slows the loading of your code or increases your program's memory usage, and there is a low likelihood that you will need the code you are importing, or you will not need it until a later time.
+*   When the module you are importing does not exist at load time.
+*   When the import specifier string needs to be constructed dynamically. (Static import only supports static specifiers.)
+*   When the module being imported has side effects, and you do not want those side effects unless some condition is true. (It is recommended not to have any side effects in a module, but you sometimes cannot control this in your module dependencies.)
+*   When you are in a non-module environment (for example, `eval` or a script file).
+
+Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and [tree shaking](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking)
+. If your only goal is to defer the execution of the loaded code until when it's used, consider using [`import defer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/defer)
+.
+
+If your file is not run as a module (if it's referenced in an HTML file, the script tag must have `type="module"`), you will not be able to use static import declarations. On the other hand, the asynchronous dynamic import syntax is always available, allowing you to import modules into non-module environments.
+
+The `options` parameter allows different kinds of import options. For example, [import attributes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with)
+:
+
+Dynamic module import is not permitted in all execution contexts. For example, `import()` can be used in the main thread, a shared worker, or a dedicated worker, but will throw if called within a [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
+ or a [worklet](https://developer.mozilla.org/en-US/docs/Web/API/Worklet)
+.
+
+"Phase modifiers" for `import` statements can also be used with dynamic imports:
+
+*   [`import.defer()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import/defer)
+    
+*   [`import.source()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import/source)
+    
+
+Each of these syntaxes is considered a distinct type of expression.
+
+### [Module namespace object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#module_namespace_object)
+
+A _module namespace object_ is an object that describes all exports from a module. It is a static object that is created when the module is evaluated. There are two ways to access the module namespace object of a module: through a [namespace import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#namespace_import)
+ (`import * as name from moduleName`), or through the fulfillment value of a dynamic import.
+
+The module namespace object is a [sealed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
+ object with [`null` prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
+. This means all string keys of the object correspond to the exports of the module and there are never extra keys. All keys are [enumerable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Enumerability_and_ownership_of_properties)
+ in lexicographic order (i.e., the default behavior of [`Array.prototype.sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#description)
+), with the default export available as a key called `default`. In addition, the module namespace object has a [`[Symbol.toStringTag]`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag)
+ property with the value `"Module"`, used in [`Object.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString)
+.
+
+The string properties are non-configurable and writable when you use [`Object.getOwnPropertyDescriptors()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors)
+ to get their descriptors. However, they are effectively read-only, because you cannot re-assign a property to a new value. This behavior mirrors the fact that static imports create "[live bindings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#imported_values_can_only_be_modified_by_the_exporter)
+" — the values can be re-assigned by the module exporting them, but not by the module importing them. The writability of the properties reflects the possibility of the values changing, because non-configurable and non-writable properties must be constant. For example, you can re-assign the exported value of a variable, and the new value can be observed in the module namespace object.
+
+Each (normalized) module specifier corresponds to a unique module namespace object, so the following is generally true:
+
+Except in one curious case: because a promise never fulfills to a [thenable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#thenables)
+, if the `my-module.js` module exports a function called `then()`, that function will automatically get called when the dynamic import's promise is fulfilled, as part of the [promise resolution](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/Promise#the_resolve_function)
+ process.
+
+**Warning:** Do not export a function called `then()` from a module. This will cause the module to behave differently when imported dynamically than when imported statically.
+
+This aggressive caching ensures that a piece of JavaScript code is never executed more than once, even if it is imported multiple times. Future imports don't even result in HTTP requests or disk access. If you do need to re-import and re-evaluate a module without restarting the entire JavaScript environment, one possible trick is to use a unique query parameter in the module specifier. This works in non-browser runtimes that support URL specifiers too.
+
+Note that this can lead to memory leaks in a long-running application, because the engine cannot safely garbage-collect any module namespace objects. Currently, there is no way to manually clear the cache of module namespace objects.
+
+You can also use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+ to fetch module source code as text, and then evaluate the module manually depending on the module type:
+
+*   For JavaScript modules, you can dynamically import the source code as a [`blob:` URL](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL_static)
+     in browsers, or use [`vm.Module`](https://nodejs.org/docs/latest/api/vm.html#class-vmmodule "External link (opens in new tab)")
+     to evaluate it in Node.js.
+*   For JSON modules, you can parse the source code using [`JSON.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
+    .
+*   For CSS modules, you can create a new [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet)
+     object and use its [`replace()`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/replace)
+     method to populate it with the source code.
+
+However, this is semantically not the same as dynamic import, because user-agent settings like [fetch destination](https://developer.mozilla.org/en-US/docs/Web/API/Request/destination)
+, [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP)
+, or [module resolution](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve)
+ may not be applied correctly.
+
+Module namespace object caching only applies to modules that are loaded and linked _successfully_. A module is imported in three steps: loading (fetching the module), linking (mostly, parsing the module), and evaluating (executing the parsed code). Only evaluation failures are cached; if a module fails to load or link, the next import may try to load and link the module again. The browser may or may not cache the result of the fetch operation, but it should follow typical HTTP semantics, so handling such network failures should not be different from handling [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch "fetch()")
+ failures.
+
+[Examples](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#examples)
+
+--------------------------------------------------------------------------------------------------------
+
+### [Import a module for its side effects only](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#import_a_module_for_its_side_effects_only)
+
+If your project uses packages that export ESM, you can also import them for side effects only. This will run the code in the package entry point file (and any files it imports) only.
+
+### [Importing defaults](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#importing_defaults)
+
+If you are destructuring the imported module namespace object, then you must rename the `default` key because `default` is a reserved word.
+
+### [Importing on-demand in response to user action](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#importing_on-demand_in_response_to_user_action)
+
+This example shows how to load functionality on to a page based on a user action, in this case a button click, and then call a function within that module. This is not the only way to implement this functionality. The `import()` function also supports `await`.
+
+### [Importing different modules based on environment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#importing_different_modules_based_on_environment)
+
+In processes such as server-side rendering, you may need to load different logic on server or in browser because they interact with different globals or modules (for example, browser code has access to web APIs like `document` and `navigator`, while server code has access to the server file system). You can do so through a conditional dynamic import.
+
+### [Importing modules with a non-literal specifier](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#importing_modules_with_a_non-literal_specifier)
+
+Dynamic imports allow any expression as the module specifier, not necessarily string literals.
+
+Here, we load 10 modules, `/modules/module-0.js`, `/modules/module-1.js`, etc., concurrently, and call the `load` functions that each one exports.
+
+### [Using import attributes with dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#using_import_attributes_with_dynamic_import)
+
+[Import attributes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with)
+ are accepted as the second parameter of the `import()` syntax.
+
+[Specifications](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#specifications)
+
+--------------------------------------------------------------------------------------------------------------------
+
+| Specification |
+| --- |
+| [ECMAScript® 2027 Language Specification  <br>\# sec-import-calls](https://tc39.es/ecma262/multipage/ecmascript-language-expressions.html#sec-import-calls) |
+
+[Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#browser_compatibility)
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+[See also](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#see_also)
+
+--------------------------------------------------------------------------------------------------------
+
+*   [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+    
+
+Help improve MDN
+----------------
+
+[Learn how to contribute](https://developer.mozilla.org/en-US/docs/MDN/Community/Getting_started)
+
+This page was last modified on Sep 15, 2026 by [MDN contributors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import/contributors.txt)
+.
+
+[View this page on GitHub](https://github.com/mdn/content/blob/main/files/en-us/web/javascript/reference/operators/import/index.md?plain=1 "Folder: en-us/web/javascript/reference/operators/import (Opens in a new tab)")
+ • [Report a problem with this content](https://github.com/mdn/content/issues/new?template=page-report.yml&mdn-url=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FJavaScript%2FReference%2FOperators%2Fimport&metadata=%3C%21--+Do+not+make+changes+below+this+line+--%3E%0A%3Cdetails%3E%0A%3Csummary%3EPage+report+details%3C%2Fsummary%3E%0A%0A*+Folder%3A+%60en-us%2Fweb%2Fjavascript%2Freference%2Foperators%2Fimport%60%0A*+MDN+URL%3A+https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FJavaScript%2FReference%2FOperators%2Fimport%0A*+GitHub+URL%3A+https%3A%2F%2Fgithub.com%2Fmdn%2Fcontent%2Fblob%2Fmain%2Ffiles%2Fen-us%2Fweb%2Fjavascript%2Freference%2Foperators%2Fimport%2Findex.md%0A*+Last+commit%3A+https%3A%2F%2Fgithub.com%2Fmdn%2Fcontent%2Fcommit%2Ff693fdeb65be430fdf3b7fc5cdf44a10a13f2bbf%0A*+Document+last+modified%3A+2026-09-15T05%3A12%3A42.000Z%0A%0A%3C%2Fdetails%3E "This will take you to GitHub to file a new issue.")

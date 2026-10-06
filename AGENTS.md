@@ -23,6 +23,13 @@ CLI, Antigravity, Codex). Tool-specific files are generated from it and from `.a
   lint failures; fix them.
 - **No prose comments in code** — code is self-explanatory. The only comments are directives:
   `@claim` links, eslint/ts directives, shebangs.
+- **Names are symmetric with their siblings.** Before naming anything, read the names beside it
+  and reuse their pattern: the same word for the same idea (never a second verb or suffix for an
+  existing concept), the same word order, and the same derivation between folder, type, enum
+  member and wire string (`tool.call.started` ↔ `ToolCallStarted` ↔ `TOOL_CALL_STARTED` ↔
+  `"tool-call-started"`). End every task by listing the names it introduced with the sibling
+  each one mirrors. Flag a name that has no sibling, and any existing asymmetry you notice, for
+  the owner's review; never copy an asymmetry or silently rename one.
 - **Python only through uv** (`uv run …`, `uvx …`, PEP 723 scripts, `uv sync` in projects such
   as `services/stt-mlx`); never bare `python`, `python3` or `pip`. Workspace tooling is
   TypeScript.
@@ -179,6 +186,7 @@ running in a `w:<task>` window, is a worker: follow `.agents/skills/orchestrate/
 - R003 Local speech-to-text engine for Ana (graduated)
 - R004 Uniform agent harness and tmux orchestration (graduated)
 - R005 Codebase review and fixes (graduated)
+- R019 Reusable engine foundation — application boundaries and efficient Deno deployment (graduated)
 - R221 Self-contained engine — one entry that owns its wiring and its single-instance start (shaped)
 
 <!-- journal:generated:end -->

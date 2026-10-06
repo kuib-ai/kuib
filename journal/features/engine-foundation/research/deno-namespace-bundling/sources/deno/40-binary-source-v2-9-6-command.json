@@ -1,0 +1,1 @@
+{"args":["scrape","https://raw.githubusercontent.com/denoland/deno/v2.9.6/cli/standalone/binary.rs","--format","markdown","--json","-o","research_notes/Deno namespace bundling research/deno-sources/40-binary-source-v2-9-6.json"],"status":0,"cliOutput":"Scrape ID: 01a10f84-d90f-72e1-8b6a-db9c9c930153\n"}

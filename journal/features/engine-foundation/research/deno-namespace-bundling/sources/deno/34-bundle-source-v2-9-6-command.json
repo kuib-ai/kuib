@@ -1,0 +1,1 @@
+{"args":["scrape","https://raw.githubusercontent.com/denoland/deno/v2.9.6/cli/tools/bundle/mod.rs","--format","markdown","--json","-o","research_notes/Deno namespace bundling research/deno-sources/34-bundle-source-v2-9-6.json"],"status":0,"cliOutput":"Scrape ID: 01a10f84-279c-708a-8d76-a6cc0643ae81\n"}

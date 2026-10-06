@@ -1,0 +1,264 @@
+*   [Skip to main content](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#content)
+    
+*   [Skip to search](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#mdn-search)
+    
+
+import
+======
+
+Baseline
+
+Widely available
+
+\*
+
+This feature is well established and works across many devices and browser versions. It’s been available across browsers since May 2018.
+
+\* Some parts of this feature may have varying levels of support.
+
+*   [See full compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#browser_compatibility)
+    
+*   [Learn more](https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility)
+    
+
+The static **`import`** declaration is used to import read-only live [bindings](https://developer.mozilla.org/en-US/docs/Glossary/Binding)
+ which are [exported](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+ by another module. The imported bindings are called _live bindings_ because they are updated by the module that exported the binding, but cannot be re-assigned by the importing module.
+
+In order to use the `import` declaration in a source file, the file must be interpreted by the runtime as a [module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+. In HTML, this is done by adding `type="module"` to the [`<script>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script)
+ tag. Modules are automatically interpreted in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
+.
+
+There is also a function-like dynamic [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
+, which does not require scripts of `type="module"`.
+
+[Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#syntax)
+
+-----------------------------------------------------------------------------------------------------
+
+[`defaultExport`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#defaultexport)
+
+Name that will refer to the default export from the module. Must be a valid JavaScript identifier.
+
+[`module-name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#module-name)
+
+The module to import from. Only single- and double-quoted string literals are allowed. The evaluation of the specifier is host-specified. Most hosts align with browsers and resolve the specifiers as URLs relative to the current module URL (see [`import.meta.url`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta)
+). Node, bundlers, and other non-browser environments often define their own features on top of this, so you should find documentation for them to understand the exact rules. The [module specifier resolution](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#module_specifier_resolution)
+ section also has more information.
+
+[`name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#name)
+
+Name of the module object that will be used as a kind of namespace when referring to the imports. Must be a valid JavaScript identifier.
+
+[`exportN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#exportn)
+
+Name of the exports to be imported. The name can be either an identifier or a string literal, depending on what `module-name` declares to export. If it is a string literal, it must be aliased to a valid identifier.
+
+[`aliasN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#aliasn)
+
+Names that will refer to the named imports. Must be a valid JavaScript identifier.
+
+The `"module-name"` may be followed by a set of [import attributes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with)
+, starting with the `with` keyword.
+
+[Description](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#description)
+
+---------------------------------------------------------------------------------------------------------------
+
+`import` declarations can only be present in modules, and only at the top-level (i.e., not inside blocks, functions, etc.). If an `import` declaration is encountered in non-module contexts (for example, `<script>` tags without `type="module"`, `eval`, `new Function`, which all have "script" or "function body" as parsing goals), a `SyntaxError` is thrown. To load modules in non-module contexts, use the [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
+ syntax instead.
+
+All imported bindings cannot be in the same scope as any other declaration, including [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+, [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
+, [`class`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/class)
+, [`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)
+, [`var`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var)
+, and `import` declaration.
+
+`import` declarations are designed to be syntactically rigid (for example, only string literal specifiers, only permitted at the top-level, all bindings must be identifiers), which allows modules to be statically analyzed and linked before getting evaluated. This is the key to making modules asynchronous by nature, powering features like [top-level await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#top_level_await)
+.
+
+The `import` keyword may be followed by a "phase modifier" that stops the module import process at a particular phase:
+
+*   [`import defer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/defer)
+    
+*   [`import source`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/source)
+    
+
+Each of these syntaxes is considered a distinct type of declaration.
+
+### [Forms of import declarations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#forms_of_import_declarations)
+
+There are four forms of `import` declarations:
+
+*   [Named import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#named_import)
+    : `import { export1, export2 } from "module-name";`
+*   [Default import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#default_import)
+    : `import defaultExport from "module-name";`
+*   [Namespace import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#namespace_import)
+    : `import * as name from "module-name";`
+*   [Side effect import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#import_a_module_for_its_side_effects_only)
+    : `import "module-name";`
+
+Below are examples to clarify the syntax.
+
+#### Named import
+
+Given a value named `myExport` which has been exported from the module `my-module` either implicitly as `export * from "another.js"` or explicitly using the [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+ statement, this inserts `myExport` into the current scope.
+
+You can import multiple names from the same module.
+
+You can rename an export when importing it. For example, this inserts `shortName` into the current scope.
+
+A module may also export a member as a string literal which is not a valid identifier, in which case you must alias it in order to use it in the current module.
+
+**Note:** `import { x, y } from "mod"` is not equivalent to `import defaultExport from "mod"` and then destructuring `x` and `y` from `defaultExport`. Named and default imports are distinct syntaxes in JavaScript modules.
+
+#### Default import
+
+Default exports need to be imported with the corresponding default import syntax. This version directly imports the default:
+
+Since the default export doesn't explicitly specify a name, you can give the identifier any name you like.
+
+It is also possible to specify a default import with namespace imports or named imports. In such cases, the default import will have to be declared first. For instance:
+
+or
+
+Importing a name called `default` has the same effect as a default import. It is necessary to alias the name because `default` is a reserved word.
+
+#### Namespace import
+
+The following code inserts `myModule` into the current scope, containing all the exports from the module located at `/modules/my-module.js`.
+
+Here, `myModule` represents a _namespace_ object which contains all exports as properties. For example, if the module imported above includes an export `doAllTheAmazingThings()`, you would call it like this:
+
+`myModule` is a [sealed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
+ object with [`null` prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
+. The default export is available as a key called `default`. For more information, see [module namespace object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#module_namespace_object)
+.
+
+**Note:** JavaScript does not have wildcard imports like `import * from "module-name"`, because of the high possibility of name conflicts.
+
+#### Import a module for its side effects only
+
+Import an entire module for side effects only, without importing anything. This runs the module's global code, but doesn't actually import any values.
+
+This is often used for [polyfills](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill)
+, which mutate the global variables.
+
+### [Hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#hoisting)
+
+Import declarations are [hoisted](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting)
+. In this case, that means that the identifiers the imports introduce are available in the entire module scope, and their side effects are produced before the rest of the module's code runs.
+
+### [Module specifier resolution](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#module_specifier_resolution)
+
+The ECMAScript specification does not define how module specifiers are resolved and leaves it to the host environment (e.g., browsers, Node.js, Deno). Browser behavior is specified by [the HTML spec](https://html.spec.whatwg.org/multipage/webappapis.html#resolve-a-module-specifier "External link (opens in new tab)")
+, and this has become the _de facto_ baseline for all environments.
+
+There are three types of specifiers widely recognized, as implemented by the HTML spec, Node, and many others:
+
+*   _Relative specifiers_ that start with `/`, `./`, or `../`, which are resolved relative to the current module URL.
+*   _Absolute specifiers_ that are parsable URLs, which are resolved as-is.
+*   _Bare specifiers_ that are not one of the above.
+
+The most notable caveat for relative specifiers, especially for people familiar with the [CommonJS](https://wiki.commonjs.org/wiki/CommonJS "External link (opens in new tab)")
+ conventions, is that browsers forbid one specifier to implicitly resolve to many potential candidates. In CommonJS, if you have `main.js` and `utils/index.js`, then all of the following will import the "default export" from `utils/index.js`:
+
+On the web, this is costly because if you write `import x from "./utils"`, the browser needs to send requests to `utils`, `utils/index.js`, `utils.js`, and potentially many other URLs until it finds an importable module. Therefore, in the HTML spec, the specifier by default can only be a URL resolved relative to the current module URL. You cannot omit the file extension or the `index.js` file name. This behavior has been inherited by Node's ESM implementation, but it is not a part of the ECMAScript specification.
+
+Note that this does not mean that `import x from "./utils"` never works on the web. The browser still sends a request to that URL, and if the server can respond with the correct content, the import will succeed. This requires the server to implement some custom resolution logic, because usually extension-less requests are understood as requests for HTML files.
+
+Absolute specifiers can be any kind of [URL](https://developer.mozilla.org/en-US/docs/Web/URI)
+ that resolve to importable source code. Most notably:
+
+*   [HTTP URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP)
+     are always supported on the web since most scripts already have HTTP URLs. It's supported natively by Deno (which initially predicated its entire module system on HTTP URLs), but it only has experimental support in Node via [custom HTTPS loaders](https://nodejs.org/api/module.html#import-from-https "External link (opens in new tab)")
+    .
+    
+*   `file:` URLs are supported by many non-browser runtimes such as Node, since scripts there already have `file:` URLs, but they are not supported by browsers due to security reasons.
+    
+*   [Data URLs](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data)
+     are supported by many runtimes including browsers, Node, Deno, etc. They are useful for embedding small modules directly into the source code. Supported [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types)
+     are those that designate importable source code, such as `text/javascript` for JavaScript, `application/json` for JSON modules, `application/wasm` for WebAssembly modules, etc. (They may still require [import attributes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with)
+    .)
+    
+    `text/javascript` data URLs are still interpreted as modules, but they cannot use relative imports — because the `data:` URL scheme is not hierarchical. That is, `import x from "data:text/javascript,import y from './y.js';"` will throw an error because the relative specifier `'./y.js'` cannot be resolved.
+    
+*   [`node:` URLs](https://nodejs.org/api/esm.html#node-imports "External link (opens in new tab)")
+     resolve to built-in Node.js modules. They are supported by Node and other runtimes that claim compatibility with Node, such as Bun.
+    
+
+Bare specifiers, popularized by CommonJS, are resolved within the `node_modules` directory. For example, if you have `import x from "foo"`, then the runtime will look for the `foo` package within any `node_modules` directory in the parent directories of the current module. This behavior can be reproduced in browsers using [import maps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#importing_modules_using_import_maps)
+, which also enable you to customize resolution in other ways.
+
+The module resolution algorithm can also be executed programmatically using the [`import.meta.resolve`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve)
+ function defined by the HTML spec.
+
+[Examples](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#examples)
+
+---------------------------------------------------------------------------------------------------------
+
+### [Standard Import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#standard_import)
+
+In this example, we create a re-usable module that exports a function to get all primes within a given range.
+
+### [Imported values can only be modified by the exporter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#imported_values_can_only_be_modified_by_the_exporter)
+
+The identifier being imported is a _live binding_, because the module exporting it may re-assign it and the imported value would change. However, the module importing it cannot re-assign it. Still, any module holding an exported object can mutate the object, and the mutated value can be observed by all other modules importing the same value.
+
+You can also observe the new value through the [module namespace object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#module_namespace_object)
+.
+
+### [Importing non-JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#importing_non-javascript_modules)
+
+Non-JavaScript modules can also be imported using the `import` statement, but their types need to be explicitly declared using [import attributes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with)
+. For example, to import a JSON module, you need to specify the `type: "json"` attribute.
+
+[Specifications](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#specifications)
+
+---------------------------------------------------------------------------------------------------------------------
+
+| Specification |
+| --- |
+| [ECMAScript® 2027 Language Specification  <br>\# sec-imports](https://tc39.es/ecma262/multipage/ecmascript-language-scripts-and-modules.html#sec-imports) |
+
+[Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#browser_compatibility)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+[See also](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#see_also)
+
+---------------------------------------------------------------------------------------------------------
+
+*   [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+    
+*   [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
+    
+*   [`import.meta`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta)
+    
+*   [Import attributes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with)
+    
+*   [Previewing ES6 Modules and more from ES2015, ES2016 and beyond](https://blogs.windows.com/msedgedev/2016/05/17/es6-modules-and-beyond/ "External link (opens in new tab)")
+     on blogs.windows.com (2016)
+*   [ES6 in Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/ "External link (opens in new tab)")
+     on hacks.mozilla.org (2015)
+*   [ES modules: A cartoon deep-dive](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/ "External link (opens in new tab)")
+     on hacks.mozilla.org (2018)
+*   [Exploring JS, Ch.16: Modules](https://exploringjs.com/es6/ch_modules.html "External link (opens in new tab)")
+     by Dr. Axel Rauschmayer
+*   [Export and Import](https://javascript.info/import-export "External link (opens in new tab)")
+     on javascript.info
+
+Help improve MDN
+----------------
+
+[Learn how to contribute](https://developer.mozilla.org/en-US/docs/MDN/Community/Getting_started)
+
+This page was last modified on Sep 11, 2026 by [MDN contributors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/contributors.txt)
+.
+
+[View this page on GitHub](https://github.com/mdn/content/blob/main/files/en-us/web/javascript/reference/statements/import/index.md?plain=1 "Folder: en-us/web/javascript/reference/statements/import (Opens in a new tab)")
+ • [Report a problem with this content](https://github.com/mdn/content/issues/new?template=page-report.yml&mdn-url=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FJavaScript%2FReference%2FStatements%2Fimport&metadata=%3C%21--+Do+not+make+changes+below+this+line+--%3E%0A%3Cdetails%3E%0A%3Csummary%3EPage+report+details%3C%2Fsummary%3E%0A%0A*+Folder%3A+%60en-us%2Fweb%2Fjavascript%2Freference%2Fstatements%2Fimport%60%0A*+MDN+URL%3A+https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FJavaScript%2FReference%2FStatements%2Fimport%0A*+GitHub+URL%3A+https%3A%2F%2Fgithub.com%2Fmdn%2Fcontent%2Fblob%2Fmain%2Ffiles%2Fen-us%2Fweb%2Fjavascript%2Freference%2Fstatements%2Fimport%2Findex.md%0A*+Last+commit%3A+https%3A%2F%2Fgithub.com%2Fmdn%2Fcontent%2Fcommit%2F31bad7cd99cccf47f6332b81bbff4371e2bc551f%0A*+Document+last+modified%3A+2026-09-11T01%3A04%3A13.000Z%0A%0A%3C%2Fdetails%3E "This will take you to GitHub to file a new issue.")

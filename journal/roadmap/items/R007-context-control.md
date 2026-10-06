@@ -5,12 +5,12 @@ state: idea
 horizon: next
 domains: [core, host]
 depends-on: ["[[roadmap/items/R006-durable-event-log]]", "[[roadmap/items/R011-own-terminal-ui]]"]
-converges-with: []
+converges-with: ["[[roadmap/items/R019-engine-foundation]]"]
 split-from: []
 absorbed-into: ""
 feature: ""
 origin: ["conversation 2026-09-28"]
-touched: 2026-09-28
+touched: 2026-10-06
 ---
 
 # R007 — Context control — see and shape what the model sees

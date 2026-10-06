@@ -50,11 +50,15 @@ const WORKER_FILE_FOR_STATUS: Record<string, string> = {
   "plan-ready": "plan.md",
   restart: "log.md",
 };
-const SHELLS = ["zsh", "bash", "sh", "fish"];
-const BUSY = /esc to interrupt|ctrl\+c to (?:interrupt|stop)/i;
-const PASTED_PLACEHOLDER = /\[Pasted (?:text|Content)/;
+const BUSY = /esc (?:to )?interrupt|ctrl\+c to (?:interrupt|stop)/i;
+const PASTED_PLACEHOLDER = /\[Pasted[^\]\n]*\]?/;
+const DIALOG =
+  /do you trust|i trust this folder|press enter to continue|\(y\/n\)|\[y\/n\]/i;
+const DIALOG_TAIL_LINES = 15;
 const CONTEXT_USED_OF = /ctx (\d{1,3})% of/g;
 const CONTEXT_PERCENT = /(\d{1,3})% (?:context|ctx)( left)?/g;
+const CONTEXT_NAMED_FIRST = /[Cc]ontext (\d{1,3})% (used|left)/g;
+const CONTEXT_TOKENS_PERCENT = /\d+(?:\.\d+)?[KkMm] \((\d{1,3})%\)/g;
 const CONTEXT_LEFT_UNTIL_COMPACT =
   /Context left until auto-compact: (\d{1,3})%/g;
 const BUSY_TAIL_LINES = 15;
@@ -63,6 +67,9 @@ const VISIBLE_PREFIX_CHARS = 40;
 const CONTEXT_DROP_MEANING_CLEARED = 10;
 const READY_TIMEOUT_SECONDS = 90;
 const PASTE_VISIBLE_TIMEOUT_SECONDS = 5;
+const SUBMIT_ATTEMPTS = 3;
+const SUBMIT_WAIT_SECONDS = 2;
+const LAUNCH_TIMEOUT_SECONDS = 20;
 const HANDOFF_SETTLE_TIMEOUT_SECONDS = 600;
 const JOURNAL_FILES_THE_ORCHESTRATOR_WRITES = [
   "journal/domains/*/current.md",
@@ -72,16 +79,21 @@ const JOURNAL_FILES_THE_ORCHESTRATOR_WRITES = [
   "journal/roadmap/ROADMAP.md",
 ];
 const WORKER_PROTOCOL = ".agents/skills/orchestrate/WORKER.md";
-const AGENTS: Record<string, string> = {
-  claude: "claude",
-  "kiro-claude": "kiro-claude",
-  "mimo-claude": "mimo-claude",
-  cursor: "cursor-agent",
-  "cursor-agent": "cursor-agent",
-  agy: "agy",
-  antigravity: "agy",
-  gemini: "gemini",
-  codex: "codex",
+interface Agent {
+  command: string;
+  promptFlag: string;
+}
+const AGENTS: Record<string, Agent> = {
+  claude: { command: "claude", promptFlag: "" },
+  "kiro-claude": { command: "kiro-claude", promptFlag: "" },
+  "mimo-claude": { command: "mimo-claude", promptFlag: "" },
+  cursor: { command: "cursor-agent", promptFlag: "" },
+  "cursor-agent": { command: "cursor-agent", promptFlag: "" },
+  agy: { command: "agy", promptFlag: "--prompt-interactive" },
+  antigravity: { command: "agy", promptFlag: "--prompt-interactive" },
+  gemini: { command: "gemini", promptFlag: "--prompt-interactive" },
+  codex: { command: "codex", promptFlag: "" },
+  opencode: { command: "opencode", promptFlag: "--prompt" },
 };
 const USAGE = `usage: pnpm orchestra <command>
 
@@ -96,7 +108,8 @@ journal/features/<feature>/tasks/<id>/ (brief.md, plan.md, log.md, report.md).
                                                   open window w:<task>, start the agent, deliver the worker prompt
   send <task> <message..> | --file PATH           deliver a message (a stopped worker is set running)
   go <task> [message..]                           approve a plan-ready worker's plan
-  restart <task>                                  clear a worker's context and resume it from its log
+  restart <task>                                  relaunch a worker with a fresh context and resume it from its log
+  resume <task> [message..]                       continue a stopped worker; relaunch it if its window is gone
   peek <task> [lines]                             print the tail of a worker's screen
   close <task>                                    kill a worker's window; an unfinished task becomes closed
   status                                          tasks, their windows and context use
@@ -473,14 +486,16 @@ const paneSession = function (pane: string): string {
   return tmux(["display-message", "-p", "-t", pane, "#{session_name}"]);
 };
 
-const paneCommand = function (pane: string): string {
-  return tmux([
-    "display-message",
-    "-p",
-    "-t",
-    pane,
-    "#{pane_current_command}",
-  ]).replace(/^-+/, "");
+const paneAtShell = function (pane: string): boolean {
+  const shell = tmux(["display-message", "-p", "-t", pane, "#{pane_pid}"]);
+  const [group, foreground] = run(
+    "ps",
+    ["-o", "pgid=", "-o", "tpgid=", "-p", shell],
+    { check: false },
+  )
+    .trim()
+    .split(/\s+/);
+  return Boolean(group) && group === foreground;
 };
 
 const capture = function (pane: string, historyLines = 0): string {
@@ -510,6 +525,14 @@ const isBusy = function (screen: string): boolean {
   return BUSY.test(screen.split("\n").slice(-BUSY_TAIL_LINES).join("\n"));
 };
 
+const openDialog = function (screen: string): string | null {
+  const tail = screen.trimEnd().split("\n").slice(-DIALOG_TAIL_LINES);
+  const line = tail.find(function (candidate) {
+    return DIALOG.test(candidate);
+  });
+  return line === undefined ? null : line.trim();
+};
+
 const lastMatch = function (
   pattern: RegExp,
   text: string,
@@ -521,11 +544,16 @@ const lastMatch = function (
 const contextUsed = function (screen: string): number | null {
   const usedOf = lastMatch(CONTEXT_USED_OF, screen);
   if (usedOf) return Number(usedOf[1]);
+  const named = lastMatch(CONTEXT_NAMED_FIRST, screen);
+  if (named)
+    return named[2] === "left" ? 100 - Number(named[1]) : Number(named[1]);
   const percent = lastMatch(CONTEXT_PERCENT, screen);
   if (percent)
     return percent[2] ? 100 - Number(percent[1]) : Number(percent[1]);
   const left = lastMatch(CONTEXT_LEFT_UNTIL_COMPACT, screen);
   if (left) return 100 - Number(left[1]);
+  const tokens = lastMatch(CONTEXT_TOKENS_PERCENT, screen);
+  if (tokens) return Number(tokens[1]);
   return null;
 };
 
@@ -550,6 +578,12 @@ const deliver = function (pane: string, text: string, label: string) {
     typeKeys(pane, text.trim());
     return;
   }
+  const dialog = openDialog(capture(pane));
+  if (dialog !== null) {
+    throw new OrchestraError(
+      `a dialog is open in ${label} ("${dialog}"); answer it in the window, then retry`,
+    );
+  }
   const content = text.trimEnd();
   const buffer = `orchestra-${process.pid}`;
   tmux(["load-buffer", "-b", buffer, "-"], { input: content });
@@ -571,8 +605,20 @@ const deliver = function (pane: string, text: string, label: string) {
       );
     }
   }
-  sleep(0.3);
-  tmux(["send-keys", "-t", pane, "Enter"]);
+  const pasted = fingerprint(capture(pane));
+  for (let attempt = 0; attempt < SUBMIT_ATTEMPTS; attempt += 1) {
+    sleep(0.5);
+    tmux(["send-keys", "-t", pane, "Enter"]);
+    const submitDeadline = monotonic() + SUBMIT_WAIT_SECONDS;
+    while (monotonic() < submitDeadline) {
+      sleep(0.25);
+      const screen = capture(pane);
+      if (isBusy(screen) || fingerprint(screen) !== pasted) return;
+    }
+  }
+  throw new OrchestraError(
+    `the message was pasted into ${label} but not submitted after ${SUBMIT_ATTEMPTS} Enter presses; submit it in the window`,
+  );
 };
 
 const waitForSteadyScreen = function (
@@ -593,7 +639,7 @@ const waitForSteadyScreen = function (
     const screen = capture(pane);
     const waiting =
       !screen.trim() ||
-      (options.needsAgent === true && SHELLS.includes(paneCommand(pane))) ||
+      (options.needsAgent === true && paneAtShell(pane)) ||
       (options.needsCalm === true && isBusy(screen));
     const current = waiting ? "" : fingerprint(screen);
     streak = current && current === previous ? streak + 1 : current ? 1 : 0;
@@ -910,7 +956,7 @@ const workerPrompt = function (task: Task): string {
 };
 
 const resumePrompt = function (task: Task): string {
-  return `Resume orchestra task '${task.id}': reread ${join(root(), WORKER_PROTOCOL)}, your brief ${task.brief} (including any ## Go sections) and your log ${taskFile(task, "log.md")}, then continue where the log ends.`;
+  return `Resume orchestra task '${task.id}': reread ${join(root(), WORKER_PROTOCOL)}, your brief ${task.brief} (including any ## Go and ## Resume sections) and your log ${taskFile(task, "log.md")}, then continue where the log ends.`;
 };
 
 const openWorkerWindow = function (task: Task, cwd: string): string {
@@ -935,17 +981,42 @@ const shellQuote = function (text: string): string {
   return `'${text.replace(/'/g, "'\\''")}'`;
 };
 
+const promptFlagOf = function (
+  agent: string,
+  command: string,
+  asArgument: boolean,
+): string | null {
+  const known = AGENTS[agent];
+  if (known !== undefined && command.split(/\s+/)[0] === known.command)
+    return known.promptFlag;
+  return asArgument ? "" : null;
+};
+
+const waitForLaunch = function (pane: string, label: string) {
+  const deadline = monotonic() + LAUNCH_TIMEOUT_SECONDS;
+  while (monotonic() < deadline) {
+    sleep(0.5);
+    if (!paneAtShell(pane)) return;
+  }
+  const tail = capture(pane).split("\n").slice(-8).join("\n");
+  throw new OrchestraError(
+    `the agent in ${label} did not start within ${LAUNCH_TIMEOUT_SECONDS} s; last lines:\n${tail}`,
+  );
+};
+
 const launchAgent = function (
   task: Task,
   pane: string,
   command: string,
   prompt: string,
-  promptAsArgument: boolean,
+  promptFlag: string | null,
 ) {
   const promptFile = savePrompt(task, prompt);
   sleep(0.5);
-  if (promptAsArgument) {
-    typeKeys(pane, `${command} "$(cat ${shellQuote(promptFile)})"`);
+  if (promptFlag !== null) {
+    const flag = promptFlag ? `${promptFlag} ` : "";
+    typeKeys(pane, `${command} ${flag}"$(cat ${shellQuote(promptFile)})"`);
+    waitForLaunch(pane, `w:${task.id}`);
     return;
   }
   typeKeys(pane, command);
@@ -975,7 +1046,13 @@ const respawnWorker = function (task: Task) {
     baseline: state.baseline ?? takeBaseline(cwd),
     screens: [],
   });
-  launchAgent(task, pane, command, resumePrompt(task), false);
+  launchAgent(
+    task,
+    pane,
+    command,
+    resumePrompt(task),
+    promptFlagOf(taskGet(task, "agent"), command, false),
+  );
 };
 
 // @claim infra/orchestra-watch
@@ -1061,6 +1138,16 @@ const screenEvents = function (
       `${used}% of the context window used (cap ${cap}%)`,
     ]);
   }
+  const dialog = openDialog(screen);
+  if (dialog === null) unsetWindowOption(pane, "@orchestra_dialog");
+  if (dialog !== null && windowOption(pane, "@orchestra_dialog") !== dialog) {
+    setWindowOption(pane, "@orchestra_dialog", dialog);
+    events.push([
+      task.id,
+      "dialog",
+      `the agent is waiting on a dialog ("${dialog}"); answer it in w:${task.id}`,
+    ]);
+  }
   const recent = isBusy(screen)
     ? []
     : [...(loadRuntime(task).screens ?? []), fingerprint(screen)].slice(
@@ -1071,7 +1158,7 @@ const screenEvents = function (
   const stable = recent[0];
   if (steady && stable && windowOption(pane, "@orchestra_idle") !== stable) {
     setWindowOption(pane, "@orchestra_idle", stable);
-    const detail = SHELLS.includes(paneCommand(pane))
+    const detail = paneAtShell(pane)
       ? "the agent exited; the window is at a shell prompt"
       : `screen unchanged for ${idlePolls} polls and no \`pnpm orchestra done\`; \`pnpm orchestra peek ${task.id}\``;
     events.push([task.id, "idle", detail]);
@@ -1235,7 +1322,9 @@ const cmdSpawn = function (parsed: Parsed) {
     );
   const cwd = realPath((values.cwd as string | undefined) ?? root());
   if (!isDirectory(cwd)) throw new OrchestraError(`cwd does not exist: ${cwd}`);
-  const command = (values.cmd as string | undefined) ?? AGENTS[agent] ?? agent;
+  const command =
+    (values.cmd as string | undefined) ?? AGENTS[agent]?.command ?? agent;
+  const asArgument = values.arg === true;
   const pane = openWorkerWindow(task, cwd);
   updateTask(task, {
     status: "running",
@@ -1248,7 +1337,13 @@ const cmdSpawn = function (parsed: Parsed) {
     reported: "",
   });
   saveRuntime(task, { baseline: takeBaseline(cwd) });
-  launchAgent(task, pane, command, workerPrompt(task), values.arg === true);
+  launchAgent(
+    task,
+    pane,
+    command,
+    workerPrompt(task),
+    promptFlagOf(agent, command, asArgument),
+  );
   for (const item of taskList(task, "items"))
     journalSet(task.feature, item, "in_progress");
   console.log(
@@ -1301,19 +1396,42 @@ const cmdGo = function (parsed: Parsed) {
 // @claim infra/orchestra
 const cmdRestart = function (parsed: Parsed) {
   const task = findTask(parsed.positionals[0]);
-  const pane = requirePane(task);
-  const label = `w:${task.id}`;
-  const prompt = resumePrompt(task);
-  const promptFile = savePrompt(task, prompt);
-  deliver(pane, "/clear", label);
-  waitUntilReady(
-    pane,
-    label,
-    `pnpm orchestra send ${task.id} --file ${promptFile}`,
+  const pane = paneOf(task.id);
+  if (pane) tmux(["kill-window", "-t", pane]);
+  respawnWorker(task);
+  console.log(
+    `${task.id}: relaunched with a fresh context; resuming from its log`,
   );
-  deliver(pane, prompt, label);
-  updateTask(task, { status: "running", reported: "" });
-  console.log(`${task.id}: cleared and resumed from its log`);
+};
+
+// @claim infra/orchestra
+const cmdResume = function (parsed: Parsed) {
+  const { positionals } = parsed;
+  const task = findTask(positionals[0]);
+  if (taskStatus(task) === "closed") {
+    throw new OrchestraError(
+      `task ${task.id} is closed; spawn it again to reopen it`,
+    );
+  }
+  const message = positionals.slice(1).join(" ").trim();
+  if (message) updateTask(task, {}, `\n## Resume — ${now()}\n\n${message}\n`);
+  const pane = paneOf(task.id);
+  if (!pane) {
+    respawnWorker(task);
+    console.log(
+      `${task.id}: relaunched in w:${task.id} with the resume prompt`,
+    );
+    return;
+  }
+  deliver(
+    pane,
+    message
+      ? `RESUME: read the latest ## Resume section of your brief (${task.brief}) and continue.`
+      : resumePrompt(task),
+    `w:${task.id}`,
+  );
+  updateTask(task, { status: "running", finished: "", reported: "" });
+  console.log(`${task.id}: resumed in its live window`);
 };
 
 const cmdPeek = function (parsed: Parsed) {
@@ -1729,10 +1847,18 @@ const SUBCOMMANDS: Record<
   restart: {
     schema: {
       description:
-        "restart <task>: clear a worker's context and resume it from its log.",
+        "restart <task>: relaunch a worker with a fresh context and resume it from its log.",
       options: {},
     },
     run: cmdRestart,
+  },
+  resume: {
+    schema: {
+      description:
+        "resume <task> [message..]: continue a stopped worker, in its live window or relaunched if the window is gone; the message goes under ## Resume in the brief.",
+      options: {},
+    },
+    run: cmdResume,
   },
   peek: {
     schema: {

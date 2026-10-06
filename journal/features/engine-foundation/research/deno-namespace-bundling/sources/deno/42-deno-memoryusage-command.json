@@ -1,0 +1,1 @@
+{"args":["scrape","https://docs.deno.com/api/deno/~/Deno.memoryUsage","--format","markdown","--json","-o","research_notes/Deno namespace bundling research/deno-sources/42-deno-memoryusage.json"],"status":0,"cliOutput":"Scrape ID: 01a10f84-d927-75bb-b372-73e4338c5c1b\n"}

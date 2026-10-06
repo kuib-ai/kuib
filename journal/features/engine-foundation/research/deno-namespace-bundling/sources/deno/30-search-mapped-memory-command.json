@@ -1,0 +1,1 @@
+{"args":["search","site:github.com/denoland/deno \"compile\" \"mmap\"","--sources","web","--no-domain-tools","--limit","4","--json","-o","research_notes/Deno namespace bundling research/deno-sources/30-search-mapped-memory.json"],"status":0,"cliOutput":"No results found.\n","note":"No results JSON was created by the CLI; stdout preserved from the completed invocation."}

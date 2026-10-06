@@ -1,0 +1,611 @@
+[Skip to content](https://github.com/avocadowastaken/babel-plugin-direct-import#start-of-content)
+                
+
+Navigation Menu
+---------------
+
+[](https://github.com/)
+
+[Sign in](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Favocadowastaken%2Fbabel-plugin-direct-import)
+
+Appearance settings
+
+*   Platform
+    
+    *   AI CODE CREATION
+        
+        *   [GitHub CopilotWrite better code with AI](https://github.com/features/copilot)
+            
+        *   [GitHub Copilot appDirect agents from issue to merge](https://github.com/features/ai/github-app)
+            
+        *   [MCP RegistryIntegrate external tools](https://github.com/mcp)
+            
+        
+    *   DEVELOPER WORKFLOWS
+        
+        *   [ActionsAutomate any workflow](https://github.com/features/actions)
+            
+        *   [CodespacesInstant dev environments](https://github.com/features/codespaces)
+            
+        *   [IssuesPlan and track work](https://github.com/features/issues)
+            
+        *   [Code ReviewManage code changes](https://github.com/features/code-review)
+            
+        *   [Code QualityEnforce quality at merge](https://github.com/features/code-quality)
+            
+        
+    *   APPLICATION SECURITY
+        
+        *   [GitHub Advanced SecurityFind and fix vulnerabilities](https://github.com/security/advanced-security)
+            
+        *   [Code securitySecure your code as you build](https://github.com/security/advanced-security/code-security)
+            
+        *   [Secret protectionStop leaks before they start](https://github.com/security/advanced-security/secret-protection)
+            
+        
+    *   EXPLORE
+        
+        *   [Why GitHub](https://github.com/why-github)
+            
+        *   [Documentation](https://docs.github.com/)
+            
+        *   [Blog](https://github.blog/)
+            
+        *   [Changelog](https://github.blog/changelog)
+            
+        *   [Marketplace](https://github.com/marketplace)
+            
+        
+    
+    [View all features](https://github.com/features)
+    
+*   Solutions
+    
+    *   BY COMPANY SIZE
+        
+        *   [Enterprises](https://github.com/enterprise)
+            
+        *   [Small and medium teams](https://github.com/team)
+            
+        *   [Startups](https://github.com/enterprise/startups)
+            
+        *   [Nonprofits](https://github.com/solutions/industry/nonprofits)
+            
+        
+    *   BY USE CASE
+        
+        *   [App Modernization](https://github.com/solutions/use-case/app-modernization)
+            
+        *   [DevSecOps](https://github.com/solutions/use-case/devsecops)
+            
+        *   [DevOps](https://github.com/solutions/use-case/devops)
+            
+        *   [CI/CD](https://github.com/solutions/use-case/ci-cd)
+            
+        *   [View all use cases](https://github.com/solutions/use-case)
+            
+        
+    *   BY INDUSTRY
+        
+        *   [Healthcare](https://github.com/solutions/industry/healthcare)
+            
+        *   [Financial services](https://github.com/solutions/industry/financial-services)
+            
+        *   [Manufacturing](https://github.com/solutions/industry/manufacturing)
+            
+        *   [Government](https://github.com/solutions/industry/government)
+            
+        *   [View all industries](https://github.com/solutions/industry)
+            
+        
+    
+    [View all solutions](https://github.com/solutions)
+    
+*   Resources
+    
+    *   EXPLORE BY TOPIC
+        
+        *   [AI](https://github.com/resources/articles?topic=ai)
+            
+        *   [Software Development](https://github.com/resources/articles?topic=software-development)
+            
+        *   [DevOps](https://github.com/resources/articles?topic=devops)
+            
+        *   [Security](https://github.com/resources/articles?topic=security)
+            
+        *   [View all topics](https://github.com/resources/articles)
+            
+        
+    *   EXPLORE BY TYPE
+        
+        *   [Customer stories](https://github.com/customer-stories)
+            
+        *   [Events & webinars](https://github.com/resources/events)
+            
+        *   [Ebooks & reports](https://github.com/resources/whitepapers)
+            
+        *   [Business insights](https://github.com/solutions/executive-insights)
+            
+        *   [GitHub Skills](https://skills.github.com/)
+            
+        
+    *   SUPPORT & SERVICES
+        
+        *   [Documentation](https://docs.github.com/)
+            
+        *   [Customer support](https://support.github.com/)
+            
+        *   [Community forum](https://github.com/orgs/community/discussions)
+            
+        *   [Trust center](https://github.com/trust-center)
+            
+        *   [Partners](https://github.com/partners)
+            
+        
+    
+    [View all resources](https://github.com/resources)
+    
+*   Open Source
+    
+    *   COMMUNITY
+        
+        *   [GitHub SponsorsFund open source developers](https://github.com/open-source/sponsors)
+            
+        
+    *   PROGRAMS
+        
+        *   [Security Lab](https://securitylab.github.com/)
+            
+        *   [Maintainer Community](https://maintainers.github.com/)
+            
+        *   [GitHub Stars](https://stars.github.com/)
+            
+        *   [Archive Program](https://archiveprogram.github.com/)
+            
+        
+    *   REPOSITORIES
+        
+        *   [Topics](https://github.com/topics)
+            
+        *   [Trending](https://github.com/trending)
+            
+        *   [Collections](https://github.com/collections)
+            
+        
+    
+*   Enterprise
+    
+    *   ENTERPRISE SOLUTIONS
+        
+        *   [Enterprise platformAI-powered developer platform](https://github.com/enterprise)
+            
+        
+    *   AVAILABLE ADD-ONS
+        
+        *   [GitHub Advanced SecurityEnterprise-grade security features](https://github.com/security/advanced-security)
+            
+        *   [Copilot for BusinessEnterprise-grade AI features](https://github.com/features/copilot/copilot-business)
+            
+        *   [Premium SupportEnterprise-grade 24/7 support](https://github.com/enterprise/premium-support)
+            
+        
+    
+*   [Pricing](https://github.com/pricing)
+    
+
+Search/
+
+[Sign in](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Favocadowastaken%2Fbabel-plugin-direct-import)
+
+[Sign up](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=avocadowastaken%2Fbabel-plugin-direct-import)
+
+Appearance settings
+
+You signed in with another tab or window. [Reload](https://github.com/avocadowastaken/babel-plugin-direct-import)
+ to refresh your session. You signed out in another tab or window. [Reload](https://github.com/avocadowastaken/babel-plugin-direct-import)
+ to refresh your session. You switched accounts on another tab or window. [Reload](https://github.com/avocadowastaken/babel-plugin-direct-import)
+ to refresh your session. Dismiss alert
+
+[avocadowastaken](https://github.com/avocadowastaken) / **[babel-plugin-direct-import](https://github.com/avocadowastaken/babel-plugin-direct-import)** Public
+
+*   [Notifications](https://github.com/login?return_to=%2Favocadowastaken%2Fbabel-plugin-direct-import)
+     You must be signed in to change notification settings
+*   [Fork 3](https://github.com/login?return_to=%2Favocadowastaken%2Fbabel-plugin-direct-import)
+    
+*   [Star 112](https://github.com/login?return_to=%2Favocadowastaken%2Fbabel-plugin-direct-import)
+    
+
+*   [Code](https://github.com/avocadowastaken/babel-plugin-direct-import)
+    
+*   [Issues 2](https://github.com/avocadowastaken/babel-plugin-direct-import/issues)
+    
+*   [Pull requests 1](https://github.com/avocadowastaken/babel-plugin-direct-import/pulls)
+    
+*   [Actions](https://github.com/avocadowastaken/babel-plugin-direct-import/actions)
+    
+*   [Security and quality 0](https://github.com/avocadowastaken/babel-plugin-direct-import/security)
+    
+*   [Insights](https://github.com/avocadowastaken/babel-plugin-direct-import/pulse)
+    
+
+Additional navigation options
+
+*   [Code](https://github.com/avocadowastaken/babel-plugin-direct-import)
+    
+*   [Issues](https://github.com/avocadowastaken/babel-plugin-direct-import/issues)
+    
+*   [Pull requests](https://github.com/avocadowastaken/babel-plugin-direct-import/pulls)
+    
+*   [Actions](https://github.com/avocadowastaken/babel-plugin-direct-import/actions)
+    
+*   [Security and quality](https://github.com/avocadowastaken/babel-plugin-direct-import/security)
+    
+*   [Insights](https://github.com/avocadowastaken/babel-plugin-direct-import/pulse)
+    
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import)
+
+main
+
+[Branches](https://github.com/avocadowastaken/babel-plugin-direct-import/branches)
+[Tags](https://github.com/avocadowastaken/babel-plugin-direct-import/tags)
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import/branches)
+[](https://github.com/avocadowastaken/babel-plugin-direct-import/tags)
+
+Go to file
+
+Code
+
+Open more actions menu
+
+Latest commit
+-------------
+
+History
+-------
+
+[270 Commits](https://github.com/avocadowastaken/babel-plugin-direct-import/commits/main/)
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import/commits/main/)
+270 Commits
+
+Folders and files
+-----------------
+
+| Name |     | Name | Last commit message | Last commit date |
+| --- | --- | --- | --- |
+| [.github](https://github.com/avocadowastaken/babel-plugin-direct-import/tree/main/.github ".github") |     | [.github](https://github.com/avocadowastaken/babel-plugin-direct-import/tree/main/.github ".github") |     |     |
+| [.husky](https://github.com/avocadowastaken/babel-plugin-direct-import/tree/main/.husky ".husky") |     | [.husky](https://github.com/avocadowastaken/babel-plugin-direct-import/tree/main/.husky ".husky") |     |     |
+| [lib](https://github.com/avocadowastaken/babel-plugin-direct-import/tree/main/lib "lib") |     | [lib](https://github.com/avocadowastaken/babel-plugin-direct-import/tree/main/lib "lib") |     |     |
+| [test](https://github.com/avocadowastaken/babel-plugin-direct-import/tree/main/test "test") |     | [test](https://github.com/avocadowastaken/babel-plugin-direct-import/tree/main/test "test") |     |     |
+| [.eslintignore](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/.eslintignore ".eslintignore") |     | [.eslintignore](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/.eslintignore ".eslintignore") |     |     |
+| [.gitignore](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/.gitignore ".gitignore") |     | [.gitignore](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/.gitignore ".gitignore") |     |     |
+| [.prettierignore](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/.prettierignore ".prettierignore") |     | [.prettierignore](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/.prettierignore ".prettierignore") |     |     |
+| [LICENSE](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/LICENSE "LICENSE") |     | [LICENSE](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/LICENSE "LICENSE") |     |     |
+| [README.md](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/README.md "README.md") |     | [README.md](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/README.md "README.md") |     |     |
+| [package-lock.json](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/package-lock.json "package-lock.json") |     | [package-lock.json](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/package-lock.json "package-lock.json") |     |     |
+| [package.json](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/package.json "package.json") |     | [package.json](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/package.json "package.json") |     |     |
+| [tsconfig.json](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/tsconfig.json "tsconfig.json") |     | [tsconfig.json](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/tsconfig.json "tsconfig.json") |     |     |
+| [vitest.config.mjs](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/vitest.config.mjs "vitest.config.mjs") |     | [vitest.config.mjs](https://github.com/avocadowastaken/babel-plugin-direct-import/blob/main/vitest.config.mjs "vitest.config.mjs") |     |     |
+| View all files |     |     |
+
+Repository files navigation
+---------------------------
+
+*   [README](https://github.com/avocadowastaken/babel-plugin-direct-import#)
+    
+*   [MIT license](https://github.com/avocadowastaken/babel-plugin-direct-import#)
+    
+
+More items
+
+babel-plugin-direct-import
+--------------------------
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#babel-plugin-direct-import)
+
+[![Main](https://github.com/umidbekk/babel-plugin-direct-import/workflows/Main/badge.svg?branch=master)](https://github.com/umidbekk/babel-plugin-direct-import/actions)
+ [![npm version](https://camo.githubusercontent.com/2c6fe7684ff66efae770fe723b3252cf07bd91032c5f1174b962fbb954a48d25/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f626162656c2d706c7567696e2d6469726563742d696d706f72742e737667)](https://www.npmjs.com/package/babel-plugin-direct-import)
+ [![npm downloads](https://camo.githubusercontent.com/31d80f88c6ae598436cd0561460fe901d4e8c75967983829c5378f91cb2aeacb/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f646d2f626162656c2d706c7567696e2d6469726563742d696d706f72742e737667)](https://www.npmjs.com/package/babel-plugin-direct-import)
+ [![Maintainability](https://camo.githubusercontent.com/399af1301677f9c7637685d5c6f95ddea5b4343ac38b9019078f83bc68ebb0dd/68747470733a2f2f6170692e636f6465636c696d6174652e636f6d2f76312f6261646765732f39326438613939383136353163316563343938632f6d61696e7461696e6162696c697479)](https://codeclimate.com/github/avocadowastaken/babel-plugin-direct-import/maintainability)
+ [![Test Coverage](https://camo.githubusercontent.com/ec158384c5685638629f5c03299f1b7f7a16655699e3d65d09dcd39489877d91/68747470733a2f2f6170692e636f6465636c696d6174652e636f6d2f76312f6261646765732f39326438613939383136353163316563343938632f746573745f636f766572616765)](https://codeclimate.com/github/avocadowastaken/babel-plugin-direct-import/test_coverage)
+
+Babel plugin to cherry-pick ES module imports.
+
+### Installation
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#installation)
+
+```shell
+npm install --save-dev babel-plugin-direct-import
+```
+
+### Example
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#example)
+
+**In**
+
+```js
+import { Button, colors, ThemeProvider } from "@mui/material";
+import {
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+} from "@mui/icons-material";
+```
+
+**Out**
+
+```js
+import Button from "@mui/material/Button/Button.js";
+import * as colors from "@mui/material/colors/index.js";
+import ThemeProvider from "@mui/system/esm/ThemeProvider/ThemeProvider.js";
+import ChevronLeftIcon from "@mui/icons-material/esm/ChevronLeft.js";
+import ChevronRightIcon from "@mui/icons-material/esm/ChevronRight.js";
+```
+
+### Usage
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#usage)
+
+#### **Via .babelrc (Recommended)**
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#via-babelrc-recommended)
+
+**.babelrc**
+
+```json
+{
+  "plugins": [\
+    [\
+      "babel-plugin-direct-import",\
+      {\
+        "modules": ["@mui/system", "@mui/material", "@mui/icons-material"]\
+      }\
+    ]\
+  ]
+}
+```
+
+#### **Via Node API**
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#via-node-api)
+
+```js
+require("babel-core").transform("code", {
+  plugins: [\
+    [\
+      "babel-plugin-direct-import",\
+      {\
+        modules: ["@mui/system", "@mui/material", "@mui/icons-material"],\
+      },\
+    ],\
+  ],
+});
+```
+
+### Limitations
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#limitations)
+
+##### Transformation of namespace imports:
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#transformation-of-namespace-imports)
+
+Namespace imports are hard to analyze, that's why we skip them.
+
+```js
+import * as MUI from "@mui/material";
+
+return (props) => <MUI.Checkbox {...props} />;
+```
+
+##### Mapping of variable exports:
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#mapping-of-variable-exports)
+
+```js
+import * as colors from "./colors";
+
+export const blue = colors.blue;
+export const cyan = colors.cyan;
+export const getDefaultColor = () => red;
+```
+
+### Tested Packages
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#tested-packages)
+
+##### [Material UI (v4)](https://github.com/mui-org/material-ui/tree/v4.12.3)
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#material-ui-v4)
+
+```json
+{
+  "plugins": [\
+    [\
+      "babel-plugin-direct-import",\
+      {\
+        "modules": [\
+          "@material-ui/lab",\
+          "@material-ui/core",\
+          "@material-ui/icons",\
+          "@material-ui/system"\
+        ]\
+      }\
+    ]\
+  ]
+}
+```
+
+##### [Material UI (v5)](https://github.com/mui-org/material-ui/tree/v5.0.0-rc.0)
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#material-ui-v5)
+
+```json
+{
+  "plugins": [\
+    [\
+      "babel-plugin-direct-import",\
+      {\
+        "modules": [\
+          "@mui/lab",\
+          "@mui/system",\
+          "@mui/material",\
+          "@mui/icons-material"\
+        ]\
+      }\
+    ]\
+  ]
+}
+```
+
+### Integrations
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#integrations)
+
+#### Next.js
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#nextjs)
+
+```js
+// babel.config.js
+
+module.exports = (api) => {
+  const target = api.caller((caller) => caller.target);
+
+  api.cache.using(() => JSON.stringify({ target }));
+
+  const presets = ["next/babel"];
+  const plugins = [];
+
+  // Enable optimizations only for the `web` bundle.
+  if (target === "web") {
+    plugins.push([\
+      "babel-plugin-direct-import",\
+      { modules: ["@mui/lab", "@mui/material", "@mui/icons-material"] },\
+    ]);
+  }
+
+  return { presets, plugins };
+};
+```
+
+### Migration
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#migration)
+
+#### 0.5.0 to 0.6.0
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#050-to-060)
+
+After migration to Babel v7 it's impossible to pass arrays as configs, and now you have to pass an object with `modules` property:
+
+Before:
+
+```json
+{
+  "plugins": [["babel-plugin-direct-import", ["@material-ui/core"]]]
+}
+```
+
+After:
+
+```json
+{
+  "plugins": [\
+    ["babel-plugin-direct-import", { "modules": ["@material-ui/core"] }]\
+  ]
+}
+```
+
+### Heavily inspired by:
+
+[](https://github.com/avocadowastaken/babel-plugin-direct-import#heavily-inspired-by)
+
+*   [babel-plugin-date-fns](https://github.com/date-fns/babel-plugin-date-fns)
+    
+*   [babel-plugin-lodash](https://github.com/lodash/babel-plugin-lodash)
+    
+*   [babel-plugin-recharts](https://github.com/recharts/babel-plugin-recharts)
+    
+*   [babel-transform-imports](https://bitbucket.org/amctheatres/babel-transform-imports)
+    
+*   [babel-plugin-import](https://github.com/ant-design/babel-plugin-import)
+    
+
+About
+-----
+
+Babel plugin to cherry-pick ES module imports.
+
+[npmjs.com/babel-plugin-direct-import](https://npmjs.com/babel-plugin-direct-import)
+
+### Topics
+
+[babel-plugin](https://github.com/topics/babel-plugin)
+[luxon](https://github.com/topics/luxon)
+[material-ui](https://github.com/topics/material-ui)
+[modules](https://github.com/topics/modules)
+
+### Resources
+
+[Readme](https://github.com/avocadowastaken/babel-plugin-direct-import#readme-ov-file)
+
+[MIT license](https://github.com/avocadowastaken/babel-plugin-direct-import#MIT-1-ov-file)
+
+[Activity](https://github.com/avocadowastaken/babel-plugin-direct-import/activity)
+
+### Stars
+
+**112** stars
+
+### Watchers
+
+**2** watching
+
+### Forks
+
+[**3** forks](https://github.com/avocadowastaken/babel-plugin-direct-import/forks)
+
+[Report repository](https://github.com/contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Favocadowastaken%2Fbabel-plugin-direct-import&report=avocadowastaken+%28user%29)
+
+Releases
+--------
+
+Used by
+-------
+
+Contributors
+------------
+
+Languages
+---------
+
+Footer
+------
+
+[](https://github.com/)
+© 2026 GitHub, Inc.
+
+### Footer navigation
+
+*   [Terms](https://docs.github.com/site-policy/github-terms/github-terms-of-service)
+    
+*   [Privacy](https://docs.github.com/site-policy/privacy-policies/github-privacy-statement)
+    
+*   [Security](https://github.com/security)
+    
+*   [Status](https://www.githubstatus.com/)
+    
+*   [Community](https://github.community/)
+    
+*   [Docs](https://docs.github.com/)
+    
+*   [Contact](https://support.github.com/?tags=dotcom-footer)
+    
+*   Manage cookies
+*   Do not share my personal information
+
+You can’t perform that action at this time.

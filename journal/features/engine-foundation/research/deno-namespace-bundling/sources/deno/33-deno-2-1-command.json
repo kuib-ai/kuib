@@ -1,0 +1,1 @@
+{"args":["scrape","https://deno.com/blog/v2.1","--format","markdown","--json","-o","research_notes/Deno namespace bundling research/deno-sources/33-deno-2-1.json"],"status":0,"cliOutput":"Scrape ID: 01a10f84-276d-771b-8a1d-5a0e4b26bb49\n"}

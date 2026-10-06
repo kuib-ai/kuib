@@ -1,0 +1,1 @@
+{"args":["search","site:esbuild.github.io \"asynchronous behavior\" \"import\"","--sources","web","--no-domain-tools","--limit","4","--json","-o","research_notes/Deno namespace bundling research/deno-sources/29-search-esbuild-api.json"],"status":0,"cliOutput":"No results found.\n","note":"No results JSON was created by the CLI; stdout preserved from the completed invocation."}

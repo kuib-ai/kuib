@@ -5,12 +5,12 @@ state: idea
 horizon: later
 domains: [core, infra]
 depends-on: ["[[roadmap/items/R010-tool-safety-and-approvals]]", "[[roadmap/items/R014-security-and-secrets]]"]
-converges-with: []
+converges-with: ["[[roadmap/items/R019-engine-foundation]]"]
 split-from: []
 absorbed-into: ""
 feature: ""
 origin: ["conversation 2026-09-28"]
-touched: 2026-09-28
+touched: 2026-10-06
 ---
 
 # R009 — Agent capabilities — providers, tools and backends

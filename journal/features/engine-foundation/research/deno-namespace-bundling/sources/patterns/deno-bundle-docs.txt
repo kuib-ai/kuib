@@ -1,0 +1,811 @@
+[Skip to main content](https://docs.deno.com/runtime/reference/cli/bundle/#content)
+
+[](https://deno.com/ "Deno main website")
+
+[Runtime](https://docs.deno.com/runtime/)
+[API reference](https://docs.deno.com/api/)
+[Examples](https://docs.deno.com/examples/)
+[Deno Deploy](https://docs.deno.com/deploy/)
+
+⌘K
+
+↑↓Up or down tonavigate↵Enter toselectESCEscape toclose
+
+![](https://docs.deno.com/img/light.svg)![](https://docs.deno.com/img/dark.svg)Toggle Theme
+
+Toggle navigation menu
+
+Get started
+-----------
+
+*   [Welcome to Deno](https://docs.deno.com/runtime/)
+    
+*   [Installation](https://docs.deno.com/runtime/getting_started/installation/)
+    
+*   [Setup your environment](https://docs.deno.com/runtime/getting_started/setup_your_environment/)
+    
+
+Guides
+------
+
+*   [Running code](https://docs.deno.com/runtime/run/)
+    
+    *   [Watch mode and HMR](https://docs.deno.com/runtime/run/watch_mode/)
+        
+    
+*   [Dependency management](https://docs.deno.com/runtime/packages/)
+    
+    *   [Publishing](https://docs.deno.com/runtime/packages/publishing/)
+        
+    *   [Supply chain](https://docs.deno.com/runtime/packages/supply_chain/)
+        
+    *   [Peer dependencies](https://docs.deno.com/runtime/packages/peer_dependencies/)
+        
+    *   [Private repositories](https://docs.deno.com/runtime/packages/private_repositories/)
+        
+    
+*   [Web development](https://docs.deno.com/runtime/fundamentals/web_dev/)
+    
+*   [JSX and React](https://docs.deno.com/runtime/reference/jsx/)
+    
+*   [HTTP Server](https://docs.deno.com/runtime/fundamentals/http_server/)
+    
+*   [Testing](https://docs.deno.com/runtime/test/)
+    
+    *   [Mocking](https://docs.deno.com/runtime/test/mocking/)
+        
+    *   [Snapshots](https://docs.deno.com/runtime/test/snapshots/)
+        
+    *   [Coverage](https://docs.deno.com/runtime/test/coverage/)
+        
+    *   [Documentation tests](https://docs.deno.com/runtime/test/doc_tests/)
+        
+    *   [Sanitizers](https://docs.deno.com/runtime/test/sanitizers/)
+        
+    *   [Migrating from Jest](https://docs.deno.com/runtime/test/migrate_from_jest/)
+        
+    
+*   [Linting and formatting](https://docs.deno.com/runtime/lint_and_format/)
+    
+*   [Migrating from Node](https://docs.deno.com/runtime/migrate/)
+    
+    *   [Migrate from npm](https://docs.deno.com/runtime/migrate/migrate_from_npm/)
+        
+    *   [Migrate from Yarn](https://docs.deno.com/runtime/migrate/migrate_from_yarn/)
+        
+    *   [Migrate from pnpm](https://docs.deno.com/runtime/migrate/migrate_from_pnpm/)
+        
+    *   [Migrate from Bun](https://docs.deno.com/runtime/migrate/migrate_from_bun/)
+        
+    
+*   [Building CLI apps](https://docs.deno.com/runtime/cli_apps/)
+    
+*   [Desktop apps](https://docs.deno.com/runtime/desktop/)
+    
+    *   [Configuration](https://docs.deno.com/runtime/desktop/configuration/)
+        
+    *   [Backends](https://docs.deno.com/runtime/desktop/backends/)
+        
+    *   [HTTP serving](https://docs.deno.com/runtime/desktop/serving/)
+        
+    *   [Frameworks](https://docs.deno.com/runtime/desktop/frameworks/)
+        
+    *   [Windows](https://docs.deno.com/runtime/desktop/windows/)
+        
+    *   [WebGPU rendering](https://docs.deno.com/runtime/desktop/webgpu/)
+        
+    *   [Bindings](https://docs.deno.com/runtime/desktop/bindings/)
+        
+    *   [Menus](https://docs.deno.com/runtime/desktop/menus/)
+        
+    *   [Tray and dock](https://docs.deno.com/runtime/desktop/tray_and_dock/)
+        
+    *   [Dialogs](https://docs.deno.com/runtime/desktop/dialogs/)
+        
+    *   [Notifications](https://docs.deno.com/runtime/desktop/notifications/)
+        
+    *   [Hot module replacement](https://docs.deno.com/runtime/desktop/hmr/)
+        
+    *   [DevTools](https://docs.deno.com/runtime/desktop/devtools/)
+        
+    *   [Auto-update](https://docs.deno.com/runtime/desktop/auto_update/)
+        
+    *   [Error reporting](https://docs.deno.com/runtime/desktop/error_reporting/)
+        
+    *   [Distribution](https://docs.deno.com/runtime/desktop/distribution/)
+        
+    *   [Comparison](https://docs.deno.com/runtime/desktop/comparison/)
+        
+    
+*   [Deploying your app](https://docs.deno.com/runtime/deploy/)
+    
+
+Concepts
+--------
+
+*   [TypeScript](https://docs.deno.com/runtime/fundamentals/typescript/)
+    
+*   [Node](https://docs.deno.com/runtime/fundamentals/node/)
+    
+*   [Security](https://docs.deno.com/runtime/fundamentals/security/)
+    
+*   [Modules](https://docs.deno.com/runtime/fundamentals/modules/)
+    
+*   [Config files](https://docs.deno.com/runtime/fundamentals/configuration/)
+    
+*   [Workspaces](https://docs.deno.com/runtime/fundamentals/workspaces/)
+    
+*   [Stability and releases](https://docs.deno.com/runtime/fundamentals/stability_and_releases/)
+    
+
+Diagnostics
+-----------
+
+*   [Debugging](https://docs.deno.com/runtime/fundamentals/debugging/)
+    
+*   [CPU profiling](https://docs.deno.com/runtime/fundamentals/cpu_profiling/)
+    
+*   [OpenTelemetry](https://docs.deno.com/runtime/fundamentals/open_telemetry/)
+    
+
+Advanced
+--------
+
+*   [FFI](https://docs.deno.com/runtime/fundamentals/ffi/)
+    
+*   [WebAssembly](https://docs.deno.com/runtime/reference/wasm/)
+    
+*   [Cron](https://docs.deno.com/runtime/fundamentals/cron/)
+    
+*   [Loader hooks](https://docs.deno.com/runtime/reference/loader_hooks/)
+    
+*   [Lint plugins](https://docs.deno.com/runtime/reference/lint_plugins/)
+    
+*   [Bundling](https://docs.deno.com/runtime/reference/bundling/)
+    
+*   [Docker](https://docs.deno.com/runtime/reference/docker/)
+    
+*   [Continuous integration](https://docs.deno.com/runtime/reference/continuous_integration/)
+    
+*   [Deno & VS Code](https://docs.deno.com/runtime/reference/vscode/)
+    
+
+Reference
+---------
+
+*   [Overview](https://docs.deno.com/runtime/reference/)
+    
+*   [CLI](https://docs.deno.com/runtime/reference/cli/)
+    
+    *   [deno add](https://docs.deno.com/runtime/reference/cli/add/)
+        
+    *   [deno approve-scripts](https://docs.deno.com/runtime/reference/cli/approve_scripts/)
+        
+    *   [deno audit](https://docs.deno.com/runtime/reference/cli/audit/)
+        
+    *   [deno bench](https://docs.deno.com/runtime/reference/cli/bench/)
+        
+    *   [deno bump-version](https://docs.deno.com/runtime/reference/cli/bump_version/)
+        
+    *   [deno bundle](https://docs.deno.com/runtime/reference/cli/bundle/)
+        
+    *   [deno check](https://docs.deno.com/runtime/reference/cli/check/)
+        
+    *   [deno ci](https://docs.deno.com/runtime/reference/cli/ci/)
+        
+    *   [deno clean](https://docs.deno.com/runtime/reference/cli/clean/)
+        
+    *   [deno compile](https://docs.deno.com/runtime/reference/cli/compile/)
+        
+    *   [deno create](https://docs.deno.com/runtime/reference/cli/create/)
+        
+    *   [deno completions](https://docs.deno.com/runtime/reference/cli/completions/)
+        
+    *   [deno coverage](https://docs.deno.com/runtime/reference/cli/coverage/)
+        
+    *   [deno deploy](https://docs.deno.com/runtime/reference/cli/deploy/)
+        
+    *   [deno desktop](https://docs.deno.com/runtime/reference/cli/desktop/)
+        
+    *   [deno doc](https://docs.deno.com/runtime/reference/cli/doc/)
+        
+    *   [deno eval](https://docs.deno.com/runtime/reference/cli/eval/)
+        
+    *   [deno fmt](https://docs.deno.com/runtime/reference/cli/fmt/)
+        
+    *   [deno info](https://docs.deno.com/runtime/reference/cli/info/)
+        
+    *   [deno init](https://docs.deno.com/runtime/reference/cli/init/)
+        
+    *   [deno install](https://docs.deno.com/runtime/reference/cli/install/)
+        
+    *   [deno jupyter](https://docs.deno.com/runtime/reference/cli/jupyter/)
+        
+    *   [deno link](https://docs.deno.com/runtime/reference/cli/link/)
+        
+    *   [deno lint](https://docs.deno.com/runtime/reference/cli/lint/)
+        
+    *   [deno list](https://docs.deno.com/runtime/reference/cli/list/)
+        
+    *   [deno outdated](https://docs.deno.com/runtime/reference/cli/outdated/)
+        
+    *   [deno pack](https://docs.deno.com/runtime/reference/cli/pack/)
+        
+    *   [deno publish](https://docs.deno.com/runtime/reference/cli/publish/)
+        
+    *   [deno lsp](https://docs.deno.com/runtime/reference/cli/lsp/)
+        
+    *   [deno remove](https://docs.deno.com/runtime/reference/cli/remove/)
+        
+    *   [deno repl](https://docs.deno.com/runtime/reference/cli/repl/)
+        
+    *   [deno run](https://docs.deno.com/runtime/reference/cli/run/)
+        
+    *   [deno sandbox](https://docs.deno.com/runtime/reference/cli/sandbox/)
+        
+    *   [deno serve](https://docs.deno.com/runtime/reference/cli/serve/)
+        
+    *   [deno task](https://docs.deno.com/runtime/reference/cli/task/)
+        
+    *   [deno test](https://docs.deno.com/runtime/reference/cli/test/)
+        
+    *   [deno transpile](https://docs.deno.com/runtime/reference/cli/transpile/)
+        
+    *   [deno types](https://docs.deno.com/runtime/reference/cli/types/)
+        
+    *   [deno uninstall](https://docs.deno.com/runtime/reference/cli/uninstall/)
+        
+    *   [deno unlink](https://docs.deno.com/runtime/reference/cli/unlink/)
+        
+    *   [deno update](https://docs.deno.com/runtime/reference/cli/update/)
+        
+    *   [deno upgrade](https://docs.deno.com/runtime/reference/cli/upgrade/)
+        
+    *   [deno unstable flags](https://docs.deno.com/runtime/reference/cli/unstable_flags/)
+        
+    *   [deno watch](https://docs.deno.com/runtime/reference/cli/watch/)
+        
+    *   [deno why](https://docs.deno.com/runtime/reference/cli/why/)
+        
+    *   [deno x](https://docs.deno.com/runtime/reference/cli/x/)
+        
+    
+*   [Standard library](https://docs.deno.com/runtime/reference/std/)
+    
+    *   [assert](https://docs.deno.com/runtime/reference/std/assert/)
+        
+    *   [async](https://docs.deno.com/runtime/reference/std/async/)
+        
+    *   [bytes](https://docs.deno.com/runtime/reference/std/bytes/)
+        
+    *   [cache](https://docs.deno.com/runtime/reference/std/cache/)
+        
+    *   [cbor](https://docs.deno.com/runtime/reference/std/cbor/)
+        
+    *   [cli](https://docs.deno.com/runtime/reference/std/cli/)
+        
+    *   [collections](https://docs.deno.com/runtime/reference/std/collections/)
+        
+    *   [crypto](https://docs.deno.com/runtime/reference/std/crypto/)
+        
+    *   [csv](https://docs.deno.com/runtime/reference/std/csv/)
+        
+    *   [data-structures](https://docs.deno.com/runtime/reference/std/data-structures/)
+        
+    *   [datetime](https://docs.deno.com/runtime/reference/std/datetime/)
+        
+    *   [dotenv](https://docs.deno.com/runtime/reference/std/dotenv/)
+        
+    *   [encoding](https://docs.deno.com/runtime/reference/std/encoding/)
+        
+    *   [expect](https://docs.deno.com/runtime/reference/std/expect/)
+        
+    *   [fmt](https://docs.deno.com/runtime/reference/std/fmt/)
+        
+    *   [front-matter](https://docs.deno.com/runtime/reference/std/front-matter/)
+        
+    *   [fs](https://docs.deno.com/runtime/reference/std/fs/)
+        
+    *   [html](https://docs.deno.com/runtime/reference/std/html/)
+        
+    *   [http](https://docs.deno.com/runtime/reference/std/http/)
+        
+    *   [ini](https://docs.deno.com/runtime/reference/std/ini/)
+        
+    *   [internal](https://docs.deno.com/runtime/reference/std/internal/)
+        
+    *   [io](https://docs.deno.com/runtime/reference/std/io/)
+        
+    *   [json](https://docs.deno.com/runtime/reference/std/json/)
+        
+    *   [jsonc](https://docs.deno.com/runtime/reference/std/jsonc/)
+        
+    *   [log](https://docs.deno.com/runtime/reference/std/log/)
+        
+    *   [media-types](https://docs.deno.com/runtime/reference/std/media-types/)
+        
+    *   [msgpack](https://docs.deno.com/runtime/reference/std/msgpack/)
+        
+    *   [net](https://docs.deno.com/runtime/reference/std/net/)
+        
+    *   [path](https://docs.deno.com/runtime/reference/std/path/)
+        
+    *   [random](https://docs.deno.com/runtime/reference/std/random/)
+        
+    *   [regexp](https://docs.deno.com/runtime/reference/std/regexp/)
+        
+    *   [semver](https://docs.deno.com/runtime/reference/std/semver/)
+        
+    *   [streams](https://docs.deno.com/runtime/reference/std/streams/)
+        
+    *   [tar](https://docs.deno.com/runtime/reference/std/tar/)
+        
+    *   [testing](https://docs.deno.com/runtime/reference/std/testing/)
+        
+    *   [text](https://docs.deno.com/runtime/reference/std/text/)
+        
+    *   [toml](https://docs.deno.com/runtime/reference/std/toml/)
+        
+    *   [ulid](https://docs.deno.com/runtime/reference/std/ulid/)
+        
+    *   [uuid](https://docs.deno.com/runtime/reference/std/uuid/)
+        
+    *   [webgpu](https://docs.deno.com/runtime/reference/std/webgpu/)
+        
+    *   [xml](https://docs.deno.com/runtime/reference/std/xml/)
+        
+    *   [yaml](https://docs.deno.com/runtime/reference/std/yaml/)
+        
+    
+*   [deno.json](https://docs.deno.com/runtime/reference/deno_json/)
+    
+*   [TypeScript](https://docs.deno.com/runtime/reference/ts_config_migration/)
+    
+*   [Environment variables](https://docs.deno.com/runtime/reference/env_variables/)
+    
+*   [Permissions](https://docs.deno.com/runtime/reference/permissions/)
+    
+*   [LSP integration](https://docs.deno.com/runtime/reference/lsp_integration/)
+    
+*   [Lint rules](https://docs.deno.com/lint/)
+    
+
+Contributing
+------------
+
+*   [Overview](https://docs.deno.com/runtime/contributing/)
+    
+*   [Architecture](https://docs.deno.com/runtime/contributing/architecture/)
+    
+*   [Style guide](https://docs.deno.com/runtime/contributing/style_guide/)
+    
+*   [Help](https://docs.deno.com/runtime/help/)
+    
+
+On this page
+
+*   [Basic usage](https://docs.deno.com/runtime/reference/cli/bundle/#basic-usage)
+    
+*   [Common options](https://docs.deno.com/runtime/reference/cli/bundle/#common-options)
+    
+*   [Type checking](https://docs.deno.com/runtime/reference/cli/bundle/#type-checking)
+    
+*   [The browser field](https://docs.deno.com/runtime/reference/cli/bundle/#the-browser-field)
+    
+*   [Options](https://docs.deno.com/runtime/reference/cli/bundle/#options)
+    
+
+1.  Reference›
+2.  [CLI](https://docs.deno.com/runtime/reference/cli/)
+    
+
+Copy page
+
+[View Page as MarkdownOpen the Markdown file in a new tab](https://docs.deno.com/runtime/reference/cli/bundle.md)
+[Open in ClaudeAsk Claude about this page](https://claude.ai/new?q=Read%20this%20page%20from%20the%20Deno%20docs%3A%20https%3A%2F%2Fdocs.deno.com%2Fruntime%2Freference%2Fcli%2Fbundle.md%20and%20answer%20questions%20about%20the%20content.)
+[llms.txtMachine-readable index of these docs for AI tools](https://docs.deno.com/llms.txt)
+
+deno bundle
+===========
+
+Info
+
+`deno bundle` is currently an experimental subcommand and is subject to changes.
+
+`deno bundle` combines your module and all of its dependencies into a single JavaScript file, using [esbuild](https://esbuild.github.io/)
+ under the hood. It is useful for deploying or distributing a project as a single optimized file, but it is not currently intended as a replacement for complex or interactive build tools such as [Vite](https://vite.dev/)
+ or [webpack](https://webpack.js.org/)
+.
+
+Basic usage [Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#basic-usage)
+
+------------------------------------------------------------------------------------------------
+
+›\_
+
+    deno bundle -o output.js main.ts
+    
+
+Without `-o`/`--output`, the bundle is written to standard output. The output file can then be run with Deno or in other JavaScript runtimes:
+
+›\_
+
+    deno run output.js
+    
+
+Common options [Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#common-options)
+
+------------------------------------------------------------------------------------------------------
+
+Target a platform with `--platform` (`deno` by default, or `browser`), shrink the output with `--minify`, and emit source maps with `--sourcemap`:
+
+›\_
+
+    deno bundle --platform=browser --minify --sourcemap -o dist/app.js main.ts
+    
+
+Split shared code into separate chunks with `--code-splitting` and an output directory:
+
+›\_
+
+    deno bundle --code-splitting --outdir dist/ main.ts worker.ts
+    
+
+Keep a dependency out of the bundle with `--external`:
+
+›\_
+
+    deno bundle --external npm:sharp -o output.js main.ts
+    
+
+Generate TypeScript declarations alongside the JS output with `--declaration`. Deno rolls up the types for each entry point into a single self-contained `.d.ts` file:
+
+›\_
+
+    deno bundle main.ts --outdir dist --declaration
+    # Produces dist/main.js and dist/main.d.ts
+    
+
+Type checking [Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#type-checking)
+
+----------------------------------------------------------------------------------------------------
+
+`deno bundle` does not type-check your code by default. Enable type-checking with the `--check` flag:
+
+›\_
+
+    # type-check local modules while bundling
+    deno bundle --check -o output.js main.ts
+    
+    # also type-check remote modules
+    deno bundle --check=all -o output.js main.ts
+    
+
+You can also skip type-checking explicitly with `--no-check`, and `--no-check=remote` ignores diagnostics from remote modules only.
+
+The `browser` field [Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#the-browser-field)
+
+--------------------------------------------------------------------------------------------------------------
+
+When bundling with `--platform=browser`, Deno honors the npm `browser` field in a dependency's `package.json`, including its object form. The object maps modules to browser-specific replacements:
+
+    {
+      "browser": {
+        "./server.js": "./client.js",
+        "crypto": false,
+        "foo": "./shims/foo.js"
+      }
+    }
+    
+
+*   A relative-path key remaps a resolved file to a browser-specific one (`./server.js` becomes `./client.js`).
+*   A bare-specifier key remaps an import (`foo` becomes `./shims/foo.js`). A leading `node:` prefix is stripped before lookup, so `import "node:crypto"` matches the `"crypto"` key.
+*   A value of `false` excludes the module: the bundler substitutes an empty stub.
+
+For more on bundling strategies with Deno, see the [Bundling](https://docs.deno.com/runtime/reference/bundling/)
+ guide.
+
+Command line usage:
+
+    bundle
+
+Output a single JavaScript file with all dependencies
+
+Options [Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options)
+
+----------------------------------------------------------------------------------------
+
+`--allow-import, -I`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-allow-import)
+
+Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: deno.land:443,[jsr.io:443](http://jsr.io:443/)
+,[esm.sh:443](http://esm.sh:443/)
+,[raw.esm.sh:443](http://raw.esm.sh:443/)
+,[cdn.jsdelivr.net:443](http://cdn.jsdelivr.net:443/)
+,[raw.githubusercontent.com:443](http://raw.githubusercontent.com:443/)
+,[gist.githubusercontent.com:443](http://gist.githubusercontent.com:443/)
+.
+
+`--allow-scripts`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-allow-scripts)
+
+Allow running npm lifecycle scripts for the given packages Note: Scripts will only be executed when using a node\_modules directory (`--node-modules-dir`).
+
+`--cert`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-cert)
+
+Load certificate authority from PEM encoded file.
+
+`--check`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-check)
+
+Enable type-checking. This subcommand does not type-check by default; pass `--check=all` to also type-check remote modules. Alternatively, use the 'deno check' subcommand.
+
+`--code-splitting`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-code-splitting)
+
+Enable code splitting.
+
+`[--config, -c](https://docs.deno.com/go/config) `
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-config)
+
+Configure different aspects of deno including TypeScript, linting, and code formatting. Typically the configuration file will be called `deno.json` or `deno.jsonc` and automatically detected; in that case this flag is not necessary.
+
+`--declaration`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-declaration)
+
+Generate .d.ts declaration files alongside the bundle.
+
+`--deny-import`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-deny-import)
+
+Deny importing from remote hosts. Optionally specify denied IP addresses and host names, with ports as necessary.
+
+`--external`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-external)
+
+`--format`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-format)
+
+`--frozen-lockfile`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-frozen-lockfile)
+
+Error out if lockfile is out of date.
+
+`[--import-map](https://docs.deno.com/runtime/manual/basics/import_maps) `
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-import-map)
+
+Load import map file from local file or remote URL.
+
+`--inline-imports`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-inline-imports)
+
+Whether to inline imported modules into the importing file \[default: true\]
+
+`--keep-names`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-keep-names)
+
+Keep function and class names.
+
+`--lock`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-lock)
+
+Check the specified lock file. (If value is not provided, defaults to "./deno.lock").
+
+`--min-dep-age`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-min-dep-age)
+
+(Unstable) The age in minutes, ISO-8601 duration or RFC3339 absolute timestamp (e.g. '120' for two hours, 'P2D' for two days, '2025-09-16' for cutoff date, '2025-09-16T12:00:00+00:00' for cutoff time, '0' to disable).
+
+`--minify`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-minify)
+
+Minify the output.
+
+`--no-check`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-no-check)
+
+Skip type-checking. If the value of "remote" is supplied, diagnostic errors from remote modules will be ignored.
+
+`--no-config`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-no-config)
+
+Disable automatic loading of the configuration file.
+
+`--no-lock`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-no-lock)
+
+Disable auto discovery of the lock file.
+
+`--no-npm`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-no-npm)
+
+Do not resolve npm modules.
+
+`--no-remote`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-no-remote)
+
+Do not resolve remote modules.
+
+`--node-modules-dir`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-node-modules-dir)
+
+Selects the node\_modules directory mode for npm packages (not a path). One of: auto (create a local node\_modules directory and install npm packages into it), manual (use the existing local node\_modules directory, do not modify it), none (do not use a local node\_modules directory; resolve npm packages from the global cache). Defaults to auto when the flag is passed without a value.
+
+`--node-modules-linker`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-node-modules-linker)
+
+Sets the linker mode for npm packages (isolated or hoisted).
+
+`--outdir`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-outdir)
+
+Output directory for bundled files.
+
+`--output, -o`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-output)
+
+Output path\`.
+
+`--packages`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-packages)
+
+How to handle packages. Accepted values are 'bundle' or 'external'.
+
+`--platform`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-platform)
+
+Platform to bundle for. Accepted values are 'browser' or 'deno'.
+
+`--reload, -r`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-reload)
+
+Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; npm: reloads all npm modules; npm:chalk reloads a single npm module; jsr:@std/http/file-server,jsr:@std/assert/assert-equals reloads specific modules.
+
+`--sourcemap`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-sourcemap)
+
+Generate source map. Accepted values are 'linked', 'inline', or 'external'.
+
+`--unsafely-ignore-certificate-errors`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-unsafely-ignore-certificate-errors)
+
+DANGER: Disables verification of TLS certificates.
+
+`--vendor`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-vendor)
+
+Toggles local vendor folder usage for remote modules and a node\_modules folder for npm packages.
+
+`--watch`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/bundle/#options-watch)
+
+Watch and rebuild on changes.
+
+Last updated on June 24, 2026
+
+[Previous← deno bump-version](https://docs.deno.com/runtime/reference/cli/bump_version/)
+[Nextdeno check →](https://docs.deno.com/runtime/reference/cli/check/)
+
+Did you find what you needed?
+-----------------------------
+
+YesNo[Edit this page](https://github.com/denoland/docs/edit/main/runtime/reference/cli/bundle.md)
+
+What can we do to improve this page?
+
+0 / 2000
+
+GitHub username (_optional_)
+
+If provided, you'll be @mentioned in the created GitHub issue
+
+Send us feedback
+
+[Privacy policy](https://docs.deno.com/deploy/privacy_policy)
+
+This page
+---------
+
+*   [Basic usage](https://docs.deno.com/runtime/reference/cli/bundle/#basic-usage)
+    
+*   [Common options](https://docs.deno.com/runtime/reference/cli/bundle/#common-options)
+    
+*   [Type checking](https://docs.deno.com/runtime/reference/cli/bundle/#type-checking)
+    
+*   [The browser field](https://docs.deno.com/runtime/reference/cli/bundle/#the-browser-field)
+    
+
+### Deno Docs
+
+*   [Deno Runtime](https://docs.deno.com/runtime/)
+    
+*   [Examples](https://docs.deno.com/examples/)
+    
+*   [Standard Library](https://jsr.io/@std)
+    
+*   [Deno API Reference](https://docs.deno.com/api/deno/)
+    
+
+### Services Docs
+
+*   [Deno Deploy](https://docs.deno.com/deploy/)
+    
+*   [Deno Deploy Classic](https://docs.deno.com/deploy/classic/)
+    
+*   [Deno Subhosting](https://docs.deno.com/subhosting/manual/)
+    
+
+### Community
+
+*   [Discord](https://discord.gg/deno)
+    
+*   [GitHub](https://github.com/denoland)
+    
+*   [YouTube](https://youtube.com/@deno_land)
+    
+*   [Bluesky](https://bsky.app/profile/deno.land)
+    
+*   [Mastodon](https://fosstodon.org/@deno_land)
+    
+*   [Twitter](https://twitter.com/deno_land)
+    
+*   [Newsletter](https://deno.news/)
+    
+
+### Help & Feedback
+
+*   [Community Support](https://discord.gg/deno)
+    
+*   [Deploy System Status](https://denostatus.com/)
+    
+*   [Deploy Feedback](https://github.com/denoland/deploy_feedback)
+    
+*   [Report a Problem](mailto:support@deno.com)
+    
+
+### Company
+
+*   [Deno Website](https://deno.com/)
+    
+*   [Blog](https://deno.com/blog)
+    
+*   [Privacy Policy](https://docs.deno.com/deploy/privacy_policy)
+    
+*   [LLMs](https://docs.deno.com/llms.txt)
+    
+
+Copyright © 2026 the Deno authors.

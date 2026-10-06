@@ -1,0 +1,118 @@
+[Skip to content](https://github.com/evanw/esbuild/issues/1883#start-of-content)
+             
+
+You signed in with another tab or window. [Reload](https://github.com/evanw/esbuild/issues/1883)
+ to refresh your session. You signed out in another tab or window. [Reload](https://github.com/evanw/esbuild/issues/1883)
+ to refresh your session. You switched accounts on another tab or window. [Reload](https://github.com/evanw/esbuild/issues/1883)
+ to refresh your session. Dismiss alert
+
+[evanw](https://github.com/evanw) / **[esbuild](https://github.com/evanw/esbuild)** Public
+
+*   [Notifications](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+     You must be signed in to change notification settings
+*   [Fork 1.4k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+*   [Star 40.1k](https://github.com/login?return_to=%2Fevanw%2Fesbuild)
+    
+
+Pure annotation for functions #1883
+===================================
+
+New issue
+
+Copy link
+
+New issue
+
+Copy link
+
+Closed
+
+Closed
+
+[Pure annotation for functions](https://github.com/evanw/esbuild/issues/1883#top)
+#1883
+
+Copy link
+
+Description
+-----------
+
+[![@skyrpex](https://avatars.githubusercontent.com/u/1077520?u=458841691255c3cc9ae5d9b356d3f9a787fefeb3&v=4&size=48)](https://github.com/skyrpex)
+
+[skyrpex](https://github.com/skyrpex)
+
+opened [on Dec 23, 2021](https://github.com/evanw/esbuild/issues/1883#issue-1088017540)
+
+Issue body actions
+
+Currently, the `/* @__PURE__ */` annotation must be used individually on every returned value for a given call.
+
+Could it be possible to allow using the annotation on a function, so all its returned values are considered pure? Like in the following.
+
+```ts
+/**
+ * The function is pure, so if the result is not used, it can be removed.
+ * 
+ * @__PURE__
+ */
+function addTwo(number: number) {
+    return number + 2;
+}
+
+// Will be removed
+addTwo(4);
+
+// Will be removed
+const x = addTwo(3);
+
+// This will be kept
+export const y = addTwo(2);
+```
+
+Reactions are currently unavailable
+
+Activity
+--------
+
+[Sign up for free](https://github.com/signup?return_to=https://github.com/evanw/esbuild/issues/1883)
+ **to join this conversation on GitHub.** Already have an account? [Sign in to comment](https://github.com/login?return_to=https://github.com/evanw/esbuild/issues/1883)
+
+Metadata
+--------
+
+Metadata
+--------
+
+### Assignees
+
+No one assigned
+
+### Labels
+
+No labels
+
+No labels
+
+### Projects
+
+No projects
+
+### Milestone
+
+No milestone
+
+### Relationships
+
+None yet
+
+### Development
+
+No branches or pull requests
+
+Issue actions
+-------------
+
+*   ![](https://github.githubassets.com/assets/github-copilot-app-light-15ad5534265eeacd.svg)Open in GitHub Copilot app
+
+You can’t perform that action at this time.

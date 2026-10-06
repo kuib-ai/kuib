@@ -1,0 +1,776 @@
+[Skip to main content](https://docs.deno.com/runtime/reference/cli/compile/#content)
+
+On this page
+
+*   [Flags](https://docs.deno.com/runtime/reference/cli/compile/#flags)
+    
+*   [Framework detection](https://docs.deno.com/runtime/reference/cli/compile/#framework-detection)
+    
+*   [Watch mode](https://docs.deno.com/runtime/reference/cli/compile/#watch-mode)
+    
+*   [Cross Compilation](https://docs.deno.com/runtime/reference/cli/compile/#cross-compilation)
+    *   [Supported Targets](https://docs.deno.com/runtime/reference/cli/compile/#supported-targets)
+        
+*   [The denort binary](https://docs.deno.com/runtime/reference/cli/compile/#the-denort-binary)
+    
+*   [Choosing a JavaScript engine](https://docs.deno.com/runtime/reference/cli/compile/#choosing-a-javascript-engine)
+    
+*   [Icons](https://docs.deno.com/runtime/reference/cli/compile/#icons)
+    
+*   [Dynamic Imports](https://docs.deno.com/runtime/reference/cli/compile/#dynamic-imports)
+    
+*   [Including Data Files or Directories](https://docs.deno.com/runtime/reference/cli/compile/#including-data-files-or-directories)
+    *   [Configuring include / exclude in deno.json](https://docs.deno.com/runtime/reference/cli/compile/#configuring-include-%2F-exclude-in-deno.json)
+        
+*   [Workers](https://docs.deno.com/runtime/reference/cli/compile/#workers)
+    
+*   [Bundling dependencies](https://docs.deno.com/runtime/reference/cli/compile/#bundling-dependencies)
+    *   [Minifying the bundle](https://docs.deno.com/runtime/reference/cli/compile/#minifying-the-bundle)
+        
+    *   [Limitations](https://docs.deno.com/runtime/reference/cli/compile/#limitations)
+        
+*   [Self-Extracting Executables](https://docs.deno.com/runtime/reference/cli/compile/#self-extracting-executables)
+    *   [Trade-offs](https://docs.deno.com/runtime/reference/cli/compile/#trade-offs)
+        
+*   [Code Signing](https://docs.deno.com/runtime/reference/cli/compile/#code-signing)
+    *   [macOS](https://docs.deno.com/runtime/reference/cli/compile/#macos)
+        
+    *   [Windows](https://docs.deno.com/runtime/reference/cli/compile/#windows)
+        
+*   [Persistent storage in executables](https://docs.deno.com/runtime/reference/cli/compile/#persistent-storage-in-executables)
+    
+*   [Options](https://docs.deno.com/runtime/reference/cli/compile/#options)
+    
+
+deno compile
+============
+
+Flags [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#flags)
+
+-------------------------------------------------------------------------------------
+
+As with [`deno install`](https://docs.deno.com/runtime/reference/cli/install/)
+, the runtime flags used to execute the script must be specified at compilation time. This includes permission flags.
+
+›\_
+
+    deno compile --allow-read --allow-net jsr:@std/http/file-server
+    
+
+[Script arguments](https://docs.deno.com/runtime/run/#passing-script-arguments)
+ can be partially embedded.
+
+›\_
+
+    deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
+    
+    ./file_server --help
+    
+
+Framework detection [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#framework-detection)
+
+-----------------------------------------------------------------------------------------------------------------
+
+Starting in Deno 2.8, `deno compile .` (or `deno compile <directory>`) detects common web frameworks and produces an entrypoint that knows how to start them. The detected build script is run first, so the compiled binary always contains a fresh build.
+
+Supported frameworks:
+
+*   Next.js
+*   Astro
+*   Fresh (1.x and 2.x)
+*   Remix
+*   React Router
+*   SvelteKit
+*   Nuxt
+*   SolidStart
+*   TanStack Start
+*   Vite (SSR, plus SPA/MPA projects served as static output)
+
+›\_
+
+    # In a Next.js / Astro / Fresh / React Router / etc. project
+    deno compile .
+    
+    # Or pointing at a specific app directory
+    deno compile ./apps/web
+    
+
+Generated entrypoints use `import.meta.dirname` so framework asset paths resolve correctly against the [virtual filesystem](https://docs.deno.com/runtime/reference/cli/compile/#including-data-files-or-directories)
+ inside the compiled binary.
+
+React Router projects must build successfully under Deno before they can be compiled. Because React Router's default server entry targets Node.js, add a Web Streams-compatible `app/entry.server.tsx` when building with Deno. See the [React Router desktop framework notes](https://docs.deno.com/runtime/desktop/frameworks/#react-router)
+ for an example.
+
+If the project doesn't match any supported framework, `deno compile` will error out.
+
+Watch mode [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#watch-mode)
+
+-----------------------------------------------------------------------------------------------
+
+Pass `--watch` to rebuild the executable whenever a file in the compile graph changes:
+
+›\_
+
+    deno compile --watch main.ts
+    
+
+Use `--watch-exclude` to keep specific paths from triggering a rebuild, and `--no-clear-screen` to preserve the terminal output between rebuilds:
+
+›\_
+
+    deno compile --watch --watch-exclude=./dist --no-clear-screen main.ts
+    
+
+Cross Compilation [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#cross-compilation)
+
+-------------------------------------------------------------------------------------------------------------
+
+You can cross-compile binaries for other platforms by using the `--target` flag.
+
+    # Cross compile for Apple Silicon
+    deno compile --target aarch64-apple-darwin main.ts
+    
+    # Cross compile for Windows with an icon
+    deno compile --target x86_64-pc-windows-msvc --icon ./icon.ico main.ts
+    
+
+### Supported Targets [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#supported-targets)
+
+Deno supports cross compiling to all targets regardless of the host platform.
+
+| OS  | Architecture | Target |
+| --- | --- | --- |
+| Windows | x86\_64 | `x86_64-pc-windows-msvc` |
+| Windows | ARM64 | `aarch64-pc-windows-msvc` |
+| macOS | x86\_64 | `x86_64-apple-darwin` |
+| macOS | ARM64 | `aarch64-apple-darwin` |
+| Linux | x86\_64 | `x86_64-unknown-linux-gnu` |
+| Linux | ARM64 | `aarch64-unknown-linux-gnu` |
+
+`aarch64-pc-windows-msvc` (Windows on ARM) is supported starting in Deno 2.9.3.
+
+The denort binary [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#the-denort-binary)
+
+-------------------------------------------------------------------------------------------------------------
+
+`deno compile` embeds your program into `denort` ("Deno runtime"): a stripped build of Deno that contains only what's needed to run a compiled program, with none of the tooling subcommands. Using `denort` as the base instead of the full `deno` binary is what keeps compiled executables smaller.
+
+The first time you compile for a given Deno version and target, Deno downloads the matching `denort-<target>.zip` from `dl.deno.land` and caches it in `DENO_DIR`. This is also how cross-compilation works: compiling with `--target` fetches that platform's `denort`. Subsequent compiles reuse the cached binary and work offline.
+
+To use a custom or locally built runtime as the base, set the `DENORT_BIN` environment variable to its path. Deno also picks up a `denort` binary placed next to the `deno` executable.
+
+Choosing a JavaScript engine [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#choosing-a-javascript-engine)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Caution
+
+`--engine quickjs` is experimental and subject to change. It landed after Deno 2.9.4, so it is available in [canary builds](https://docs.deno.com/runtime/reference/cli/upgrade/#canary-build)
+ and in later releases.
+
+Compiled binaries run on V8 by default. The `--engine` flag lets you build against QuickJS instead, which produces a smaller executable:
+
+›\_
+
+    # Default, same as omitting the flag
+    deno compile --engine v8 main.ts
+    
+    # Build a binary that runs on QuickJS
+    deno compile --engine quickjs main.ts
+    
+
+The same flag is available on [`deno desktop`](https://docs.deno.com/runtime/desktop/distribution/)
+, where it selects the engine embedded in the app's runtime library.
+
+Trade-offs to weigh before shipping a QuickJS binary:
+
+*   **Security updates.** The QuickJS backend does not receive the same security updates as V8. Don't use it for programs that run untrusted input.
+*   **Performance.** QuickJS is an interpreter with no JIT, so compute-heavy code runs slower than on V8. Startup and memory use are lower.
+*   **Maturity.** The backend is experimental; behavior differences from V8 are possible, so test your program with the engine you intend to ship.
+
+Each engine has its own prebuilt runtime: with `--engine quickjs`, Deno downloads `denort-quickjs-<target>.zip` (or `libdenort-quickjs-<target>.zip` for `deno desktop`) instead of the default `denort-<target>.zip`. Both variants are published for every [supported target](https://docs.deno.com/runtime/reference/cli/compile/#supported-targets)
+, so cross-compilation works the same way. If you override the base runtime with `DENORT_BIN` (or a `denort` binary next to `deno`), that binary is used as-is: `--engine` is then ignored and Deno prints a warning.
+
+Icons [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#icons)
+
+-------------------------------------------------------------------------------------
+
+It is possible to add an icon to the executable by using the `--icon` flag when targeting Windows. The icon must be in the `.ico` format.
+
+    deno compile --icon icon.ico main.ts
+    
+    # Cross compilation with icon
+    deno compile --target x86_64-pc-windows-msvc --icon ./icon.ico main.ts
+    
+
+Dynamic Imports [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#dynamic-imports)
+
+---------------------------------------------------------------------------------------------------------
+
+By default, statically analyzable dynamic imports (imports that have the string literal within the `import("...")` call expression) will be included in the output.
+
+    // calculator.ts and its dependencies will be included in the binary
+    const calculator = await import("./calculator.ts");
+    
+
+But non-statically analyzable dynamic imports won't:
+
+    const specifier = condition ? "./calc.ts" : "./better_calc.ts";
+    const calculator = await import(specifier);
+    
+
+To include non-statically analyzable dynamic imports, specify an `--include <path>` flag.
+
+›\_
+
+    deno compile --include calc.ts --include better_calc.ts main.ts
+    
+
+Including Data Files or Directories [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#including-data-files-or-directories)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Starting in Deno 2.1, you can include files or directories in the executable by specifying them via the `--include <path>` flag.
+
+›\_
+
+    deno compile --include names.csv --include data main.ts
+    
+
+Then read the file relative to the directory path of the current module via `import.meta.dirname`:
+
+    // main.ts
+    const names = Deno.readTextFileSync(import.meta.dirname + "/names.csv");
+    const dataFiles = Deno.readDirSync(import.meta.dirname + "/data");
+    
+    // use names and dataFiles here
+    
+
+Note this currently only works for files on the file system and not remote files.
+
+`--include` treats embedded `.js` and `.ts` files as module-graph roots, so it resolves and transpiles them. To embed files exactly as they are, without any module resolution, use `--include-as-is` instead. This is the right choice for pre-built frontend bundles (for example Vite or webpack output) that are already processed and would fail to resolve as Deno modules:
+
+›\_
+
+    deno compile --include-as-is ./dist main.ts
+    
+
+### Configuring `include` / `exclude` in `deno.json` [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#configuring-include-%2F-exclude-in-deno.json)
+
+The `--include` and `--exclude` paths can be set declaratively in `deno.json` so you don't have to repeat them on every `deno compile` invocation:
+
+deno.json
+
+    {
+      "compile": {
+        "include": ["names.csv", "data", "worker.ts"],
+        "exclude": ["data/secrets", "**/*.test.ts"]
+      }
+    }
+    
+
+CLI flags are merged with the config: `--include` and `--exclude` add to the lists in `deno.json` rather than replacing them. See the [Compile config](https://docs.deno.com/runtime/reference/deno_json/#compile-config)
+ section in the configuration guide for more details, including how to declare `permissions` on the same block.
+
+Workers [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#workers)
+
+-----------------------------------------------------------------------------------------
+
+Similarly to non-statically analyzable dynamic imports, code for [workers](https://docs.deno.com/runtime/reference/web_platform_apis/#web-workers)
+ is not included in the compiled executable by default. There are two ways to include workers:
+
+1.  Use the `--include <path>` flag to include the worker code.
+
+›\_
+
+    deno compile --include worker.ts main.ts
+    
+
+2.  Import worker module using a statically analyzable import.
+
+    // main.ts
+    import "./worker.ts";
+    
+
+›\_
+
+    deno compile main.ts
+    
+
+Bundling dependencies [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#bundling-dependencies)
+
+---------------------------------------------------------------------------------------------------------------------
+
+Caution
+
+`--bundle` is experimental and subject to change. Some dynamic patterns are not yet supported (see [Limitations](https://docs.deno.com/runtime/reference/cli/compile/#limitations)
+ below).
+
+By default, `deno compile` embeds the entire resolved `node_modules` tree in the executable. For projects with many npm dependencies this can make binaries large and slow to start. The `--bundle` flag instead runs your entrypoint through the bundler before embedding, so only the code your program actually reaches ends up in the binary.
+
+›\_
+
+    deno compile --bundle main.ts
+    
+
+For a pure-ESM dependency tree, tree-shaking removes everything unused and the npm payload is dropped entirely, producing a much smaller binary. When a CommonJS package or a native addon (`.node`) is reached, the relevant packages are embedded so they keep working at runtime, but unreached packages are still left out.
+
+`--bundle` understands several real-world patterns automatically:
+
+*   **CommonJS and native addons** — CJS dependencies and `.node` native addons are detected and the packages that provide them are embedded.
+*   **Workers** — `new Worker(new URL("./worker.ts", import.meta.url), ...)` calls are discovered, each worker is bundled separately and embedded alongside the main bundle.
+*   **`package.json` reads** — packages that read their own `package.json` at runtime (for example to report a version) have it included automatically.
+
+### Minifying the bundle [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#minifying-the-bundle)
+
+Combine `--bundle` with `--minify` to minify the bundled output. This reduces both the embedded bundle size and runtime memory use, at the cost of less readable stack traces.
+
+›\_
+
+    deno compile --bundle --minify main.ts
+    
+
+`--minify` is only meaningful together with `--bundle`.
+
+### Limitations [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#limitations)
+
+Because bundling relies on statically analyzing your code, patterns that can't be traced are dropped from the binary:
+
+*   Dynamic `require()` / `import()` of specifiers that aren't string literals.
+*   Workers spawned with computed URLs, or spawned from transitive dependencies rather than your own source.
+
+If your program relies on these, either keep them statically analyzable, add the needed files with [`--include`](https://docs.deno.com/runtime/reference/cli/compile/#including-data-files-or-directories)
+, or compile without `--bundle`.
+
+Self-Extracting Executables [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#self-extracting-executables)
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+By default, compiled executables serve embedded files from an in-memory virtual file system. The `--self-extracting` flag changes this behavior so that the binary extracts all embedded files to disk on first run and uses real file system operations at runtime.
+
+›\_
+
+    deno compile --self-extracting main.ts
+    
+
+This is useful for scenarios where code needs real files on disk, such as native addons or native code that reads relative files.
+
+The extraction directory is chosen in order of preference:
+
+1.  `<exe_dir>/.<exe_name>/<hash>/` (next to the compiled binary)
+2.  Platform data directory fallback:
+    *   Linux: `$XDG_DATA_HOME/<exe_name>/<hash>` or `~/.local/share/<exe_name>/<hash>`
+    *   macOS: `~/Library/Application Support/<exe_name>/<hash>`
+    *   Windows: `%LOCALAPPDATA%\<exe_name>\<hash>`
+
+Files are only extracted once — subsequent runs reuse the extracted directory if it already exists and the hash matches.
+
+### Trade-offs [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#trade-offs)
+
+Self-extracting mode enables broader compatibility, but comes with some trade-offs:
+
+*   **Initial startup cost**: The first run takes longer due to file extraction.
+*   **Disk usage**: Extracted files take up additional space on disk.
+*   **Memory usage**: Higher memory usage since embedded content can no longer be referenced as static data.
+*   **Tamper risk**: Users or other code can modify the extracted files on disk.
+
+Code Signing [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#code-signing)
+
+---------------------------------------------------------------------------------------------------
+
+### macOS [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#macos)
+
+By default, on macOS, the compiled executable will be signed using an ad-hoc signature which is the equivalent of running `codesign -s -`:
+
+›\_
+
+    deno compile -o main main.ts
+    codesign --verify -vv ./main
+    
+    ./main: valid on disk
+    ./main: satisfies its Designated Requirement
+    
+
+You can specify a signing identity when code signing the executable just like you would do with any other macOS executable:
+
+›\_
+
+    codesign -s "Developer ID Application: Your Name" ./main
+    
+
+Refer to the [official documentation](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution)
+ for more information on codesigning and notarization on macOS.
+
+### Windows [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#windows)
+
+On Windows, the compiled executable can be signed using the `SignTool.exe` utility.
+
+›\_
+
+    deno compile -o main.exe main.ts
+    signtool sign /fd SHA256 main.exe
+    
+
+Persistent storage in executables [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#persistent-storage-in-executables)
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+A compiled binary is treated as a standalone application, so origin-bound storage persists across runs in the platform's application data directory (`%LOCALAPPDATA%` on Windows, `~/Library/Application Support` on macOS, `$XDG_DATA_HOME` on Linux):
+
+*   [`localStorage`](https://docs.deno.com/runtime/reference/web_platform_apis/#web-storage)
+     and the [Web Cache API](https://docs.deno.com/api/web/~/Cache)
+     read and write to that directory.
+*   [`Deno.openKv()`](https://docs.deno.com/api/deno/~/Deno.openKv)
+     called without a path opens a persistent database there instead of falling back to an in-memory one.
+
+Each compiled app gets its own location derived from its identity, so separate apps do not share storage. That identity comes from the `--app-name` flag, which is baked in at compile time and falls back to the output file name when omitted:
+
+›\_
+
+    deno compile --app-name my-app main.ts
+    
+
+Because the name (not the module path) drives the directory, the store stays stable across runs even if you rename the binary, two binaries built with the same `--app-name` share a store, and differently named apps stay isolated. Recompiling with a different `--app-name` starts a fresh store.
+
+Command line usage:
+
+    compile
+
+Compile the script into a self contained executable
+
+Options [Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options)
+
+-----------------------------------------------------------------------------------------
+
+`--app-name`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-app-name)
+
+Stable identity for the compiled app. Determines where origin-bound storage such as the default `Deno.openKv()`, `localStorage` and `caches` is persisted (under the platform's app data directory). Defaults to the output file name. Set this to keep storage stable across renames.
+
+`--bundle`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-bundle)
+
+Experimental. Bundle the entrypoint with esbuild before embedding, instead of shipping the whole node\_modules tree. Produces a smaller binary with faster startup, at the cost of dropping dynamic require/import patterns that can't be statically traced.
+
+`--cached-only`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-cached-only)
+
+Require that remote dependencies are already cached.
+
+`--cert`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-cert)
+
+Load certificate authority from PEM encoded file.
+
+`--check`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-check)
+
+Set type-checking behavior. This subcommand type-checks local modules by default, so passing `--check` is redundant; pass `--check=all` to also type-check remote modules. Alternatively, use the 'deno check' subcommand.
+
+`[--conditions](https://docs.deno.com/go/conditional-exports) `
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-conditions)
+
+Use this argument to specify custom conditions for npm package exports. You can also use DENO\_CONDITIONS env var. .
+
+`[--config, -c](https://docs.deno.com/go/config) `
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-config)
+
+Configure different aspects of deno including TypeScript, linting, and code formatting. Typically the configuration file will be called `deno.json` or `deno.jsonc` and automatically detected; in that case this flag is not necessary.
+
+`--engine`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-engine)
+
+JS engine the compiled binary runs on (quickjs is smaller and experimental, and does not receive the same security updates as v8).
+
+`--env-file`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-env-file)
+
+Load environment variables from local file Only the first environment variable with a given key is used. Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved. Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.
+
+`--exclude`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-exclude)
+
+Excludes a file/directory in the compiled executable. Use this flag to exclude a specific file or directory within the included files. For example, to exclude a certain folder in the bundled node\_modules directory.
+
+`--exclude-unused-npm`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-exclude-unused-npm)
+
+Embed only the npm packages reachable from the module graph (managed npm; no node\_modules directory). Without this flag the full managed npm snapshot from the lockfile / package.json is embedded. Reduces binary size when the lockfile contains packages the entrypoint does not import. Skips packages that are only reached through non-statically-analyzable dynamic imports; pass those with `--include` npm: if needed.
+
+`--ext`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-ext)
+
+Set content type of the supplied file.
+
+`--frozen-lockfile`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-frozen-lockfile)
+
+Error out if lockfile is out of date.
+
+`--icon`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-icon)
+
+Set the icon of the executable on Windows (.ico).
+
+`[--import-map](https://docs.deno.com/runtime/manual/basics/import_maps) `
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-import-map)
+
+Load import map file from local file or remote URL.
+
+`--include`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-include)
+
+Includes an additional module or file/directory in the compiled executable. Use this flag if a dynamically imported module or a web worker main module fails to load in the executable or to embed a file or directory in the executable. This flag can be passed multiple times, to include multiple additional modules.
+
+`--inspect`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-inspect)
+
+Activate inspector on host:port \[default: 127.0.0.1:9229\]. Host and port are optional. Using port 0 will assign a random free port.
+
+`--inspect-brk`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-inspect-brk)
+
+Activate inspector on host:port, wait for debugger to connect and break at the start of user script.
+
+`--inspect-publish-uid`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-inspect-publish-uid)
+
+`--inspect-wait`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-inspect-wait)
+
+Activate inspector on host:port and wait for debugger to connect before running user code.
+
+`--location`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-location)
+
+Value of globalThis.location used by some web APIs.
+
+`--lock`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-lock)
+
+Check the specified lock file. (If value is not provided, defaults to "./deno.lock").
+
+`--min-dep-age`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-min-dep-age)
+
+(Unstable) The age in minutes, ISO-8601 duration or RFC3339 absolute timestamp (e.g. '120' for two hours, 'P2D' for two days, '2025-09-16' for cutoff date, '2025-09-16T12:00:00+00:00' for cutoff time, '0' to disable).
+
+`--minify`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-minify)
+
+Experimental. Minify the bundled output. Only meaningful with `--bundle.` Reduces both the embedded bundle size and runtime memory use, at the cost of less readable stack traces.
+
+`--no-check`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-no-check)
+
+Skip type-checking. If the value of "remote" is supplied, diagnostic errors from remote modules will be ignored.
+
+`--no-clear-screen`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-no-clear-screen)
+
+Do not clear terminal screen when under watch mode.
+
+`--no-code-cache`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-no-code-cache)
+
+Disable V8 code cache feature.
+
+`--no-config`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-no-config)
+
+Disable automatic loading of the configuration file.
+
+`--no-lock`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-no-lock)
+
+Disable auto discovery of the lock file.
+
+`--no-npm`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-no-npm)
+
+Do not resolve npm modules.
+
+`--no-remote`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-no-remote)
+
+Do not resolve remote modules.
+
+`--no-terminal`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-no-terminal)
+
+Hide terminal on Windows.
+
+`--node-modules-dir`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-node-modules-dir)
+
+Selects the node\_modules directory mode for npm packages (not a path). One of: auto (create a local node\_modules directory and install npm packages into it), manual (use the existing local node\_modules directory, do not modify it), none (do not use a local node\_modules directory; resolve npm packages from the global cache). Defaults to auto when the flag is passed without a value.
+
+`--node-modules-linker`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-node-modules-linker)
+
+Sets the linker mode for npm packages (isolated or hoisted).
+
+`--output, -o`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-output)
+
+Output file (defaults to $PWD/).
+
+`--preload`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-preload)
+
+A list of files that will be executed before the main module.
+
+`--reload, -r`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-reload)
+
+Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; npm: reloads all npm modules; npm:chalk reloads a single npm module; jsr:@std/http/file-server,jsr:@std/assert/assert-equals reloads specific modules.
+
+`--require`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-require)
+
+A list of CommonJS modules that will be executed before the main module.
+
+`--seed`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-seed)
+
+Set the random number generator seed.
+
+`--self-extracting`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-self-extracting)
+
+Create a self-extracting binary that extracts the embedded file system to disk on first run and then runs from there.
+
+`--target`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-target)
+
+Target OS architecture.
+
+`--unsafely-ignore-certificate-errors`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-unsafely-ignore-certificate-errors)
+
+DANGER: Disables verification of TLS certificates.
+
+`--v8-flags`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-v8-flags)
+
+To see a list of all available flags use `--v8-flags=--help` Flags can also be set via the DENO\_V8\_FLAGS environment variable. Any flags set with this flag are appended after the DENO\_V8\_FLAGS environment variable.
+
+`--vendor`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-vendor)
+
+Toggles local vendor folder usage for remote modules and a node\_modules folder for npm packages.
+
+`--watch`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-watch)
+
+Watch for file changes and restart process automatically. Only local files from entry point module graph are watched.
+
+`--watch-exclude`
+
+[Jump to heading#](https://docs.deno.com/runtime/reference/cli/compile/#options-watch-exclude)
+
+Exclude provided files/patterns from watch mode.
+
+Last updated on August 6, 2026
+
+Did you find what you needed?
+-----------------------------
+
+YesNo[Edit this page](https://github.com/denoland/docs/edit/main/runtime/reference/cli/compile.md)
+
+What can we do to improve this page?
+
+0 / 2000
+
+GitHub username (_optional_)
+
+If provided, you'll be @mentioned in the created GitHub issue
+
+Send us feedback
+
+[Privacy policy](https://docs.deno.com/deploy/privacy_policy)
+
+This page
+---------
+
+*   [Flags](https://docs.deno.com/runtime/reference/cli/compile/#flags)
+    
+*   [Framework detection](https://docs.deno.com/runtime/reference/cli/compile/#framework-detection)
+    
+*   [Watch mode](https://docs.deno.com/runtime/reference/cli/compile/#watch-mode)
+    
+*   [Cross Compilation](https://docs.deno.com/runtime/reference/cli/compile/#cross-compilation)
+    *   [Supported Targets](https://docs.deno.com/runtime/reference/cli/compile/#supported-targets)
+        
+*   [The denort binary](https://docs.deno.com/runtime/reference/cli/compile/#the-denort-binary)
+    
+*   [Choosing a JavaScript engine](https://docs.deno.com/runtime/reference/cli/compile/#choosing-a-javascript-engine)
+    
+*   [Icons](https://docs.deno.com/runtime/reference/cli/compile/#icons)
+    
+*   [Dynamic Imports](https://docs.deno.com/runtime/reference/cli/compile/#dynamic-imports)
+    
+*   [Including Data Files or Directories](https://docs.deno.com/runtime/reference/cli/compile/#including-data-files-or-directories)
+    *   [Configuring include / exclude in deno.json](https://docs.deno.com/runtime/reference/cli/compile/#configuring-include-%2F-exclude-in-deno.json)
+        
+*   [Workers](https://docs.deno.com/runtime/reference/cli/compile/#workers)
+    
+*   [Bundling dependencies](https://docs.deno.com/runtime/reference/cli/compile/#bundling-dependencies)
+    *   [Minifying the bundle](https://docs.deno.com/runtime/reference/cli/compile/#minifying-the-bundle)
+        
+    *   [Limitations](https://docs.deno.com/runtime/reference/cli/compile/#limitations)
+        
+*   [Self-Extracting Executables](https://docs.deno.com/runtime/reference/cli/compile/#self-extracting-executables)
+    *   [Trade-offs](https://docs.deno.com/runtime/reference/cli/compile/#trade-offs)
+        
+*   [Code Signing](https://docs.deno.com/runtime/reference/cli/compile/#code-signing)
+    *   [macOS](https://docs.deno.com/runtime/reference/cli/compile/#macos)
+        
+    *   [Windows](https://docs.deno.com/runtime/reference/cli/compile/#windows)
+        
+*   [Persistent storage in executables](https://docs.deno.com/runtime/reference/cli/compile/#persistent-storage-in-executables)

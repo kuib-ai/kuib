@@ -1,0 +1,741 @@
+[Skip to content](https://effect.website/docs/v3/getting-started#_top)
+
+[](https://effect.website/blog/releases/effect/40)
+
+Effect 4.0 is here. One ecosystem. Zero dependencies.
+
+ [![Effect Logo](https://effect.website/_astro/effect-logo-black.CJ9hFWX7.svg) ![](https://effect.website/_astro/effect-logo-white.Yu0soJEa.svg)](https://effect.website/)
+
+[Docs](https://effect.website/docs/v3)
+
+[Onboarding](https://effect.website/docs/v3)
+ [Guides](https://effect.website/docs/v3/guides)
+ [Reference](https://effect.website/docs/v3/api)
+
+[v4](https://effect.website/docs/v4)
+ [v3](https://effect.website/docs/v3)
+
+*   [Docs](https://effect.website/docs/v3)
+    
+*   [Onboarding](https://effect.website/docs/v3)
+    
+*   [Guides](https://effect.website/docs/v3/guides)
+    
+*   [Reference](https://effect.website/docs/v3/api)
+    
+
+[](https://github.com/Effect-TS)
+[](https://discord.gg/effect-ts)
+
+Docs menu / Getting Started
+
+*   [Getting Started](https://effect.website/docs/v3/getting-started)
+    
+*   Error Management
+    
+    *   [Two Types of Errors](https://effect.website/docs/v3/error-management/two-error-types)
+        
+    *   [Expected Errors](https://effect.website/docs/v3/error-management/expected-errors)
+        
+    *   [Unexpected Errors](https://effect.website/docs/v3/error-management/unexpected-errors)
+        
+    *   [Fallback](https://effect.website/docs/v3/error-management/fallback)
+        
+    *   [Matching](https://effect.website/docs/v3/error-management/matching)
+        
+    *   [Retrying](https://effect.website/docs/v3/error-management/retrying)
+        
+    *   [Timing Out](https://effect.website/docs/v3/error-management/timing-out)
+        
+    *   [Sandboxing](https://effect.website/docs/v3/error-management/sandboxing)
+        
+    *   [Error Accumulation](https://effect.website/docs/v3/error-management/error-accumulation)
+        
+    *   [Error Channel Operations](https://effect.website/docs/v3/error-management/error-channel-operations)
+        
+    *   [Parallel and Sequential Errors](https://effect.website/docs/v3/error-management/parallel-and-sequential-errors)
+        
+    *   [Yieldable Errors](https://effect.website/docs/v3/error-management/yieldable-errors)
+        
+    
+*   Requirements Management
+    
+    *   [Managing Services](https://effect.website/docs/v3/requirements-management/services)
+        
+    *   [Default Services](https://effect.website/docs/v3/requirements-management/default-services)
+        
+    *   [Managing Layers](https://effect.website/docs/v3/requirements-management/layers)
+        
+    *   [Layer Memoization](https://effect.website/docs/v3/requirements-management/layer-memoization)
+        
+    
+*   Resource Management
+    
+    *   [Introduction](https://effect.website/docs/v3/resource-management/introduction)
+        
+    *   [Scope](https://effect.website/docs/v3/resource-management/scope)
+        
+    
+*   Observability
+    
+    *   [Logging](https://effect.website/docs/v3/observability/logging)
+        
+    *   [Metrics](https://effect.website/docs/v3/observability/metrics)
+        
+    *   [Tracing](https://effect.website/docs/v3/observability/tracing)
+        
+    *   [Supervisor](https://effect.website/docs/v3/observability/supervisor)
+        
+    
+*   [Configuration](https://effect.website/docs/v3/configuration)
+    
+*   [Runtime](https://effect.website/docs/v3/runtime)
+    
+*   Scheduling
+    
+    *   [Introduction](https://effect.website/docs/v3/scheduling/introduction)
+        
+    *   [Repetition](https://effect.website/docs/v3/scheduling/repetition)
+        
+    *   [Built-In Schedules](https://effect.website/docs/v3/scheduling/built-in-schedules)
+        
+    *   [Schedule Combinators](https://effect.website/docs/v3/scheduling/schedule-combinators)
+        
+    *   [Cron](https://effect.website/docs/v3/scheduling/cron)
+        
+    *   [Examples](https://effect.website/docs/v3/scheduling/examples)
+        
+    
+*   State Management
+    
+    *   [Ref](https://effect.website/docs/v3/state-management/ref)
+        
+    *   [SynchronizedRef](https://effect.website/docs/v3/state-management/synchronizedref)
+        
+    *   [SubscriptionRef](https://effect.website/docs/v3/state-management/subscriptionref)
+        
+    
+*   [Batching](https://effect.website/docs/v3/batching)
+    
+*   Caching
+    
+    *   [Caching Effects](https://effect.website/docs/v3/caching/caching-effects)
+        
+    *   [Cache](https://effect.website/docs/v3/caching/cache)
+        
+    
+*   Concurrency
+    
+    *   [Basic Concurrency](https://effect.website/docs/v3/concurrency/basic-concurrency)
+        
+    *   [Fibers](https://effect.website/docs/v3/concurrency/fibers)
+        
+    *   [Deferred](https://effect.website/docs/v3/concurrency/deferred)
+        
+    *   [Queue](https://effect.website/docs/v3/concurrency/queue)
+        
+    *   [PubSub](https://effect.website/docs/v3/concurrency/pubsub)
+        
+    *   [Semaphore](https://effect.website/docs/v3/concurrency/semaphore)
+        
+    *   [Latch](https://effect.website/docs/v3/concurrency/latch)
+        
+    
+*   Stream
+    
+    *   [Introduction](https://effect.website/docs/v3/stream/introduction)
+        
+    *   [Creating Streams](https://effect.website/docs/v3/stream/creating)
+        
+    *   [Consuming Streams](https://effect.website/docs/v3/stream/consuming-streams)
+        
+    *   [Error Handling](https://effect.website/docs/v3/stream/error-handling)
+        
+    *   [Operations](https://effect.website/docs/v3/stream/operations)
+        
+    *   [Resourceful Streams](https://effect.website/docs/v3/stream/resourceful-streams)
+        
+    
+*   Sink
+    
+    *   [Introduction](https://effect.website/docs/v3/sink/introduction)
+        
+    *   [Creating Sinks](https://effect.website/docs/v3/sink/creating)
+        
+    *   [Operations](https://effect.website/docs/v3/sink/operations)
+        
+    *   [Concurrency](https://effect.website/docs/v3/sink/concurrency)
+        
+    *   [Leftovers](https://effect.website/docs/v3/sink/leftovers)
+        
+    
+*   Testing
+    
+    *   [TestClock](https://effect.website/docs/v3/testing/testclock)
+        
+    
+*   Code Style
+    
+    *   [Guidelines](https://effect.website/docs/v3/code-style/guidelines)
+        
+    *   [Dual APIs](https://effect.website/docs/v3/code-style/dual)
+        
+    *   [Branded Types](https://effect.website/docs/v3/code-style/branded-types)
+        
+    *   [Pattern Matching](https://effect.website/docs/v3/code-style/pattern-matching)
+        
+    *   [Excessive Nesting](https://effect.website/docs/v3/code-style/do)
+        
+    *   [Control Flow Operators](https://effect.website/docs/v3/code-style/control-flow)
+        
+    
+*   Data Types
+    
+    *   [BigDecimal](https://effect.website/docs/v3/data-types/bigdecimal)
+        
+    *   [Cause](https://effect.website/docs/v3/data-types/cause)
+        
+    *   [Chunk](https://effect.website/docs/v3/data-types/chunk)
+        
+    *   [Data](https://effect.website/docs/v3/data-types/data)
+        
+    *   [DateTime](https://effect.website/docs/v3/data-types/datetime)
+        
+    *   [Duration](https://effect.website/docs/v3/data-types/duration)
+        
+    *   [Either](https://effect.website/docs/v3/data-types/either)
+        
+    *   [Exit](https://effect.website/docs/v3/data-types/exit)
+        
+    *   [HashSet](https://effect.website/docs/v3/data-types/hash-set)
+        
+    *   [Option](https://effect.website/docs/v3/data-types/option)
+        
+    *   [Redacted](https://effect.website/docs/v3/data-types/redacted)
+        
+    
+*   Trait
+    
+    *   [Equal](https://effect.website/docs/v3/trait/equal)
+        
+    *   [Hash](https://effect.website/docs/v3/trait/hash)
+        
+    
+*   Behaviour
+    
+    *   [Equivalence](https://effect.website/docs/v3/behaviour/equivalence)
+        
+    *   [Order](https://effect.website/docs/v3/behaviour/order)
+        
+    
+*   Schema
+    
+    *   [Introduction](https://effect.website/docs/v3/schema/introduction)
+        
+    *   [Getting Started](https://effect.website/docs/v3/schema/getting-started)
+        
+    *   [Basic Usage](https://effect.website/docs/v3/schema/basic-usage)
+        
+    *   [Filters](https://effect.website/docs/v3/schema/filters)
+        
+    *   [Advanced Usage](https://effect.website/docs/v3/schema/advanced-usage)
+        
+    *   [Projections](https://effect.website/docs/v3/schema/projections)
+        
+    *   [Transformations](https://effect.website/docs/v3/schema/transformations)
+        
+    *   [Annotations](https://effect.website/docs/v3/schema/annotations)
+        
+    *   [Error Messages](https://effect.website/docs/v3/schema/error-messages)
+        
+    *   [Error Formatters](https://effect.website/docs/v3/schema/error-formatters)
+        
+    *   [Class APIs](https://effect.website/docs/v3/schema/classes)
+        
+    *   [Default Constructors](https://effect.website/docs/v3/schema/default-constructors)
+        
+    *   [Effect Data Types](https://effect.website/docs/v3/schema/effect-data-types)
+        
+    *   [Standard Schema](https://effect.website/docs/v3/schema/standard-schema)
+        
+    *   [Arbitrary](https://effect.website/docs/v3/schema/arbitrary)
+        
+    *   [JSON Schema](https://effect.website/docs/v3/schema/json-schema)
+        
+    *   [Equivalence](https://effect.website/docs/v3/schema/equivalence)
+        
+    *   [Pretty Printer](https://effect.website/docs/v3/schema/pretty)
+        
+    
+*   Ai
+    
+    *   [Introduction](https://effect.website/docs/v3/ai/introduction)
+        
+    *   [Getting Started](https://effect.website/docs/v3/ai/getting-started)
+        
+    *   [Execution Planning](https://effect.website/docs/v3/ai/planning-llm-interactions)
+        
+    *   [Tool Use](https://effect.website/docs/v3/ai/tool-use)
+        
+    
+*   Micro
+    
+    *   [Getting Started](https://effect.website/docs/v3/micro/new-users)
+        
+    *   [Micro for Effect Users](https://effect.website/docs/v3/micro/effect-users)
+        
+    
+*   Platform
+    
+    *   [Introduction](https://effect.website/docs/v3/platform/introduction)
+        
+    *   [Command](https://effect.website/docs/v3/platform/command)
+        
+    *   [FileSystem](https://effect.website/docs/v3/platform/file-system)
+        
+    *   [KeyValueStore](https://effect.website/docs/v3/platform/key-value-store)
+        
+    *   [Path](https://effect.website/docs/v3/platform/path)
+        
+    *   [PlatformLogger](https://effect.website/docs/v3/platform/platformlogger)
+        
+    *   [Runtime](https://effect.website/docs/v3/platform/runtime)
+        
+    *   [Terminal](https://effect.website/docs/v3/platform/terminal)
+        
+    
+*   Additional Resources
+    
+    *   [Myths](https://effect.website/docs/v3/additional-resources/myths)
+        
+    *   [Coming From ZIO](https://effect.website/docs/v3/additional-resources/coming-from-zio)
+        
+    *   [Effect vs fp-ts](https://effect.website/docs/v3/additional-resources/effect-vs-fp-ts)
+        
+    *   [Effect vs Promise](https://effect.website/docs/v3/additional-resources/effect-vs-promise)
+        
+    *   [Effect vs neverthrow](https://effect.website/docs/v3/additional-resources/effect-vs-neverthrow)
+        
+    
+
+*   [Getting Started](https://effect.website/docs/v3/getting-started)
+    
+*   Error Management
+    
+    *   [Two Types of Errors](https://effect.website/docs/v3/error-management/two-error-types)
+        
+    *   [Expected Errors](https://effect.website/docs/v3/error-management/expected-errors)
+        
+    *   [Unexpected Errors](https://effect.website/docs/v3/error-management/unexpected-errors)
+        
+    *   [Fallback](https://effect.website/docs/v3/error-management/fallback)
+        
+    *   [Matching](https://effect.website/docs/v3/error-management/matching)
+        
+    *   [Retrying](https://effect.website/docs/v3/error-management/retrying)
+        
+    *   [Timing Out](https://effect.website/docs/v3/error-management/timing-out)
+        
+    *   [Sandboxing](https://effect.website/docs/v3/error-management/sandboxing)
+        
+    *   [Error Accumulation](https://effect.website/docs/v3/error-management/error-accumulation)
+        
+    *   [Error Channel Operations](https://effect.website/docs/v3/error-management/error-channel-operations)
+        
+    *   [Parallel and Sequential Errors](https://effect.website/docs/v3/error-management/parallel-and-sequential-errors)
+        
+    *   [Yieldable Errors](https://effect.website/docs/v3/error-management/yieldable-errors)
+        
+    
+*   Requirements Management
+    
+    *   [Managing Services](https://effect.website/docs/v3/requirements-management/services)
+        
+    *   [Default Services](https://effect.website/docs/v3/requirements-management/default-services)
+        
+    *   [Managing Layers](https://effect.website/docs/v3/requirements-management/layers)
+        
+    *   [Layer Memoization](https://effect.website/docs/v3/requirements-management/layer-memoization)
+        
+    
+*   Resource Management
+    
+    *   [Introduction](https://effect.website/docs/v3/resource-management/introduction)
+        
+    *   [Scope](https://effect.website/docs/v3/resource-management/scope)
+        
+    
+*   Observability
+    
+    *   [Logging](https://effect.website/docs/v3/observability/logging)
+        
+    *   [Metrics](https://effect.website/docs/v3/observability/metrics)
+        
+    *   [Tracing](https://effect.website/docs/v3/observability/tracing)
+        
+    *   [Supervisor](https://effect.website/docs/v3/observability/supervisor)
+        
+    
+*   [Configuration](https://effect.website/docs/v3/configuration)
+    
+*   [Runtime](https://effect.website/docs/v3/runtime)
+    
+*   Scheduling
+    
+    *   [Introduction](https://effect.website/docs/v3/scheduling/introduction)
+        
+    *   [Repetition](https://effect.website/docs/v3/scheduling/repetition)
+        
+    *   [Built-In Schedules](https://effect.website/docs/v3/scheduling/built-in-schedules)
+        
+    *   [Schedule Combinators](https://effect.website/docs/v3/scheduling/schedule-combinators)
+        
+    *   [Cron](https://effect.website/docs/v3/scheduling/cron)
+        
+    *   [Examples](https://effect.website/docs/v3/scheduling/examples)
+        
+    
+*   State Management
+    
+    *   [Ref](https://effect.website/docs/v3/state-management/ref)
+        
+    *   [SynchronizedRef](https://effect.website/docs/v3/state-management/synchronizedref)
+        
+    *   [SubscriptionRef](https://effect.website/docs/v3/state-management/subscriptionref)
+        
+    
+*   [Batching](https://effect.website/docs/v3/batching)
+    
+*   Caching
+    
+    *   [Caching Effects](https://effect.website/docs/v3/caching/caching-effects)
+        
+    *   [Cache](https://effect.website/docs/v3/caching/cache)
+        
+    
+*   Concurrency
+    
+    *   [Basic Concurrency](https://effect.website/docs/v3/concurrency/basic-concurrency)
+        
+    *   [Fibers](https://effect.website/docs/v3/concurrency/fibers)
+        
+    *   [Deferred](https://effect.website/docs/v3/concurrency/deferred)
+        
+    *   [Queue](https://effect.website/docs/v3/concurrency/queue)
+        
+    *   [PubSub](https://effect.website/docs/v3/concurrency/pubsub)
+        
+    *   [Semaphore](https://effect.website/docs/v3/concurrency/semaphore)
+        
+    *   [Latch](https://effect.website/docs/v3/concurrency/latch)
+        
+    
+*   Stream
+    
+    *   [Introduction](https://effect.website/docs/v3/stream/introduction)
+        
+    *   [Creating Streams](https://effect.website/docs/v3/stream/creating)
+        
+    *   [Consuming Streams](https://effect.website/docs/v3/stream/consuming-streams)
+        
+    *   [Error Handling](https://effect.website/docs/v3/stream/error-handling)
+        
+    *   [Operations](https://effect.website/docs/v3/stream/operations)
+        
+    *   [Resourceful Streams](https://effect.website/docs/v3/stream/resourceful-streams)
+        
+    
+*   Sink
+    
+    *   [Introduction](https://effect.website/docs/v3/sink/introduction)
+        
+    *   [Creating Sinks](https://effect.website/docs/v3/sink/creating)
+        
+    *   [Operations](https://effect.website/docs/v3/sink/operations)
+        
+    *   [Concurrency](https://effect.website/docs/v3/sink/concurrency)
+        
+    *   [Leftovers](https://effect.website/docs/v3/sink/leftovers)
+        
+    
+*   Testing
+    
+    *   [TestClock](https://effect.website/docs/v3/testing/testclock)
+        
+    
+*   Code Style
+    
+    *   [Guidelines](https://effect.website/docs/v3/code-style/guidelines)
+        
+    *   [Dual APIs](https://effect.website/docs/v3/code-style/dual)
+        
+    *   [Branded Types](https://effect.website/docs/v3/code-style/branded-types)
+        
+    *   [Pattern Matching](https://effect.website/docs/v3/code-style/pattern-matching)
+        
+    *   [Excessive Nesting](https://effect.website/docs/v3/code-style/do)
+        
+    *   [Control Flow Operators](https://effect.website/docs/v3/code-style/control-flow)
+        
+    
+*   Data Types
+    
+    *   [BigDecimal](https://effect.website/docs/v3/data-types/bigdecimal)
+        
+    *   [Cause](https://effect.website/docs/v3/data-types/cause)
+        
+    *   [Chunk](https://effect.website/docs/v3/data-types/chunk)
+        
+    *   [Data](https://effect.website/docs/v3/data-types/data)
+        
+    *   [DateTime](https://effect.website/docs/v3/data-types/datetime)
+        
+    *   [Duration](https://effect.website/docs/v3/data-types/duration)
+        
+    *   [Either](https://effect.website/docs/v3/data-types/either)
+        
+    *   [Exit](https://effect.website/docs/v3/data-types/exit)
+        
+    *   [HashSet](https://effect.website/docs/v3/data-types/hash-set)
+        
+    *   [Option](https://effect.website/docs/v3/data-types/option)
+        
+    *   [Redacted](https://effect.website/docs/v3/data-types/redacted)
+        
+    
+*   Trait
+    
+    *   [Equal](https://effect.website/docs/v3/trait/equal)
+        
+    *   [Hash](https://effect.website/docs/v3/trait/hash)
+        
+    
+*   Behaviour
+    
+    *   [Equivalence](https://effect.website/docs/v3/behaviour/equivalence)
+        
+    *   [Order](https://effect.website/docs/v3/behaviour/order)
+        
+    
+*   Schema
+    
+    *   [Introduction](https://effect.website/docs/v3/schema/introduction)
+        
+    *   [Getting Started](https://effect.website/docs/v3/schema/getting-started)
+        
+    *   [Basic Usage](https://effect.website/docs/v3/schema/basic-usage)
+        
+    *   [Filters](https://effect.website/docs/v3/schema/filters)
+        
+    *   [Advanced Usage](https://effect.website/docs/v3/schema/advanced-usage)
+        
+    *   [Projections](https://effect.website/docs/v3/schema/projections)
+        
+    *   [Transformations](https://effect.website/docs/v3/schema/transformations)
+        
+    *   [Annotations](https://effect.website/docs/v3/schema/annotations)
+        
+    *   [Error Messages](https://effect.website/docs/v3/schema/error-messages)
+        
+    *   [Error Formatters](https://effect.website/docs/v3/schema/error-formatters)
+        
+    *   [Class APIs](https://effect.website/docs/v3/schema/classes)
+        
+    *   [Default Constructors](https://effect.website/docs/v3/schema/default-constructors)
+        
+    *   [Effect Data Types](https://effect.website/docs/v3/schema/effect-data-types)
+        
+    *   [Standard Schema](https://effect.website/docs/v3/schema/standard-schema)
+        
+    *   [Arbitrary](https://effect.website/docs/v3/schema/arbitrary)
+        
+    *   [JSON Schema](https://effect.website/docs/v3/schema/json-schema)
+        
+    *   [Equivalence](https://effect.website/docs/v3/schema/equivalence)
+        
+    *   [Pretty Printer](https://effect.website/docs/v3/schema/pretty)
+        
+    
+*   Ai
+    
+    *   [Introduction](https://effect.website/docs/v3/ai/introduction)
+        
+    *   [Getting Started](https://effect.website/docs/v3/ai/getting-started)
+        
+    *   [Execution Planning](https://effect.website/docs/v3/ai/planning-llm-interactions)
+        
+    *   [Tool Use](https://effect.website/docs/v3/ai/tool-use)
+        
+    
+*   Micro
+    
+    *   [Getting Started](https://effect.website/docs/v3/micro/new-users)
+        
+    *   [Micro for Effect Users](https://effect.website/docs/v3/micro/effect-users)
+        
+    
+*   Platform
+    
+    *   [Introduction](https://effect.website/docs/v3/platform/introduction)
+        
+    *   [Command](https://effect.website/docs/v3/platform/command)
+        
+    *   [FileSystem](https://effect.website/docs/v3/platform/file-system)
+        
+    *   [KeyValueStore](https://effect.website/docs/v3/platform/key-value-store)
+        
+    *   [Path](https://effect.website/docs/v3/platform/path)
+        
+    *   [PlatformLogger](https://effect.website/docs/v3/platform/platformlogger)
+        
+    *   [Runtime](https://effect.website/docs/v3/platform/runtime)
+        
+    *   [Terminal](https://effect.website/docs/v3/platform/terminal)
+        
+    
+*   Additional Resources
+    
+    *   [Myths](https://effect.website/docs/v3/additional-resources/myths)
+        
+    *   [Coming From ZIO](https://effect.website/docs/v3/additional-resources/coming-from-zio)
+        
+    *   [Effect vs fp-ts](https://effect.website/docs/v3/additional-resources/effect-vs-fp-ts)
+        
+    *   [Effect vs Promise](https://effect.website/docs/v3/additional-resources/effect-vs-promise)
+        
+    *   [Effect vs neverthrow](https://effect.website/docs/v3/additional-resources/effect-vs-neverthrow)
+        
+    
+
+Getting Started
+===============
+
+Welcome to the Effect guides. If you are new to Effect, start with the [Onboarding](https://effect.website/docs/v3/onboarding)
+ section, which introduces the core concepts in order. These guides explain each topic in more detail, and you can also use them as a reference while you build.
+
+[](https://effect.website/docs/v3/getting-started#how-to-use-these-docs)
+How to Use These Docs
+----------------------------------------------------------------------------------------------
+
+The documentation is structured in a sequential manner, starting from the basics and progressing to more advanced topics. This allows you to follow along step-by-step as you build your Effect application. However, you have the flexibility to read the documentation in any order or jump directly to the pages that are relevant to your specific use case.
+
+You can switch between Effect versions using the version selector at the top of the page.
+
+To facilitate navigation within a page, you will find a table of contents on the right side of the screen. This allows you to easily jump between different sections of the page.
+
+[](https://effect.website/docs/v3/getting-started#guide-sections)
+Guide Sections
+--------------------------------------------------------------------------------
+
+The guides are grouped by area:
+
+*   The [Error Management](https://effect.website/docs/v3/error-management/two-error-types)
+     guides cover typed errors, fallbacks, and retries.
+*   The [Concurrency](https://effect.website/docs/v3/concurrency/basic-concurrency)
+     guides cover fibers, bounded parallelism, and racing.
+*   The [Resource Management](https://effect.website/docs/v3/resource-management/introduction)
+     guides explain how to acquire and release resources safely.
+*   The [Schema](https://effect.website/docs/v3/schema/introduction)
+     guides cover parsing, validating, and transforming data.
+*   The [Observability](https://effect.website/docs/v3/observability/logging)
+     guides cover logging, metrics, and tracing.
+*   The [Streaming](https://effect.website/docs/v3/stream/introduction)
+     guides show how to build data pipelines with backpressure.
+
+For a complete reference of every module, see the [API Reference](https://effect.website/docs/v3/api)
+.
+
+[](https://effect.website/docs/v3/getting-started#coding-with-llms)
+Coding with LLMs
+------------------------------------------------------------------------------------
+
+The following article describe how to use Effect with LLMs: [https://effect.website/blog/the-one-weird-git-trick-that-makes-coding-agents-more-effect-ive/](https://effect.website/blog/the-one-weird-git-trick-that-makes-coding-agents-more-effect-ive/)
+
+When using LLMs it is also very important to optimize the feedback loop to be as tight as possible, that can include writing custom linting rules to fit your style preferences and patterns, an example of a repository optimized for agentic coding can be found at: [https://github.com/mikearnaldi/accountability](https://github.com/mikearnaldi/accountability)
+
+A key part of optimizing the feedback loop (and the developer experience in general when using Effect) is to use the Effect LSP plugin, we advise using the latest “tsgo” implementation of it that can be found at: [https://github.com/Effect-TS/tsgo](https://github.com/Effect-TS/tsgo)
+
+[](https://effect.website/docs/v3/getting-started#join-our-community)
+Join our Community
+----------------------------------------------------------------------------------------
+
+If you have questions about anything related to Effect, you’re always welcome to ask our community on [Discord](https://discord.gg/effect-ts)
+.
+
+[Next Two Types of Errors](https://effect.website/docs/v3/error-management/two-error-types)
+
+On this page
+
+*   [How to Use These Docs](https://effect.website/docs/v3/getting-started#how-to-use-these-docs)
+    
+*   [Guide Sections](https://effect.website/docs/v3/getting-started#guide-sections)
+    
+*   [Coding with LLMs](https://effect.website/docs/v3/getting-started#coding-with-llms)
+    
+*   [Join our Community](https://effect.website/docs/v3/getting-started#join-our-community)
+    
+
+### Resources
+
+*   [Documentation](https://effect.website/docs/)
+    
+*   [API reference](https://effect.website/docs/v3/api)
+    
+*   [Workshops](https://www.youtube.com/playlist?list=PLDf3uQLaK2B9vHzUNyvOSvoMv61LW7792)
+    
+*   [LLM Guide](https://effect.website/blog/the-one-weird-git-trick-that-makes-coding-agents-more-effect-ive/)
+    
+
+### DevTools
+
+*   [Effect Playground](https://effect.website/play/)
+    
+*   [Effect LSP](https://github.com/Effect-TS/language-service)
+    
+*   [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=effectful-tech.effect-vscode)
+    
+*   [Linting Rules](https://github.com/Effect-TS/tsgo#lsp-based-linter)
+    
+
+### Community
+
+*   [Effect Days](https://effect.website/effect-days)
+    
+*   [Podcast 🎙️](https://effect.website/podcast)
+    
+*   [Discord](https://discord.gg/effect-ts)
+    
+*   [Community Hub](https://effect.website/community-hub)
+    
+*   [Adoption Partner](https://effect.website/adoption-partners/)
+    
+
+### Other
+
+*   [Blog](https://effect.website/blog/)
+    
+*   [Effect Jobs](https://effect.website/effect-jobs/)
+    
+*   [Myths about Effect 💀](https://effect.website/myths/)
+    
+*   [Effect merch 🧢](https://effect.website/merch/)
+    
+*   [Logo guidelines](https://effect.website/brand-assets/)
+    
+
+ [![Effect](https://effect.website/_astro/effect-logo-black.CJ9hFWX7.svg) ![Effect](https://effect.website/_astro/effect-logo-white.Yu0soJEa.svg)](https://effect.website/)
+
+[](https://github.com/Effect-TS)
+[](https://discord.gg/effect-ts)
+[](https://x.com/EffectTS_)
+[](https://www.youtube.com/@Effect-TS)
+[](https://www.linkedin.com/company/effect-ts)
+[](https://bsky.app/profile/effect-ts.bsky.social)
+
+MIT Licensed
+
+© 2026 [Effectful Technologies Inc.](https://effectful.co/)
+ All rights reserved.
+
+[Email us](mailto:contact@effectful.co)
+ [Privacy](https://effect.website/privacy)

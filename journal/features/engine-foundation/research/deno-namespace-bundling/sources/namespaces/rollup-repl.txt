@@ -1,0 +1,95 @@
+[Skip to content](https://rollupjs.org/repl/#VPContent)
+
+ES6 modules go in...
+--------------------
+
+99
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+// NAMED EXPORTS
+
+// There are many ways to export bindings
+
+// from an ES2015 module
+
+export var foo \= 1;
+
+  
+
+export function bar() {
+
+// try changing this to \`foo++\`
+
+// when generating CommonJS
+
+return foo;
+
+}
+
+  
+
+function baz() {
+
+return bar();
+
+}
+
+  
+
+export \* from './qux';
+
+export { baz };
+
+9
+
+1
+
+export const qux \= 'QUX';
+
+add module
+
+... bundle comes out
+--------------------
+
+Loading Rollup...
+
+### [output.format](https://rollupjs.org/configuration-options/#output-format)
+
+esamdcjsiifeumdsystem
+
+add optioncontextexperimentalLogSideEffectsjsxoutput.banneroutput.chunkFileNamesoutput.compactoutput.entryFileNamesoutput.experimentalMinChunkSizeoutput.freezeoutput.footeroutput.generatedCode.arrowFunctionsoutput.generatedCode.constBindingsoutput.generatedCode.objectShorthandoutput.generatedCode.presetoutput.generatedCode.reservedNamesAsPropsoutput.generatedCode.symbolsoutput.hashCharactersoutput.hoistTransitiveImportsoutput.importAttributesKeyoutput.inlineDynamicImportsoutput.introoutput.minifyInternalExportsoutput.outrooutput.preserveModulesoutput.sourcemapoutput.sourcemapFileNamesoutput.sanitizeFileNameoutput.validatepreserveEntrySignaturesshimMissingExportstreeshaketreeshake.annotationstreeshake.correctVarValueBeforeDeclarationtreeshake.moduleSideEffectstreeshake.presettreeshake.propertyReadSideEffectstreeshake.tryCatchDeoptimizationtreeshake.unknownGlobalSideEffects
+
+Loading Rollup (latest) …

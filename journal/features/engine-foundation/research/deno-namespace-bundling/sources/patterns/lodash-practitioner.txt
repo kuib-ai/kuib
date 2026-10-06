@@ -1,0 +1,357 @@
+  
+
+[Skip to content](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#main-content)
+
+Navigation menu [![DEV Community](https://media2.dev.to/dynamic/image/quality=100/https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png)](https://dev.to/)
+
+ Search [Powered by Algolia Search](https://www.algolia.com/developers/?utm_source=devto&utm_medium=referral)
+
+[Log in](https://dev.to/enter?signup_subforem=1) [Create account](https://dev.to/enter?signup_subforem=1&state=new-user)
+
+DEV Community
+-------------
+
+Close
+
+ ![](https://assets.dev.to/assets/heart-plus-active-9ea3b22f2bc311281db911d416166c5f430636e76b15cd5df6b3b841d830eefa.svg)19 Add reaction
+
+ ![](https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg)19 Like ![](https://assets.dev.to/assets/multi-unicorn-b44d6f8c23cdd00964192bedc38af3e82463978aa611b4365bd33a0f1f4f3e97.svg)0 Unicorn  ![](https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg)0 Exploding Head  ![](https://assets.dev.to/assets/raised-hands-74b2099fd66a39f2d7eed9305ee0f4553df0eb7b4f11b01b6b1b499973048fe5.svg)0 Raised Hands  ![](https://assets.dev.to/assets/fire-f60e7a582391810302117f987b22a8ef04a2fe0df7e3258a5f49332df1cec71e.svg)0 Fire
+
+1 Jump to Comments 3 Save Boost
+
+Pick as gem
+
+More...
+
+Copy link Copy link
+
+Copied to Clipboard
+
+[Share to X](https://twitter.com/intent/tweet?text=%22Making%20lodash%20tree-shakable%22%20by%20%40P_FFigueiredo%20%23DEVCommunity%20https%3A%2F%2Fdev.to%2Fpffigueiredo%2Fmaking-lodash-tree-shakable-3h27)
+ [Share to LinkedIn](https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fdev.to%2Fpffigueiredo%2Fmaking-lodash-tree-shakable-3h27&title=Making%20lodash%20tree-shakable&summary=TL%3BDR%20%20%20%201-%20Replace%20%60lodash%60%20with%20%60lodash-es%60%202-%20Ditch%20default%20imports%203-%20Prefer%20namespace%20imports%20-...&source=DEV%20Community)
+ [Share to Facebook](https://www.facebook.com/sharer.php?u=https%3A%2F%2Fdev.to%2Fpffigueiredo%2Fmaking-lodash-tree-shakable-3h27)
+ [Share to Mastodon](https://s2f.kytta.dev/?text=https%3A%2F%2Fdev.to%2Fpffigueiredo%2Fmaking-lodash-tree-shakable-3h27)
+
+[Report Abuse](https://dev.to/report-abuse)
+
+[![Cover image for Making lodash tree-shakable](https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvpxhmlzeese098a0qkwp.jpg)](https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvpxhmlzeese098a0qkwp.jpg)
+
+[![Pedro Figueiredo](https://media2.dev.to/dynamic/image/width=50,height=50,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F162462%2F1dcd4d0f-b60c-454f-8a68-c5e7b8f8e753.jpg)](https://dev.to/pffigueiredo)
+
+[Pedro Figueiredo](https://dev.to/pffigueiredo)
+
+Posted on Nov 19, 2023 • Edited on Nov 23, 2023
+
+ ![](https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg) 19  ![](https://assets.dev.to/assets/multi-unicorn-b44d6f8c23cdd00964192bedc38af3e82463978aa611b4365bd33a0f1f4f3e97.svg)  ![](https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg)  ![](https://assets.dev.to/assets/raised-hands-74b2099fd66a39f2d7eed9305ee0f4553df0eb7b4f11b01b6b1b499973048fe5.svg) ![](https://assets.dev.to/assets/fire-f60e7a582391810302117f987b22a8ef04a2fe0df7e3258a5f49332df1cec71e.svg)
+
+Making lodash tree-shakable
+===========================
+
+[#webdev](https://dev.to/t/webdev)
+ [#javascript](https://dev.to/t/javascript)
+ [#programming](https://dev.to/t/programming)
+ [#typescript](https://dev.to/t/typescript)
+
+**TL;DR**  
+
+    1- Replace `lodash` with `lodash-es`
+    2- Ditch default imports
+    3- Prefer namespace imports - import * as _ from "lodash-es"
+    4- Setup a linter rule to not allow this happen again
+    5- See great bundle size improvements 😎  
+    
+
+Enter fullscreen mode Exit fullscreen mode
+
+[](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#lodash)
+Lodash
+------------------------------------------------------------------------------
+
+Lodash is a JS utility library that delivers small functions capable of easing the way we work with arrays, numbers, objects, strings, etc.
+
+*   `isEmpty`
+*   `lowerCase`
+*   `concat`
+*   `defer`
+*   ...
+
+And although it's about 11 years old, `lodash` is still today, the most "depended-upon" package, according to the [npm registry](https://gist.github.com/anvaka/8e8fa57c7ee1350e3491)
+. So it's very likely that you are using it directly or indirectly through one of your dependencies.
+
+### [](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#commonjs)
+CommonJS
+
+When `lodash` was first introduced in 2011, `CommonJS` was the common standard to write JS modules, however, that standard was mainly intended to be used in server-side applications and never to reach the browser.
+
+But in 2023, the `lodash` library is still being widely used in web applications, and of course, it's still written in the `CommonJS` format.
+
+### [](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#tree-shaking-in-commonjs)
+Tree Shaking in CommonJS
+
+> _Tree shaking is a process in modern JavaScript bundlers that eliminates unused code during the build process, resulting in smaller and more optimized bundles._
+
+Because `CommonJS` was originally designed with server-side applications in mind, it didn't prioritize a crucial aspect for browser-based environments: **the ability to be tree shaken**.
+
+This happens because CommonJS allows for highly dynamic imports/exports, that bundlers can't simply pick up and do a fully static analysis on, to understand if certain code should be kept or eliminated in the final bundle.
+
+For more in-depth information on how `CommonJS` works when it comes to tree shaking, make sure to take a look at this great [article](https://web.dev/articles/commonjs-larger-bundles)
+.
+
+### [](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#a-treeshakable-alternative)
+A Tree-Shakable Alternative
+
+In today's web development, `ECMAScript` is the go-to standard for writing JS modules and it's being widely adapted not only on the browser but also on `node` environments.
+
+This standard is much more mature and offers much better support for static analysis and tree shaking due to its more declarative and static nature.
+
+[](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#treeshaking-raw-lodash-endraw-)
+Tree-shaking `lodash`
+---------------------------------------------------------------------------------------------------------------------
+
+> _Now that we have gone through why tree shaking doesn't play well with `lodash`, let's dive into what we can do we make it tree-shakable._
+
+**1- Replacing `lodash` with `lodash-es`**
+
+Due to the huge amount of benefits of using ESM (ECMAScript Modules), the [`lodash-es`](https://www.npmjs.com/package/lodash-es)
+ lib was created and it's now the recommended package to be installed if you want to continue to use `lodash`, it is still the same library, but exported as ES modules.
+
+**2- Stop using the default import**
+
+Another very common practice that might completely ruin tree shaking, is doing a default import when using `lodash` or any other lib that exports everything from the default exported variable.  
+
+    import _ from "lodash-es";
+    
+    // `_` contains every single lodash's function 
+    _.add(1,2);
+    _.isEmpy([]);
+    _.lowerCase("HEY");
+    
+
+Enter fullscreen mode Exit fullscreen mode
+
+In the example above, although we are only using 3 functions, we are actually importing the whole lib, because the `default` export is an object that contains all the lib's utilities.
+
+**3- Use namespace imports**
+
+Namespace imports are a way to import every single exported member from a module individually.  
+
+    import * as _ from "lodash-es";
+    
+    // `_` contains every single lodash's function 
+    _.add(1,2);
+    _.isEmpy([]);
+    _.lowerCase("HEY");
+    
+
+Enter fullscreen mode Exit fullscreen mode
+
+The difference between this and the `default` import, is that we are importing `add`, `isEmpty` and `lowerCase` individually and as such, every other import that isn't used will be removed at build time.
+
+Of course, you could also import each utility individually, but because of how similar these function names are to the ones provided by native JS, I highly recommend that you keep the `_` prefix when using `lodash`.  
+
+    import { some } from "lodash-es";
+    
+    // makes it harder to understand which one is each ❌
+    some([null, 0, 'yes', false], Boolean);
+    [null, 0, 'yes', false].some(Boolean);
+    
+    // ------------------------------------------------
+    
+    import * as _ from "lodash-es";
+    
+    // makes it very easy to understand which one is each ✅
+    _.some([null, 0, 'yes', false], Boolean);
+    [null, 0, 'yes', false].some(Boolean);
+    
+
+Enter fullscreen mode Exit fullscreen mode
+
+### [](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#bonus-tip)
+Bonus tip
+
+To safeguard against unintentional slip-ups, such as default imports that can bloat your app's bundle size, I strongly recommend incorporating an ESLint rule to NOT allow using the `default` import of `lodash-es`.  
+
+    // eslintrc.js
+    module.exports = {
+        rules: {
+            "no-restricted-syntax": [\
+                "error",\
+                {\
+                    message:\
+                        "Do not import default from lodash-es. Use a namespace import (* as) instead.",\
+                    selector:\
+                        'ImportDeclaration[source.value="lodash-es"] ImportDefaultSpecifier',\
+                },      \
+            ],
+        },
+    };
+    
+
+Enter fullscreen mode Exit fullscreen mode
+
+**Summary**
+
+1- Avoid using CommonJS libraries in browser-based applications  
+2- Be mindful when using default imports and prefer namespace imports  
+3- Avoid these common pitfalls with linter rules
+
+**Conclusion**
+
+This approach is not exclusive to `lodash`, and it can actually be applied to a variety of packages, particularly those that are still being exported as `CommonJS`.
+
+* * *
+
+_Make sure to follow me on [twitter](https://twitter.com/P_FFigueiredo)
+ if you want to read about TypeScript best practices or just web development in general!_
+
+[](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#)
+Promoted
+
+[](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#)
+
+[](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#)
+
+------------------------------------------------------------------
+
+[](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#)
+
+Top comments (1)
+----------------
+
+Subscribe
+
+   ![pic](https://media2.dev.to/dynamic/image/width=256,height=,fit=scale-down,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F8j7kvp660rqzt99zui8e.png)
+
+Personal Trusted User
+
+[Create template](https://dev.to/settings/response-templates)
+
+Templates let you quickly answer FAQs or store snippets for re-use.
+
+Submit Preview [Dismiss](https://dev.to/404.html)
+
+Collapse Expand
+
+ 
+
+[![trash_fr profile image](https://media2.dev.to/dynamic/image/width=50,height=50,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F1676728%2Ffe1f4362-a3ad-42a1-9569-90b06fd19873.png)](https://dev.to/trash_fr)
+
+[Trash Fr](https://dev.to/trash_fr)
+
+Trash Fr
+
+ [![](https://media2.dev.to/dynamic/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F1676728%2Ffe1f4362-a3ad-42a1-9569-90b06fd19873.png)Trash Fr](https://dev.to/trash_fr)
+
+Follow
+
+*   Joined
+    
+    Jun 24, 2024
+    
+
+• [Jun 25 '24](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#comment-2g50c)
+
+Dropdown menu
+
+*   [Copy link](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#comment-2g50c)
+    
+
+*   Hide
+
+*   [Report abuse](https://dev.to/report-abuse?url=https://dev.to/trash_fr/comment/2g50c)
+    
+
+keep in mind that `chain` is NOT available in lodash-es, and had to be replaced by `flow`
+
+Like comment: Like comment: 3 likes Like Comment button Reply
+
+[Code of Conduct](https://dev.to/code-of-conduct)
+ • [Report abuse](https://dev.to/report-abuse)
+
+Are you sure you want to hide this comment? It will become hidden in your post, but will still be visible via the comment's [permalink](https://dev.to/pffigueiredo/making-lodash-tree-shakable-3h27#)
+.
+
+Hide child comments as well
+
+Confirm
+
+For further actions, you may consider blocking this person and/or [reporting abuse](https://dev.to/report-abuse)
+
+ [![](https://media2.dev.to/dynamic/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F162462%2F1dcd4d0f-b60c-454f-8a68-c5e7b8f8e753.jpg)Pedro Figueiredo](https://dev.to/pffigueiredo)
+
+Follow
+
+Software Engineer @SingleStore, TypeScript, React, State Machines and Accessibility
+
+*   Joined
+    
+    Apr 30, 2019
+    
+
+### More from [Pedro Figueiredo](https://dev.to/pffigueiredo)
+
+[Fixing TypeScript Dates\
+\
+#javascript #typescript #webdev](https://dev.to/pffigueiredo/fixing-typescript-dates-3fjf)
+[Splitting and Caching React Chunks\
+\
+#javascript #webdev #react #programming](https://dev.to/pffigueiredo/splitting-and-caching-react-chunks-4c0c)
+[TypeScript Return Types: Separating Fact from Fiction\
+\
+#typescript #webdev #javascript #programming](https://dev.to/pffigueiredo/typescript-return-types-separating-fact-from-fiction-4266)
+
+[DEV Community](https://dev.to/)
+ — A space to discuss and keep up software development and manage your software career
+
+*   [Home](https://dev.to/)
+    
+*   [DEV Challenges](https://dev.to/challenges)
+    
+*   [Reading List](https://dev.to/readinglist)
+    
+*   [DEV++](https://dev.to/++)
+    
+*   [Videos](https://dev.to/videos)
+    
+*   [DEV Education Tracks](https://dev.to/deved)
+    
+*   [DEV Help](https://dev.to/help)
+    
+*   [Advertise on DEV](https://dev.to/advertise)
+    
+*   [Organization Accounts](https://dev.to/organizations)
+    
+*   [DEV Showcase](https://dev.to/showcase)
+    
+*   [About](https://dev.to/about)
+    
+*   [Contact](https://dev.to/contact)
+    
+*   [DEV Shop](https://shop.forem.com/)
+    
+*   [MLH](https://mlh.io/)
+    
+
+*   [Code of Conduct](https://dev.to/code-of-conduct)
+    
+*   [Privacy Policy](https://dev.to/privacy)
+    
+*   [Terms of Use](https://dev.to/terms)
+    
+
+Built on [Forem](https://www.forem.com/)
+ — the [open source](https://dev.to/t/opensource)
+ software that powers [DEV](https://dev.to/)
+ and other inclusive communities.
+
+Made with love and [Ruby on Rails](https://dev.to/t/rails)
+. DEV Community © 2016 - 2026.
+
+![DEV Community](https://media2.dev.to/dynamic/image/width=190,height=,fit=scale-down,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F8j7kvp660rqzt99zui8e.png)
+
+We're a place where coders share, stay up-to-date and grow their careers.
+
+[Log in](https://dev.to/enter?signup_subforem=1)
+ [Create account](https://dev.to/enter?signup_subforem=1&state=new-user)
+
+![](https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg) ![](https://assets.dev.to/assets/multi-unicorn-b44d6f8c23cdd00964192bedc38af3e82463978aa611b4365bd33a0f1f4f3e97.svg) ![](https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg) ![](https://assets.dev.to/assets/raised-hands-74b2099fd66a39f2d7eed9305ee0f4553df0eb7b4f11b01b6b1b499973048fe5.svg) ![](https://assets.dev.to/assets/fire-f60e7a582391810302117f987b22a8ef04a2fe0df7e3258a5f49332df1cec71e.svg)
