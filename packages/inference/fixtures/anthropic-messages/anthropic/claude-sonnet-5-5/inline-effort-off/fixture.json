@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: effort change with reasoning off. Approved settings: thinking=between_tools; top effort=high; inline effort=low; same beta. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

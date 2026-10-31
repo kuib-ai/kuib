@@ -1,0 +1,51 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-haiku-5-5","id":"msg_011CfyrQtazXCXG4EqYJrx9g","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":76,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":8,"service_tier":"standard","inference_geo":"global"},"diagnostics":null}          }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}          }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"Blue works"}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" out to 17"}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"-5=12, and green do"}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"ubles to 18"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":", gi"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"ving a total of 30."}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"\n\n"}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQS9wQKEAgSGAI4AUIIdGhpbmtpbmcSDF3HOj749HUTPw5DkBoMPELiHNz7CtUoRIsZIjBIlrh5BfjAkJH3E+bBgZY86wlEylLbUPGByiFDxMIIXHlYabxpSwZPK17I86YzvI0qlAT/rCyfFQ8dA5S1Ow63tEOPTXS3CUFNgV2zfe7luRs9/qYBm86poklVJHrVsIf7BFWGl7JIgivsgF+M3rE8nCAmRoZDX2FaZ/0i1hhxgUkZpYgiJ9SkiXi1aTjHAvuB/ZRlWropMjwvlx4O9BrrPwmxkfTyGfFXBSmDLea7O38Nre8rDpuj5+/jNAm3DpAMr6ICVR8mqW9rI4h1UwvLQS5CfRLdspn8nMwTwFwagI4de25oCbh24UvsB6cbHITpusxPAkVMyiLSrviSiF6eYYPPFOJqm6P12pvDHtOdewGSF2LEPZtov2mNjTBG8JtHIMDFnGUeghcTOOryIXh0BupCcl9FeKKrhTikvD9w2lUvk+qTrnX+KQrkYNN44yemMONnqW9uQVURoUou8468QqsMx9RYzQNk13d4z7UmBEIsxtphuoNnsCsdyrTM/NZ2L4E+eSZQPRQLff5sBA7MTxmrFbGerCSIgVugt/fPE9IJfAB3ouIviN9VFrx7dMVicpDtJ3VYzEuivPOODLcL+nXMTsxKSV+hm4QUSOeAuo8x0auaii72Vg07yHzYO1yHw86vGwS5a9t6PfWXsKaxrkYUT+VOzzx+H7RkTI+Sanu3pz7PWt6ZR4cyizyH8Va4ueeVWCWac5Aj8KJePZUfCRNfila5lprTgSO+Y5X70J4HsNUgt9G79ez/vTsG2KBOtd9pJ2mcGAE="}      }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0         }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"The"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" widget has 30 beads"} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" remaining: 12 bl"}               }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"ue and 18 green."}   }
+

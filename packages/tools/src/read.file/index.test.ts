@@ -1,8 +1,9 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
-import type { FileSystemPort } from "@kuib-ai/protocol/file.system.port";
-import type { ReadFileInput } from "@kuib-ai/protocol/file.system/read.file.input";
-import type { ReadFileOutput } from "@kuib-ai/protocol/file.system/read.file.output";
+import Daemon from "@kuib-ai/daemon";
+import createTempDir from "@kuib-ai/testing/create.temp.dir";
+import { writeFileSync } from "node:fs";
+import { join } from "node:path";
 import type { ToolContext } from "../tool.spec/index.ts";
 import readFile from "./index.ts";
 
@@ -18,25 +19,13 @@ describe("readFile tool", function () {
   });
 
   it("delegates input to ctx.fs.readFile and returns its result", async function () {
-    const seen: ReadFileInput[] = [];
-    const output: ReadFileOutput = { content: "hello world" };
-    const fs: FileSystemPort = {
-      readFile: async function (input) {
-        seen.push(input);
-        return output;
-      },
-      readDir: async function () {
-        return { content: "" };
-      },
-    };
-    const ctx: ToolContext = { fs };
+    using dir = createTempDir();
+    const path = join(dir.path, "hello.txt");
+    writeFileSync(path, "hello world");
+    const ctx: ToolContext = { fs: Daemon.createDaemonCaller({}) };
     const result = await readFile.use(function (definition) {
-      return definition.execute(
-        definition.input.parse({ path: "/etc/hosts" }),
-        ctx,
-      );
+      return definition.execute(definition.input.parse({ path }), ctx);
     });
-    expect(seen).toEqual([{ path: "/etc/hosts" }]);
-    expect(result).toBe(output);
+    expect(result).toEqual({ content: "hello world" });
   });
 });

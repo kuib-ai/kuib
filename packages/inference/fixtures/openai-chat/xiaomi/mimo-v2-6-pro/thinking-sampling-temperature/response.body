@@ -1,0 +1,40 @@
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911781,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"17 - 5 ="},"finish_reason":null,"index":0}],"created":1791911781,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" 12 blue,"},"finish_reason":null,"index":0}],"created":1791911781,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" 9 × 2 = 1"},"finish_reason":null,"index":0}],"created":1791911781,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"8 green, total 3"},"finish_reason":null,"index":0}],"created":1791911781,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"0."},"finish_reason":null,"index":0}],"created":1791911782,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":"The widget","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911782,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":" has 1","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911782,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":"2 blue beads and 18 green","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911782,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":" beads, for","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911782,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":" a","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911782,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":" total of 30 beads.","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911782,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791911782,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"07cf5a50-10a1-4ecf-a19b-1cf69c918470_6b3a6abd12cf4904b08fa39757ca18b0","choices":[],"created":1791911782,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":54,"prompt_tokens":54,"total_tokens":108,"completion_tokens_details":{"reasoning_tokens":28},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

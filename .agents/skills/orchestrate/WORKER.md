@@ -31,9 +31,14 @@ Write `plan.md` — the changes by path, the order of moves, how each is verifie
 brief leaves undecided — then `pnpm orchestra done <task> plan-ready` and stop. Change no file
 before the orchestrator sends GO; its conditions are appended under `## Go` in your brief.
 
+## Resume
+
+When you are resumed, reread your brief and your log first. A `## Resume` section in the brief is
+a new instruction from the orchestrator: do what its latest one says, then finish as usual.
+
 ## Context limit
 
-When the orchestrator asks, or you notice your context is nearly full: append your full state
+When the orchestrator asks, or you notice your context at or past 60%: append your full state
 to `log.md` (done, in progress, next, findings you must not lose), run
 `pnpm orchestra done <task> restart`, and stop. You will be cleared and resumed from the log.
 
@@ -51,6 +56,15 @@ to `log.md` (done, in progress, next, findings you must not lose), run
 
    ## Files
    - path — what changed
+
+   ## Tests
+   - added: path › "title" — what it proves
+   - changed: path › "title" — what changed in it and why
+   - removed or skipped: path › "title" — why (never to make a run pass)
+   - none changed, when none did
+
+   ## Deviations from the approved plan
+   - what differs from plan.md and the `## Go` conditions, and why; "none" when none
 
    ## Plan updates (for the orchestrator)
    - P02-I01 → implemented

@@ -1,0 +1,4 @@
+{
+  "shows": "muse-spark-1.1: tool placement/error envelope. Approved settings: assistant call + user + tool result, or unmatched tool_call_id. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

@@ -1,0 +1,1 @@
+{"type":"error","error":{"type":"invalid_request_error","message":"output_config.effort 'xhigh' is not supported when thinking is disabled on this model. Use effort 'high' or below, or enable thinking."},"request_id":"req_011CfyoVuGDqZtr7a8VPm7KY"}

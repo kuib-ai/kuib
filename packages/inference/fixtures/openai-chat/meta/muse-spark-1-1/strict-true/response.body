@@ -1,0 +1,10 @@
+data: {"id":"chatcmpl-01a13443-75da-72eb-9846-d1ea092ab7a0","choices":[{"delta":{"content":"The stored value for selector 7 will be retrieved now.","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878198,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-75da-72eb-9846-d1ea092ab7a0","choices":[{"delta":{"tool_calls":[{"index":0,"id":"call_01a1344376df72eaafefdc4a6e7e96b5","type":"function","function":{"name":"get_value","arguments":""}}]},"finish_reason":null,"index":0}],"created":1791878198,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-75da-72eb-9846-d1ea092ab7a0","choices":[{"delta":{"tool_calls":[{"index":0,"function":{"arguments":"{\"selector\":7}"}}]},"finish_reason":null,"index":0}],"created":1791878198,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-75da-72eb-9846-d1ea092ab7a0","choices":[{"delta":{},"finish_reason":"tool_calls","index":0}],"created":1791878198,"model":"muse-spark-1.1","object":"chat.completion.chunk","usage":{"completion_tokens":108,"prompt_tokens":550,"total_tokens":658,"completion_tokens_details":{"reasoning_tokens":37},"prompt_tokens_details":{"cached_tokens":497}}}
+
+data: [DONE]
+

@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: signed reasoning and genuine tool call for replay. Approved settings: stream=false; thinking=enabled; budget_tokens=1024; display=summarized; tools get_value; auto. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

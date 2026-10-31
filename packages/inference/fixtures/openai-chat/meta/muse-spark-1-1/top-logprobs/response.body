@@ -1,0 +1,1 @@
+{"error":{"code":null,"message":"`logprobs` is not supported with reasoning.","param":"logprobs","type":"invalid_request_error"}}

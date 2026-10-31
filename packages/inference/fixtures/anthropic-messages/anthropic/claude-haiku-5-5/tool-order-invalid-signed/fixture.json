@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: rejection and raw error body. Approved settings: insert user text before tool_result or leave result unmatched.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: H/tool-order-invalid. Signed repeat of row H/tool-order-invalid.",
+  "origin": "recorded"
+}

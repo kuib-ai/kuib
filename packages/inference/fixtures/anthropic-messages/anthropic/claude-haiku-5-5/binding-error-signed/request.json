@@ -1,0 +1,21 @@
+{
+  "messageFormat": "anthropic-messages",
+  "provider": "anthropic",
+  "model": "claude-haiku-5-5",
+  "name": "binding-error-signed",
+  "method": "POST",
+  "url": "https://api.anthropic.com/v1/messages",
+  "authHeader": "x-api-key",
+  "headers": {
+    "anthropic-version": "2023-06-01",
+    "anthropic-beta": "thinking-binding-controls-2026-08-01",
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  },
+  "replay": {
+    "fixture": "anthropic-messages/anthropic/claude-haiku-5-5/tool-seed-signed",
+    "changes": [
+      "change system; thinking.block_binding.prefix_mismatch_behavior=error; binding beta"
+    ]
+  }
+}

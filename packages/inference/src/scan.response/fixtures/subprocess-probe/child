@@ -1,0 +1,16 @@
+// @claim core/provider-captures
+import { readFileSync } from "node:fs";
+import record from "../../../record.exchange/index.ts";
+
+const [path, runText, optionsText] = Deno.args;
+const run = JSON.parse(runText);
+const options = JSON.parse(optionsText);
+options.key = Deno.env.get("KUIB_ANTHROPIC_API_KEY");
+
+try {
+  await record(path, run, options);
+} catch (error) {
+  console.error(error.code ?? "capture-error");
+  const rows = readFileSync(options.ledger, "utf8").trim().split("\n");
+  console.log(JSON.stringify(JSON.parse(rows.at(-1)).diagnosis));
+}

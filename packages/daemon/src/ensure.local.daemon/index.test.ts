@@ -1,14 +1,14 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import net from "node:net";
-import { join } from "node:path";
-import { tmpdir } from "node:os";
+import createSocketPath from "@kuib-ai/testing/create.socket.path";
 import Protocol from "@kuib-ai/protocol";
 import ensureLocalDaemon from "./index.ts";
 
 describe("ensureLocalDaemon", function () {
   it("threads socketOverride through resolve+ensure and returns a UNIX endpoint with the resolved socketPath", async function () {
-    const socketPath = join(tmpdir(), `kuib-test-${Date.now()}.sock`);
+    using socket = createSocketPath();
+    const socketPath = socket.path;
     const server = net.createServer();
     await new Promise<void>(function (resolve) {
       return server.listen(socketPath, resolve);

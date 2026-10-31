@@ -1,0 +1,18 @@
+data: {"id":"c722f4e0-eae0-4c13-bd09-c989416c6934_72a89e2c8b3e461ab5dddb5cbc348a20","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911186,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"c722f4e0-eae0-4c13-bd09-c989416c6934_72a89e2c8b3e461ab5dddb5cbc348a20","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The user wants me"},"finish_reason":null,"index":0}],"created":1791911186,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"c722f4e0-eae0-4c13-bd09-c989416c6934_72a89e2c8b3e461ab5dddb5cbc348a20","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" to list integers "},"finish_reason":null,"index":0}],"created":1791911186,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"c722f4e0-eae0-4c13-bd09-c989416c6934_72a89e2c8b3e461ab5dddb5cbc348a20","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"1 through 100,"},"finish_reason":null,"index":0}],"created":1791911186,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"c722f4e0-eae0-4c13-bd09-c989416c6934_72a89e2c8b3e461ab5dddb5cbc348a20","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" each followed"},"finish_reason":null,"index":0}],"created":1791911186,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"c722f4e0-eae0-4c13-bd09-c989416c6934_72a89e2c8b3e461ab5dddb5cbc348a20","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" by a short invented word. Let"},"finish_reason":null,"index":0}],"created":1791911186,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"c722f4e0-eae0-4c13-bd09-c989416c6934_72a89e2c8b3e461ab5dddb5cbc348a20","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" me create "},"finish_reason":null,"index":0}],"created":1791911186,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"c722f4e0-eae0-4c13-bd09-c989416c6934_72a89e2c8b3e461ab5dddb5cbc348a20","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"100 unique invented words."},"finish_reason":null,"index":0}],"created":1791911186,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"c722f4e0-eae0-4c13-bd09-c989416c6934_72a89e2c8b3e461ab5dddb5cbc348a20","choices":[{"delta":{"content":"1 f","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911186,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+

@@ -1,0 +1,4 @@
+{
+  "shows": "mimo-v2.6-pro: implicit cache configuration. Approved settings: long synthetic developer prefix; prompt_cache_options={mode:implicit,ttl:30m}; cache key=synthetic-capture. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

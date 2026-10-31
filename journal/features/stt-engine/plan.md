@@ -13,10 +13,10 @@ superseded-by: []
 roadmap: R003
 context: []
 checkpoint:
-  summary: "P01 code complete. Renamed to services/stt-coreml. Swift 6.0 (toolchain 6.3.3 on minerva), SwiftNIO for socket server, Nx project.json wired. All P01 items done. Shifting to minerva for first build + FluidAudio version verification. Before P02: swift build on minerva (verify FluidAudio resolves), then test transcription end-to-end; P01 items move to verified after that."
-  next: ["P02-I01"]
+  summary: "P01 code complete. Renamed to services/stt-coreml. Swift 6.0 (toolchain 6.3.3 on minerva), SwiftNIO for socket server, Nx project.json wired. All P01 items done. Live evaluation on 2026-10-18/19 compared Qwen3-ASR 0.6B, Whisper Large-v3-Turbo, and Cohere Transcribe 2B; architecture for resident multi-model confidence routing and Cohere Transcribe Roman Hinglish/Benglish adaptation recorded in research/multilingual-routing-and-adaptation-2026-10-19.md."
+  next: ["P02-I01", "P03-I02", "P03-I03", "P03-I04"]
   blockers: []
-  note: ""
+  note: "2026-10-19: Evaluated Qwen3-ASR 0.6B, Whisper Large-v3-Turbo, and Cohere Transcribe 2B (CohereLabs/cohere-transcribe-03-2026) on live English + Hinglish/Benglish dictation. Cohere Transcribe's FastConformer encoder (8x subsampling, 12.5 Hz) captures phonemes accurately and runs with very low latency and strong punctuation, lacking only Indian voiced aspirates in top encoder layers and Roman Hinglish/Benglish/developer priors in the decoder. Designed two complementary tracks in [[features/stt-engine/research/multilingual-routing-and-adaptation-2026-10-19]]: (1) keeping 3-5 models resident in minerva's 16 GB RAM with per-segment confidence/entropy routing, rolling bidirectional context reconciliation during speech, and instant buffered retry/script switching; (2) 3-zone LoRA adaptation of Cohere Transcribe 2B (frozen bottom 75% encoder, light LoRA on top 25% encoder, heavy LoRA on decoder) + developer ITN for numeric digits."
 ---
 
 # Plan — stt-engine
@@ -117,6 +117,36 @@ platform-agnostic boundary; apps only depend on the client.
 - Acceptance: Configurable model selection per request. Option for dual-pipeline: fast
   partial via Parakeet, high-accuracy final via Qwen3-ASR when utterance completes.
 - State: planned
+
+### P03-I03 — Resident multi-model pool and per-segment confidence routing
+
+- Acceptance: `minerva` keeps 3–5 specialized models warm in its 16 GB unified memory
+  (e.g., `Cohere Transcribe 2B`, `Parakeet TDT v3`, a Roman Hinglish/Benglish specialist,
+  and an on-demand Devanagari/native-script model) with zero cold-switch overhead. Incoming
+  audio is segmented at VAD micro-pauses (`2–4 s`); segments whose primary-model decoder
+  confidence / token log-probability falls below threshold are automatically re-transcribed
+  against the secondary resident model while the next segment is being spoken. Includes
+  rolling background context reconciliation across adjacent segments and client audio-buffer
+  retention for single-key retry or script switching. See
+  [[features/stt-engine/research/multilingual-routing-and-adaptation-2026-10-19]].
+- State: planned
+- Decisions: D006, D007
+- Addresses: G005
+
+### P03-I04 — Cohere Transcribe 2B Roman Hinglish/Benglish adaptation and developer ITN
+
+- Acceptance: Unwrap `CohereLabs/cohere-transcribe-03-2026` (FastConformer 8x subsampling
+  encoder + Transformer decoder) and apply a 3-zone adaptation: freeze the bottom ~75% of
+  the encoder, apply light LoRA (`r=16`) to the top ~25% of the encoder for Indian voiced
+  aspirates (`bh`, `dh`, `gh`, `jh`) and non-rhotic syllable boundaries, and apply heavy
+  LoRA (`r=32–64`) to the decoder for Roman Hinglish, Kolkata Roman Benglish, and developer
+  vocabulary (`minerva`, `cetus`, `eos`, `cornelius`, `kuib`, `tsgo`, `claude`). Add
+  deterministic Inverse Text Normalization (ITN) / logit biasing so developer numbers and
+  units (`port 8080`, `port 8000`, `16GB`) emit numeric digits. See
+  [[features/stt-engine/research/multilingual-routing-and-adaptation-2026-10-19]].
+- State: planned
+- Decisions: D007
+- Addresses: G005
 
 ## P04 — TypeScript client package
 
@@ -229,6 +259,16 @@ platform-agnostic boundary; apps only depend on the client.
 - Supersedes: —
 - Superseded by: —
 
+### D007 — Resident multi-model confidence routing and Cohere Transcribe 2B adaptation
+
+- Status: accepted
+- Ruling: "in my minerva machine, i will have, i can most likely keep four or five models loaded in the ram properly, and in terms of processing, also, i think only one will run at any time. so, it should accommodate itself and basically should be able to switch very seamlessly. keeping the real time factor. and since we will do some intelligent batching. some proper chunking of audio, the switching can be. segmented among the sections where i am speaking. that particular language... the single model that we are making will likely be able to handle all three languages. but it should still be able to handle some specific configuration and maybe some model score is low or high. or maybe let's say if i want the script in devanagari. i can have another model ready there for that." (roysupriyo10, 2026-10-19)
+- Context: Live testing on 2026-10-18/19 showed `Qwen3-ASR 0.6B` mangles Hindi/technical phonetics, stock `whisper-large-v3-turbo` with `<|hi|>` locks the entire output into Devanagari, and `CohereLabs/cohere-transcribe-03-2026` (`2B`, FastConformer 8x subsampling) is extremely fast with accurate punctuation on English and hears Indic phonemes cleanly in its encoder, failing only in its English-biased decoder vocabulary.
+- Decision: Pair two complementary capabilities on `minerva`: (1) keep 3–5 specialized models warm in unified memory and route VAD-segmented audio chunks dynamically using decoder confidence / entropy scores (plus explicit request configuration such as Roman vs Devanagari script), reconciling adjacent segments in the background while the user is still speaking; and (2) adapt `Cohere Transcribe 2B` via a 3-zone LoRA strategy (frozen bottom ~75% encoder, light LoRA on top ~25% encoder, heavy LoRA on decoder) with developer ITN for numeric digits.
+- Consequences: Zero cold-switch latency on `minerva`; seamless mid-utterance code-switching across English, Roman Hinglish, and Roman Benglish; retains ability to switch to native-script models on demand.
+- Supersedes: —
+- Superseded by: —
+
 ## Gaps
 
 ### G001 — Parakeet CoreML model files source
@@ -261,3 +301,10 @@ platform-agnostic boundary; apps only depend on the client.
 - Context: The Bun → Deno migration is planned (landed 2026-09-22 — Deno is the runtime, `Deno.*` is used freely in host/runtime code; see `journal/features/deno-runtime/plan.md`). The STT client package must use
   runtime-agnostic APIs (no `bun:*` or `Deno.*` in the public interface). Unix socket
   access differs between runtimes — need an abstraction or conditional import.
+
+### G005 — Cohere Transcribe layer inspection and confidence routing thresholds
+
+- Status: planned
+- Recommendation: Inspect `CohereLabs/cohere-transcribe-03-2026` weight structure and token log-probability distributions on English vs Hinglish/Benglish utterances to set the segment confidence threshold and target module names for the 3-zone LoRA.
+- Context: Details and architecture recorded in
+  [[features/stt-engine/research/multilingual-routing-and-adaptation-2026-10-19]].

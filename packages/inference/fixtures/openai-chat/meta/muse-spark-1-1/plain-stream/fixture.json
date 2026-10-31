@@ -1,0 +1,4 @@
+{
+  "shows": "MT/plain-stream: captured HTTP 200, sse, complete. The recorded stream has its terminal frame. The synthetic admission was answered; native usage and response bytes are preserved.",
+  "origin": "recorded"
+}

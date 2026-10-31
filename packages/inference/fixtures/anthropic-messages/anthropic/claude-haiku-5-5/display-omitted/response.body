@@ -1,0 +1,45 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-haiku-5-5","id":"msg_011CfyrMqdojMqhY8K1ncVw4","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":76,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":8,"service_tier":"standard","inference_geo":"global"},"diagnostics":null}         }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}             }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":""}               }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQS7wQKEAgSGAI4AUIIdGhpbmtpbmcSDHm9G6LiM56d4ssXWhoMW3CGAqeGnHV1B/hzIjBCmHBOTuWOajuWTaguAhB3uBnoP0JO/lOm9rtU3/zjdLNdtIAj9XQ5cWaZuCGFsrQqjASwyDqiPFHEi7LEioUVYfD1rG9NGJGQD1NUQoKvV0c2vRJEGcIozuHDvYW302CS8x0lDEvCw2/Gs2YoPv9rPJLdSTbwlxOhjgOa9cE/o5uC4qtfS7QLGFPi1bsA8bBmzOBeicAE2NVsWBizwsDZRRAThUZaDdPQUtb2gNpyoJ6zZA8zzwyFax4y/Anvoc/92cvb65d6eiE+7cvrz7YSI01L/mx/Fr1R06ekuMXYKoLEKge7kDhcBOs8UDojZ7cOAD6pdX0HWQJnD7f+Y+jLYT8XrZt3dpuIzA8aWOo22QHRobxbW5GMtIwNoqbZIkSy03VDmQVGGwPyadKIBfEIfpd3M2HzgO6XDkTUzH8V0XGcO8GqGY8YhL5DQIQpS7xK0VwEAksX2UtB1uKZ+zTXpv6F6qiUdeAkoDnBppcX0+jOM2E7p0WquLMOo35wBnC22YVOHg5658sOZBo/PIZgr+K91/hURn1lYOC7f9iWSwabMT0+KS9jqoKpUXNb27fIIPiZh2QyVOmdnxvyRniB2uQLVIIPAETZPedPsrdZIFR5saB6KIqJTxh9KYLaY61XBPZF0zJCGPkgaxvX7crwzVfeAYrzjECm+rB+sjvufa41WbjdYwnaYvww52DTIg0cc99+f8bBQXl6SNr9lkf44yxJCwx0L+IogLczMwEsUo0PBUL6VkVmCzN+WYx0BRgB"}    }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0     }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"The widget has"}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" 30"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" beads rem"}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"aining: 12 blue"}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" and 18 green."}          }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1  }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":76,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":54,"output_tokens_details":{"thinking_tokens":28}}               }
+
+event: message_stop
+data: {"type":"message_stop"              }
+

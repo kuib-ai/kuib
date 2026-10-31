@@ -1,0 +1,1 @@
+{"type":"error","error":{"type":"invalid_request_error","message":"messages.0: use the top-level 'system' parameter for the initial system prompt; the directive-only form (content: [] with output_config) is accepted at any position"},"request_id":"req_011CfyrawqzB1LCJrdhNH3G7"}

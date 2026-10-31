@@ -1,0 +1,51 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-haiku-5-5","id":"msg_011CfyrR9H3oJJ8CmNStgErg","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":117,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":2,"service_tier":"standard","inference_geo":"global"},"diagnostics":null}       }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}   }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":""}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQSmwcKEAgSGAI4AUIIdGhpbmtpbmcSDBwSS+rDDvORVdvhQhoMZ57L33i1lUpqUsdZIjDlvZUMmmCvT2Ml0/bCQDAYzkMhQ0/CsRUGQRnewNHNjbdLyNLNFjlkjhHTYgFevnwquAY+0oFqAoMKT21VQo4ZC4e+Yx/jOPYazSV5wbkWchzkA5YSpI5iXZh9089i5rpvHeKPULgNp04h4w8avFZS7W2fz1IT0XmB58zLSSQ4+GwWnPRvkRhCfJaAUsl8+0ybWsKvn6D5oQN4Ea37eZyRAXWi7CsEZRXYV4znNbSgA5ZKgnukGjRpdYB6L6y4IxNwJ+q3QiIDNl762CU3W1QYmMRvlYh3rQPUTmius1X1aJ3vh7/aZPWPPyFdKN4+UNhwfpUth6A7bdW0iTmWdU938L911kAVHyFd8coIdU6Hw/guBturzSNEW/VTRo1ByFzXR2WLn2cCC81MJ0bZ2vLQfocPbZMUdp+qjsFaTDh3PEtcCMQONHY+V2U2vmqHLMLdduTjgUT7jeajmpH/43aC4rlzJT8PJ4/XSDnoFEqqb00cJKDg3DOHIwsXezlNWNYHdCwTRjNM11HXyAMtVHChlvkxpwHhi+Fekpaks39xVPUFwlGQevuEuDONDdFnJy+bzaC4hYbX28/gfF4wJM6TR4eHGJTAmNHaUekQoAkl6Lf1Vmn+B7kuwdTRi5mU8FdUUR1KpdCN30v91q8gqXKjlsh1erzPQ8BOOqoH8QVZU3Y9MfS8RpQVOI3UfynPkyJJVT1y9eCCM7lJiWpyJfp0PeySRjXCszSIZfpZRq7Bnval6u9EKpDrwaB/5AQ59q6d3CTqiKRCPmY8++ZOKhK2VRLA5VIrt4oh/0yHoQlPV55WDBx4LCYb96nP+qvBtG9AkfmDEiiq3rSQlPUxg72grfWGmPsOu+cmzCgPaKIQ7uoatnVaHXY4H8kpNZv9SBrgbip24tdi4wME44eA0AAK7NTQhjL277I3kIOg43ouiNpZZpi9Hhx6FUf7n/KwD17rPtxhPEjtA/WVhoBPcHcHlZO0pwCLUDOzSx7oYvvvuviStxb40kB3S41VIEhFP1nilrnJ9B0SFSFmOPFjlK3U3M0RTIJeR2gbgX3iosNCLQoVywZ2F3vDsvTwmDMHqwZPHNfuBUqgIPbOMhelRX7Sxut6ZQu1dnX/I9WOKS2iwPZqa5RuyKejOIo6r/32F9p2S4di2PJ9W8GkOBgB"}           }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0           }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"The"}            }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" widget now"}               }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" has 30 beads:"}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" 12 blue and 18"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" green. What"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" would you like to do"}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" next?"}            }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1         }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":117,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":129,"output_tokens_details":{"thinking_tokens":97}}          }
+
+event: message_stop
+data: {"type":"message_stop" }
+

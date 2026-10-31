@@ -1,5 +1,5 @@
 ---
-status: "running"
+status: "done"
 role: "probe"
 gate: "none"
 items: []
@@ -8,9 +8,9 @@ agent: "agy"
 command: "agy --dangerously-skip-permissions"
 cwd: "/home/rs10/developer/kuib-ai/kuib"
 session: "kuib-ai/kuib/root"
-started: "2026-10-06T21:27:29"
-finished: ""
-reported: ""
+started: "2026-10-06T22:33:21"
+finished: "2026-10-06T22:36:04"
+reported: "done"
 ---
 # live-agy — live round probe (agy)
 

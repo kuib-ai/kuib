@@ -1,0 +1,2 @@
+{"group":"MT","stop":"model-refused","ordinal":294}
+{"group":"MT","kind":"reviewed","ordinal":294,"reason":"Coarse offline classifier mistook an expected unsupported effort-none parameter for a model refusal. Same-model effort-minimal answered 200 at ordinal 294; no systemic refusal or ledger stop occurred. Continue only unattempted approved rows."}

@@ -1,0 +1,6 @@
+[
+  "/home/rs10/developer/kuib-ai/kuib/packages/inference/fixtures/anthropic-messages-claude-haiku-5-5/consecutive-user/001.request.json",
+  "/home/rs10/developer/kuib-ai/kuib/packages/inference/fixtures/anthropic-messages-claude-haiku-5-5/invalid-beta/001.request.json",
+  "/home/rs10/developer/kuib-ai/kuib/packages/inference/fixtures/anthropic-messages-claude-haiku-5-5/inline-tools/001.request.json",
+  "/home/rs10/developer/kuib-ai/kuib/packages/inference/fixtures/anthropic-messages-claude-haiku-5-5/cross-model-s/001.request.json"
+]

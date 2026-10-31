@@ -1,0 +1,10 @@
+data: {"id":"chatcmpl-01a13441-b450-7017-87d6-09f9110f5677","choices":[{"delta":{"content":"The widget has","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878083,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13441-b450-7017-87d6-09f9110f5677","choices":[{"delta":{"content":" 30 beads remaining ("},"finish_reason":null,"index":0}],"created":1791878083,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13441-b450-7017-87d6-09f9110f5677","choices":[{"delta":{"content":"12 blue and 18 green)."},"finish_reason":null,"index":0}],"created":1791878083,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13441-b450-7017-87d6-09f9110f5677","choices":[{"delta":{},"finish_reason":"stop","index":0}],"created":1791878083,"model":"muse-spark-1.1","object":"chat.completion.chunk","usage":{"completion_tokens":197,"prompt_tokens":53,"total_tokens":250,"completion_tokens_details":{"reasoning_tokens":172},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

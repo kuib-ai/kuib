@@ -1,0 +1,1255 @@
+{
+  "recipes": [
+    {
+      "strategy": "host-sgp",
+      "patch": {},
+      "remove": [],
+      "row": "MO/host-sgp",
+      "nativeSettings": "https://token-plan-sgp.xiaomimimo.com/v1/chat/completions; Authorization Bearer; thinking disabled"
+    },
+    {
+      "row": "MO/tool-seed",
+      "nativeSettings": "stream=false; tools get_value; choice auto; ask value 7; MiMo thinking enabled / Meta effort low",
+      "strategy": "tool-seed",
+      "patch": {
+        "stream": false,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "remove": [
+        "stream_options"
+      ]
+    },
+    {
+      "row": "MO/plain-json",
+      "nativeSettings": "stream=false; reasoning_effort omitted; thinking omitted",
+      "strategy": "plain-json",
+      "patch": {
+        "stream": false
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/plain-stream",
+      "nativeSettings": "stream=true; stream_options.include_usage=true",
+      "strategy": "plain-stream",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/stream-default",
+      "nativeSettings": "stream omitted; usage options omitted",
+      "strategy": "stream-default",
+      "patch": {},
+      "remove": [
+        "stream",
+        "stream_options"
+      ]
+    },
+    {
+      "row": "MO/stream-usage-omitted",
+      "nativeSettings": "stream=true; stream_options omitted",
+      "strategy": "stream-usage-omitted",
+      "patch": {},
+      "remove": [
+        "stream_options"
+      ]
+    },
+    {
+      "row": "MO/stream-usage-false",
+      "nativeSettings": "stream=true; include_usage=false",
+      "strategy": "stream-usage-false",
+      "patch": {
+        "stream_options": {
+          "include_usage": false
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/stream-obfuscation-false",
+      "nativeSettings": "stream=true; include_usage=true; include_obfuscation=false",
+      "strategy": "stream-obfuscation-false",
+      "patch": {
+        "stream_options": {
+          "include_usage": true,
+          "include_obfuscation": false
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/stream-obfuscation-true",
+      "nativeSettings": "stream=true; include_usage=true; include_obfuscation=true",
+      "strategy": "stream-obfuscation-true",
+      "patch": {
+        "stream_options": {
+          "include_usage": true,
+          "include_obfuscation": true
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/json-stream-options",
+      "nativeSettings": "stream=false; include_usage=true",
+      "strategy": "json-stream-options",
+      "patch": {
+        "stream": false,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/thinking-enabled",
+      "nativeSettings": "thinking.type=enabled; effort omitted",
+      "strategy": "thinking-enabled",
+      "patch": {
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/thinking-disabled",
+      "nativeSettings": "thinking.type=disabled; effort omitted",
+      "strategy": "thinking-disabled",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/effort-none",
+      "nativeSettings": "reasoning_effort=none",
+      "strategy": "effort-none",
+      "patch": {
+        "reasoning_effort": "none"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/effort-minimal",
+      "nativeSettings": "reasoning_effort=minimal",
+      "strategy": "effort-minimal",
+      "patch": {
+        "reasoning_effort": "minimal"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/effort-low",
+      "nativeSettings": "reasoning_effort=low",
+      "strategy": "effort-low",
+      "patch": {
+        "reasoning_effort": "low"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/effort-medium",
+      "nativeSettings": "reasoning_effort=medium",
+      "strategy": "effort-medium",
+      "patch": {
+        "reasoning_effort": "medium"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/effort-high",
+      "nativeSettings": "reasoning_effort=high",
+      "strategy": "effort-high",
+      "patch": {
+        "reasoning_effort": "high"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/effort-xhigh",
+      "nativeSettings": "reasoning_effort=xhigh",
+      "strategy": "effort-xhigh",
+      "patch": {
+        "reasoning_effort": "xhigh"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/effort-max",
+      "nativeSettings": "reasoning_effort=max",
+      "strategy": "effort-max",
+      "patch": {
+        "reasoning_effort": "max"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/verbosity-low",
+      "nativeSettings": "verbosity=low",
+      "strategy": "verbosity-low",
+      "patch": {
+        "verbosity": "low"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/verbosity-medium",
+      "nativeSettings": "verbosity=medium",
+      "strategy": "verbosity-medium",
+      "patch": {
+        "verbosity": "medium"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/verbosity-high",
+      "nativeSettings": "verbosity=high",
+      "strategy": "verbosity-high",
+      "patch": {
+        "verbosity": "high"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/tool-replay",
+      "nativeSettings": "stream=true; include_usage=true; unchanged assistant call, original reasoning_content if present; tool result 7",
+      "strategy": "tool-replay",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/tool-replay-omit-reasoning",
+      "nativeSettings": "same round; remove reasoning_content",
+      "strategy": "tool-replay-omit-reasoning",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/tool-replay-empty-reasoning",
+      "nativeSettings": "same round; reasoning_content=\"\"",
+      "strategy": "tool-replay-empty-reasoning",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/tool-replay-synthetic-reasoning",
+      "nativeSettings": "same round; reasoning_content=\"Synthetic test reasoning.\"",
+      "strategy": "tool-replay-synthetic-reasoning",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/tool-order-invalid",
+      "nativeSettings": "assistant call + user + tool result, or unmatched tool_call_id",
+      "strategy": "tool-order-invalid",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/tool-result-blocks",
+      "nativeSettings": "same round; tool content text-block array",
+      "strategy": "tool-result-blocks",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/tool-result-error",
+      "nativeSettings": "same round; tool result plain string with synthetic error",
+      "strategy": "tool-result-error",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/choice-auto",
+      "nativeSettings": "tool_choice=auto; tools retained",
+      "strategy": "choice-auto",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/choice-none",
+      "nativeSettings": "tool_choice=none; tools retained",
+      "strategy": "choice-none",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "none"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/choice-required",
+      "nativeSettings": "tool_choice=required; tools retained",
+      "strategy": "choice-required",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "required"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/choice-function",
+      "nativeSettings": "tool_choice={type:function,function:{name:get_value}}; tools retained",
+      "strategy": "choice-function",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "get_value"
+          }
+        }
+      },
+      "remove": []
+    },
+    {
+      "strategy": "choice-allowed-tools",
+      "patch": {},
+      "remove": [],
+      "row": "MO/choice-allowed_tools",
+      "nativeSettings": "tool_choice={type:allowed_tools,allowed_tools:{mode:auto,tools:[get_value]}}; tools retained"
+    },
+    {
+      "row": "MO/choice-custom",
+      "nativeSettings": "tool_choice={type:custom,custom:{name:echo_value}}; tools retained; declare custom echo_value",
+      "strategy": "choice-custom",
+      "patch": {
+        "tools": [
+          {
+            "type": "custom",
+            "custom": {
+              "name": "echo_value",
+              "description": "Echo a synthetic value.",
+              "format": {
+                "type": "text"
+              }
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "custom",
+          "custom": {
+            "name": "echo_value"
+          }
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/choice-allowed-required",
+      "nativeSettings": "allowed_tools mode=required; tools get_value",
+      "strategy": "choice-allowed-required",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "allowed_tools",
+          "allowed_tools": {
+            "mode": "required",
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "get_value"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/parallel-false",
+      "nativeSettings": "parallel_tool_calls=false; ask for values 7 and 8; choice auto",
+      "strategy": "parallel-false",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "parallel_tool_calls": false
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/parallel-true",
+      "nativeSettings": "parallel_tool_calls=true; ask for values 7 and 8; choice auto",
+      "strategy": "parallel-true",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "parallel_tool_calls": true
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/strict-false",
+      "nativeSettings": "tools[].function.strict=false",
+      "strategy": "strict-false",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              },
+              "strict": false
+            }
+          }
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/strict-true",
+      "nativeSettings": "strict=true; additionalProperties=false; all properties required",
+      "strategy": "strict-true",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              },
+              "strict": true
+            }
+          }
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/strict-invalid",
+      "nativeSettings": "strict=true; required omitted; additionalProperties omitted",
+      "strategy": "strict-invalid",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "strict": true
+            }
+          }
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/instruction-system-first",
+      "nativeSettings": "messages=[system(instruction), user]",
+      "strategy": "instruction-system-first",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/instruction-system-after-user",
+      "nativeSettings": "messages=[user, system(instruction)]",
+      "strategy": "instruction-system-after-user",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/instruction-system-after-assistant",
+      "nativeSettings": "messages=[user, assistant(text), system(instruction), user]",
+      "strategy": "instruction-system-after-assistant",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/instruction-system-between-call-result",
+      "nativeSettings": "source round with system inserted between call and result",
+      "strategy": "instruction-system-between-call-result",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/instruction-developer-first",
+      "nativeSettings": "messages=[developer(instruction), user]",
+      "strategy": "instruction-developer-first",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/instruction-developer-after-user",
+      "nativeSettings": "messages=[user, developer(instruction)]",
+      "strategy": "instruction-developer-after-user",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/instruction-developer-after-assistant",
+      "nativeSettings": "messages=[user, assistant(text), developer(instruction), user]",
+      "strategy": "instruction-developer-after-assistant",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/instruction-developer-between-call-result",
+      "nativeSettings": "source round with developer inserted between call and result",
+      "strategy": "instruction-developer-between-call-result",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/instruction-blocks",
+      "nativeSettings": "developer content text-block array",
+      "strategy": "instruction-blocks",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cut-text",
+      "nativeSettings": "stream=true; ask long enumerated output; cancel after first content delta",
+      "strategy": "cut-text",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cut-text-user",
+      "nativeSettings": "partial observed assistant content + user Continue",
+      "strategy": "cut-text-user",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cut-text-prefill",
+      "nativeSettings": "partial observed content as last assistant message",
+      "strategy": "cut-text-prefill",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cut-reasoning",
+      "nativeSettings": "stream=true; MiMo thinking enabled / Meta effort high; cancel on first reasoning delta, else first text chunk",
+      "strategy": "cut-reasoning",
+      "patch": {
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/cut-reasoning-replay",
+      "nativeSettings": "observed partial reasoning_content if present + user Continue",
+      "strategy": "cut-reasoning-replay",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/reasoning-display-summarized",
+      "nativeSettings": "thinking={type:enabled,display:summarized}",
+      "strategy": "reasoning-display-summarized",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "summarized"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/reasoning-display-omitted",
+      "nativeSettings": "thinking={type:enabled,display:omitted}",
+      "strategy": "reasoning-display-omitted",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "omitted"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/reasoning-display-updates",
+      "nativeSettings": "thinking={type:enabled,display:updates}",
+      "strategy": "reasoning-display-updates",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "updates"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/cache-implicit-write",
+      "nativeSettings": "long synthetic developer prefix; prompt_cache_options={mode:implicit,ttl:30m}; cache key=synthetic-capture",
+      "strategy": "cache-implicit-write",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-implicit-read",
+      "nativeSettings": "identical request to cache-implicit-write",
+      "strategy": "cache-implicit-read",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-explicit-write",
+      "nativeSettings": "long prefix as text parts; one prompt_cache_breakpoint={mode:explicit}; prompt_cache_options={mode:explicit,ttl:30m}",
+      "strategy": "cache-explicit-write",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-explicit-read",
+      "nativeSettings": "identical request to cache-explicit-write",
+      "strategy": "cache-explicit-read",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-explicit-no-mark",
+      "nativeSettings": "explicit mode=explicit; ttl=30m; no breakpoint",
+      "strategy": "cache-explicit-no-mark",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-four",
+      "nativeSettings": "four explicit text-part breakpoints; explicit mode; ttl=30m",
+      "strategy": "cache-four",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-five",
+      "nativeSettings": "five explicit breakpoints; explicit mode; ttl=30m",
+      "strategy": "cache-five",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-implicit-four",
+      "nativeSettings": "implicit mode; four explicit breakpoints",
+      "strategy": "cache-implicit-four",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-no-options-write",
+      "nativeSettings": "long identical synthetic prefix; no cache fields",
+      "strategy": "cache-no-options-write",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-no-options-read",
+      "nativeSettings": "identical request to cache-no-options-write",
+      "strategy": "cache-no-options-read",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "strategy": "cache-retention-in-memory",
+      "patch": {},
+      "remove": [],
+      "row": "MO/cache-retention-in_memory",
+      "nativeSettings": "prompt_cache_retention=in_memory"
+    },
+    {
+      "row": "MO/cache-retention-24h",
+      "nativeSettings": "prompt_cache_retention=24h",
+      "strategy": "cache-retention-24h",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-key",
+      "nativeSettings": "prompt_cache_key=synthetic-capture-key",
+      "strategy": "cache-key",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/cache-invalid-ttl",
+      "nativeSettings": "prompt_cache_options={mode:explicit,ttl:1h}",
+      "strategy": "cache-invalid-ttl",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/temperature-default",
+      "nativeSettings": "thinking disabled; temperature=1",
+      "strategy": "temperature-default",
+      "patch": {
+        "temperature": 1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/temperature-changed",
+      "nativeSettings": "thinking disabled; temperature=0",
+      "strategy": "temperature-changed",
+      "patch": {
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/temperature-upper",
+      "nativeSettings": "thinking disabled; temperature=1.5",
+      "strategy": "temperature-upper",
+      "patch": {
+        "temperature": 1.5,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/top-p-default",
+      "nativeSettings": "thinking disabled; top_p=1",
+      "strategy": "top-p-default",
+      "patch": {
+        "top_p": 1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/top-p-changed",
+      "nativeSettings": "thinking disabled; top_p=0.5",
+      "strategy": "top-p-changed",
+      "patch": {
+        "top_p": 0.5,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/top-p-lower",
+      "nativeSettings": "thinking disabled; top_p=0.01",
+      "strategy": "top-p-lower",
+      "patch": {
+        "top_p": 0.01,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/frequency-penalty",
+      "nativeSettings": "thinking disabled; frequency_penalty=0.2",
+      "strategy": "frequency-penalty",
+      "patch": {
+        "frequency_penalty": 0.2,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/presence-penalty",
+      "nativeSettings": "thinking disabled; presence_penalty=0.2",
+      "strategy": "presence-penalty",
+      "patch": {
+        "presence_penalty": 0.2,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/seed",
+      "nativeSettings": "thinking disabled; seed=7",
+      "strategy": "seed",
+      "patch": {
+        "seed": 7,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/logit-bias",
+      "nativeSettings": "thinking disabled; logit_bias={}",
+      "strategy": "logit-bias",
+      "patch": {
+        "logit_bias": {},
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/n-one",
+      "nativeSettings": "thinking disabled; n=1",
+      "strategy": "n-one",
+      "patch": {
+        "n": 1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/n-two",
+      "nativeSettings": "thinking disabled; n=2",
+      "strategy": "n-two",
+      "patch": {
+        "n": 2,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/logprobs",
+      "nativeSettings": "thinking disabled; logprobs=true",
+      "strategy": "logprobs",
+      "patch": {
+        "logprobs": true,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/top-logprobs",
+      "nativeSettings": "thinking disabled; logprobs=true; top_logprobs=1",
+      "strategy": "top-logprobs",
+      "patch": {
+        "top_logprobs": 1,
+        "logprobs": true,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/thinking-sampling-temperature",
+      "nativeSettings": "thinking enabled; temperature=0",
+      "strategy": "thinking-sampling-temperature",
+      "patch": {
+        "temperature": 0,
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "strategy": "thinking-sampling-top-p",
+      "patch": {
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "remove": [],
+      "row": "MO/thinking-sampling-top_p",
+      "nativeSettings": "thinking enabled; top_p=0.5"
+    },
+    {
+      "row": "MO/sampling-combined",
+      "nativeSettings": "thinking disabled; temperature=1; top_p=1",
+      "strategy": "sampling-combined",
+      "patch": {
+        "temperature": 1,
+        "top_p": 1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/stop-string",
+      "nativeSettings": "stop=END; ask OK END EXTRA",
+      "strategy": "stop-string",
+      "patch": {
+        "stop": "END"
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/stop-one",
+      "nativeSettings": "stop=[END]; ask OK END EXTRA",
+      "strategy": "stop-one",
+      "patch": {
+        "stop": [
+          "END"
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/stop-four",
+      "nativeSettings": "stop=[END,A,B,C]",
+      "strategy": "stop-four",
+      "patch": {
+        "stop": [
+          "END",
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/stop-five",
+      "nativeSettings": "stop=[END,A,B,C,D]",
+      "strategy": "stop-five",
+      "patch": {
+        "stop": [
+          "END",
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/output-one",
+      "nativeSettings": "max_completion_tokens=1; ask long text",
+      "strategy": "output-one",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/output-zero",
+      "nativeSettings": "max_completion_tokens=0",
+      "strategy": "output-zero",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/output-negative",
+      "nativeSettings": "max_completion_tokens=-1",
+      "strategy": "output-negative",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/output-legacy",
+      "nativeSettings": "max_tokens=256; max_completion_tokens omitted",
+      "strategy": "output-legacy",
+      "patch": {
+        "max_tokens": 256
+      },
+      "remove": [
+        "max_completion_tokens"
+      ]
+    },
+    {
+      "row": "MO/output-both",
+      "nativeSettings": "max_tokens=128; max_completion_tokens=256",
+      "strategy": "output-both",
+      "patch": {
+        "max_tokens": 128
+      },
+      "remove": []
+    },
+    {
+      "row": "MO/empty-text",
+      "nativeSettings": "user empty text content part",
+      "strategy": "empty-text",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/first-assistant",
+      "nativeSettings": "messages=[assistant(text),user]",
+      "strategy": "first-assistant",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/consecutive-user",
+      "nativeSettings": "two adjacent user messages",
+      "strategy": "consecutive-user",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/assistant-null",
+      "nativeSettings": "actual tool-seed replay; assistant content=null",
+      "strategy": "assistant-null",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MO/assistant-empty",
+      "nativeSettings": "actual tool-seed replay; assistant content=\"\"",
+      "strategy": "assistant-empty",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "strategy": "auth-api-key",
+      "patch": {},
+      "remove": [],
+      "row": "MO/auth-api-key",
+      "nativeSettings": "api-key instead of Authorization Bearer"
+    },
+    {
+      "strategy": "output-above-ceiling",
+      "patch": {
+        "max_completion_tokens": 131073
+      },
+      "remove": [],
+      "row": "MO/output-above-ceiling",
+      "nativeSettings": "max_completion_tokens=131073; ask OK; cancel immediately on HTTP 200"
+    },
+    {
+      "strategy": "host-api",
+      "patch": {},
+      "remove": [],
+      "row": "MO/host-api",
+      "nativeSettings": "https://api.xiaomimimo.com/v1/chat/completions; same named key; thinking disabled"
+    },
+    {
+      "strategy": "host-sgp-repeat",
+      "patch": {},
+      "remove": [],
+      "row": "MO/host-sgp-repeat",
+      "nativeSettings": "https://token-plan-sgp.xiaomimimo.com/v1/chat/completions; Authorization Bearer; thinking disabled"
+    }
+  ],
+  "puzzle": "A synthetic widget has 17 blue beads and 9 green beads. It loses 5 blue beads, then doubles its green beads. How many beads remain? Answer in one sentence.",
+  "tool": {
+    "type": "function",
+    "function": {
+      "name": "get_value",
+      "description": "Return the stored integer for the selector.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "selector"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

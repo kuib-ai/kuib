@@ -10,12 +10,14 @@ import {
   realpathSync,
   renameSync,
   statSync,
+  unlinkSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "@std/yaml";
+import ts from "typescript";
 import Cli from "@kuib-ai/cli";
 import type { CliSchema } from "@kuib-ai/cli/cli.schema";
 
@@ -41,7 +43,6 @@ const ROLES = ["implementer", "reviewer", "probe"];
 const GATES = ["none", "plan"];
 const STOP_STATUSES = ["plan-ready", "done", "blocked", "failed", "restart"];
 const EVENT_STATUSES = [...STOP_STATUSES, "lost"];
-const FINISHED_STATUSES = ["done", "blocked", "failed"];
 const CLOSABLE_STATUSES = ["running", "restart", "plan-ready", "lost"];
 const WORKER_FILE_FOR_STATUS: Record<string, string> = {
   done: "report.md",
@@ -68,6 +69,8 @@ const CONTEXT_DROP_MEANING_CLEARED = 10;
 const READY_TIMEOUT_SECONDS = 90;
 const PASTE_VISIBLE_TIMEOUT_SECONDS = 5;
 const SUBMIT_ATTEMPTS = 3;
+const MATCHED_LINES_KEPT = 200;
+const MATCH_DETAIL_CHARS = 160;
 const SUBMIT_WAIT_SECONDS = 2;
 const LAUNCH_TIMEOUT_SECONDS = 20;
 const HANDOFF_SETTLE_TIMEOUT_SECONDS = 600;
@@ -80,21 +83,61 @@ const JOURNAL_FILES_THE_ORCHESTRATOR_WRITES = [
 ];
 const WORKER_PROTOCOL = ".agents/skills/orchestrate/WORKER.md";
 interface Agent {
+  executable: string;
   command: string;
   promptFlag: string;
 }
+const OPENCODE_MODEL = "xiaomi-token-plan-sgp/mimo-v2.6-pro";
 const AGENTS: Record<string, Agent> = {
-  claude: { command: "claude", promptFlag: "" },
-  "kiro-claude": { command: "kiro-claude", promptFlag: "" },
-  "mimo-claude": { command: "mimo-claude", promptFlag: "" },
-  cursor: { command: "cursor-agent", promptFlag: "" },
-  "cursor-agent": { command: "cursor-agent", promptFlag: "" },
-  agy: { command: "agy", promptFlag: "--prompt-interactive" },
-  antigravity: { command: "agy", promptFlag: "--prompt-interactive" },
-  gemini: { command: "gemini", promptFlag: "--prompt-interactive" },
-  codex: { command: "codex", promptFlag: "" },
-  opencode: { command: "opencode", promptFlag: "--prompt" },
+  claude: {
+    executable: "claude",
+    command: "claude --dangerously-skip-permissions",
+    promptFlag: "",
+  },
+  "kiro-claude": {
+    executable: "kiro-claude",
+    command: "kiro-claude --dangerously-skip-permissions",
+    promptFlag: "",
+  },
+  "mimo-claude": {
+    executable: "mimo-claude",
+    command: "mimo-claude --dangerously-skip-permissions",
+    promptFlag: "",
+  },
+  cursor: {
+    executable: "cursor-agent",
+    command: "cursor-agent",
+    promptFlag: "",
+  },
+  "cursor-agent": {
+    executable: "cursor-agent",
+    command: "cursor-agent",
+    promptFlag: "",
+  },
+  agy: {
+    executable: "agy",
+    command: "agy",
+    promptFlag: "--prompt-interactive",
+  },
+  antigravity: {
+    executable: "agy",
+    command: "agy",
+    promptFlag: "--prompt-interactive",
+  },
+  gemini: {
+    executable: "gemini",
+    command: "gemini",
+    promptFlag: "--prompt-interactive",
+  },
+  codex: { executable: "codex", command: "codex", promptFlag: "" },
+  opencode: {
+    executable: "opencode",
+    command: `env OPENCODE_CONFIG_CONTENT='${JSON.stringify({ model: OPENCODE_MODEL })}' opencode --standalone`,
+    promptFlag: "--prompt",
+  },
 };
+const MCP_CONFIG = ".agents/mcp_config.json";
+const MCP_AGENTS = ["claude", "kiro-claude", "mimo-claude"];
 const USAGE = `usage: pnpm orchestra <command>
 
 Coordinate agent CLIs in tmux windows. Tasks are journal records under
@@ -104,7 +147,7 @@ journal/features/<feature>/tasks/<id>/ (brief.md, plan.md, log.md, report.md).
   new <feature> <task> [--role implementer|reviewer|probe] [--gate none|plan] [--items P01-I01,..] [--grant 'glob,..']
                                                   create a draft task folder with brief.md
   path <task>                                     print a task's folder
-  spawn <task> <agent> [--cwd DIR] [--cmd 'launch command'] [--arg]
+  spawn <task> <agent> [--cwd DIR] [--cmd 'launch command'] [--arg] [--mcp name,..]
                                                   open window w:<task>, start the agent, deliver the worker prompt
   send <task> <message..> | --file PATH           deliver a message (a stopped worker is set running)
   go <task> [message..]                           approve a plan-ready worker's plan
@@ -114,12 +157,14 @@ journal/features/<feature>/tasks/<id>/ (brief.md, plan.md, log.md, report.md).
   close <task>                                    kill a worker's window; an unfinished task becomes closed
   status                                          tasks, their windows and context use
   reconcile [--respawn]                           align this session's task records with its windows
-  watch [tasks..] [--follow] [--interval 10] [--idle 3] [--cap 60] [--timeout 0]
+  watch [tasks..] [--follow] [--interval 10] [--idle 3] [--cap 60] [--match REGEX] [--timeout 0]
                                                   print unreported events; exit after the first poll with events
-  accept <task> [--close]                         accept a done task: set its items implemented with refs
+  diff <task>                                     list added, changed and removed paths since spawn
+  accept <task> [--close] [--removed-title TITLE ...] [--without-title-guard]
+                                                  accept a done task: set its items implemented with one report ref
   done <task> [done|blocked|failed|plan-ready|restart]
                                                   worker: set your task's status after writing its file
-  handoff [--delay 20]                            orchestrator: clear this pane after the turn and resume
+  handoff [prompt..] | --file PATH [--delay 20]    orchestrator: clear this pane after the turn and resume
 
 agents: ${Object.keys(AGENTS).sort().join(", ")}, or any command`;
 
@@ -144,9 +189,12 @@ interface Snapshot {
 
 interface Runtime {
   baseline?: Snapshot;
+  test_titles?: string[];
+  prompt_flag?: string | null;
   screens?: string[];
   flagged_paths?: string[];
   git_flagged?: boolean;
+  matched_lines?: string[];
 }
 
 const pauseCell = new Int32Array(new SharedArrayBuffer(4));
@@ -573,7 +621,12 @@ const isSlashCommand = function (text: string): boolean {
 };
 
 // @claim infra/orchestra
-const deliver = function (pane: string, text: string, label: string) {
+const deliver = function (
+  pane: string,
+  text: string,
+  label: string,
+  preserve = false,
+) {
   if (isSlashCommand(text)) {
     typeKeys(pane, text.trim());
     return;
@@ -584,7 +637,7 @@ const deliver = function (pane: string, text: string, label: string) {
       `a dialog is open in ${label} ("${dialog}"); answer it in the window, then retry`,
     );
   }
-  const content = text.trimEnd();
+  const content = preserve ? text : text.trimEnd();
   const buffer = `orchestra-${process.pid}`;
   tmux(["load-buffer", "-b", buffer, "-"], { input: content });
   tmux(["paste-buffer", "-d", "-p", "-b", buffer, "-t", pane]);
@@ -716,6 +769,7 @@ const repoTop = function (cwd: string): string {
   return repoTops.get(cwd)!;
 };
 
+// @claim infra/orchestra-watch
 const dirtyFiles = function (top: string): Record<string, string> {
   const entries = run("git", [
     "-C",
@@ -737,28 +791,50 @@ const dirtyFiles = function (top: string): Record<string, string> {
   const hashable = paths.filter(function (path) {
     return path && !path.includes("\n") && isFile(join(top, path));
   });
-  const blobs =
-    hashable.length > 0
-      ? run("git", ["-C", top, "hash-object", "--stdin-paths"], {
-          input: hashable
-            .map(function (path) {
-              return `${path}\n`;
-            })
-            .join(""),
-          check: false,
-        })
-          .trim()
-          .split("\n")
-      : [];
   const hashes = new Map<string, string>();
-  hashable.forEach(function (path, index) {
-    if (blobs[index]) hashes.set(path, blobs[index]);
-  });
+  if (hashable.length > 0) {
+    const result = spawnSync(
+      "git",
+      ["-C", top, "hash-object", "--stdin-paths"],
+      {
+        input: hashable
+          .map(function (path) {
+            return `${path}\n`;
+          })
+          .join(""),
+        encoding: "utf-8",
+      },
+    );
+    const blobs = (result.stdout ?? "").trim().split("\n");
+    if (
+      result.status === 0 &&
+      blobs.length === hashable.length &&
+      blobs.every(function (blob) {
+        return /^[0-9a-f]{40}$/.test(blob);
+      })
+    ) {
+      hashable.forEach(function (path, index) {
+        hashes.set(path, blobs[index]!);
+      });
+    }
+  }
   const dirty: Record<string, string> = {};
   for (const path of paths) {
     if (!path) continue;
-    dirty[path] =
-      hashes.get(path) ?? (lexists(join(top, path)) ? "not-a-file" : "deleted");
+    if (!isFile(join(top, path))) {
+      dirty[path] = lexists(join(top, path)) ? "not-a-file" : "deleted";
+      continue;
+    }
+    const hash =
+      hashes.get(path) ??
+      run("git", ["-C", top, "hash-object", "--", path], {
+        check: false,
+      }).trim();
+    dirty[path] = /^[0-9a-f]{40}$/.test(hash)
+      ? hash
+      : lexists(join(top, path))
+        ? "not-a-file"
+        : "deleted";
   }
   return dirty;
 };
@@ -779,6 +855,86 @@ const repoSnapshot = function (top: string): Snapshot {
 const takeBaseline = function (cwd: string): Snapshot {
   const top = repoTop(cwd);
   return top ? repoSnapshot(top) : { top: "", head: "", branch: "", dirty: {} };
+};
+
+// @claim infra/orchestra
+const testTitles = function (top: string): string[] {
+  const files = run("git", [
+    "-C",
+    top,
+    "ls-files",
+    "--cached",
+    "--others",
+    "--exclude-standard",
+    "-z",
+  ])
+    .split("\0")
+    .filter(function (path) {
+      return (
+        /\.(?:live\.)?(?:test|bench)\.tsx?$/.test(path) &&
+        isFile(join(top, path))
+      );
+    });
+  const titles = new Set<string>();
+  const testCall = function (expression: ts.Expression): boolean {
+    if (ts.isIdentifier(expression))
+      return expression.text === "it" || expression.text === "test";
+    if (ts.isCallExpression(expression)) return testCall(expression.expression);
+    if (!ts.isPropertyAccessExpression(expression)) return false;
+    if (
+      ts.isIdentifier(expression.expression) &&
+      expression.expression.text === "Deno"
+    ) {
+      return (
+        expression.name.text === "test" || expression.name.text === "bench"
+      );
+    }
+    return (
+      ["skip", "only", "todo", "each", "ignore"].includes(
+        expression.name.text,
+      ) && testCall(expression.expression)
+    );
+  };
+  for (const path of files) {
+    const source = ts.createSourceFile(
+      path,
+      readFileSync(join(top, path), "utf-8"),
+      ts.ScriptTarget.Latest,
+      true,
+    );
+    const visit = function (node: ts.Node): void {
+      if (ts.isCallExpression(node)) {
+        if (testCall(node.expression)) {
+          const first = node.arguments[0];
+          if (
+            first &&
+            (ts.isStringLiteral(first) ||
+              ts.isNoSubstitutionTemplateLiteral(first))
+          ) {
+            titles.add(first.text);
+          } else if (first && ts.isObjectLiteralExpression(first)) {
+            const property = first.properties.find(function (entry) {
+              return (
+                ts.isPropertyAssignment(entry) &&
+                entry.name.getText(source) === "name"
+              );
+            });
+            if (
+              property &&
+              ts.isPropertyAssignment(property) &&
+              (ts.isStringLiteral(property.initializer) ||
+                ts.isNoSubstitutionTemplateLiteral(property.initializer))
+            ) {
+              titles.add(property.initializer.text);
+            }
+          }
+        }
+      }
+      ts.forEachChild(node, visit);
+    };
+    visit(source);
+  }
+  return [...titles].sort();
 };
 
 const committedSince = function (
@@ -827,11 +983,31 @@ const changedSince = function (
   current: Snapshot,
 ): string[] {
   const before = baseline?.dirty ?? {};
-  const uncommitted = Object.entries(current.dirty)
-    .filter(function ([path, blob]) {
-      return before[path] !== blob;
+  const dirtyPaths = new Set([
+    ...Object.keys(before),
+    ...Object.keys(current.dirty),
+  ]);
+  const uncommitted = [...dirtyPaths]
+    .filter(function (path) {
+      const currentBlob = current.dirty[path];
+      if (currentBlob !== undefined) return before[path] !== currentBlob;
+      const headBlob = current.head
+        ? run(
+            "git",
+            [
+              "-C",
+              current.top,
+              "rev-parse",
+              "-q",
+              "--verify",
+              `${current.head}:${path}`,
+            ],
+            { check: false },
+          ).trim()
+        : "";
+      return before[path] !== headBlob;
     })
-    .map(function ([path]) {
+    .map(function (path) {
       return path;
     });
   const committed = baseline ? committedSince(baseline, current) : [];
@@ -895,15 +1071,24 @@ const matchesAny = function (path: string, globs: string[]): boolean {
   });
 };
 
+// @claim infra/orchestra-watch
 const allowedGlobs = function (
   task: Task,
   top: string,
-  running: Task[],
+  tasks: Task[],
 ): string[] {
+  const started = taskGet(task, "started");
   const sharingRepo = [
     task,
-    ...running.filter(function (other) {
-      return other.id !== task.id && repoTop(taskGet(other, "cwd")) === top;
+    ...tasks.filter(function (other) {
+      const otherStarted = taskGet(other, "started");
+      const otherFinished = taskGet(other, "finished");
+      return (
+        other.id !== task.id &&
+        (Boolean(otherStarted) || taskStatus(other) === "running") &&
+        (!started || !otherFinished || otherFinished >= started) &&
+        repoTop(taskGet(other, "cwd")) === top
+      );
     }),
   ];
   const globs = [...JOURNAL_FILES_THE_ORCHESTRATOR_WRITES];
@@ -918,6 +1103,7 @@ const journalSet = function (
   item: string,
   state: string,
   refs: string[] = [],
+  role = "changed",
 ) {
   const args = [
     "run",
@@ -928,7 +1114,7 @@ const journalSet = function (
     item,
     state,
     ...refs.flatMap(function (ref) {
-      return ["--ref", `${ref}=changed`];
+      return ["--ref", `${ref}=${role}`];
     }),
   ];
   const result = spawnSync(process.execPath, args, {
@@ -981,13 +1167,50 @@ const shellQuote = function (text: string): string {
   return `'${text.replace(/'/g, "'\\''")}'`;
 };
 
+// @claim infra/orchestra
+const commandWithPrompt = function (
+  command: string,
+  executable: string,
+  promptFlag: string,
+  promptFile: string,
+): string {
+  const escaped = executable.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const matches = [
+    ...command.matchAll(
+      new RegExp(`(^|\\s)(?:[^\\s]*/)?${escaped}(?=\\s|$)`, "g"),
+    ),
+  ];
+  if (matches.length !== 1)
+    throw new OrchestraError(
+      `cannot locate one ${executable} executable in --cmd; use a command with an unquoted agent executable or omit --arg`,
+    );
+  const match = matches[0]!;
+  const end = (match.index ?? 0) + match[0].length;
+  const flag = promptFlag ? `${promptFlag} ` : "";
+  return `${command.slice(0, end)} ${flag}"$(cat ${shellQuote(promptFile)})"${command.slice(end)}`;
+};
+
+// @claim infra/orchestra
+const promptInForeground = function (pane: string, prompt: string): boolean {
+  const shell = tmux(["display-message", "-p", "-t", pane, "#{pane_pid}"]);
+  const groups = run("ps", ["-o", "tpgid=", "-p", shell], {
+    check: false,
+  }).trim();
+  if (!/^\d+$/.test(groups)) return false;
+  const processes = run("ps", ["-eww", "-o", "pgid=,args="], { check: false });
+  return processes.split("\n").some(function (line) {
+    const match = line.match(/^\s*(\d+)\s+(.*)$/);
+    return match?.[1] === groups && match[2]?.includes(prompt);
+  });
+};
+
 const promptFlagOf = function (
   agent: string,
   command: string,
   asArgument: boolean,
 ): string | null {
   const known = AGENTS[agent];
-  if (known !== undefined && command.split(/\s+/)[0] === known.command)
+  if (known !== undefined && command.split(/\s+/).includes(known.executable))
     return known.promptFlag;
   return asArgument ? "" : null;
 };
@@ -1014,9 +1237,21 @@ const launchAgent = function (
   const promptFile = savePrompt(task, prompt);
   sleep(0.5);
   if (promptFlag !== null) {
-    const flag = promptFlag ? `${promptFlag} ` : "";
-    typeKeys(pane, `${command} ${flag}"$(cat ${shellQuote(promptFile)})"`);
+    const executable =
+      AGENTS[taskGet(task, "agent")]?.executable ?? taskGet(task, "agent");
+    typeKeys(
+      pane,
+      commandWithPrompt(command, executable, promptFlag, promptFile),
+    );
     waitForLaunch(pane, `w:${task.id}`);
+    const deadline = monotonic() + PASTE_VISIBLE_TIMEOUT_SECONDS;
+    while (monotonic() < deadline) {
+      if (promptInForeground(pane, prompt)) return;
+      sleep(0.25);
+    }
+    throw new OrchestraError(
+      `prompt did not reach the agent in w:${task.id}; prompt saved at ${promptFile}`,
+    );
     return;
   }
   typeKeys(pane, command);
@@ -1036,7 +1271,7 @@ const respawnWorker = function (task: Task) {
   const pane = openWorkerWindow(task, cwd);
   updateTask(task, {
     status: "running",
-    started: now(),
+    started: taskGet(task, "started") || now(),
     finished: "",
     reported: "",
   });
@@ -1051,7 +1286,9 @@ const respawnWorker = function (task: Task) {
     pane,
     command,
     resumePrompt(task),
-    promptFlagOf(taskGet(task, "agent"), command, false),
+    state.prompt_flag !== undefined
+      ? state.prompt_flag
+      : promptFlagOf(taskGet(task, "agent"), command, false),
   );
 };
 
@@ -1075,12 +1312,12 @@ const reconcile = function (respawn: boolean): string[] {
         changes.push(`${task.id}: respawn failed: ${error.message}`);
       }
     } else if (status === "running" && !live) {
-      updateTask(task, { status: "lost" });
+      updateTask(task, { status: "lost", finished: now() });
       changes.push(
         `${task.id}: window w:${task.id} is gone; marked lost (\`pnpm orchestra reconcile --respawn\` relaunches it)`,
       );
     } else if (status === "lost" && live) {
-      updateTask(task, { status: "running", reported: "" });
+      updateTask(task, { status: "running", finished: "", reported: "" });
       changes.push(`${task.id}: window w:${task.id} is back; marked running`);
     }
   }
@@ -1122,14 +1359,37 @@ const contextCrossedCap = function (
 };
 
 // @claim infra/orchestra-watch
+const matchEvents = function (
+  task: Task,
+  screen: string,
+  match: RegExp,
+): Event[] {
+  const seen = loadRuntime(task).matched_lines ?? [];
+  const events: Event[] = [];
+  for (const line of screen.split("\n")) {
+    const text = squashWhitespace(line);
+    if (!match.test(text)) continue;
+    const key = sha1(text);
+    if (seen.includes(key)) continue;
+    seen.push(key);
+    events.push([task.id, "match", text.slice(0, MATCH_DETAIL_CHARS)]);
+  }
+  if (events.length > 0)
+    updateRuntime(task, { matched_lines: seen.slice(-MATCHED_LINES_KEPT) });
+  return events;
+};
+
+// @claim infra/orchestra-watch
 const screenEvents = function (
   task: Task,
   pane: string,
   cap: number,
   idlePolls: number,
+  match: RegExp | null,
 ): Event[] {
   const screen = capture(pane, SCREEN_HISTORY_LINES);
-  const events: Event[] = [];
+  const events: Event[] =
+    match === null ? [] : matchEvents(task, screen, match);
   const used = contextUsed(screen);
   if (used !== null && contextCrossedCap(pane, used, cap)) {
     events.push([
@@ -1169,7 +1429,7 @@ const screenEvents = function (
 // @claim infra/orchestra-watch
 const repoEvents = function (
   task: Task,
-  running: Task[],
+  tasks: Task[],
   snapshots: Map<string, Snapshot>,
 ): Event[] {
   const state = loadRuntime(task);
@@ -1179,7 +1439,7 @@ const repoEvents = function (
   if (!snapshots.has(top)) snapshots.set(top, repoSnapshot(top));
   const current = snapshots.get(top)!;
   const flagged = new Set(state.flagged_paths ?? []);
-  const allowed = allowedGlobs(task, top, running);
+  const allowed = allowedGlobs(task, top, tasks);
   const outside = changedSince(baseline, current).filter(function (path) {
     return !flagged.has(path) && !matchesAny(path, allowed);
   });
@@ -1305,6 +1565,40 @@ const cmdPath = function (parsed: Parsed) {
   console.log(findTask(parsed.positionals[0]).folder);
 };
 
+const mcpArguments = function (agent: string, names: string[]): string {
+  if (!MCP_AGENTS.includes(agent)) {
+    if (names.length > 0) {
+      throw new OrchestraError(
+        `--mcp is for ${MCP_AGENTS.join(", ")}; ${agent} takes its MCP servers from its own configuration`,
+      );
+    }
+    return "";
+  }
+  const servers = (
+    JSON.parse(readFileSync(join(root(), MCP_CONFIG), "utf-8")) as {
+      mcpServers: Record<string, unknown>;
+    }
+  ).mcpServers;
+  const missing = names.filter(function (name) {
+    return !(name in servers);
+  });
+  if (missing.length > 0) {
+    throw new OrchestraError(
+      `no MCP server named ${missing.join(", ")} in ${MCP_CONFIG} (known: ${Object.keys(servers).join(", ")})`,
+    );
+  }
+  const selected = Object.fromEntries(
+    names.map(function (name) {
+      return [name, servers[name]];
+    }),
+  );
+  const config = JSON.stringify({ mcpServers: selected }).replaceAll(
+    "'",
+    "'\\''",
+  );
+  return ` --strict-mcp-config --mcp-config '${config}'`;
+};
+
 // @claim infra/orchestra
 const cmdSpawn = function (parsed: Parsed) {
   const { positionals, values } = parsed;
@@ -1322,8 +1616,20 @@ const cmdSpawn = function (parsed: Parsed) {
     );
   const cwd = realPath((values.cwd as string | undefined) ?? root());
   if (!isDirectory(cwd)) throw new OrchestraError(`cwd does not exist: ${cwd}`);
+  const servers = ((values.mcp as string | undefined) ?? "")
+    .split(",")
+    .map(function (name) {
+      return name.trim();
+    })
+    .filter(function (name) {
+      return name.length > 0;
+    });
+  if (values.cmd !== undefined && servers.length > 0) {
+    throw new OrchestraError("give either --cmd or --mcp");
+  }
   const command =
-    (values.cmd as string | undefined) ?? AGENTS[agent]?.command ?? agent;
+    (values.cmd as string | undefined) ??
+    `${AGENTS[agent]?.command ?? agent}${mcpArguments(agent, servers)}`;
   const asArgument = values.arg === true;
   const pane = openWorkerWindow(task, cwd);
   updateTask(task, {
@@ -1336,14 +1642,13 @@ const cmdSpawn = function (parsed: Parsed) {
     finished: "",
     reported: "",
   });
-  saveRuntime(task, { baseline: takeBaseline(cwd) });
-  launchAgent(
-    task,
-    pane,
-    command,
-    workerPrompt(task),
-    promptFlagOf(agent, command, asArgument),
-  );
+  const promptFlag = promptFlagOf(agent, command, asArgument);
+  saveRuntime(task, {
+    baseline: takeBaseline(cwd),
+    test_titles: testTitles(root()),
+    prompt_flag: promptFlag,
+  });
+  launchAgent(task, pane, command, workerPrompt(task), promptFlag);
   for (const item of taskList(task, "items"))
     journalSet(task.feature, item, "in_progress");
   console.log(
@@ -1382,7 +1687,7 @@ const cmdGo = function (parsed: Parsed) {
     positionals.slice(1).join(" ").trim() || "Approved as planned.";
   updateTask(
     task,
-    { status: "running", reported: "" },
+    { status: "running", finished: "", reported: "" },
     `\n## Go — ${now()}\n\n${message}\n`,
   );
   deliver(
@@ -1571,6 +1876,8 @@ const cmdWatch = function (parsed: Parsed) {
   const idlePolls = Math.max(1, numberOption(values.idle, 3));
   const cap = numberOption(values.cap, 60);
   const timeout = numberOption(values.timeout, 0);
+  const pattern = values.match as string | undefined;
+  const match = pattern ? new RegExp(pattern, "i") : null;
   const deadline = timeout > 0 ? monotonic() + timeout : null;
   const reportedHere = new Set<string>();
   for (;;) {
@@ -1579,9 +1886,6 @@ const cmdWatch = function (parsed: Parsed) {
     const all = allTasks();
     const events: Event[] = brokenEvents(all, wanted);
     const everything = readableTasks(all);
-    const runningAnywhere = everything.filter(function (task) {
-      return taskStatus(task) === "running";
-    });
     const watched = everything.filter(function (task) {
       return (
         taskGet(task, "session") === session &&
@@ -1595,8 +1899,8 @@ const cmdWatch = function (parsed: Parsed) {
         events.push(...recordEvents(task));
         const pane = panes[task.id];
         if (pane && taskStatus(task) === "running") {
-          events.push(...screenEvents(task, pane, cap, idlePolls));
-          events.push(...repoEvents(task, runningAnywhere, snapshots));
+          events.push(...screenEvents(task, pane, cap, idlePolls, match));
+          events.push(...repoEvents(task, everything, snapshots));
         }
       } catch (error) {
         if (!(error instanceof OrchestraError)) throw error;
@@ -1628,6 +1932,56 @@ const cmdWatch = function (parsed: Parsed) {
 };
 
 // @claim infra/orchestra
+const cmdDiff = function (parsed: Parsed) {
+  const task = findTask(parsed.positionals[0]);
+  const baseline = loadRuntime(task).baseline;
+  if (!baseline?.top)
+    throw new OrchestraError(
+      `no spawn baseline for ${task.id}; respawn with a fresh snapshot before diff or accept`,
+    );
+  const current = repoSnapshot(baseline.top);
+  for (const path of changedSince(baseline, current)) {
+    const before =
+      baseline.dirty[path] === "deleted"
+        ? false
+        : baseline.dirty[path] !== undefined
+          ? true
+          : Boolean(
+              baseline.head &&
+              run(
+                "git",
+                [
+                  "-C",
+                  baseline.top,
+                  "rev-parse",
+                  "-q",
+                  "--verify",
+                  `${baseline.head}:${path}`,
+                ],
+                { check: false },
+              ).trim(),
+            );
+    const after = lexists(join(baseline.top, path));
+    const kind =
+      !before && after ? "added" : before && !after ? "removed" : "changed";
+    console.log(`${kind.padEnd(7)} ${path}`);
+  }
+};
+
+// @claim infra/orchestra
+const reportRef = function (task: Task): string {
+  return `journal/features/${task.feature}/tasks/${task.id}/report.md`;
+};
+
+// @claim infra/orchestra
+const itemReports = function (task: Task): { item: string; refs: string[] }[] {
+  const report = reportRef(task);
+  return taskList(task, "items").map(function (item) {
+    return { item, refs: [report] };
+  });
+};
+
+// @claim infra/orchestra
 const cmdAccept = function (parsed: Parsed) {
   const { positionals, values } = parsed;
   const task = findTask(positionals[0]);
@@ -1636,25 +1990,59 @@ const cmdAccept = function (parsed: Parsed) {
       `task ${task.id} is ${taskStatus(task)}; only done tasks can be accepted`,
     );
   }
-  const baseline = loadRuntime(task).baseline;
+  const runtime = loadRuntime(task);
+  const baseline = runtime.baseline;
   const top = baseline?.top ?? "";
-  if (!top)
-    warn(
-      `no baseline for ${task.id} (expected ${runtimeFile(task)}); items are set without refs`,
+  const titles = runtime.test_titles;
+  const withoutTitleGuard = values["without-title-guard"] === true;
+  if (titles === undefined && !withoutTitleGuard) {
+    throw new OrchestraError(
+      `no test-title snapshot for ${task.id}; pass --without-title-guard to accept this legacy task explicitly`,
     );
+  }
+  if (titles !== undefined && withoutTitleGuard) {
+    throw new OrchestraError(
+      `--without-title-guard is only for a task without a test-title snapshot`,
+    );
+  }
+  if (!top && !withoutTitleGuard)
+    throw new OrchestraError(
+      `no spawn baseline for ${task.id}; respawn with a fresh snapshot before diff or accept`,
+    );
+  if (titles !== undefined) {
+    const currentTitles = new Set(testTitles(root()));
+    const missing = titles.filter(function (title) {
+      return !currentTitles.has(title);
+    });
+    const removed = (values["removed-title"] as string[] | undefined) ?? [];
+    const invalid = removed.filter(function (title) {
+      return !missing.includes(title);
+    });
+    if (invalid.length > 0)
+      throw new OrchestraError(
+        `not missing test titles: ${invalid.join(", ")}`,
+      );
+    const unaccepted = missing.filter(function (title) {
+      return !removed.includes(title);
+    });
+    if (unaccepted.length > 0)
+      throw new OrchestraError(
+        `test titles removed since spawn: ${unaccepted.join("; ")}; pass --removed-title '<title>' only if intentional`,
+      );
+  }
   const changed = top ? changedSince(baseline, repoSnapshot(top)) : [];
   const grant = taskList(task, "grant");
   const granted = changed.filter(function (path) {
     return matchesAny(path, grant);
   });
-  const inRoot = Boolean(top) && top === root();
-  if (top && !inRoot) {
-    console.log(
-      `${task.id} worked in ${top}, not ${root()}; refs skipped: ${granted.join(", ") || "(none)"}`,
+  if (withoutTitleGuard)
+    updateTask(
+      task,
+      {},
+      `\n## Test-title guard skipped — ${now()}\n\nAccepted with --without-title-guard because this task has no spawn title snapshot.\n`,
     );
-  }
-  for (const item of taskList(task, "items")) {
-    journalSet(task.feature, item, "implemented", inRoot ? granted : []);
+  for (const { item, refs } of itemReports(task)) {
+    journalSet(task.feature, item, "implemented", refs, "report");
   }
   updateTask(task, { status: "accepted", reported: "accepted" });
   const pane = paneOf(task.id);
@@ -1663,9 +2051,11 @@ const cmdAccept = function (parsed: Parsed) {
     return !matchesAny(path, JOURNAL_FILES_THE_ORCHESTRATOR_WRITES);
   });
   console.log(
-    work.length > 0
-      ? `accepted ${task.id}; files changed since spawn:`
-      : `accepted ${task.id}; no files changed since spawn`,
+    !top
+      ? `accepted ${task.id}; files changed since spawn unknown (no baseline)`
+      : work.length > 0
+        ? `accepted ${task.id}; files changed since spawn:`
+        : `accepted ${task.id}; no files changed since spawn`,
   );
   for (const path of work) {
     console.log(
@@ -1693,15 +2083,14 @@ const cmdDone = function (parsed: Parsed) {
       `write ${required} before \`pnpm orchestra done ${task.id} ${status}\``,
     );
   }
-  const changes: Fields = { status, reported: "" };
-  if (FINISHED_STATUSES.includes(status)) changes.finished = now();
+  const changes: Fields = { status, reported: "", finished: now() };
   updateTask(task, changes);
   console.log(`${task.id}: ${status}`);
 };
 
 // @claim infra/handoff
 const cmdHandoff = function (parsed: Parsed) {
-  const { values } = parsed;
+  const { positionals, values } = parsed;
   const delay = numberOption(values.delay, 20);
   const pane = process.env.TMUX_PANE ?? "";
   const orchestrator = sessionOption("@orchestra_pane");
@@ -1716,6 +2105,21 @@ const cmdHandoff = function (parsed: Parsed) {
       "no feature for this session; run `pnpm orchestra init <feature>` first",
     );
   }
+  const file = values.file as string | undefined;
+  if (positionals.length > 0 && file)
+    throw new OrchestraError("give either a prompt or --file PATH");
+  const supplied = file ? readFileSync(file, "utf-8") : positionals.join(" ");
+  if ((file || positionals.length > 0) && !supplied.trim())
+    throw new OrchestraError("nothing to hand off");
+  let promptFile = "";
+  if (file || positionals.length > 0) {
+    promptFile = join(
+      dirname(brokenFile()),
+      `handoff-${process.pid}-${Date.now()}.prompt.md`,
+    );
+    mkdirSync(dirname(promptFile), { recursive: true, mode: 0o700 });
+    writeFileSync(promptFile, supplied, { mode: 0o600 });
+  }
   const guard = [
     `TMUX=${shellQuote(process.env.TMUX ?? "")}`,
     `ORCHESTRA_ROOT=${shellQuote(root())}`,
@@ -1727,17 +2131,44 @@ const cmdHandoff = function (parsed: Parsed) {
     shellQuote(pane),
     shellQuote(feature),
     shellQuote(String(delay)),
+    shellQuote(promptFile),
     ">/dev/null 2>&1",
   ].join(" ");
   tmux(["run-shell", "-b", guard]);
   console.log(
-    `handoff armed: pane ${pane} will be cleared once this turn ends, then resumes orchestrating ${feature}`,
+    promptFile
+      ? `handoff armed: pane ${pane} will be cleared once this turn ends, then resumes from the supplied prompt`
+      : `handoff armed: pane ${pane} will be cleared once this turn ends, then resumes orchestrating ${feature}`,
   );
 };
 
+// @claim infra/handoff
+const handoffOpening = function (feature: string): string {
+  return `Resume orchestrating ${feature}. Read the rendered handoff injected by the session hook; if it is missing, run pnpm journal handoff ${feature}. Read the briefs of active tasks named there. Carry on orchestrating from the handoff: run pnpm orchestra status and re-arm pnpm orchestra watch.`;
+};
+
+// @claim infra/handoff
+const handoffMessage = function (feature: string, supplied: string): string {
+  const opening = handoffOpening(feature);
+  return supplied ? `${opening}\n\n${supplied}` : opening;
+};
+
+// @claim infra/handoff
 const cmdGuard = function (parsed: Parsed) {
-  const [pane, feature, delay] = parsed.positionals;
+  const [pane, feature, delay, promptFile] = parsed.positionals;
   if (!pane || !feature) return;
+  let supplied = "";
+  if (promptFile) {
+    try {
+      supplied = readFileSync(promptFile, "utf-8");
+      if (!supplied.trim()) throw new Error("empty prompt");
+    } catch {
+      const message = `orchestra: handoff prompt unavailable at ${promptFile}; pane left unchanged`;
+      tmux(["display-message", "-t", pane, message]);
+      warn(message);
+      return;
+    }
+  }
   sleep(numberOption(delay, 20));
   const settled = waitForSteadyScreen(pane, {
     equalPolls: 3,
@@ -1749,11 +2180,8 @@ const cmdGuard = function (parsed: Parsed) {
   const label = "the orchestrator pane";
   deliver(pane, "/clear", label);
   waitUntilReady(pane, label, "type the resume prompt");
-  deliver(
-    pane,
-    `Resume orchestrating ${feature}: the session hook injected your handoff; continue from it.`,
-    label,
-  );
+  deliver(pane, handoffMessage(feature, supplied), label, Boolean(supplied));
+  if (promptFile) unlinkSync(promptFile);
 };
 
 // @claim infra/workspace-tools
@@ -1818,6 +2246,11 @@ const SUBCOMMANDS: Record<
           type: "boolean",
           description:
             "pass the prompt as a CLI argument instead of pasting it",
+        },
+        mcp: {
+          type: "string",
+          description:
+            "MCP servers the worker starts with, by name from .agents/mcp_config.json, comma separated; none by default",
         },
       },
     },
@@ -1917,6 +2350,11 @@ const SUBCOMMANDS: Record<
           description:
             "context use in percent that raises context (default 60)",
         },
+        match: {
+          type: "string",
+          description:
+            "regular expression; a worker screen line that matches raises match once, e.g. 'git (commit|push)|rm -rf'",
+        },
         timeout: {
           type: "string",
           description: "seconds; exit 2 when reached (default 0, none)",
@@ -1925,12 +2363,31 @@ const SUBCOMMANDS: Record<
     },
     run: cmdWatch,
   },
+  diff: {
+    schema: {
+      description:
+        "diff <task>: list added, changed and removed paths since spawn.",
+      options: {},
+    },
+    run: cmdDiff,
+  },
   accept: {
     schema: {
       description:
         "accept <task>: accept a done task and set its plan items implemented with refs.",
       options: {
         close: { type: "boolean", description: "also kill the window" },
+        "removed-title": {
+          type: "string",
+          multiple: true,
+          description:
+            "accept a missing test title as removed on purpose; repeat for each title",
+        },
+        "without-title-guard": {
+          type: "boolean",
+          description:
+            "accept a legacy task that has no spawn test-title snapshot and record the exception in its brief",
+        },
       },
     },
     run: cmdAccept,
@@ -1946,8 +2403,13 @@ const SUBCOMMANDS: Record<
   handoff: {
     schema: {
       description:
-        "handoff: orchestrator clears this pane after the turn and resumes from the rendered handoff.",
+        "handoff [prompt..] | --file PATH: clear this pane after the turn, read the handoff and active briefs, then resume from the supplied prompt.",
       options: {
+        file: {
+          type: "string",
+          description:
+            "copy the next prompt from this file before arming the handoff",
+        },
         delay: {
           type: "string",
           description: "seconds before watching the pane settle (default 20)",
@@ -1959,23 +2421,36 @@ const SUBCOMMANDS: Record<
   _guard: { schema: { description: "internal", options: {} }, run: cmdGuard },
 };
 
-const [command, ...rest] = process.argv.slice(2);
-const subcommand = command ? SUBCOMMANDS[command] : undefined;
-if (!subcommand) {
-  console.log(USAGE);
-  process.exit(!command || command === "-h" || command === "--help" ? 0 : 1);
+if (import.meta.main) {
+  const [command, ...rest] = process.argv.slice(2);
+  const subcommand = command ? SUBCOMMANDS[command] : undefined;
+  if (!subcommand) {
+    console.log(USAGE);
+    process.exit(!command || command === "-h" || command === "--help" ? 0 : 1);
+  }
+  const parsed = Cli.parseCli<Parsed["values"]>(
+    `orchestra ${command}`,
+    subcommand.schema,
+    rest,
+  );
+  if (parsed === null)
+    process.exit(rest.includes("--help") || rest.includes("-h") ? 0 : 1);
+  try {
+    subcommand.run(parsed);
+  } catch (error) {
+    if (!(error instanceof OrchestraError)) throw error;
+    console.error(`orchestra: ${error.message}`);
+    process.exit(1);
+  }
 }
-const parsed = Cli.parseCli<Parsed["values"]>(
-  `orchestra ${command}`,
-  subcommand.schema,
-  rest,
-);
-if (parsed === null)
-  process.exit(rest.includes("--help") || rest.includes("-h") ? 0 : 1);
-try {
-  subcommand.run(parsed);
-} catch (error) {
-  if (!(error instanceof OrchestraError)) throw error;
-  console.error(`orchestra: ${error.message}`);
-  process.exit(1);
-}
+
+export {
+  changedSince,
+  commandWithPrompt,
+  deliver,
+  handoffMessage,
+  handoffOpening,
+  itemReports,
+  reportRef,
+  testTitles,
+};

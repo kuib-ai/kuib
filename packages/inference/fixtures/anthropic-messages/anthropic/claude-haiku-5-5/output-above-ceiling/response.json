@@ -1,0 +1,13 @@
+{
+  "status": 400,
+  "statusText": "Bad Request",
+  "headers": {
+    "content-type": "application/json",
+    "date": "Tue, 13 Oct 2026 07:59:56 GMT",
+    "request-id": "req_011CfytBoexQs5ZaK2UsP4yz"
+  },
+  "excludedHeaders": {
+    "identity": 2,
+    "unknown": 9
+  }
+}

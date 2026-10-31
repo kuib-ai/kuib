@@ -1,0 +1,19 @@
+{
+  "messageFormat": "openai-chat",
+  "provider": "xiaomi",
+  "model": "mimo-v2-6-pro",
+  "name": "instruction-developer-between-call-result",
+  "method": "POST",
+  "url": "https://token-plan-sgp.xiaomimimo.com/v1/chat/completions",
+  "authHeader": "authorization",
+  "headers": {
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  },
+  "replay": {
+    "fixture": "openai-chat/xiaomi/mimo-v2-6-pro/tool-seed",
+    "changes": [
+      "source round with developer inserted between call and result"
+    ]
+  }
+}

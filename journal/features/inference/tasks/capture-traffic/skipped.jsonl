@@ -1,0 +1,12 @@
+{"row":"MA/tool-seed","reason":"mimo-admission-refused-on-both-hosts"}
+{"row":"S/tool-replay-empty-signature","reason":"source-without-thinking"}
+{"row":"S/tool-replay-no-signature","reason":"source-without-thinking"}
+{"row":"S/cut-thinking-replay","reason":"source-without-requested-partial-content"}
+{"row":"S/cache-thinking","reason":"source-without-thinking"}
+{"row":"S/cross-model-ma","reason":"unavailable-approved-prerequisite"}
+{"row":"H/tool-replay-empty-signature","reason":"source-without-thinking"}
+{"row":"H/tool-replay-no-signature","reason":"source-without-thinking"}
+{"row":"H/cache-thinking","reason":"source-without-thinking"}
+{"row":"MT/cut-text-user","reason":"source-without-requested-partial-content"}
+{"row":"MT/cut-text-prefill","reason":"source-without-requested-partial-content"}
+{"row":"MT/cut-reasoning-replay","reason":"source-without-thinking"}

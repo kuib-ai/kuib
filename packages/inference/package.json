@@ -1,0 +1,29 @@
+{
+  "name": "@kuib-ai/inference",
+  "version": "0.0.1",
+  "description": "kuib inference — recorded provider traffic and the model layer",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*/index.ts"
+  },
+  "bin": "./bin/inference",
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "test": "testing",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@kuib-ai/protocol": "workspace:*",
+    "@kuib-ai/std": "workspace:*"
+  },
+  "devDependencies": {
+    "@kuib-ai/testing": "workspace:*",
+    "@std/expect": "catalog:",
+    "@std/testing": "catalog:",
+    "@kuib-ai/deno-types": "workspace:*",
+    "@kuib-ai/tsconfig": "workspace:*",
+    "@types/node": "catalog:"
+  }
+}

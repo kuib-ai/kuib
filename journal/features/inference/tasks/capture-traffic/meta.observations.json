@@ -1,0 +1,1178 @@
+[
+  {
+    "row": "MT/plain-json",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/plain-stream",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/stream-default",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/stream-usage-omitted",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/stream-usage-false",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/stream-obfuscation-false",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/stream-obfuscation-true",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/json-stream-options",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "stream_options"
+    ]
+  },
+  {
+    "row": "MT/thinking-enabled",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "thinking"
+    ]
+  },
+  {
+    "row": "MT/thinking-disabled",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "thinking"
+    ]
+  },
+  {
+    "row": "MT/effort-none",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "reasoning_effort"
+    ]
+  },
+  {
+    "row": "MT/effort-minimal",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/effort-low",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/effort-medium",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/effort-high",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/effort-xhigh",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/effort-max",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "reasoning_effort"
+    ]
+  },
+  {
+    "row": "MT/verbosity-low",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "verbosity"
+    ]
+  },
+  {
+    "row": "MT/verbosity-medium",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "verbosity"
+    ]
+  },
+  {
+    "row": "MT/verbosity-high",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "verbosity"
+    ]
+  },
+  {
+    "row": "MT/tool-seed",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 1,
+    "functions": [
+      "get_value"
+    ],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/tool-replay",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/tool-replay-omit-reasoning",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/tool-replay-empty-reasoning",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/tool-replay-synthetic-reasoning",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/tool-order-invalid",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/tool-result-blocks",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/tool-result-error",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/choice-auto",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 1,
+    "functions": [
+      "get_value"
+    ],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/choice-none",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "tool_choice"
+    ]
+  },
+  {
+    "row": "MT/choice-required",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "tool_choice"
+    ]
+  },
+  {
+    "row": "MT/choice-function",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "tool_choice"
+    ]
+  },
+  {
+    "row": "MT/choice-allowed_tools",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "tool_choice"
+    ]
+  },
+  {
+    "row": "MT/choice-custom",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "tool_choice"
+    ]
+  },
+  {
+    "row": "MT/choice-allowed-required",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "tool_choice"
+    ]
+  },
+  {
+    "row": "MT/parallel-false",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 1,
+    "functions": [
+      "get_value"
+    ],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/parallel-true",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 2,
+    "functions": [
+      "get_value"
+    ],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/strict-false",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 1,
+    "functions": [
+      "get_value"
+    ],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/strict-true",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 1,
+    "functions": [
+      "get_value"
+    ],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/strict-invalid",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/instruction-system-first",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/instruction-system-after-user",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/instruction-system-after-assistant",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/instruction-system-between-call-result",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/instruction-developer-first",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/instruction-developer-after-user",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/instruction-developer-after-assistant",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/instruction-developer-between-call-result",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/instruction-blocks",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/cut-text",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/cut-reasoning",
+    "status": 200,
+    "state": "cancelled",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/reasoning-display-summarized",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "thinking"
+    ]
+  },
+  {
+    "row": "MT/reasoning-display-omitted",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "thinking"
+    ]
+  },
+  {
+    "row": "MT/reasoning-display-updates",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "thinking"
+    ]
+  },
+  {
+    "row": "MT/cache-implicit-write",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "prompt_cache_options"
+    ]
+  },
+  {
+    "row": "MT/cache-implicit-read",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "prompt_cache_options"
+    ]
+  },
+  {
+    "row": "MT/cache-explicit-write",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "prompt_cache_options"
+    ]
+  },
+  {
+    "row": "MT/cache-explicit-read",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "prompt_cache_options"
+    ]
+  },
+  {
+    "row": "MT/cache-explicit-no-mark",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "prompt_cache_options"
+    ]
+  },
+  {
+    "row": "MT/cache-four",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "prompt_cache_options"
+    ]
+  },
+  {
+    "row": "MT/cache-five",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "prompt_cache_options"
+    ]
+  },
+  {
+    "row": "MT/cache-implicit-four",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "prompt_cache_options"
+    ]
+  },
+  {
+    "row": "MT/cache-no-options-write",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/cache-no-options-read",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/cache-retention-in_memory",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/cache-retention-24h",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/cache-key",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/cache-invalid-ttl",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "prompt_cache_options"
+    ]
+  },
+  {
+    "row": "MT/temperature-default",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/temperature-changed",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/temperature-upper",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/top-p-default",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/top-p-changed",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/top-p-lower",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/frequency-penalty",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/presence-penalty",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/seed",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/logit-bias",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "logit_bias"
+    ]
+  },
+  {
+    "row": "MT/n-one",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/n-two",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "n"
+    ]
+  },
+  {
+    "row": "MT/logprobs",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "logprobs"
+    ]
+  },
+  {
+    "row": "MT/top-logprobs",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "logprobs"
+    ]
+  },
+  {
+    "row": "MT/thinking-sampling-temperature",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/thinking-sampling-top_p",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/sampling-combined",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/stop-string",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "stop"
+    ]
+  },
+  {
+    "row": "MT/stop-one",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "stop"
+    ]
+  },
+  {
+    "row": "MT/stop-four",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "stop"
+    ]
+  },
+  {
+    "row": "MT/stop-five",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "stop"
+    ]
+  },
+  {
+    "row": "MT/output-one",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/output-zero",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "max_completion_tokens"
+    ]
+  },
+  {
+    "row": "MT/output-negative",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "max_completion_tokens"
+    ]
+  },
+  {
+    "row": "MT/output-legacy",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/output-both",
+    "status": 400,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": [
+      "max_completion_tokens",
+      "max_tokens"
+    ]
+  },
+  {
+    "row": "MT/empty-text",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": false,
+    "errorFields": []
+  },
+  {
+    "row": "MT/first-assistant",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/consecutive-user",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/assistant-null",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  },
+  {
+    "row": "MT/assistant-empty",
+    "status": 200,
+    "state": "complete",
+    "toolCalls": 0,
+    "functions": [],
+    "reasoningText": false,
+    "reasoningDelta": false,
+    "contentDelta": true,
+    "errorFields": []
+  }
+]

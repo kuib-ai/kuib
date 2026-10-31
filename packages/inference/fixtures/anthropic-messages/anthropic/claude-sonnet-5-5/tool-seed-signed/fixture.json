@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: signed reasoning and genuine tool call for replay. Approved settings: stream=false; thinking=adaptive; display=summarized; tools get_value; auto.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: S/tool-seed. Signed repeat of row S/tool-seed.",
+  "origin": "recorded"
+}

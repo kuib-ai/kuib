@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: allowed omission outside tool round. Approved settings: complete reasoning-json assistant text only + new user.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: S/reasoning-outside-omit. Signed repeat of row S/reasoning-outside-omit.",
+  "origin": "recorded"
+}

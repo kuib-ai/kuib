@@ -1,0 +1,1 @@
+{"model":"mimo-v2.6-pro","max_tokens":256,"stream":false,"system":"Keep the answer short.","messages":[{"role":"user","content":"Reply with exactly: OK"}],"thinking":{"type":"disabled"}}

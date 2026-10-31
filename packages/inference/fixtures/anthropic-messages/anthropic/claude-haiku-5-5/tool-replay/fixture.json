@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: tool round with all reasoning and original call order. Approved settings: stream=true; same tools/system/thinking; actual tool result value 7.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

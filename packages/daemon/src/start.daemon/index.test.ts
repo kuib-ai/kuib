@@ -1,17 +1,19 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import { join } from "node:path";
-import { mkdtempSync } from "node:fs";
-import { tmpdir } from "node:os";
+import createSocketPath from "@kuib-ai/testing/create.socket.path";
+import createTempDir from "@kuib-ai/testing/create.temp.dir";
 
 const entry = join(import.meta.dirname!, "index.ts");
 
 const runDaemonLine = async function (
   env: Record<string, string>,
+  cwd: string,
 ): Promise<string> {
   const proc = new Deno.Command(Deno.execPath(), {
     args: ["run", "-A", entry],
     env,
+    cwd,
     stdout: "piped",
     stderr: "null",
   }).spawn();
@@ -33,18 +35,28 @@ const runDaemonLine = async function (
 
 describe("start.daemon main", function () {
   it("resolves the configured socket and omits the tcp suffix when no port is set", async function () {
-    const socketPath = join(mkdtempSync(join(tmpdir(), "kuib-")), "d.sock");
-    const line = await runDaemonLine({ KUIB_DAEMON_SOCKET: socketPath });
+    using dir = createTempDir();
+    using socket = createSocketPath();
+    const socketPath = socket.path;
+    const line = await runDaemonLine(
+      { KUIB_DAEMON_SOCKET: socketPath },
+      dir.path,
+    );
     expect(line).toBe(`kuib daemon → ${socketPath}`);
   });
 
   it("coerces KUIB_DAEMON_PORT to a number and appends the tcp suffix", async function () {
-    const socketPath = join(mkdtempSync(join(tmpdir(), "kuib-")), "d.sock");
+    using dir = createTempDir();
+    using socket = createSocketPath();
+    const socketPath = socket.path;
     const port = 20000 + (process.pid % 20000);
-    const line = await runDaemonLine({
-      KUIB_DAEMON_SOCKET: socketPath,
-      KUIB_DAEMON_PORT: `${port}`,
-    });
+    const line = await runDaemonLine(
+      {
+        KUIB_DAEMON_SOCKET: socketPath,
+        KUIB_DAEMON_PORT: `${port}`,
+      },
+      dir.path,
+    );
     expect(line).toBe(`kuib daemon → ${socketPath} + tcp :${port}`);
   });
 });

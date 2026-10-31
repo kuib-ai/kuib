@@ -1,7 +1,7 @@
 ---
 domain: infra
 summary: Workspace tooling, config/env/std/telemetry foundations, lint rules, agent wiring and the journal itself.
-code: ["*", ".agents/**", ".claude/**", ".cursor/**", ".gemini/**", "scripts/**", "tooling/**", "packages/{config,env,std,telemetry,eslint-plugin-house-style,tsconfig,deno-types}/**"]
+code: ["*", ".agents/**", ".claude/**", ".cursor/**", ".gemini/**", ".github/**", ".githooks/**", "scripts/**", "tooling/**", "packages/{config,env,std,telemetry,testing,eslint-plugin-house-style,tsconfig,deno-types}/**"]
 ---
 
 # Infra
@@ -87,12 +87,18 @@ is derived from its items, never stored. `journal.ts set` writes an item's state
 accepted decisions that record an owner `Ruling`, open gaps with their `Recommendation`,
 unfinished items per phase, the feature's tasks (marking live windows) and the context claims
 that need re-verification. Nobody writes a continuation by hand; only the note is written at
-handoff time. ^handoff
+handoff time. `orchestra handoff` asks the resumed session to read the rendered handoff and the
+briefs of active tasks. ^handoff
 
-> [!sources]- behaviour · verified 2026-09-23
+> [!sources]- behaviour · verified 2026-10-14
 > - `tooling/journal.ts` › `renderHandoff` · #92d9c7e7
 > - `tooling/journal.ts` › `commandBrief` · #ad2ad783
-> - `tooling/orchestra.ts` › `cmdHandoff` · #0ae89f08
+> - `tooling/orchestra.ts` › `cmdHandoff` · #191d0a78
+> - `tooling/orchestra.ts` › `handoffOpening` · #be8aaa9f
+> - `tooling/orchestra.ts` › `handoffMessage` · #8c85434d
+> - `tooling/orchestra.ts` › `cmdGuard` · #f6d50ba2
+> - test: `tooling/orchestra.test.ts` › "puts the opening before a whole multiline handoff prompt and preserves its last newline"
+> - test: `tooling/orchestra.test.ts` › "refuses an empty handoff and leaves the pane unchanged when the saved prompt is missing"
 > - why: [[domains/infra/decisions#^D028]]
 
 ## Workspace and tooling
@@ -116,13 +122,18 @@ Node through strict `engines`. ^pnpm-workspace
 
 Nx is the task runner. `nx.json` caches `generate`, `typecheck`, `test`, `lint` and `format`;
 `typecheck` depends on upstream `generate` targets, and `typecheck` and `test` key their cache on
-`deno --version`. Each TS package defines the same four scripts: `typecheck` (`tsgo --noEmit`),
-`test` (`deno test -A --no-check`), `lint` (`eslint .`) and `format` (`prettier --write .`). ^nx-tasks
+`deno --version`. Test inputs include the testing package's command and sources; lint inputs include the
+flat config and plugin sources, and the plugin's own lint includes all project sources to
+validate its untested-unit list. Each TS project defines `typecheck` (`tsgo --noEmit`),
+`test` (`testing`), `lint` (`eslint .`) and `format` (`prettier --write .`). The two
+engine projects retain `deno test -A --no-check` until released. `test:live` and `bench` are
+uncached targets added when a project gains those kinds of files. ^nx-tasks
 
-> [!sources]- behaviour · verified 2026-09-23
+> [!sources]- behaviour · verified 2026-10-14
 > - `nx.json` › ""dependsOn": ["^generate"],"
 > - `nx.json` › "{ "runtime": "deno --version" }"
-> - `packages/std/package.json` › ""test": "deno test -A --no-check","
+> - `packages/std/package.json` › ""test": "testing","
+> - `nx.json` › ""parallel": 1"
 > - `packages/std/package.json` › ""typecheck": "tsgo --noEmit","
 > - why: [[domains/infra/decisions#^D008]]
 > - why: [[domains/infra/decisions#^D023]]
@@ -147,15 +158,19 @@ carry explicit `.ts` specifiers. ^deno-runtime
 > - why: [[domains/infra/decisions#^D005]]
 > - why: [[domains/infra/decisions#^D009]]
 
-`pnpm run check` first runs `scripts/check.root.manifest.ts`, which fails if the root
+`pnpm run check` uses `check:base` to run `scripts/check.root.manifest.ts`, which fails if the root
 `package.json` has gained `workspaces`, `catalog` or `catalogs` (Deno's pnpm-workspace
-migration), then `agents.ts check`, then `journal.ts check`, then `typecheck`, `lint` and `format` across all projects
-through Nx with parallelism 10. `pnpm test` runs every project's `test` target; `pnpm check:circular` runs madge
-over `packages` and `apps`. ^check-pipeline
+migration), then `agents.ts check`, then `journal.ts check`, then `prettier --check .`,
+then madge for circular imports and `typecheck`, `lint` and `test` across all projects
+through Nx with workspace parallelism 1 from `nx.json`. The gate checks formatting without writing. `check:affected`
+uses the same base checks and the affected project targets against `origin/master`.
+`pnpm test` runs every project's `test` target. ^check-pipeline
 
-> [!sources]- behaviour · verified 2026-09-23
-> - `package.json` › ""check": "deno run --allow-read scripts/check.root.manifest.ts &&"
-> - `package.json` › "deno run -A tooling/journal.ts check && nx run-many --parallel=10 -t typecheck lint format""
+> [!sources]- behaviour · verified 2026-10-14
+> - `package.json` › ""check:base": "deno run --allow-read scripts/check.root.manifest.ts &&"
+> - `package.json` › ""check": "pnpm run check:base && nx run-many -t typecheck lint test""
+> - `package.json` › ""check:affected": "pnpm run check:base && nx affected -t typecheck lint test""
+> - `nx.json` › ""parallel": 1"
 > - `package.json` › ""check:circular": "madge --circular --extensions ts,tsx packages apps","
 > - `scripts/check.root.manifest.ts` › "["workspaces", "catalog", "catalogs"]"
 > - `scripts/check.root.manifest.ts` › "pnpm-workspace.yaml is the source of truth"
@@ -165,17 +180,20 @@ over `packages` and `apps`. ^check-pipeline
 A package exposes `.` → `src/index.ts` and `./*` → `src/*/index.ts`, so every unit directory is
 importable as a subpath (`@kuib-ai/std` additionally names `./pino`). The root `src/index.ts`
 default-exports a namespace object of the package's values (`Env`, `Config`, `Std`,
-`Telemetry`); types are imported from unit subpaths. ^package-exports
+`Telemetry`); types are imported from unit subpaths. The testing package also exposes the
+`testing` command through `bin/testing`. ^package-exports
 
-> [!sources]- structure · verified 2026-09-23
+> [!sources]- structure · verified 2026-10-14
 > - `packages/config/src/index.ts` › `Config` · #98b19ecc
 > - `packages/env/src/index.ts` › `Env` · #e748a310
 > - `packages/std/src/index.ts` › `Std` · #c92e2630
 > - `packages/telemetry/src/index.ts` › `Telemetry` · #18efc467
+> - `packages/testing/src/index.ts` › `Testing` · #db2b6186
 > - `packages/env/package.json` › ""./*": "./src/*/index.ts""
 > - `packages/std/package.json` › ""./pino": "./src/pino/index.ts","
 > - `packages/config/package.json` › ""./*": "./src/*/index.ts""
 > - `packages/telemetry/package.json` › ""./*": "./src/*/index.ts""
+> - `packages/testing/package.json` › ""bin": "./bin/testing""
 > - why: [[domains/infra/decisions#^D015]]
 > - from: [[_archive/house-style-linting/decisions#The house style (audited from the author's hand-written reference codebase)]]
 
@@ -183,17 +201,155 @@ default-exports a namespace object of the package's values (`Env`, `Config`, `St
 `.references` and the generated Deno declarations, applies the JS and typescript-eslint
 recommended sets, and applies the house-style plugin's `recommended` rules to
 `apps/**/*.{ts,tsx}` and `packages/**/*.{ts,tsx}`. Test files turn off
-`house/require-context-link`, `house/named-exports-are-types` and `house/dot-case-filename`.
-Prettier formats everything except the lockfile, `journal`, `.agents` and `.claude`. ^eslint-config
+`house/require-context-link`, `house/named-exports-are-types` and `house/dot-case-filename`;
+live tests match the same patterns and benchmarks get the same overrides. Prettier excludes
+the lockfile, `journal`, `.agents`, `.claude` and generated Deno declarations. Both ESLint and
+Prettier exclude `packages/inference/fixtures` so recorded request and response bytes are
+never reformatted. ^eslint-config
 
-> [!sources]- behaviour · verified 2026-09-23
+> [!sources]- behaviour · verified 2026-10-12
 > - `eslint.config.ts` › "rules: houseStylePlugin.configs.recommended.rules,"
 > - `eslint.config.ts` › ""packages/deno-types/index.d.ts","
-> - `eslint.config.ts` › "files: ["**/*.test.ts", "**/*.test.tsx"],"
+> - `eslint.config.ts` › "files: ["**/*.test.ts", "**/*.test.tsx", "**/*.bench.ts", "**/*.bench.tsx"],"
 > - `.prettierignore` › "journal"
 > - `package.json` › ""jiti": "catalog:","
 > - why: [[domains/infra/decisions#^D015]]
 > - from: [[_archive/house-style-linting/decisions#Lint infra changes (2026-07-01)]]
+
+## Testing
+
+
+The `testing` command from `@kuib-ai/testing` is the script behind each migrated project's `test`. The two engine projects await release, From
+the workspace root, `pnpm test` with nothing runs every project's `test` target through Nx,
+`--affected` runs the affected projects, and project folders run those projects through Nx, all
+cached. A file or folder inside a project, or any flag meant for Deno, runs directly and
+uncached in the project that owns the path; leading arguments are paths and everything from the
+first flag on reaches `deno test` untouched, apart from the runner's own `--affected`,
+`--coverage` and `--kind=`. Inside a project the runner runs that project. The kind picks the
+subcommand and the files, which the runner names itself instead of leaving discovery to Deno:
+`test` runs `deno test` on `**/*.test.ts(x)` without `**/*.live.test.ts(x)`, `live` runs only
+those, `bench` runs `deno bench` on `**/*.bench.ts(x)`; a folder argument becomes the same
+patterns under it. So a file merely named `test.ts`, the runner included, is never run as a
+test. All three kinds pass `--no-check` and `--permit-no-files`, so a project with no such
+file passes. The runner passes SIGINT and SIGTERM on to the process it started. ^test-runner
+
+> [!sources]- behaviour · verified 2026-10-14
+> - `packages/testing/src/parse.test.request/index.ts` › `parseTestRequest` · #9b42a836
+> - `packages/testing/src/resolve.test.files/index.ts` › `resolveTestFiles` · #e642974e
+> - `packages/testing/src/resolve.test.kind/index.ts` › `resolveTestKind` · #710f8322
+> - `packages/testing/src/resolve.test.projects/index.ts` › `resolveTestProjects` · #9021c91c
+> - `packages/testing/src/resolve.test.targets/index.ts` › `resolveTestTargets` · #b584bd9d
+> - `packages/testing/src/resolve.test.task/index.ts` › `resolveTestTask` · #db613c07
+> - `packages/testing/src/run.test.command/index.ts` › `route` · #0cae1951
+> - `packages/testing/src/run.test.command/index.ts` › `runTestCommand` · #9a675210
+> - `packages/testing/src/run.test.process/index.ts` › `runTestProcess` · #e647ab25
+> - `packages/testing/src/run.test.projects/index.ts` › `runTestProjects` · #de835d87
+> - `packages/testing/src/run.test.target/index.ts` › `runTestTarget` · #0cefeb10
+> - `packages/testing/src/test.kind.enum/index.ts` › `TestKindEnum` · #f71df95c
+> - `package.json` › ""test": "testing","
+> - `package.json` › ""@kuib-ai/testing": "workspace:*","
+
+Every direct run happens in a sandbox created under the OS temp folder and removed when the
+run ends: `home` becomes `HOME`, `tmp` becomes `TMPDIR`, `slots` is named in
+`KUIB_TEST_SLOTS`, and sixteen socket paths under `s` are named in `KUIB_TEST_SOCKETS`. The permissions are defined once, in
+`resolveTestPermissions`: `--no-prompt`, reading everywhere except the workspace's `.env`
+files, the environment, OS facts, writing only inside the sandbox, and the network only on
+loopback and the sandbox's socket paths, each granted by exact path because Deno scopes unix
+sockets no wider. The kind `live` may read `.env` and reach any host. One table adds what a
+project needs beyond that: the daemon and testing may spawn any program, inference may spawn only
+the workspace Deno binary, and tooling tests may spawn only that Deno, git and tmux; the daemon may listen on all
+interfaces, and the two engine packages are unrestricted until they move onto the runner. The
+test process gets a clean environment, built by `resolveTestEnv`: `PATH`, the sandbox's
+variables, `DENO_DIR`, `KUIB_TEST_DEPTH` and the colour and CI switches; `live` keeps the
+caller's environment underneath, without `KUIB_TEST_NESTED`. ^test-permissions
+
+> [!sources]- behaviour · verified 2026-10-14
+> - `packages/testing/src/create.sandbox/index.ts` › `createSandbox` · #1d7ac086
+> - `packages/testing/src/resolve.test.env/index.ts` › `resolveTestEnv` · #af4f8882
+> - `packages/testing/src/resolve.test.permissions/index.ts` › `PROJECT_GRANTS` · #403116a9
+> - `packages/testing/src/resolve.test.permissions/index.ts` › `resolveTestPermissions` · #517070da
+> - test: `packages/testing/src/resolve.test.permissions/index.test.ts` › "refuses a remote host, a write outside the sandbox, a spawn and the workspace .env"
+> - test: `packages/testing/src/resolve.test.permissions/index.test.ts` › "grants spawning for daemon, testing and named tooling subprocesses"
+
+A test run is bounded in depth and in width. Depth: the runner gives every test process
+`KUIB_TEST_DEPTH`, one more than its own, and `resolveTestDepth` makes the runner refuse to
+start when that is 1 or more, so a test cannot start the runner; the runner's own test opts in
+with `KUIB_TEST_NESTED=1`, which is honoured at depth 1 only and never handed to a test
+process, and an unreadable depth is refused. The runner also refuses to fan out through Nx
+when it is itself an Nx task. Width: before starting a test process the runner takes a slot
+with `acquireTestSlot`, an exclusive lock on one of four files under
+`node_modules/.cache/kuib-test-slots`, and waits while all four are held, so at most four test
+processes run at once in a workspace whatever the Nx parallelism; the lock goes when its
+holder exits, however it exits. A nested run takes its slot from the `slots` folder of the
+sandbox it runs in (`KUIB_TEST_SLOTS`), so it never waits on the slot its own parent
+holds. ^test-bounds
+
+> [!sources]- behaviour · verified 2026-10-14
+> - `packages/testing/src/acquire.test.slot/index.ts` › `acquireTestSlot` · #07a231f9
+> - `packages/testing/src/resolve.test.depth/index.ts` › `resolveTestDepth` · #c6e0b3e3
+> - test: `packages/testing/src/resolve.test.depth/index.test.ts` › "refuses a second level even when the test opts in"
+> - test: `packages/testing/src/acquire.test.slot/index.test.ts` › "never holds more slots than the limit, however many ask at once"
+
+`@kuib-ai/testing` holds what test files share, each a disposable used with `using` so it
+restores even when a test throws: `createTempDir` makes a folder and removes it,
+`overrideEnv` snapshots the whole environment, applies the given values and restores the
+snapshot exactly, `changeCwd` restores the working directory, and `createSocketPath` hands out
+one of the sandbox's socket paths and frees it. `createLoopbackServer` serves synthetic
+responses on loopback and shuts down with `await using`. `findProjectRoot` walks up to the nearest
+`package.json`. The package holds no stand-in for a module of the codebase. ^testing-helpers
+
+> [!sources]- behaviour · verified 2026-10-14
+> - `packages/testing/src/change.cwd/index.ts` › `changeCwd` · #9efc20db
+> - `packages/testing/src/create.socket.path/index.ts` › `createSocketPath` · #8d5b9045
+> - `packages/testing/src/create.temp.dir/index.ts` › `createTempDir` · #4b9f4c5e
+> - `packages/testing/src/find.project.root/index.ts` › `findProjectRoot` · #686a1272
+> - `packages/testing/src/override.env/index.ts` › `overrideEnv` · #488b0dce
+> - test: `packages/testing/src/override.env/index.test.ts` › "restores a variable that was unset to unset"
+
+A fixture is a folder under a project's `fixtures/`, beside `src/`, holding data files and one
+`fixture.json` that says what it shows and whether it was recorded or written by hand.
+`loadFixture(import.meta.url, name)` finds the owning project and refuses a fixture whose
+folder or description is missing or invalid. Fixtures are project files, so Nx reruns a
+project's tests when one changes. ^fixture-convention
+
+> [!sources]- behaviour · verified 2026-10-12
+> - `packages/testing/src/fixture.description/index.ts` › `FixtureDescription` · #60082f4c
+> - `packages/testing/src/fixture.origin.enum/index.ts` › `FixtureOriginEnum` · #f499fb44
+> - `packages/testing/src/load.fixture/index.ts` › `loadFixture` · #c81c8072
+> - test: `packages/testing/src/load.fixture/index.test.ts` › "refuses a fixture without a description"
+
+`pnpm test --coverage` runs the chosen projects sequentially and uncached with separate raw
+profile folders under `dist/coverage/raw`, because Deno clears a profile folder at test
+startup. It consumes the lcov/HTML reports Deno generates while each test's transpilation
+cache is current. Runner subprocess tests collect their own profiles and immediately report
+from the testing package cwd, so the command implementation is measured too. `mergeTestCoverage` adds hits
+and unions line/branch denominators for each source, excludes tests and benchmarks, and
+attributes measured workspace sources to their owning project, including imports tested
+from another package. It writes one lcov file per measured project, `total.lcov` as the
+concatenation of those disjoint reports, and `html/index.html` linking each project's native
+HTML runs. It prints lines and branches per measured project and a workspace total, with no
+empty rows or coverage floor. Missing reports or missing production coverage for a collected
+project fail; reporter errors are not suppressed. ^coverage-report
+
+> [!sources]- behaviour · verified 2026-10-14
+> - `packages/testing/src/merge.test.coverage/index.ts` › `mergeTestCoverage` · #4d116087
+> - `packages/testing/src/report.test.coverage/index.ts` › `reportTestCoverage` · #70727565
+> - `packages/testing/src/run.test.coverage/index.ts` › `runTestCoverage` · #13924d10
+> - test: `packages/testing/src/merge.test.coverage/index.test.ts` › "unions measured lines and branches across runs without counting a source twice"
+> - test: `packages/testing/src/merge.test.coverage/index.test.ts` › "fails when a collected run has no lcov report"
+
+The root `prepare` script points local `core.hooksPath` at `.githooks` on a fresh install.
+The pinned pnpm skips lifecycle scripts when a repeat install changes no dependencies;
+`pnpm run prepare` reapplies the path in an existing checkout.
+`pre-push` runs `pnpm run check:affected`, the gate for the projects affected against
+`origin/master`; `commit-msg` forwards to the hook of the same name in the user's global hooks
+folder when there is one. `.github/workflows/check.yml` runs `pnpm run check` on every push
+and pull request. ^push-hook-ci
+
+> [!sources]- behaviour · verified 2026-10-14
+> - `package.json` › ""prepare": "git config core.hooksPath .githooks || true","
+> - `.githooks/pre-push` › "exec pnpm run check:affected"
+> - `.github/workflows/check.yml` › "run: pnpm run check"
 
 ## Environment (`@kuib-ai/env`)
 
@@ -414,15 +570,15 @@ from `[telemetry] endpoint` / `KUIB_TRACE_ENDPOINT`. ^start-telemetry
 
 ## House-style lint rules
 
-`@kuib-ai/eslint-plugin-house-style` registers thirteen `house/*` rules and a `recommended`
+`@kuib-ai/eslint-plugin-house-style` registers fourteen `house/*` rules and a `recommended`
 config that sets all of them to `error`, together with reused core rules: `func-style`
 (`expression`), `eqeqeq` (`always`), `no-labels` off, unused vars allowed only with a `_`
 prefix, `no-explicit-any`, value imports from `@kuib-ai/protocol/*` subpaths banned (types
 allowed), and `no-restricted-syntax` bans on `try`/`catch`, `as unknown` and `as any`. Rules are
 tested with `@typescript-eslint/rule-tester` wired to `@std/testing/bdd`. ^house-plugin
 
-> [!sources]- behaviour · verified 2026-09-23
-> - `packages/eslint-plugin-house-style/src/index.ts` › `recommendedRules` · #ed0b8b26
+> [!sources]- behaviour · verified 2026-10-12
+> - `packages/eslint-plugin-house-style/src/index.ts` › `recommendedRules` · #858466a4
 > - `packages/eslint-plugin-house-style/src/index.ts` › `houseStylePlugin` · #978e12b4
 > - `packages/eslint-plugin-house-style/src/index.ts` › "Do not use try/catch. Handle errors explicitly via the async tuple helper."
 > - `packages/eslint-plugin-house-style/package.json` › ""@typescript-eslint/rule-tester": "catalog:","
@@ -442,16 +598,18 @@ Module-shape rules:
 | `no-named-import-from-package-root` | `@kuib-ai/<pkg>` roots are imported as a default namespace only |
 | `no-re-exports` | No `export … from` or `export * from` |
 | `no-cross-package-relative` | Relative imports may not escape their `packages/*` or `apps/*` package |
+| `require-unit-test` | Modules containing functions or classes have a sibling unit/live test or are existing entries in `untested.units`; the list rejects missing, tested or behaviour-free files |
 
 ^house-structure-rules
 
-> [!sources]- behaviour · verified 2026-09-23
+> [!sources]- behaviour · verified 2026-10-12
 > - `packages/eslint-plugin-house-style/src/rules/dot.case.filename/index.ts` › `dotCaseFilename` · #989b35a5
 > - `packages/eslint-plugin-house-style/src/rules/named.exports.are.types/index.ts` › `namedExportsAreTypes` · #c25a9cd0
 > - `packages/eslint-plugin-house-style/src/rules/no.cross.package.relative/index.ts` › `noCrossPackageRelative` · #6069d649
 > - `packages/eslint-plugin-house-style/src/rules/no.named.import.from.package.root/index.ts` › `noNamedImportFromPackageRoot` · #8327036b
 > - `packages/eslint-plugin-house-style/src/rules/no.package.barrel.named.exports/index.ts` › `noPackageBarrelNamedExports` · #0d17b1ec
 > - `packages/eslint-plugin-house-style/src/rules/no.re.exports/index.ts` › `noReExports` · #4b8a0905
+> - `packages/eslint-plugin-house-style/src/rules/require.unit.test/index.ts` › `requireUnitTest` · #66796177
 > - test: `packages/eslint-plugin-house-style/src/rules/dot.case.filename/index.test.ts` › "dot-case-filename"
 > - test: `packages/eslint-plugin-house-style/src/rules/named.exports.are.types/index.test.ts` › "named-exports-are-types"
 > - test: `packages/eslint-plugin-house-style/src/rules/no.package.barrel.named.exports/index.test.ts` › "no-package-barrel-named-exports"
@@ -576,32 +734,58 @@ none|plan, plan `items`, the `grant` of paths the worker may change, agent, comm
 session, times, `reported`) above the brief the orchestrator writes; the worker writes
 `plan.md`, an append-only `log.md` and `report.md` next to it. Runtime stays out of the journal:
 a worker is the tmux window `w:<task>`, the orchestrator pane and feature are session options,
-and each task's baseline and watch state sit in a per-session runtime directory under the
-system temp dir. `spawn` opens the window with `ORCHESTRA_ROOT` set, starts the agent, waits
-until its screen settles and pastes the one-line worker prompt, checking it is visible before
-pressing Enter, then marks the plan items `in_progress`. Workers only do assigned work and never
+and each task's baseline, test-title snapshot, prompt mode and watch state sit in a per-session runtime directory under the
+system temp dir. `spawn` opens the window with `ORCHESTRA_ROOT` set and starts the agent with
+the one-line worker prompt on its command line before trailing options, in the form that agent takes (positional for
+claude, codex and cursor-agent, `--prompt-interactive` for agy and gemini, `--prompt` for
+opencode, which defaults to a standalone server on the MiMo 2.6 Pro model); claude,
+kiro-claude and mimo-claude are launched with `--dangerously-skip-permissions`, so a worker
+never waits on a permission prompt, and with `--strict-mcp-config`, so a worker starts only the
+MCP servers `spawn --mcp` names from `.agents/mcp_config.json`, none by default; an unknown agent
+is started bare and the prompt pasted once the window's shell has a foreground job and the
+screen settles. Argument launches verify that the foreground process received the prompt;
+failed delivery names the saved prompt path. It then marks the plan items `in_progress`. A pasted message is never sent
+into an open dialog, and after pasting Enter is pressed until the screen changes, up to three
+times, before the delivery fails. Workers only do assigned work and never
 message the orchestrator: `done` sets their own status (`done`, `blocked`, `failed`,
 `plan-ready` after writing `plan.md`, `restart` after writing `log.md`). The orchestrator
 answers with `go` (appends a `## Go` section and resumes a plan-ready worker), `send`,
-`restart` (clears the worker and resumes it from its log), `accept` (marks the items
-`implemented`, with the files changed inside the grant since spawn, committed or not, as refs),
-`peek`, `status` and `close` (kills the window; a task still in progress becomes `closed`, which
+`restart` (kills the window and relaunches the recorded command with the resume prompt and its
+original argument or paste mode, so the
+context is fresh for any agent), `resume` (continues a stopped worker: an optional message is
+appended under `## Resume` in the brief, then the worker is told to read it in its live window
+or relaunched if the window is gone; a closed task is refused), `accept` (refuses when a literal
+test title recorded at spawn has disappeared everywhere unless named with `--removed-title`, then
+marks each item `implemented` with one task report reference; an older task without a snapshot
+needs `--without-title-guard`, recorded in its brief), `diff` (lists added, changed and removed
+paths since spawn), `peek`, `status` and `close` (kills the window; a task still in progress becomes `closed`, which
 `reconcile` never respawns). A task whose `brief.md` cannot be read is reported and skipped;
 it never stops the others. ^orchestra
 
-> [!sources]- behaviour · verified 2026-09-23
+> [!sources]- behaviour · verified 2026-10-25
 > - `tooling/journal.ts` › `loadTasks` · #675a8a1a
 > - `tooling/orchestra.ts` › `taskProblem` · #9f97462f
-> - `tooling/orchestra.ts` › `deliver` · #848ac51c
-> - `tooling/orchestra.ts` › `cmdSpawn` · #bf642dcc
-> - `tooling/orchestra.ts` › `cmdGo` · #fe60ea15
-> - `tooling/orchestra.ts` › `cmdRestart` · #c19aa1c5
+> - `tooling/orchestra.ts` › `deliver` · #c43a7a17
+> - `tooling/orchestra.ts` › `testTitles` · #fed4494f
+> - `tooling/orchestra.ts` › `commandWithPrompt` · #19fc96d8
+> - `tooling/orchestra.ts` › `promptInForeground` · #91bf5ae7
+> - `tooling/orchestra.ts` › `cmdSpawn` · #3119e614
+> - `tooling/orchestra.ts` › `cmdGo` · #5a0c71a4
+> - `tooling/orchestra.ts` › `cmdRestart` · #0007a227
+> - `tooling/orchestra.ts` › `cmdResume` · #c1d4cdaf
 > - `tooling/orchestra.ts` › `cmdClose` · #4ef24c34
-> - `tooling/orchestra.ts` › `cmdAccept` · #cd104d04
-> - `tooling/orchestra.ts` › `cmdDone` · #0a4e069f
+> - `tooling/orchestra.ts` › `cmdDiff` · #00d3842d
+> - `tooling/orchestra.ts` › `reportRef` · #ee53b94e
+> - `tooling/orchestra.ts` › `itemReports` · #6f3d6052
+> - `tooling/orchestra.ts` › `cmdAccept` · #22df30bd
+> - `tooling/orchestra.ts` › `cmdDone` · #a0a5d47f
+> - test: `tooling/orchestra.test.ts` › "delivers a prompt before a trailing variadic flag and reports changes since spawn"
+> - test: `tooling/orchestra.test.ts` › "fails spawn when the foreground agent has no prompt in its argv"
+> - test: `tooling/orchestra.test.ts` › "refuses a missing test title, permits a moved title and records an intentional removal"
+> - test: `tooling/orchestra.test.ts` › "fails closed without a title snapshot and records an explicit legacy exception"
 > - `package.json` › "\"orchestra\": \"deno run -A tooling/orchestra.ts\""
-> - `.agents/skills/orchestrate/SKILL.md` · #255d323a
-> - `.agents/skills/orchestrate/WORKER.md` · #39a1ad28
+> - `.agents/skills/orchestrate/SKILL.md` · #2d884e9d
+> - `.agents/skills/orchestrate/WORKER.md` · #b3683787
 > - why: [[domains/infra/decisions#^D026]]
 > - why: [[domains/infra/decisions#^D030]]
 
@@ -609,24 +793,37 @@ it never stops the others. ^orchestra
 windows (a running task whose window is gone becomes `lost`) and prints unreported events as
 `orchestra: <task> <kind>: <detail>`, each once: from the records (`done`, `plan-ready`,
 `blocked`, `failed`, `restart`, `lost`, and `broken` for a brief it cannot read), from the screen (`idle` when it stays unchanged and
-calm for `--idle` polls, `context` when the status line shows usage at or above `--cap`), and
+calm for `--idle` polls, `context` when the status line shows usage at or above `--cap`,
+`dialog` when a trust or confirmation prompt is showing, `match` once per screen line that
+matches `--match <regex>`), and
 from the worker's repository against its spawn baseline, counting both commits and uncommitted
-changes (`scope` for a changed path outside the grant and outside the journal files the
+changes (`scope` for a changed path outside the grants of every same-repository task active at
+any time since the watched task spawned, including tasks since stopped, and outside the journal files the
 orchestrator writes — claims, plans, task records, generated indexes; `git` when HEAD or the branch
 moved). It exits
 after the first poll with events, or keeps streaming with `--follow` until nothing runs;
-`reconcile --respawn` relaunches lost workers with a resume prompt. `handoff` arms a guard,
-run by the tmux server, that waits until the orchestrator pane is calm, sends `/clear` and types a
-resume line; the session hook then injects the rendered handoff. ^orchestra-watch
+`reconcile --respawn` relaunches lost workers with a resume prompt. Task record `started` and
+`finished` times bound that grant overlap; a restart preserves the original `started`, the spawn
+baseline and previously reported paths. Dirty paths use a checked batch hash with an individual
+fallback, so one disappearing file cannot shift hashes onto others. `handoff` arms a guard run by the tmux server that waits
+until the orchestrator pane is calm, sends `/clear`, then pastes an opening that instructs the next
+session to read the rendered handoff and active briefs, run `orchestra status`, and re-arm watch.
+A supplied prompt is copied into private session runtime before arming and pasted after that
+opening, preserving its lines; an empty or missing prompt leaves the pane uncleared. ^orchestra-watch
 
-> [!sources]- behaviour · verified 2026-09-23
-> - `tooling/orchestra.ts` › `changedSince` · #3c5655d4
-> - `tooling/orchestra.ts` › `reconcile` · #ca722c2a
+> [!sources]- behaviour · verified 2026-10-14
+> - `tooling/orchestra.ts` › `dirtyFiles` · #c16ee915
+> - `tooling/orchestra.ts` › `changedSince` · #531a9acc
+> - `tooling/orchestra.ts` › `allowedGlobs` · #eebf5b0f
+> - `tooling/orchestra.ts` › `reconcile` · #f2730e3a
 > - `tooling/orchestra.ts` › `recordEvents` · #381e7ac0
-> - `tooling/orchestra.ts` › `screenEvents` · #1be7ca48
-> - `tooling/orchestra.ts` › `repoEvents` · #b9f58c98
+> - `tooling/orchestra.ts` › `matchEvents` · #b1718e34
+> - `tooling/orchestra.ts` › `screenEvents` · #88ae129d
+> - `tooling/orchestra.ts` › `repoEvents` · #7e76c076
 > - `tooling/orchestra.ts` › `brokenEvents` · #d6df28a7
-> - `tooling/orchestra.ts` › `cmdWatch` · #a56025af
+> - `tooling/orchestra.ts` › `cmdWatch` · #05ac0a7a
+> - test: `tooling/orchestra.test.ts` › "attributes scope to either running grant and stays quiet after restart"
+> - test: `tooling/orchestra.test.ts` › "keeps a stopped peer's grant for overlapping work but excludes an earlier task"
 > - why: [[domains/infra/decisions#^D030]]
 
 ## Scripts
@@ -669,10 +866,10 @@ other project. Each tool dispatches on its first argument to a subcommand whose 
 and `--help` come from `@kuib-ai/cli`; with no or an unknown subcommand it prints its usage.
 Other scripts live in `scripts/`; any package they import is a root devDependency. ^workspace-tools
 
-> [!sources]- structure · verified 2026-09-25
+> [!sources]- structure · verified 2026-10-14
 > - `tooling/agents.ts` › `SUBCOMMANDS` · #5e720576
 > - `tooling/journal.ts` › `SUBCOMMANDS` · #4b3ccede
-> - `tooling/orchestra.ts` › `SUBCOMMANDS` · #1e559d87
+> - `tooling/orchestra.ts` › `SUBCOMMANDS` · #d232f4ad
 > - `package.json` › "\"journal\": \"deno run -A tooling/journal.ts\""
 > - `package.json` › "\"agents\": \"deno run -A tooling/agents.ts\""
 > - `tooling/package.json` › "\"@kuib-ai/cli\": \"workspace:*\""

@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: every native tool choice without deleting tools. Approved settings: thinking=between_tools; tools retained; tool_choice=tool(get_value). Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

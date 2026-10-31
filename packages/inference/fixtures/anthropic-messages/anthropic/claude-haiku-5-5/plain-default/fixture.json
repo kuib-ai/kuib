@@ -1,0 +1,4 @@
+{
+  "shows": "H/plain-default: captured HTTP 200, json, complete. The recorded JSON body and status are retained. The synthetic admission was answered; native usage and response bytes are preserved.",
+  "origin": "recorded"
+}

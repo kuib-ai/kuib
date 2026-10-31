@@ -1,0 +1,13 @@
+{
+  "lengths": [
+    339
+  ],
+  "bytes": 339,
+  "sha256": "67bf4816141c3aa28c8c445865c35060b7fb673d2470fbbeb262aade16474e53",
+  "boundary": "fetch-body-reader",
+  "state": "complete",
+  "cut": null,
+  "startedAt": "2026-10-13T16:45:07.055Z",
+  "finishedAt": "2026-10-13T16:45:07.543Z",
+  "anthropicOrganizationId": true
+}

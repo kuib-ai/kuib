@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: incomplete reasoning sent back. Approved settings: replay observed incomplete thinking as thinking; append user Continue.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: S/cut-thinking-replay. Signed repeat of row S/cut-thinking-replay.",
+  "origin": "recorded"
+}

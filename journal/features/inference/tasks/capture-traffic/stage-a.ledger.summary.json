@@ -1,0 +1,42 @@
+{
+  "calls": 12,
+  "costUsd": 0.001647,
+  "providers": [
+    {
+      "provider": "anthropic",
+      "calls": 9,
+      "costUsd": 0.000379
+    },
+    {
+      "provider": "mimo",
+      "calls": 1,
+      "costUsd": 0
+    },
+    {
+      "provider": "meta",
+      "calls": 2,
+      "costUsd": 0.001268
+    }
+  ],
+  "stopped": [
+    {
+      "provider": "mimo",
+      "row": "MA/host-sgp",
+      "stop": "authentication-failure"
+    }
+  ],
+  "callOrder": [
+    "S/plain-json",
+    "S/plain-stream",
+    "S/plain-default",
+    "H/plain-json",
+    "H/plain-stream",
+    "H/plain-default",
+    "L/plain-json",
+    "L/plain-stream",
+    "L/plain-default",
+    "MA/host-sgp",
+    "MT/plain-json",
+    "MT/plain-stream"
+  ]
+}

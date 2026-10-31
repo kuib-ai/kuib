@@ -8,16 +8,15 @@ Contract: [[SPEC]]. Roadmap = intent, domains = built truth, features = in fligh
 
 | Domain | Summary | Claims | Decisions |
 |---|---|---|---|
-| [[domains/core/current\|core]] | Agent loop, protocol schemas, event log, tools, daemon and engine-service. | 48 | [[domains/core/decisions\|30]] |
+| [[domains/core/current\|core]] | Agent loop, protocol schemas, event log, tools, daemon and engine-service. | 50 | [[domains/core/decisions\|30]] |
 | [[domains/host/current\|host]] | Host adapters: the terminal host and its CLI surface. | 14 | [[domains/host/decisions\|9]] |
-| [[domains/infra/current\|infra]] | Workspace tooling, config/env/std/telemetry foundations, lint rules, agent wiring and the journal itself. | 39 | [[domains/infra/decisions\|31]] |
+| [[domains/infra/current\|infra]] | Workspace tooling, config/env/std/telemetry foundations, lint rules, agent wiring and the journal itself. | 46 | [[domains/infra/decisions\|31]] |
 | [[domains/product/current\|product]] | Ana voice assistant: speech-to-text services and their clients. | 13 | [[domains/product/decisions\|10]] |
 
 ## Features
 
 - [[features/agent-harness/plan|agent-harness]] — implementing · R004
   One source (AGENTS.md + .agents/) generates every agent tool's config, and a tool-agnostic tmux orchestra lets one orchestrator spawn and coordinate worker agents.
-  next: P03-I05
 - [[features/codebase-review/plan|codebase-review]] — implementing · R005
   Parallel reviewer agents audit the codebase and its domain claims; findings are triaged and fixed.
   next: P02-I01, P01-I04
@@ -29,13 +28,17 @@ Contract: [[SPEC]]. Roadmap = intent, domains = built truth, features = in fligh
   next: P05-I01
 - [[features/engine-foundation/plan|engine-foundation]] — draft · R019
   Shape the reusable engine for Kuib and Ana, preserving namespace APIs and establishing fast, low-overhead deployment as one Deno executable.
+- [[features/inference/plan|inference]] — draft · R020
+  kuib's own model layer end to end: the two formats in use broken into pieces, a neutral format in protocol, translations for Anthropic Messages and OpenAI chat built from blocks and proven against recorded traffic, and the existing model path repaired onto it.
 - [[features/stt-engine/plan|stt-engine]] — implementing · R003
   Unified STT service on M4 Mac Mini (minerva) — FluidAudio for Parakeet CoreML/ANE, mlx-swift for Qwen3-ASR, single unix socket API. TypeScript client in monorepo.
-  next: P02-I01
+  next: P02-I01, P03-I02, P03-I03, P03-I04
+- [[features/test-system/plan|test-system]] — implementing · R021
+  Testing becomes first class: tests in the gate, three kinds of test as named targets in every project, real modules instead of stand-ins, offline and isolated by construction, shared helpers and one fixture convention, and a lint rule, coverage, a hook and CI that keep it true.
 
 ## Roadmap
 
-[[roadmap/ROADMAP]] — 20 open items (now 7, next 8, later 5, maybe 0).
+[[roadmap/ROADMAP]] — 22 open items (now 9, next 8, later 5, maybe 0).
 
 - [[roadmap/items/R001-context-system|R001]] Three-layer context system with drift detection
 - [[roadmap/items/R002-deno-runtime|R002]] Deno as the only runtime
@@ -43,6 +46,8 @@ Contract: [[SPEC]]. Roadmap = intent, domains = built truth, features = in fligh
 - [[roadmap/items/R004-agent-harness|R004]] Uniform agent harness and tmux orchestration
 - [[roadmap/items/R005-codebase-review|R005]] Codebase review and fixes
 - [[roadmap/items/R019-engine-foundation|R019]] Reusable engine foundation — application boundaries and efficient Deno deployment
+- [[roadmap/items/R020-inference|R020]] Inference — a neutral model format, translations built from blocks, providers as plugins
+- [[roadmap/items/R021-test-system|R021]] Tests as a first-class part of the workspace
 - [[roadmap/items/R221-self-contained-engine|R221]] Self-contained engine — one entry that owns its wiring and its single-instance start
 
 ## Wireframes

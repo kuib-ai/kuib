@@ -27,7 +27,9 @@ const sleep = function (ms: number): Promise<void> {
 };
 
 // @claim core/ensure-daemon
-const ensureDaemon = async function (socketPath: string): Promise<void> {
+const ensureDaemon = async function (
+  socketPath: string,
+): Promise<number | undefined> {
   if (await probe(socketPath)) {
     return;
   }
@@ -44,7 +46,7 @@ const ensureDaemon = async function (socketPath: string): Promise<void> {
   const deadline = Date.now() + PROBE_TIMEOUT_MS;
   while (Date.now() < deadline) {
     if (await probe(socketPath)) {
-      return;
+      return child.pid;
     }
     await sleep(PROBE_INTERVAL_MS);
   }

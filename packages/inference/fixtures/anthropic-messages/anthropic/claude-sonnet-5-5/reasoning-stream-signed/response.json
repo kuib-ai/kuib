@@ -1,0 +1,26 @@
+{
+  "status": 200,
+  "statusText": "OK",
+  "headers": {
+    "anthropic-ratelimit-input-tokens-limit": "10000000",
+    "anthropic-ratelimit-input-tokens-remaining": "10000000",
+    "anthropic-ratelimit-input-tokens-reset": "2026-10-13T08:16:09Z",
+    "anthropic-ratelimit-output-tokens-limit": "2000000",
+    "anthropic-ratelimit-output-tokens-remaining": "2000000",
+    "anthropic-ratelimit-output-tokens-reset": "2026-10-13T08:16:09Z",
+    "anthropic-ratelimit-requests-limit": "10000",
+    "anthropic-ratelimit-requests-remaining": "9999",
+    "anthropic-ratelimit-requests-reset": "2026-10-13T08:16:09Z",
+    "anthropic-ratelimit-tokens-limit": "12000000",
+    "anthropic-ratelimit-tokens-remaining": "12000000",
+    "anthropic-ratelimit-tokens-reset": "2026-10-13T08:16:09Z",
+    "cache-control": "no-cache",
+    "content-type": "text/event-stream; charset=utf-8",
+    "date": "Tue, 13 Oct 2026 08:16:09 GMT",
+    "request-id": "req_011CfyuRWJgN1MonS8BbcmrE"
+  },
+  "excludedHeaders": {
+    "identity": 2,
+    "unknown": 8
+  }
+}

@@ -1,7 +1,8 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
-import { mkdtempSync, writeFileSync } from "node:fs";
-import { tmpdir, homedir } from "node:os";
+import { writeFileSync } from "node:fs";
+import { homedir } from "node:os";
+import createTempDir from "@kuib-ai/testing/create.temp.dir";
 import { join, relative } from "node:path";
 import { TRPCError } from "@trpc/server";
 import Trpc from "../../trpc/index.ts";
@@ -13,8 +14,8 @@ const caller = createCaller({});
 
 describe("read.file procedure", function () {
   it("reads an existing file with ~ expansion and returns its content", async function () {
-    const dir = mkdtempSync(join(homedir(), ".kuib-read-file-test-"));
-    const filePath = join(dir, "hello.txt");
+    using dir = createTempDir(".kuib-read-file-test-", homedir());
+    const filePath = join(dir.path, "hello.txt");
     writeFileSync(filePath, "hello world", "utf8");
     const tildePath = "~/" + relative(homedir(), filePath);
 
@@ -24,7 +25,8 @@ describe("read.file procedure", function () {
   });
 
   it("throws a TRPCError INTERNAL_SERVER_ERROR when the read fails", async function () {
-    const missing = join(mkdtempSync(join(tmpdir(), "kuib-rf-")), "nope.txt");
+    using dir = createTempDir();
+    const missing = join(dir.path, "nope.txt");
 
     const promise = caller.readFile({ path: missing });
 

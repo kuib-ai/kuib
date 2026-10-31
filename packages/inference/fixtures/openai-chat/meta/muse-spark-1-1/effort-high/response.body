@@ -1,0 +1,8 @@
+data: {"id":"chatcmpl-01a13442-8ff3-76d7-9726-382084a2aece","choices":[{"delta":{"content":"30 beads remain —","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878139,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13442-8ff3-76d7-9726-382084a2aece","choices":[{"delta":{"content":" 12 blue and 18 green."},"finish_reason":null,"index":0}],"created":1791878139,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13442-8ff3-76d7-9726-382084a2aece","choices":[{"delta":{},"finish_reason":"stop","index":0}],"created":1791878139,"model":"muse-spark-1.1","object":"chat.completion.chunk","usage":{"completion_tokens":592,"prompt_tokens":53,"total_tokens":645,"completion_tokens_details":{"reasoning_tokens":570},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

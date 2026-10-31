@@ -1,0 +1,27 @@
+{
+  "name": "@kuib-ai/testing",
+  "version": "0.0.1",
+  "description": "kuib test helpers and the sandbox every test runs in",
+  "type": "module",
+  "bin": "./bin/testing",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "test": "testing",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@kuib-ai/deno-types": "workspace:*",
+    "@kuib-ai/tsconfig": "workspace:*",
+    "@std/expect": "catalog:",
+    "@std/testing": "catalog:",
+    "@types/node": "catalog:"
+  }
+}

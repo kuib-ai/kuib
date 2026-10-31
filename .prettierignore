@@ -10,3 +10,5 @@ CLAUDE.md
 .mcp.json
 .cursor
 .gemini
+packages/deno-types/index.d.ts
+packages/inference/fixtures

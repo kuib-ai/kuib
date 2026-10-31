@@ -1,0 +1,1 @@
+{"model":"claude-haiku-5-5","max_tokens":768,"stream":true,"system":"Keep the answer short.","messages":[{"role":"user","content":"A synthetic widget has 17 blue beads and 9 green beads. It loses 5 blue beads, then doubles its green beads. How many beads remain? Answer in one sentence."}],"thinking":{"type":"disabled"}}

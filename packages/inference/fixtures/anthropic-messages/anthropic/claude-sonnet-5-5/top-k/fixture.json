@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: sampling field accepted/rejected without normalization. Approved settings: thinking=between_tools; top_k=1. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

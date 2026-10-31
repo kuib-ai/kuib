@@ -1,0 +1,4 @@
+data: {"id":"1ecbecee-dfd3-45cc-bc9e-a73fb2a857bf_dca07ed7ea954352bc42d8fa0a87a7f5","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911230,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"1ecbecee-dfd3-45cc-bc9e-a73fb2a857bf_dca07ed7ea954352bc42d8fa0a87a7f5","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The user wants me"},"finish_reason":null,"index":0}],"created":1791911230,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+

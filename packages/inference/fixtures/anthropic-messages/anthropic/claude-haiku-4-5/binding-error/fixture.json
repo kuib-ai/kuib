@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: binding control and input_transformations. Approved settings: change system; thinking.block_binding.prefix_mismatch_behavior=error; binding beta.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

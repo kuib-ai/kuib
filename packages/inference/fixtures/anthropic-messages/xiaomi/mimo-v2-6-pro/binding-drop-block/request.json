@@ -1,0 +1,20 @@
+{
+  "messageFormat": "anthropic-messages",
+  "provider": "xiaomi",
+  "model": "mimo-v2-6-pro",
+  "name": "binding-drop-block",
+  "method": "POST",
+  "url": "https://token-plan-sgp.xiaomimimo.com/anthropic/v1/messages",
+  "authHeader": "api-key",
+  "headers": {
+    "anthropic-beta": "thinking-binding-controls-2026-08-01",
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  },
+  "replay": {
+    "fixture": "anthropic-messages/xiaomi/mimo-v2-6-pro/tool-seed",
+    "changes": [
+      "change system; thinking.block_binding.prefix_mismatch_behavior=drop_block; binding beta"
+    ]
+  }
+}

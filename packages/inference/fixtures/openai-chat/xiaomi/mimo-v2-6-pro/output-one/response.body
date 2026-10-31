@@ -1,0 +1,8 @@
+data: {"id":"1a85330c-ead9-458b-80ee-f3ccb760294c_a80d951eb00c45e1ba1a465a804ea664","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911815,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"1a85330c-ead9-458b-80ee-f3ccb760294c_a80d951eb00c45e1ba1a465a804ea664","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"length","index":0}],"created":1791911815,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"1a85330c-ead9-458b-80ee-f3ccb760294c_a80d951eb00c45e1ba1a465a804ea664","choices":[],"created":1791911815,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":1,"prompt_tokens":36,"total_tokens":37,"completion_tokens_details":{"reasoning_tokens":0},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

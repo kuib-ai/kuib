@@ -1,0 +1,16 @@
+data: {"id":"ff255618-e9c2-4b46-b5ff-3409046b78e7_8512d250cf2740e1adef9242cb5cfe7c","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910549,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"ff255618-e9c2-4b46-b5ff-3409046b78e7_8512d250cf2740e1adef9242cb5cfe7c","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The stored value is 7."},"finish_reason":null,"index":0}],"created":1791910549,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"ff255618-e9c2-4b46-b5ff-3409046b78e7_8512d250cf2740e1adef9242cb5cfe7c","choices":[{"delta":{"content":"The stored value for","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910549,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"ff255618-e9c2-4b46-b5ff-3409046b78e7_8512d250cf2740e1adef9242cb5cfe7c","choices":[{"delta":{"content":" selector 7 is **7**","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910549,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"ff255618-e9c2-4b46-b5ff-3409046b78e7_8512d250cf2740e1adef9242cb5cfe7c","choices":[{"delta":{"content":".","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910549,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"ff255618-e9c2-4b46-b5ff-3409046b78e7_8512d250cf2740e1adef9242cb5cfe7c","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791910549,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"ff255618-e9c2-4b46-b5ff-3409046b78e7_8512d250cf2740e1adef9242cb5cfe7c","choices":[],"created":1791910549,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":22,"prompt_tokens":153,"total_tokens":175,"completion_tokens_details":{"reasoning_tokens":8},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

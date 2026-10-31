@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: signed reasoning and genuine tool call for replay. Approved settings: stream=false; thinking=adaptive; display=summarized; tools get_value; auto. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

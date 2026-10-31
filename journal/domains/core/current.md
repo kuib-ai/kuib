@@ -1,25 +1,28 @@
 ---
 domain: core
 summary: Agent loop, protocol schemas, event log, tools, daemon and engine-service.
-code: ["packages/{engine,engine-service,protocol,transcript,tools,event-log-sqlite,daemon}/**"]
+code: ["packages/{engine,engine-service,protocol,transcript,tools,event-log-sqlite,daemon,inference}/**"]
 ---
 
 # Core
 
 ## Packages and boundaries
 
-Core is seven workspace packages. `@kuib-ai/protocol` holds the schemas and port interfaces.
+Core is eight workspace packages. `@kuib-ai/protocol` holds the schemas and port interfaces.
 `@kuib-ai/tools` holds the tool definitions. `@kuib-ai/engine` is the agent-loop library:
 orchestrator, providers, context building, the daemon client, an in-memory event log and mesh
 discovery. `@kuib-ai/engine-service` is the long-lived process that runs turns behind a unix
 socket. `@kuib-ai/event-log-sqlite` is the durable event log. `@kuib-ai/daemon` is the node-local
 fs/shell executor served over tRPC. `@kuib-ai/transcript` folds the event log into display
-entries. Dependencies point one way. Protocol depends only on `zod`. Tools depend on protocol.
+entries. `@kuib-ai/inference` holds recorded provider fixtures, their enum-based path unit and the
+recorder used to build and audit those fixtures. Its public namespace remains empty, and no
+translation or neutral format is implemented there.
+Dependencies point one way. Protocol depends only on `zod`. Inference and tools depend on protocol.
 The daemon depends on protocol, config and std. The engine depends on protocol, tools and std,
 and uses the daemon only for its router type. engine-service imports protocol and std, and
 receives the engine through an injected `runTurn`. ^core-packages
 
-> [!sources]- structure · verified 2026-09-23
+> [!sources]- structure · verified 2026-10-14
 > - `packages/protocol/package.json` › "schemas, events, and interfaces"
 > - `packages/tools/package.json` › "single source of truth, backed by protocol interfaces"
 > - `packages/engine/package.json` › "agent loop, event log, daemon dispatch"
@@ -33,13 +36,13 @@ receives the engine through an injected `runTurn`. ^core-packages
 > - from: [[_archive/architecture-overview/decisions#Package Dependency Flow]]
 
 Each package has a barrel at `src/index.ts` that default-exports one namespace object:
-`Protocol`, `Engine`, `EngineService`, `EventLogSqlite`, `Daemon`, `Tools` or `Transcript`.
+`Protocol`, `Engine`, `EngineService`, `EventLogSqlite`, `Daemon`, `Tools`, `Transcript` or `Inference`.
 Sub-barrels group related units, for example `Engine.Provider`, `Engine.Mesh`,
 `Engine.EventLog` and `Engine.DaemonClient`. Every unit lives in its own dot-case directory as
 `index.ts`. The `"./*": "./src/*/index.ts"` export lets a consumer import a single unit or type
 by subpath. ^package-barrels
 
-> [!sources]- structure · verified 2026-09-23
+> [!sources]- structure · verified 2026-10-14
 > - `packages/daemon/src/index.ts` › `Daemon` · #cee1fafa
 > - `packages/engine-service/src/index.ts` › `EngineService` · #7873c5ec
 > - `packages/engine/src/daemon.client/index.ts` › `DaemonClient` · #854366ac
@@ -48,18 +51,116 @@ by subpath. ^package-barrels
 > - `packages/engine/src/mesh/index.ts` › `Mesh` · #28bc6363
 > - `packages/engine/src/provider/index.ts` › `Provider` · #0477c345
 > - `packages/event-log-sqlite/src/index.ts` › `EventLogSqlite` · #79e1f38f
-> - `packages/protocol/src/index.ts` › `Protocol` · #70cedeed
+> - `packages/inference/src/index.ts` › `Inference` · #4bd24030
+> - `packages/protocol/src/index.ts` › `Protocol` · #97841046
 > - `packages/tools/src/index.ts` › `Tools` · #544fdf91
 > - `packages/transcript/src/index.ts` › `Transcript` · #62871a58
 > - `packages/engine/package.json` › ""./*": "./src/*/index.ts""
 
-Every core package except protocol runs its tests with `deno test -A --no-check` and
-typechecks with `tsgo --noEmit`. Tests sit next to their unit as `index.test.ts`, import from
+The inference package exposes an empty `Inference` namespace. Its fixture path unit files
+recorded exchanges under `fixtures/<messageFormat>/<provider>/<model>/<case>/`, using the
+protocol enum values. The tree test rejects folders and envelopes that disagree with those
+enums. Each case has `request.json` and `response.json` for exchange metadata,
+`request.body` and `response.body` for exact provider wire bytes, `transport.json` for observed
+read lengths, hashes and capture time, and `fixture.json` for `shows` and `origin`.
+`request.json` contains only exchange description: identity, method, URL, auth header, headers,
+and replay when built from another fixture. A run's row, price and controls belong to its
+ledger and recording input. No `sequence.json` is stored. The recorder and future translations
+use the shared path unit; translations can load cases through the testing loader. ^inference-fixtures
+
+> [!sources]- structure · verified 2026-10-14
+> - `packages/inference/src/fixture.path/index.ts` › `fixturePath` · #d5e37ea3
+> - `packages/inference/package.json` › "kuib inference — recorded provider traffic and the model layer"
+
+`pnpm capture` runs the `inference` command with named provider-host, credential-environment,
+read and write permissions. Call commands take a run folder whose append-only ledger belongs
+to that run. The recorder imports the protocol's message format, provider and model enums and the
+inference package's one fixture path function. `prepare` writes a credential-free
+request once in its format/provider/model/case fixture before any call; `record` sends those
+exact UTF-8 body bytes with the
+credential added only in memory. It stores untouched fetch-body-reader bytes and observed
+read lengths, excluding account/credential headers through a public allowlist. Ordinary
+header exclusions retain only identity/unknown counts. The approved organization-id value
+may occur in request or response body bytes: a match against the excluded
+`anthropic-organization-id` response header sets `anthropicOrganizationId: true` in that
+case's transport metadata. The header itself is never stored, and its value is still refused
+in metadata or ledger data. Keys and every other identity-header value remain refused in
+all blobs. A sensitive value reflected in body
+or metadata refuses persistence; its finished ledger entry diagnoses the value's kind
+(call key, another provider key, or response header with its name), length, encoding form
+and matched blob, without the value or surrounding text. Standard and URL-safe base64 runs
+are decoded at every character phase so sensitive values at all three byte alignments
+are found in every scanned blob and during audits. The audit also rejects UUID-shaped
+ASCII hidden inside a stored request/response body's base64 run without needing a secret,
+except in cases carrying that explicit organization-id transport mark; known organization
+ids are permitted only in such marked body files, while audit key/other-identity scans apply
+regardless of the mark;
+its error names only the fixture case. A ledger reserves each call before
+fetch, using at least the request body's byte length as a conservative input-token estimate
+and the longest cache-write rate when a cache hint is present. It retains missing-usage,
+unterminated-stream and interrupted-call reservations, while a complete 4xx rejection with
+no usage releases its reservation at zero cost. A sensitive-data stop applies globally until
+`liftStop` or `pnpm capture lift` appends its ordinal, reviewer and reason; historical
+bytes, call counts and reservations remain unchanged. Authentication stops also admit an
+append-only reviewed lift when a key is replaced; billing stops cannot be lifted. A reviewed
+`repriced` entry sets an unbilled 400 call's retained reservation to zero without rewriting
+its original cost; budget accounting applies that entry and call counts remain unchanged.
+A diagnostic repeat has a new case,
+records the original ordinal in replay metadata and the ledger, requires identical body bytes
+and a reviewed safety stop, and can start only once per reviewed ordinal. Another refusal
+creates a fresh global stop. It prevents repeated starts, provider count overruns and
+requests exceeding the five-dollar budget. The sequential driver
+does not retry; authentication failures persist a stop for their host/path/auth-header
+combination, while billing failures stop the whole provider. A current entry with an omitted
+header can recover it from the stored request without rewriting ledger history.
+Two consecutive fetch failures or 429/5xx responses end the sequence with a
+reported reason, without a permanent provider stop; those rows still count and cannot be
+resent by the tool. A non-transient result resets that streak. The recorder rejects redirects,
+unsafe destinations and above-2,048 output limits. The five approved output-above-ceiling
+row ids are the only exception: their provider/model/path and exact larger limit must match,
+the call cuts at headers for a 2xx answer, and its full output remains reserved. Rejection
+bodies are read in full; a complete 4xx rejection without usage releases only that call's
+reservation. Three named Claude ceiling repeats preserve their original row in replay and ledger metadata and reuse the same exact limit exception. Named MiMo admission
+repeats retain their original row in the same metadata. The resumed matrices allow 384
+Anthropic calls and 226 Xiaomi calls including their expressly approved repeats; Meta keeps
+its 102-call cap, and the five-dollar guard remains. Named Sonnet/Haiku
+5.5 signed repeats preserve their original row in the same metadata; seed variants are
+bounded to the initial, max-effort and harder-prompt cases; Haiku 4.5 has only its explicitly
+named initial signed seed. A repeat row can start only once,
+even through a second fixture in one run, and historical ledger reservations remain unchanged.
+One named Sonnet JSON max-effort repeat and its outside-tool omit/keep repeats are permitted;
+the outside case name and replay metadata must agree on the signed JSON-max or stream source,
+and only one source variant of each operation can start. A Meta thinking cut stops at the
+first exposed reasoning delta or falls back to its first visible content delta,
+preserving every observed reader byte and the full missing-usage reservation.
+Each case holds one exchange and no step field or numbered file name. A response file prevents
+a second call to the same case even with a different run ledger. `rename` replaces an
+old identity value across envelopes and folders, including one no longer in the enum, and
+`refile` places every case at the path named by its envelope and current enums. Both
+leave body bytes untouched and update replay paths. Nested fixtures load through the real testing loader; offline tests exercise the recorder
+against loopback HTTP servers. No provider traffic is recorded by an offline test. The product barrel does not import recorder
+units. The launcher starts only workspace Deno, and its child receives permissions from
+`resolveCapturePermissions`, including only the supplied run folder for run data.
+^provider-captures
+
+
+> [!sources]- behaviour · verified 2026-10-14
+> - test: `packages/inference/src/scan.response/index.test.ts` › "records the real HTTP body exactly and removes account headers before writing"
+> - test: `packages/inference/src/record.exchange/index.test.ts` › "loads nested format/provider/model/case fixtures with the real loader and replays the same prepared request bytes"
+> - test: `packages/inference/src/check.allowance/index.test.ts` › "enforces the five-dollar ceiling even if the caller supplies a larger budget"
+> - test: `packages/inference/src/sequence.requests/index.test.ts` › "runs requests sequentially and reserves missing usage across invocations"
+> - test: `packages/inference/src/check.allowance/index.test.ts` › "releases complete 4xx reservations without usage so rejected rows do not consume the dollar budget"
+> - test: `packages/inference/src/sequence.requests/index.test.ts` › "resets the transient streak on any non-transient answer and starts fresh on a later run"
+
+Core packages use the shared workspace test runner, except engine and engine-service, which
+retain `deno test -A --no-check` until released. Inference's fixture path unit and tree test
+participate in the runner. Core packages typecheck with `tsgo --noEmit`.
+Tests sit next to their unit as `index.test.ts`, import from
 `@std/testing/bdd` and `@std/expect`, and pass fakes as parameters rather than mocking modules.
 Orchestrator tests drive `MockLanguageModelV3` streams and assert on events in a memory event
 log. ^core-tests-typecheck
 
-> [!sources]- structure · verified 2026-09-23
+> [!sources]- structure · verified 2026-10-14
 > - `packages/engine/package.json` › ""test": "deno test -A --no-check""
 > - `packages/daemon/package.json` › ""typecheck": "tsgo --noEmit""
 > - `packages/engine/src/orchestrator/index.test.ts` › "import { MockLanguageModelV3, simulateReadableStream } from "ai/test";"
@@ -92,9 +193,10 @@ The protocol defines 11 IDs, each a branded, non-empty Zod string: `SessionID`, 
 > - from: [[_archive/protocol-design/decisions#Design Principles]]
 
 Every discriminator value is a native TS enum member. Schemas use `z.literal(Enum.X)` or
-`z.enum(Enum)`, and consumers switch on the same enums. ^protocol-enums
+`z.enum(Enum)`, and consumers switch on the same enums. `MessageFormatEnum`, `ProviderEnum` and
+`ModelEnum` define the three fixture filing identities as sibling units at the protocol root. ^protocol-enums
 
-> [!sources]- structure · verified 2026-09-23
+> [!sources]- structure · verified 2026-10-14
 > - `packages/protocol/src/endpoint/endpoint.kind.enum/index.ts` › `EndpointKindEnum` · #cea19557
 > - `packages/protocol/src/error/error.code.enum/index.ts` › `ErrorCodeEnum` · #3c35f4cf
 > - `packages/protocol/src/event/event.type.enum/index.ts` › `EventTypeEnum` · #ea7dcf2c
@@ -650,14 +752,15 @@ server error. ^daemon-server
 
 `ensureDaemon(socketPath)` connects to the socket to check for a live daemon. If none answers,
 it spawns `start.daemon` with the current executable, detached with ignored stdio and
-`KUIB_DAEMON_SOCKET` set. It then re-probes every 50 ms and throws after 5 s.
+`KUIB_DAEMON_SOCKET` set. It then re-probes every 50 ms, returns the spawned process's pid
+once reachable, and throws after 5 s. An already reachable daemon returns `undefined`.
 `ensureLocalDaemon(socketOverride?)` resolves the socket through `Config.resolveAppPaths`,
 ensures the daemon is running and returns a `unix` endpoint. `resolveDaemonEndpoint(remoteUrl,
 socketOverride)` returns a `tcp` endpoint when a remote URL is given, and otherwise falls back to
 the local daemon. ^ensure-daemon
 
-> [!sources]- behaviour · verified 2026-09-23
-> - `packages/daemon/src/ensure.daemon/index.ts` › `ensureDaemon` · #5f8b48cc
+> [!sources]- behaviour · verified 2026-10-12
+> - `packages/daemon/src/ensure.daemon/index.ts` › `ensureDaemon` · #cece989b
 > - `packages/daemon/src/ensure.local.daemon/index.ts` › `ensureLocalDaemon` · #ad06f33c
 > - `packages/daemon/src/resolve.daemon.endpoint/index.ts` › `resolveDaemonEndpoint` · #0847601e
 > - test: `packages/daemon/src/ensure.daemon/index.test.ts` › "returns without spawning when the socket is already alive"

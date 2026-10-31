@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: parallel switch, separate calls if emitted. Approved settings: thinking=disabled; auto.disable_parallel_tool_use=false; ask for values 7 and 8.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

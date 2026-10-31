@@ -1,0 +1,20 @@
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+data: {"id":"2f987cce-3f8a-467c-aa0c-65823333951f_18cab87c318342d8861adb649acc940d","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911667,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"2f987cce-3f8a-467c-aa0c-65823333951f_18cab87c318342d8861adb649acc940d","choices":[{"delta":{"content":"OK","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911667,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"2f987cce-3f8a-467c-aa0c-65823333951f_18cab87c318342d8861adb649acc940d","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791911667,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"2f987cce-3f8a-467c-aa0c-65823333951f_18cab87c318342d8861adb649acc940d","choices":[],"created":1791911667,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":2,"prompt_tokens":23,"total_tokens":25,"completion_tokens_details":{"reasoning_tokens":0},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: sampling field accepted/rejected without normalization. Approved settings: thinking=disabled; top_k=1.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

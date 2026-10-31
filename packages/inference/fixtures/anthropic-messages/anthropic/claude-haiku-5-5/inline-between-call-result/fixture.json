@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: fourth instruction position and paired-call rule. Approved settings: insert system(text) between actual call and its result.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

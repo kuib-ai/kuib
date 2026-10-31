@@ -1,0 +1,18 @@
+{
+  "status": 200,
+  "statusText": "OK",
+  "headers": {
+    "cache-control": "no-cache",
+    "content-type": "text/event-stream",
+    "date": "Tue, 13 Oct 2026 07:56:08 GMT",
+    "x-ratelimit-limit-requests": "3000",
+    "x-ratelimit-limit-tokens": "4000000",
+    "x-ratelimit-remaining-requests": "2995",
+    "x-ratelimit-remaining-tokens": "3997574",
+    "x-request-id": "2d7ab52e-9cc3-4b96-91a4-0a5ffe2c2233"
+  },
+  "excludedHeaders": {
+    "identity": 0,
+    "unknown": 2
+  }
+}

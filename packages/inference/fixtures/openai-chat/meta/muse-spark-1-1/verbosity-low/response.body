@@ -1,0 +1,1 @@
+{"error":{"code":null,"message":"`verbosity` is not supported","param":"verbosity","type":"invalid_request_error"}}

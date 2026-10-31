@@ -1,0 +1,4 @@
+{
+  "shows": "mimo-v2.6-pro: chat cache TTL rejection. Approved settings: prompt_cache_options={mode:explicit,ttl:1h}. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

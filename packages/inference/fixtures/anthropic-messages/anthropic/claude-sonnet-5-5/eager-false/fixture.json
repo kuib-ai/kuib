@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: tool argument fragmentation switch. Approved settings: thinking=between_tools; tools[].eager_input_streaming=false; stream=true. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

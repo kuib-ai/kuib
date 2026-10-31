@@ -1,0 +1,4 @@
+#!/usr/bin/env -S deno run --no-check --no-prompt --allow-read=packages/inference,node_modules,package.json,pnpm-workspace.yaml --allow-run=./node_modules/.bin/deno
+// @claim core/provider-captures
+import main from "../src/run.capture.command/index.ts";
+await main(Deno.args);

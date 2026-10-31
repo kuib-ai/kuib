@@ -1,0 +1,69 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-haiku-4-5-20251001","id":"msg_011CfzaDyJbsyf54EdPnWrbe","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":87,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":4,"service_tier":"standard","inference_geo":"not_available"},"diagnostics":null}       }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}               }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":""}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"EuQECrgBCBIYAipAUgRPQYg//zAv2iyShsw2h7LkKOwy1vFnB8EjYJqkGTq9K+th5IaV5MePjRV/T8CX4AwHz79dqm5xKHzuFEAIFjIZY2xhdWRlLWhhaWt1LTQtNS0yMDI1MTAwMTgAQgh0aGlua2luZ1okYzE3OWMyMDctYzhlMi00NjFjLTkyMWEtYjJlODY2ZjlhMzcxmgEbChljbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxqAGLwLnWBhIMtXjcG0gfhmZ4QYJTGgykQ+lPcC6FYzaoIXkiMBIXJWSiKeuMjnvpopYJgDT7njXnsuGn5TJcsaWU6DPQB5TMRDzsgwoM8cOLM8XC0CrYAk5g6y3hUalgLAHB0MtHk9Ml1DM6Jey0VDcijHy0dzvpt9uXzF7MXAo4DIFtC6vi03FkYXxgApFuUnlu9Uhvg4w2CS9+Ee8MHKtqqz58EB+PF19hQQ6LaBrxi2Xn4te6mQx+OkAH75Tvms1Ds/UXV0xrIeezk1ZC1eBIgkHbie3KI9EnHAYGESNuw9xySJpUsW1pw40TWmK7QjIiW+hHI7l9B2r0KfG4jPofrjIUzq14/l8WfZ0uA5j3tD+Yd91TZEX6vw49t0n3W9s7qwrm86TOENhswdsO4tjblN3OAF7gDxiXaKmjqbF3s25U1bUkdQUxVsNSwL2A8R57J1mzZnt6sn1lRI15AJEH+37HsFVjVel9hp4Rl5xAvXuKm0qP9SabNvnxsfJ3v24wz7rF7iz0+F6R7FTVf6GmXSLthoP/HJeQ/3knv6PbibFOlESx/XpTt9c9wcmPGAE="} }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0  }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"After"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" losing 5 "}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"blue beads and"}      }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" doubling its green"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" beads, the"}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" widget has 12"}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" blue beads"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" and 18 "}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"green beads,"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" for a total of"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" 30 be"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"ads remaining"}   }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"."}}
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1      }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":87,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":184,"output_tokens_details":{"thinking_tokens":134}}               }
+
+event: message_stop
+data: {"type":"message_stop"    }
+

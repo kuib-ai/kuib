@@ -1,0 +1,44 @@
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910621,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The tool returned"},"finish_reason":null,"index":0}],"created":1791910621,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" an error saying"},"finish_reason":null,"index":0}],"created":1791910621,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" the value is unavailable. I should not"},"finish_reason":null,"index":0}],"created":1791910621,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" guess. Report"},"finish_reason":null,"index":0}],"created":1791910621,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" this"},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"."},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":"The value","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":" for","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":" selector 7 is unavailable — the tool","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":" returned an error (\"","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":"Synthetic test error: the value is","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":" unavailable\"),","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":" so I can't provide","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":" the stored value.","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"792cff8c-d671-4aee-a1c3-38f763e035e8_b2812cc98aa84999aa2e5c2f372fa075","choices":[],"created":1791910622,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":56,"prompt_tokens":170,"total_tokens":226,"completion_tokens_details":{"reasoning_tokens":20},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

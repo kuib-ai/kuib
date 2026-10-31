@@ -1,0 +1,37 @@
+: PROCESSING
+
+: PROCESSING
+
+event: message_start
+data: {"type":"message_start","message":{"id":"msg_a6d17ccbc6524cd0a6259c9a","type":"message","role":"assistant","model":"mimo-v2.6-pro","content":[],"usage":{"input_tokens":120,"output_tokens":0}}}
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","delta":{"type":"thinking_delta","thinking":"The user wants me to"},"index":0}
+
+event: content_block_delta
+data: {"type":"content_block_delta","delta":{"type":"thinking_delta","thinking":" call get_value with selector 7."},"index":0}
+
+event: content_block_delta
+data: {"type":"content_block_delta","delta":{"type":"signature_delta","signature":""},"index":0}
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0}
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"tool_use","id":"call_8322c250976047b3bc21b0ae","name":"get_value","input":{}}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","delta":{"type":"input_json_delta","partial_json":"{\"selector\": 7}"},"index":1}
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1}
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"tool_use"},"usage":{"input_tokens":120,"output_tokens":33}}
+
+event: message_stop
+data: {"type":"message_stop"}
+

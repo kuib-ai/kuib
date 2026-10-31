@@ -1,0 +1,13 @@
+{
+  "messageFormat": "openai-chat",
+  "provider": "xiaomi",
+  "model": "mimo-v2-6-pro",
+  "name": "auth-api-key",
+  "method": "POST",
+  "url": "https://token-plan-sgp.xiaomimimo.com/v1/chat/completions",
+  "authHeader": "api-key",
+  "headers": {
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  }
+}

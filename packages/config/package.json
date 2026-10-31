@@ -9,7 +9,7 @@
   },
   "scripts": {
     "typecheck": "tsgo --noEmit",
-    "test": "deno test -A --no-check",
+    "test": "testing",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

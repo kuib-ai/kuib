@@ -11,6 +11,7 @@ export default defineConfig(
       "**/.nx/**",
       ".references/**",
       "packages/deno-types/index.d.ts",
+      "packages/inference/fixtures/**",
     ],
   },
   jseslint.configs.recommended,
@@ -23,7 +24,7 @@ export default defineConfig(
     rules: houseStylePlugin.configs.recommended.rules,
   },
   {
-    files: ["**/*.test.ts", "**/*.test.tsx"],
+    files: ["**/*.test.ts", "**/*.test.tsx", "**/*.bench.ts", "**/*.bench.tsx"],
     rules: {
       "house/require-context-link": "off",
       "house/named-exports-are-types": "off",

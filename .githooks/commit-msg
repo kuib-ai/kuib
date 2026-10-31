@@ -1,0 +1,5 @@
+#!/bin/sh
+global=$(git config --global --path --get core.hooksPath || true)
+if [ -n "$global" ] && [ -x "$global/commit-msg" ]; then
+  exec "$global/commit-msg" "$@"
+fi

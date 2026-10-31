@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: empty signature handling. Approved settings: same replay; signature=\"\" on every thinking block.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: H/tool-replay-empty-signature. Signed repeat of row H/tool-replay-empty-signature.",
+  "origin": "recorded"
+}

@@ -1,22 +1,24 @@
 // @claim infra
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
-import { mkdtempSync, mkdirSync, writeFileSync, realpathSync } from "node:fs";
-import { tmpdir } from "node:os";
+import overrideEnv from "@kuib-ai/testing/override.env";
+import changeCwd from "@kuib-ai/testing/change.cwd";
+import createTempDir from "@kuib-ai/testing/create.temp.dir";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import resolveDirs from "./index.ts";
 
 describe("resolveDirs", function () {
   it("returns the five bases under dist in development", function () {
-    const root = realpathSync(mkdtempSync(join(tmpdir(), "env-dirs-")));
+    using temp = createTempDir("env-dirs-");
+    const root = temp.path;
     writeFileSync(join(root, "pnpm-workspace.yaml"), "packages: []\n");
     const nested = join(root, "apps", "host-tui");
     mkdirSync(nested, { recursive: true });
-
-    const prevCwd = process.cwd();
-    const prevNodeEnv = process.env["NODE_ENV"];
-    process.chdir(nested);
-    process.env["NODE_ENV"] = "development";
+    using _cwd = changeCwd(nested);
+    using _env = overrideEnv({
+      NODE_ENV: "development",
+    });
 
     expect(resolveDirs()).toEqual({
       config: join(root, "dist", "config"),
@@ -25,26 +27,20 @@ describe("resolveDirs", function () {
       cache: join(root, "dist", "cache"),
       runtime: join(root, "dist", "runtime"),
     });
-
-    process.chdir(prevCwd);
-    process.env["NODE_ENV"] = prevNodeEnv;
   });
 
   it("returns platform bases when { dev: false }", function () {
-    const base = mkdtempSync(join(tmpdir(), "env-bases-"));
-    const prevNodeEnv = process.env["NODE_ENV"];
-    const prevConfig = process.env["XDG_CONFIG_HOME"];
-    const prevData = process.env["XDG_DATA_HOME"];
-    const prevState = process.env["XDG_STATE_HOME"];
-    const prevCache = process.env["XDG_CACHE_HOME"];
-    const prevRuntime = process.env["XDG_RUNTIME_DIR"];
+    using temp = createTempDir("env-bases-");
+    const base = temp.path;
 
-    process.env["NODE_ENV"] = "development";
-    process.env["XDG_CONFIG_HOME"] = join(base, "config");
-    process.env["XDG_DATA_HOME"] = join(base, "data");
-    process.env["XDG_STATE_HOME"] = join(base, "state");
-    process.env["XDG_CACHE_HOME"] = join(base, "cache");
-    process.env["XDG_RUNTIME_DIR"] = join(base, "runtime");
+    using _env = overrideEnv({
+      NODE_ENV: "development",
+      XDG_CONFIG_HOME: join(base, "config"),
+      XDG_DATA_HOME: join(base, "data"),
+      XDG_STATE_HOME: join(base, "state"),
+      XDG_CACHE_HOME: join(base, "cache"),
+      XDG_RUNTIME_DIR: join(base, "runtime"),
+    });
 
     expect(resolveDirs({ dev: false })).toEqual({
       config: join(base, "config"),
@@ -53,12 +49,5 @@ describe("resolveDirs", function () {
       cache: join(base, "cache"),
       runtime: join(base, "runtime"),
     });
-
-    process.env["NODE_ENV"] = prevNodeEnv;
-    process.env["XDG_CONFIG_HOME"] = prevConfig;
-    process.env["XDG_DATA_HOME"] = prevData;
-    process.env["XDG_STATE_HOME"] = prevState;
-    process.env["XDG_CACHE_HOME"] = prevCache;
-    process.env["XDG_RUNTIME_DIR"] = prevRuntime;
   });
 });

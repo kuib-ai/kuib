@@ -1,7 +1,7 @@
 {
   "name": "@kuib-ai/tools",
   "version": "0.0.1",
-  "description": "kuib tool definitions \u2014 single source of truth, backed by protocol interfaces",
+  "description": "kuib tool definitions — single source of truth, backed by protocol interfaces",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "typecheck": "tsgo --noEmit",
-    "test": "deno test -A --no-check",
+    "test": "testing",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -19,7 +19,9 @@
   },
   "nx": {},
   "devDependencies": {
+    "@kuib-ai/daemon": "workspace:*",
     "@kuib-ai/deno-types": "workspace:*",
+    "@kuib-ai/testing": "workspace:*",
     "@kuib-ai/tsconfig": "workspace:*",
     "@std/expect": "catalog:",
     "@std/testing": "catalog:",

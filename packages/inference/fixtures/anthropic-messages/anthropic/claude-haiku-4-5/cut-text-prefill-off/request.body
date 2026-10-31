@@ -1,0 +1,1 @@
+{"model":"claude-haiku-4-5-20251001","max_tokens":256,"stream":true,"system":"Keep the answer short.","messages":[{"role":"user","content":"List the integers from 1 to 100, one per line."},{"role":"assistant","content":[{"type":"text","text":"1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14"}]}],"thinking":{"type":"disabled"}}

@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: system as first message. Approved settings: messages=[system(text), user]; no beta.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

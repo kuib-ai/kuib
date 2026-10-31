@@ -1,0 +1,11 @@
+: PROCESSING
+
+event: message_start
+data: {"type":"message_start","message":{"id":"msg_88207a691873498fb2c7c7af","type":"message","role":"assistant","model":"mimo-v2.6-pro","content":[],"usage":{"input_tokens":54,"output_tokens":0}}}
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","delta":{"type":"thinking_delta","thinking":"17 - 5 ="},"index":0}
+

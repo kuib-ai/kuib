@@ -1,0 +1,8 @@
+data: {"id":"chatcmpl-01a13444-ef6d-75cd-a727-b18a6d8aa51f","choices":[{"delta":{"content":"30 beads","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878295,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13444-ef6d-75cd-a727-b18a6d8aa51f","choices":[{"delta":{"content":" remain."},"finish_reason":null,"index":0}],"created":1791878295,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13444-ef6d-75cd-a727-b18a6d8aa51f","choices":[{"delta":{},"finish_reason":"stop","index":0}],"created":1791878295,"model":"muse-spark-1.1","object":"chat.completion.chunk","usage":{"completion_tokens":717,"prompt_tokens":53,"total_tokens":770,"completion_tokens_details":{"reasoning_tokens":703},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

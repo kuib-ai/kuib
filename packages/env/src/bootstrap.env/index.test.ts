@@ -1,7 +1,9 @@
 import { describe, it, beforeEach, afterEach } from "@std/testing/bdd";
 import { expect } from "@std/expect";
-import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
+import createTempDir from "@kuib-ai/testing/create.temp.dir";
+import overrideEnv from "@kuib-ai/testing/override.env";
+import changeCwd from "@kuib-ai/testing/change.cwd";
+import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import bootstrapEnv from "./index.ts";
 import { z } from "zod";
@@ -11,27 +13,19 @@ const TestSchema = z.object({
   KUIB_SESSION_ID: z.string().default("default"),
 });
 
-const originalCwd = process.cwd();
-const originalEnv = { ...process.env };
 let workspace = "";
-
-const resetEnv = function (): void {
-  for (const key of Object.keys(process.env)) {
-    delete process.env[key];
-  }
-  Object.assign(process.env, originalEnv);
-};
+let resources: DisposableStack;
 
 beforeEach(function () {
-  workspace = mkdtempSync(resolve(tmpdir(), "kuib-env-"));
+  resources = new DisposableStack();
+  resources.use(overrideEnv());
+  workspace = resources.use(createTempDir("kuib-env-")).path;
   writeFileSync(resolve(workspace, "pnpm-workspace.yaml"), "packages: []\n");
-  process.chdir(workspace);
+  resources.use(changeCwd(workspace));
 });
 
 afterEach(function () {
-  process.chdir(originalCwd);
-  rmSync(workspace, { recursive: true, force: true });
-  resetEnv();
+  resources.dispose();
 });
 
 describe("bootstrapEnv", function () {
@@ -51,7 +45,7 @@ describe("bootstrapEnv", function () {
   });
 
   it("throws when the resolved env is invalid", function () {
-    process.env["KUIB_MODEL_BASE_URL"] = "not-a-url";
+    using _env = overrideEnv({ KUIB_MODEL_BASE_URL: "not-a-url" });
 
     expect(function () {
       return bootstrapEnv(TestSchema, "test");
@@ -61,7 +55,7 @@ describe("bootstrapEnv", function () {
   it("keeps OS environment above mode and base dotenv files", function () {
     writeFileSync(resolve(workspace, ".env"), "KUIB_SESSION_ID=base\n");
     writeFileSync(resolve(workspace, ".env.test"), "KUIB_SESSION_ID=mode\n");
-    process.env["KUIB_SESSION_ID"] = "os";
+    using _env = overrideEnv({ KUIB_SESSION_ID: "os" });
 
     expect(bootstrapEnv(TestSchema, "test").KUIB_SESSION_ID).toBe("os");
   });
@@ -69,7 +63,7 @@ describe("bootstrapEnv", function () {
   it("keeps the mode dotenv file above the base dotenv file", function () {
     writeFileSync(resolve(workspace, ".env"), "KUIB_SESSION_ID=base\n");
     writeFileSync(resolve(workspace, ".env.test"), "KUIB_SESSION_ID=mode\n");
-    delete process.env["KUIB_SESSION_ID"];
+    using _env = overrideEnv({ KUIB_SESSION_ID: undefined });
 
     expect(bootstrapEnv(TestSchema, "test").KUIB_SESSION_ID).toBe("mode");
   });

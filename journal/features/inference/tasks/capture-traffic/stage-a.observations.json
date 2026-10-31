@@ -1,0 +1,549 @@
+{
+  "stage": "A",
+  "fixtures": 12,
+  "successes": 11,
+  "authenticationRejections": 1,
+  "skipped": [
+    {
+      "row": "MO/host-sgp",
+      "reason": "MiMo provider stopped after MA/host-sgp HTTP 401"
+    }
+  ],
+  "costUsd": 0.001647,
+  "loadedBy": "Testing.loadFixture",
+  "requestBodyHashesMatchPricedRows": true,
+  "responseHashesAndReadLengthsVerified": true,
+  "rows": [
+    {
+      "row": "S/plain-json",
+      "fixture": "anthropic-messages-claude-sonnet-5-5/plain-json",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": false,
+      "responseFormat": "json",
+      "terminal": "not-applicable",
+      "contentEncoded": false,
+      "usage": {
+        "input_tokens": 26,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 4,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        }
+      },
+      "excludedHeaders": {
+        "identity": 2,
+        "unknown": 8
+      },
+      "eventKinds": [],
+      "unknownEventCount": 0,
+      "contentKinds": [
+        "text"
+      ],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "end_turn"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 525,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.000092,
+      "stop": null
+    },
+    {
+      "row": "S/plain-stream",
+      "fixture": "anthropic-messages-claude-sonnet-5-5/plain-stream",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": true,
+      "responseFormat": "sse",
+      "terminal": true,
+      "contentEncoded": false,
+      "usage": {
+        "input_tokens": 26,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 4,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        }
+      },
+      "excludedHeaders": {
+        "identity": 2,
+        "unknown": 8
+      },
+      "eventKinds": [
+        "message_start",
+        "content_block_start",
+        "ping",
+        "content_block_delta",
+        "content_block_stop",
+        "message_delta",
+        "message_stop"
+      ],
+      "unknownEventCount": 0,
+      "contentKinds": [
+        "text"
+      ],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "end_turn"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 1232,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.000092,
+      "stop": null
+    },
+    {
+      "row": "S/plain-default",
+      "fixture": "anthropic-messages-claude-sonnet-5-5/plain-default",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": "omitted",
+      "responseFormat": "json",
+      "terminal": "not-applicable",
+      "contentEncoded": false,
+      "usage": {
+        "input_tokens": 18,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 4,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        }
+      },
+      "excludedHeaders": {
+        "identity": 2,
+        "unknown": 8
+      },
+      "eventKinds": [],
+      "unknownEventCount": 0,
+      "contentKinds": [
+        "text"
+      ],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "end_turn"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 525,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.000076,
+      "stop": null
+    },
+    {
+      "row": "H/plain-json",
+      "fixture": "anthropic-messages-claude-haiku-5-5/plain-json",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": false,
+      "responseFormat": "json",
+      "terminal": "not-applicable",
+      "contentEncoded": false,
+      "usage": {
+        "input_tokens": 26,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 4,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        }
+      },
+      "excludedHeaders": {
+        "identity": 2,
+        "unknown": 8
+      },
+      "eventKinds": [],
+      "unknownEventCount": 0,
+      "contentKinds": [
+        "text"
+      ],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "end_turn"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 524,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.0000046,
+      "stop": null
+    },
+    {
+      "row": "H/plain-stream",
+      "fixture": "anthropic-messages-claude-haiku-5-5/plain-stream",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": true,
+      "responseFormat": "sse",
+      "terminal": true,
+      "contentEncoded": false,
+      "usage": {
+        "input_tokens": 26,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 4,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        }
+      },
+      "excludedHeaders": {
+        "identity": 2,
+        "unknown": 8
+      },
+      "eventKinds": [
+        "message_start",
+        "content_block_start",
+        "ping",
+        "content_block_delta",
+        "content_block_stop",
+        "message_delta",
+        "message_stop"
+      ],
+      "unknownEventCount": 0,
+      "contentKinds": [
+        "text"
+      ],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "end_turn"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 1244,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.0000046,
+      "stop": null
+    },
+    {
+      "row": "H/plain-default",
+      "fixture": "anthropic-messages-claude-haiku-5-5/plain-default",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": "omitted",
+      "responseFormat": "json",
+      "terminal": "not-applicable",
+      "contentEncoded": false,
+      "usage": {
+        "input_tokens": 18,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 4,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        }
+      },
+      "excludedHeaders": {
+        "identity": 2,
+        "unknown": 8
+      },
+      "eventKinds": [],
+      "unknownEventCount": 0,
+      "contentKinds": [
+        "text"
+      ],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "end_turn"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 524,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.0000037999999999999996,
+      "stop": null
+    },
+    {
+      "row": "L/plain-json",
+      "fixture": "anthropic-messages-claude-haiku-4-5-20251001/plain-json",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": false,
+      "responseFormat": "json",
+      "terminal": "not-applicable",
+      "contentEncoded": false,
+      "usage": {
+        "input_tokens": 17,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 4
+      },
+      "excludedHeaders": {
+        "identity": 2,
+        "unknown": 8
+      },
+      "eventKinds": [],
+      "unknownEventCount": 0,
+      "contentKinds": [
+        "text"
+      ],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "end_turn"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 494,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.000037,
+      "stop": null
+    },
+    {
+      "row": "L/plain-stream",
+      "fixture": "anthropic-messages-claude-haiku-4-5-20251001/plain-stream",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": true,
+      "responseFormat": "sse",
+      "terminal": true,
+      "contentEncoded": false,
+      "usage": {
+        "input_tokens": 17,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 4
+      },
+      "excludedHeaders": {
+        "identity": 2,
+        "unknown": 8
+      },
+      "eventKinds": [
+        "message_start",
+        "content_block_start",
+        "ping",
+        "content_block_delta",
+        "content_block_stop",
+        "message_delta",
+        "message_stop"
+      ],
+      "unknownEventCount": 0,
+      "contentKinds": [
+        "text"
+      ],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "end_turn"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 1209,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.000037,
+      "stop": null
+    },
+    {
+      "row": "L/plain-default",
+      "fixture": "anthropic-messages-claude-haiku-4-5-20251001/plain-default",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": "omitted",
+      "responseFormat": "json",
+      "terminal": "not-applicable",
+      "contentEncoded": false,
+      "usage": {
+        "input_tokens": 12,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 4
+      },
+      "excludedHeaders": {
+        "identity": 2,
+        "unknown": 8
+      },
+      "eventKinds": [],
+      "unknownEventCount": 0,
+      "contentKinds": [
+        "text"
+      ],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "end_turn"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 494,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.000032,
+      "stop": null
+    },
+    {
+      "row": "MA/host-sgp",
+      "fixture": "mimo-messages-mimo-v2-6-pro/host-sgp",
+      "status": 401,
+      "state": "complete",
+      "streamRequested": true,
+      "responseFormat": "json",
+      "terminal": "not-applicable",
+      "contentEncoded": false,
+      "usage": {},
+      "excludedHeaders": {
+        "identity": 0,
+        "unknown": 5
+      },
+      "eventKinds": [],
+      "unknownEventCount": 0,
+      "contentKinds": [],
+      "textPresent": false,
+      "textOnlyOK": null,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [],
+      "modelRefused": false,
+      "bodyBytes": 165,
+      "byteEvidenceVerified": true,
+      "costUsd": 0,
+      "stop": "authentication-failure"
+    },
+    {
+      "row": "MT/plain-json",
+      "fixture": "meta-chat-muse-spark-1-1/plain-json",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": false,
+      "responseFormat": "json",
+      "terminal": "not-applicable",
+      "contentEncoded": false,
+      "usage": {
+        "completion_tokens": 138,
+        "prompt_tokens": 21,
+        "total_tokens": 159,
+        "completion_tokens_details": {
+          "reasoning_tokens": 127
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "excludedHeaders": {
+        "identity": 0,
+        "unknown": 2
+      },
+      "eventKinds": [],
+      "unknownEventCount": 0,
+      "contentKinds": [],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "stop"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 420,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.00061275,
+      "stop": null
+    },
+    {
+      "row": "MT/plain-stream",
+      "fixture": "meta-chat-muse-spark-1-1/plain-stream",
+      "status": 200,
+      "state": "complete",
+      "streamRequested": true,
+      "responseFormat": "sse",
+      "terminal": true,
+      "contentEncoded": false,
+      "usage": {
+        "completion_tokens": 148,
+        "prompt_tokens": 21,
+        "total_tokens": 169,
+        "completion_tokens_details": {
+          "reasoning_tokens": 137
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "excludedHeaders": {
+        "identity": 0,
+        "unknown": 2
+      },
+      "eventKinds": [],
+      "unknownEventCount": 0,
+      "contentKinds": [],
+      "textPresent": true,
+      "textOnlyOK": true,
+      "reasoningTextReturned": false,
+      "thinkingParts": 0,
+      "signatureParts": 0,
+      "stopReasons": [
+        "stop"
+      ],
+      "modelRefused": false,
+      "bodyBytes": 612,
+      "byteEvidenceVerified": true,
+      "costUsd": 0.00065525,
+      "stop": null
+    }
+  ]
+}

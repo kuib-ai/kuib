@@ -18,8 +18,8 @@ CLI, Antigravity, Codex). Tool-specific files are generated from it and from `.a
   `deno.json` Deno rewrites the root `package.json` from `pnpm-workspace.yaml`.
 - **`tsgo` is the only type-checker**, against the Deno declarations generated into
   `packages/deno-types`. Dependencies are added through pnpm and the catalog.
-- **Always leave the codebase green**: `pnpm run check` (agent adapters, journal, typecheck,
-  lint, format — cached via Nx) must pass before ending a task. Never silence type errors or
+- **Always leave the codebase green**: `pnpm run check` (agent adapters, journal, format check,
+  circular imports, typecheck, lint and tests — project tasks cached via Nx) must pass before ending a task. Never silence type errors or
   lint failures; fix them.
 - **No prose comments in code** — code is self-explanatory. The only comments are directives:
   `@claim` links, eslint/ts directives, shebangs.
@@ -30,13 +30,56 @@ CLI, Antigravity, Codex). Tool-specific files are generated from it and from `.a
   `"tool-call-started"`). End every task by listing the names it introduced with the sibling
   each one mirrors. Flag a name that has no sibling, and any existing asymmetry you notice, for
   the owner's review; never copy an asymmetry or silently rename one.
+- **One home for each concern.** Code that serves a package's concern lives in that package, as
+  units with tests. `tooling/` holds only bare scripts that work on the repository itself. A
+  project script names a command, never a relative path.
+- **Existing tests are proof.** Never change an existing test's assertion, title or skip
+  condition to make a run pass, and never drop a test when moving code. If a change makes a test
+  false, stop and report blocked.
 - **Python only through uv** (`uv run …`, `uvx …`, PEP 723 scripts, `uv sync` in projects such
   as `services/stt-mlx`); never bare `python`, `python3` or `pip`. Workspace tooling is
   TypeScript.
-- New packages include `"lint": "eslint ."` and `"format": "prettier --write ."`.
+- New TypeScript packages include `"test": "testing"` (except engine and engine-service until
+  released),
+  `"lint": "eslint ."` and `"format": "prettier --write ."`.
 - Commits: one line, `feat|refactor|chore: <description>`; no body, no attribution; never push
   without explicit instruction. Never mention AI/agents in commits; commit only when asked.
   Worktrees and branches belong to the owner.
+
+## Testing
+
+- Three kinds: `*.test.ts(x)` are offline tests, `*.live.test.ts(x)` are live tests,
+  `*.bench.ts(x)` are benchmarks. Add `test:live` (`testing --kind=live`)
+  or `bench` (`testing --kind=bench`) to a project when it gains those files; both are uncached.
+- One command: `pnpm test` runs all projects through Nx, cached; `pnpm test --affected`
+  runs affected projects against `origin/master`; `pnpm test packages/env` runs one project,
+  cached. A file or folder inside a project runs directly: `pnpm test packages/env/src/workspace.root`.
+  Paths come first; Deno flags follow: `pnpm test packages/env --filter findWorkspaceRoot`,
+  `pnpm test packages/env --watch`. `pnpm test --coverage` writes lcov and HTML under
+  `dist/coverage` and prints project and workspace totals, with no coverage floor.
+- A test lives in the package whose behaviour it proves; lower packages are dev dependencies.
+  There is no separate end-to-end project. Test real modules the codebase implements, never
+  stand-ins for them. Pass time and randomness as values.
+- `@kuib-ai/testing` provides disposable `createTempDir`, `overrideEnv`, `changeCwd` and
+  `createSocketPath`. Use `using` to restore resources even when expectations fail. Every
+  run has its own HOME and TMPDIR, writes only inside that sandbox, reads no workspace
+  `.env` keys, and reaches only loopback and its sixteen exact socket paths. Only daemon
+  and testing tests may spawn, and inference tests may start the workspace Deno and nothing
+  else. Live tests may read `.env` and reach external hosts.
+- The runner refuses nested starts unless its own tests opt in with `KUIB_TEST_NESTED=1`
+  for one level, and refuses Nx fan-out inside an Nx task. Four locks per workspace bound
+  concurrent test processes; extra runs wait. Nested runs use their parent's sandbox locks.
+- Fixtures live in `<project>/fixtures/<name>/`, with data files and a `fixture.json`
+  description containing `shows` and `origin` (`recorded` or `written`). Load them with
+  `Testing.loadFixture(import.meta.url, name)`; a missing or invalid description fails.
+- `house/require-unit-test` requires a sibling unit or live test for a module containing a
+  function or class. Types, enums, plain schemas and barrels are exempt. Existing gaps are
+  listed in `packages/eslint-plugin-house-style/src/untested.units/index.ts`; remove entries
+  as tests arrive. Lint rejects entries whose file is gone, tested or has no behaviour.
+- Engine and engine-service retain their unrestricted test scripts until released. The
+  legacy `test:llm` script stays until then.
+- `pnpm install` installs `.githooks`: pre-push runs the affected gate; commit-msg forwards
+  the owner's global commit-msg hook. CI runs the full gate on pushes and pull requests.
 
 ## Why context lives on disk
 
@@ -154,9 +197,11 @@ running in a `w:<task>` window, is a worker: follow `.agents/skills/orchestrate/
 | `packages/env` | infra | kuib environment bootstrap and platform base directories |
 | `packages/eslint-plugin-house-style` | infra |  |
 | `packages/event-log-sqlite` | core | kuib event log — node:sqlite adapter |
+| `packages/inference` | core | kuib inference — recorded provider traffic and the model layer |
 | `packages/protocol` | core | kuib protocol — schemas, events, and interfaces |
 | `packages/std` | infra | kuib shared primitives |
 | `packages/telemetry` | infra | kuib telemetry — OpenTelemetry span export for the AI SDK to Phoenix |
+| `packages/testing` | infra | kuib test helpers and the sandbox every test runs in |
 | `packages/tools` | core | kuib tool definitions — single source of truth, backed by protocol interfaces |
 | `packages/transcript` | core | kuib transcript fold — event log → display entries, shared by host adapters |
 | `packages/tsconfig` | infra |  |
@@ -178,6 +223,7 @@ running in a `w:<task>` window, is a worker: follow `.agents/skills/orchestrate/
 - `journal/features/context-system/` (implementing) — Replace the drifting context graph with three layers — roadmap (intent), domains (code-attributed truth), features (in flight) — plus deterministic drift detection so domain context is periodically corrected.
 - `journal/features/deno-runtime/` (implementing) — Strip OpenTUI/Solid/Bun and run every TS project on Deno as a pure runtime — pnpm resolves packages, Nx runs tasks, tsgo type-checks against Nx-generated Deno types. No deno.json. Clears the ground for kuib's own TUI library.
 - `journal/features/stt-engine/` (implementing) — Unified STT service on M4 Mac Mini (minerva) — FluidAudio for Parakeet CoreML/ANE, mlx-swift for Qwen3-ASR, single unix socket API. TypeScript client in monorepo.
+- `journal/features/test-system/` (implementing) — Testing becomes first class: tests in the gate, three kinds of test as named targets in every project, real modules instead of stand-ins, offline and isolated by construction, shared helpers and one fixture convention, and a lint rule, coverage, a hook and CI that keep it true.
 
 ### Roadmap: now
 
@@ -187,6 +233,8 @@ running in a `w:<task>` window, is a worker: follow `.agents/skills/orchestrate/
 - R004 Uniform agent harness and tmux orchestration (graduated)
 - R005 Codebase review and fixes (graduated)
 - R019 Reusable engine foundation — application boundaries and efficient Deno deployment (graduated)
+- R020 Inference — a neutral model format, translations built from blocks, providers as plugins (graduated)
+- R021 Tests as a first-class part of the workspace (graduated)
 - R221 Self-contained engine — one entry that owns its wiring and its single-instance start (shaped)
 
 <!-- journal:generated:end -->

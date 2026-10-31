@@ -1,0 +1,54 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-haiku-5-5","id":"msg_011CfyrRJCaAc5sVDeUcY437","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":114,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":3,"service_tier":"standard","inference_geo":"global"},"diagnostics":null}      }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}          }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"The user just wants a simple"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" \"OK\" reply, conf"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"irming the ear"}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"lier math chec"}   }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"ks out."}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" I'll just resp"}            }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"ond with that."}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"\n\n"} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQS1gUKEAgSGAI4AUIIdGhpbmtpbmcSDGuc5YBFor5UxYiKThoMfOc4hScC9lJI917KIjCb5j7bx+t9u2onIPhxPg3lX1PbUfLmv4pp3Tlvp5duF4ZeAGz0NxIimwqyY0Zc7hsq8wRs2mjQeFOZK58AiyjONoGkzYkaYfODajBrGVdxI+PCEvyow6EdfCeaZGBeo1o55RogHUvt2e/QwJyE9lNfpC6jH96e38COLymfkOtVGwNWxK+VnUj9fU0hAyEgQw3QfeBgnvMfLLdq7FOF2Tdm6p4lfKnf50nXUB/J6ipshx2RISpB2kv6mFyBmoSZD1dXT0UewXlCvNjav7Ce7OJoIq/sHYDWK4oF6Kr2+DYgbDQufYjZDdiQqrSpsxsraHuRJ/AxfmsXnyBbf1gSfyL22QtuxXTXpOHen+WdknJFAtMhdRpXN3eFyJkv8t1nOt7qbMghKrWcQa7qeC+FStpMLbAlT3GQIOJ28iJ5RefaWUgXbcmoUtPhgQU6L6s+YJAGrcOAdaFYv6bfB4DxHAxKuXyNzkrXvT0jEGtSEODQFC6wkXudMIEsySN3IaPQSIlbkZv7I382U8x7bFdau/JSBWKGegzkfaryiHsYaLflC9BJ6EdjlMlbVr87jHadP/za5AI94tB5MnF69fCQvBwIE4zewMrln1vfpD5Zm+WDqrUGE2SZ7+5ktR0fAnSCdvs1YfiS66E/5aPFfHw1YQTVNw1FPjVslxL1NGZVh927zlwOu/hOrPM9hUgvoVM/LzOn8Zdlcnp6fdYgjMNHagHsvIz1+s18JtMSWjepRprpCDTER60oC2MZ0c/EocC0z4iOF1LLwa69kr3/fVFLSl3mld7SW+8/u7DOLkQ40pXumyRkko8J1bENo/KQWVSYFCTkWqDYEwclv3y7Qim/U7qzBiqoauwTE6xbW+nsOV1fzSS6M6vYts9mS8JKLOnGBoEdeE5eaAQYAQ=="}     }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0       }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"OK"}          }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1  }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":114,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":63,"output_tokens_details":{"thinking_tokens":59}}       }
+
+event: message_stop
+data: {"type":"message_stop" }
+

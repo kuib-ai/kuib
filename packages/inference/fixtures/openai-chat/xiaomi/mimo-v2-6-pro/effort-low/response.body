@@ -1,0 +1,32 @@
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"17 -"},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" 5 = 12 blue,"},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" 9 × 2 = 1"},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"8 green, total 3"},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"0."},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":"After","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":" losing 5 blue beads (","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":"12 left","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":") and doubling green","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":" beads (18), the","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910518,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":" widget has 30 beads remaining","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910519,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":".","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910519,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791910519,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"3f841aef-5b52-4095-a2b7-f453ddbf7381_324a551bb7004e81a3e8c42e110d82df","choices":[],"created":1791910519,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":58,"prompt_tokens":54,"total_tokens":112,"completion_tokens_details":{"reasoning_tokens":28},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

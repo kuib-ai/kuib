@@ -1,0 +1,24 @@
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+data: {"id":"0f566274-8ffe-4de1-881b-be7989024cd4_0101e9b348dd4730b8ce260c7e46669f","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910574,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"0f566274-8ffe-4de1-881b-be7989024cd4_0101e9b348dd4730b8ce260c7e46669f","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The user says reply"},"finish_reason":null,"index":0}],"created":1791910574,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"0f566274-8ffe-4de1-881b-be7989024cd4_0101e9b348dd4730b8ce260c7e46669f","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" with exactly:"},"finish_reason":null,"index":0}],"created":1791910574,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"0f566274-8ffe-4de1-881b-be7989024cd4_0101e9b348dd4730b8ce260c7e46669f","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" OK"},"finish_reason":null,"index":0}],"created":1791910575,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"0f566274-8ffe-4de1-881b-be7989024cd4_0101e9b348dd4730b8ce260c7e46669f","choices":[{"delta":{"content":"OK","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910575,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"0f566274-8ffe-4de1-881b-be7989024cd4_0101e9b348dd4730b8ce260c7e46669f","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791910575,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"0f566274-8ffe-4de1-881b-be7989024cd4_0101e9b348dd4730b8ce260c7e46669f","choices":[],"created":1791910575,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":12,"prompt_tokens":170,"total_tokens":182,"completion_tokens_details":{"reasoning_tokens":9},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

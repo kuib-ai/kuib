@@ -22,13 +22,16 @@ holds a CLI schema module. It wires the workspace packages `cli`, `config`, `dae
 > - from: [[_archive/host-layer/decisions#v1 Frontend — OpenTUI + Solid (nvim-flavored)]]
 
 host-tui runs on Deno straight from TypeScript source: `dev` is `deno run -A src/index.ts`,
-`dev:watch` adds `--watch` for restart-on-edit, tests run under `deno test -A --no-check`, and
-type-checking is `tsgo --noEmit` against the shared base tsconfig. ^host-runtime
+`dev:watch` adds `--watch` for restart-on-edit. Its `test` script invokes `testing`,
+which selects offline tests and runs them with
+the workspace sandbox and scoped permissions. Project tests run through Nx from the root,
+and direct paths use the same runner. Type-checking is `tsgo --noEmit` against the shared
+base tsconfig. ^host-runtime
 
-> [!sources]- structure · verified 2026-09-23
+> [!sources]- structure · verified 2026-10-14
 > - `apps/host-tui/package.json` › "deno run -A src/index.ts"
 > - `apps/host-tui/package.json` › "deno run -A --watch src/index.ts"
-> - `apps/host-tui/package.json` › "deno test -A --no-check"
+> - `apps/host-tui/package.json` › ""test": "testing""
 > - `apps/host-tui/tsconfig.json` › "@kuib-ai/tsconfig/base.json"
 > - why: [[domains/host/decisions#^D003]]
 > - why: [[domains/host/decisions#^D008]]

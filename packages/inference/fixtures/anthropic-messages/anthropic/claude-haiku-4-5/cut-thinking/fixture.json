@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: step cut before signature; raw prefix retained. Approved settings: stream=true; thinking=enabled; budget_tokens=1024; display=summarized; cancel after first thinking delta.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

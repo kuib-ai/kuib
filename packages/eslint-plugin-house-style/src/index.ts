@@ -12,6 +12,7 @@ import preferGuardClauses from "./rules/prefer.guard.clauses/index.ts";
 import noPackageBarrelNamedExports from "./rules/no.package.barrel.named.exports/index.ts";
 import noNamedImportFromPackageRoot from "./rules/no.named.import.from.package.root/index.ts";
 import noReExports from "./rules/no.re.exports/index.ts";
+import requireUnitTest from "./rules/require.unit.test/index.ts";
 
 const rules = {
   "require-context-link": requireContextLink,
@@ -27,6 +28,7 @@ const rules = {
   "no-package-barrel-named-exports": noPackageBarrelNamedExports,
   "no-named-import-from-package-root": noNamedImportFromPackageRoot,
   "no-re-exports": noReExports,
+  "require-unit-test": requireUnitTest,
 };
 
 // @claim infra/house-plugin
@@ -44,6 +46,7 @@ const recommendedRules = {
   "house/no-package-barrel-named-exports": "error",
   "house/no-named-import-from-package-root": "error",
   "house/no-re-exports": "error",
+  "house/require-unit-test": "error",
   "func-style": ["error", "expression"],
   eqeqeq: ["error", "always"],
   "no-labels": "off",

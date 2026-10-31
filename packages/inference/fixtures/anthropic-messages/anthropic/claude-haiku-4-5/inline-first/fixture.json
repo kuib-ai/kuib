@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: system as first message. Approved settings: messages=[system(text), user]; no beta. Latest Resume permits only Haiku 4.5 non-reasoning rows; unspecified mode is explicitly disabled. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

@@ -1,0 +1,54 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-haiku-5-5","id":"msg_011CfyrKS3SFdCNDehJNTK4j","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":76,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":8,"service_tier":"standard","inference_geo":"global"},"diagnostics":null}}
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""} }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"Blue com"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"es to 12, green to"}   }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" 18, gi"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"ving a total of 30."}   }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"\n\n"}            }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQS7wQKEAgSGAI4AUIIdGhpbmtpbmcSDJV+EwET7Pz2uuoAuhoMAD8lkKfJd2Vq0UM6IjD1nO1JeG2zMOkCZ7SZd/2BsH435QDcABybHmiu+oAibi83GQfey5EaoqniQ9UlGMUqjAT18bkTjYHgYYGk37e+notTaCkbjBaze4w1Js0ULGGC+stSHc7+6HM+uytT6QNrjcUbY1I0jPz+/h7B42KJG3K+lxCTJxOWOKKkQgKJC3kMvlJ1hhM1MmXCJRwzANjcR/VX+YqRlH9hyP4DXiu1p2JrmuTawZw7N5fqUd2hlrM6XZiWBouiZvd5umHAigiuy5zRHRNRYwcNtGVhpGVG8K1NUpbST0s7J7Z/5ir7gf1boi507k5iacX44eq1RiR/clxn537legsvBVp/hvcMXfT0uyzuByffRRLQZZuRgaqjCEnSmHTKELXcfC6xZOhSMMDzbhoalKOEwowJmhsIxrPbMQpIo0b5XepV9UasyWcM1TEi5DomJRi0YAOhoiQ7AQDpDqYViJZebdT6I47UBl5J3tnNQQmH6w8sEvYAQpEWMmBTaPhVtUSdBXVJ65ud5byobT7clWGhivGhbEjhNbV8YMTm4IHPl2VFhVC0PEAD04mc3HGC8MAO4DHwMYn8g4JB1rh+W8sjVHov6U4nzyCqQtLW+Ny+EAHUkFUXEQxYRIj6GPqOWJ+Iaj3isi9qHaWkGgfZMC2IS5UkKD6YBLFUPpRfy2RxamneGXJex1UNOTvxdveVCq/LiGaeE1SjdulODk7HwH4igE44UwEGO4UqZ+zmYA73GY51xpTcbbiJuTvJOWWqWCxd25M7sBgB"}     }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0              }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"The"}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" widget has 30 beads"}               }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" remaining: 12 bl"}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"ue and 18 green."}         }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1              }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":76,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":54,"output_tokens_details":{"thinking_tokens":28}}        }
+
+event: message_stop
+data: {"type":"message_stop"            }
+

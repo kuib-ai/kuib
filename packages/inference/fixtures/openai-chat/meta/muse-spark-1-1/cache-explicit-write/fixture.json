@@ -1,0 +1,4 @@
+{
+  "shows": "muse-spark-1.1: explicit cache breakpoint. Approved settings: long prefix as text parts; one prompt_cache_breakpoint={mode:explicit}; prompt_cache_options={mode:explicit,ttl:30m}. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

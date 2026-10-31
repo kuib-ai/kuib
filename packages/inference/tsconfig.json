@@ -1,0 +1,4 @@
+{
+  "extends": "@kuib-ai/tsconfig/base.json",
+  "include": ["src"]
+}

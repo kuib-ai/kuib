@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: fourth instruction position and paired-call rule. Approved settings: insert system(text) between actual call and its result.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: H/inline-between-call-result. Signed repeat of row H/inline-between-call-result.",
+  "origin": "recorded"
+}

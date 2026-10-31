@@ -1,0 +1,1 @@
+{"model":"claude-sonnet-5-5","max_tokens":1,"stream":true,"system":"Keep the answer short.","messages":[{"role":"user","content":"List integers from 1 to 100."}],"thinking":{"type":"between_tools"}}

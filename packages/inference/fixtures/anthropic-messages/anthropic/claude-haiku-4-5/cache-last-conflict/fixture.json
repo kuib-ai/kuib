@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: conflicting last-block TTL. Approved settings: last user block ttl=1h; top-level ttl=5m. Latest Resume permits only Haiku 4.5 non-reasoning rows; unspecified mode is explicitly disabled. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

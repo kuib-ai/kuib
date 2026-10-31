@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: turn-scope header requirement. Approved settings: inline system text; clear_at=next_user_message; no beta. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

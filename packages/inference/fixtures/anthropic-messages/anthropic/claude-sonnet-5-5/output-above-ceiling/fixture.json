@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: server answer to above-model ceiling; pending cap exception. Approved settings: thinking=between_tools; ask exactly OK; cancel immediately if HTTP 200.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

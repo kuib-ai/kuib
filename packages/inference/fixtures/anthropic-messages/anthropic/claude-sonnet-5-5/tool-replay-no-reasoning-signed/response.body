@@ -1,0 +1,135 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-sonnet-5-5","id":"msg_011CfyuN6wRRtXv1dRiqPEJP","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":543,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":3,"service_tier":"standard","inference_geo":"global"},"diagnostics":null} }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}            }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"I need x"} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" ≡"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" 2 mod 5,"}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" 0 mod 7,"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" 7 mod 11."}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" Checking multiples of "} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"7 for"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" the"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" mod 5 condition g"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"ives 7, 42, "}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"77 —"}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" testing these"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" against mod 11, only "}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"7 satisfies all"}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" three conditions. So the st"}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"ored value is 7."}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"\n\n"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQSxwYKEAgSGAI4AUIIdGhpbmtpbmcSDPoTYN7hhGTdmo0N4hoMnAQuRUHinLZ6T7iVIjCvcLxssxuSJA1cd59AzTAiEu0gCL8ErBGdQsu/R+mZ9X0aBXBMYCpVgQAXfRaemW0q5AW403uKwLrA1V551gDcvjtlHQlKs9rxpIuaaCAytqTW7+ct/jd7ehk9xoMfu2QXFwpHKB9VTQcgc8fyeHPPDsfKbePakOWe2OCiAdvSWjovEMzxMnuRvcyiuM8KU81pA3XF3p2A6J+cKJA92HD7hHggVnlm/HeaIB0fVC6mujnsOdf6YmylUQ/Jp1rxQGBH+qeC7ZVdiFJBGt+CASLXru3Bbs7KutIc/eFKOKlBZ1H8Rbhh4JAZF0onfZ7Va4EiGUJep2aUPC09yu5ldZa69Afb+6JguE6BCAv9drYlNhD177WBjZQxZdms6P+1RLc76Yc0sVnd47cCAPD0t179grPZsLpR5TVgqA/FKr5IJcbavI7bjscBN0eezFFEtE11QWHd+OSlbtXJM+nrXuSvrS0AjUmDXtkeVRleGdydA2yDIncX/vS076s5DOy2ljrVSYoSGVzISu+7F9HQCze347EU3ohD9/qIaCluRCctvWK0otnIYncvXyiJql6UhlpaLZhghpizfmkcM5p4BalocERTi2s0BHtNUxehpCCjIe8Ob8PN11A4g9hb9Nx43YicicrbvGLzM0G/+KsW4VTDacSeDxdEj50RG4Glbd4LkWPWTJEXKdxUDoFjqZf3Fl5SMyRCXviWEXiSV5KZcLpKK4ZQ+TCCaI4tqz11oNrdZFv3So5j7SRCWdilIrK9Tf+r+tF3kjkrUrJNSAiQCrwiEkQF0KaWXjRD1EDKuPHQZV38fUtd5xwXiOkg41kyidkS9XpOlcR3z+2B/TVgsbQ1gcaRZCyxHcdQbup4Rr/ra6ZAmKN+TGG1WHdWZlDHmuEX8YDF9U8CG8rbCpFbHRGgli6Bz0GFeoUci8X6DBuJkBpvTyU9fOAHRbxz2RBoEhU4wxYZz9vEO3En+tQ8NDSCgIihaH2uu8fVD1AdRofTM/Pj5+0rjROU6r+tvOWW2zoecIoWKCDD4JISUnfhPExStxKKyguaOxgB"}      }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0}
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"The selector is **"}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"7**,"}            }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" and `get_value("}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"7)` returned **7**"}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"."}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"\n\nMult"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"iples of 7 that"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" le"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"ave remainder 2 when"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" divided by 5 are "}   }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"7, 42 and 77"}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"."}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" Of those, only 7 "}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"leaves remainder 7"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" when divided by 11."}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" (42 le"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"aves 9 "}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"and 77 leaves "}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"0.)"}          }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1              }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":543,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":262,"output_tokens_details":{"thinking_tokens":157}}  }
+
+event: message_stop
+data: {"type":"message_stop"    }
+

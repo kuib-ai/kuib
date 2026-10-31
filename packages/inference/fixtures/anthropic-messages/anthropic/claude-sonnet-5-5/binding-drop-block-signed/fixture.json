@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: binding control and input_transformations. Approved settings: change system; thinking.block_binding.prefix_mismatch_behavior=drop_block; binding beta.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: S/binding-drop_block. Signed repeat of row S/binding-drop_block.",
+  "origin": "recorded"
+}

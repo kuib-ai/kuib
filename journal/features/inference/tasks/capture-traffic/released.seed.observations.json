@@ -1,0 +1,18 @@
+{
+  "row": "L/tool-seed-signed",
+  "repeatOf": "L/tool-seed",
+  "markerVerified": true,
+  "thinkingBlocks": 1,
+  "thinkingText": true,
+  "signatureBlocks": 1,
+  "signatureLengths": [
+    1512
+  ],
+  "toolCalls": 1,
+  "signedBeforeTool": true,
+  "nativeSelectorSeven": true,
+  "inputThinkingBlocks": 0,
+  "inputSignatureLengths": [],
+  "inputCalls": 0,
+  "anthropicOrganizationId": true
+}

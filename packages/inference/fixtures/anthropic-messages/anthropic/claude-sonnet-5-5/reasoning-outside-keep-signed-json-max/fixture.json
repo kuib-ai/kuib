@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: reasoning replay across user turns. Approved settings: complete reasoning-json blocks unchanged + new user.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:54:32. Original row: S/reasoning-outside-keep. Signed repeat of row S/reasoning-outside-keep.",
+  "origin": "recorded"
+}

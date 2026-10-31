@@ -12,6 +12,9 @@ import FileSystem from "./file.system/index.ts";
 import Endpoint from "./endpoint/index.ts";
 import Node from "./node/index.ts";
 import Provider from "./provider/index.ts";
+import { MessageFormatEnum } from "./message.format.enum/index.ts";
+import { ProviderEnum } from "./provider.enum/index.ts";
+import { ModelEnum } from "./model.enum/index.ts";
 
 // @claim core/package-barrels
 const Protocol = {
@@ -28,6 +31,9 @@ const Protocol = {
   Endpoint,
   Node,
   Provider,
+  MessageFormatEnum,
+  ProviderEnum,
+  ModelEnum,
 };
 
 export default Protocol;

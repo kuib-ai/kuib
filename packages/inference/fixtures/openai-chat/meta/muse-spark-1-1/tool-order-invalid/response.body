@@ -1,0 +1,6 @@
+data: {"id":"chatcmpl-01a13443-19cf-7792-bf81-7f891a523fb5","choices":[{"delta":{"content":"OK","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878175,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-19cf-7792-bf81-7f891a523fb5","choices":[{"delta":{},"finish_reason":"stop","index":0}],"created":1791878175,"model":"muse-spark-1.1","object":"chat.completion.chunk","usage":{"completion_tokens":142,"prompt_tokens":649,"total_tokens":791,"completion_tokens_details":{"reasoning_tokens":131},"prompt_tokens_details":{"cached_tokens":497}}}
+
+data: [DONE]
+

@@ -9,9 +9,21 @@
   },
   "scripts": {
     "typecheck": "tsgo --noEmit",
-    "test": "deno test -A --no-check",
+    "test": "testing",
     "lint": "eslint .",
     "format": "prettier --write ."
+  },
+  "nx": {
+    "targets": {
+      "lint": {
+        "inputs": [
+          "default",
+          "lintRules",
+          "{workspaceRoot}/apps/*/src/**/*",
+          "{workspaceRoot}/packages/*/src/**/*"
+        ]
+      }
+    }
   },
   "devDependencies": {
     "@std/expect": "catalog:",

@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: omitted reasoning inside tool round. Approved settings: same replay; remove only thinking blocks. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

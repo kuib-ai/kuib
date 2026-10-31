@@ -1,0 +1,21 @@
+{
+  "messageFormat": "anthropic-messages",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "name": "cache-inline-effort",
+  "method": "POST",
+  "url": "https://api.anthropic.com/v1/messages",
+  "authHeader": "x-api-key",
+  "headers": {
+    "anthropic-version": "2023-06-01",
+    "anthropic-beta": "mid-conversation-output-config-2026-07-01",
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  },
+  "replay": {
+    "fixture": "anthropic-messages/anthropic/claude-sonnet-5-5/cache-change-thinking",
+    "changes": [
+      "cache-5m request + inline effort-only instruction + beta; thinking on"
+    ]
+  }
+}

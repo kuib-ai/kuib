@@ -1,0 +1,1 @@
+{"id":"13d98199-adcd-4a71-ad2e-3061272322d1_6fdae0008479472e85d37a0e93fb65ad","type":"message","role":"assistant","model":"mimo-v2.6-pro","stop_reason":"end_turn","content":[{"type":"text","text":"OK"}],"usage":{"input_tokens":23,"output_tokens":2}}

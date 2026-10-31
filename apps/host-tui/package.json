@@ -7,7 +7,7 @@
     "dev": "deno run -A src/index.ts",
     "dev:watch": "deno run -A --watch src/index.ts",
     "typecheck": "tsgo --noEmit",
-    "test": "deno test -A --no-check",
+    "test": "testing",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

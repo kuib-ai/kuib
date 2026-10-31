@@ -9,7 +9,7 @@
   },
   "scripts": {
     "typecheck": "tsgo --noEmit",
-    "test": "deno test -A --no-check",
+    "test": "testing",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@kuib-ai/deno-types": "workspace:*",
+    "@kuib-ai/testing": "workspace:*",
     "@kuib-ai/tsconfig": "workspace:*",
     "@std/expect": "catalog:",
     "@std/testing": "catalog:",

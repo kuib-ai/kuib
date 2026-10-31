@@ -1,0 +1,12 @@
+: PROCESSING
+
+data: {"id":"a1375d0b-6f21-4741-b5e6-7fb7bbb6ea94_d89a8b9652a241b5974aca23656ca318","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911751,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"a1375d0b-6f21-4741-b5e6-7fb7bbb6ea94_d89a8b9652a241b5974aca23656ca318","choices":[{"delta":{"content":"OK","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911751,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"a1375d0b-6f21-4741-b5e6-7fb7bbb6ea94_d89a8b9652a241b5974aca23656ca318","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791911751,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"a1375d0b-6f21-4741-b5e6-7fb7bbb6ea94_d89a8b9652a241b5974aca23656ca318","choices":[],"created":1791911751,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":2,"prompt_tokens":23,"total_tokens":25,"completion_tokens_details":{"reasoning_tokens":0},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

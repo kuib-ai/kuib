@@ -1,0 +1,4 @@
+{
+  "shows": "MA/host-sgp: captured HTTP 401, json, complete. The recorded JSON body and status are retained. This admission was refused for authentication and stopped this provider.",
+  "origin": "recorded"
+}

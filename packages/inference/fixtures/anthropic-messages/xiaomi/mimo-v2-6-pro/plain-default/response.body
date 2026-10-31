@@ -1,0 +1,6 @@
+
+
+
+
+
+{"id":"47fa672a-871c-4a19-886e-2af6b7ea9dcd_54f333d7ac064a32ba5ac20672b7fb92","type":"message","role":"assistant","model":"mimo-v2.6-pro","stop_reason":"end_turn","content":[{"type":"text","text":"OK"},{"type":"thinking","thinking":"The user wants me to reply with exactly \"OK\".","signature":""}],"usage":{"input_tokens":12,"output_tokens":15}}

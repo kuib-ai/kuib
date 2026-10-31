@@ -1,0 +1,75 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-haiku-4-5-20251001","id":"msg_011CfzaDkh5TpuV8GxNEK4RQ","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":87,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":4,"service_tier":"standard","inference_geo":"not_available"},"diagnostics":null}        }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}          }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":""}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"EqkECrgBCBIYAipAGdWD9Zej8drL6jgaU4Cvk6nH4mI9Orcj9yuFr21XX4qMa3vLEEQkZUq9Q97BASNJ6FAnLtYXddQuxwqn8EQtfTIZY2xhdWRlLWhhaWt1LTQtNS0yMDI1MTAwMTgAQgh0aGlua2luZ1okYzE3OWMyMDctYzhlMi00NjFjLTkyMWEtYjJlODY2ZjlhMzcxmgEbChljbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxqAGIwLnWBhIM0zovv8ww8fH/UtffGgxo797ki4FQLvJuKdciMM4F5AiAg+hs0YLf74wDb5/2Yb7/8tDhMmkhzMS/zFX4PCQOaW/yVNFeZDXs5d2J2SqdArD0WcolVV5KV9I6v7vpKgyrikBAG4CEDaM4LxwekUIpri8H7OZup5OxkwN88uNK6Z5W2GW3knOxRzX1wjz1whWBALilqjtF8HY30SAb8E4m7sAbiEiV36OlvOYsuS1+BQdoUNFO6KRdj554me5z5lsQxZ5P03mWSclgWiXflLecKL+EsDxqyJ1bwfeeTn+5EDToFkcx569vDfs7aPVIYZfGQO/m+yKpYi8WOFTKa/YI6Bu+Nsmnefeab9AjIeaS2MkdPyiQhDXU24Auzq/sH+BVVB+ckqoo/sQFIJSWsHiT/eushfWnZms+H0wv2l4Arjbxyfx9obUB6jPvWUIzbAMRUdN1o3r4AJtCvgz+d3+SVSSJrs837exkTykamhgB"}            }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0 }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"After losing"} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" 5 blue"} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" beads ("}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"leaving"}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" 12 blue"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":")"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" and dou"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"bling its"}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" green beads ("}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"making 18 "}               }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"green), the"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" widget"}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" has 30"}               }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" beads remaining"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"."}  }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1       }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":87,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":161,"output_tokens_details":{"thinking_tokens":117}}            }
+
+event: message_stop
+data: {"type":"message_stop"   }
+

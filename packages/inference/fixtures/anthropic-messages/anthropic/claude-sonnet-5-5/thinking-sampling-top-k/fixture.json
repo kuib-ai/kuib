@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: sampling with reasoning on; MiMo override. Approved settings: thinking=adaptive; top_k=1. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

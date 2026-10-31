@@ -1,0 +1,4 @@
+data: {"id":"chatcmpl-01a13444-50a2-74aa-a8a1-9886c2b759a3","choices":[{"delta":{},"finish_reason":"stop","index":0}],"created":1791878254,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: [DONE]
+

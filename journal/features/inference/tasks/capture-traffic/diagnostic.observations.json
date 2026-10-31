@@ -1,0 +1,18 @@
+{
+  "row": "L/tool-seed-diagnostic",
+  "ordinal": 121,
+  "originalOrdinal": 120,
+  "status": 200,
+  "state": "complete",
+  "stop": "sensitive-data",
+  "costUsd": 0.011264,
+  "diagnosis": {
+    "kind": "response-header",
+    "header": "anthropic-organization-id",
+    "length": 36,
+    "form": "base64",
+    "blob": "response-body"
+  },
+  "historyPrefixBytes": 104277,
+  "historyPrefixSha256": "3e3b26ae0228134fc93b24d87ca51c47405f082bfddc6afaef1dfd6d5b2862f6"
+}

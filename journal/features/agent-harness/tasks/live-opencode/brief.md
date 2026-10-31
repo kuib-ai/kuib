@@ -1,16 +1,16 @@
 ---
-status: "restart"
+status: "closed"
 role: "probe"
 gate: "none"
 items: []
 grant: ["journal/features/agent-harness/tasks/live-opencode/**"]
 agent: "opencode"
-command: "opencode --auto"
+command: "env OPENCODE_CONFIG_CONTENT='{\"model\":\"xiaomi-token-plan-sgp/mimo-v2.6-pro\"}' opencode --standalone"
 cwd: "/home/rs10/developer/kuib-ai/kuib"
 session: "kuib-ai/kuib/root"
-started: "2026-10-06T21:27:38"
-finished: ""
-reported: ""
+started: "2026-10-06T22:39:15"
+finished: "2026-10-06T22:39:45"
+reported: "closed"
 ---
 # live-opencode — live round probe (opencode)
 

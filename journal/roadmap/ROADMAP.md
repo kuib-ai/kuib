@@ -12,6 +12,8 @@ The initiatives not built yet, one file per item in `roadmap/items/`. Absorbed i
 - [[roadmap/items/R004-agent-harness|R004]] Uniform agent harness and tmux orchestration — graduated · infra · → [[features/agent-harness/plan|agent-harness]]
 - [[roadmap/items/R005-codebase-review|R005]] Codebase review and fixes — graduated · core, host, infra, product · → [[features/codebase-review/plan|codebase-review]]
 - [[roadmap/items/R019-engine-foundation|R019]] Reusable engine foundation — application boundaries and efficient Deno deployment — graduated · core, host, infra, product · → [[features/engine-foundation/plan|engine-foundation]] · overlaps R007, R009, R013, R015, R221
+- [[roadmap/items/R020-inference|R020]] Inference — a neutral model format, translations built from blocks, providers as plugins — graduated · core · → [[features/inference/plan|inference]] · overlaps R009
+- [[roadmap/items/R021-test-system|R021]] Tests as a first-class part of the workspace — graduated · infra · → [[features/test-system/plan|test-system]]
 - [[roadmap/items/R221-self-contained-engine|R221]] Self-contained engine — one entry that owns its wiring and its single-instance start — shaped · core, host · overlaps R012, R019
 
 ## Next
@@ -28,7 +30,7 @@ The initiatives not built yet, one file per item in `roadmap/items/`. Absorbed i
 ## Later
 
 - [[roadmap/items/R008-comprehension-first-coding|R008]] Comprehension-first coding — idea · core, host
-- [[roadmap/items/R009-agent-capabilities|R009]] Agent capabilities — providers, tools and backends — idea · core, infra · overlaps R019
+- [[roadmap/items/R009-agent-capabilities|R009]] Agent capabilities — providers, tools and backends — idea · core, infra · overlaps R019, R020
 - [[roadmap/items/R013-multi-device-mesh|R013]] Multi-device mesh — idea · core, host, infra · overlaps R010, R011, R012, R019
 - [[roadmap/items/R015-distribution|R015]] Distribution — one signed binary, installed as a service — idea · host, infra · overlaps R014, R019
 - [[roadmap/items/R017-ana-voice|R017]] Ana voice in and out — idea · product, infra
@@ -65,6 +67,8 @@ flowchart TB
   R004["Uniform agent harness and tmux orchestration<br/>R004 · graduated"]:::graduated
   R005["Codebase review and fixes<br/>R005 · graduated"]:::graduated
   R019["Reusable engine foundation<br/>R019 · graduated"]:::graduated
+  R020["Inference<br/>R020 · graduated"]:::graduated
+  R021["Tests as a first-class part of the workspace<br/>R021 · graduated"]:::graduated
   R006["Durable event log<br/>R006 · next"]:::next
   R014["Security and secrets<br/>R014 · next"]:::next
   R017["Ana voice in and out<br/>R017 · later"]:::later

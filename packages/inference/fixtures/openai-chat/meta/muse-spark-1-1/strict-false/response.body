@@ -1,0 +1,10 @@
+data: {"id":"chatcmpl-01a13443-6faf-74cf-bd12-a8bfaed53f89","choices":[{"delta":{"content":"Confirmed – selector 7 is required, so I will fetch the stored integer now.","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878197,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-6faf-74cf-bd12-a8bfaed53f89","choices":[{"delta":{"tool_calls":[{"index":0,"id":"call_01a1344370d2768ebe1542e696d0df0e","type":"function","function":{"name":"get_value","arguments":""}}]},"finish_reason":null,"index":0}],"created":1791878197,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-6faf-74cf-bd12-a8bfaed53f89","choices":[{"delta":{"tool_calls":[{"index":0,"function":{"arguments":"{\"selector\":7}"}}]},"finish_reason":null,"index":0}],"created":1791878197,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-6faf-74cf-bd12-a8bfaed53f89","choices":[{"delta":{},"finish_reason":"tool_calls","index":0}],"created":1791878197,"model":"muse-spark-1.1","object":"chat.completion.chunk","usage":{"completion_tokens":118,"prompt_tokens":550,"total_tokens":668,"completion_tokens_details":{"reasoning_tokens":42},"prompt_tokens_details":{"cached_tokens":497}}}
+
+data: [DONE]
+

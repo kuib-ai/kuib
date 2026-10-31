@@ -1,0 +1,16 @@
+data: {"id":"1532bd37-9326-4541-a403-ef863998e2f4_2e78a9a3e2d843f1a983acc18baa9034","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911367,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"1532bd37-9326-4541-a403-ef863998e2f4_2e78a9a3e2d843f1a983acc18baa9034","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The user says"},"finish_reason":null,"index":0}],"created":1791911367,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"1532bd37-9326-4541-a403-ef863998e2f4_2e78a9a3e2d843f1a983acc18baa9034","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" \"Reply with"},"finish_reason":null,"index":0}],"created":1791911367,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"1532bd37-9326-4541-a403-ef863998e2f4_2e78a9a3e2d843f1a983acc18baa9034","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" exactly: OK\"."},"finish_reason":null,"index":0}],"created":1791911367,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"1532bd37-9326-4541-a403-ef863998e2f4_2e78a9a3e2d843f1a983acc18baa9034","choices":[{"delta":{"content":"OK","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911367,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"1532bd37-9326-4541-a403-ef863998e2f4_2e78a9a3e2d843f1a983acc18baa9034","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791911367,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"1532bd37-9326-4541-a403-ef863998e2f4_2e78a9a3e2d843f1a983acc18baa9034","choices":[],"created":1791911367,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":14,"prompt_tokens":1206,"total_tokens":1220,"completion_tokens_details":{"reasoning_tokens":11},"prompt_tokens_details":{"cached_tokens":1152}}}
+
+data: [DONE]
+

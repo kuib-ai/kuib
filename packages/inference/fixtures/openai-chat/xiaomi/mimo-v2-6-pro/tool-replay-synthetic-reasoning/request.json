@@ -1,0 +1,19 @@
+{
+  "messageFormat": "openai-chat",
+  "provider": "xiaomi",
+  "model": "mimo-v2-6-pro",
+  "name": "tool-replay-synthetic-reasoning",
+  "method": "POST",
+  "url": "https://token-plan-sgp.xiaomimimo.com/v1/chat/completions",
+  "authHeader": "authorization",
+  "headers": {
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  },
+  "replay": {
+    "fixture": "openai-chat/xiaomi/mimo-v2-6-pro/tool-seed",
+    "changes": [
+      "same round; reasoning_content=\"Synthetic test reasoning.\""
+    ]
+  }
+}

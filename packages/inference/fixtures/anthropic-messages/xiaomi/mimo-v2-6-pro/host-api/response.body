@@ -1,0 +1,8 @@
+{
+    "error": {
+        "message": "Invalid API Key",
+        "param": "Please provide valid API Key",
+        "code": "401",
+        "type": "invalid_key"
+    }
+}

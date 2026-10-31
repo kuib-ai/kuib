@@ -1,0 +1,4 @@
+{
+  "shows": "The symlink target remains untouched when capture rejects a linked path.",
+  "origin": "written"
+}

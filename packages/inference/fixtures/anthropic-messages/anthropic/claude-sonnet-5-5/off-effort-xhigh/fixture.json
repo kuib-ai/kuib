@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: off/effort incompatibility. Approved settings: thinking=between_tools; output_config.effort=xhigh. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

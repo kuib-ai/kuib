@@ -1,0 +1,1 @@
+{"model":"claude-haiku-4-5-20251001","max_tokens":256,"messages":[{"role":"user","content":"Reply with exactly: OK"}],"system":"Keep the answer short.","thinking":{"type":"disabled"},"stream":false}

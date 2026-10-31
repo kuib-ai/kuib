@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: top-level effort cache invalidation. Approved settings: cache-5m request + top-level effort=low; mode unchanged. Latest Resume permits only Haiku 4.5 non-reasoning rows; unspecified mode is explicitly disabled. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

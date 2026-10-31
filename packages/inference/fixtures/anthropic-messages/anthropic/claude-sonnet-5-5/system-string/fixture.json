@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: base instruction string. Approved settings: system string; thinking=between_tools. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

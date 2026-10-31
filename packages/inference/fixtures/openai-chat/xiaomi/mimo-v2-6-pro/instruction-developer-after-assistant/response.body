@@ -1,0 +1,24 @@
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+data: {"id":"f00b39d7-2d85-4f1c-96df-077412fdfe9b_821d9a45c5e34f8ab252b3e1e0f9e911","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911142,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"f00b39d7-2d85-4f1c-96df-077412fdfe9b_821d9a45c5e34f8ab252b3e1e0f9e911","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The user wants me"},"finish_reason":null,"index":0}],"created":1791911142,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"f00b39d7-2d85-4f1c-96df-077412fdfe9b_821d9a45c5e34f8ab252b3e1e0f9e911","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" to reply with exactly:"},"finish_reason":null,"index":0}],"created":1791911142,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"f00b39d7-2d85-4f1c-96df-077412fdfe9b_821d9a45c5e34f8ab252b3e1e0f9e911","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" OK"},"finish_reason":null,"index":0}],"created":1791911142,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"f00b39d7-2d85-4f1c-96df-077412fdfe9b_821d9a45c5e34f8ab252b3e1e0f9e911","choices":[{"delta":{"content":"OK","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911143,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"f00b39d7-2d85-4f1c-96df-077412fdfe9b_821d9a45c5e34f8ab252b3e1e0f9e911","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791911143,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"f00b39d7-2d85-4f1c-96df-077412fdfe9b_821d9a45c5e34f8ab252b3e1e0f9e911","choices":[],"created":1791911143,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":14,"prompt_tokens":37,"total_tokens":51,"completion_tokens_details":{"reasoning_tokens":11},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

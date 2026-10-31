@@ -1,0 +1,210 @@
+{
+  "authority": "Resume 2026-10-13T21:54:35",
+  "reason": "Owner permits organization id in body data (D028); key replaced for MiMo",
+  "rows": [
+    {
+      "row": "L/tool-seed",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "S/cross-model-l",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/reasoning-json",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/reasoning-stream",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/tool-replay",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/tool-replay-no-reasoning",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/tool-replay-empty-signature",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/tool-replay-no-signature",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/tool-replay-error",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/tool-replay-false",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/tool-replay-cache",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/tool-order-invalid",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/thinking-adaptive",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/thinking-enabled",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/budget-too-small",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/budget-at-output",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/effort-low",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/effort-medium",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/effort-high",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/effort-xhigh",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/effort-max",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/display-summarized",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/display-omitted",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/display-updates",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/display-updates-no-beta",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/thinking-tool-choice-any",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/thinking-tool-choice-tool",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/inline-between-call-result",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/inline-after-result",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/inline-effort",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/inline-effort-no-beta",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/cut-text-user",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/cut-text-prefill-on",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/cut-thinking",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/cut-thinking-replay",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/reasoning-outside-omit",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/reasoning-outside-keep",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/binding-default",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/binding-error",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/binding-drop_block",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/binding-no-beta",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/changed-tools",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/cache-thinking",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/cache-change-thinking",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/cache-inline-effort",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/thinking-sampling-temperature",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/thinking-sampling-top_p",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/thinking-sampling-top_k",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/thinking-top-p-valid",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/cross-model-s",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    },
+    {
+      "row": "L/tool-seed-diagnostic",
+      "reason": "Haiku 4.5 reasoning or thinking-replay hold under latest Resume; signature privacy decision pending"
+    }
+  ]
+}

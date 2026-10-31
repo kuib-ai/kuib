@@ -1,0 +1,1 @@
+{"type":"error","error":{"type":"invalid_request_error","message":"output_config.effort requires a model that supports per-turn effort; this model does not"},"request_id":"req_011CfzaGxqefNL7E8VodJnNt"}

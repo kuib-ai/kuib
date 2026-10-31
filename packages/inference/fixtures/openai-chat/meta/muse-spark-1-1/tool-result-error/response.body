@@ -1,0 +1,12 @@
+data: {"id":"chatcmpl-01a13443-2ed5-7337-9a8e-9eee7b2a0a83","choices":[{"delta":{"content":"get","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878180,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-2ed5-7337-9a8e-9eee7b2a0a83","choices":[{"delta":{"content":"_value for selector 7 failed"},"finish_reason":null,"index":0}],"created":1791878180,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-2ed5-7337-9a8e-9eee7b2a0a83","choices":[{"delta":{"content":": \"Synthetic test error: the value is unavailable.\" -"},"finish_reason":null,"index":0}],"created":1791878180,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-2ed5-7337-9a8e-9eee7b2a0a83","choices":[{"delta":{"content":" cannot provide the value."},"finish_reason":null,"index":0}],"created":1791878180,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13443-2ed5-7337-9a8e-9eee7b2a0a83","choices":[{"delta":{},"finish_reason":"stop","index":0}],"created":1791878180,"model":"muse-spark-1.1","object":"chat.completion.chunk","usage":{"completion_tokens":351,"prompt_tokens":648,"total_tokens":999,"completion_tokens_details":{"reasoning_tokens":316},"prompt_tokens_details":{"cached_tokens":625}}}
+
+data: [DONE]
+

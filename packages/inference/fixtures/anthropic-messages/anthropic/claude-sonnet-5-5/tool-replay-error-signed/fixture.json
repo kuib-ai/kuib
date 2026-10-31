@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: tool-result error flag. Approved settings: same replay; is_error=true; synthetic error result.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: S/tool-replay-error. Signed repeat of row S/tool-replay-error.",
+  "origin": "recorded"
+}

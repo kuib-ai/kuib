@@ -1,0 +1,2 @@
+data: {"id":"chatcmpl-01a13443-ea6e-733a-9117-26794479cab7","choices":[{"delta":{"content":"To","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878228,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+

@@ -1,0 +1,19 @@
+{
+  "messageFormat": "anthropic-messages",
+  "provider": "xiaomi",
+  "model": "mimo-v2-6-pro",
+  "name": "tool-replay-empty-signature",
+  "method": "POST",
+  "url": "https://token-plan-sgp.xiaomimimo.com/anthropic/v1/messages",
+  "authHeader": "api-key",
+  "headers": {
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  },
+  "replay": {
+    "fixture": "anthropic-messages/xiaomi/mimo-v2-6-pro/tool-seed",
+    "changes": [
+      "same replay; signature=\"\" on every thinking block"
+    ]
+  }
+}

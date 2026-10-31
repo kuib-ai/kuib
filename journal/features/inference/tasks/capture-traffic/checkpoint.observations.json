@@ -1,0 +1,1573 @@
+{
+  "calls": 387,
+  "finished": 387,
+  "recorded": 385,
+  "costUsd": 1.91284977,
+  "groups": [
+    {
+      "group": "S",
+      "calls": 109,
+      "recorded": 109,
+      "cost": 1.3557021999999999,
+      "statusCounts": {
+        "200": 68,
+        "400": 41
+      }
+    },
+    {
+      "group": "H",
+      "calls": 110,
+      "recorded": 110,
+      "cost": 0.06853312,
+      "statusCounts": {
+        "200": 73,
+        "400": 37
+      }
+    },
+    {
+      "group": "L",
+      "calls": 66,
+      "recorded": 64,
+      "cost": 0.38210175,
+      "statusCounts": {
+        "200": 42,
+        "400": 24
+      }
+    },
+    {
+      "group": "MA",
+      "calls": 1,
+      "recorded": 1,
+      "cost": 0,
+      "statusCounts": {
+        "401": 1
+      }
+    },
+    {
+      "group": "MO",
+      "calls": 2,
+      "recorded": 2,
+      "cost": 0,
+      "statusCounts": {
+        "401": 2
+      }
+    },
+    {
+      "group": "MT",
+      "calls": 99,
+      "recorded": 99,
+      "cost": 0.10651269999999996,
+      "statusCounts": {
+        "200": 61,
+        "400": 38
+      }
+    }
+  ],
+  "remaining": 0,
+  "remainingGroups": {},
+  "unattemptedMimo": 221,
+  "heldRows": 51,
+  "heldUnattempted": 49,
+  "unexpected": [
+    {
+      "row": "S/tool-replay-no-reasoning",
+      "status": 200
+    },
+    {
+      "row": "S/inline-effort-off",
+      "status": 200
+    },
+    {
+      "row": "S/binding-error",
+      "status": 200
+    },
+    {
+      "row": "S/top-p-default",
+      "status": 400
+    },
+    {
+      "row": "S/sampling-combined",
+      "status": 400
+    },
+    {
+      "row": "S/output-zero",
+      "status": 400
+    },
+    {
+      "row": "H/tool-replay-no-reasoning",
+      "status": 200
+    },
+    {
+      "row": "H/inline-effort-off",
+      "status": 200
+    },
+    {
+      "row": "H/cut-thinking-replay",
+      "status": 200
+    },
+    {
+      "row": "H/binding-error",
+      "status": 200
+    },
+    {
+      "row": "H/top-p-default",
+      "status": 400
+    },
+    {
+      "row": "H/sampling-combined",
+      "status": 400
+    },
+    {
+      "row": "H/output-zero",
+      "status": 400
+    },
+    {
+      "row": "L/sampling-combined",
+      "status": 400
+    },
+    {
+      "row": "L/output-zero",
+      "status": 400
+    },
+    {
+      "row": "MT/tool-order-invalid",
+      "status": 200
+    },
+    {
+      "row": "MT/choice-none",
+      "status": 400
+    },
+    {
+      "row": "MT/choice-required",
+      "status": 400
+    },
+    {
+      "row": "MT/choice-function",
+      "status": 400
+    }
+  ],
+  "skipped": [
+    {
+      "row": "MA/tool-seed",
+      "reason": "mimo-admission-refused-on-both-hosts"
+    },
+    {
+      "row": "S/tool-replay-empty-signature",
+      "reason": "source-without-thinking"
+    },
+    {
+      "row": "S/tool-replay-no-signature",
+      "reason": "source-without-thinking"
+    },
+    {
+      "row": "S/cut-thinking-replay",
+      "reason": "source-without-requested-partial-content"
+    },
+    {
+      "row": "S/cache-thinking",
+      "reason": "source-without-thinking"
+    },
+    {
+      "row": "S/cross-model-ma",
+      "reason": "unavailable-approved-prerequisite"
+    },
+    {
+      "row": "H/tool-replay-empty-signature",
+      "reason": "source-without-thinking"
+    },
+    {
+      "row": "H/tool-replay-no-signature",
+      "reason": "source-without-thinking"
+    },
+    {
+      "row": "H/cache-thinking",
+      "reason": "source-without-thinking"
+    },
+    {
+      "row": "MT/cut-text-user",
+      "reason": "source-without-requested-partial-content"
+    },
+    {
+      "row": "MT/cut-text-prefill",
+      "reason": "source-without-requested-partial-content"
+    },
+    {
+      "row": "MT/cut-reasoning-replay",
+      "reason": "source-without-thinking"
+    }
+  ],
+  "metaRows": [
+    {
+      "row": "MT/stream-default",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 176,
+        "prompt_tokens": 21,
+        "total_tokens": 197,
+        "completion_tokens_details": {
+          "reasoning_tokens": 165
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/stream-usage-omitted",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 263,
+        "prompt_tokens": 21,
+        "total_tokens": 284,
+        "completion_tokens_details": {
+          "reasoning_tokens": 252
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/stream-usage-false",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 204,
+        "prompt_tokens": 21,
+        "total_tokens": 225,
+        "completion_tokens_details": {
+          "reasoning_tokens": 193
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/stream-obfuscation-false",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 343,
+        "prompt_tokens": 21,
+        "total_tokens": 364,
+        "completion_tokens_details": {
+          "reasoning_tokens": 332
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/stream-obfuscation-true",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 219,
+        "prompt_tokens": 21,
+        "total_tokens": 240,
+        "completion_tokens_details": {
+          "reasoning_tokens": 208
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/json-stream-options",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/thinking-enabled",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/thinking-disabled",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/effort-none",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/effort-minimal",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 197,
+        "prompt_tokens": 53,
+        "total_tokens": 250,
+        "completion_tokens_details": {
+          "reasoning_tokens": 172
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/effort-low",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 185,
+        "prompt_tokens": 53,
+        "total_tokens": 238,
+        "completion_tokens_details": {
+          "reasoning_tokens": 158
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/effort-medium",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 315,
+        "prompt_tokens": 53,
+        "total_tokens": 368,
+        "completion_tokens_details": {
+          "reasoning_tokens": 285
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/effort-high",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 592,
+        "prompt_tokens": 53,
+        "total_tokens": 645,
+        "completion_tokens_details": {
+          "reasoning_tokens": 570
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/effort-xhigh",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 432,
+        "prompt_tokens": 53,
+        "total_tokens": 485,
+        "completion_tokens_details": {
+          "reasoning_tokens": 410
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/effort-max",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/verbosity-low",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/verbosity-medium",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/verbosity-high",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/tool-seed",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "tool_calls"
+      ],
+      "usage": {
+        "completion_tokens": 101,
+        "prompt_tokens": 550,
+        "total_tokens": 651,
+        "completion_tokens_details": {
+          "reasoning_tokens": 29
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/tool-replay",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 164,
+        "prompt_tokens": 640,
+        "total_tokens": 804,
+        "completion_tokens_details": {
+          "reasoning_tokens": 142
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/tool-replay-omit-reasoning",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 159,
+        "prompt_tokens": 640,
+        "total_tokens": 799,
+        "completion_tokens_details": {
+          "reasoning_tokens": 138
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 625
+        }
+      }
+    },
+    {
+      "row": "MT/tool-replay-empty-reasoning",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 279,
+        "prompt_tokens": 640,
+        "total_tokens": 919,
+        "completion_tokens_details": {
+          "reasoning_tokens": 258
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 625
+        }
+      }
+    },
+    {
+      "row": "MT/tool-replay-synthetic-reasoning",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 179,
+        "prompt_tokens": 651,
+        "total_tokens": 830,
+        "completion_tokens_details": {
+          "reasoning_tokens": 158
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 497
+        }
+      }
+    },
+    {
+      "row": "MT/tool-order-invalid",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 142,
+        "prompt_tokens": 649,
+        "total_tokens": 791,
+        "completion_tokens_details": {
+          "reasoning_tokens": 131
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 497
+        }
+      }
+    },
+    {
+      "row": "MT/tool-result-blocks",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 289,
+        "prompt_tokens": 640,
+        "total_tokens": 929,
+        "completion_tokens_details": {
+          "reasoning_tokens": 268
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 625
+        }
+      }
+    },
+    {
+      "row": "MT/tool-result-error",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 351,
+        "prompt_tokens": 648,
+        "total_tokens": 999,
+        "completion_tokens_details": {
+          "reasoning_tokens": 316
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 625
+        }
+      }
+    },
+    {
+      "row": "MT/choice-auto",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "tool_calls"
+      ],
+      "usage": {
+        "completion_tokens": 149,
+        "prompt_tokens": 550,
+        "total_tokens": 699,
+        "completion_tokens_details": {
+          "reasoning_tokens": 77
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 497
+        }
+      }
+    },
+    {
+      "row": "MT/choice-none",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/choice-required",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/choice-function",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/choice-allowed_tools",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/choice-custom",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/choice-allowed-required",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/parallel-false",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "tool_calls"
+      ],
+      "usage": {
+        "completion_tokens": 177,
+        "prompt_tokens": 543,
+        "total_tokens": 720,
+        "completion_tokens_details": {
+          "reasoning_tokens": 104
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 497
+        }
+      }
+    },
+    {
+      "row": "MT/parallel-true",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "tool_calls"
+      ],
+      "usage": {
+        "completion_tokens": 205,
+        "prompt_tokens": 543,
+        "total_tokens": 748,
+        "completion_tokens_details": {
+          "reasoning_tokens": 86
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 497
+        }
+      }
+    },
+    {
+      "row": "MT/strict-false",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "tool_calls"
+      ],
+      "usage": {
+        "completion_tokens": 118,
+        "prompt_tokens": 550,
+        "total_tokens": 668,
+        "completion_tokens_details": {
+          "reasoning_tokens": 42
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 497
+        }
+      }
+    },
+    {
+      "row": "MT/strict-true",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "tool_calls"
+      ],
+      "usage": {
+        "completion_tokens": 108,
+        "prompt_tokens": 550,
+        "total_tokens": 658,
+        "completion_tokens_details": {
+          "reasoning_tokens": 37
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 497
+        }
+      }
+    },
+    {
+      "row": "MT/strict-invalid",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/instruction-system-first",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 218,
+        "prompt_tokens": 21,
+        "total_tokens": 239,
+        "completion_tokens_details": {
+          "reasoning_tokens": 207
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/instruction-system-after-user",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 194,
+        "prompt_tokens": 21,
+        "total_tokens": 215,
+        "completion_tokens_details": {
+          "reasoning_tokens": 183
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/instruction-system-after-assistant",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 167,
+        "prompt_tokens": 37,
+        "total_tokens": 204,
+        "completion_tokens_details": {
+          "reasoning_tokens": 156
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/instruction-system-between-call-result",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 244,
+        "prompt_tokens": 645,
+        "total_tokens": 889,
+        "completion_tokens_details": {
+          "reasoning_tokens": 223
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/instruction-developer-first",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 209,
+        "prompt_tokens": 21,
+        "total_tokens": 230,
+        "completion_tokens_details": {
+          "reasoning_tokens": 198
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/instruction-developer-after-user",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 200,
+        "prompt_tokens": 21,
+        "total_tokens": 221,
+        "completion_tokens_details": {
+          "reasoning_tokens": 189
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/instruction-developer-after-assistant",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 219,
+        "prompt_tokens": 37,
+        "total_tokens": 256,
+        "completion_tokens_details": {
+          "reasoning_tokens": 208
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/instruction-developer-between-call-result",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 305,
+        "prompt_tokens": 645,
+        "total_tokens": 950,
+        "completion_tokens_details": {
+          "reasoning_tokens": 284
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 625
+        }
+      }
+    },
+    {
+      "row": "MT/instruction-blocks",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 214,
+        "prompt_tokens": 21,
+        "total_tokens": 235,
+        "completion_tokens_details": {
+          "reasoning_tokens": 203
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/cut-text",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/cut-reasoning",
+      "status": 200,
+      "state": "cancelled",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/reasoning-display-summarized",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/reasoning-display-omitted",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/reasoning-display-updates",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-implicit-write",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-implicit-read",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-explicit-write",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-explicit-read",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-explicit-no-mark",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-four",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-five",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-implicit-four",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-no-options-write",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-no-options-read",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-retention-in_memory",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-retention-24h",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-key",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/cache-invalid-ttl",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/temperature-default",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 192,
+        "prompt_tokens": 21,
+        "total_tokens": 213,
+        "completion_tokens_details": {
+          "reasoning_tokens": 181
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/temperature-changed",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 151,
+        "prompt_tokens": 21,
+        "total_tokens": 172,
+        "completion_tokens_details": {
+          "reasoning_tokens": 140
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/temperature-upper",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 236,
+        "prompt_tokens": 21,
+        "total_tokens": 257,
+        "completion_tokens_details": {
+          "reasoning_tokens": 225
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/top-p-default",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 207,
+        "prompt_tokens": 21,
+        "total_tokens": 228,
+        "completion_tokens_details": {
+          "reasoning_tokens": 196
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/top-p-changed",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 125,
+        "prompt_tokens": 21,
+        "total_tokens": 146,
+        "completion_tokens_details": {
+          "reasoning_tokens": 114
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/top-p-lower",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 147,
+        "prompt_tokens": 21,
+        "total_tokens": 168,
+        "completion_tokens_details": {
+          "reasoning_tokens": 136
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/frequency-penalty",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/presence-penalty",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 210,
+        "prompt_tokens": 21,
+        "total_tokens": 231,
+        "completion_tokens_details": {
+          "reasoning_tokens": 199
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/seed",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 200,
+        "prompt_tokens": 21,
+        "total_tokens": 221,
+        "completion_tokens_details": {
+          "reasoning_tokens": 189
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/logit-bias",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/n-one",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 184,
+        "prompt_tokens": 21,
+        "total_tokens": 205,
+        "completion_tokens_details": {
+          "reasoning_tokens": 173
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/n-two",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/logprobs",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/top-logprobs",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/thinking-sampling-temperature",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 527,
+        "prompt_tokens": 53,
+        "total_tokens": 580,
+        "completion_tokens_details": {
+          "reasoning_tokens": 513
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/thinking-sampling-top_p",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 717,
+        "prompt_tokens": 53,
+        "total_tokens": 770,
+        "completion_tokens_details": {
+          "reasoning_tokens": 703
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/sampling-combined",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/stop-string",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/stop-one",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/stop-four",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/stop-five",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/output-one",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/output-zero",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/output-negative",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/output-legacy",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 204,
+        "prompt_tokens": 21,
+        "total_tokens": 225,
+        "completion_tokens_details": {
+          "reasoning_tokens": 193
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/output-both",
+      "status": 400,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [],
+      "usage": {}
+    },
+    {
+      "row": "MT/empty-text",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {}
+    },
+    {
+      "row": "MT/first-assistant",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 140,
+        "prompt_tokens": 19,
+        "total_tokens": 159,
+        "completion_tokens_details": {
+          "reasoning_tokens": 129
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/consecutive-user",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 202,
+        "prompt_tokens": 30,
+        "total_tokens": 232,
+        "completion_tokens_details": {
+          "reasoning_tokens": 191
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "row": "MT/assistant-null",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 235,
+        "prompt_tokens": 619,
+        "total_tokens": 854,
+        "completion_tokens_details": {
+          "reasoning_tokens": 213
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 497
+        }
+      }
+    },
+    {
+      "row": "MT/assistant-empty",
+      "status": 200,
+      "state": "complete",
+      "reasoningTextReturned": false,
+      "stopReasons": [
+        "stop"
+      ],
+      "usage": {
+        "completion_tokens": 271,
+        "prompt_tokens": 619,
+        "total_tokens": 890,
+        "completion_tokens_details": {
+          "reasoning_tokens": 250
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 497
+        }
+      }
+    }
+  ]
+}

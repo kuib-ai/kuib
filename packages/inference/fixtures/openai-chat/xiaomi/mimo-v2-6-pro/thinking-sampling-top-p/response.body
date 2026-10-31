@@ -1,0 +1,30 @@
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"17 - 5 ="},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" 12 blue,"},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" 9 × 2 = 1"},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"8 green, total ="},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" 30."},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":"The widget","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":" has **","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":"30 beads","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":"** remaining","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":" (12 blue and 1","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":"8 green).","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"46e42a6b-68cf-4dfb-a828-7facd1f6560b_251044f735904f36bd923f018235554c","choices":[],"created":1791911789,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":50,"prompt_tokens":54,"total_tokens":104,"completion_tokens_details":{"reasoning_tokens":29},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

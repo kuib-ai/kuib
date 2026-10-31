@@ -1,0 +1,1 @@
+{"error":{"code":null,"message":"reasoning_effort 'max' is not supported for model 'muse-spark-1.1'. Supported values: [minimal, low, medium, high, xhigh]","param":"reasoning_effort","type":"invalid_request_error"}}

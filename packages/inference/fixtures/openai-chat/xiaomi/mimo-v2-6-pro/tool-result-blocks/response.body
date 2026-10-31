@@ -1,0 +1,22 @@
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+data: {"id":"ad435ff3-ab17-457a-9bf8-5a33cb1b14ba_57ad6a0bb13542ae80fab47f75afacc0","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910598,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"ad435ff3-ab17-457a-9bf8-5a33cb1b14ba_57ad6a0bb13542ae80fab47f75afacc0","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The stored value is 7."},"finish_reason":null,"index":0}],"created":1791910598,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"ad435ff3-ab17-457a-9bf8-5a33cb1b14ba_57ad6a0bb13542ae80fab47f75afacc0","choices":[{"delta":{"content":"The stored value for","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910598,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"ad435ff3-ab17-457a-9bf8-5a33cb1b14ba_57ad6a0bb13542ae80fab47f75afacc0","choices":[{"delta":{"content":" selector 7 is **7**.","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791910598,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"ad435ff3-ab17-457a-9bf8-5a33cb1b14ba_57ad6a0bb13542ae80fab47f75afacc0","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791910599,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"ad435ff3-ab17-457a-9bf8-5a33cb1b14ba_57ad6a0bb13542ae80fab47f75afacc0","choices":[],"created":1791910599,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":22,"prompt_tokens":161,"total_tokens":183,"completion_tokens_details":{"reasoning_tokens":8},"prompt_tokens_details":{"cached_tokens":128}}}
+
+data: [DONE]
+

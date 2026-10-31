@@ -20,9 +20,9 @@ context:
   - "[[domains/infra/current#^workspace-tools]]"
 checkpoint:
   summary: "v2 landed (P03): the tooling package (tooling/, @kuib-ai/tooling) holds journal, agents and the TypeScript orchestra (plan gate, restart, accept, watch events with an orchestra: prefix, orchestrator handoff), all parsing arguments with @kuib-ai/cli; role-aware session brief; agents sync lock with MCP import and hand-edit refusal. Orchestra verified only with a fake agent in an isolated tmux server (G004). Next: a first live round (P03-I05)."
-  next: ["P03-I05"]
+  next: []
   blockers: []
-  note: ""
+  note: "P04 IS DONE (2026-10-14, accepted at 10:44 IST, note written at 10:44 IST, both read from the system clock): task repair-orchestra is accepted and closed. orchestra diff lists a task's changes since spawn; accept writes one reference per item, the task report, and refuses while a literal test title has vanished (--removed-title for an intended removal, --without-title-guard for a task with no snapshot, recorded in its brief; this task itself needed it); spawn puts the prompt right after the agent and checks it arrived, tried with the real codex and claude commands; scope keeps the grants of stopped tasks that overlapped the watched task, which was the cause of the false bursts; handoff [prompt..] | --file PATH pastes a standard opening and then the prompt after clearing. The orchestrator checked it: gate green with the cache skipped and from the cache, no file rewritten, 123 of 123 claims fresh, 12 tests in tooling/orchestra.test.ts, the one changed permission test read in full. The orchestrate skill describes the new commands. Open for the owner: moving journal.ts and orchestra.ts out of tooling/ into packages (D007, consequences); the restart-burst cause in the batch hash step was guarded but never reproduced. THE EARLIER NOTE, restored on 2026-10-14 after the orchestrator overwrote it by mistake (it was in no commit; recovered word for word from an earlier session transcript): First live round ran 2026-10-06 on eos (Linux) with claude, codex, agy and opencode as probe tasks live-claude, live-codex, live-agy and live-opencode (task records kept). Found and fixed in tooling/orchestra.ts: agents launched through shell wrapper functions showed as bash, so readiness never passed (now: the window's shell has a foreground job); prompts were pasted into trust dialogs and updaters, and opencode's paste was never submitted (now: the first prompt goes on the agent's command line, a dialog raises a dialog event and blocks pasting, Enter is retried until the screen changes); Codex and opencode context formats were not parsed. Added: resume <task> [message] for a stopped worker with or without a window, restart by relaunch instead of /clear, watch --match <regex> for screen-line interception, opencode default model MiMo 2.6 Pro in standalone mode. Verified live on all four: spawn, restart from log, resume after the window was closed, send while stopped and while busy, match events on tool-call lines. Not verified live: plan gate, accept, handoff, the context event at the cap, gemini and cursor-agent (not installed). Open: scope events blame every worker for changes made by anyone in a shared worktree; match also fires on the orchestrator's own echoed message; pre-execution tool-call interception needs per-agent hooks and is not built; no automated test for the orchestra yet. Deferred by the owner on 2026-10-06 (\"let us handle all of that later\"): resume through each agent's own session id (claude --session-id and opencode --session can be set at spawn; codex and agy ids are found by searching their transcripts for the task's worker prompt: ~/.codex/sessions/<date>/rollout-*-<id>.jsonl and ~/.gemini/antigravity-cli/brain/<id>/; the resume flags themselves are untested), storing the session id and spawn baseline with the task record instead of /tmp, an exited event distinct from idle, matching tasks to the repository instead of the tmux session name, automatic respawn with a retry cap, and workers logging before risky steps. This pane is registered as the agent-harness orchestrator; since 2026-10-08 the owner's main thread is the inference feature (journal/features/inference/plan.md, load it with /remember inference), with the engine design in journal/features/engine-foundation/research/engine-design-2026-10-07.md."
 ---
 
 # Plan — agent-harness
@@ -150,6 +150,64 @@ and repositories (workers never message it), decides every next step, and keeps 
 - State: planned
 - Addresses: G004
 
+## P04 — Orchestra repairs from the deviations review
+
+### P04-I01 — Accept writes lasting references and guards tests
+
+- Acceptance: `orchestra accept` no longer writes every changed file onto every item; each item
+  gets one reference, the task's `report.md`. It refuses to accept when a test title that
+  existed anywhere in the workspace when the task was spawned exists nowhere any more, and names
+  each missing title; an explicit option accepts named titles as removed on purpose.
+- State: implemented
+- Decisions: D007
+- Refs:
+  - `journal/features/agent-harness/tasks/repair-orchestra/report.md` — report
+
+### P04-I02 — A task's changes since spawn
+
+- Acceptance: `orchestra diff <task>` lists the paths a task added, changed and removed since it
+  was spawned, from the baseline the watch already keeps, committed or not.
+- State: implemented
+- Decisions: D007
+- Refs:
+  - `journal/features/agent-harness/tasks/repair-orchestra/report.md` — report
+
+### P04-I03 — Scope is attributed per task
+
+- Acceptance: `watch` reports a path changed outside a task's grant only when no grant covers it
+  of a task in the same repository that was active at any time since this task was spawned,
+  running or since stopped, and a restart reports nothing that did not change. (First written as
+  "no other running task": that misses a task which has just reported, whose files then fall on
+  the tasks still running; corrected by the orchestrator after reading `allowedGlobs`.) The cause of the
+  bursts after a restart is found and fixed, or shown to be absent, by a test.
+- State: implemented
+- Decisions: D007
+- Refs:
+  - `journal/features/agent-harness/tasks/repair-orchestra/report.md` — report
+
+### P04-I04 — Spawn delivers its prompt whatever the flags
+
+- Acceptance: the worker prompt reaches the agent whatever options the launch command ends
+  with, `--mcp-config` included, and `spawn` checks that the agent received it and fails loudly
+  when it did not.
+- State: implemented
+- Decisions: D007
+- Refs:
+  - `journal/features/agent-harness/tasks/repair-orchestra/report.md` — report
+
+### P04-I05 — Handoff resumes from a given prompt
+
+- Acceptance: `orchestra handoff` can be given the prompt the orchestrator is to resume from; once
+  the turn ends it clears the orchestrator pane and pastes, whole, a standard opening and then
+  that prompt verbatim. The opening makes the resumed session read the rendered handoff (the one
+  the session hook injects, or `pnpm journal handoff <feature>` when it is missing) and carry on
+  orchestrating: check the tasks and re-arm the watch. Without a prompt it pastes the opening
+  alone.
+- State: implemented
+- Decisions: D007
+- Refs:
+  - `journal/features/agent-harness/tasks/repair-orchestra/report.md` — report
+
 ## Decisions
 
 ### D001 — Generate adapters instead of symlinking everything
@@ -218,6 +276,54 @@ and repositories (workers never message it), decides every next step, and keeps 
 - Options considered: document "edit only sources"; import MCP edits and refuse other hand edits.
 - Decision: `.agents/generated.lock.json` records the hash of every generated file; edited MCP files are imported, other edits are refused unless `--force` (infra D029).
 - Consequences: the lock is committed.
+- Supersedes: —
+- Superseded by: —
+
+### D007 — The deviations review is adopted, and handoff resumes from a given prompt
+
+- Status: accepted
+- Ruling: "Please do it and also add the functionality in the Pnpm Orchestra tooling to clear
+  yourself and paste the next prompt into your own context window and con resume from there."
+  (owner, 2026-10-14)
+- Context: An investigation the owner ran found that most of the shape he rejected in the
+  test-system and inference work was specified or approved by the orchestrator, and proposed
+  changes to `AGENTS.md`, the orchestrate skill, `WORKER.md` and the orchestra tool
+  ([[features/agent-harness/research/deviations-review-2026-10-14]]). The orchestrator
+  recommended adopting them. "Please do it" is read as that adoption; the commit, also open at
+  the time, is not read as asked.
+- Decision: The rules are adopted as written in the review: in `AGENTS.md`, one home for each
+  concern and existing tests as proof; in the skill, the literal-lines review at the plan gate, a
+  ruling about one thing is not a ruling about another, briefs cite every decision that
+  constrains a name, and acceptance reads the whole report, compares tests before and after and
+  runs the journal check first; in `WORKER.md`, a `Tests` and a `Deviations from the approved
+  plan` section in the report. The orchestrator wrote these the same day. The tool changes are
+  P04, together with the owner's addition: handoff can resume from a given prompt.
+- Ruling, at the plan gate of task repair-orchestra, after the literal commands, options and
+  output lines were shown: "Okay got it to whatever it is just make sure that the cla make sure
+  the next hando handed off session reads up the brief as well as the continues orchestration"
+  (owner, 2026-10-14, dictated). Read as approval of the plan with the orchestrator's four
+  conditions, `accept --without-title-guard` among them, and as the requirement now in P04-I05.
+- Consequences: `tooling/journal.ts` (about 2,900 lines) and `tooling/orchestra.ts` (about 2,100)
+  now stand against the rule that `tooling/` holds only bare scripts, and against D005's single
+  files; moving them into packages is a question for the owner, not part of P04.
+- Supersedes: —
+- Superseded by: —
+
+### D008 — An orchestrator lays out from the tree
+
+- Status: accepted
+- Ruling: "yeah then let us please add this to a common place for all the future orchestrators
+  when they start planning" (owner, 2026-10-25)
+- Context: The owner asked why the recorder's 57 units lie flat in `packages/inference/src`.
+  The orchestrator's brief for the task move-capture had told the worker that units grouped
+  under a folder sat "one level deeper than every other unit of this codebase" and then "Flat,
+  like every other unit". The premise was false: `protocol` (76 units), the eslint plugin (14),
+  `engine` (11), `daemon` (8) and `host-tui` (2) nest units under subject folders.
+- Decision: The orchestrate skill says, under planning, that every statement about how the
+  codebase is arranged is found in the tree and cited before it goes into a plan, brief or go,
+  that a concern's units go together under a subject folder, and that code only tests or
+  tooling use never lies flat among a package's product units. The inference refactor is
+  inference D032.
 - Supersedes: —
 - Superseded by: —
 

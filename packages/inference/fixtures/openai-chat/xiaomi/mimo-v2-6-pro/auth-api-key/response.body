@@ -1,0 +1,28 @@
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+: PROCESSING
+
+data: {"id":"38b7b31b-f785-470f-947b-774a1968ce83_8adaac1570fb4c3381b1cb722aebada2","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791913611,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"38b7b31b-f785-470f-947b-774a1968ce83_8adaac1570fb4c3381b1cb722aebada2","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The user asked"},"finish_reason":null,"index":0}],"created":1791913611,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"38b7b31b-f785-470f-947b-774a1968ce83_8adaac1570fb4c3381b1cb722aebada2","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" me to reply with exactly \"OK\"."},"finish_reason":null,"index":0}],"created":1791913611,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"38b7b31b-f785-470f-947b-774a1968ce83_8adaac1570fb4c3381b1cb722aebada2","choices":[{"delta":{"content":"OK","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791913612,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"38b7b31b-f785-470f-947b-774a1968ce83_8adaac1570fb4c3381b1cb722aebada2","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791913612,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"38b7b31b-f785-470f-947b-774a1968ce83_8adaac1570fb4c3381b1cb722aebada2","choices":[],"created":1791913612,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":15,"prompt_tokens":21,"total_tokens":36,"completion_tokens_details":{"reasoning_tokens":12},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

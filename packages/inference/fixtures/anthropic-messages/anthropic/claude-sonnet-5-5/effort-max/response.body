@@ -1,0 +1,57 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-sonnet-5-5","id":"msg_011CfyoVkmjbG1t764cHhXz2","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":76,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":5,"service_tier":"standard","inference_geo":"global"},"diagnostics":null} }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}         }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":""}      }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQS2AUKEAgSGAI4AUIIdGhpbmtpbmcSDPnAoDGTldjgH4gYuhoMjodwp9ci8BE4RsBBIjCRy34ZFSyVO6qF8OZXg9t5DErnDg5LeQfCtsuC5ah0ypOTmSvx7sC1Lify6UDYxyAq9QSs31+gQasBFGSjxlmIx44qTabmCvpo2AEjQxxq2KeBgpRYV+WYU1IE1n4PGKzt8fv/lUELf1GPSzvcHvtoMYaXoFOtxudRXRSw8V3mTNyTve1FKLKjXrJdBC3lbfkam54wHeSlyWytXMkTaL4+WK+B+qyNPgIuIvoH8/+xGb5+wJF+13PNE0PlacNlzNhWzE2xrUXM/7wT14D7QEnFJQvobWsHUQFCluBqf26bHrUv1bg4WTPDeCbSKrRBhYKMiz7R34XgZkZwzAEjERH5izW0XIs/NaUKyuVtGf0LdreJ8i+eGuFLyQSwrm+5b8EiCQz/T3BJqiMf/sPYBW/imwQ9WQsdlDhXOwUrxJWjKdHfuWvcdsEMC7e7oLnC4HP4PJOjX4aHHpZvOQfzod2ijk34f+OZXv1pJBzfe+NQ5xqoKMp4ulUQLPRh2W480ri/Xi45eR4H1zW1ZZBVnl7p9H7QR6e3/2E0CibChVwpI2Un3oj16U4h/dDtHHg2fQweqgefKPKh7FvDye6bkWXshQYpLfsumOJbuBfJsavt+AlfGIoc3oEO/4VUWbGvDG2NffUkOxL/UtB1aJep7pM/NR6Qis4EFPwM0uAWd8LJihqNR/q0LacMSKeHIH6wi9B+qsLxp9T46HRZ+bqXhbrUcSpcp17neqiVeFOfyzg/ge9gZGEdd1xAdgFqD1jyb8rgli+cKWu5JCMjlLMTRg4BAZldT3t4Hopdej6GTeKAEf5TLObPgZlW7YYrF+FHmmQgNe0h6kI6VtSTbbBTY0HD59Wb87e/z1kvPx9yJpTHVv5uZMz9ad4PLMLlad7/BaUgf1w8vmdQlhgB"}   }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0    }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"After"}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" losing 5 blue be"}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"ads it"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" has 12 blue,"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" and doubling its green beads"}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" gives 18 green, so"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" **"}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"30 beads**"}            }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" remain."}              }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1      }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":76,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":117,"output_tokens_details":{"thinking_tokens":72}}       }
+
+event: message_stop
+data: {"type":"message_stop"   }
+

@@ -1,0 +1,132 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-sonnet-5-5","id":"msg_011CfyuSFqKQZsF1p5pW8u1w","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":98,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":9,"service_tier":"standard","inference_geo":"global"},"diagnostics":null}      }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}     }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"I'm solving the system"}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" of congruences using CRT"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":":"}      }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" x≡2 mod5"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":", 0 mod7,"}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" 7 mod11."}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" Setting x=7k and sol"}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"ving for"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" k m"}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"od5 gives k≡"}   }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"1 mod5, so x"}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"=7,"}            }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"42,77,..."}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" and"}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" checking x=7 sat"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"isfies all three conditions"}      }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"."}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"\n\n"}      }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQSzAYKEAgSGAI4AUIIdGhpbmtpbmcSDCF8pLNPUNyozLSHeBoMf12+/XESNreaj2IDIjCLo9uuALzYsAOwGFD38Cf4owkgarV0kvEjntKAO4eXgzkV4egyP+VnzIt7nTABWgYq6QWsvMJ7qZuQdBjsE4AUlBOb5fu3O59c/OPxjw8+r2nLj2rDqhK/ThAH/pRMUSsjwMrGNFeuBKz7bXus+ub2KuJdvz19Ygwxt56MEMbyyU7n0oPn9mzAVMg/GNbKcfJaxT/n0vLyFbMpTybw/enNIGASFXiMXsky8sBgxWS0P3qiNwJXqvcrTKmFCxo8YYAD7JHx2dGeQ9BEiPubvvjhXY7M5zjefCDQQrZokjyR6NSmP99c4PydMlsQrapJUiaPkkD867Thce6301vmqHc64ESLvg0xg6Rc73X8hpNbbL6A7dgLnN2wfPDnVbj9olK/7rJIlK5+mErd8B5SAkckwgtO4nD7G3M+sbyqceSKwZb6/mgp+mAAM6wi3uF9zbVbJJJTxXdFqkqZUqumCzLyh1DlcTMSVn749m9OlxO9HNMP1kOqTva7cLeaS0b06lypEmzZbXzhmLQMJoGEHj5wJAYMOwlc1nskPYwEd7/4AwHLU0i+qfII2T3atCHZO132jYJ0jaVasbIM8s2Cb3xAy6L9KOTWUps0gDoGnMTH0F3opXLUVys46vOZ0xfWwwW270XxDFK7liF6yg61VPIFoNoPOeYWxnnDgJdDMDRyShFiW1aocTEm/rW68nXfvSNM+iyjuVqbO75sw/qvzDPEnyoa0aZaJpHrkuyzl7EeXNs+cayqxoLF0upcp4UoGEJR22+QcCr2OjyBcgAGKmWHNhUfvN5nNTkO1GQ4dc0oXyOG6+XgKdi84tt5KmrZmYzoxR3YQeNuvnV9Sh9sIdaUZ+txVWl23h9y19XucnQg9MfN7uKVD6ISji8mqYHOd8ixgRvW+44DI/Hi5yIWSviYG/43tPqUgmml5sjQmwglr3IzBUiQKlgwptZLt8mb8q6H3l+CFFM8nyP5ioFou2v40GmN3b8zQSftKhHiLVy1W0Zy8axU0K5gla/pK6CqpjSESghZnetfXKpXUOlxRqWHrJ9jQHV27sdrjQqCGAE="}             }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0      }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"**The selector is 7"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":".**\n\n- x ≡"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" 0"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" (mod 7) means"}              }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" x is a multiple of "}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"7:"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" 7, 14, 21"}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":", …\n- x ≡"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" 2 (mod "}      }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"5) ke"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"eps the multiples of "}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"7 that end in 2 "}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"or 7:"} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" 7, 42, 77"}            }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":", …"}               }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" These"}            }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" are the num"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"bers 7k with"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" k ≡ 1 "}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"(mod 5).\n-"}   }
+

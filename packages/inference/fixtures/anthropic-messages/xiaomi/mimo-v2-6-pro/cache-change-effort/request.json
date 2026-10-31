@@ -1,0 +1,19 @@
+{
+  "messageFormat": "anthropic-messages",
+  "provider": "xiaomi",
+  "model": "mimo-v2-6-pro",
+  "name": "cache-change-effort",
+  "method": "POST",
+  "url": "https://token-plan-sgp.xiaomimimo.com/anthropic/v1/messages",
+  "authHeader": "api-key",
+  "headers": {
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  },
+  "replay": {
+    "fixture": "anthropic-messages/xiaomi/mimo-v2-6-pro/cache-5m-write",
+    "changes": [
+      "cache-5m request + top-level effort=low; mode unchanged"
+    ]
+  }
+}

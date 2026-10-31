@@ -1,0 +1,50 @@
+{
+  "authority": "Resume 2026-10-13T21:54:35",
+  "reviews": [
+    {
+      "command": "lift",
+      "ordinal": 10,
+      "reviewer": "orchestrator",
+      "reason": "owner replaced the key on 2026-10-13"
+    },
+    {
+      "command": "lift",
+      "ordinal": 13,
+      "reviewer": "orchestrator",
+      "reason": "owner replaced the key on 2026-10-13"
+    },
+    {
+      "command": "lift",
+      "ordinal": 14,
+      "reviewer": "orchestrator",
+      "reason": "owner replaced the key on 2026-10-13"
+    },
+    {
+      "command": "reprice",
+      "ordinal": 382,
+      "costUsd": 0,
+      "reviewer": "orchestrator",
+      "reason": "rejected with 400, not billed"
+    },
+    {
+      "command": "reprice",
+      "ordinal": 383,
+      "costUsd": 0,
+      "reviewer": "orchestrator",
+      "reason": "rejected with 400, not billed"
+    },
+    {
+      "command": "reprice",
+      "ordinal": 384,
+      "costUsd": 0,
+      "reviewer": "orchestrator",
+      "reason": "rejected with 400, not billed"
+    }
+  ],
+  "originalBytes": 379317,
+  "originalSha256": "4643a971650aac7fc10edc34bc9fb680301e68da783cc75f8bd94d5e541a36da",
+  "originalPrefixPreserved": true,
+  "ledgerCalls": 435,
+  "effectiveCostUsd": 0.3111444950000001,
+  "rawFinishedCostUsd": 1.9783343949999999
+}

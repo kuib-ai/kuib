@@ -1,0 +1,13 @@
+{
+  "messageFormat": "openai-chat",
+  "provider": "meta",
+  "model": "muse-spark-1-1",
+  "name": "effort-medium",
+  "method": "POST",
+  "url": "https://api.meta.ai/v1/chat/completions",
+  "authHeader": "authorization",
+  "headers": {
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  }
+}

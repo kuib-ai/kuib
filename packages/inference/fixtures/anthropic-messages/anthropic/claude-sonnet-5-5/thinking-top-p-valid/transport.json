@@ -1,0 +1,12 @@
+{
+  "lengths": [
+    151
+  ],
+  "bytes": 151,
+  "sha256": "a03d71b4983d4361c17ccbbabac86bedd9f91229a01e5cb86688b8fb3a9a09a1",
+  "boundary": "fetch-body-reader",
+  "state": "complete",
+  "cut": null,
+  "startedAt": "2026-10-13T06:59:57.605Z",
+  "finishedAt": "2026-10-13T06:59:58.030Z"
+}

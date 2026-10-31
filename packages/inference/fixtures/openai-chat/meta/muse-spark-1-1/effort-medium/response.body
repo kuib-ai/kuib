@@ -1,0 +1,8 @@
+data: {"id":"chatcmpl-01a13442-855e-76aa-b313-19d1cca990f9","choices":[{"delta":{"content":"The widget now has 12","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878137,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13442-855e-76aa-b313-19d1cca990f9","choices":[{"delta":{"content":" blue and 18 green beads for a total of 30 beads."},"finish_reason":null,"index":0}],"created":1791878137,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13442-855e-76aa-b313-19d1cca990f9","choices":[{"delta":{},"finish_reason":"stop","index":0}],"created":1791878137,"model":"muse-spark-1.1","object":"chat.completion.chunk","usage":{"completion_tokens":315,"prompt_tokens":53,"total_tokens":368,"completion_tokens_details":{"reasoning_tokens":285},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

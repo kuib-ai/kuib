@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: legal instruction position after result. Approved settings: system(text) after actual user tool_result, at end.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

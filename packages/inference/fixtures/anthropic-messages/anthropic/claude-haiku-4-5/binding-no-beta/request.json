@@ -1,0 +1,20 @@
+{
+  "messageFormat": "anthropic-messages",
+  "provider": "anthropic",
+  "model": "claude-haiku-4-5",
+  "name": "binding-no-beta",
+  "method": "POST",
+  "url": "https://api.anthropic.com/v1/messages",
+  "authHeader": "x-api-key",
+  "headers": {
+    "anthropic-version": "2023-06-01",
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  },
+  "replay": {
+    "fixture": "anthropic-messages/anthropic/claude-haiku-4-5/tool-seed-signed",
+    "changes": [
+      "changed system; block_binding=drop_block; no binding beta"
+    ]
+  }
+}

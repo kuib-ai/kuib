@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: four stop sequences. Approved settings: thinking=between_tools; stop_sequences=[END,A,B,C]. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

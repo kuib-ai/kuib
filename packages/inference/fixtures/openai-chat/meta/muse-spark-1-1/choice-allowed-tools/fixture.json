@@ -1,0 +1,4 @@
+{
+  "shows": "muse-spark-1.1: native choice value or unsupported-choice rejection. Approved settings: tool_choice={type:allowed_tools,allowed_tools:{mode:auto,tools:[get_value]}}; tools retained. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

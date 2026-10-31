@@ -1,13 +1,14 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
-import { mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import createTempDir from "@kuib-ai/testing/create.temp.dir";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import findWorkspaceRoot from "./index.ts";
 
 describe("findWorkspaceRoot", function () {
   it("walks up to the directory containing pnpm-workspace.yaml", function () {
-    const rootDir = mkdtempSync(join(tmpdir(), "wsroot-"));
+    using temp = createTempDir("wsroot-");
+    const rootDir = temp.path;
     writeFileSync(join(rootDir, "pnpm-workspace.yaml"), "packages: []\n");
     const nested = join(rootDir, "packages", "foo", "src");
     mkdirSync(nested, { recursive: true });
@@ -16,7 +17,8 @@ describe("findWorkspaceRoot", function () {
   });
 
   it("returns the original start when the marker is never found", function () {
-    const bare = mkdtempSync(join(tmpdir(), "wsroot-none-"));
+    using temp = createTempDir("wsroot-none-");
+    const bare = temp.path;
     const nested = join(bare, "a", "b");
     mkdirSync(nested, { recursive: true });
 

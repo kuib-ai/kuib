@@ -1,0 +1,2226 @@
+{
+  "version": 1,
+  "puzzle": "Find the unique integer selector from 1 through 99 that has remainder 2 when divided by 5, remainder 0 when divided by 7, and remainder 7 when divided by 11. Work out the constraints before answering.",
+  "hard": "Find the unique selector x with 1 <= x <= 999 such that 3*x + 4 is congruent to 12 modulo 13, 5*x - 6 is congruent to 29 modulo 31, and 7*x + 8 is congruent to 20 modulo 37. Derive the selector by reconciling all three congruences before answering.",
+  "tool": {
+    "name": "get_value",
+    "description": "Return the stored integer for the selector.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "selector": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "selector"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "rows": [
+    {
+      "id": "S/tool-seed-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-seed-signed",
+      "settings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "shows": "signed reasoning and genuine tool call for replay",
+      "expected": "A",
+      "maxTokens": 2048,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.022528,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 16,
+      "signedRepeatOf": "S/tool-seed"
+    },
+    {
+      "id": "S/tool-seed-signed-max",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-seed-signed-max",
+      "settings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "shows": "signed reasoning and genuine tool call for replay",
+      "expected": "A",
+      "maxTokens": 2048,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.022528,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 16,
+      "signedRepeatOf": "S/tool-seed"
+    },
+    {
+      "id": "S/tool-seed-signed-hard",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-seed-signed-hard",
+      "settings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "shows": "signed reasoning and genuine tool call for replay",
+      "expected": "A",
+      "maxTokens": 2048,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.022528,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 16,
+      "signedRepeatOf": "S/tool-seed"
+    },
+    {
+      "id": "H/tool-seed-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-seed-signed",
+      "settings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "shows": "signed reasoning and genuine tool call for replay",
+      "expected": "A",
+      "maxTokens": 2048,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0011264,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 122,
+      "signedRepeatOf": "H/tool-seed"
+    },
+    {
+      "id": "H/tool-seed-signed-max",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-seed-signed-max",
+      "settings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "shows": "signed reasoning and genuine tool call for replay",
+      "expected": "A",
+      "maxTokens": 2048,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0011264,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 122,
+      "signedRepeatOf": "H/tool-seed"
+    },
+    {
+      "id": "H/tool-seed-signed-hard",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-seed-signed-hard",
+      "settings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "shows": "signed reasoning and genuine tool call for replay",
+      "expected": "A",
+      "maxTokens": 2048,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0011264,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 122,
+      "signedRepeatOf": "H/tool-seed"
+    },
+    {
+      "id": "S/tool-replay-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-replay-signed",
+      "settings": "stream=true; same tools/system/thinking; actual tool result value 7",
+      "shows": "tool round with all reasoning and original call order",
+      "expected": "A",
+      "maxTokens": 2048,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.026624,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 19,
+      "signedRepeatOf": "S/tool-replay"
+    },
+    {
+      "id": "S/tool-replay-no-reasoning-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-replay-no-reasoning-signed",
+      "settings": "same replay; remove only thinking blocks",
+      "shows": "omitted reasoning inside tool round",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 20,
+      "signedRepeatOf": "S/tool-replay-no-reasoning"
+    },
+    {
+      "id": "S/tool-replay-empty-signature-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-replay-empty-signature-signed",
+      "settings": "same replay; signature=\"\" on every thinking block",
+      "shows": "empty signature handling",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 21,
+      "signedRepeatOf": "S/tool-replay-empty-signature"
+    },
+    {
+      "id": "S/tool-replay-no-signature-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-replay-no-signature-signed",
+      "settings": "same replay; remove signature field only",
+      "shows": "missing signature handling",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 22,
+      "signedRepeatOf": "S/tool-replay-no-signature"
+    },
+    {
+      "id": "S/tool-replay-error-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-replay-error-signed",
+      "settings": "same replay; is_error=true; synthetic error result",
+      "shows": "tool-result error flag",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 23,
+      "signedRepeatOf": "S/tool-replay-error"
+    },
+    {
+      "id": "S/tool-replay-false-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-replay-false-signed",
+      "settings": "same replay; is_error=false; result as text blocks",
+      "shows": "tool-result false flag and block content",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 24,
+      "signedRepeatOf": "S/tool-replay-false"
+    },
+    {
+      "id": "S/tool-replay-cache-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-replay-cache-signed",
+      "settings": "same replay; cache_control on tool_use and tool_result",
+      "shows": "cache mark on call and result blocks",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.019968,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 25,
+      "signedRepeatOf": "S/tool-replay-cache"
+    },
+    {
+      "id": "S/tool-order-invalid-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "tool-order-invalid-signed",
+      "settings": "insert user text before tool_result or leave result unmatched",
+      "shows": "rejection and raw error body",
+      "expected": "R",
+      "maxTokens": 256,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 26,
+      "signedRepeatOf": "S/tool-order-invalid"
+    },
+    {
+      "id": "S/inline-between-call-result-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "inline-between-call-result-signed",
+      "settings": "insert system(text) between actual call and its result",
+      "shows": "fourth instruction position and paired-call rule",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 59,
+      "signedRepeatOf": "S/inline-between-call-result"
+    },
+    {
+      "id": "S/inline-after-result-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "inline-after-result-signed",
+      "settings": "system(text) after actual user tool_result, at end",
+      "shows": "legal instruction position after result",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 60,
+      "signedRepeatOf": "S/inline-after-result"
+    },
+    {
+      "id": "S/binding-default-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "binding-default-signed",
+      "settings": "change only top-level system; actual signed tool seed replay; no binding control",
+      "shows": "account default for changed-prefix signature",
+      "expected": "A?/R?",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 74,
+      "signedRepeatOf": "S/binding-default"
+    },
+    {
+      "id": "S/binding-error-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "binding-error-signed",
+      "settings": "change system; thinking.block_binding.prefix_mismatch_behavior=error; binding beta",
+      "shows": "binding control and input_transformations",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 75,
+      "signedRepeatOf": "S/binding-error"
+    },
+    {
+      "id": "S/binding-drop_block-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "binding-drop-block-signed",
+      "settings": "change system; thinking.block_binding.prefix_mismatch_behavior=drop_block; binding beta",
+      "shows": "binding control and input_transformations",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 76,
+      "signedRepeatOf": "S/binding-drop_block"
+    },
+    {
+      "id": "S/binding-no-beta-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "binding-no-beta-signed",
+      "settings": "changed system; block_binding=drop_block; no binding beta",
+      "shows": "binding header requirement",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 77,
+      "signedRepeatOf": "S/binding-no-beta"
+    },
+    {
+      "id": "S/changed-tools-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "changed-tools-signed",
+      "settings": "change synthetic tool description only; actual signed seed replay",
+      "shows": "tools-prefix binding interaction",
+      "expected": "A?/R?",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 78,
+      "signedRepeatOf": "S/changed-tools"
+    },
+    {
+      "id": "S/cache-thinking-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "cache-thinking-signed",
+      "settings": "cache_control on unchanged replayed thinking block",
+      "shows": "reasoning is not cache-markable",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 2048
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 95,
+      "signedRepeatOf": "S/cache-thinking"
+    },
+    {
+      "id": "S/cross-model-h-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "cross-model-h-signed",
+      "settings": "source request unchanged except target model/host/auth; complete assistant blocks and result",
+      "shows": "tool round continued on another offering",
+      "expected": "A?/R?",
+      "maxTokens": 2048,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.026624,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 123,
+      "signedRepeatOf": "S/cross-model-h"
+    },
+    {
+      "id": "H/tool-replay-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-replay-signed",
+      "settings": "stream=true; same tools/system/thinking; actual tool result value 7",
+      "shows": "tool round with all reasoning and original call order",
+      "expected": "A",
+      "maxTokens": 2048,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0013312,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 132,
+      "signedRepeatOf": "H/tool-replay"
+    },
+    {
+      "id": "H/tool-replay-no-reasoning-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-replay-no-reasoning-signed",
+      "settings": "same replay; remove only thinking blocks",
+      "shows": "omitted reasoning inside tool round",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 133,
+      "signedRepeatOf": "H/tool-replay-no-reasoning"
+    },
+    {
+      "id": "H/tool-replay-empty-signature-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-replay-empty-signature-signed",
+      "settings": "same replay; signature=\"\" on every thinking block",
+      "shows": "empty signature handling",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 134,
+      "signedRepeatOf": "H/tool-replay-empty-signature"
+    },
+    {
+      "id": "H/tool-replay-no-signature-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-replay-no-signature-signed",
+      "settings": "same replay; remove signature field only",
+      "shows": "missing signature handling",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 135,
+      "signedRepeatOf": "H/tool-replay-no-signature"
+    },
+    {
+      "id": "H/tool-replay-error-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-replay-error-signed",
+      "settings": "same replay; is_error=true; synthetic error result",
+      "shows": "tool-result error flag",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0006912,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 136,
+      "signedRepeatOf": "H/tool-replay-error"
+    },
+    {
+      "id": "H/tool-replay-false-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-replay-false-signed",
+      "settings": "same replay; is_error=false; result as text blocks",
+      "shows": "tool-result false flag and block content",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0006912,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 137,
+      "signedRepeatOf": "H/tool-replay-false"
+    },
+    {
+      "id": "H/tool-replay-cache-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-replay-cache-signed",
+      "settings": "same replay; cache_control on tool_use and tool_result",
+      "shows": "cache mark on call and result blocks",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0009984000000000002,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 138,
+      "signedRepeatOf": "H/tool-replay-cache"
+    },
+    {
+      "id": "H/tool-order-invalid-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "tool-order-invalid-signed",
+      "settings": "insert user text before tool_result or leave result unmatched",
+      "shows": "rejection and raw error body",
+      "expected": "R",
+      "maxTokens": 256,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 139,
+      "signedRepeatOf": "H/tool-order-invalid"
+    },
+    {
+      "id": "H/inline-between-call-result-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "inline-between-call-result-signed",
+      "settings": "insert system(text) between actual call and its result",
+      "shows": "fourth instruction position and paired-call rule",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 172,
+      "signedRepeatOf": "H/inline-between-call-result"
+    },
+    {
+      "id": "H/inline-after-result-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "inline-after-result-signed",
+      "settings": "system(text) after actual user tool_result, at end",
+      "shows": "legal instruction position after result",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0006912,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 173,
+      "signedRepeatOf": "H/inline-after-result"
+    },
+    {
+      "id": "H/binding-default-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "binding-default-signed",
+      "settings": "change only top-level system; actual signed tool seed replay; no binding control",
+      "shows": "account default for changed-prefix signature",
+      "expected": "A?/R?",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0006912,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 187,
+      "signedRepeatOf": "H/binding-default"
+    },
+    {
+      "id": "H/binding-error-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "binding-error-signed",
+      "settings": "change system; thinking.block_binding.prefix_mismatch_behavior=error; binding beta",
+      "shows": "binding control and input_transformations",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 188,
+      "signedRepeatOf": "H/binding-error"
+    },
+    {
+      "id": "H/binding-drop_block-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "binding-drop-block-signed",
+      "settings": "change system; thinking.block_binding.prefix_mismatch_behavior=drop_block; binding beta",
+      "shows": "binding control and input_transformations",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0006912,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 189,
+      "signedRepeatOf": "H/binding-drop_block"
+    },
+    {
+      "id": "H/binding-no-beta-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "binding-no-beta-signed",
+      "settings": "changed system; block_binding=drop_block; no binding beta",
+      "shows": "binding header requirement",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 190,
+      "signedRepeatOf": "H/binding-no-beta"
+    },
+    {
+      "id": "H/changed-tools-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "changed-tools-signed",
+      "settings": "change synthetic tool description only; actual signed seed replay",
+      "shows": "tools-prefix binding interaction",
+      "expected": "A?/R?",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0006912,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 191,
+      "signedRepeatOf": "H/changed-tools"
+    },
+    {
+      "id": "H/cache-thinking-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "cache-thinking-signed",
+      "settings": "cache_control on unchanged replayed thinking block",
+      "shows": "reasoning is not cache-markable",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "H/tool-seed-signed"
+      ],
+      "source": "H/tool-seed",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 2048
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 208,
+      "signedRepeatOf": "H/cache-thinking"
+    },
+    {
+      "id": "H/cross-model-s-signed",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "cross-model-s-signed",
+      "settings": "source request unchanged except target model/host/auth; complete assistant blocks and result",
+      "shows": "tool round continued on another offering",
+      "expected": "A?/R?",
+      "maxTokens": 2048,
+      "dependencies": [
+        "S/tool-seed-signed"
+      ],
+      "source": "S/tool-seed",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0013312,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 235,
+      "signedRepeatOf": "H/cross-model-s"
+    },
+    {
+      "id": "S/reasoning-json-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "reasoning-json-signed",
+      "settings": "stream=false; thinking=adaptive; display=summarized",
+      "shows": "complete reasoning blocks and any signature",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.009728,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 14,
+      "signedRepeatOf": "S/reasoning-json"
+    },
+    {
+      "id": "S/reasoning-stream-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "reasoning-stream-signed",
+      "settings": "stream=true; thinking=adaptive; display=summarized",
+      "shows": "reasoning/signature deltas and complete ordering",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.009728,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 15,
+      "signedRepeatOf": "S/reasoning-stream"
+    },
+    {
+      "id": "S/reasoning-outside-omit-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "reasoning-outside-omit-signed",
+      "settings": "complete reasoning-json assistant text only + new user",
+      "shows": "allowed omission outside tool round",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/reasoning-json-signed"
+      ],
+      "source": "S/reasoning-json",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 72,
+      "signedRepeatOf": "S/reasoning-outside-omit"
+    },
+    {
+      "id": "S/reasoning-outside-keep-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "reasoning-outside-keep-signed",
+      "settings": "complete reasoning-json blocks unchanged + new user",
+      "shows": "reasoning replay across user turns",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/reasoning-json-signed"
+      ],
+      "source": "S/reasoning-json",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 73,
+      "signedRepeatOf": "S/reasoning-outside-keep"
+    },
+    {
+      "id": "S/cut-thinking-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "cut-thinking-signed",
+      "settings": "stream=true; thinking=adaptive; display=summarized; cancel after first thinking delta",
+      "shows": "step cut before signature; raw prefix retained",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.009728,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 70,
+      "signedRepeatOf": "S/cut-thinking"
+    },
+    {
+      "id": "S/cut-thinking-replay-signed",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "cut-thinking-replay-signed",
+      "settings": "replay observed incomplete thinking as thinking; append user Continue",
+      "shows": "incomplete reasoning sent back",
+      "expected": "R",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/cut-thinking-signed"
+      ],
+      "source": "S/cut-thinking",
+      "evidence": "U",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 71,
+      "signedRepeatOf": "S/cut-thinking-replay"
+    },
+    {
+      "id": "S/output-above-ceiling-repeat",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "output-above-ceiling-repeat",
+      "settings": "thinking=between_tools; ask exactly OK; cancel immediately if HTTP 200",
+      "shows": "server answer to above-model ceiling; pending cap exception",
+      "expected": "R?",
+      "maxTokens": 128001,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "U; HOLD",
+      "stage": "signed-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 1.282058,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 560,
+      "ceilingRepeatOf": "S/output-above-ceiling"
+    },
+    {
+      "id": "H/output-above-ceiling-repeat",
+      "group": "H",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-5-5",
+      "offering": "anthropic-messages-claude-haiku-5-5",
+      "name": "output-above-ceiling-repeat",
+      "settings": "thinking=disabled; ask exactly OK; cancel immediately if HTTP 200",
+      "shows": "server answer to above-model ceiling; pending cap exception",
+      "expected": "R?",
+      "maxTokens": 128001,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "U; HOLD",
+      "stage": "signed-resume",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheRead": 0.01,
+        "cacheWrite5m": 0.125,
+        "cacheWrite1h": 0.2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.0641029,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 561,
+      "ceilingRepeatOf": "H/output-above-ceiling"
+    },
+    {
+      "id": "L/output-above-ceiling-repeat",
+      "group": "L",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-haiku-4-5-20251001",
+      "offering": "anthropic-messages-claude-haiku-4-5-20251001",
+      "name": "output-above-ceiling-repeat",
+      "settings": "thinking=disabled; ask exactly OK; cancel immediately if HTTP 200",
+      "shows": "server answer to above-model ceiling; pending cap exception",
+      "expected": "R?",
+      "maxTokens": 64001,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "U; HOLD",
+      "stage": "signed-resume",
+      "price": {
+        "input": 1,
+        "output": 5,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 1.25,
+        "cacheWrite1h": 2,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.321029,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 562,
+      "ceilingRepeatOf": "L/output-above-ceiling"
+    },
+    {
+      "id": "S/reasoning-json-signed-max",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "reasoning-json-signed-max",
+      "settings": "stream=false; thinking=adaptive; display=summarized; adaptive thinking with summarized display; output_config.effort=max; stream=false (Resume 13:54:32)",
+      "shows": "complete reasoning blocks and any signature",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [],
+      "source": "—",
+      "evidence": "pieces",
+      "stage": "outside-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.009728,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 14,
+      "signedRepeatOf": "S/reasoning-json"
+    },
+    {
+      "id": "S/reasoning-outside-omit-signed-json-max",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "reasoning-outside-omit-signed-json-max",
+      "settings": "complete reasoning-json assistant text only + new user",
+      "shows": "allowed omission outside tool round",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/reasoning-json-signed-max"
+      ],
+      "source": "S/reasoning-json",
+      "evidence": "pieces",
+      "stage": "outside-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 72,
+      "signedRepeatOf": "S/reasoning-outside-omit"
+    },
+    {
+      "id": "S/reasoning-outside-keep-signed-json-max",
+      "group": "S",
+      "provider": "anthropic",
+      "format": "messages",
+      "model": "claude-sonnet-5-5",
+      "offering": "anthropic-messages-claude-sonnet-5-5",
+      "name": "reasoning-outside-keep-signed-json-max",
+      "settings": "complete reasoning-json blocks unchanged + new user",
+      "shows": "reasoning replay across user turns",
+      "expected": "A",
+      "maxTokens": 768,
+      "dependencies": [
+        "S/reasoning-json-signed-max"
+      ],
+      "source": "S/reasoning-json",
+      "evidence": "U",
+      "stage": "outside-resume",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.1,
+        "cacheWrite5m": 2.5,
+        "cacheWrite1h": 4,
+        "inputTokens": 1024
+      },
+      "expectedEstimateUsd": 0.013824,
+      "pricing": "provisional-until-prepared",
+      "ordinal": 73,
+      "signedRepeatOf": "S/reasoning-outside-keep"
+    }
+  ],
+  "recipes": [
+    {
+      "row": "S/tool-seed-signed",
+      "nativeSettings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "strategy": "tool-seed",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "stream": false,
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": [],
+      "original": "S/tool-seed"
+    },
+    {
+      "row": "S/tool-seed-signed-max",
+      "nativeSettings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "strategy": "tool-seed",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "stream": false,
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": [],
+      "original": "S/tool-seed"
+    },
+    {
+      "row": "S/tool-seed-signed-hard",
+      "nativeSettings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "strategy": "tool-seed",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "stream": false,
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": [],
+      "original": "S/tool-seed"
+    },
+    {
+      "row": "H/tool-seed-signed",
+      "nativeSettings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "strategy": "tool-seed",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "stream": false,
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": [],
+      "original": "H/tool-seed"
+    },
+    {
+      "row": "H/tool-seed-signed-max",
+      "nativeSettings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "strategy": "tool-seed",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "stream": false,
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": [],
+      "original": "H/tool-seed"
+    },
+    {
+      "row": "H/tool-seed-signed-hard",
+      "nativeSettings": "stream=false; thinking=adaptive; display=summarized; tools get_value; auto",
+      "strategy": "tool-seed",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "stream": false,
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": [],
+      "original": "H/tool-seed"
+    },
+    {
+      "row": "S/tool-replay-signed",
+      "nativeSettings": "stream=true; same tools/system/thinking; actual tool result value 7",
+      "strategy": "tool-replay",
+      "patch": {},
+      "remove": [],
+      "original": "S/tool-replay"
+    },
+    {
+      "row": "S/tool-replay-no-reasoning-signed",
+      "nativeSettings": "same replay; remove only thinking blocks",
+      "strategy": "tool-replay-no-reasoning",
+      "patch": {},
+      "remove": [],
+      "original": "S/tool-replay-no-reasoning"
+    },
+    {
+      "row": "S/tool-replay-empty-signature-signed",
+      "nativeSettings": "same replay; signature=\"\" on every thinking block",
+      "strategy": "tool-replay-empty-signature",
+      "patch": {},
+      "remove": [],
+      "original": "S/tool-replay-empty-signature"
+    },
+    {
+      "row": "S/tool-replay-no-signature-signed",
+      "nativeSettings": "same replay; remove signature field only",
+      "strategy": "tool-replay-no-signature",
+      "patch": {},
+      "remove": [],
+      "original": "S/tool-replay-no-signature"
+    },
+    {
+      "row": "S/tool-replay-error-signed",
+      "nativeSettings": "same replay; is_error=true; synthetic error result",
+      "strategy": "tool-replay-error",
+      "patch": {},
+      "remove": [],
+      "original": "S/tool-replay-error"
+    },
+    {
+      "row": "S/tool-replay-false-signed",
+      "nativeSettings": "same replay; is_error=false; result as text blocks",
+      "strategy": "tool-replay-false",
+      "patch": {},
+      "remove": [],
+      "original": "S/tool-replay-false"
+    },
+    {
+      "row": "S/tool-replay-cache-signed",
+      "nativeSettings": "same replay; cache_control on tool_use and tool_result",
+      "strategy": "tool-replay-cache",
+      "patch": {},
+      "remove": [],
+      "original": "S/tool-replay-cache"
+    },
+    {
+      "row": "S/tool-order-invalid-signed",
+      "nativeSettings": "insert user text before tool_result or leave result unmatched",
+      "strategy": "tool-order-invalid",
+      "patch": {},
+      "remove": [],
+      "original": "S/tool-order-invalid"
+    },
+    {
+      "row": "S/inline-between-call-result-signed",
+      "nativeSettings": "insert system(text) between actual call and its result",
+      "strategy": "inline-between-call-result",
+      "patch": {},
+      "remove": [],
+      "original": "S/inline-between-call-result"
+    },
+    {
+      "row": "S/inline-after-result-signed",
+      "nativeSettings": "system(text) after actual user tool_result, at end",
+      "strategy": "inline-after-result",
+      "patch": {},
+      "remove": [],
+      "original": "S/inline-after-result"
+    },
+    {
+      "row": "S/binding-default-signed",
+      "nativeSettings": "change only top-level system; actual signed tool seed replay; no binding control",
+      "strategy": "binding-default",
+      "patch": {},
+      "remove": [],
+      "original": "S/binding-default"
+    },
+    {
+      "row": "S/binding-error-signed",
+      "nativeSettings": "change system; thinking.block_binding.prefix_mismatch_behavior=error; binding beta",
+      "strategy": "binding-error",
+      "patch": {},
+      "remove": [],
+      "original": "S/binding-error"
+    },
+    {
+      "row": "S/binding-drop_block-signed",
+      "nativeSettings": "change system; thinking.block_binding.prefix_mismatch_behavior=drop_block; binding beta",
+      "strategy": "binding-drop_block",
+      "patch": {},
+      "remove": [],
+      "original": "S/binding-drop_block"
+    },
+    {
+      "row": "S/binding-no-beta-signed",
+      "nativeSettings": "changed system; block_binding=drop_block; no binding beta",
+      "strategy": "binding-no-beta",
+      "patch": {},
+      "remove": [],
+      "original": "S/binding-no-beta"
+    },
+    {
+      "row": "S/changed-tools-signed",
+      "nativeSettings": "change synthetic tool description only; actual signed seed replay",
+      "strategy": "changed-tools",
+      "patch": {},
+      "remove": [],
+      "original": "S/changed-tools"
+    },
+    {
+      "row": "S/cache-thinking-signed",
+      "nativeSettings": "cache_control on unchanged replayed thinking block",
+      "strategy": "cache-thinking",
+      "patch": {},
+      "remove": [],
+      "original": "S/cache-thinking"
+    },
+    {
+      "row": "S/cross-model-h-signed",
+      "nativeSettings": "source request unchanged except target model/host/auth; complete assistant blocks and result",
+      "strategy": "cross-model-h",
+      "patch": {},
+      "remove": [],
+      "original": "S/cross-model-h"
+    },
+    {
+      "row": "H/tool-replay-signed",
+      "nativeSettings": "stream=true; same tools/system/thinking; actual tool result value 7",
+      "strategy": "tool-replay",
+      "patch": {},
+      "remove": [],
+      "original": "H/tool-replay"
+    },
+    {
+      "row": "H/tool-replay-no-reasoning-signed",
+      "nativeSettings": "same replay; remove only thinking blocks",
+      "strategy": "tool-replay-no-reasoning",
+      "patch": {},
+      "remove": [],
+      "original": "H/tool-replay-no-reasoning"
+    },
+    {
+      "row": "H/tool-replay-empty-signature-signed",
+      "nativeSettings": "same replay; signature=\"\" on every thinking block",
+      "strategy": "tool-replay-empty-signature",
+      "patch": {},
+      "remove": [],
+      "original": "H/tool-replay-empty-signature"
+    },
+    {
+      "row": "H/tool-replay-no-signature-signed",
+      "nativeSettings": "same replay; remove signature field only",
+      "strategy": "tool-replay-no-signature",
+      "patch": {},
+      "remove": [],
+      "original": "H/tool-replay-no-signature"
+    },
+    {
+      "row": "H/tool-replay-error-signed",
+      "nativeSettings": "same replay; is_error=true; synthetic error result",
+      "strategy": "tool-replay-error",
+      "patch": {},
+      "remove": [],
+      "original": "H/tool-replay-error"
+    },
+    {
+      "row": "H/tool-replay-false-signed",
+      "nativeSettings": "same replay; is_error=false; result as text blocks",
+      "strategy": "tool-replay-false",
+      "patch": {},
+      "remove": [],
+      "original": "H/tool-replay-false"
+    },
+    {
+      "row": "H/tool-replay-cache-signed",
+      "nativeSettings": "same replay; cache_control on tool_use and tool_result",
+      "strategy": "tool-replay-cache",
+      "patch": {},
+      "remove": [],
+      "original": "H/tool-replay-cache"
+    },
+    {
+      "row": "H/tool-order-invalid-signed",
+      "nativeSettings": "insert user text before tool_result or leave result unmatched",
+      "strategy": "tool-order-invalid",
+      "patch": {},
+      "remove": [],
+      "original": "H/tool-order-invalid"
+    },
+    {
+      "row": "H/inline-between-call-result-signed",
+      "nativeSettings": "insert system(text) between actual call and its result",
+      "strategy": "inline-between-call-result",
+      "patch": {},
+      "remove": [],
+      "original": "H/inline-between-call-result"
+    },
+    {
+      "row": "H/inline-after-result-signed",
+      "nativeSettings": "system(text) after actual user tool_result, at end",
+      "strategy": "inline-after-result",
+      "patch": {},
+      "remove": [],
+      "original": "H/inline-after-result"
+    },
+    {
+      "row": "H/binding-default-signed",
+      "nativeSettings": "change only top-level system; actual signed tool seed replay; no binding control",
+      "strategy": "binding-default",
+      "patch": {},
+      "remove": [],
+      "original": "H/binding-default"
+    },
+    {
+      "row": "H/binding-error-signed",
+      "nativeSettings": "change system; thinking.block_binding.prefix_mismatch_behavior=error; binding beta",
+      "strategy": "binding-error",
+      "patch": {},
+      "remove": [],
+      "original": "H/binding-error"
+    },
+    {
+      "row": "H/binding-drop_block-signed",
+      "nativeSettings": "change system; thinking.block_binding.prefix_mismatch_behavior=drop_block; binding beta",
+      "strategy": "binding-drop_block",
+      "patch": {},
+      "remove": [],
+      "original": "H/binding-drop_block"
+    },
+    {
+      "row": "H/binding-no-beta-signed",
+      "nativeSettings": "changed system; block_binding=drop_block; no binding beta",
+      "strategy": "binding-no-beta",
+      "patch": {},
+      "remove": [],
+      "original": "H/binding-no-beta"
+    },
+    {
+      "row": "H/changed-tools-signed",
+      "nativeSettings": "change synthetic tool description only; actual signed seed replay",
+      "strategy": "changed-tools",
+      "patch": {},
+      "remove": [],
+      "original": "H/changed-tools"
+    },
+    {
+      "row": "H/cache-thinking-signed",
+      "nativeSettings": "cache_control on unchanged replayed thinking block",
+      "strategy": "cache-thinking",
+      "patch": {},
+      "remove": [],
+      "original": "H/cache-thinking"
+    },
+    {
+      "row": "H/cross-model-s-signed",
+      "nativeSettings": "source request unchanged except target model/host/auth; complete assistant blocks and result",
+      "strategy": "cross-model-s",
+      "patch": {},
+      "remove": [],
+      "original": "H/cross-model-s"
+    },
+    {
+      "row": "S/reasoning-json-signed",
+      "nativeSettings": "stream=false; thinking=adaptive; display=summarized",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "stream": false
+      },
+      "remove": [],
+      "original": "S/reasoning-json"
+    },
+    {
+      "row": "S/reasoning-stream-signed",
+      "nativeSettings": "stream=true; thinking=adaptive; display=summarized",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        }
+      },
+      "remove": [],
+      "original": "S/reasoning-stream"
+    },
+    {
+      "row": "S/reasoning-outside-omit-signed",
+      "nativeSettings": "complete reasoning-json assistant text only + new user",
+      "strategy": "reasoning-outside-omit",
+      "patch": {},
+      "remove": [],
+      "original": "S/reasoning-outside-omit"
+    },
+    {
+      "row": "S/reasoning-outside-keep-signed",
+      "nativeSettings": "complete reasoning-json blocks unchanged + new user",
+      "strategy": "reasoning-outside-keep",
+      "patch": {},
+      "remove": [],
+      "original": "S/reasoning-outside-keep"
+    },
+    {
+      "row": "S/cut-thinking-signed",
+      "nativeSettings": "stream=true; thinking=adaptive; display=summarized; cancel after first thinking delta",
+      "strategy": "cut-thinking",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        }
+      },
+      "remove": [],
+      "original": "S/cut-thinking"
+    },
+    {
+      "row": "S/cut-thinking-replay-signed",
+      "nativeSettings": "replay observed incomplete thinking as thinking; append user Continue",
+      "strategy": "cut-thinking-replay",
+      "patch": {},
+      "remove": [],
+      "original": "S/cut-thinking-replay"
+    },
+    {
+      "row": "S/output-above-ceiling-repeat",
+      "nativeSettings": "thinking=between_tools; ask exactly OK; cancel immediately if HTTP 200",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "between_tools"
+        }
+      },
+      "remove": [],
+      "original": "S/output-above-ceiling"
+    },
+    {
+      "row": "H/output-above-ceiling-repeat",
+      "nativeSettings": "thinking=disabled; ask exactly OK; cancel immediately if HTTP 200",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": [],
+      "original": "H/output-above-ceiling"
+    },
+    {
+      "row": "L/output-above-ceiling-repeat",
+      "nativeSettings": "thinking=disabled; ask exactly OK; cancel immediately if HTTP 200",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": [],
+      "original": "L/output-above-ceiling"
+    },
+    {
+      "row": "S/reasoning-json-signed-max",
+      "nativeSettings": "stream=false; thinking=adaptive; display=summarized",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "stream": false
+      },
+      "remove": [],
+      "original": "S/reasoning-json",
+      "authority": "Resume 13:54:32"
+    },
+    {
+      "row": "S/reasoning-outside-omit-signed-json-max",
+      "nativeSettings": "complete reasoning-json assistant text only + new user",
+      "strategy": "reasoning-outside-omit",
+      "patch": {},
+      "remove": [],
+      "original": "S/reasoning-outside-omit",
+      "authority": "Resume 13:54:32"
+    },
+    {
+      "row": "S/reasoning-outside-keep-signed-json-max",
+      "nativeSettings": "complete reasoning-json blocks unchanged + new user",
+      "strategy": "reasoning-outside-keep",
+      "patch": {},
+      "remove": [],
+      "original": "S/reasoning-outside-keep",
+      "authority": "Resume 13:54:32"
+    }
+  ]
+}

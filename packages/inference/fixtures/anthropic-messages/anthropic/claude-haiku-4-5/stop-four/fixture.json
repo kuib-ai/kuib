@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: four stop sequences. Approved settings: thinking=disabled; stop_sequences=[END,A,B,C].  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

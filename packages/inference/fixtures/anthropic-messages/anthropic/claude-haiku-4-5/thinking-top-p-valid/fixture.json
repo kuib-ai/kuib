@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: budget-model permitted top_p versus newer bound. Approved settings: thinking=enabled; budget_tokens=1024; top_p=0.95.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

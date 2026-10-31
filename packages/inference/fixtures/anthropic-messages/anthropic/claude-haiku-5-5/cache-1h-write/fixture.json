@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: cache write and TTL usage. Approved settings: thinking=disabled; long synthetic prefix; system mark ttl=1h; stream=true.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

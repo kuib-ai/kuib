@@ -1,0 +1,1203 @@
+{
+  "version": 1,
+  "tool": {
+    "type": "function",
+    "function": {
+      "name": "get_value",
+      "description": "Return the stored integer for the selector.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "selector"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "puzzle": "A synthetic widget has 17 blue beads and 9 green beads. It loses 5 blue beads, then doubles its green beads. How many beads remain? Answer in one sentence.",
+  "recipes": [
+    {
+      "row": "MT/plain-json",
+      "nativeSettings": "stream=false; reasoning_effort omitted; thinking omitted",
+      "strategy": "plain-json",
+      "patch": {
+        "stream": false
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/plain-stream",
+      "nativeSettings": "stream=true; stream_options.include_usage=true",
+      "strategy": "plain-stream",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/stream-default",
+      "nativeSettings": "stream omitted; usage options omitted",
+      "strategy": "stream-default",
+      "patch": {},
+      "remove": [
+        "stream",
+        "stream_options"
+      ]
+    },
+    {
+      "row": "MT/stream-usage-omitted",
+      "nativeSettings": "stream=true; stream_options omitted",
+      "strategy": "stream-usage-omitted",
+      "patch": {},
+      "remove": [
+        "stream_options"
+      ]
+    },
+    {
+      "row": "MT/stream-usage-false",
+      "nativeSettings": "stream=true; include_usage=false",
+      "strategy": "stream-usage-false",
+      "patch": {
+        "stream_options": {
+          "include_usage": false
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/stream-obfuscation-false",
+      "nativeSettings": "stream=true; include_usage=true; include_obfuscation=false",
+      "strategy": "stream-obfuscation-false",
+      "patch": {
+        "stream_options": {
+          "include_usage": true,
+          "include_obfuscation": false
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/stream-obfuscation-true",
+      "nativeSettings": "stream=true; include_usage=true; include_obfuscation=true",
+      "strategy": "stream-obfuscation-true",
+      "patch": {
+        "stream_options": {
+          "include_usage": true,
+          "include_obfuscation": true
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/json-stream-options",
+      "nativeSettings": "stream=false; include_usage=true",
+      "strategy": "json-stream-options",
+      "patch": {
+        "stream": false,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/thinking-enabled",
+      "nativeSettings": "thinking.type=enabled; effort omitted",
+      "strategy": "thinking-enabled",
+      "patch": {
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/thinking-disabled",
+      "nativeSettings": "thinking.type=disabled; effort omitted",
+      "strategy": "thinking-disabled",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/effort-none",
+      "nativeSettings": "reasoning_effort=none",
+      "strategy": "effort-none",
+      "patch": {
+        "reasoning_effort": "none"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/effort-minimal",
+      "nativeSettings": "reasoning_effort=minimal",
+      "strategy": "effort-minimal",
+      "patch": {
+        "reasoning_effort": "minimal"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/effort-low",
+      "nativeSettings": "reasoning_effort=low",
+      "strategy": "effort-low",
+      "patch": {
+        "reasoning_effort": "low"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/effort-medium",
+      "nativeSettings": "reasoning_effort=medium",
+      "strategy": "effort-medium",
+      "patch": {
+        "reasoning_effort": "medium"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/effort-high",
+      "nativeSettings": "reasoning_effort=high",
+      "strategy": "effort-high",
+      "patch": {
+        "reasoning_effort": "high"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/effort-xhigh",
+      "nativeSettings": "reasoning_effort=xhigh",
+      "strategy": "effort-xhigh",
+      "patch": {
+        "reasoning_effort": "xhigh"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/effort-max",
+      "nativeSettings": "reasoning_effort=max",
+      "strategy": "effort-max",
+      "patch": {
+        "reasoning_effort": "max"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/verbosity-low",
+      "nativeSettings": "verbosity=low",
+      "strategy": "verbosity-low",
+      "patch": {
+        "verbosity": "low"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/verbosity-medium",
+      "nativeSettings": "verbosity=medium",
+      "strategy": "verbosity-medium",
+      "patch": {
+        "verbosity": "medium"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/verbosity-high",
+      "nativeSettings": "verbosity=high",
+      "strategy": "verbosity-high",
+      "patch": {
+        "verbosity": "high"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/tool-seed",
+      "nativeSettings": "stream=false; tools get_value; choice auto; ask value 7; MiMo thinking enabled / Meta effort low",
+      "strategy": "tool-seed",
+      "patch": {
+        "stream": false,
+        "reasoning_effort": "low",
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto"
+      },
+      "remove": [
+        "stream_options"
+      ]
+    },
+    {
+      "row": "MT/tool-replay",
+      "nativeSettings": "stream=true; include_usage=true; unchanged assistant call, original reasoning_content if present; tool result 7",
+      "strategy": "tool-replay",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/tool-replay-omit-reasoning",
+      "nativeSettings": "same round; remove reasoning_content",
+      "strategy": "tool-replay-omit-reasoning",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/tool-replay-empty-reasoning",
+      "nativeSettings": "same round; reasoning_content=\"\"",
+      "strategy": "tool-replay-empty-reasoning",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/tool-replay-synthetic-reasoning",
+      "nativeSettings": "same round; reasoning_content=\"Synthetic test reasoning.\"",
+      "strategy": "tool-replay-synthetic-reasoning",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/tool-order-invalid",
+      "nativeSettings": "assistant call + user + tool result, or unmatched tool_call_id",
+      "strategy": "tool-order-invalid",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/tool-result-blocks",
+      "nativeSettings": "same round; tool content text-block array",
+      "strategy": "tool-result-blocks",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/tool-result-error",
+      "nativeSettings": "same round; tool result plain string with synthetic error",
+      "strategy": "tool-result-error",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/choice-auto",
+      "nativeSettings": "tool_choice=auto; tools retained",
+      "strategy": "choice-auto",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/choice-none",
+      "nativeSettings": "tool_choice=none; tools retained",
+      "strategy": "choice-none",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "none"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/choice-required",
+      "nativeSettings": "tool_choice=required; tools retained",
+      "strategy": "choice-required",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "required"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/choice-function",
+      "nativeSettings": "tool_choice={type:function,function:{name:get_value}}; tools retained",
+      "strategy": "choice-function",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "get_value"
+          }
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/choice-allowed_tools",
+      "nativeSettings": "tool_choice={type:allowed_tools,allowed_tools:{mode:auto,tools:[get_value]}}; tools retained",
+      "strategy": "choice-allowed_tools",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "allowed_tools",
+          "allowed_tools": {
+            "mode": "auto",
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "get_value"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/choice-custom",
+      "nativeSettings": "tool_choice={type:custom,custom:{name:echo_value}}; tools retained; declare custom echo_value",
+      "strategy": "choice-custom",
+      "patch": {
+        "tools": [
+          {
+            "type": "custom",
+            "custom": {
+              "name": "echo_value",
+              "description": "Echo a synthetic value.",
+              "format": {
+                "type": "text"
+              }
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "custom",
+          "custom": {
+            "name": "echo_value"
+          }
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/choice-allowed-required",
+      "nativeSettings": "allowed_tools mode=required; tools get_value",
+      "strategy": "choice-allowed-required",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "allowed_tools",
+          "allowed_tools": {
+            "mode": "required",
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "get_value"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/parallel-false",
+      "nativeSettings": "parallel_tool_calls=false; ask for values 7 and 8; choice auto",
+      "strategy": "parallel-false",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "parallel_tool_calls": false
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/parallel-true",
+      "nativeSettings": "parallel_tool_calls=true; ask for values 7 and 8; choice auto",
+      "strategy": "parallel-true",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "parallel_tool_calls": true
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/strict-false",
+      "nativeSettings": "tools[].function.strict=false",
+      "strategy": "strict-false",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              },
+              "strict": false
+            }
+          }
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/strict-true",
+      "nativeSettings": "strict=true; additionalProperties=false; all properties required",
+      "strategy": "strict-true",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "selector"
+                ],
+                "additionalProperties": false
+              },
+              "strict": true
+            }
+          }
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/strict-invalid",
+      "nativeSettings": "strict=true; required omitted; additionalProperties omitted",
+      "strategy": "strict-invalid",
+      "patch": {
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_value",
+              "description": "Return the stored integer for the selector.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "strict": true
+            }
+          }
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/instruction-system-first",
+      "nativeSettings": "messages=[system(instruction), user]",
+      "strategy": "instruction-system-first",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/instruction-system-after-user",
+      "nativeSettings": "messages=[user, system(instruction)]",
+      "strategy": "instruction-system-after-user",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/instruction-system-after-assistant",
+      "nativeSettings": "messages=[user, assistant(text), system(instruction), user]",
+      "strategy": "instruction-system-after-assistant",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/instruction-system-between-call-result",
+      "nativeSettings": "source round with system inserted between call and result",
+      "strategy": "instruction-system-between-call-result",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/instruction-developer-first",
+      "nativeSettings": "messages=[developer(instruction), user]",
+      "strategy": "instruction-developer-first",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/instruction-developer-after-user",
+      "nativeSettings": "messages=[user, developer(instruction)]",
+      "strategy": "instruction-developer-after-user",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/instruction-developer-after-assistant",
+      "nativeSettings": "messages=[user, assistant(text), developer(instruction), user]",
+      "strategy": "instruction-developer-after-assistant",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/instruction-developer-between-call-result",
+      "nativeSettings": "source round with developer inserted between call and result",
+      "strategy": "instruction-developer-between-call-result",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/instruction-blocks",
+      "nativeSettings": "developer content text-block array",
+      "strategy": "instruction-blocks",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cut-text",
+      "nativeSettings": "stream=true; ask long enumerated output; cancel after first content delta",
+      "strategy": "cut-text",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cut-text-user",
+      "nativeSettings": "partial observed assistant content + user Continue",
+      "strategy": "cut-text-user",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cut-text-prefill",
+      "nativeSettings": "partial observed content as last assistant message",
+      "strategy": "cut-text-prefill",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cut-reasoning",
+      "nativeSettings": "stream=true; MiMo thinking enabled / Meta effort high; cancel on first reasoning delta, else first text chunk",
+      "strategy": "cut-reasoning",
+      "patch": {
+        "reasoning_effort": "high"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/cut-reasoning-replay",
+      "nativeSettings": "observed partial reasoning_content if present + user Continue",
+      "strategy": "cut-reasoning-replay",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/reasoning-display-summarized",
+      "nativeSettings": "thinking={type:enabled,display:summarized}",
+      "strategy": "reasoning-display-summarized",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "summarized"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/reasoning-display-omitted",
+      "nativeSettings": "thinking={type:enabled,display:omitted}",
+      "strategy": "reasoning-display-omitted",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "omitted"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/reasoning-display-updates",
+      "nativeSettings": "thinking={type:enabled,display:updates}",
+      "strategy": "reasoning-display-updates",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "updates"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/cache-implicit-write",
+      "nativeSettings": "long synthetic developer prefix; prompt_cache_options={mode:implicit,ttl:30m}; cache key=synthetic-capture",
+      "strategy": "cache-implicit-write",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-implicit-read",
+      "nativeSettings": "identical request to cache-implicit-write",
+      "strategy": "cache-implicit-read",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-explicit-write",
+      "nativeSettings": "long prefix as text parts; one prompt_cache_breakpoint={mode:explicit}; prompt_cache_options={mode:explicit,ttl:30m}",
+      "strategy": "cache-explicit-write",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-explicit-read",
+      "nativeSettings": "identical request to cache-explicit-write",
+      "strategy": "cache-explicit-read",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-explicit-no-mark",
+      "nativeSettings": "explicit mode=explicit; ttl=30m; no breakpoint",
+      "strategy": "cache-explicit-no-mark",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-four",
+      "nativeSettings": "four explicit text-part breakpoints; explicit mode; ttl=30m",
+      "strategy": "cache-four",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-five",
+      "nativeSettings": "five explicit breakpoints; explicit mode; ttl=30m",
+      "strategy": "cache-five",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-implicit-four",
+      "nativeSettings": "implicit mode; four explicit breakpoints",
+      "strategy": "cache-implicit-four",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-no-options-write",
+      "nativeSettings": "long identical synthetic prefix; no cache fields",
+      "strategy": "cache-no-options-write",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-no-options-read",
+      "nativeSettings": "identical request to cache-no-options-write",
+      "strategy": "cache-no-options-read",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-retention-in_memory",
+      "nativeSettings": "prompt_cache_retention=in_memory",
+      "strategy": "cache-retention-in_memory",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-retention-24h",
+      "nativeSettings": "prompt_cache_retention=24h",
+      "strategy": "cache-retention-24h",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-key",
+      "nativeSettings": "prompt_cache_key=synthetic-capture-key",
+      "strategy": "cache-key",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/cache-invalid-ttl",
+      "nativeSettings": "prompt_cache_options={mode:explicit,ttl:1h}",
+      "strategy": "cache-invalid-ttl",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/temperature-default",
+      "nativeSettings": "temperature=1",
+      "strategy": "temperature-default",
+      "patch": {
+        "temperature": 1
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/temperature-changed",
+      "nativeSettings": "temperature=0",
+      "strategy": "temperature-changed",
+      "patch": {
+        "temperature": 0
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/temperature-upper",
+      "nativeSettings": "temperature=1.5",
+      "strategy": "temperature-upper",
+      "patch": {
+        "temperature": 1.5
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/top-p-default",
+      "nativeSettings": "top_p=1",
+      "strategy": "top-p-default",
+      "patch": {
+        "top_p": 1
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/top-p-changed",
+      "nativeSettings": "top_p=0.5",
+      "strategy": "top-p-changed",
+      "patch": {
+        "top_p": 0.5
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/top-p-lower",
+      "nativeSettings": "top_p=0.01",
+      "strategy": "top-p-lower",
+      "patch": {
+        "top_p": 0.01
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/frequency-penalty",
+      "nativeSettings": "frequency_penalty=0.2",
+      "strategy": "frequency-penalty",
+      "patch": {
+        "frequency_penalty": 0.2
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/presence-penalty",
+      "nativeSettings": "presence_penalty=0.2",
+      "strategy": "presence-penalty",
+      "patch": {
+        "presence_penalty": 0.2
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/seed",
+      "nativeSettings": "seed=7",
+      "strategy": "seed",
+      "patch": {
+        "seed": 7
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/logit-bias",
+      "nativeSettings": "logit_bias={}",
+      "strategy": "logit-bias",
+      "patch": {
+        "logit_bias": {}
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/n-one",
+      "nativeSettings": "n=1",
+      "strategy": "n-one",
+      "patch": {
+        "n": 1
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/n-two",
+      "nativeSettings": "n=2",
+      "strategy": "n-two",
+      "patch": {
+        "n": 2
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/logprobs",
+      "nativeSettings": "logprobs=true",
+      "strategy": "logprobs",
+      "patch": {
+        "logprobs": true
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/top-logprobs",
+      "nativeSettings": "logprobs=true; top_logprobs=1",
+      "strategy": "top-logprobs",
+      "patch": {
+        "top_logprobs": 1,
+        "logprobs": true
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/thinking-sampling-temperature",
+      "nativeSettings": "reasoning_effort high; temperature=0",
+      "strategy": "thinking-sampling-temperature",
+      "patch": {
+        "temperature": 0,
+        "reasoning_effort": "high"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/thinking-sampling-top_p",
+      "nativeSettings": "reasoning_effort high; top_p=0.5",
+      "strategy": "thinking-sampling-top_p",
+      "patch": {
+        "top_p": 0.5,
+        "reasoning_effort": "high"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/sampling-combined",
+      "nativeSettings": "temperature=1; top_p=1",
+      "strategy": "sampling-combined",
+      "patch": {
+        "temperature": 1,
+        "top_p": 1
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/stop-string",
+      "nativeSettings": "stop=END; ask OK END EXTRA",
+      "strategy": "stop-string",
+      "patch": {
+        "stop": "END"
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/stop-one",
+      "nativeSettings": "stop=[END]; ask OK END EXTRA",
+      "strategy": "stop-one",
+      "patch": {
+        "stop": [
+          "END"
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/stop-four",
+      "nativeSettings": "stop=[END,A,B,C]",
+      "strategy": "stop-four",
+      "patch": {
+        "stop": [
+          "END",
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/stop-five",
+      "nativeSettings": "stop=[END,A,B,C,D]",
+      "strategy": "stop-five",
+      "patch": {
+        "stop": [
+          "END",
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/output-one",
+      "nativeSettings": "max_completion_tokens=1; ask long text",
+      "strategy": "output-one",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/output-zero",
+      "nativeSettings": "max_completion_tokens=0",
+      "strategy": "output-zero",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/output-negative",
+      "nativeSettings": "max_completion_tokens=-1",
+      "strategy": "output-negative",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/output-legacy",
+      "nativeSettings": "max_tokens=256; max_completion_tokens omitted",
+      "strategy": "output-legacy",
+      "patch": {
+        "max_tokens": 256
+      },
+      "remove": [
+        "max_completion_tokens"
+      ]
+    },
+    {
+      "row": "MT/output-both",
+      "nativeSettings": "max_tokens=128; max_completion_tokens=256",
+      "strategy": "output-both",
+      "patch": {
+        "max_tokens": 128
+      },
+      "remove": []
+    },
+    {
+      "row": "MT/empty-text",
+      "nativeSettings": "user empty text content part",
+      "strategy": "empty-text",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/first-assistant",
+      "nativeSettings": "messages=[assistant(text),user]",
+      "strategy": "first-assistant",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/consecutive-user",
+      "nativeSettings": "two adjacent user messages",
+      "strategy": "consecutive-user",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/assistant-null",
+      "nativeSettings": "actual tool-seed replay; assistant content=null",
+      "strategy": "assistant-null",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MT/assistant-empty",
+      "nativeSettings": "actual tool-seed replay; assistant content=\"\"",
+      "strategy": "assistant-empty",
+      "patch": {},
+      "remove": []
+    }
+  ]
+}

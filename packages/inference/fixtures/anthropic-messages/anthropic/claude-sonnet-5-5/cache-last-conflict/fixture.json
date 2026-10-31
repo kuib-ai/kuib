@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: conflicting last-block TTL. Approved settings: last user block ttl=1h; top-level ttl=5m. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

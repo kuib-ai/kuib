@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: tool-choice cache invalidation. Approved settings: cache-5m request + tool_choice none, tools unchanged. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

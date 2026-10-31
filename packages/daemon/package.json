@@ -9,7 +9,7 @@
   },
   "scripts": {
     "typecheck": "tsgo --noEmit",
-    "test": "deno test -A --no-check",
+    "test": "testing",
     "start": "deno run -A src/start.daemon/index.ts",
     "lint": "eslint .",
     "format": "prettier --write ."
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@kuib-ai/deno-types": "workspace:*",
+    "@kuib-ai/testing": "workspace:*",
     "@kuib-ai/tsconfig": "workspace:*",
     "@std/expect": "catalog:",
     "@std/testing": "catalog:",

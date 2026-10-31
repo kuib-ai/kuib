@@ -1,0 +1,1 @@
+{"type":"error","error":{"type":"invalid_request_error","message":"system.0: cache_control cannot be set for empty text blocks"},"request_id":"req_011CfyrdGj6FPtHbMDaSPoqc"}

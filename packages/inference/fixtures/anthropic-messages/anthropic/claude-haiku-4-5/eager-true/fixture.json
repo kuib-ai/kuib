@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: tool argument fragmentation switch. Approved settings: thinking=disabled; tools[].eager_input_streaming=true; stream=true.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

@@ -1,17 +1,8 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import { createServer, connect } from "node:net";
-import { rmSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
+import createSocketPath from "@kuib-ai/testing/create.socket.path";
 import createDaemonServer from "./index.ts";
-
-const uniqueSocketPath = function () {
-  return join(
-    tmpdir(),
-    `kuib-daemon-test-${Date.now()}-${Math.floor(Math.random() * 1e6)}.sock`,
-  );
-};
 
 const freePort = function () {
   return new Promise<number>(function (resolve) {
@@ -40,7 +31,8 @@ const canConnect = function (port: number) {
 
 describe("createDaemonServer", function () {
   it("removes a stale socket, listens on socketPath, and returns the server", async function () {
-    const socketPath = uniqueSocketPath();
+    using socket = createSocketPath();
+    const socketPath = socket.path;
     const server = createDaemonServer(socketPath);
 
     await new Promise<void>(function (resolve) {
@@ -55,11 +47,11 @@ describe("createDaemonServer", function () {
         return resolve();
       });
     });
-    rmSync(socketPath, { force: true });
   });
 
   it("starts a second TCP server when a valid port is provided", async function () {
-    const socketPath = uniqueSocketPath();
+    using socket = createSocketPath();
+    const socketPath = socket.path;
     const port = await freePort();
     const server = createDaemonServer(socketPath, port);
 
@@ -78,11 +70,11 @@ describe("createDaemonServer", function () {
         return resolve();
       });
     });
-    rmSync(socketPath, { force: true });
   });
 
   it("skips the TCP server when the port is undefined or NaN", async function () {
-    const socketPath = uniqueSocketPath();
+    using socket = createSocketPath();
+    const socketPath = socket.path;
     const port = await freePort();
     const server = createDaemonServer(socketPath, Number.NaN);
 
@@ -98,6 +90,5 @@ describe("createDaemonServer", function () {
         return resolve();
       });
     });
-    rmSync(socketPath, { force: true });
   });
 });

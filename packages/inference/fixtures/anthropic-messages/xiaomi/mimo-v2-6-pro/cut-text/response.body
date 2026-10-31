@@ -1,0 +1,9 @@
+event: message_start
+data: {"type":"message_start","message":{"id":"msg_7b6d469a1e1a44efad6a90ce","type":"message","role":"assistant","model":"mimo-v2.6-pro","content":[],"usage":{"input_tokens":34,"output_tokens":0}}}
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","delta":{"type":"text_delta","text":"1"},"index":0}
+

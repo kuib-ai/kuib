@@ -1,0 +1,48 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-sonnet-5-5","id":"msg_011CfyvTp6Bgpb3pw1Y37BZz","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":724,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":4,"service_tier":"standard","inference_geo":"global"},"diagnostics":null}            }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}            }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"The user wants me to reply"}            }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" with"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" exactly \"OK\","}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" so I'll just resp"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"ond with that."}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"\n\n"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQS3QUKEAgSGAI4AUIIdGhpbmtpbmcSDIcbeHwcGnM2fs9sRhoMKSmBvrC3O96CcCZqIjDAL76MEhYrED4S1EFXnJHScTVIVB7gpeTeIeXaMcsNSf5vG5shM2hP+6ut12gwK4Eq+gRRXFe7orMT+fS4cNqjiIB9GDDJpIF7bt2s5+VhV09/z/Vv3gKO/w5SefHpgd0JdkJSRrLAH4TFDzODBzarV2yEAZBUII0YA9U8EaZvsp6tNe+5U8rb0FaBV9d7i8BiKTsj5o6Y/Ysl1pVHRNs6aRmAO0c20eE6axQfC6UlsHbe2kIaegMZZ/6AC1vCgEZ0lCBhom8ZogBDVkQ4BGmnOKgsQxpXBuulol38SffoIlKqeG8WT+EJGteG6hZNHc7cNW+AMwR8FZGFdJJK3/xFTdNVyPWdj3WbL/E7eXxphBNQiIUc/mbTYf/zeRhzCILYmIIlDYxXkf5CnBgkaRamTNf4lMmDEjMgxKm0weRASbP76MMP6UDC41PRee3yc+cF01IdaTs7H+/aurRXW/Y5HgHH3dYdU7O8x14LNcp43lKC27l+f+bjhv7s8AG9kSjVy1X+clmad/awXBhzivEvdQKf3zM0GjnAfKgVIrIhItXKgQFMX/zqzXi9C0FPN0ktlhglasaYp223haXJ6UvroJIttmQ5MCqMJaeTBdSZyR1waYZt/kc47ftpjtwAFWusKCgXYwuuK3KUIykgLAg8SFK7Z+kSN3p4Dbcyv0Hxmjqzjey6j1WhJCMYVU63rxZTcxCYugwyrCu+0befN6f4ji8mGNeg++qADiR1eqLXlQWXOUsWTckk2hVIgcLLoRrFJ+Neb1xnkSJWfmgudclQ5Cph/fpQ/boh7glb5H7CR+zswAj0kCEA3cO7FK7aXaTey8EVDIIiz7fBt+I9y9VX9x34m2vRBmM1LIfX2aLgAxJi/2e1tTqIKJCRlpPBv2iyMRE7KbW+3uf1qXNlGAE="}   }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0         }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}      }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"OK"} }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1  }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":724,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":33,"output_tokens_details":{"thinking_tokens":29}}         }
+
+event: message_stop
+data: {"type":"message_stop"              }
+

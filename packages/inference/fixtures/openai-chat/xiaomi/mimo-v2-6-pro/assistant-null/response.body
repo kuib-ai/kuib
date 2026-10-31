@@ -1,0 +1,20 @@
+: PROCESSING
+
+: PROCESSING
+
+data: {"id":"e4fcd0b1-f630-4651-b412-c1730cb12328_7af41f74b6a74da0a8e492b17cf0b692","choices":[{"delta":{"content":"","role":"assistant","tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911895,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"e4fcd0b1-f630-4651-b412-c1730cb12328_7af41f74b6a74da0a8e492b17cf0b692","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":"The stored value for"},"finish_reason":null,"index":0}],"created":1791911895,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"e4fcd0b1-f630-4651-b412-c1730cb12328_7af41f74b6a74da0a8e492b17cf0b692","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":" selector 7 is 7."},"finish_reason":null,"index":0}],"created":1791911895,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"e4fcd0b1-f630-4651-b412-c1730cb12328_7af41f74b6a74da0a8e492b17cf0b692","choices":[{"delta":{"content":"The stored value for","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911896,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"e4fcd0b1-f630-4651-b412-c1730cb12328_7af41f74b6a74da0a8e492b17cf0b692","choices":[{"delta":{"content":" selector 7 is **7**.","role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":null,"index":0}],"created":1791911896,"model":"mimo-v2.6-pro","object":"chat.completion.chunk"}
+
+data: {"id":"e4fcd0b1-f630-4651-b412-c1730cb12328_7af41f74b6a74da0a8e492b17cf0b692","choices":[{"delta":{"content":null,"role":null,"tool_calls":null,"reasoning_content":null},"finish_reason":"stop","index":0}],"created":1791911896,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":null}
+
+data: {"id":"e4fcd0b1-f630-4651-b412-c1730cb12328_7af41f74b6a74da0a8e492b17cf0b692","choices":[],"created":1791911896,"model":"mimo-v2.6-pro","object":"chat.completion.chunk","usage":{"completion_tokens":26,"prompt_tokens":161,"total_tokens":187,"completion_tokens_details":{"reasoning_tokens":12},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

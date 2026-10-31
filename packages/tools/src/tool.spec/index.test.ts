@@ -1,18 +1,12 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import { z } from "zod";
+import Daemon from "@kuib-ai/daemon";
 import defineTool from "./index.ts";
 import type { ToolDefinition, ToolContext } from "./index.ts";
 
 const ctx: ToolContext = {
-  fs: {
-    readFile: async function () {
-      return { content: "" };
-    },
-    readDir: async function () {
-      return { content: "" };
-    },
-  },
+  fs: Daemon.createDaemonCaller({}),
 };
 
 const input = z.object({ path: z.string() });

@@ -1,0 +1,10 @@
+data: {"id":"chatcmpl-01a13442-7c39-754b-bca9-e2a732062b92","choices":[{"delta":{"content":"The widget now has 30 beads total","role":"assistant"},"finish_reason":null,"index":0}],"created":1791878134,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13442-7c39-754b-bca9-e2a732062b92","choices":[{"delta":{"content":" — "},"finish_reason":null,"index":0}],"created":1791878134,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13442-7c39-754b-bca9-e2a732062b92","choices":[{"delta":{"content":"12 blue and 18 green."},"finish_reason":null,"index":0}],"created":1791878134,"model":"muse-spark-1.1","object":"chat.completion.chunk"}
+
+data: {"id":"chatcmpl-01a13442-7c39-754b-bca9-e2a732062b92","choices":[{"delta":{},"finish_reason":"stop","index":0}],"created":1791878134,"model":"muse-spark-1.1","object":"chat.completion.chunk","usage":{"completion_tokens":185,"prompt_tokens":53,"total_tokens":238,"completion_tokens_details":{"reasoning_tokens":158},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

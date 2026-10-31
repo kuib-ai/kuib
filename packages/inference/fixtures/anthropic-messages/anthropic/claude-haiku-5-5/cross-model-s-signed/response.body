@@ -1,0 +1,105 @@
+event: message_start
+data: {"type":"message_start","message":{"model":"claude-haiku-5-5","id":"msg_011Cfyubhior8PCFfdHQwRYQ","type":"message","role":"assistant","content":[],"container":null,"stop_reason":null,"stop_sequence":null,"stop_details":null,"usage":{"input_tokens":543,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":3,"service_tier":"standard","inference_geo":"global"},"diagnostics":null}           }
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}           }
+
+event: ping
+data: {"type": "ping"}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"Chec"}               }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"king mult"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"iples of 7 under"}          }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" 100 for the"}           }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" pattern:"}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" 7"}               }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" satisfies m"}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"od5=2, mod7"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"=0, m"}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"od11=7, confirming"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":" the tool's answ"} }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"er of 7 is correct"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"."}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":"\n\n"}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"CAQSwQYKEAgSGAI4AUIIdGhpbmtpbmcSDCIolESaDQfvIx24BRoM7CZXYHOxDkD1m3egIjBpSYttgTgpHhOEeKoiPvgzFPBvU9i+Z+L8b2OdcdgoyyvnSPOYtgeP/j3R3b1U4mwq3gWTHqvsI4XKfrx1QhjpzwlF81sulB/x6QlVpwSqazxJ1r+/vruQqH2r6ZjBYzXTQPno9oQ5Bzj5NlhYgNj2iSowYeMnZM6uYNoY++zp5E4n9zT7sJLX2N23u4go33c7GeNcVrhRIn/FBDcXFazW2ZmJ+3NIpLXKrIufLlGuxZq+nDO/rOmcs3DnEAlG54n5lvl4yYo2HXvQS3a9ORwz4/0Gq7cdC5CSPwL2jQORWZFtQ00MBYeVRShY+xYanS/ZIimxTZg0xB4xP3hHHZ0tik7KHV+ZnUp1dHS5lg5cDlI9z/1VmGfTnb1HNrchSkLQ030RJDcIrBHhshrffTpw5Vamz5jFg824NJPs2Gh+qFuT9C8aH8evBPNXyy74ThlY3nRW0i6+PaaAooXtlTipcyRM+OEtzBiR6XIhzyGRwPQK4sxC9LvviHCKcgY7YxG2v3Cuqj0eK7q6SJCkdx6ksxTyq7m4zWx3bM3CswGJlr/78Ql/fFUdyImL59GhnKGAJ6k6ovPCCk7F7AMrLo6xSLKX5n8d5SQP9W1ojqxkVzpOeN/cITqpY1mXQGTIE3NaLt5mk6bJxF38GQcnYcqMijU/0dYtdg+o80mWDn3GQuiJHYyrqoG6TuCFCGmtOk4cq9A77WWuNappEOM1Kgh/M43SbZnGlNIr+KtwSJNpRW2wlVnFhK5UeLgS2yAa3rJ8uW7qpODkLnDdE7g5xAtEj4sWGhfunOTsm0PMvQwvo+IT24T2Tp+6iMbinqDlcCPakzrkFmtR7jwLZJHMG7h10eAL5XdSkSbQhJOSMz8xh7ayWxT8CraRpQbXUExaQntV7vkv7Ml1re0GJnmhjzGZFckwYuGRRzaxAo01gWoNst1u4cqoq21n13D/QJwlJqEoQm0j3k1NBYgl/o8351RfW3EU2FvjGtAZ9lYIblSiJD/B5VQychm/obBvtfp/3+ldkMXPknhEZwoP7S+ZrxULVhgB"}     }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0       }
+
+event: content_block_start
+data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":""}    }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"The selector is **"}  }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"7**:"}         }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" it le"}      }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"aves rem"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"ainder 2 m"}     }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"od 5, rem"}             }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"ainder 0 mod "}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"7, and remainder 7"}       }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" mod 11. The st"}        }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"ored value for"}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":" selector 7 is **7"}      }
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"**."}         }
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":1          }
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"stop_details":null,"container":null},"usage":{"input_tokens":543,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":205,"output_tokens_details":{"thinking_tokens":142}}      }
+
+event: message_stop
+data: {"type":"message_stop"           }
+

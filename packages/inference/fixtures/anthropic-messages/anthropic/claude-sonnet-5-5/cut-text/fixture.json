@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: deliberate text cut; no terminal frame. Approved settings: stream=true; thinking off; ask for long enumerated text; cancel after first text delta. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

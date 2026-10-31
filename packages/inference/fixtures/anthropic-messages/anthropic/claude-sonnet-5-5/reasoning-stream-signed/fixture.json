@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: reasoning/signature deltas and complete ordering. Approved settings: stream=true; thinking=adaptive; display=summarized.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: S/reasoning-stream. Signed repeat of row S/reasoning-stream.",
+  "origin": "recorded"
+}

@@ -1,0 +1,14 @@
+{
+  "messageFormat": "anthropic-messages",
+  "provider": "xiaomi",
+  "model": "mimo-v2-6-pro",
+  "name": "inline-effort-off",
+  "method": "POST",
+  "url": "https://token-plan-sgp.xiaomimimo.com/anthropic/v1/messages",
+  "authHeader": "api-key",
+  "headers": {
+    "anthropic-beta": "mid-conversation-output-config-2026-07-01",
+    "content-type": "application/json",
+    "accept-encoding": "identity"
+  }
+}

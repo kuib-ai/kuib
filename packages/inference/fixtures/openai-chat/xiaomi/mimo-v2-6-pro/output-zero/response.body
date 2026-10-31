@@ -1,0 +1,1 @@
+{"error":{"code":"400","message":"Param Incorrect","param":"max_completion_tokens is too small: 0. This model supports at least 1 completion tokens, whereas you provided 0.","type":""}}

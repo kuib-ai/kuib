@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: server answer to above-model ceiling; pending cap exception. Approved settings: thinking=disabled; ask exactly OK; cancel immediately if HTTP 200.  Synthetic prompt; outcome and original bytes retained. Rejection body retained; only a successful answer is cancelled at headers. Ceiling repeat of row L/output-above-ceiling.",
+  "origin": "recorded"
+}

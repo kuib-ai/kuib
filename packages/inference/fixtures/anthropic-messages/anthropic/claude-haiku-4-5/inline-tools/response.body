@@ -1,0 +1,1 @@
+{"type":"error","error":{"type":"invalid_request_error","message":"tool_addition/tool_removal requires a model that supports mid-conversation system content; this model does not"},"request_id":"req_011CfyrfAb4VAtMTUbuMoKHb"}

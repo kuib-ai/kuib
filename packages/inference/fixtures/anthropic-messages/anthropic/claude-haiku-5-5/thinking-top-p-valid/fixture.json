@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: budget-model permitted top_p versus newer bound. Approved settings: thinking=adaptive; top_p=0.95.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

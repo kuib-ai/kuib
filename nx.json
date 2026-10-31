@@ -1,6 +1,18 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "analytics": false,
+  "defaultBase": "origin/master",
+  "namedInputs": {
+    "testRunner": [
+      "{workspaceRoot}/packages/testing/bin/testing",
+      "{workspaceRoot}/packages/testing/package.json",
+      "{workspaceRoot}/packages/testing/src/**/*"
+    ],
+    "lintRules": [
+      "{workspaceRoot}/eslint.config.ts",
+      "{workspaceRoot}/packages/eslint-plugin-house-style/src/**/*"
+    ]
+  },
   "targetDefaults": {
     "generate": {
       "cache": true
@@ -8,19 +20,39 @@
     "typecheck": {
       "cache": true,
       "dependsOn": ["^generate"],
-      "inputs": ["default", "^default", { "runtime": "deno --version" }]
+      "inputs": [
+        "default",
+        "^default",
+        {
+          "runtime": "deno --version"
+        }
+      ]
     },
     "test": {
       "cache": true,
-      "inputs": ["default", "^default", { "runtime": "deno --version" }]
+      "inputs": [
+        "default",
+        "^default",
+        "testRunner",
+        {
+          "runtime": "deno --version"
+        }
+      ]
+    },
+    "test:live": {
+      "cache": false
+    },
+    "bench": {
+      "cache": false
     },
     "lint": {
       "cache": true,
-      "inputs": ["default"]
+      "inputs": ["default", "lintRules"]
     },
     "format": {
       "cache": true,
       "inputs": ["default"]
     }
-  }
+  },
+  "parallel": 1
 }

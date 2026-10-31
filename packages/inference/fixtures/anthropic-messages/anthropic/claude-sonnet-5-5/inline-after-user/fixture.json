@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: system inside conversation at legal end. Approved settings: messages=[user, system(text)]; no beta. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

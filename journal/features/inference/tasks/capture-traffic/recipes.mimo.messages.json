@@ -1,0 +1,1480 @@
+{
+  "recipes": [
+    {
+      "strategy": "host-sgp",
+      "patch": {},
+      "remove": [],
+      "row": "MA/host-sgp",
+      "nativeSettings": "https://token-plan-sgp.xiaomimimo.com/anthropic/v1/messages; api-key; thinking disabled"
+    },
+    {
+      "row": "MA/tool-seed",
+      "nativeSettings": "stream=false; thinking=enabled; display=summarized; tools get_value; auto",
+      "strategy": "tool-seed",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "summarized",
+          "budget_tokens": 1024
+        },
+        "stream": false,
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/reasoning-json",
+      "nativeSettings": "stream=false; thinking=enabled; display=summarized",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "summarized",
+          "budget_tokens": 1024
+        },
+        "stream": false
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/reasoning-stream",
+      "nativeSettings": "stream=true; thinking=enabled; display=summarized",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "summarized",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/plain-json",
+      "nativeSettings": "stream=false; thinking=disabled",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "stream": false
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/plain-stream",
+      "nativeSettings": "stream=true; thinking=disabled",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/plain-default",
+      "nativeSettings": "stream omitted; thinking omitted; system omitted",
+      "strategy": "plain",
+      "patch": {},
+      "remove": [
+        "stream",
+        "system",
+        "thinking"
+      ]
+    },
+    {
+      "row": "MA/system-string",
+      "nativeSettings": "system string; thinking=disabled",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/system-blocks",
+      "nativeSettings": "system text-block array; thinking=disabled",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "system": [
+          {
+            "type": "text",
+            "text": "Keep the answer short."
+          }
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/tool-replay",
+      "nativeSettings": "stream=true; same tools/system/thinking; actual tool result value 7",
+      "strategy": "tool-replay",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/tool-replay-no-reasoning",
+      "nativeSettings": "same replay; remove only thinking blocks",
+      "strategy": "tool-replay-no-reasoning",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/tool-replay-empty-signature",
+      "nativeSettings": "same replay; signature=\"\" on every thinking block",
+      "strategy": "tool-replay-empty-signature",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/tool-replay-no-signature",
+      "nativeSettings": "same replay; remove signature field only",
+      "strategy": "tool-replay-no-signature",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/tool-replay-error",
+      "nativeSettings": "same replay; is_error=true; synthetic error result",
+      "strategy": "tool-replay-error",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/tool-replay-false",
+      "nativeSettings": "same replay; is_error=false; result as text blocks",
+      "strategy": "tool-replay-false",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/tool-replay-cache",
+      "nativeSettings": "same replay; cache_control on tool_use and tool_result",
+      "strategy": "tool-replay-cache",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/tool-order-invalid",
+      "nativeSettings": "insert user text before tool_result or leave result unmatched",
+      "strategy": "tool-order-invalid",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/thinking-adaptive",
+      "nativeSettings": "thinking.type=adaptive; effort omitted",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/thinking-enabled",
+      "nativeSettings": "thinking.type=enabled; budget_tokens=1024; effort omitted",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/thinking-disabled",
+      "nativeSettings": "thinking.type=disabled; effort omitted",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "strategy": "thinking-between-tools",
+      "patch": {},
+      "remove": [],
+      "row": "MA/thinking-between_tools",
+      "nativeSettings": "thinking.type=between_tools; effort omitted"
+    },
+    {
+      "row": "MA/budget-too-small",
+      "nativeSettings": "thinking=enabled; budget_tokens=1023",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1023
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/budget-at-output",
+      "nativeSettings": "thinking=enabled; budget_tokens=1536",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1536
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/effort-low",
+      "nativeSettings": "thinking=enabled; output_config.effort=low",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "output_config": {
+          "effort": "low"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/effort-medium",
+      "nativeSettings": "thinking=enabled; output_config.effort=medium",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "output_config": {
+          "effort": "medium"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/effort-high",
+      "nativeSettings": "thinking=enabled; output_config.effort=high",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "output_config": {
+          "effort": "high"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/effort-xhigh",
+      "nativeSettings": "thinking=enabled; output_config.effort=xhigh",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "output_config": {
+          "effort": "xhigh"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/effort-max",
+      "nativeSettings": "thinking=enabled; output_config.effort=max",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "output_config": {
+          "effort": "max"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/off-effort-xhigh",
+      "nativeSettings": "thinking=disabled; output_config.effort=xhigh",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "output_config": {
+          "effort": "xhigh"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/off-effort-max",
+      "nativeSettings": "thinking=disabled; output_config.effort=max",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "output_config": {
+          "effort": "max"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/display-summarized",
+      "nativeSettings": "thinking=enabled; display=summarized",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "summarized",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/display-omitted",
+      "nativeSettings": "thinking=enabled; display=omitted",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "omitted",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/display-updates",
+      "nativeSettings": "thinking=enabled; display=updates; beta=thinking-display-updates-2026-08-18",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "updates",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": [],
+      "beta": "thinking-display-updates-2026-08-18"
+    },
+    {
+      "row": "MA/display-disabled",
+      "nativeSettings": "thinking=disabled; display=summarized",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "disabled",
+          "display": "summarized"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/between-tools-display",
+      "nativeSettings": "thinking=between_tools; display=summarized",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "disabled",
+          "display": "summarized"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/display-updates-no-beta",
+      "nativeSettings": "thinking=enabled; display=updates; no beta",
+      "strategy": "puzzle",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "updates",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/tool-choice-auto",
+      "nativeSettings": "thinking=disabled; tools retained; tool_choice=auto",
+      "strategy": "tool",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/tool-choice-any",
+      "nativeSettings": "thinking=disabled; tools retained; tool_choice=any",
+      "strategy": "tool",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "any"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/tool-choice-tool",
+      "nativeSettings": "thinking=disabled; tools retained; tool_choice=tool(get_value)",
+      "strategy": "tool",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "get_value"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/tool-choice-none",
+      "nativeSettings": "thinking=disabled; tools retained; tool_choice=none",
+      "strategy": "tool",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "none"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/thinking-tool-choice-any",
+      "nativeSettings": "thinking=enabled; tools retained; tool_choice=any",
+      "strategy": "tool",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "any"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/thinking-tool-choice-tool",
+      "nativeSettings": "thinking=enabled; tools retained; tool_choice=tool",
+      "strategy": "tool",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "get_value"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/parallel-false",
+      "nativeSettings": "thinking=disabled; auto.disable_parallel_tool_use=false; ask for values 7 and 8",
+      "strategy": "parallel",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto",
+          "disable_parallel_tool_use": false
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/parallel-true",
+      "nativeSettings": "thinking=disabled; auto.disable_parallel_tool_use=true; ask for values 7 and 8",
+      "strategy": "parallel",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "auto",
+          "disable_parallel_tool_use": true
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/eager-false",
+      "nativeSettings": "thinking=disabled; tools[].eager_input_streaming=false; stream=true",
+      "strategy": "tool",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            },
+            "eager_input_streaming": false
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/eager-true",
+      "nativeSettings": "thinking=disabled; tools[].eager_input_streaming=true; stream=true",
+      "strategy": "tool",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "tools": [
+          {
+            "name": "get_value",
+            "description": "Return the stored integer for the selector.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "selector": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "selector"
+              ],
+              "additionalProperties": false
+            },
+            "eager_input_streaming": true
+          }
+        ],
+        "tool_choice": {
+          "type": "auto"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/inline-first",
+      "nativeSettings": "messages=[system(text), user]; no beta",
+      "strategy": "inline-first",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/inline-after-user",
+      "nativeSettings": "messages=[user, system(text)]; no beta",
+      "strategy": "inline-after-user",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/inline-after-assistant",
+      "nativeSettings": "messages=[user, assistant(text), system(text), user]",
+      "strategy": "inline-after-assistant",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/inline-between-call-result",
+      "nativeSettings": "insert system(text) between actual call and its result",
+      "strategy": "inline-between-call-result",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/inline-after-result",
+      "nativeSettings": "system(text) after actual user tool_result, at end",
+      "strategy": "inline-after-result",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/inline-effort",
+      "nativeSettings": "thinking on; system(content=\"\",output_config.effort=low); beta=mid-conversation-output-config-2026-07-01",
+      "strategy": "inline-effort",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "output_config": {
+          "effort": "low"
+        }
+      },
+      "remove": [],
+      "beta": "mid-conversation-output-config-2026-07-01"
+    },
+    {
+      "row": "MA/inline-effort-off",
+      "nativeSettings": "thinking=disabled; top effort=high; inline effort=low; same beta",
+      "strategy": "inline-effort-off",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "output_config": {
+          "effort": "high"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/inline-effort-no-beta",
+      "nativeSettings": "thinking on; inline effort=low; no beta",
+      "strategy": "inline-effort-no-beta",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "output_config": {
+          "effort": "low"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/clear-at",
+      "nativeSettings": "inline system text; clear_at=next_user_message; matching beta",
+      "strategy": "clear-at",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/clear-at-no-beta",
+      "nativeSettings": "inline system text; clear_at=next_user_message; no beta",
+      "strategy": "clear-at-no-beta",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cut-text",
+      "nativeSettings": "stream=true; thinking off; ask for long enumerated text; cancel after first text delta",
+      "strategy": "cut-text",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cut-text-user",
+      "nativeSettings": "original history + observed partial assistant text + user Continue; thinking on",
+      "strategy": "cut-text-user",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cut-text-prefill-off",
+      "nativeSettings": "original history + observed partial text as last assistant; thinking off",
+      "strategy": "cut-text-prefill-off",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cut-text-prefill-on",
+      "nativeSettings": "same last partial assistant; thinking on",
+      "strategy": "cut-text-prefill-on",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cut-thinking",
+      "nativeSettings": "stream=true; thinking=enabled; display=summarized; cancel after first thinking delta",
+      "strategy": "cut-thinking",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "display": "summarized",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cut-thinking-replay",
+      "nativeSettings": "replay observed incomplete thinking as thinking; append user Continue",
+      "strategy": "cut-thinking-replay",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/reasoning-outside-omit",
+      "nativeSettings": "complete reasoning-json assistant text only + new user",
+      "strategy": "reasoning-outside-omit",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/reasoning-outside-keep",
+      "nativeSettings": "complete reasoning-json blocks unchanged + new user",
+      "strategy": "reasoning-outside-keep",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/binding-default",
+      "nativeSettings": "change only top-level system; actual signed tool seed replay; no binding control",
+      "strategy": "binding-default",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/binding-error",
+      "nativeSettings": "change system; thinking.block_binding.prefix_mismatch_behavior=error; binding beta",
+      "strategy": "binding-error",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "strategy": "binding-drop-block",
+      "patch": {},
+      "remove": [],
+      "row": "MA/binding-drop_block",
+      "nativeSettings": "change system; thinking.block_binding.prefix_mismatch_behavior=drop_block; binding beta"
+    },
+    {
+      "row": "MA/binding-no-beta",
+      "nativeSettings": "changed system; block_binding=drop_block; no binding beta",
+      "strategy": "binding-no-beta",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/changed-tools",
+      "nativeSettings": "change synthetic tool description only; actual signed seed replay",
+      "strategy": "changed-tools",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-5m-write",
+      "nativeSettings": "thinking=disabled; long synthetic prefix; system mark ttl=5m; stream=true",
+      "strategy": "cache-5m-write",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-5m-read",
+      "nativeSettings": "identical request bytes to cache-5m-write",
+      "strategy": "cache-5m-read",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-1h-write",
+      "nativeSettings": "thinking=disabled; long synthetic prefix; system mark ttl=1h; stream=true",
+      "strategy": "cache-1h-write",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-1h-read",
+      "nativeSettings": "identical request bytes to cache-1h-write",
+      "strategy": "cache-1h-read",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-tool",
+      "nativeSettings": "thinking=disabled; 5m mark at tool; long synthetic prefix",
+      "strategy": "cache-tool",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-user",
+      "nativeSettings": "thinking=disabled; 5m mark at user; long synthetic prefix",
+      "strategy": "cache-user",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-assistant",
+      "nativeSettings": "thinking=disabled; 5m mark at assistant; long synthetic prefix",
+      "strategy": "cache-assistant",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-top-level",
+      "nativeSettings": "thinking=disabled; 5m mark at top-level; long synthetic prefix",
+      "strategy": "cache-top-level",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-four",
+      "nativeSettings": "four explicit marks, including system/user/tool; thinking off",
+      "strategy": "cache-four",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-five",
+      "nativeSettings": "five explicit marks; thinking off",
+      "strategy": "cache-five",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-four-plus-top",
+      "nativeSettings": "four explicit marks and top-level automatic mark",
+      "strategy": "cache-four-plus-top",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-mixed-valid",
+      "nativeSettings": "1h mark before 5m mark",
+      "strategy": "cache-mixed-valid",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-mixed-invalid",
+      "nativeSettings": "5m mark before 1h mark",
+      "strategy": "cache-mixed-invalid",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-last-conflict",
+      "nativeSettings": "last user block ttl=1h; top-level ttl=5m",
+      "strategy": "cache-last-conflict",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-short",
+      "nativeSettings": "short prefix below minimum; one 5m mark",
+      "strategy": "cache-short",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-empty",
+      "nativeSettings": "empty text block with 5m cache mark",
+      "strategy": "cache-empty",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-thinking",
+      "nativeSettings": "cache_control on unchanged replayed thinking block",
+      "strategy": "cache-thinking",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/cache-change-thinking",
+      "nativeSettings": "cache-5m request + same-prefix thinking on",
+      "strategy": "cache-change-thinking",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-change-effort",
+      "nativeSettings": "cache-5m request + top-level effort=low; mode unchanged",
+      "strategy": "cache-change-effort",
+      "patch": {
+        "output_config": {
+          "effort": "low"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-inline-effort",
+      "nativeSettings": "cache-5m request + inline effort-only instruction + beta; thinking on",
+      "strategy": "cache-inline-effort",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/cache-change-choice",
+      "nativeSettings": "cache-5m request + tool_choice none, tools unchanged",
+      "strategy": "cache-change-choice",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/temperature-default",
+      "nativeSettings": "thinking=disabled; temperature=1",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "temperature": 1
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/temperature-changed",
+      "nativeSettings": "thinking=disabled; temperature=0",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "temperature": 0
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/top-p-default",
+      "nativeSettings": "thinking=disabled; top_p=1",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "top_p": 1
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/top-p-boundary",
+      "nativeSettings": "thinking=disabled; top_p=0.99",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "top_p": 0.99
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/top-p-changed",
+      "nativeSettings": "thinking=disabled; top_p=0.5",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "top_p": 0.5
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/top-k",
+      "nativeSettings": "thinking=disabled; top_k=1",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "top_k": 1
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/thinking-sampling-temperature",
+      "nativeSettings": "thinking=enabled; temperature=0",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "temperature": 0
+      },
+      "remove": []
+    },
+    {
+      "strategy": "thinking-sampling-top-p",
+      "patch": {},
+      "remove": [],
+      "row": "MA/thinking-sampling-top_p",
+      "nativeSettings": "thinking=enabled; top_p=0.5"
+    },
+    {
+      "strategy": "thinking-sampling-top-k",
+      "patch": {},
+      "remove": [],
+      "row": "MA/thinking-sampling-top_k",
+      "nativeSettings": "thinking=enabled; top_k=1"
+    },
+    {
+      "row": "MA/thinking-top-p-valid",
+      "nativeSettings": "thinking=enabled; top_p=0.95",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "enabled",
+          "budget_tokens": 1024
+        },
+        "top_p": 0.95
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/sampling-combined",
+      "nativeSettings": "thinking=disabled; temperature=1; top_p=1",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "temperature": 1,
+        "top_p": 1
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/stop-one",
+      "nativeSettings": "thinking=disabled; stop_sequences=[END]; ask OK END EXTRA",
+      "strategy": "stop",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "stop_sequences": [
+          "END"
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/stop-four",
+      "nativeSettings": "thinking=disabled; stop_sequences=[END,A,B,C]",
+      "strategy": "stop",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        },
+        "stop_sequences": [
+          "END",
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/output-one",
+      "nativeSettings": "thinking=disabled; request long text",
+      "strategy": "long",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/output-zero",
+      "nativeSettings": "thinking=disabled; long cache-marked prefix",
+      "strategy": "output-zero",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/output-negative",
+      "nativeSettings": "thinking=disabled",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/empty-text",
+      "nativeSettings": "user empty text block",
+      "strategy": "empty-text",
+      "patch": {},
+      "remove": []
+    },
+    {
+      "row": "MA/first-assistant",
+      "nativeSettings": "messages=[assistant(text), user]; thinking off",
+      "strategy": "first-assistant",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/consecutive-user",
+      "nativeSettings": "two adjacent user messages; thinking off",
+      "strategy": "consecutive-user",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "row": "MA/auth-bearer",
+      "nativeSettings": "Authorization Bearer instead of default auth header; thinking off",
+      "strategy": "auth-bearer",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "strategy": "version-header",
+      "patch": {},
+      "remove": [],
+      "row": "MA/version-header",
+      "nativeSettings": "add anthropic-version=2023-06-01"
+    },
+    {
+      "strategy": "beta-header",
+      "patch": {},
+      "remove": [],
+      "row": "MA/beta-header",
+      "nativeSettings": "add beta=mid-conversation-output-config-2026-07-01"
+    },
+    {
+      "strategy": "metadata",
+      "patch": {},
+      "remove": [],
+      "row": "MA/metadata",
+      "nativeSettings": "metadata.user_id=synthetic-capture"
+    },
+    {
+      "strategy": "claude-signature",
+      "patch": {},
+      "remove": [],
+      "row": "MA/claude-signature",
+      "nativeSettings": "MiMo thinking with signature replaced by Sonnet seed signature"
+    },
+    {
+      "strategy": "cross-model-s",
+      "patch": {},
+      "remove": [],
+      "row": "MA/cross-model-s",
+      "nativeSettings": "source request unchanged except target model/host/auth; complete assistant blocks and result"
+    },
+    {
+      "row": "MA/output-above-ceiling",
+      "nativeSettings": "thinking=disabled; ask exactly OK; cancel immediately if HTTP 200",
+      "strategy": "plain",
+      "patch": {
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "remove": []
+    },
+    {
+      "strategy": "auth-x-api-key",
+      "patch": {},
+      "remove": [],
+      "row": "MA/auth-x-api-key",
+      "nativeSettings": "x-api-key only; no api-key; thinking off"
+    },
+    {
+      "strategy": "host-api",
+      "patch": {},
+      "remove": [],
+      "row": "MA/host-api",
+      "nativeSettings": "https://api.xiaomimimo.com/anthropic/v1/messages; same named key; thinking disabled"
+    },
+    {
+      "strategy": "host-sgp-repeat",
+      "patch": {},
+      "remove": [],
+      "row": "MA/host-sgp-repeat",
+      "nativeSettings": "https://token-plan-sgp.xiaomimimo.com/anthropic/v1/messages; api-key; thinking disabled"
+    }
+  ],
+  "puzzle": "A synthetic widget has 17 blue beads and 9 green beads. It loses 5 blue beads, then doubles its green beads. How many beads remain? Answer in one sentence.",
+  "tool": {
+    "name": "get_value",
+    "description": "Return the stored integer for the selector.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "selector": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "selector"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

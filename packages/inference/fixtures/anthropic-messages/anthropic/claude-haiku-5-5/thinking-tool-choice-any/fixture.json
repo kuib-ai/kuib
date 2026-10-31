@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: forced tool choice with reasoning. Approved settings: thinking=adaptive; tools retained; tool_choice=any.  Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

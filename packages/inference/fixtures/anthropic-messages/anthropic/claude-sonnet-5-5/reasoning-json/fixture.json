@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: complete reasoning blocks and any signature. Approved settings: stream=false; thinking=adaptive; display=summarized. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

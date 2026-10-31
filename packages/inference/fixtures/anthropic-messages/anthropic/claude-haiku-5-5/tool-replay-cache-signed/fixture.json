@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-5-5: cache mark on call and result blocks. Approved settings: same replay; cache_control on tool_use and tool_result.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: H/tool-replay-cache. Signed repeat of row H/tool-replay-cache.",
+  "origin": "recorded"
+}

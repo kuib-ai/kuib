@@ -1,0 +1,4 @@
+{
+  "shows": "claude-sonnet-5-5: complete reasoning blocks and any signature. Approved settings: stream=false; thinking=adaptive; display=summarized.  Synthetic prompt; outcome and original bytes retained. Signed native-seed continuation authorized by Resume 13:35:57. Original row: S/reasoning-json. Signed repeat of row S/reasoning-json.",
+  "origin": "recorded"
+}

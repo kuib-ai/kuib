@@ -6,11 +6,15 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsgo --noEmit",
+    "test": "testing",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@kuib-ai/inference": "workspace:*",
+    "@kuib-ai/protocol": "workspace:*",
     "@kuib-ai/cli": "workspace:*",
+    "@kuib-ai/testing": "workspace:*",
     "@std/toml": "catalog:",
     "@std/yaml": "catalog:",
     "typescript": "catalog:"
@@ -18,6 +22,8 @@
   "devDependencies": {
     "@kuib-ai/deno-types": "workspace:*",
     "@kuib-ai/tsconfig": "workspace:*",
+    "@std/expect": "catalog:",
+    "@std/testing": "catalog:",
     "@types/node": "catalog:"
   }
 }

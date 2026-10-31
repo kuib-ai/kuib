@@ -1,0 +1,4 @@
+{
+  "shows": "mimo-v2.6-pro: native choice value or unsupported-choice rejection. Approved settings: tool_choice={type:function,function:{name:get_value}}; tools retained. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

@@ -1,0 +1,4 @@
+{
+  "shows": "claude-haiku-4-5-20251001: mid-conversation tool availability. Approved settings: system tool_addition then tool_removal; beta=inline-tools-2026-09-15. Latest Resume permits only Haiku 4.5 non-reasoning rows; unspecified mode is explicitly disabled. Synthetic prompt; outcome and original bytes retained.",
+  "origin": "recorded"
+}

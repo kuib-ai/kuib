@@ -10,7 +10,7 @@ split-from: []
 absorbed-into: ""
 feature: ""
 origin: ["conversation 2026-09-28"]
-touched: 2026-09-28
+touched: 2026-10-08
 ---
 
 # R018 — Workspace health
@@ -22,3 +22,4 @@ The workspace stays verifiable and self-correcting: complete checks, clean test 
 ## History
 
 - 2026-09-28 created as an initiative; absorbed R220, R410, R412, R413, R414, whose files keep the prior notes
+- 2026-10-08 the testing part (complete checks, clean test teardown) split out as [[roadmap/items/R021-test-system]]
